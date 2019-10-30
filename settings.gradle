@@ -1,2 +1,2 @@
-include ':app', ':core', ':rpc'
+include ':app', ':core', ':rpc', ':data'
 rootProject.name='tink-pfm-sdk-android'
