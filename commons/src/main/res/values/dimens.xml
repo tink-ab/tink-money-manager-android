@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- TextView styles dimensions -->
+  <dimen name="h2_text_size">17.0dip</dimen>
+  <dimen name="h2_line_height">24.0dip</dimen>
+  <dimen name="deci_text_size">15.0dip</dimen>
+  <dimen name="deci_line_height">20.0dip</dimen>
+  <dimen name="giga_text_size">25.0dip</dimen>
+  <dimen name="giga_line_height">32.0dip</dimen>
+  <dimen name="hecto_text_size">17.0dip</dimen>
+  <dimen name="hecto_line_height">24.0dip</dimen>
+  <dimen name="mega_text_size">21.0dip</dimen>
+  <dimen name="mega_line_height">28.0dip</dimen>
+  <dimen name="micro_text_size">13.0dip</dimen>
+  <dimen name="micro_line_height">18.0dip</dimen>
+  <dimen name="nano_text_size">11.0dip</dimen>
+  <dimen name="nano_line_height">16.0dip</dimen>
+  <dimen name="tera_text_size">35.0dip</dimen>
+  <dimen name="tera_line_height">40.0dip</dimen>
+  <dimen name="peta_text_size">45.0dip</dimen>
+  <dimen name="peta_line_height">48.0dip</dimen>
+
+  <!-- Button style dimensions -->
+  <dimen name="button_height">52dp</dimen>
+
+  <!-- CardView style dimensions -->
+  <dimen name="card_elevation">2dp</dimen>
+  <dimen name="card_corner_radius">8dp</dimen>
+  <dimen name="corner_radius">8dp</dimen>
+
+  <!-- Category icon dimensions -->
+  <dimen name="category_icon_background_size">44dp</dimen>
+  <dimen name="category_icon_size">20dp</dimen>
+
+  <!-- Period picker dimensions-->
+  <dimen name="period_picker_height">@dimen/button_height</dimen>
+
+</resources>

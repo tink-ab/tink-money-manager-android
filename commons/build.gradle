@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(':core')
+
+    implementation libraries.kotlin_stdlib
+    implementation libraries.support_appcompat
+    implementation libraries.android_core_ktx
+
+    implementation libraries.support_design
+    implementation libraries.support_constraint_layout
+
+    implementation libraries.dagger
+    implementation libraries.dagger_android
+    implementation libraries.dagger_android_support
+    kapt libraries.dagger_android_processor
+    kapt libraries.dagger_compiler
+
+    implementation libraries.guava
+    implementation libraries.joda_time
+
+    testImplementation libraries.test_mockk
+    testImplementation libraries.test_assertj
+    testImplementation libraries.test_junit_api
+    testRuntimeOnly libraries.test_junit_engine
+    testImplementation libraries.test_junit_params // (Optional) If you need "Parameterized Tests"
+}
+
+repositories {
+    mavenCentral()
+}

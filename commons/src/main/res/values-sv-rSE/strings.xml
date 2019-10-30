@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="upcoming_transaction_hide">Göm</string>
+  <string name="upcoming_transaction_show">Visa</string>
+  <string name="upcoming_transaction_from">%1$s från %2$s</string>
+  <string name="upcoming_transactions_show_button_text">Visa</string>
+  <string name="account_type_card">Kreditkort</string>
+  <string name="account_type_checking">Transaktionskonto</string>
+  <string name="account_type_saving">Sparkonto</string>
+  <string name="account_type_investment">Investeringskonto</string>
+  <string name="account_type_pension">Pensionskonto</string>
+  <string name="account_type_loan">Lån</string>
+  <string name="account_type_mortgage">Bolån</string>
+  <string name="account_type_other">Annat konto</string>
+  <string name="provider_capability_checking_accounts">Vardagskonton</string>
+  <string name="provider_capability_credit_cards">Kreditkort</string>
+  <string name="provider_capability_identity_data">Personlig information</string>
+  <string name="provider_capability_investments">Investeringar</string>
+  <string name="provider_capability_loans">Lån</string>
+  <string name="provider_capability_mortgage_aggregation">Bolån</string>
+  <string name="provider_capability_mortgage_loan">Bolån</string>
+  <string name="provider_capability_payments">Betalningar</string>
+  <string name="provider_capability_savings_accounts">Sparkonton</string>
+  <string name="provider_capability_transfers">Överföringar</string>
+  <string name="provider_capability_open_banking_default">Transaktionskonton</string>
+  <string name="provider_capability_other_default">Andra konton</string>
+  <string name="provider_capability_last_separator"> och %s</string>
+</resources>

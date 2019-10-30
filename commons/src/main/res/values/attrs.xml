@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="PeriodPicker">
+    <attr name="showButtons" format="boolean"/>
+    <attr name="nextButtonEnabled" format="boolean"/>
+    <attr name="previousButtonEnabled" format="boolean"/>
+    <attr name="android:text"/>
+  </declare-styleable>
+
+  <attr name="textColorAction" format="reference|color"/>
+  <attr name="textColorPrimaryDisabled" format="reference|color"/>
+  <attr name="textColorSecondaryDisabled" format="reference|color"/>
+</resources>

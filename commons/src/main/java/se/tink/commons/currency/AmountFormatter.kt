@@ -1,0 +1,12 @@
+package se.tink.commons.currency
+
+import se.tink.core.models.misc.Amount
+
+interface AmountFormatter {
+    fun format(
+        amount: Amount,
+        useSymbol: Boolean = true,
+        useSign: Boolean = true,
+        explicitlyPositive: Boolean = false
+    ): String
+}
