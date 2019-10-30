@@ -38,7 +38,6 @@ class TransactionItemFactory @Inject constructor(
                 label = description,
                 amount = amount,
                 dispensableAmount = dispensableAmount,
-                recurring = isRecurring,
                 upcomingTransactionData = if (isUpcoming) {
                     ListItem.TransactionItem.UpcomingTransactionData(
                         pending = isPending,
@@ -69,7 +68,6 @@ class TransactionItemFactory @Inject constructor(
                     description = category.name,
                     date = dateUtils.formatDateHuman(timestamp),
                     merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
-                    recurring = isRecurring,
                     selected = isSelected
                 )
             } else {
@@ -86,7 +84,6 @@ class TransactionItemFactory @Inject constructor(
         label: String,
         amount: Amount,
         dispensableAmount: Amount,
-        recurring: Boolean,
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {
@@ -131,7 +128,6 @@ class TransactionItemFactory @Inject constructor(
                 ),
                 date = date,
                 merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
-                recurring = recurring,
                 upcomingTransactionData = upcomingTransactionData
             )
         } else {

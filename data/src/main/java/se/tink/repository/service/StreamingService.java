@@ -10,7 +10,6 @@ import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.transfer.SignableOperation;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MapChangeObserver;
@@ -39,8 +38,6 @@ public interface StreamingService extends TinkService {
 	void subscribeForFollowItems(ChangeObserver<FollowItem> listener);
 
 	void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener);
-
-	void subscribeForSignableOperations(ChangeObserver<SignableOperation> listener);
 
 	void unsubscribe(MapChangeObserver listener);
 

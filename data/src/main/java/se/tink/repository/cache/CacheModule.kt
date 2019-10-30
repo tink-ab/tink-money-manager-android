@@ -15,7 +15,6 @@ import se.tink.core.models.follow.FollowItem
 import se.tink.core.models.misc.Period
 import se.tink.core.models.provider.Provider
 import se.tink.core.models.transaction.Transaction
-import se.tink.core.models.transfer.SignableOperation
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
 import se.tink.repository.cache.database.CacheDatabase
@@ -44,13 +43,12 @@ class CacheModule(private val context: Context, private val diskCacheAllowed: Bo
     @Provides
     fun cacheHandle(
         cacheDatabase: CacheDatabase,
-        signableOperationCache: WritableCacheRepository<SignableOperation>,
         providerCache: WritableCacheRepository<Provider>,
         credentialCache: WritableCacheRepository<Credential>
     ): CacheHandle {
         return CacheHandle(
             cacheDatabase,
-            setOf(signableOperationCache, providerCache, credentialCache)
+            setOf(providerCache, credentialCache)
         )
     }
 
@@ -130,12 +128,6 @@ class CacheModule(private val context: Context, private val diskCacheAllowed: Bo
         modelConverter: ModelConverter
     ): LiveDataCache<List<CachedCredential>> {
         return CredentialsDatabaseCache(cacheDatabase, modelConverter)
-    }
-
-    @Provides
-    @Singleton
-    fun signableOperationCache(): WritableCacheRepository<SignableOperation> {
-        return InMemoryCache()
     }
 
     @Provides

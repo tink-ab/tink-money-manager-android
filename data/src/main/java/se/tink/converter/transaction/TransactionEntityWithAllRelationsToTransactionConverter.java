@@ -4,7 +4,6 @@ import java.util.List;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.misc.Amount;
-import se.tink.core.models.transaction.Counterpart;
 import se.tink.core.models.transaction.Tag;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.modelConverter.AbstractConverter;
@@ -47,11 +46,6 @@ public class TransactionEntityWithAllRelationsToTransactionConverter extends
 		List<Tag> tags = modelConverter.map(source.getTagEntities(), Tag.class);
 
 		destination.setTags(tags);
-
-		List<Counterpart> counterparts = modelConverter.map(source.getCounterpartEntities(),
-			Counterpart.class);
-
-		destination.setCounterparts(counterparts);
 
 		return destination;
 

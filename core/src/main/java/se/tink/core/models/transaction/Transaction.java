@@ -25,8 +25,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 	private String type;
 	private TransactionDetails details;
 	private List<Tag> tags;
-	private List<Counterpart> counterparts = new ArrayList<>();
-	private boolean recurring;
 
 	public Transaction() {
 	}
@@ -50,9 +48,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 		details = in.readParcelable(TransactionDetails.class.getClassLoader());
 		tags = new ArrayList<>();
 		in.readList(tags, null);
-		counterparts = new ArrayList<>();
-		in.readList(counterparts, null);
-		recurring = in.readByte() != 0;
 	}
 
 	@Override
@@ -74,8 +69,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 		parcel.writeParcelable(dispensableAmount, i);
 		parcel.writeParcelable(details, i);
 		parcel.writeList(tags);
-		parcel.writeList(counterparts);
-		parcel.writeByte((byte) (recurring ? 1 : 0));
 	}
 
 	public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
@@ -266,14 +259,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 		this.insertionTime = insertionTime;
 	}
 
-	public List<Counterpart> getCounterparts() {
-		return counterparts;
-	}
-
-	public void setCounterparts(List<Counterpart> counterparts) {
-		this.counterparts = counterparts;
-	}
-
 	public Amount getDispensableAmount() {
 		return dispensableAmount;
 	}
@@ -284,13 +269,5 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 
 	public boolean isEditable() {
 		return upcoming && pending && details != null && !details.getTransferId().isEmpty();
-	}
-
-	public void setRecurring(boolean recurring) {
-		this.recurring = recurring;
-	}
-
-	public boolean isRecurring() {
-		return recurring;
 	}
 }

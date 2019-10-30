@@ -80,7 +80,6 @@ import se.tink.converter.tracking.TrackingEventToTrackingDTOConverter;
 import se.tink.converter.tracking.TrackingRequestToTrackingRequestDTOConverter;
 import se.tink.converter.tracking.TrackingTimingToTrackingTimingDTOConverter;
 import se.tink.converter.tracking.TrackingViewToTrackingViewDTOConverter;
-import se.tink.converter.transaction.CreatePartAndCounterpartResponseConverter;
 import se.tink.converter.transaction.QueryTransactionResponseDTOToSearchResultMetadataConverter;
 import se.tink.converter.transaction.SuggestTransactionConverter;
 import se.tink.converter.transaction.SuggestTransactionsResponseConverter;
@@ -253,7 +252,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new TransactionClusterConverter(this));
 
         addConverter(new QueryTransactionResponseDTOToSearchResultMetadataConverter(this));
-        addConverter(new CreatePartAndCounterpartResponseConverter(this));
     }
 
     private void setupStatisticConverters() {

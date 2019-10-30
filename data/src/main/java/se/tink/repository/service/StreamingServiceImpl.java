@@ -20,7 +20,6 @@ import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.transfer.SignableOperation;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.rpc.StreamingRequest;
 import se.tink.grpc.v1.rpc.StreamingResponse;
@@ -53,8 +52,6 @@ public class StreamingServiceImpl implements StreamingService {
 	private final List<ObjectChangeObserver<CategoryTree>> categoryListeners = Lists.newArrayList();
 	private final List<ChangeObserver<Account>> accountListeners = Lists.newArrayList();
 	private final List<ChangeObserver<FollowItem>> followItemListeners = Lists.newArrayList();
-	private List<ChangeObserver<SignableOperation>> signableOperationsListeners = Lists
-		.newArrayList();
 	private Date latestStreamingTime = DateTime.now().toDate();
 	@Nullable
 	private StreamObserver<StreamingRequest> requestStreamObserver;
@@ -149,14 +146,6 @@ public class StreamingServiceImpl implements StreamingService {
 						FollowItem.class);
 				notifyListeners(items, followItemListeners, type);
 			}
-
-			if (value.hasSignableOperations()) {
-				List<SignableOperation> items = converter
-					.map(value.getSignableOperations().getSignableOperationList(),
-						SignableOperation.class);
-				notifyListeners(items, signableOperationsListeners, type);
-			}
-
 		}
 	};
 
@@ -220,11 +209,6 @@ public class StreamingServiceImpl implements StreamingService {
 	@Override
 	public void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener) {
 		userConfigurationListeners.add(listener);
-	}
-
-	@Override
-	public void subscribeForSignableOperations(ChangeObserver<SignableOperation> listener) {
-		signableOperationsListeners.add(listener);
 	}
 
 	@Override

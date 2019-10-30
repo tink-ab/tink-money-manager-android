@@ -3,7 +3,6 @@ package se.tink.repository.service;
 import java.util.List;
 import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
-import se.tink.core.models.transaction.CreatePartAndCounterpartResponse;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.SuggestTransactionsResponse;
 import se.tink.core.models.transaction.Transaction;
@@ -49,10 +48,6 @@ public interface TransactionService extends TinkService {
 
 	void suggestTransactions(boolean evaluateEverything, int nrOfClusters,
 		final MutationHandler<SuggestTransactionsResponse> handler);
-
-	void createPartAndCounterpart(String transactionId, String counterpartTransactionId,
-		MutationHandler<CreatePartAndCounterpartResponse> handler, Amount partAmount,
-		int suggestionIndex);
 
 	void updatePartAndCounterpart(String transactionId, String partId, Amount amount,
 		MutationHandler<Transaction> handler);
