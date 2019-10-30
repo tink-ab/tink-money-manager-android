@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':data')
+    
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation libraries.kotlin_stdlib
+
+    implementation libraries.rxandroid
+    implementation libraries.android_lifecycle_rx_ktx
+
+    implementation libraries.dagger
+    kapt libraries.dagger_compiler
+    testImplementation libraries.dagger
+
+    implementation libraries.arch_lifecycle_extensions
+    implementation libraries.arch_lifecycle_common_java8
+    kapt libraries.arch_lifecycle_compiler
+}
+
+repositories {
+    mavenCentral()
+}
