@@ -9,10 +9,11 @@
       <corners android:radius="12dp"/>
     </shape>
   </item>
-  <item
-    android:bottom="4dp"
-    android:drawable="@drawable/ic_done_white_24dp"
-    android:left="4dp"
-    android:right="4dp"
-    android:top="4dp"/>
+<!--  TODO: do we need this?-->
+<!-- <item-->
+<!--    android:bottom="4dp"-->
+<!--    android:drawable="@drawable/ic_done_white_24dp"-->
+<!--    android:left="4dp"-->
+<!--    android:right="4dp"-->
+<!--    android:top="4dp"/>-->
 </layer-list>

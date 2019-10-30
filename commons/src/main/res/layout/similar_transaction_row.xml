@@ -37,15 +37,6 @@
     app:layout_constraintBottom_toTopOf="@+id/iconBackground"
     app:layout_constraintStart_toEndOf="@+id/iconBackground" />
 
-  <ImageView
-    android:id="@+id/recurringBadge"
-    android:layout_width="@dimen/recurring_item_badge_size"
-    android:layout_height="@dimen/recurring_item_badge_size"
-    android:src="@drawable/recurring_list_item_badge"
-    android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="@+id/spacer"
-    app:layout_constraintTop_toTopOf="@+id/spacer"/>
-
   <TextView
     android:id="@+id/label"
     style="@style/hecto"

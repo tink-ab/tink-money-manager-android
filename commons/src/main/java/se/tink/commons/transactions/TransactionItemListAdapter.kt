@@ -14,7 +14,6 @@ import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.tint
 import se.tink.commons.extensions.visible
-import se.tink.merchantlogos.MerchantLogos
 import se.tink.utils.DateUtils
 import kotlin.properties.Delegates
 
@@ -236,29 +235,17 @@ class TransactionItemViewHolder(
     fun bind(item: ListItem.TransactionItem) {
         with(itemView) {
 
-            val merchantLogo = if (item.merchantLogoAllowed) {
-                MerchantLogos.fromTransactionDescription(item.label)
-            } else {
-                null
-            }
-
-            if (merchantLogo != null) {
-                icon.setImageResource(0)
-                iconBackground.setImageResource(merchantLogo)
-            } else {
-                val (iconRes, iconColor, iconBackgroundColor) = item.icon
-                icon.setImageResource(iconRes)
-                icon.tint(iconColor)
-                iconBackground.setImageResource(0)
-                iconBackground.backgroundTint(iconBackgroundColor)
-            }
+            val (iconRes, iconColor, iconBackgroundColor) = item.icon
+            icon.setImageResource(iconRes)
+            icon.tint(iconColor)
+            iconBackground.setImageResource(0)
+            iconBackground.backgroundTint(iconBackgroundColor)
 
             label.text = item.label
             description.text = item.description
             amount.text = item.amount
             dispensableAmount.text = item.dispensableAmount
             dispensableAmount.visible = item.dispensableAmount != item.amount
-            recurringBadge.visible = item.recurring
         }
     }
 }

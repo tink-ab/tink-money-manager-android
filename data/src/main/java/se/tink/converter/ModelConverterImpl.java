@@ -79,7 +79,6 @@ import se.tink.converter.identity.IdentityStatePropertyConverter;
 import se.tink.converter.identity.IdentityStateRecordOfNonPaymentConverter;
 import se.tink.converter.identity.IdentityStateRoleConverter;
 import se.tink.converter.identity.IdentityStateTaxDeclarationConverter;
-import se.tink.converter.insights.InsightConverters;
 import se.tink.converter.kyc.KycAnswersToStoreKycRequestConverter;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
@@ -233,7 +232,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupIdentityConverters();
         setupBudgetConverters();
         setupKycConverters();
-        setupActionableInsightConverters();
     }
 
     private void addConverter(AbstractConverter abstractConverter) {
@@ -497,9 +495,5 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupKycConverters() {
         addConverter(new KycAnswersToStoreKycRequestConverter());
-    }
-
-    private void setupActionableInsightConverters() {
-        addConverters(InsightConverters.INSTANCE.forConverter(this));
     }
 }
