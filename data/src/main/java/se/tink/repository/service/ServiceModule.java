@@ -16,19 +16,14 @@ import se.tink.core.models.follow.FollowItem;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.transfer.SignableOperation;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
-import se.tink.grpc.v1.services.ActivityServiceGrpc;
 import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.BudgetServiceGrpc;
-import se.tink.grpc.v1.services.ConsentServiceGrpc;
 import se.tink.grpc.v1.services.CredentialServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.FollowServiceGrpc;
-import se.tink.grpc.v1.services.IdentityServiceGrpc;
-import se.tink.grpc.v1.services.InsightsServiceGrpc;
 import se.tink.grpc.v1.services.LoanServiceGrpc;
 import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.ProviderServiceGrpc;
@@ -37,8 +32,6 @@ import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TrackingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
-import se.tink.grpc.v1.services.TransferKycServiceGrpc;
-import se.tink.grpc.v1.services.TransferServiceGrpc;
 import se.tink.grpc.v1.services.UserServiceGrpc;
 import se.tink.grpc.v1.services.UserServiceGrpc.UserServiceStub;
 import se.tink.repository.ExceptionTracker;
@@ -53,7 +46,6 @@ import se.tink.repository.manager.CategoryServiceCachedImpl;
 import se.tink.repository.manager.CredentialServiceCachedImpl;
 import se.tink.repository.manager.FollowRepositoryCachedImpl;
 import se.tink.repository.manager.ProviderServiceCachedImpl;
-import se.tink.repository.manager.SignableOperationServiceCacheImpl;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
 
@@ -117,15 +109,6 @@ public class ServiceModule {
 		LiveDataCache<List<Account>> cache
 	) {
 		return new AccountServiceCachedImpl(accountServiceApi, streamingServiceStub, converter, cache);
-	}
-
-	@Provides
-	@Singleton
-	public LoanService provideLoanRepository(
-		LoanServiceGrpc.LoanServiceStub loanServiceStub,
-		ModelConverter converter
-	) {
-		return new LoanServiceImpl(loanServiceStub, converter);
 	}
 
 	@Provides
@@ -220,15 +203,6 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public SignableOperationService provideSignableOperationService(
-		StreamingService streamingService,
-		WritableCacheRepository<SignableOperation> signableOperationCache
-	) {
-		return new SignableOperationServiceCacheImpl(streamingService, signableOperationCache);
-	}
-
-	@Provides
-	@Singleton
 	public SettingsService settingsService(
 		SettingsServiceGrpc.SettingsServiceStub stub,
 		UserServiceStub userService,
@@ -302,16 +276,6 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public FeedService feedService(
-		StreamingService streamingService,
-		ModelConverter modelConverter, Channel channel
-	) {
-		return new FeedServiceImpl(ActivityServiceGrpc.newStub(channel), streamingService,
-			modelConverter);
-	}
-
-	@Provides
-	@Singleton
 	public TrackingService trackingService(ModelConverter modelConverter, Channel channel) {
 		return new TrackingServiceImpl(TrackingServiceGrpc.newStub(channel), modelConverter);
 	}
@@ -331,40 +295,9 @@ public class ServiceModule {
 		return DeviceServiceGrpc.newStub(channel);
 	}
 
-	@Provides
-	@Singleton
-	public IdentityService provideIdentityService(ModelConverter modelConverter, Channel channel) {
-		return new IdentityServiceImpl(IdentityServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@Provides
-	@Singleton
-	public ConsentService consentService(ModelConverter modelConverter, Channel channel) {
-		return new ConsentServiceImpl(modelConverter, ConsentServiceGrpc.newStub(channel));
-	}
-
-	@Provides
-	@Singleton
-	public TransferService transferService(ModelConverter modelConverter, Channel channel) {
-		return new TransferServiceImpl(TransferServiceGrpc.newStub(channel), modelConverter);
-	}
-
 	@Singleton
 	@Provides
 	public BudgetService budgetService(ModelConverter modelConverter, Channel channel) {
 		return new BudgetServiceImpl(BudgetServiceGrpc.newStub(channel), modelConverter);
 	}
-
-	@Singleton
-	@Provides
-	TransferKycService transferKycService(ModelConverter modelConverter, Channel channel) {
-		return new TransferKycServiceImpl(TransferKycServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@Singleton
-	@Provides
-	InsightService insightService(ModelConverter modelConverter, Channel channel) {
-		return new InsightServiceImpl(InsightsServiceGrpc.newStub(channel), modelConverter);
-	}
-
 }

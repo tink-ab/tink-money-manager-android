@@ -18,7 +18,6 @@ import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
-import se.tink.core.models.transaction.CreatePartAndCounterpartResponse;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.SuggestTransactionsResponse;
 import se.tink.core.models.transaction.Transaction;
@@ -26,7 +25,6 @@ import se.tink.grpc.v1.models.CurrencyDenominatedAmount;
 import se.tink.grpc.v1.models.Tag;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsRequest;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsResponse;
-import se.tink.grpc.v1.rpc.CreatePartAndCounterpartRequest;
 import se.tink.grpc.v1.rpc.DeletePartAndCounterpartRequest;
 import se.tink.grpc.v1.rpc.DeletePartAndCounterpartResponse;
 import se.tink.grpc.v1.rpc.GetSimilarTransactionsRequest;
@@ -54,15 +52,6 @@ public class TransactionServiceImpl implements TransactionService {
 	private final ModelConverter converter;
 	private final StreamingService streamingService;
 	private final Map<ChangeObserver<Transaction>, List<TransactionSubscription>> subscriptionsByObserver;
-
-//    @Inject
-//    public TransactionServiceImpl(TransactionServiceGrpc.TransactionServiceStub stub, StreamingService streamingStub, ModelConverter converter) {
-//        service = stub;
-//        streamingService = streamingStub;
-//        this.converter = converter;
-//        subscriptionsByObserver = Maps.newHashMap();
-//        startListeningToStream();
-//    }
 
 	@Inject
 	public TransactionServiceImpl(
@@ -254,36 +243,6 @@ public class TransactionServiceImpl implements TransactionService {
 				@Override
 				public void onCompleted() {
 					handler.onCompleted();
-				}
-			});
-	}
-
-	@Override
-	public void createPartAndCounterpart(String transactionId, String counterpartTransactionId,
-		final MutationHandler<CreatePartAndCounterpartResponse> handler, Amount partAmount,
-		int suggestionIndex) {
-		CreatePartAndCounterpartRequest.Builder builder = CreatePartAndCounterpartRequest
-			.newBuilder()
-			.setTransactionId(transactionId)
-			.setCounterpartTransactionId(counterpartTransactionId);
-
-		if (partAmount != null && partAmount.isValid()) {
-			CurrencyDenominatedAmount amount = converter.map(partAmount, CurrencyDenominatedAmount.class);
-			builder.setPartAmount(amount);
-		}
-
-		if (suggestionIndex > -1) {
-			builder.setSuggestResponseIndex(Int32Value.of(suggestionIndex));
-		}
-
-		transactionServiceApi.createPartAndCounterpart(builder.build(),
-			new SimpleStreamObserver<se.tink.grpc.v1.rpc.CreatePartAndCounterpartResponse>(
-				handler) {
-				@Override
-				public void onNext(se.tink.grpc.v1.rpc.CreatePartAndCounterpartResponse value) {
-					CreatePartAndCounterpartResponse mappedValue = converter
-						.map(value, CreatePartAndCounterpartResponse.class);
-					handler.onNext(mappedValue);
 				}
 			});
 	}

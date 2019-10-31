@@ -26,8 +26,6 @@ import se.tink.converter.misc.PeriodEntityToPeriodConverter;
 import se.tink.converter.misc.PeriodToPeriodEntityConverter;
 import se.tink.converter.statistic.StatisticEntityToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticEntityConverter;
-import se.tink.converter.transaction.CounterpartEntityToCounterpartConverter;
-import se.tink.converter.transaction.CounterpartToCounterpartEntityConverter;
 import se.tink.converter.transaction.TagEntityToTagConverter;
 import se.tink.converter.transaction.TransactionEntityWithAllRelationsToTransactionConverter;
 import se.tink.converter.transaction.TransactionToTransactionWithAllRelationsConverter;
@@ -73,8 +71,6 @@ public class CacheConverterFactory {
 		converters.add(new AccountToAccountEntityAndAccountIdentifierEntityConverter(converter));
 		converters.add(new AccountSourceIdentifierEntityToStringConverter(converter));
 		converters.add(new UserConfigurationI18nConfigurationEntityToI18nConfigurationConverter());
-		converters.add(new CounterpartToCounterpartEntityConverter(converter));
-		converters.add(new CounterpartEntityToCounterpartConverter(converter));
 
 		return converters;
 	}

@@ -42,7 +42,7 @@ import se.tink.repository.cache.models.follow.FollowSavingAccountIdEntity;
             CredentialsEntity.class,
             BudgetEntity.class
         },
-        version = 12,
+        version = 1,
         exportSchema = false)
 public abstract class CacheDatabase extends RoomDatabase {
 
@@ -53,8 +53,6 @@ public abstract class CacheDatabase extends RoomDatabase {
     public abstract TransactionDao transactionDao();
 
     public abstract TagDao tagDao();
-
-    public abstract CounterpartDao counterpartDao();
 
     public abstract UserConfigurationDao userConfigurationDao();
 

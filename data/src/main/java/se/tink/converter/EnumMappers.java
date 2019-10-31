@@ -5,10 +5,6 @@ import com.google.common.collect.ImmutableBiMap;
 import se.tink.core.models.authentication.AuthenticationStatus;
 import se.tink.core.models.credential.Credential;
 import se.tink.core.models.device.AuthenticationMethod;
-import se.tink.core.models.transfer.SignableOperation;
-import se.tink.core.models.transfer.SignableOperation.Status;
-import se.tink.core.models.transfer.TransferDestination;
-import se.tink.core.models.transfer.TransferDestination.Type;
 import se.tink.core.models.user.BankIdAuthenticationStatus;
 import se.tink.core.models.user.PeriodSetting;
 import se.tink.grpc.v1.models.PeriodDateBreakType;
@@ -71,39 +67,6 @@ public class EnumMappers {
 				PeriodSetting.PeriodDateBreakType.MONTHLY_ADJUSTED)
 			.put(PeriodDateBreakType.PERIOD_DATE_BREAK_TYPE_UNKNOWN,
 				PeriodSetting.PeriodDateBreakType.UNKNOWN)
-			.build();
-
-	public static final BiMap<se.tink.grpc.v1.models.Account.Type, TransferDestination.Type> GRPC_TO_MODEL_TRANSFER_DESTINATION_TYPE =
-		ImmutableBiMap.<se.tink.grpc.v1.models.Account.Type, TransferDestination.Type>builder()
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_CHECKING, Type.TYPE_CHECKING)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_CREDIT_CARD, Type.TYPE_CREDIT_CARD)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_DUMMY, Type.TYPE_DUMMY)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_EXTERNAL, Type.TYPE_EXTERNAL)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_INVESTMENT, Type.TYPE_INVESTMENT)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_LOAN, Type.TYPE_LOAN)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_MORTGAGE, Type.TYPE_MORTGAGE)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_OTHER, Type.TYPE_OTHER)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_PENSION, Type.TYPE_PENSION)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_SAVINGS, Type.TYPE_SAVINGS)
-			.put(se.tink.grpc.v1.models.Account.Type.TYPE_UNKNOWN, Type.TYPE_UNKNOWN)
-			.build();
-
-	public static final BiMap<se.tink.grpc.v1.models.SignableOperation.Status, SignableOperation.Status> GRPC_TO_MODEL_SIGNABLE_OPERATION_STATUS =
-		ImmutableBiMap.<se.tink.grpc.v1.models.SignableOperation.Status, SignableOperation.Status>builder()
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_UNKNOWN, Status.STATUS_UNKNOWN)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_CREATED, Status.STATUS_CREATED)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_EXECUTING, Status.STATUS_EXECUTING)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_AWAITING_CREDENTIALS, Status.STATUS_AWAITING_CREDENTIALS)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_CANCELLED, Status.STATUS_CANCELLED)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_FAILED, Status.STATUS_FAILED)
-		.put(se.tink.grpc.v1.models.SignableOperation.Status.STATUS_EXECUTED, Status.STATUS_EXECUTED)
-		.build();
-
-	public static final BiMap<se.tink.grpc.v1.models.SignableOperation.Type, SignableOperation.Type> GRPC_TO_MODEL_SIGNABLE_OPERATION_TYPE=
-		ImmutableBiMap.<se.tink.grpc.v1.models.SignableOperation.Type, SignableOperation.Type>builder()
-			.put(se.tink.grpc.v1.models.SignableOperation.Type.TYPE_UNKNOWN, SignableOperation.Type.TYPE_UNKNOWN)
-			.put(se.tink.grpc.v1.models.SignableOperation.Type.TYPE_TRANSFER, SignableOperation.Type.TYPE_TRANSFER)
-			.put(se.tink.grpc.v1.models.SignableOperation.Type.TYPE_ACCOUNT_CREATE, SignableOperation.Type.TYPE_ACCOUNT_CREATE)
 			.build();
 
 	public static final BiMap<se.tink.grpc.v1.models.AuthenticationMethod, AuthenticationMethod> AUTHENTICATION_METHOD_MAP =

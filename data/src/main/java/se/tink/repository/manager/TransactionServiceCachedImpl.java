@@ -26,7 +26,6 @@ import se.tink.core.extensions.AccountExtensionsKt;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
-import se.tink.core.models.transaction.CreatePartAndCounterpartResponse;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.grpc.v1.rpc.GetTransactionRequest;
@@ -201,15 +200,6 @@ public class TransactionServiceCachedImpl implements TransactionService {
 	public void suggestTransactions(boolean evaluateEverything, int nrOfClusters,
 		MutationHandler<se.tink.core.models.transaction.SuggestTransactionsResponse> handler) {
 		uncachedService.suggestTransactions(evaluateEverything, nrOfClusters, handler);
-	}
-
-	@Override
-	public void createPartAndCounterpart(String transactionId, String counterpartTransactionId,
-		MutationHandler<CreatePartAndCounterpartResponse> mutationHandler, Amount amount,
-		int suggestionIndex) {
-		uncachedService
-			.createPartAndCounterpart(transactionId, counterpartTransactionId, mutationHandler,
-				amount, suggestionIndex);
 	}
 
 	@Override

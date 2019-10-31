@@ -23,7 +23,6 @@ ext {
             android_lifecycle_rx_ktx            : "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion",
 
             apmem_tools_layouts                 : 'org.apmem.tools:layouts:1.10@aar',
-            appsflyer_sdk                       : 'com.appsflyer:af-android-sdk:4.8.12',
 
             arch_lifecycle_extensions           : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion", //Both LiveData and ViewModel
             arch_lifecycle_livedata             : "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion", // Only LiveData
@@ -38,7 +37,6 @@ ext {
 
             commonmark                          : 'com.atlassian.commonmark:commonmark:0.10.0',
             conscrypt                           : 'org.conscrypt:conscrypt-android:2.2.1',
-            crashlytics                         : 'com.crashlytics.sdk.android:crashlytics:2.6.8@aar',
 
             dagger                              : "com.google.dagger:dagger:$daggerVersion",
             dagger_android                      : "com.google.dagger:dagger-android:$daggerVersion",
@@ -47,13 +45,9 @@ ext {
             dagger_compiler                     : "com.google.dagger:dagger-compiler:$daggerVersion",
 
             facebook_fresco                     : 'com.facebook.fresco:fresco:2.0.0',
-            facebook_applinks                   : 'com.facebook.android:facebook-applinks:[4,5)',
 
-            freedrawview                        : 'com.rm:freedrawview:1.1.2',
             gson                                : "com.google.code.gson:gson:$gsonVersion",
             guava                               : "com.google.guava:guava:$guavaVersion",
-            installreferrer                     : 'com.android.installreferrer:installreferrer:1.0',
-            intercom                            : 'io.intercom.android:intercom-sdk:5.+',
             joda_time                           : "joda-time:joda-time:$jodaVersion",
             kotlin_stdlib                       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
             kotlin_coroutines                   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version",
@@ -62,8 +56,6 @@ ext {
             noadapter                           : 'vn.tiki.noadapter2:noadapter:2.0.2',
 
             play_services_analytics             : "com.google.android.gms:play-services-analytics:$analyticsVersion",
-
-            rmtheis_tess_two                    : 'com.rmtheis:tess-two:5.4.1',
 
             room_compiler                       : "androidx.room:room-compiler:$roomVersion",
             room_runtime                        : "androidx.room:room-runtime:$roomVersion",

@@ -5,7 +5,6 @@ import java.util.List;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.repository.cache.database.CacheDatabase;
-import se.tink.repository.cache.database.CounterpartDao;
 import se.tink.repository.cache.database.TagDao;
 import se.tink.repository.cache.database.TransactionDao;
 import se.tink.repository.cache.models.CounterpartEntity;
@@ -15,7 +14,6 @@ import se.tink.repository.cache.models.TransactionWithAllRelations;
 
 public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transaction>> {
 
-	private final CounterpartDao counterpartDao;
 	private TransactionDao transactionDao;
 	private TagDao tagDao;
 	private final ModelConverter modelConverter;
@@ -24,7 +22,6 @@ public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transac
 		super(cacheDatabase);
 		transactionDao = cacheDatabase.transactionDao();
 		tagDao = cacheDatabase.tagDao();
-		counterpartDao = cacheDatabase.counterpartDao();
 		this.modelConverter = modelConverter;
 	}
 
@@ -49,7 +46,6 @@ public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transac
 		}
 		transactionDao.clearAllAndInsert(new ArrayList<TransactionEntity>(entitiesWithRelations));
 		tagDao.clearAllAndInsert(tags);
-		counterpartDao.clearAllAndInsert(counterpartEntities);
 	}
 
 	@Override
@@ -64,7 +60,6 @@ public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transac
 		}
 		transactionDao.insertAll(new ArrayList<TransactionEntity>(entitiesWithRelations));
 		tagDao.insertAll(tags);
-		counterpartDao.insertAll(counterpartEntities);
 	}
 
 	@Override
@@ -80,8 +75,6 @@ public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transac
 			tags.addAll(entityWithRelations.getTagEntities());
 		}
 		transactionDao.updateAll(new ArrayList<TransactionEntity>(entitiesWithRelations));
-		counterpartDao
-			.clearWithTransactionIdAndInsertAllCounterparts(transactionIds, counterpartEntities);
 		tagDao.clearWithTransactionIdAndInsertAllTags(transactionIds, tags);
 	}
 
@@ -102,6 +95,5 @@ public class TransactionDatabaseCache extends AbstractDatabaseCache<List<Transac
 	public synchronized void clear() {
 		transactionDao.clear();
 		tagDao.clear();
-		counterpartDao.clear();
 	}
 }

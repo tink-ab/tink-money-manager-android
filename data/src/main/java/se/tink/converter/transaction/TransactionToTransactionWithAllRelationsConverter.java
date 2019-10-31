@@ -3,11 +3,9 @@ package se.tink.converter.transaction;
 import java.util.ArrayList;
 import java.util.List;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.transaction.Counterpart;
 import se.tink.core.models.transaction.Tag;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.repository.cache.models.AmountEntity;
-import se.tink.repository.cache.models.CounterpartEntity;
 import se.tink.repository.cache.models.TagEntity;
 import se.tink.repository.cache.models.TransactionWithAllRelations;
 
@@ -48,10 +46,6 @@ public class TransactionToTransactionWithAllRelationsConverter extends
 		List<TagEntity> tags = mapTags(source.getTags(), source.getId());
 		transactionEntity.setTagEntities(tags);
 
-		List<CounterpartEntity> counterpartEntities = mapCounterparts(source.getCounterparts(),
-			source.getId());
-		transactionEntity.setCounterpartEntities(counterpartEntities);
-
 		return transactionEntity;
 	}
 
@@ -75,15 +69,5 @@ public class TransactionToTransactionWithAllRelationsConverter extends
 			tagEntities.add(tagEntity);
 		}
 		return tagEntities;
-	}
-
-	private List<CounterpartEntity> mapCounterparts(List<Counterpart> counterparts,
-		String transactionId) {
-		List<CounterpartEntity> counterpartEntities = modelConverter
-			.map(counterparts, CounterpartEntity.class);
-		for (CounterpartEntity entity : counterpartEntities) {
-			entity.setTransactionId(transactionId);
-		}
-		return counterpartEntities;
 	}
 }
