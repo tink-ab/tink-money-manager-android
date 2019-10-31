@@ -59,7 +59,6 @@
 
   <color name="tink_tag_icon_text_color">@color/default_icon_color</color>
   <color name="payment_scan_icon_color">@color/default_icon_color</color>
-  <color name="intercom_button_icon">@color/default_icon_color</color>
 
   <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
   <color name="period_picker_background">@color/colorSurface</color>

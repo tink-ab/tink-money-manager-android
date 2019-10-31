@@ -6,7 +6,6 @@ import se.tink.repository.service.CredentialService
 import se.tink.repository.service.FollowService
 import se.tink.repository.service.PeriodService
 import se.tink.repository.service.ProviderService
-import se.tink.repository.service.SignableOperationService
 import se.tink.repository.service.StatisticService
 import se.tink.repository.service.TransactionService
 import se.tink.repository.service.UserConfigurationService
@@ -23,6 +22,5 @@ class ServiceCacheInitialization @Inject constructor(
     providerService: ProviderService,
     statisticService: StatisticService,
     transactionService: TransactionService,
-    userConfigurationService: UserConfigurationService,
-    signableOperationService: SignableOperationService
+    userConfigurationService: UserConfigurationService
 )

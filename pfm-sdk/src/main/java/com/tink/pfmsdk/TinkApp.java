@@ -1,19 +1,15 @@
 package com.tink.pfmsdk;
 
 import android.app.Application;
-import com.crashlytics.android.Crashlytics;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tink.pfmsdk.buildConfig.BuildConfiguration;
 import com.tink.pfmsdk.buildConfig.BuildConfigurations;
-import com.tink.pfmsdk.buildConfig.Feature;
-import com.tink.pfmsdk.buildConfig.LoggingConfigurations;
 import com.tink.pfmsdk.configuration.I18nConfiguration;
 import com.tink.pfmsdk.security.DefaultRecoveryHandler;
 import com.tink.pfmsdk.security.SecuredClientDataStorage;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
-import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -24,7 +20,6 @@ import java.security.UnrecoverableEntryException;
 import java.security.cert.CertificateException;
 import javax.crypto.NoSuchPaddingException;
 import javax.inject.Inject;
-import se.tink.repository.cache.CacheModule;
 import timber.log.Timber;
 
 
@@ -52,8 +47,6 @@ public class TinkApp extends Application implements HasAndroidInjector {
 
 		sharedInstance = this;
 
-		startFabricIfDesired();
-
 		Fresco.initialize(this);
 
 		// Init SecuredPreferenceStore, used for storing sensitive data
@@ -76,15 +69,6 @@ public class TinkApp extends Application implements HasAndroidInjector {
 		Timber.plant(config.getLoggingConfigurations().getTimberTree());
 
 		i18nConfiguration.initialize();
-	}
-
-	private void startFabricIfDesired() {
-		LoggingConfigurations loggingConfigurations = BuildConfigurations.INSTANCE.getInstance()
-			.getLoggingConfigurations();
-
-		if (loggingConfigurations.shouldStartFabric()) {
-			Fabric.with(this, new Crashlytics());
-		}
 	}
 
 	@Deprecated

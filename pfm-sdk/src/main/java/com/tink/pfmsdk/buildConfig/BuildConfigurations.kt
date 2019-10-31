@@ -17,9 +17,7 @@ interface LoggingConfigurations {
 class BuildConfiguration(val featureConfigurations: FeatureConfigurations,
                          val loggingConfigurations: LoggingConfigurations,
                          val supportedLangugaes: List<String>,
-                         val googleAnalyticsKey: String,
-                         val intercomAppId: String,
-                         val intercomApiKey: String)
+                         val googleAnalyticsKey: String)
 
 object BuildConfigurations {
 
@@ -29,17 +27,13 @@ object BuildConfigurations {
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
                 supportedLangugaes = listOf("en_US", "sv_SE"),
-                googleAnalyticsKey = "UA-34242137-6",
-                intercomAppId = "iy6mejjz",
-                intercomApiKey = "android_sdk-a16dcea6faadefd33bc945299f7784ed24e8512e")
+                googleAnalyticsKey = "UA-34242137-6")
     } else {
         BuildConfiguration(
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
                 supportedLangugaes = listOf("en_US", "sv_SE"),
-                googleAnalyticsKey = "UA-34242137-3",
-                intercomAppId = "c0335cb448541134051916dfe0fa9be43d31b79f",
-                intercomApiKey = "android_sdk-bba55ef580835fb728546ca7abf984afba0294ae")
+                googleAnalyticsKey = "UA-34242137-3")
     }
 
 }
@@ -58,7 +52,6 @@ private fun getFeatureConfigurations(): FeatureConfigurations {
                 BLOCK_SCREENSHOTS -> false
                 LOANS -> true
                 FORCE_PASSWORD_PROTECTION -> false
-                INTERCOM -> false
                 MORTGAGE -> true
             }
         }

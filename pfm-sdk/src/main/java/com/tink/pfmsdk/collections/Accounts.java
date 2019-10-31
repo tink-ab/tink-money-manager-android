@@ -1,18 +1,13 @@
 package com.tink.pfmsdk.collections;
 
-import android.content.Context;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.tink.pfmsdk.ClientDataStorage;
 import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import se.tink.core.models.account.Account;
-import se.tink.core.models.transfer.Transfer;
-import se.tink.core.models.transfer.TransferDestinationPerAccount;
-import se.tink.helpers.CollectionsHelper;
 
 public class Accounts {
 
@@ -99,69 +94,6 @@ public class Accounts {
 		List<Account> modifiedAccounts = copyList(currentAccounts);
 		modifiedAccounts.removeAll(toDeleteAccounts);
 		return modifiedAccounts;
-	}
-
-	public static Account getMostLikelyFromAccount(List<Account> accounts,
-		List<TransferDestinationPerAccount> transferDestinationsPerAccount, Transfer.Type type,
-		Context context) {
-		String mostLikelyFromAccountId = getMostLikelyFromAccountId(accounts, transferDestinationsPerAccount, type, context);
-		if (mostLikelyFromAccountId == null) {
-			return null;
-		}
-
-		return getAccountById(mostLikelyFromAccountId, accounts);
-	}
-
-	public static String getMostLikelyFromAccountId(List<Account> accounts,
-		final List<TransferDestinationPerAccount> transferDestinationsPerAccount, final Transfer.Type type,
-		Context context) {
-		if (accounts == null || context == null) {
-			return null;
-		}
-
-		final String latestTransferFromAccount = ClientDataStorage.sharedInstance(context)
-			.getLatestTransferFromAccount();
-		String result = null;
-		if (latestTransferFromAccount != null) {
-			boolean contains = CollectionsHelper.contains(accounts,
-				input -> input.getId().equals(latestTransferFromAccount));
-
-			if (contains) {
-				result = latestTransferFromAccount;
-			}
-		}
-
-		if (result == null) {
-			Account account = CollectionsHelper.findFirst(accounts,
-				input -> accountHasCorrectDestinationForType(input, transferDestinationsPerAccount, type));
-			if (account != null) {
-				result = account.getId();
-			}
-		}
-		return result;
-	}
-
-	public static boolean accountHasCorrectDestinationForType(final Account account, List<TransferDestinationPerAccount> transferDestinationsPerAccount, final Transfer.Type type) {
-		return Iterables.any(transferDestinationsPerAccount,
-			transferDestinationPerAccount -> account.getId().equals(transferDestinationPerAccount.getAccountId())
-				&& destinationsHasCorrectTransferDestinationForType(
-				transferDestinationPerAccount, type));
-	}
-
-
-	private static boolean destinationsHasCorrectTransferDestinationForType(
-		TransferDestinationPerAccount destinationPerAccount, final Transfer.Type type) {
-		return Iterables.any(destinationPerAccount.getDestinations(),
-			input -> {
-				switch (type) {
-					case TYPE_PAYMENT:
-					case TYPE_EINVOICE:
-						return input.isPayable() || input.isMatchesMultiple();
-					case TYPE_BANK_TRANSFER:
-						return input.isTransferable();
-				}
-				return false;
-			});
 	}
 
 	private static List<Account> copyList(List<Account> currentAccounts) {

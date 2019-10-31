@@ -70,20 +70,12 @@ dependencies {
 
     implementation libraries.facebook_fresco
 
-    implementation(libraries.crashlytics) {
-        transitive = true
-    }
-
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
 
     implementation libraries.joda_time
 
     implementation libraries.timber
-
-    implementation(libraries.intercom) {
-        exclude group: 'com.android.support'
-    }
 
     implementation libraries.firebase_core
     implementation libraries.firebase_messaging

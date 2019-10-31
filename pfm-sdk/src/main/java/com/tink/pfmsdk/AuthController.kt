@@ -11,7 +11,6 @@ import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.buildConfig.BuildConfigurations
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
 import se.tink.android.di.application.ApplicationScoped
-import se.tink.collections.Currencies
 import se.tink.core.models.tracking.TrackingConfigurationResponse
 import se.tink.privacy.DataWipeManager
 import se.tink.repository.ServiceCoordinator
@@ -65,7 +64,8 @@ class AuthController @Inject constructor(@ApplicationScoped private val context:
         interceptor.setSession(sessionId)
 
         Categories.getSharedInstance().attatchListener(categoryService)
-        Currencies.getSharedInstance().attatchListener(userConfigurationService)
+        // TODO: PFMSDK: Do we need this?
+        //Currencies.getSharedInstance().attatchListener(userConfigurationService)
         Periods.getSharedInstance().attatchListener(periodService)
         Providers.getSharedInstance().attatchListener(providerService)
         // TODO: PFMSDK: Do we need this?
@@ -92,7 +92,8 @@ class AuthController @Inject constructor(@ApplicationScoped private val context:
         interceptor.setSession(null)
 
         Categories.getSharedInstance().removeListener(categoryService)
-        Currencies.getSharedInstance().removeListener(userConfigurationService)
+        // TODO: PFMSDK: Do we need this?
+        //Currencies.getSharedInstance().removeListener(userConfigurationService)
         Periods.getSharedInstance().removeListener(periodService)
         Providers.getSharedInstance().removeListener(providerService)
         dataStorage.sessionId = null
