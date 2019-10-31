@@ -1,0 +1,16 @@
+package com.tink.pfmsdk.buildConfig;
+
+public enum Feature {
+	LEFT_TO_SPEND,
+	TAG_VIEW,
+	FAB,
+	SAVINGS_GOAL,
+	ID_CONTROL,
+	TOUCH_ID_LOGIN,
+	DISK_CACHE,
+	BLOCK_SCREENSHOTS,
+	LOANS,
+	FORCE_PASSWORD_PROTECTION,
+	INTERCOM,
+	MORTGAGE
+}

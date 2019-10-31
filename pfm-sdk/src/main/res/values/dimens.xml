@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="toolbar_elevation">4dp</dimen>
+  <dimen name="snackbar_height">60dp</dimen>
+  <dimen name="double_base_line_step">8dp</dimen>
+</resources>

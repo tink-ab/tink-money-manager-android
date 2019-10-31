@@ -1,3 +1,45 @@
 <resources>
   <string name="app_name">PFM SDK</string>
+  <string name="snackbar_utils_error_default">An error has occurred. Please try again later.</string>
+  <string name="snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
+  <string name="snackbar_utils_error_already_exists">Already exists</string>
+  <string name="onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
+
+  <string name="date_format_human_today">Today</string>
+  <string name="date_format_human_yesterday">Yesterday</string>
+  <string name="date_format_human_day_before_yesterday">Day before yesterday</string>
+  <string name="date_format_human_tomorrow">Tomorrow</string>
+  <string name="date_format_human_day_after_tomorrow">Day after tomorrow</string>
+  <string name="date_formatter_monthly">yyyy-MM</string>
+  <string name="date_formatter_yearly">yyyy</string>
+  <string name="date_formatter_week_yearly">xxxx</string>
+  <string name="date_formatter_integer_date">yyyyMMdd</string>
+  <string name="date_formatter_integer_date_compact">yyMMdd</string>
+  <string name="date_formatter_monthly_only">MM</string>
+  <string name="date_formatter_monthly_compact">MMM</string>
+  <string name="date_formatter_month_name">MMMMM</string>
+  <string name="date_formatter_month_name_short">MMMM</string>
+  <string name="date_formatter_weekly">xxxx:ww</string>
+  <string name="date_formatter_daily">yyyy-MM-dd</string>
+  <string name="date_formatter_daily_compact">yy-MM-dd</string>
+  <string name="date_formatter_daily_pretty">MMM d</string>
+  <string name="date_formatter_daily_monthly">dd MMM</string>
+  <string name="date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
+  <string name="date_formatter_minutes">yyyy-MM-dd HH:mm</string>
+  <string name="date_formatter_seconds">yyyy-MM-dd HH:mm:ss</string>
+  <string name="date_formatter_seconds_dashes">yyyy-MM-dd&#45;&#45;HH:mm:ss</string>
+  <string name="date_formatter_seconds_t">yyyy-MM-dd\'T\'HH:mm:ss</string>
+  <string name="date_formatter_seconds_with_timezone">yyyy-MM-dd HH:mm:ssZ</string>
+  <string name="date_formatter_milliseconds_with_timezone">yyyy-MM-dd\'T\'HH:mm:ss.SSSZ</string>
+  <string name="date_formatter_time_millis">HH:mm:ss,SSS</string>
+  <string name="date_formatter_filename_safe">yyyy-MM-dd&#45;&#45;HH:mm:ss.SSS</string>
+  <string name="date_formatter_logging">yyyy-MM-dd HH:mm:ss,SSS</string>
+  <string name="date_formatter_day_of_week">EEEE</string>
+  <string name="date_formatter_month_and_day_of_week">EEEE MMM d</string>
+  <string name="date_formatter_month_and_day">MMMM d</string>
+  <string name="date_formatter_month_and_day_and_year">MMMM d yyyy</string>
+  <string name="date_formatter_month_and_year">MMMM yyyy</string>
+  <string name="date_formatter_month_and_year_compact">MMM yyyy</string>
+
+  <string name="all_categories">All categories</string>
 </resources>
