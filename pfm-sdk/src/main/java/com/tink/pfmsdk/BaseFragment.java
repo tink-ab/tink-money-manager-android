@@ -76,7 +76,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	private UICallbackRunner callbacksExecutor;
 
 	@Nullable
-	//@BindView(R.id.tink_toolbar) // TODO: PFMSDK This is shown as error maybe because resource IDs are not constant in a library module
+	//@BindView(R.id.tink_toolbar) // TODO: PFMSDK: Don't use butterknife
 		TinkToolbar toolbar;
 
 	private Theme defaultTheme;

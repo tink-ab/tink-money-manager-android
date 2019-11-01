@@ -11,8 +11,8 @@ import se.tink.commons.categories.isExcluded
 import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.models.Category
-import se.tink.core.models.account.Account
 import se.tink.core.models.misc.Amount
+import se.tink.core.models.misc.ExactNumber
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -25,15 +25,13 @@ class TransactionItemFactory @Inject constructor(
 
     fun fromTransaction(
         transaction: Transaction,
-        category: Category,
-        account: Account
+        category: Category
     ): ListItem.TransactionItem? =
         with(transaction) {
             createItem(
                 id = id,
                 isUpcoming = isUpcoming,
                 category = category,
-                account = account,
                 date = timestamp,
                 label = description,
                 amount = amount,
@@ -50,7 +48,7 @@ class TransactionItemFactory @Inject constructor(
             )
         }
 
-    fun fromTransaction(
+    fun similarTransactionItemFromTransaction(
         transaction: Transaction,
         category: Category,
         isSelected: Boolean = true
@@ -79,11 +77,10 @@ class TransactionItemFactory @Inject constructor(
         id: String,
         isUpcoming: Boolean,
         category: Category,
-        account: Account,
         date: DateTime,
         label: String,
         amount: Amount,
-        dispensableAmount: Amount,
+        dispensableAmount: Amount = Amount(ExactNumber.ZERO, "SEK"), // TODO:PFMSDK: Remove dispensableAmount
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {
@@ -99,22 +96,7 @@ class TransactionItemFactory @Inject constructor(
                 }
             }
 
-            val descriptionText = if (isUpcoming) {
-                context.getString(
-                    R.string.upcoming_transaction_from,
-                    dateUtils.formatDateHuman(date),
-                    account.name
-                )
-            } else {
-                category.name
-            }
-
-            val adjustedDispensableAmount = with(dispensableAmount) {
-                Amount(
-                    value.multiply(account.ownership),
-                    currencyCode
-                )
-            }
+            val descriptionText = category.name
 
             ListItem.TransactionItem(
                 id = id,
@@ -123,7 +105,7 @@ class TransactionItemFactory @Inject constructor(
                 description = descriptionText,
                 amount = amountFormatter.format(amount = amount, explicitlyPositive = true),
                 dispensableAmount = amountFormatter.format(
-                    amount = adjustedDispensableAmount,
+                    amount = dispensableAmount,
                     explicitlyPositive = true
                 ),
                 date = date,

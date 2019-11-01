@@ -7,4 +7,14 @@
     <attr format="boolean" name="isHandlingTagSymbol"/>
     <attr name="color"/>
   </declare-styleable>
+
+  <declare-styleable name="ViewPagerIndicator">
+    <attr name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="ScreenPercentLayout">
+    <attr format="float" name="height_percent"/>
+    <attr format="float" name="width_percent"/>
+  </declare-styleable>
+
 </resources>

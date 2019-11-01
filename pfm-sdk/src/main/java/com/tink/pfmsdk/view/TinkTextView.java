@@ -7,7 +7,6 @@ import android.util.TypedValue;
 import androidx.appcompat.widget.AppCompatTextView;
 import com.google.common.base.Strings;
 import com.tink.pfmsdk.util.DimensionUtils;
-import com.tink.pfmsdk.view.BaseLineHelper;
 
 public class TinkTextView extends AppCompatTextView {
 
