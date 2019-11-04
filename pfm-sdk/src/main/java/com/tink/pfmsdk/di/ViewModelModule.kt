@@ -2,6 +2,8 @@ package com.tink.pfmsdk.di
 
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.overview.OverviewChartViewModel
+import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
+import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -120,11 +122,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(OverviewChartViewModel::class)
     fun bindOverviewChartViewModel(model: OverviewChartViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(PieChartDetailsViewModel::class)
-//    fun bindDetailsViewModel(model: PieChartDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PieChartDetailsViewModel::class)
+    fun bindDetailsViewModel(model: PieChartDetailsViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap
@@ -136,10 +138,10 @@ interface ViewModelModule {
 //    @ViewModelKey(BetaInformationViewModel::class)
 //    fun bindBetaInformationViewModel(model: BetaInformationViewModel): ViewModel
 //
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(ChartDetailsViewModel::class)
-//    fun bindChartDetailsPagerViewModel(model: ChartDetailsViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChartDetailsViewModel::class)
+    fun bindChartDetailsPagerViewModel(model: ChartDetailsViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap
