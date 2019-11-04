@@ -2,6 +2,7 @@ package se.tink.android.tink_pfm_sdk_android
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.tink.pfmsdk.TinkFragment
 import com.tink.pfmsdk.overview.OverviewChartFragment
 
 class MainActivity : FragmentActivity(){
@@ -12,7 +13,7 @@ class MainActivity : FragmentActivity(){
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
-            OverviewChartFragment()
+            TinkFragment()
         ).commit()
     }
 }

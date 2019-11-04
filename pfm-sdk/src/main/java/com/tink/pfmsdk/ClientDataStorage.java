@@ -101,10 +101,12 @@ public class ClientDataStorage implements Clearable {
 	}
 
 	public synchronized String getSessionId() {
-		if (sessionId == null) {
-			sessionId = SecuredClientDataStorage.getSharedInstance().getString(SESSION_ID, null);
-		}
-		return sessionId;
+		//TODO:PFMSDK
+//		if (sessionId == null) {
+//			sessionId = SecuredClientDataStorage.getSharedInstance().getString(SESSION_ID, null);
+//		}
+//		return sessionId;
+		return null;
 	}
 
 	public void setLastVisitedPageInOverview(int page) {

@@ -1,11 +1,11 @@
 package com.tink.pfmsdk.di
 
 import android.content.Context
-import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.Timezone
 import com.tink.pfmsdk.TimezoneManager
+import com.tink.pfmsdk.TinkFragment
 import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
@@ -32,17 +32,46 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        AndroidInjectionModule::class,
+        ContextModule::class,
+//        BaseFragmentModule::class,
         EverythingModule::class,
         AllBindings::class,
-        AndroidInjectionModule::class,
         ViewModelModule::class,
-        FragmentBindingModule::class]
+        FragmentBindingModule::class
+    ]
 )
-interface FragmentComponent : AndroidInjector<BaseFragment> {
-
+interface FragmentComponent : AndroidInjector<TinkFragment> {
 
     @Component.Factory
-    interface Factory : AndroidInjector.Factory<BaseFragment>
+    interface Factory : AndroidInjector.Factory<TinkFragment>
+}
+
+
+//@Module
+//interface BaseFragmentModule {
+//
+//    @ContributesAndroidInjector(
+//        modules = [
+//            EverythingModule::class,
+//            AllBindings::class,
+//            ViewModelModule::class,
+//            FragmentBindingModule::class
+//        ]
+//    )
+//    fun baseFragment(): BaseFragment
+//
+////    @Binds
+////    @ApplicationScoped
+////    fun bindContext(fragment: BaseFragment): Context
+//}
+
+@Module
+class ContextModule {
+
+    @Provides
+    @ApplicationScoped
+    fun context(fragment: TinkFragment) = fragment.context!!.applicationContext
 }
 
 @Module(includes = [TransitionModule::class, ServiceModule::class, NetworkModule::class])
@@ -50,7 +79,7 @@ class EverythingModule {
 
     @Provides
     fun fragmentCoordinator(
-        fragment: BaseFragment,
+        fragment: TinkFragment,
         transitionCoordinator: TransitionCoordinatorImpl
     ) =
         FragmentCoordinator(fragment.activity!!.supportFragmentManager, 0, transitionCoordinator)
@@ -66,9 +95,9 @@ class EverythingModule {
     @Provides
     fun analytics() = Analytics(setOf())
 
-    @Provides
-    @ApplicationScoped
-    fun context(fragment: BaseFragment) = fragment.context!!.applicationContext
+//    @Provides
+//    @ApplicationScoped
+//    fun context(fragment: TinkFragment): Context = fragment.context!!.applicationContext
 
     @Provides
     @Singleton
