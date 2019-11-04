@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="TinkWidgetStyle">
+    <attr format="dimension" name="lineHeight"/>
+    <attr format="boolean" name="ignore_baseLine"/>
+    <attr format="string" name="inputType"/>
+    <attr format="boolean" name="isHandlingTagSymbol"/>
+    <attr name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="ViewPagerIndicator">
+    <attr name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="ScreenPercentLayout">
+    <attr format="float" name="height_percent"/>
+    <attr format="float" name="width_percent"/>
+  </declare-styleable>
+
+</resources>

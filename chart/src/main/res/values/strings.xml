@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Tink android chart</string>
+  <string name="category_default_child_format">%s - Other</string>
+</resources>

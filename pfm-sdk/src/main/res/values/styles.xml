@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="leftToSpendTutorialDescription" parent="hecto"/>
+  <style name="leftToSpendTutorialStepDescription" parent="deci.primary"/>
+  <style name="leftToSpendTutorialStepNumber" parent="leftToSpendTutorialStepDescription">
+    <item name="android:fontFamily">@font/lota_grotesque_bold</item>
+  </style>
+</resources>

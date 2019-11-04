@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  /* Semantic colors */
+
+  <color name="savings">@color/income</color>
+  <color name="colorOnSavings">@color/colorOnIncome</color>
+
+  <color name="toolbar_default">@color/colorPrimary</color>
+  <color name="status_bar_default">@color/colorPrimaryDark</color>
+  <color name="status_bar_no_toolbar">@color/black</color>
+
+  <color name="backdrop_dark">@color/plain_black_60</color>
+  <color name="backdrop_light">@color/white_90</color>
+
+  <color name="chart_mean_value_color">@color/grey_light</color>
+  <color name="axis_label">@color/grey_light</color>
+
+  <color name="input_text_color_inverted">@color/white_68</color>
+  <color name="input_hint_color_inverted">@color/white_53</color>
+
+  <color name="tink_account_gradient_top">@color/colorPrimary_25</color>
+
+  <color name="overview_background">@color/tink_background_grey</color>
+  <color name="search_header_background">@color/tink_background_blue</color>
+
+  <color name="insight_category_primary_bubble_color">@color/colorPrimary_10</color>
+  <color name="insight_category_primary_text_color">@color/colorPrimary</color>
+  <color name="insight_category_secondary_bubble_color">@color/colorAccent_10</color> <!-- colorAccent with alpha -->
+  <color name="insight_category_secondary_text_color">@color/colorAccent</color>
+  <color name="insight_category_tertiary_bubble_color">@color/colorAccent_10</color> <!-- colorAccent with alpha -->
+  <color name="insight_category_tertiary_text_color">@color/colorAccent</color>
+
+  <color name="tab_label_selected_color">@color/white</color>
+  <color name="tab_label_normal_color">@color/white_70</color>
+
+  <color name="bottom_navigation_bar_unchecked">@color/grey_light</color>
+  <color name="bottom_navigation_bar_badge_fill">@color/red</color>
+  <color name="bottom_navigation_bar_badge_border">@color/white</color>
+
+  <color name="id_control_event">@color/red</color>
+  <color name="id_control_event_status_bar">@color/red_dark</color>
+
+  <color name="cta_button_text_color_enabled">@color/default_button_text_color</color>
+  <color name="cta_button_text_color_disabled">@color/disabled</color>
+  <color name="cta_button_color_enabled">@color/default_button_background_color</color>
+  <color name="cta_button_color_disabled">@color/white</color>
+
+  <color name="progress_background">@color/grey_very_light</color>
+
+  <color name="refresh_credentials_loading_color">@color/default_loading_indicator_color</color>
+  <color name="fingerprint_auth_loading_color">@color/default_loading_indicator_color</color>
+
+  <color name="default_icon_color">@color/white</color>
+  <color name="default_button_text_color">@color/white</color>
+  <color name="default_button_background_color">@color/colorAccent</color>
+  <color name="default_action_bar_icon_color">@color/default_icon_color</color>
+  <color name="default_loading_indicator_color">@color/white</color>
+
+  <color name="tink_tag_icon_text_color">@color/default_icon_color</color>
+  <color name="payment_scan_icon_color">@color/default_icon_color</color>
+
+  <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
+  <color name="period_picker_background">@color/colorSurface</color>
+  <color name="suggest_transaction_button_background">@color/colorSurface</color>
+  <color name="counterpart_suggestion_view_background">@color/colorBackground</color>
+  <color name="empty_state_border">@color/grey_inactive</color>
+  <color name="access_type_other_status_text_color">@color/textColorSecondary</color>
+  <color name="credential_type_icon_background_color">@color/colorAccent</color>
+
+  <color name="open_banking_consent_text_background_color">@color/colorAccentLight</color>
+
+  <color name="open_banking_migration_rounded_icon_background">@color/colorAccent_20</color>
+
+</resources>

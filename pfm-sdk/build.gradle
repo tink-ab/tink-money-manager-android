@@ -1,0 +1,90 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation project(':chart')
+    implementation project(':commons')
+    implementation project(':data')
+    implementation project(':data-commons')
+    implementation project(':core')
+    implementation project(':rpc')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libraries.kotlin_stdlib
+    implementation libraries.android_core_ktx
+    implementation libraries.android_fragment_ktx
+    implementation libraries.android_collection_ktx
+    implementation libraries.android_lifecycle_viewmodel_ktx
+    implementation libraries.android_lifecycle_rx_ktx
+
+    implementation libraries.support_appcompat
+    implementation libraries.support_design
+    implementation libraries.support_cardview
+    implementation libraries.support_constraint_layout
+
+    implementation libraries.arch_lifecycle_extensions
+    implementation libraries.arch_lifecycle_common_java8
+    kapt libraries.arch_lifecycle_compiler
+
+    implementation libraries.play_services_analytics
+
+    implementation libraries.rxandroid
+
+    implementation libraries.dagger
+    implementation libraries.dagger_android
+    implementation libraries.dagger_android_support
+
+    implementation libraries.butterknife
+    kapt libraries.butterknife_compiler
+    implementation libraries.butterknife_annotations
+
+    implementation libraries.facebook_fresco
+
+    kapt libraries.dagger_android_processor
+    kapt libraries.dagger_compiler
+
+    implementation libraries.joda_time
+
+    implementation libraries.timber
+
+    implementation libraries.firebase_core
+    implementation libraries.firebase_messaging
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

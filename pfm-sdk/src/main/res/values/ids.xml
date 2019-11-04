@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <item name="tink_toolbar" type="id"/>
+  <item name="nav_insights" type="id"/>
+  <item name="transition_group_back" type="id"/>
+  <item name="transition_group_main" type="id"/>
+  <item name="back_segment" type="id"/>
+  <item name="tink_toolbar_custom_view_container" type="id"/>
+</resources>

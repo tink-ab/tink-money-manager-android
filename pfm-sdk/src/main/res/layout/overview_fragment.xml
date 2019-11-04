@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+  <LinearLayout
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/overview_background"
+    android:orientation="vertical"
+    android:paddingBottom="56dp">
+    <com.tink.pfmsdk.view.TinkToolbar
+      android:id="@+id/tink_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize" />
+    <com.tink.pfmsdk.view.ScreenPercentLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:height_percent="0.5"
+      tools:layout_height="200dp">
+      <fragment
+        android:id="@+id/charts"
+        class="com.tink.pfmsdk.overview.OverviewChartFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </com.tink.pfmsdk.view.ScreenPercentLayout>
+    <LinearLayout
+      android:id="@+id/transactionContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:clipToPadding="false"
+      android:orientation="vertical"
+      android:paddingLeft="@dimen/horizontal_margin"
+      android:paddingTop="4dp"
+      android:paddingRight="@dimen/horizontal_margin"
+      android:paddingBottom="4dp"
+      android:transitionGroup="true" />
+  </LinearLayout>
+</layout>
