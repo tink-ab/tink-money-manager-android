@@ -1,4 +1,4 @@
-package se.tink.repository.service;
+package com.tink.pfmsdk.di;
 
 import dagger.Module;
 import dagger.Provides;
@@ -37,7 +37,6 @@ import se.tink.grpc.v1.services.UserServiceGrpc.UserServiceStub;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.ServiceCoordinator;
 import se.tink.repository.cache.Cache;
-import se.tink.repository.cache.CacheModule;
 import se.tink.repository.cache.CategoryTreeCache;
 import se.tink.repository.cache.LiveDataCache;
 import se.tink.repository.cache.StasticCache;
@@ -48,6 +47,32 @@ import se.tink.repository.manager.FollowRepositoryCachedImpl;
 import se.tink.repository.manager.ProviderServiceCachedImpl;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
+import se.tink.repository.service.AccountService;
+import se.tink.repository.service.AccountServiceCachedImpl;
+import se.tink.repository.service.BudgetService;
+import se.tink.repository.service.BudgetServiceImpl;
+import se.tink.repository.service.CategoryService;
+import se.tink.repository.service.CredentialService;
+import se.tink.repository.service.CredentialServiceImpl;
+import se.tink.repository.service.FollowService;
+import se.tink.repository.service.FollowServiceImpl;
+import se.tink.repository.service.PeriodService;
+import se.tink.repository.service.PeriodServiceCachedImpl;
+import se.tink.repository.service.ProviderService;
+import se.tink.repository.service.ProviderServiceImpl;
+import se.tink.repository.service.SettingsService;
+import se.tink.repository.service.SettingsServiceImpl;
+import se.tink.repository.service.StatisticService;
+import se.tink.repository.service.StreamingService;
+import se.tink.repository.service.StreamingServiceImpl;
+import se.tink.repository.service.TrackingService;
+import se.tink.repository.service.TrackingServiceImpl;
+import se.tink.repository.service.TransactionService;
+import se.tink.repository.service.TransactionServiceImpl;
+import se.tink.repository.service.UserConfigurationService;
+import se.tink.repository.service.UserConfigurationServiceCachedImpl;
+import se.tink.repository.service.UserService;
+import se.tink.repository.service.UserServiceImpl;
 
 @Module(includes = {ConverterModule.class, CacheModule.class})
 public class ServiceModule {
@@ -278,15 +303,6 @@ public class ServiceModule {
 	@Singleton
 	public TrackingService trackingService(ModelConverter modelConverter, Channel channel) {
 		return new TrackingServiceImpl(TrackingServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@Provides
-	@Singleton
-	public DeviceService deviceService(
-		DeviceServiceGrpc.DeviceServiceStub stub,
-		ModelConverter modelConverter
-	) {
-		return new DeviceServiceImpl(stub, modelConverter);
 	}
 
 	@Provides

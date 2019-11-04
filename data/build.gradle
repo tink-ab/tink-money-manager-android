@@ -69,6 +69,7 @@ dependencies {
     implementation libraries.timber
 
     implementation libraries.arch_lifecycle_livedata
+    implementation libraries.arch_lifecycle_extensions
 
     implementation libraries.kotlin_stdlib
 

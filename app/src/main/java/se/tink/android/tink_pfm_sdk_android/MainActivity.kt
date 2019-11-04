@@ -1,12 +1,18 @@
 package se.tink.android.tink_pfm_sdk_android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentActivity
+import com.tink.pfmsdk.overview.OverviewChartFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction().add(
+            R.id.fragmentContainer,
+            OverviewChartFragment()
+        ).commit()
     }
 }
