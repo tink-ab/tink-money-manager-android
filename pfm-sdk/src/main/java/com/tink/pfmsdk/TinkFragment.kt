@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.overview.OverviewChartFragment
 import dagger.android.AndroidInjector
@@ -18,6 +19,8 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+    @Inject
+    lateinit var i18nConfiguration: I18nConfiguration
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
@@ -44,6 +47,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
                 R.id.fragmentRoot,
                 OverviewChartFragment()
             ).commit()
+        i18nConfiguration.initialize()
     }
 
 
