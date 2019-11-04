@@ -28,6 +28,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         DaggerFragmentComponent.factory().create(this).inject(this)
+        i18nConfiguration.initialize()
     }
 
     override fun onCreateView(
@@ -47,8 +48,5 @@ class TinkFragment : Fragment(), HasAndroidInjector {
                 R.id.fragmentRoot,
                 OverviewChartFragment()
             ).commit()
-        i18nConfiguration.initialize()
     }
-
-
 }
