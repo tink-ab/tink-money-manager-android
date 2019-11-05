@@ -448,9 +448,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	 * but do not keep it for the app lifetime (as it in fact is if we attach it to the main activity)
 	 */
 	public BaseFragment getRootFragment() {
-		BaseFragment parent = (BaseFragment) getParentFragment();
-		if (parent != null) {
-			return parent.getRootFragment();
+		Fragment parent = getParentFragment();
+		if (parent instanceof BaseFragment) {
+			return ((BaseFragment) parent).getRootFragment();
 		}
 		return this;
 	}
