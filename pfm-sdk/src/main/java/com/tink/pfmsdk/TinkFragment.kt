@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.overview.OverviewChartFragment
+import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.security.DefaultRecoveryHandler
 import com.tink.pfmsdk.security.SecuredClientDataStorage
 import dagger.android.AndroidInjector
@@ -59,17 +60,6 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_tink, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        childFragmentManager
-            .beginTransaction()
-            .add(
-                R.id.fragmentRoot,
-                OverviewChartFragment()
-            ).commit()
     }
 
     //TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
