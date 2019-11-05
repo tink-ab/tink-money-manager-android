@@ -35,8 +35,11 @@ class LatestTransactionsViewModel @Inject constructor(
         setListMode(TransactionListMode.All)
     }
 
-    val latestTransactions = transactionItems.map {
-        it.transactions.take(3)
+    val latestTransactions = transactionItems.map { items ->
+        items
+            .transactions
+            .sortedByDescending { it.date }
+            .take(3)
     }
 
 }

@@ -88,7 +88,11 @@ open class TransactionListViewModel @Inject constructor(
                     return transactionItemFactory.fromTransaction(this, category)
                 }
 
-                value = TransactionItems(transactions = transactions.mapNotNull { it.toItem() })
+                value = TransactionItems(
+                    transactions = transactions
+                        .filterNot { it.isUpcoming }
+                        .mapNotNull { it.toItem() }
+                )
             }
             addSource(_transactions) { update() }
             addSource(categories) { update() }
