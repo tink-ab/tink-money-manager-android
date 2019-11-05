@@ -40,6 +40,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ContextModule::class,
+        CurrencyModule::class,
 //        BaseFragmentModule::class,
         EverythingModule::class,
         AllBindings::class,
