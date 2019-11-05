@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import com.tink.pfmsdk.TinkFragment
 import com.tink.pfmsdk.overview.OverviewChartFragment
 
-class MainActivity : FragmentActivity(){
+class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
