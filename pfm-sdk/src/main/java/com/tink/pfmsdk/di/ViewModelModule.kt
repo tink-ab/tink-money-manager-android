@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.overview.OverviewChartViewModel
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
+import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -232,4 +233,9 @@ interface ViewModelModule {
 //    @IntoMap
 //    @ViewModelKey(SimilarTransactionsViewModel::class)
 //    fun bindSimilarTransactionsViewModel(model: SimilarTransactionsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LatestTransactionsViewModel::class)
+    fun bindLatestTransactionsViewModel(model: LatestTransactionsViewModel): ViewModel
 }

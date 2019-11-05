@@ -27,7 +27,7 @@ import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
 
-class TransactionListViewModel @Inject constructor(
+open class TransactionListViewModel @Inject constructor(
     private val transactionRepository: TransactionRepository,
     private val exceptionTracker: ExceptionTracker,
     categoryRepository: CategoryRepository,
@@ -88,7 +88,11 @@ class TransactionListViewModel @Inject constructor(
                     return transactionItemFactory.fromTransaction(this, category)
                 }
 
-                value = TransactionItems(transactions = transactions.mapNotNull { it.toItem() })
+                value = TransactionItems(
+                    transactions = transactions
+                        .filterNot { it.isUpcoming }
+                        .mapNotNull { it.toItem() }
+                )
             }
             addSource(_transactions) { update() }
             addSource(categories) { update() }
