@@ -38,7 +38,7 @@ public class LeftToSpendTutorialFragment extends BaseFragment {
 
 	TinkTextView tutorialStepThreeDescription;
 
-	Button close;
+	ImageView close;
 
 	@Override
 	public int getLayoutId() {
@@ -109,7 +109,7 @@ public class LeftToSpendTutorialFragment extends BaseFragment {
 	private void setupClose() {
 		close.setOnClickListener(v -> {
 			if (getActivity() != null) {
-				getActivity().onBackPressed();
+				fragmentCoordinator.popBackStack();
 			}
 		});
 	}
@@ -125,7 +125,7 @@ public class LeftToSpendTutorialFragment extends BaseFragment {
 			.setText(getString(R.string.left_to_spend_tutorial_description_two));
 		tutorialStepThreeDescription
 			.setText(getString(R.string.left_to_spend_tutorial_description_three));
-
-		close.setText(TinkIcon.CLOSE);
+		// TODO: PFMSDK: Fix this
+		//close.setText(TinkIcon.CLOSE);
 	}
 }

@@ -86,7 +86,7 @@ class CategorySelectionFragment : BaseFragment() {
         view.button.setOnClickListener {
             adapter.selectedItem?.let {
                 (targetFragment as? CategorySelectionListener)?.onCategorySelected(it.id)
-                fragmentCoordinator.handleBackPress()
+                fragmentCoordinator.popBackStack()
             }
         }
     }

@@ -15,20 +15,23 @@
     app:layout_constraintTop_toTopOf="parent"/>
 
   <!-- TODO: PFMSDK: Fix this close button layout and its vertical alignment -->
-  <Button
+  <!--<Button
     android:id="@+id/close"
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:padding="16dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="parent"/>
-
-  <!--<se.tink.android.views.TinkIconView
-    android:id="@+id/close"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
-    android:padding="16dp"
     app:layout_constraintRight_toRightOf="parent"/>-->
+
+  <ImageView
+    android:id="@+id/close"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:src="@drawable/close"
+    android:tint="@color/leftToSpend"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
 
   <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline"
