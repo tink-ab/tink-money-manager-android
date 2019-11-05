@@ -20,14 +20,17 @@
     android:padding="16dp"
     android:visibility="gone"/>-->
 
-  <Button
+  <!-- TODO: PFMSDK: Do we need this? -->
+  <ImageView
     android:id="@+id/tutorial_marker"
     android:layout_width="60dp"
     android:layout_height="60dp"
     android:layout_marginRight="4dp"
     android:layout_alignParentRight="true"
     android:padding="16dp"
-    android:visibility="gone"/>
+    android:visibility="gone"
+    android:src="@drawable/ic_info"
+    android:tint="@color/leftToSpend"/>
 
   <se.tink.linechart.BalanceLineChartArea
     android:id="@+id/line_chart_current_month"

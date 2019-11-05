@@ -76,8 +76,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	private UICallbackRunner callbacksExecutor;
 
 	@Nullable
-	//@BindView(R.id.tink_toolbar) // TODO: PFMSDK: Don't use butterknife
-		TinkToolbar toolbar;
+	TinkToolbar toolbar;
 
 	private Theme defaultTheme;
 
@@ -161,7 +160,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 		if (view == null) {
 			inflatedView = inflater.inflate(getLayoutId(), container, false);
+
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
+			toolbar = view.findViewById(R.id.tink_toolbar);
 			ButterKnife.bind(this, view);
 			ViewCompat.setTranslationZ(view, translationZ);
 
@@ -203,9 +204,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	private void setupToolbar() {
 		if (toolbar == null) {
-			// TODO: PFMSDK
-			//throw new IllegalStateException("No toolbar with the supplied ID was found.");
-			return;
+			throw new IllegalStateException("No toolbar with the supplied ID was found.");
 		}
 
 		toolbar.setOnMenuItemClickListener(this::onToolbarMenuItemSelected);
@@ -246,7 +245,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public void onUpPressed() {
 		if (getActivity() != null) {
 			SoftKeyboardUtils.closeSoftKeyboard(getActivity());
-			//getActivity().onBackPressed();
 			fragmentCoordinator.popBackStack();
 		}
 	}
@@ -347,9 +345,12 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public boolean onBackPressed() {
-		//return false;
-		fragmentCoordinator.popBackStack();
-		return true;
+		if (getActivity() != null) {
+			SoftKeyboardUtils.closeSoftKeyboard(getActivity());
+			fragmentCoordinator.popBackStack();
+			return true;
+		}
+		return false;
 	}
 
 	protected boolean shouldTrackScreen() {

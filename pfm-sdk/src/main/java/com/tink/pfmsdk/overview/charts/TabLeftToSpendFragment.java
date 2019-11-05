@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import butterknife.BindView;
 import com.google.common.collect.Lists;
@@ -87,7 +88,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 	VerticalBarChartArea barChartView12Months;
 
-	Button tutorialMarker;
+	ImageView tutorialMarker;
 
 	private static final String ARG_POSITION = "arg_position";
 	private static final String TAG = "LeftToSpend";
@@ -231,7 +232,8 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		tutorialMarker.setVisibility(View.VISIBLE);
 		tutorialMarker.setOnClickListener(v -> fragmentCoordinator.replace(
 			new LeftToSpendTutorialFragment(), true, FragmentAnimationFlags.NONE));
-		tutorialMarker.setText(TinkIcon.INFO);
+		// TODO: PFMSDK: Fix this
+		//tutorialMarker.setText(TinkIcon.INFO);
 	}
 
 	private void setupCurrentMonthChart() {
