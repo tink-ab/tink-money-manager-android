@@ -21,6 +21,8 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
+    //TODO:PFMSDK: Verify all values
+
     @Provides
     @Singleton
     @Named("staging")
@@ -120,7 +122,7 @@ class NetworkModule {
             } else {
                 usePlaintext(true)
             }
-//            userAgent(AppUtils.getUserAgent())
+//            userAgent(AppUtils.getUserAgent()) //TODO:PFMSDK
         }.build()
 
 
