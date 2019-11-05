@@ -17,6 +17,7 @@ import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmsdk.overview.charts.TabExpensesBarChartFragment
 import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
+import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import dagger.Binds
 import dagger.Component
 import dagger.Module
@@ -157,4 +158,7 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun tabExpensesBarChartFragment(): TabExpensesBarChartFragment
+
+    @ContributesAndroidInjector
+    fun latestTransactionsFragment(): LatestTransactionsFragment
 }
