@@ -247,7 +247,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		Charts.sharedInstance().setupLineChart(
 			lineChartContainer,
-			TinkApp.sharedInstance().getApplicationContext(),
+			getContext(),
 			userConfiguration.getI18nConfiguration().getCurrencyCode(),
 			new SuitableLocaleFinder().findLocale(),
 			TimezoneManager.defaultTimezone,
@@ -351,7 +351,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
@@ -392,7 +392,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
@@ -528,7 +528,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		}
 
 		int marginTop = ScreenUtils
-			.dpToPixels(TinkApp.sharedInstance().getApplicationContext(), 25);
+			.dpToPixels(requireContext(), 25);
 		if (getActivity() != null) {
 			Display display = getActivity().getWindowManager().getDefaultDisplay();
 			Point size = new Point();

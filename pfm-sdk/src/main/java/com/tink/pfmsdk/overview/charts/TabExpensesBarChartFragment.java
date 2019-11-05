@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-import butterknife.BindView;
 import com.google.common.collect.Lists;
 import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.BuildConfig;
@@ -274,7 +273,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
@@ -314,7 +313,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);

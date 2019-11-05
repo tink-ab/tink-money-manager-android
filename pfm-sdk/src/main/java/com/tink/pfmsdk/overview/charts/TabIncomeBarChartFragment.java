@@ -274,7 +274,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
@@ -315,7 +315,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
 		Charts.sharedInstance()
-			.setupBarChart(TinkApp.sharedInstance().getApplicationContext(),
+			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
 				TimezoneManager.defaultTimezone, barChart);

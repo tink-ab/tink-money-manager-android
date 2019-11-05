@@ -203,7 +203,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	private void setupToolbar() {
 		if (toolbar == null) {
-			throw new IllegalStateException("No toolbar with the supplied ID was found.");
+			// TODO: PFMSDK
+			//throw new IllegalStateException("No toolbar with the supplied ID was found.");
+			return;
 		}
 
 		toolbar.setOnMenuItemClickListener(this::onToolbarMenuItemSelected);
@@ -244,7 +246,8 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public void onUpPressed() {
 		if (getActivity() != null) {
 			SoftKeyboardUtils.closeSoftKeyboard(getActivity());
-			getActivity().onBackPressed();
+			//getActivity().onBackPressed();
+			fragmentCoordinator.popBackStack();
 		}
 	}
 
@@ -253,7 +256,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			return toolbar;
 		}
 		if (getParentFragment() != null) {
-			return ((BaseFragment) getParentFragment()).getToolbar();
+			if (getParentFragment() instanceof BaseFragment) {
+				return ((BaseFragment) getParentFragment()).getToolbar();
+			}
 		}
 		return null;
 	}
@@ -342,7 +347,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public boolean onBackPressed() {
-		return false;
+		//return false;
+		fragmentCoordinator.popBackStack();
+		return true;
 	}
 
 	protected boolean shouldTrackScreen() {

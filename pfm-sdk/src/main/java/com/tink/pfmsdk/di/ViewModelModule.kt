@@ -2,6 +2,7 @@ package com.tink.pfmsdk.di
 
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.overview.OverviewChartViewModel
+import com.tink.pfmsdk.overview.charts.CategorySelectionViewModel
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsViewModel
@@ -144,10 +145,10 @@ interface ViewModelModule {
     @ViewModelKey(ChartDetailsViewModel::class)
     fun bindChartDetailsPagerViewModel(model: ChartDetailsViewModel): ViewModel
 //
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(CategorySelectionViewModel::class)
-//    fun bindCategorySelectionViewModel(model: CategorySelectionViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategorySelectionViewModel::class)
+    fun bindCategorySelectionViewModel(model: CategorySelectionViewModel): ViewModel
 //
 //    @Binds
 //    @IntoMap

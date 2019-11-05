@@ -109,7 +109,7 @@ public class LeftToSpendTutorialFragment extends BaseFragment {
 	private void setupClose() {
 		close.setOnClickListener(v -> {
 			if (getActivity() != null) {
-				getActivity().onBackPressed();
+				fragmentCoordinator.popBackStack();
 			}
 		});
 	}

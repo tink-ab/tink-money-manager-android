@@ -42,8 +42,7 @@ public class TinkTabs extends TabLayout {
 
 	@Override
 	public void addTab(@NonNull Tab tab, int position, boolean setSelected) {
-		TinkTextView tinkTextView = new TinkTextView(
-			TinkApp.sharedInstance().getApplicationContext());
+		TinkTextView tinkTextView = new TinkTextView(getContext());
 		tinkTextView.setTheme(theme.getTabsTitle());
 		tinkTextView.setTextColor(ContextCompat.getColorStateList(tinkTextView.getContext(), R.color.tink_tab_label_color));
 		tinkTextView.setText(tab.getText());
