@@ -35,7 +35,7 @@ public class TinkTabs extends TabLayout {
 		setBackgroundColor(theme.getBackgroundColor());
 		setSelectedTabIndicatorColor(theme.getMarkerColor());
 
-		Context context = TinkApp.sharedInstance().getApplicationContext();
+		Context context = getContext();
 		setElevation(DimensionUtils.getPixelsFromDP(theme.getElevation(), context));
 		setSelectedTabIndicatorHeight(ScreenUtils.dpToPixels(context, 3));
 	}

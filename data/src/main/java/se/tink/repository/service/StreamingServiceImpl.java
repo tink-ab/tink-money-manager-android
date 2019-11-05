@@ -375,7 +375,7 @@ public class StreamingServiceImpl implements StreamingService {
 		}
 	}
 
-	void setExceptionTracker(
+	public void setExceptionTracker(
 		ExceptionTracker exceptionTracker) {
 		this.exceptionTracker = exceptionTracker;
 	}

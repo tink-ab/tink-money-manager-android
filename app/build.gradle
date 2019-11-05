@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
@@ -26,19 +27,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    implementation project(':core')
-    implementation project(':commons')
-    implementation project(':data')
-    implementation project(':data-commons')
-    implementation project(':rpc')
+//    implementation project(':core')
+//    implementation project(':commons')
+//    implementation project(':data')
+//    implementation project(':data-commons')
+//    implementation project(':rpc')
+    implementation project(':pfm-sdk')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat
     implementation libraries.android_core_ktx
     implementation libraries.support_constraint_layout
+
+    implementation libraries.dagger
+    implementation libraries.dagger_android
+    implementation libraries.dagger_android_support
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

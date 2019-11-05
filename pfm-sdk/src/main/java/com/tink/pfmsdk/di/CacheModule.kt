@@ -1,10 +1,11 @@
-package se.tink.repository.cache
+package com.tink.pfmsdk.di
 
 import android.content.Context
 import androidx.room.Room
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import se.tink.android.di.application.ApplicationScoped
 import se.tink.converter.ModelConverter
 import se.tink.core.models.Category
 import se.tink.core.models.account.Account
@@ -17,27 +18,46 @@ import se.tink.core.models.provider.Provider
 import se.tink.core.models.transaction.Transaction
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
+import se.tink.repository.cache.AccountDatabaseCache
+import se.tink.repository.cache.BudgetsDatabaseCache
+import se.tink.repository.cache.Cache
+import se.tink.repository.cache.CacheHandle
+import se.tink.repository.cache.CategoryDatabaseCache
+import se.tink.repository.cache.CategoryTreeCache
+import se.tink.repository.cache.CredentialsDatabaseCache
+import se.tink.repository.cache.FollowItemDatabaseCache
+import se.tink.repository.cache.InMemoryCache
+import se.tink.repository.cache.LiveDataCache
+import se.tink.repository.cache.PeriodDatabaseCache
+import se.tink.repository.cache.StasticCache
+import se.tink.repository.cache.StatisticDatabaseCache
+import se.tink.repository.cache.TransactionDatabaseCache
+import se.tink.repository.cache.UserConfigurationDatabaseCache
+import se.tink.repository.cache.WritableCacheRepository
 import se.tink.repository.cache.database.CacheDatabase
 import java.io.File
 import javax.inject.Singleton
 
 @Module(includes = [CacheBindingModule::class])
-class CacheModule(private val context: Context, private val diskCacheAllowed: Boolean) {
+class CacheModule(
+//    private val diskCacheAllowed: Boolean
+) {
 
     @Provides
     @Singleton
-    fun cacheDatabase(): CacheDatabase {
+    fun cacheDatabase(@ApplicationScoped context: Context): CacheDatabase {
         val dbFile = File(context.cacheDir, "cache_db")
 
-        return if (!diskCacheAllowed) {
-            Room.inMemoryDatabaseBuilder(context, CacheDatabase::class.java)
+        //TODO:PFMSDK: Should we have this check?
+//        return if (!diskCacheAllowed) {
+//            Room.inMemoryDatabaseBuilder(context, CacheDatabase::class.java)
+//                .fallbackToDestructiveMigration()
+//                .build()
+//        } else {
+            return Room.databaseBuilder(context, CacheDatabase::class.java, dbFile.absolutePath)
                 .fallbackToDestructiveMigration()
                 .build()
-        } else {
-            Room.databaseBuilder(context, CacheDatabase::class.java, dbFile.absolutePath)
-                .fallbackToDestructiveMigration()
-                .build()
-        }
+//        }
     }
 
     @Provides
@@ -86,7 +106,10 @@ class CacheModule(private val context: Context, private val diskCacheAllowed: Bo
         cacheDatabase: CacheDatabase,
         modelConverter: ModelConverter
     ): Cache<UserConfiguration> {
-        return UserConfigurationDatabaseCache(cacheDatabase, modelConverter)
+        return UserConfigurationDatabaseCache(
+            cacheDatabase,
+            modelConverter
+        )
     }
 
     @Provides
@@ -94,9 +117,9 @@ class CacheModule(private val context: Context, private val diskCacheAllowed: Bo
         cacheDatabase: CacheDatabase,
         modelConverter: ModelConverter
     ): StasticCache {
-        return if (diskCacheAllowed) {
-            StatisticDatabaseCache(cacheDatabase, modelConverter)
-        } else StatisticInMemoryCache()
+//        return if (diskCacheAllowed) { //TODO: PFMSDK
+            return StatisticDatabaseCache(cacheDatabase, modelConverter)
+//        } else StatisticInMemoryCache()
     }
 
     @Provides

@@ -68,6 +68,12 @@ dependencies {
     implementation libraries.dagger_android
     implementation libraries.dagger_android_support
 
+    implementation libraries.conscrypt
+
+    implementation libraries.room_runtime
+    implementation libraries.room_rxjava
+    kapt libraries.room_compiler
+
     implementation libraries.butterknife
     kapt libraries.butterknife_compiler
     implementation libraries.butterknife_annotations
