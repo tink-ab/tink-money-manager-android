@@ -237,4 +237,7 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun leftToSpendTutorialFragment(): LeftToSpendTutorialFragment
+
+    @ContributesAndroidInjector
+    fun transactionListFragment(): TransactionsListFragment
 }

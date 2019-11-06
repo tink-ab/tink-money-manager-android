@@ -6,6 +6,9 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <!-- TODO:PFMSDK: Consumers need to override this or the app will crash. Can we make this nicer? -->
+    <item name="textColorAction">@color/colorAccent</item>
   </style>
 
 </resources>
