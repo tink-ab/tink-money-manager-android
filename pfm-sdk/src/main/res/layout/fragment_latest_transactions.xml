@@ -35,11 +35,13 @@
         android:layout_width="wrap_content"
         style="@style/deci.action.bold"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:padding="8dp"
+        android:background="@drawable/ripple_button_background"
         android:text="@string/overview_latest_transactions_view_all_link"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/title" />
 
       <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/latestTransactionsView"
