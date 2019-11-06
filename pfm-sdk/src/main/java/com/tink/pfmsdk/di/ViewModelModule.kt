@@ -6,6 +6,7 @@ import com.tink.pfmsdk.overview.charts.CategorySelectionViewModel
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsViewModel
+import com.tink.pfmsdk.transaction.TransactionListViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -99,12 +100,12 @@ interface ViewModelModule {
 //    @IntoMap
 //    @ViewModelKey(AccountViewModel::class)
 //    fun bindAccountViewModel(model: AccountViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(TransactionListViewModel::class)
-//    fun bindTransactionListViewModel(model: TransactionListViewModel): ViewModel
-//
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionListViewModel::class)
+    fun bindTransactionListViewModel(model: TransactionListViewModel): ViewModel
+
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(ProfileViewModel::class)

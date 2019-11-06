@@ -2,11 +2,15 @@ package com.tink.pfmsdk.overview.latesttransactions
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.transaction.StatusSubtitleMode
+import com.tink.pfmsdk.transaction.TransactionsListFragment
+import com.tink.pfmsdk.transaction.TransactionsListMetaData
 import kotlinx.android.synthetic.main.fragment_latest_transactions.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
@@ -38,8 +42,27 @@ class LatestTransactionsFragment : BaseFragment() {
             adapter = transactionsAdapter
         }
 
+        action.setOnClickListener { showTransactions() }
+
         viewModel.latestTransactions.observe(viewLifecycleOwner, Observer {
             transactionsAdapter.setTransactionItems(it)
         })
+    }
+
+    private fun showTransactions() {
+
+        val context = context ?: return
+
+        val metaData = TransactionsListMetaData(
+            ContextCompat.getColor(context, R.color.colorPrimaryDark),
+            ContextCompat.getColor(context, R.color.colorPrimary),
+            getString(R.string.overview_latest_transactions_title),
+            false,
+            null, null,
+            true,
+            StatusSubtitleMode.SHOW_REDUCED_AMOUNT, null
+        )
+
+        fragmentCoordinator.replace(TransactionsListFragment.newInstance(metaData))
     }
 }
