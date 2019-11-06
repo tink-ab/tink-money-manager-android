@@ -47,6 +47,10 @@ class LatestTransactionsFragment : BaseFragment() {
         viewModel.latestTransactions.observe(viewLifecycleOwner, Observer {
             transactionsAdapter.setTransactionItems(it)
         })
+
+        viewModel.hasTransactions.observe(viewLifecycleOwner, Observer { hasTransactions ->
+            card.visibility = if(hasTransactions) View.VISIBLE else View.GONE
+        })
     }
 
     private fun showTransactions() {
