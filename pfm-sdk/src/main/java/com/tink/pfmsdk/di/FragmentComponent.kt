@@ -30,6 +30,7 @@ import com.tink.pfmsdk.theme.TinkLeftToSpendTabPageTheme
 import com.tink.pfmsdk.theme.TinkLeftToSpendTutorialTheme
 import com.tink.pfmsdk.theme.TinkTransactionSimilarTheme
 import com.tink.pfmsdk.theme.TinkTransactionsListTheme
+import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import com.tink.pfmsdk.transaction.SimilarTransactionsFragment
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import com.tink.pfmsdk.view.TinkSnackbar
@@ -240,4 +241,10 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun transactionListFragment(): TransactionsListFragment
+
+    @ContributesAndroidInjector
+    fun categorizationFlowFragment(): CategorizationFlowFragment
+
+    @ContributesAndroidInjector
+    fun similarTransactionsFragment(): SimilarTransactionsFragment
 }
