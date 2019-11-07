@@ -55,71 +55,71 @@ public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_chartBackgroundColor);
 	}
 
 	@Override
 	public int getCenterDateMarkColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpend);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_centerDateMarkColor);
 	}
 
 	@Override
 	public int getLineChartZeroLine() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_lineChartZeroLine);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_zeroLineColor);
 	}
 
 	@Override
 	public int getAreaGradientBottomColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_areaGradientBottomColor);
 	}
 
 	@Override
 	public int getAreaGradientTopColor() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpend);
+		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_areaGradientTopColor);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getLinePaintColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpend);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_linePaintColor);
 	}
 
 	@Override
 	public int getDateMarkerGradientBottom() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpend);
+		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientBottom);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getDateMarkerGradientTop50() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpend);
+		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientTop50);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getDateMarkerGradientTop80() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpend);
+		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientTop80);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpend);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_sixMonthBarColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendLight);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_sixMonthNegativeBarColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.chart_mean_value_color);
+		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_meanValueColor);
 	}
 
 	@Override

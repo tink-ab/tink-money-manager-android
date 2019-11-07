@@ -3,12 +3,12 @@
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimary">#ff461e7d</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorAccent">#ff461e7d</item>
+    <item name="android:colorBackground">@color/white_90</item>
 
     <!-- TODO:PFMSDK: Consumers need to override this or the app will crash. Can we make this nicer? -->
     <item name="textColorAction">@color/colorAccent</item>
   </style>
-
 </resources>

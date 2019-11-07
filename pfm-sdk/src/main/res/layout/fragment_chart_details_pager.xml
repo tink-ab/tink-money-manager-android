@@ -4,7 +4,8 @@
   android:id="@+id/root_container"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical">
+  android:orientation="vertical"
+  android:background="@color/chart_container_background_color">
 
   <com.tink.pfmsdk.view.TinkToolbar
     android:id="@+id/tink_toolbar"

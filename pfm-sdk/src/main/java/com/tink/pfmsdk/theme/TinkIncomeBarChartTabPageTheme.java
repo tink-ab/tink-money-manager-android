@@ -3,6 +3,7 @@ package com.tink.pfmsdk.theme;
 
 import android.content.Context;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.overview.charts.TabIncomeBarChartFragment;
 import com.tink.pfmsdk.view.Hecto;
@@ -47,37 +48,37 @@ public class TinkIncomeBarChartTabPageTheme implements TabIncomeBarChartFragment
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_chartBackgroundColor);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_zeroLineColor);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.income);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_sixMonthBarColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeLight);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_sixMonthNegativeBarColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.chart_mean_value_color);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_meanValueColor);
 	}
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.income);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_twelveMonthBarColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeLight);
+		return ContextCompat.getColor(context, R.color.incomeBarChart_twelveMonthNegativeBarColor);
 	}
 
 	// TODO: PFMSDK

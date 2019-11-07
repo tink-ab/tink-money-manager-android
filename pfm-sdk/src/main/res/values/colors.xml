@@ -15,4 +15,38 @@
 
   <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
 
+  <color name="chart_container_background_color">@color/white</color>
+
+  <color name="incomeBarChart_chartBackgroundColor">@color/transparent</color>
+  <color name="incomeBarChart_zeroLineColor">@color/transparent</color>
+  <color name="incomeBarChart_sixMonthBarColor">@color/income</color>
+  <color name="incomeBarChart_sixMonthNegativeBarColor">@color/incomeLight</color>
+  <color name="incomeBarChart_twelveMonthBarColor">@color/income</color>
+  <color name="incomeBarChart_twelveMonthNegativeBarColor">@color/incomeLight</color>
+  <color name="incomeBarChart_meanValueColor">@color/chart_mean_value_color</color>
+
+  <color name="expensesBarChart_chartBackgroundColor">@color/transparent</color>
+  <color name="expensesBarChart_zeroLineColor">@color/transparent</color>
+  <color name="expensesBarChart_sixMonthBarColor">@color/expenses</color>
+  <color name="expensesBarChart_sixMonthNegativeBarColor">@color/expensesLight</color>
+  <color name="expensesBarChart_twelveMonthBarColor">@color/expenses</color>
+  <color name="expensesBarChart_twelveMonthNegativeBarColor">@color/expensesLight</color>
+  <color name="expensesBarChart_meanValueColor">@color/chart_mean_value_color</color>
+
+  <color name="leftToSpendBarChart_chartBackgroundColor">@color/transparent</color>
+  <color name="leftToSpendBarChart_centerDateMarkColor">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_lineChartZeroLine">@color/transparent</color>
+  <color name="leftToSpendBarChart_zeroLineColor">@color/transparent</color>
+  <color name="leftToSpendBarChart_areaGradientBottomColor">@color/transparent</color>
+  <color name="leftToSpendBarChart_areaGradientTopColor">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_linePaintColor">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_dateMarkerGradientBottom">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_dateMarkerGradientTop50">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_dateMarkerGradientTop80">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_sixMonthBarColor">@color/leftToSpend</color>
+  <color name="leftToSpendBarChart_sixMonthNegativeBarColor">@color/leftToSpendLight</color>
+  <color name="leftToSpendBarChart_meanValueColor">@color/chart_mean_value_color</color>
+
+  <color name="leftToSpendToolbar_backgroundColor">@color/leftToSpend</color>
+
 </resources>
