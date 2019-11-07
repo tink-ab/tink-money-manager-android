@@ -48,37 +48,37 @@ public class TinkExpenseBarChartTabPageTheme implements TabExpensesBarChartFragm
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_chartBackgroundColor);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_zeroLineColor);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.expenses);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_sixMonthBarColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesLight);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_sixMonthNegativeBarColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.chart_mean_value_color);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_meanValueColor);
 	}
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.expenses);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_twelveMonthBarColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesLight);
+		return ContextCompat.getColor(context, R.color.expensesBarChart_twelveMonthNegativeBarColor);
 	}
 
 	// TODO: PFMSDK

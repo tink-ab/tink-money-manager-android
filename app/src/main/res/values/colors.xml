@@ -1,42 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  /* Sample color palette */
+  <!-- TODO: PFMSDK: Add the raw color declarations below to a color palette here -->
 
-  /* Semantic colors */
-
-  <color name="savings">@color/income</color>
-  <color name="colorOnSavings">@color/colorOnIncome</color>
-
-  <color name="toolbar_default">@color/colorPrimary</color>
-  <color name="status_bar_default">@color/colorPrimaryDark</color>
+  /* Sample semantic colors */
+  <!-- TODO: Add custom values here -->
   <color name="status_bar_no_toolbar">@color/black</color>
-
-  <color name="backdrop_dark">@color/plain_black_60</color>
-  <color name="backdrop_light">@color/white_90</color>
 
   <color name="chart_mean_value_color">@color/grey_light</color>
   <color name="axis_label">@color/grey_light</color>
 
-  <color name="overview_background">@color/tink_background_grey</color>
-  <color name="search_header_background">@color/tink_background_blue</color>
-
   <color name="tab_label_selected_color">@color/white</color>
   <color name="tab_label_normal_color">@color/white_70</color>
 
-  <color name="cta_button_text_color_enabled">@color/default_button_text_color</color>
-  <color name="cta_button_text_color_disabled">@color/disabled</color>
-  <color name="cta_button_color_enabled">@color/default_button_background_color</color>
-  <color name="cta_button_color_disabled">@color/white</color>
-
-  <color name="progress_background">@color/grey_very_light</color>
-
-  <color name="default_icon_color">@color/white</color>
   <color name="default_button_text_color">@color/white</color>
-  <color name="default_button_background_color">@color/colorAccent</color>
-  <color name="default_action_bar_icon_color">@color/default_icon_color</color>
-  <color name="default_loading_indicator_color">@color/white</color>
 
   <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
-  <color name="period_picker_background">@color/colorSurface</color>
-  <color name="empty_state_border">@color/grey_inactive</color>
+
+  <color name="colorAccent">#ff461e7d</color> <!-- TODO: PFMSDK: This should be a semantic color and not the android colorAccent -->
+  <color name="colorPrimary">#ff461e7d</color> <!-- TODO: PFMSDK: This should be a semantic color and not the android colorPrimary -->
+
+  <color name="expenses">#ff5638ff</color>
+  <color name="expensesDark">#ff5638ff</color> <!-- TODO: PFMSDK: Add expenses dark color -->
+  <color name="expensesLight">#ffe6e1ff</color>
+  <color name="colorOnExpenses">@color/white</color>
+
+  <color name="leftToSpend">#ffff016e</color>
+  <color name="leftToSpendDark">#ffff016e</color> <!-- TODO: PFMSDK: Add left to spend dark color -->
+  <color name="leftToSpendLight">#40ff016e</color>
+  <color name="colorOnLeftToSpend">@color/colorOnPrimary</color>
+
+  <color name="income">#ff36b472</color>
+  <color name="incomeDark">@color/salary_green_dark</color> <!-- TODO: PFMSDK: Add income dark color -->
+  <color name="incomeLight">#ffdffbed</color>
+  <color name="colorOnIncome">@color/white</color>
+
+  <color name="transfer">@color/transfer_grey</color>
+  <color name="transferDark">@color/black</color>
+  <color name="colorOnTransfer">@color/white</color>
+
+  <color name="period_disabled_arrow">@color/grey_inactive</color>
+  <color name="divider_color">@color/divider_grey</color>
+  <color name="disabled">@color/grey_light</color>
+
+  <color name="uncategorized_transaction">@color/orange</color>
+  <color name="uncategorizedLight">@color/orange_light</color>
+
+  <color name="snackbar_background">@color/greyblack</color>
+  <color name="color_on_snackbar_background">@color/white</color>
+
+  <color name="chart_container_background_color">#fff6fafb</color>
 
 </resources>
