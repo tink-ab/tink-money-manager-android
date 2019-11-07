@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.pfmsdk.BaseFragment
+import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import com.tink.pfmsdk.transaction.StatusSubtitleMode
@@ -34,7 +35,7 @@ class LatestTransactionsFragment : BaseFragment() {
 
         transactionsAdapter = TransactionItemListAdapter(dateUtils, groupByDates = false)
         transactionsAdapter.onTransactionItemClickedListener = {
-            fragmentCoordinator.replace(CategorizationFlowFragment.newInstance(it))
+            fragmentCoordinator.replace(CategorizationFlowFragment.newInstance(it), animation = FragmentAnimationFlags.FADE_IN)
         }
     }
 

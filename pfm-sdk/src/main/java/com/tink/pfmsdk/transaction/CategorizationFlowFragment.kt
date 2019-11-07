@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
-import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionListener
@@ -74,7 +73,7 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
             )
             .also {
                 it.setTargetFragment(this, 0)
-                fragmentCoordinator.replace(it, animation = FragmentAnimationFlags.FADE_IN)
+                fragmentCoordinator.replace(it)
             }
     }
 

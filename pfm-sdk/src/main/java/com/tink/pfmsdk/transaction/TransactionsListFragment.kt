@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmsdk.BaseFragment
+import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import kotlinx.android.synthetic.main.transactions_list_fragment.*
 import se.tink.commons.transactions.TransactionItemListAdapter
@@ -109,9 +110,13 @@ class TransactionsListFragment : BaseFragment() {
         adapter.onTransactionItemClickedListener = { id ->
             CategorizationFlowFragment
                 .newInstance(id)
-                .also { fragmentCoordinator.replace(it) }
+                .also {
+                    fragmentCoordinator.replace(
+                        it,
+                        animation = FragmentAnimationFlags.FADE_IN
+                    )
+                }
         }
-
         recyclerView.adapter = adapter
     }
 
