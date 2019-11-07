@@ -58,7 +58,7 @@ class CategorySelectionFragment : BaseFragment() {
         val categories = viewModel.getCategoryItems(
             type,
             includeTransfers = options.includeTransferTypes,
-            includeTopLevel = options.includeTransferTypes
+            includeTopLevel = options.includeTopLevelItem
         )
         categories.observe(viewLifecycle, object : Observer<List<TreeListSelectionItem>> {
             override fun onChanged(it: List<TreeListSelectionItem>?) {
