@@ -6,6 +6,8 @@ import com.tink.pfmsdk.overview.charts.CategorySelectionViewModel
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsViewModel
+import com.tink.pfmsdk.transaction.CategorizationFlowViewModel
+import com.tink.pfmsdk.transaction.SimilarTransactionsViewModel
 import com.tink.pfmsdk.transaction.TransactionListViewModel
 import dagger.Binds
 import dagger.Module
@@ -230,14 +232,19 @@ interface ViewModelModule {
 //    @IntoMap
 //    @ViewModelKey(CounterpartSuggestionViewModel::class)
 //    fun bindCounterpartSuggestionsViewModel(model: CounterpartSuggestionViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SimilarTransactionsViewModel::class)
-//    fun bindSimilarTransactionsViewModel(model: SimilarTransactionsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SimilarTransactionsViewModel::class)
+    fun bindSimilarTransactionsViewModel(model: SimilarTransactionsViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(LatestTransactionsViewModel::class)
     fun bindLatestTransactionsViewModel(model: LatestTransactionsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategorizationFlowViewModel::class)
+    fun bindCategorizationFlowViewModel(model: CategorizationFlowViewModel): ViewModel
 }

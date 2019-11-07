@@ -18,6 +18,8 @@ import javax.inject.Inject
 
 class SimilarTransactionsFragment : BaseFragment() {
 
+    var onSimilarTransactionsDone: (() -> Unit)? = null
+
     @Inject
     lateinit var ownTheme: Theme
 
@@ -72,9 +74,15 @@ class SimilarTransactionsFragment : BaseFragment() {
                         }
                     }
                 )
+                onSimilarTransactionsDone?.invoke()
                 fragmentCoordinator.popBackStack()
             }
-            skipBtn.setOnClickListener { fragmentCoordinator.popBackStack() }
+            skipBtn.setOnClickListener {
+                onSimilarTransactionsDone?.invoke()
+                fragmentCoordinator.popBackStack()
+            }
+
+
             markerButton.setOnClickListener { adapter.toggleMarked() }
         }
         viewModel.apply {
