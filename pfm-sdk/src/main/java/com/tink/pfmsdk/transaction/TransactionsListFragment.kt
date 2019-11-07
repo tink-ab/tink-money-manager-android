@@ -106,73 +106,16 @@ class TransactionsListFragment : BaseFragment() {
 
         adapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
 
-        adapter.onTransactionItemClickedListener = {
-            // TODO: PFMSDK: Fix logic to show category selection fragment
-            showCategoryPickerView()
+        adapter.onTransactionItemClickedListener = { id ->
+            CategorizationFlowFragment
+                .newInstance(id)
+                .also { fragmentCoordinator.replace(it) }
         }
 
         recyclerView.adapter = adapter
     }
 
-    private fun showCategoryPickerView() {
 
-        // TODO: PFMSDK: Fix logic to show category selection fragment
-        /*val transaction = viewModel.transaction.value ?: return
-
-        val categoryType =
-            if (transaction.amount.value.isBiggerThan(ExactNumber.ZERO)) {
-                Category.Type.TYPE_INCOME
-            } else {
-                Category.Type.TYPE_EXPENSES
-            }
-
-        CategorySelectionFragment
-            .newInstance(
-                categoryType,
-                transaction.categoryCode,
-                CategorySelectionFragment.Options(
-                    dropdownToolbarAppearance = false,
-                    includeTransferTypes = true,
-                    includeTopLevelItem = false
-                )
-            )
-            .apply { setTargetFragment(this@TransactionFragment, 0) }
-            .also { fragmentCoordinator.replace(it) }
-
-        showSimilarTransactionsOnReturn()*/
-    }
-
-    /**
-     *
-     * Pre-load similar transactions. The LiveData-framework and the lifecycleOwner will make sure
-     *that the result is only fired when returning back to this fragment
-     */
-    private fun showSimilarTransactionsOnReturn() {
-
-        // TODO: PFMSDK: Show similar transactions upon selection of category
-        /*val similarTransactionsLiveData = viewModel.fetchSimilarTransactions()
-
-        similarTransactionsLiveData?.observe(this, object : Observer<List<Transaction>?> {
-
-            override fun onChanged(list: List<Transaction>?) {
-                list?.let {
-                    similarTransactionsLiveData.removeObserver(this)
-                    if (list.isNotEmpty()) {
-                        updatedCategoryCode?.let {
-                            showSimilarTransactionFragment(list, it)
-                            updatedCategoryCode = null
-                        }
-                    }
-                }
-            }
-        })*/
-    }
-
-    private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
-        fragmentCoordinator.replace(
-            SimilarTransactionsFragment.newInstance(transactions, code)
-        )
-    }
 
     interface Theme : BaseFragment.Theme {
 

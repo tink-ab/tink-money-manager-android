@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import se.tink.android.categories.CategoryRepository
+import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.SingleTransactionLiveData
 import se.tink.android.repository.transaction.TransactionError
 import se.tink.android.repository.transaction.TransactionReceived
@@ -61,10 +62,10 @@ class CategorizationFlowViewModel @Inject constructor(
         addSource(categories) { update() }
     }
 
-    fun fetchSimilarTransactions(): LiveData<List<Transaction>?>? =
-        transaction.value?.let {
-            transactionRepository.fetchSimilarTransactions(it.id)
-        }
+
+    val similarTransactions: LiveData<List<Transaction>?> = transaction.switchMap {
+        transactionRepository.fetchSimilarTransactions(it.id)
+    }
 
     fun categorizeTransactions(
         transactionIds: List<String>,
@@ -75,8 +76,36 @@ class CategorizationFlowViewModel @Inject constructor(
         }
     }
 
+
+    private val _state: MediatorLiveData<State> = MediatorLiveData<State>().apply {
+
+        addSource(transaction) {
+            if (value == State.LoadingTransaction) value = State.CategorySelection(it)
+        }
+
+        value = State.LoadingTransaction
+    }
+    val state: LiveData<State> = _state
+
+
+    fun categorySelected(categoryCode: String) {
+        _state.value = State.SimilarTransactions(categoryCode)
+    }
+
+    fun similarTransactionsDone() {
+        _state.value = State.Done
+    }
+
+
     override fun onCleared() {
         super.onCleared()
         transactionLiveData?.dispose()
+    }
+
+    sealed class State {
+        object LoadingTransaction : State()
+        class CategorySelection(val transaction: Transaction) : State()
+        class SimilarTransactions(val updatedCategoryCode: String) : State()
+        object Done : State()
     }
 }

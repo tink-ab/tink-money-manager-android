@@ -6,12 +6,14 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
+import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionListener
 import se.tink.core.models.Category
 import se.tink.core.models.misc.ExactNumber
 import se.tink.core.models.transaction.Transaction
+import timber.log.Timber
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
@@ -21,9 +23,15 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     private var updatedCategoryCode: String? = null
-    private val transactionId: String by lazy { requireNotNull(arguments?.getString(ARG_TRANSACTION_ID)) }
+    private val transactionId: String by lazy {
+        requireNotNull(
+            arguments?.getString(
+                ARG_TRANSACTION_ID
+            )
+        )
+    }
 
-    lateinit var viewModel: CategorizationFlowViewModel
+    private lateinit var viewModel: CategorizationFlowViewModel
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
@@ -35,15 +43,19 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        viewModel.transaction.observe(viewLifecycleOwner, Observer {
-            showCategoryPickerView(it)
+        Timber.tag("Jan").d("i can log stuff")
+
+        viewModel.state.observe(viewLifecycleOwner, Observer {
+            Timber.tag("Jan").d("State: $it")
+            when (it) {
+                is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
+                is CategorizationFlowViewModel.State.SimilarTransactions -> showSimilarTransactionsOnReturn()
+                is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
+            }
         })
     }
 
-
     private fun showCategoryPickerView(transaction: Transaction) {
-
-        // TODO: PFMSDK: Fix logic to show category selection fragment
 
         val categoryType =
             if (transaction.amount.value.isBiggerThan(ExactNumber.ZERO)) {
@@ -62,27 +74,17 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
                     includeTopLevelItem = false
                 )
             )
-            .apply { setTargetFragment(this@CategorizationFlowFragment, 0) }
-            .also { fragmentCoordinator.replace(it) }
-
-        showSimilarTransactionsOnReturn()
+            .also {
+                it.setTargetFragment(this, 0)
+                fragmentCoordinator.replace(it, animation = FragmentAnimationFlags.FADE_IN)
+            }
     }
 
-    /**
-     *
-     * Pre-load similar transactions. The LiveData-framework and the lifecycleOwner will make sure
-     *that the result is only fired when returning back to this fragment
-     */
     private fun showSimilarTransactionsOnReturn() {
-
-        // TODO: PFMSDK: Show similar transactions upon selection of category
-        val similarTransactionsLiveData = viewModel.fetchSimilarTransactions()
-
-        similarTransactionsLiveData?.observe(this, object : Observer<List<Transaction>?> {
-
+        viewModel.similarTransactions.observe(this, object : Observer<List<Transaction>?> {
             override fun onChanged(list: List<Transaction>?) {
                 list?.let {
-                    similarTransactionsLiveData.removeObserver(this)
+                    viewModel.similarTransactions.removeObserver(this)
                     if (list.isNotEmpty()) {
                         updatedCategoryCode?.let {
                             showSimilarTransactionFragment(list, it)
@@ -105,6 +107,8 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
         this.updatedCategoryCode = updatedCategoryCode
 
         updateTransactionCategory(updatedCategoryCode)
+
+        viewModel.categorySelected(updatedCategoryCode)
     }
 
     private fun updateTransactionCategory(updatedCategoryCode: String) {
@@ -114,9 +118,10 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     }
 
     private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
-        fragmentCoordinator.replace(
-            SimilarTransactionsFragment.newInstance(transactions, code)
-        )
+        SimilarTransactionsFragment.newInstance(transactions, code).also {
+            it.onSimilarTransactionsDone = viewModel::similarTransactionsDone
+            fragmentCoordinator.replace(it)
+        }
     }
 
     companion object {
