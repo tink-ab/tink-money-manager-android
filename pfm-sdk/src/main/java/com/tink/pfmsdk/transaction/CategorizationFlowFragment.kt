@@ -22,7 +22,6 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     override fun getLayoutId(): Int = R.layout.fragment_category_selection_flow
     override fun needsLoginToBeAuthorized(): Boolean = true
 
-    private var updatedCategoryCode: String? = null
     private val transactionId: String by lazy {
         requireNotNull(
             arguments?.getString(
@@ -49,7 +48,10 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
             Timber.tag("Jan").d("State: $it")
             when (it) {
                 is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
-                is CategorizationFlowViewModel.State.SimilarTransactions -> showSimilarTransactionsOnReturn()
+
+                is CategorizationFlowViewModel.State.SimilarTransactions ->
+                    showSimilarTransactionsOnReturn(it.updatedCategoryCode)
+
                 is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
             }
         })
@@ -80,42 +82,24 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
             }
     }
 
-    private fun showSimilarTransactionsOnReturn() {
+    private fun showSimilarTransactionsOnReturn(updatedCategoryCode: String) {
         viewModel.similarTransactions.observe(this, object : Observer<List<Transaction>?> {
             override fun onChanged(list: List<Transaction>?) {
                 list?.let {
                     viewModel.similarTransactions.removeObserver(this)
                     if (list.isNotEmpty()) {
-                        updatedCategoryCode?.let {
-                            showSimilarTransactionFragment(list, it)
-                            updatedCategoryCode = null
-                        }
+                        showSimilarTransactionFragment(list, updatedCategoryCode)
+                    } else {
+                        viewModel.similarTransactionsDone()
                     }
                 }
             }
         })
     }
 
-    override fun onCategorySelected(updatedCategoryCode: String) {
-
-        val transaction = viewModel.transaction.value ?: return
-
-        if (updatedCategoryCode == transaction.categoryCode) {
-            return
-        }
-
-        this.updatedCategoryCode = updatedCategoryCode
-
-        updateTransactionCategory(updatedCategoryCode)
-
+    override fun onCategorySelected(updatedCategoryCode: String) =
         viewModel.categorySelected(updatedCategoryCode)
-    }
 
-    private fun updateTransactionCategory(updatedCategoryCode: String) {
-        val transaction = viewModel.transaction.value ?: return
-
-        viewModel.categorizeTransactions(listOf(transaction.id), updatedCategoryCode)
-    }
 
     private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
         SimilarTransactionsFragment.newInstance(transactions, code).also {

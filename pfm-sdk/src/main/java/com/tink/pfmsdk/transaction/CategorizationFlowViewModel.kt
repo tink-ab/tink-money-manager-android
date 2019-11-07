@@ -89,7 +89,15 @@ class CategorizationFlowViewModel @Inject constructor(
 
 
     fun categorySelected(categoryCode: String) {
-        _state.value = State.SimilarTransactions(categoryCode)
+
+        val transaction = transaction.value ?: return
+
+        if (categoryCode != transaction.categoryCode) {
+            _state.value = State.SimilarTransactions(categoryCode)
+            categorizeTransactions(listOf(transaction.id), categoryCode)
+        } else {
+           _state.value = State.Done
+        }
     }
 
     fun similarTransactionsDone() {
