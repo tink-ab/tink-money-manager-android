@@ -18,6 +18,9 @@ class FragmentCoordinator(
     private val transitionCoordinator: TransitionCoordinatorImpl? = null
 ) {
 
+    val backStackEntryCount
+        get() = fragmentManager.backStackEntryCount
+
     /**
      * return last added currently visible fragment (there can be more than one visible at the moment)
      */

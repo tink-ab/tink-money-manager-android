@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
-import com.tink.pfmsdk.overview.OverviewChartFragment
-import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.security.DefaultRecoveryHandler
 import com.tink.pfmsdk.security.SecuredClientDataStorage
 import dagger.android.AndroidInjector
@@ -33,6 +31,9 @@ class TinkFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     lateinit var i18nConfiguration: I18nConfiguration
+
+    @Inject
+    lateinit var fragmentCoordinator: FragmentCoordinator
 
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
@@ -61,6 +62,13 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     ): View? {
         return inflater.inflate(R.layout.fragment_tink, container, false)
     }
+
+    fun handleBackPress() =
+        if (fragmentCoordinator.backStackEntryCount > 0) {
+            fragmentCoordinator.handleBackPress()
+        } else {
+            false
+        }
 
     //TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
     fun initSecuredDataStorage(context: Context) {

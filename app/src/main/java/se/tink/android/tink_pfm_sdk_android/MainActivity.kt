@@ -7,13 +7,20 @@ import com.tink.pfmsdk.overview.OverviewChartFragment
 
 class MainActivity : FragmentActivity() {
 
+    private var currentTinkFragment: TinkFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
-            TinkFragment()
+            TinkFragment().also { currentTinkFragment = it }
         ).commit()
+    }
+
+    override fun onBackPressed() {
+        if (currentTinkFragment?.handleBackPress() == false)
+            super.onBackPressed()
     }
 }
