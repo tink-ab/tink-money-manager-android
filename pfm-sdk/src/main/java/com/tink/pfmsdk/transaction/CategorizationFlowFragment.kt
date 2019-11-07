@@ -13,7 +13,6 @@ import com.tink.pfmsdk.overview.charts.CategorySelectionListener
 import se.tink.core.models.Category
 import se.tink.core.models.misc.ExactNumber
 import se.tink.core.models.transaction.Transaction
-import timber.log.Timber
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
@@ -42,10 +41,7 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        Timber.tag("Jan").d("i can log stuff")
-
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            Timber.tag("Jan").d("State: $it")
             when (it) {
                 is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
 
