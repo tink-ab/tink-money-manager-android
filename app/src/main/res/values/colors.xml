@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   /* Sample color palette */
+  <!-- TODO: PFMSDK: Add the raw color declarations below to a color palette here -->
 
   /* Sample semantic colors */
   <!-- TODO: Add custom values here -->
