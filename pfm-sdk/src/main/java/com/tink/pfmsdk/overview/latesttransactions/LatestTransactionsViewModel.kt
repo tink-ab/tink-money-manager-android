@@ -8,6 +8,7 @@ import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.service.TransactionService
@@ -38,7 +39,7 @@ class LatestTransactionsViewModel @Inject constructor(
     val latestTransactions = transactionItems.map { items ->
         items
             .transactions
-            .sortedByDescending { it.date }
+            .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             .take(3)
     }
 
