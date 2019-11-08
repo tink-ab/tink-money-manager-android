@@ -73,6 +73,10 @@ class SimilarTransactionsViewModel  @Inject constructor(
                                 categoryTree.findCategoryByCode(categoryCode)?.let { category ->
                                     transactionItemFactory
                                         .similarTransactionItemFromTransaction(transaction, category)
+                                        ?.apply {
+                                            selected =
+                                                markedTransactionsIds.value?.contains(id) ?: true
+                                        }
                                 }
                             }
                     postValue(transactionItems)
