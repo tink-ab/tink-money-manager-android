@@ -24,7 +24,7 @@ class DimensionAttribute
 
 class TypefaceAttribute
 @JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Int = R.font.lota_grotesque_regular,
+                          val defVal: Int = R.font.font_regular,
                           val setValue: (Typeface?) -> Unit) : Attribute(id)
 
 class BooleanAttribute

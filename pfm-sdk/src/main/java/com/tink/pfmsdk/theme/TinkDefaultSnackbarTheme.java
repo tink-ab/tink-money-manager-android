@@ -33,7 +33,7 @@ public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
 
 			@Override
 			public Typeface getFont() {
-				return FontUtils.getTypeface(FontUtils.LOTA_BOLD_FONT, context);
+				return FontUtils.getTypeface(FontUtils.BOLD_FONT, context);
 			}
 		};
 	}
