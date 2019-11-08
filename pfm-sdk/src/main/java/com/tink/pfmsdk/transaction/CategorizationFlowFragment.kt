@@ -95,6 +95,7 @@ class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
     override fun onCategorySelected(updatedCategoryCode: String) =
         viewModel.categorySelected(updatedCategoryCode)
 
+    override fun onCategorySelectionCancelled() = viewModel.categorySelectionCancelled()
 
     private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
         SimilarTransactionsFragment.newInstance(transactions, code).also {

@@ -91,6 +91,19 @@ class CategorySelectionFragment : BaseFragment() {
         }
     }
 
+    override fun onBackPressed(): Boolean {
+        onCancelled()
+        return super.onBackPressed()
+    }
+
+    override fun onUpPressed() {
+        onCancelled()
+        super.onUpPressed()
+    }
+
+    private fun onCancelled() =
+        (targetFragment as? CategorySelectionListener)?.onCategorySelectionCancelled()
+
     companion object {
         fun newInstance(
             type: Category.Type,
@@ -117,6 +130,7 @@ class CategorySelectionFragment : BaseFragment() {
 
 interface CategorySelectionListener {
     fun onCategorySelected(updatedCategoryCode: String)
+    fun onCategorySelectionCancelled() { }
 }
 
 

@@ -96,14 +96,16 @@ class CategorizationFlowViewModel @Inject constructor(
             _state.value = State.SimilarTransactions(categoryCode)
             categorizeTransactions(listOf(transaction.id), categoryCode)
         } else {
-           _state.value = State.Done
+           done()
         }
     }
 
-    fun similarTransactionsDone() {
+    fun similarTransactionsDone() = done()
+    fun categorySelectionCancelled() = done()
+
+    private fun done() {
         _state.value = State.Done
     }
-
 
     override fun onCleared() {
         super.onCleared()
