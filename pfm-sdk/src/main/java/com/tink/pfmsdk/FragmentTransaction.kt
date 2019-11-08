@@ -3,7 +3,7 @@ package com.tink.pfmsdk
 import androidx.fragment.app.FragmentTransaction
 
 enum class FragmentAnimationFlags {
-    FULL, EXIT_ONLY, KEEP_BEHIND, FADE, FADE_IN, SLIDE_UP, NONE
+    FULL, EXIT_ONLY, KEEP_BEHIND, FADE, FADE_IN, FADE_IN_ONLY, SLIDE_UP, NONE
 }
 
 fun FragmentTransaction.setAnimation(animation: FragmentAnimationFlags): FragmentTransaction {
@@ -19,6 +19,9 @@ fun FragmentTransaction.setAnimation(animation: FragmentAnimationFlags): Fragmen
 
         FragmentAnimationFlags.FADE_IN ->
             setCustomAnimations(R.anim.crossfade_in, 0, R.anim.crossfade_out, 0)
+
+        FragmentAnimationFlags.FADE_IN_ONLY ->
+            setCustomAnimations(R.anim.crossfade_in, 0, 0, 0)
 
         FragmentAnimationFlags.SLIDE_UP ->
             setCustomAnimations(R.anim.bottom_slide_in, R.anim.stay, R.anim.stay, R.anim.bottom_slide_out)

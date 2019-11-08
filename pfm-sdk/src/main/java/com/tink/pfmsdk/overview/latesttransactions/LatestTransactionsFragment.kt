@@ -35,7 +35,10 @@ class LatestTransactionsFragment : BaseFragment() {
 
         transactionsAdapter = TransactionItemListAdapter(dateUtils, groupByDates = false)
         transactionsAdapter.onTransactionItemClickedListener = {
-            fragmentCoordinator.replace(CategorizationFlowFragment.newInstance(it), animation = FragmentAnimationFlags.FADE_IN)
+            fragmentCoordinator.replace(
+                CategorizationFlowFragment.newInstance(it),
+                animation = FragmentAnimationFlags.FADE_IN_ONLY
+            )
         }
     }
 
