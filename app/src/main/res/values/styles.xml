@@ -10,4 +10,9 @@
     <!-- TODO:PFMSDK: Consumers need to override this or the app will crash. Can we make this nicer? -->
     <item name="textColorAction">@color/colorAccent</item>
   </style>
+
+<!--  Comment in for testing font overrides-->
+<!--  <item name="font_bold" type="font">@font/lobster</item>-->
+<!--  <item name="font_semi_bold" type="font">@font/lobster</item>-->
+<!--  <item name="font_regular" type="font">@font/lobster</item>-->
 </resources>
