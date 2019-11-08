@@ -22,7 +22,7 @@ public class AxisLabel implements Theme {
 
 	@Override
 	public Typeface getFont() {
-		return FontUtils.getTypeface(FontUtils.LOTA_REGULAR_FONT, context);
+		return FontUtils.getTypeface(FontUtils.REGULAR_FONT, context);
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class TinkDefaultToolbarActionButtonTheme implements TinkToolbar.Theme.To
 
 	@Override
 	public Typeface getFont() {
-		return FontUtils.getTypeface(FontUtils.LOTA_BOLD_FONT, context);
+		return FontUtils.getTypeface(FontUtils.BOLD_FONT, context);
 	}
 
 	@Override
