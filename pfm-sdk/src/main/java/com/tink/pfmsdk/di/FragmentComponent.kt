@@ -14,6 +14,7 @@ import com.tink.pfmsdk.TransitionDescription
 import com.tink.pfmsdk.analytics.Analytics
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
 import com.tink.pfmsdk.overview.OverviewChartFragment
+import com.tink.pfmsdk.overview.OverviewFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmsdk.overview.charts.LeftToSpendTutorialFragment
@@ -103,6 +104,7 @@ class ContextModule {
 @Module(includes = [TransitionModule::class, ServiceModule::class, NetworkModule::class])
 class EverythingModule {
 
+    @Singleton
     @Provides
     fun fragmentCoordinator(
         fragment: TinkFragment,
@@ -110,10 +112,12 @@ class EverythingModule {
     ) =
         FragmentCoordinator(fragment.childFragmentManager, R.id.fragmentRoot, transitionCoordinator)
 
+    @Singleton
     @Provides
     fun providesTransitionCoordinatorImpl(transitions: Set<@JvmSuppressWildcards TransitionDescription>): TransitionCoordinatorImpl =
         TransitionCoordinatorImpl(transitions)
 
+    @Singleton
     @Provides
     fun providesTransitionCoordinator(transitionCoordinator: TransitionCoordinatorImpl): TransitionCoordinator =
         transitionCoordinator
@@ -247,4 +251,7 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun similarTransactionsFragment(): SimilarTransactionsFragment
+
+    @ContributesAndroidInjector
+    fun overviewFragment(): OverviewFragment
 }
