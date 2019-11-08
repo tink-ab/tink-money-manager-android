@@ -1,7 +1,10 @@
 package com.tink.pfmsdk.overview.latesttransactions
 
 import android.os.Bundle
+import android.transition.TransitionManager
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -57,7 +60,13 @@ class LatestTransactionsFragment : BaseFragment() {
         })
 
         viewModel.hasTransactions.observe(viewLifecycleOwner, Observer { hasTransactions ->
-            card.visibility = if(hasTransactions) View.VISIBLE else View.GONE
+            TransitionManager.beginDelayedTransition(view as ViewGroup)
+            mainContent.visibility = if(hasTransactions) View.VISIBLE else View.GONE
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
+            TransitionManager.beginDelayedTransition(view as ViewGroup)
+            loader.visibility = if(loading) View.VISIBLE else View.GONE
         })
     }
 

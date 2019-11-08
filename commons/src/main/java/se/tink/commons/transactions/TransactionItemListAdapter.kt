@@ -88,11 +88,11 @@ class TransactionItemListAdapter(
 
         upcomingTransactionItems
             ?.takeIf { expanded }
-            ?.sortedByDescending { it.date }
+            ?.sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             ?.let { list += it }
 
         transactionItems
-            .sortedByDescending { it.date }
+            .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             .groupBy { it.date }
             .forEach { entry ->
                 if (groupByDates && dateUtils != null) {
