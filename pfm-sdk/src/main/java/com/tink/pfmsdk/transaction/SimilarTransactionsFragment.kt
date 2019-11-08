@@ -95,6 +95,16 @@ class SimilarTransactionsFragment : BaseFragment() {
         }
     }
 
+    override fun onBackPressed(): Boolean {
+        onSimilarTransactionsDone?.invoke()
+        return super.onBackPressed()
+    }
+
+    override fun onUpPressed() {
+        onSimilarTransactionsDone?.invoke()
+        super.onUpPressed()
+    }
+
     interface Theme : BaseFragment.Theme {
 
         val snackbarErrorTheme: TinkSnackbar.Theme

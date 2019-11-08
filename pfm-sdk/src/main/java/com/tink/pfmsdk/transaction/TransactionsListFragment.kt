@@ -114,7 +114,7 @@ class TransactionsListFragment : BaseFragment() {
                 .also {
                     fragmentCoordinator.replace(
                         it,
-                        animation = FragmentAnimationFlags.FADE_IN
+                        animation = FragmentAnimationFlags.FADE_IN_ONLY
                     )
                 }
         }
