@@ -389,10 +389,10 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		if (theme.getToolbarTheme() != null && toolbar != null) {
 			toolbar.setTheme(theme.getToolbarTheme());
 		}
-		if (theme.getStatusBarTheme() != null) {
-			StatusbarUtils.updateStatusBar(getActivity(), theme.getStatusBarTheme().getStatusBarColor(),
-					theme.getStatusBarTheme().isStatusBarLight());
-		}
+//		if (theme.getStatusBarTheme() != null) {
+//			StatusbarUtils.updateStatusBar(getActivity(), theme.getStatusBarTheme().getStatusBarColor(),
+//					theme.getStatusBarTheme().isStatusBarLight());
+//		}
 	}
 
 	public void setTitle(String title) {
