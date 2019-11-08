@@ -245,7 +245,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public void onUpPressed() {
 		if (getActivity() != null) {
 			SoftKeyboardUtils.closeSoftKeyboard(getActivity());
-			fragmentCoordinator.popBackStack();
+			fragmentCoordinator.handleBackPress();
 		}
 	}
 
@@ -345,11 +345,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public boolean onBackPressed() {
-		if (getActivity() != null) {
-			SoftKeyboardUtils.closeSoftKeyboard(getActivity());
-			fragmentCoordinator.popBackStack();
-			return true;
-		}
 		return false;
 	}
 
