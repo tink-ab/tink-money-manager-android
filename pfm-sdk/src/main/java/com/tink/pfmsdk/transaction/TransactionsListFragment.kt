@@ -32,6 +32,7 @@ class TransactionsListFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): Theme = ownTheme
     override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRANSACTIONS_LIST
+    override fun hasToolbar(): Boolean = true
 
     private lateinit var adapter: TransactionItemListAdapter
 
