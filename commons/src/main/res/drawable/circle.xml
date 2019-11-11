@@ -4,5 +4,5 @@
   <size
     android:width="50dp"
     android:height="50dp"/>
-  <solid android:color="?colorPrimary"/>
+  <solid android:color="?attr/tink_colorPrimary"/>
 </shape>

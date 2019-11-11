@@ -15,7 +15,9 @@ class MainActivity : FragmentActivity() {
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
-            TinkFragment().also { currentTinkFragment = it }
+            TinkFragment.newInstance(R.style.TinkSamplePfmStyle).also {
+                currentTinkFragment = it
+            }
         ).commit()
     }
 

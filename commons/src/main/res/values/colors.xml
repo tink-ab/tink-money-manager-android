@@ -56,19 +56,15 @@
   <color name="ripple_on_dark_background">#20ffffff</color>
 
   /* App colors */
-  <color name="colorPrimary">@color/tink_lax</color>
-  <color name="colorPrimary_10">@color/tink_lax_10</color>
-  <color name="colorPrimary_25">@color/tink_lax_25</color>
-  <color name="colorPrimaryDark">@color/tink_lax_dark</color>
-  <color name="colorPrimaryLight">@color/tink_lax_light</color>
-  <color name="colorOnPrimary">@color/white</color>
+  <color name="colorPrimary">?tink_colorPrimary</color>
+  <color name="colorPrimaryDark">?tink_colorPrimaryDark</color>
+  <color name="colorPrimaryLight">?tink_colorPrimaryLight</color>
+  <color name="colorOnPrimary">?tink_colorOnPrimary</color>
 
-  <color name="colorAccent">@color/tink_blue</color>
-  <color name="colorAccent_10">@color/tink_blue_10</color>
-  <color name="colorAccent_20">@color/tink_blue_20</color>
-  <color name="colorAccentDark">@color/tink_blue_dark</color>
-  <color name="colorAccentLight">@color/tink_blue_light</color>
-  <color name="colorOnAccent">@color/white</color>
+  <color name="colorAccent">?tink_colorAccent</color>
+  <color name="colorAccentDark">?tink_colorAccentDark</color>
+  <color name="colorAccentLight">?tink_colorAccentLight</color>
+  <color name="colorOnAccent">?tink_colorOnAccent</color>
 
   <color name="colorWarning">@color/orange</color>
   <color name="colorOnWarning">@color/white</color>
@@ -94,34 +90,34 @@
   <color name="textColorAction">@color/colorAccent</color>
 
   /* Semantic colors */
-  <color name="expenses">@color/expensive_blue</color>
-  <color name="expensesDark">@color/expensive_blue_dark</color>
-  <color name="expensesLight">@color/expensive_blue_light</color>
-  <color name="colorOnExpenses">@color/white</color>
+  <color name="expenses">?tink_expensesColor</color>
+  <color name="expensesDark">?tink_expensesDarkColor</color>
+  <color name="expensesLight">?tink_expensesLightColor</color>
+  <color name="colorOnExpenses">?tink_colorOnExpenses</color>
 
-  <color name="leftToSpend">@color/colorPrimary</color>
-  <color name="leftToSpendDark">@color/colorPrimaryDark</color>
-  <color name="leftToSpendLight">@color/colorPrimaryLight</color>
-  <color name="colorOnLeftToSpend">@color/colorOnPrimary</color>
+  <color name="leftToSpend">?tink_leftToSpendColor</color>
+  <color name="leftToSpendDark">?tink_leftToSpendDarkColor</color>
+  <color name="leftToSpendLight">?tink_leftToSpendLightColor</color>
+  <color name="colorOnLeftToSpend">?tink_colorOnLeftToSpend</color>
 
-  <color name="income">@color/salary_green</color>
-  <color name="incomeDark">@color/salary_green_dark</color>
-  <color name="incomeLight">@color/salary_green_light</color>
-  <color name="colorOnIncome">@color/white</color>
+  <color name="income">?tink_incomeColor</color>
+  <color name="incomeDark">?tink_incomeDarkColor</color>
+  <color name="incomeLight">?tink_incomeLightColor</color>
+  <color name="colorOnIncome">?tink_colorOnIncome</color>
 
-  <color name="transfer">@color/transfer_grey</color>
-  <color name="transferDark">@color/black</color>
-  <color name="colorOnTransfer">@color/white</color>
+  <color name="transfer">?tink_transferColor</color>
+  <color name="transferDark">?tink_transferDarkColor</color>
+  <color name="colorOnTransfer">?tink_colorOnTransfer</color>
 
   <color name="period_disabled_arrow">@color/grey_inactive</color>
   <color name="divider_color">@color/divider_grey</color>
   <color name="disabled">@color/grey_light</color>
 
-  <color name="uncategorized_transaction">@color/orange</color>
-  <color name="uncategorizedLight">@color/orange_light</color>
+  <color name="uncategorized_transaction">?tink_uncategorizedColor</color>
+  <color name="uncategorizedLight">?tink_uncategorizedLightColor</color>
   <color name="upcoming_transaction">@color/greyblack</color>
   <color name="upcomingLight">@color/divider_color</color>
 
-  <color name="snackbar_background">@color/greyblack</color>
-  <color name="color_on_snackbar_background">@color/white</color>
+  <color name="snackbar_background">?tink_snackbarColor</color>
+  <color name="color_on_snackbar_background">?tink_colorOnSnackBar</color>
 </resources>
