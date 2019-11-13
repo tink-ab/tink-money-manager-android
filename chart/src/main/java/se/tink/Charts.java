@@ -11,6 +11,7 @@ import java.util.Locale;
 import se.tink.android.charts.R;
 import se.tink.barchart.BarChartAreaAdapter;
 import se.tink.barchart.VerticalBarChartArea;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.core.models.Labels;
 import se.tink.core.models.PeriodBalance;
 import se.tink.core.models.VerticalBarChart;
@@ -100,7 +101,7 @@ public class Charts {
 		int areaGradientTopColor,
 		int linePaintColor) {
 
-		int transparentColor = ContextCompat.getColor(context, R.color.transparent);
+		int transparentColor = ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 
 		setupLineChart(lineChart, context, currencyCode, locale, timezoneCode, showXLabels,
 			showYLabels,

@@ -6,6 +6,7 @@ import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.transaction.SimilarTransactionsFragment;
 import com.tink.pfmsdk.view.TinkSnackbar;
 import com.tink.pfmsdk.view.TinkToolbar.Theme;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.core.models.Category;
 import se.tink.core.models.Category.Type;
 
@@ -41,15 +42,15 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 					(category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
 				switch (type) {
 					case TYPE_EXPENSES:
-						id = R.color.expensesDark;
+						id = R.attr.tink_expensesDarkColor;
 						break;
 					case TYPE_INCOME:
-						id = R.color.incomeDark;
+						id = R.attr.tink_incomeDarkColor;
 						break;
 					case TYPE_TRANSFER:
 					case TYPE_UNKKNOWN:
 					default:
-						id = R.color.transferDark;
+						id = R.attr.tink_transferDarkColor;
 				}
 				return ContextCompat.getColor(context, id);
 			}
@@ -67,16 +68,16 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 		Type type = (category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
 		switch (type) {
 			case TYPE_EXPENSES:
-				id = R.color.expenses;
+				id = R.attr.tink_expensesColor;
 				break;
 			case TYPE_INCOME:
-				id = R.color.income;
+				id = R.attr.tink_incomeColor;
 				break;
 			case TYPE_TRANSFER:
 			case TYPE_UNKKNOWN:
 			default:
-				id = R.color.transfer;
+				id = R.attr.tink_transferColor;
 		}
-		return ContextCompat.getColor(context, id);
+		return ContextUtils.getColorFromAttr(context, id);
 	}
 }

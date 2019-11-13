@@ -17,6 +17,7 @@ import se.tink.android.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
 import com.tink.pfmsdk.repository.StatisticsRepository
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
@@ -94,7 +95,7 @@ class PieChartDetailsViewModel @Inject constructor(
     fun getStatistic(context: Context, type: ChartType): LiveData<DetailsChartModel> =
         mapDistinct(statisticData) {
             val data = calculateStatistic(type, it)
-            val color = ContextCompat.getColor(context, type.color)
+            val color = context.getColorFromAttr(type.color)
             val src = it.source
             val periodStr =
                 getPeriodString(dateUtils, src.period, context)

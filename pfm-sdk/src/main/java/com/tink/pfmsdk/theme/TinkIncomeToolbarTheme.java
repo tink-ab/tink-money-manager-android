@@ -1,7 +1,6 @@
 package com.tink.pfmsdk.theme;
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.view.TinkToolbar;
 import javax.inject.Inject;
@@ -21,12 +20,12 @@ public class TinkIncomeToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.income);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeColor);
 	}
 
 	@Override
 	public int getTitleColor() {
-		return ContextUtils.getColorCompat(context, R.color.colorOnIncome);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnIncome);
 	}
 
 	@Override

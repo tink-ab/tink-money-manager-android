@@ -31,6 +31,7 @@ import java.util.Set;
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
 import se.tink.ChartArea;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.core.models.PeriodBalance;
 import se.tink.enums.XLabelAlignment;
 import se.tink.enums.YLabelAlignment;
@@ -202,7 +203,7 @@ public class BalanceLineChartArea extends ChartArea {
 
 		pathPaint = new Paint();
 		pathPaint.setAntiAlias(true);
-		pathPaint.setColor(ContextCompat.getColor(context, R.color.transparent));
+		pathPaint.setColor(ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor));
 
 		areaPaint = new Paint();
 		areaPaint.setAntiAlias(true);

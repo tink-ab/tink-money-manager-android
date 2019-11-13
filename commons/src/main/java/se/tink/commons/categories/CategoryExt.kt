@@ -42,19 +42,19 @@ fun iconFromCategoryCode(code: String): Int = when {
 
 fun Category.iconColor(): Int {
     return when {
-        code.isUncategorized() -> R.color.uncategorized_transaction
-        code.isIncome() -> R.color.income
-        code.isExpense() -> R.color.expenses
-        else -> R.color.transfer
+        code.isUncategorized() -> R.attr.tink_uncategorizedColor
+        code.isIncome() -> R.attr.tink_incomeColor
+        code.isExpense() -> R.attr.tink_expensesColor
+        else -> R.attr.tink_transferColor //TODO:PFMSDK
     }
 }
 
 fun Category.iconBackgroundColor(): Int {
     return when {
-        code.isUncategorized() -> R.color.uncategorizedLight
-        code.isIncome() -> R.color.incomeLight
-        code.isExpense() -> R.color.expensesLight
-        else -> R.color.divider_color
+        code.isUncategorized() -> R.attr.tink_uncategorizedLightColor
+        code.isIncome() -> R.attr.tink_incomeLightColor
+        code.isExpense() -> R.attr.tink_expensesLightColor
+        else -> R.attr.tink_transferColor //TODO:PFMSDK
     }
 }
 

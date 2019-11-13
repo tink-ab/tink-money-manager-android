@@ -21,7 +21,7 @@ public class TinkOverviewToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.transparent);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override

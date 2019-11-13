@@ -9,6 +9,7 @@ import com.tink.pfmsdk.view.NanoTitle;
 import com.tink.pfmsdk.view.TinkTabs;
 import com.tink.pfmsdk.view.TinkTextView;
 import javax.inject.Inject;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.utils.ColorsUtils;
 
 public class TinkExpensesTabsTheme extends TinkTabsTheme implements TinkTabs.Theme {
@@ -24,12 +25,12 @@ public class TinkExpensesTabsTheme extends TinkTabsTheme implements TinkTabs.The
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.expenses);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesColor);
 	}
 
 	@Override
 	public int getMarkerColor() {
-		int color = ContextCompat.getColor(context, R.color.colorOnExpenses);
+		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnExpenses);
 		return ColorsUtils.adjustAlpha(color, 0.4f);
 	}
 

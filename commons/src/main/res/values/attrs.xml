@@ -45,6 +45,8 @@
     <attr name="tink_colorPrimaryDark" format="color|reference"/>
     <attr name="tink_colorOnPrimary" format="color|reference"/>
     <attr name="tink_textColorAction" format="reference|color"/>
+    <attr name="tink_transparentColor" format="color|reference" />
+    <attr name="tink_warningColor" format="color|reference" />
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

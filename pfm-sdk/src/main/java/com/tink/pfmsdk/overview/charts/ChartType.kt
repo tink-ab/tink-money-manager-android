@@ -1,5 +1,6 @@
 package com.tink.pfmsdk.overview.charts
 
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.tink.pfmsdk.BaseFragment
@@ -16,7 +17,7 @@ enum class ChartType {
             AnalyticsEvent.EXPENSES_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.expenses_title
-        override val color: Int get() = R.color.expenses
+        override val color: Int get() = R.attr.tink_expensesColor
         override val topCategoryName: Int get() = R.string.all_categories
         override val type: Category.Type get() = Category.Type.TYPE_EXPENSES
 
@@ -31,7 +32,7 @@ enum class ChartType {
             AnalyticsEvent.LEFTTOSPEND_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.left_to_spend_title
-        override val color: Int get() = R.color.leftToSpend
+        override val color: Int get() = R.attr.tink_leftToSpendColor
         override val showCategoryPicker = false
         override val type: Category.Type get() = Category.Type.TYPE_UNKKNOWN
 
@@ -46,7 +47,7 @@ enum class ChartType {
             AnalyticsEvent.INCOME_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.income_title
-        override val color: Int get() = R.color.income
+        override val color: Int get() = R.attr.tink_incomeColor
         override val topCategoryName: Int get() = R.string.all_categories
         override val type: Category.Type get() = Category.Type.TYPE_INCOME
 
@@ -56,7 +57,7 @@ enum class ChartType {
     };
 
     abstract val analytics: List<AnalyticsEvent>
-    @get:ColorRes
+    @get:AttrRes
     abstract val color: Int
     @get:StringRes
     abstract val title: Int

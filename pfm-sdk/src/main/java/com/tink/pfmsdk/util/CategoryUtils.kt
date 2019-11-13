@@ -101,26 +101,26 @@ fun getType(category: Category?): Category.Type = category?.type ?: Category.Typ
 
 private fun getDarkColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.color.expensesDark
-        Category.Type.TYPE_INCOME -> R.color.incomeDark
+        Category.Type.TYPE_EXPENSES -> R.attr.tink_expensesDarkColor
+        Category.Type.TYPE_INCOME -> R.attr.tink_incomeDarkColor
         Category.Type.TYPE_TRANSFER,
-        Category.Type.TYPE_UNKKNOWN -> R.color.transferDark
-        else -> R.color.transferDark
+        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferDarkColor
+        else -> R.attr.tink_transferDarkColor
     }
 
 private fun getTextColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.color.colorOnExpenses
-        Category.Type.TYPE_INCOME -> R.color.colorOnIncome
+        Category.Type.TYPE_EXPENSES -> R.attr.tink_colorOnExpenses
+        Category.Type.TYPE_INCOME -> R.attr.tink_colorOnIncome
         Category.Type.TYPE_TRANSFER,
-        Category.Type.TYPE_UNKKNOWN -> R.color.colorOnTransfer
-        else -> R.color.colorOnTransfer
+        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_colorOnTransfer
+        else -> R.attr.tink_colorOnTransfer
     }
 
 private fun getColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.color.expenses
-        Category.Type.TYPE_INCOME -> R.color.income
-        Category.Type.TYPE_TRANSFER, Category.Type.TYPE_UNKKNOWN -> R.color.transfer
-        else -> R.color.transfer
+        Category.Type.TYPE_EXPENSES -> R.attr.tink_expensesColor
+        Category.Type.TYPE_INCOME -> R.attr.tink_incomeColor
+        Category.Type.TYPE_TRANSFER, Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferColor
+        else -> R.attr.tink_transferColor
     }

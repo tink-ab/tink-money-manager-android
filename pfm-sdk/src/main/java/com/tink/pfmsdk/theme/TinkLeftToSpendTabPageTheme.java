@@ -12,6 +12,7 @@ import com.tink.pfmsdk.view.TinkTextView;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
 import com.tink.pfmsdk.view.TinkToolbar;
 import javax.inject.Inject;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.utils.ColorsUtils;
 
 public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme {
@@ -124,12 +125,12 @@ public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpend);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendLight);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendLightColor);
 	}
 
 	@Override
