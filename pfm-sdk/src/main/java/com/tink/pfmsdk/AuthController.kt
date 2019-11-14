@@ -6,7 +6,6 @@ import android.content.Context
 import com.tink.pfmsdk.buildConfig.Feature
 import com.tink.pfmsdk.analytics.Analytics
 import com.tink.pfmsdk.collections.Periods
-import com.tink.pfmsdk.collections.Providers
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.buildConfig.BuildConfigurations
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
@@ -67,7 +66,6 @@ class AuthController @Inject constructor(@ApplicationScoped private val context:
         // TODO: PFMSDK: Do we need this?
         //Currencies.getSharedInstance().attatchListener(userConfigurationService)
         Periods.getSharedInstance().attatchListener(periodService)
-        Providers.getSharedInstance().attatchListener(providerService)
         // TODO: PFMSDK: Do we need this?
         //FCMManager.getInstance().registerPushToken(deviceService)
 
@@ -95,7 +93,6 @@ class AuthController @Inject constructor(@ApplicationScoped private val context:
         // TODO: PFMSDK: Do we need this?
         //Currencies.getSharedInstance().removeListener(userConfigurationService)
         Periods.getSharedInstance().removeListener(periodService)
-        Providers.getSharedInstance().removeListener(providerService)
         dataStorage.sessionId = null
 
         cacheHandle.clearCache()
