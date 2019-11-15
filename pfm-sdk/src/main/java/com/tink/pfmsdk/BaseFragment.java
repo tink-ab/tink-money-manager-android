@@ -172,9 +172,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			}
 		}
 
-		// TODO: PFMSDK - Remove dependency of MainActivity
-		//getMainActivity().getWindow().setSoftInputMode(getSoftInputMode());
-
 		if (isAuthorized()) {
 			authorizedOnCreateView(inflater, container, savedInstanceState);
 		}
@@ -402,11 +399,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			toolbar.setTitle(title);
 		}
 	}
-
-	// TODO: PFMSDK - Remove dependency of MainActivity
-	/*public MainActivity getMainActivity() {
-		return (MainActivity) getActivity();
-	}*/
 
 	protected boolean isFirstCreation() {
 		return firstCreation;
