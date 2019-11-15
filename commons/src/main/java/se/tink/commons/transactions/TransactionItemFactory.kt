@@ -87,8 +87,8 @@ class TransactionItemFactory @Inject constructor(
             val icon = if (isUpcoming) {
                 ListItem.TransactionItem.Icon(
                     R.drawable.ic_all_expenses,
-                    R.attr.tink_transferDarkColor,
-                    R.attr.tink_transferColor
+                    R.attr.tink_transferColor,
+                    R.attr.tink_transferLightColor
                 )
             } else {
                 with(category) {

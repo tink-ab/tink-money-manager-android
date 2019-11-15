@@ -50,7 +50,7 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 					case TYPE_TRANSFER:
 					case TYPE_UNKKNOWN:
 					default:
-						id = R.attr.tink_transferDarkColor;
+						id = R.attr.tink_transferColor;
 				}
 				return ContextCompat.getColor(context, id);
 			}

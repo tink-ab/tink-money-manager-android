@@ -104,8 +104,8 @@ private fun getDarkColorId(type: Category.Type): Int =
         Category.Type.TYPE_EXPENSES -> R.attr.tink_expensesDarkColor
         Category.Type.TYPE_INCOME -> R.attr.tink_incomeDarkColor
         Category.Type.TYPE_TRANSFER,
-        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferDarkColor
-        else -> R.attr.tink_transferDarkColor
+        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferColor
+        else -> R.attr.tink_transferColor
     }
 
 private fun getTextColorId(type: Category.Type): Int =

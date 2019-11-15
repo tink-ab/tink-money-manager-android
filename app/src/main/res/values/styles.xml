@@ -29,7 +29,7 @@
     <item name="tink_incomeLightColor">#ffdffbed</item>
     <item name="tink_colorOnIncome">@color/white</item>
     <item name="tink_transferColor">@color/transfer_grey</item>
-    <item name="tink_transferDarkColor">@color/black</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
     <item name="tink_colorOnTransfer">@color/white</item>
     <item name="tink_uncategorizedColor">@color/orange</item>
     <item name="tink_uncategorizedLightColor">@color/orange_light</item>

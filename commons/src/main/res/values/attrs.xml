@@ -24,7 +24,7 @@
     <attr name="tink_incomeDarkColor" format="color|reference"/>
     <attr name="tink_colorOnIncome" format="color|reference"/>
     <attr name="tink_transferColor" format="color|reference"/>
-    <attr name="tink_transferDarkColor" format="color|reference"/>
+    <attr name="tink_transferLightColor" format="color|reference"/>
     <attr name="tink_colorOnTransfer" format="color|reference"/>
     <attr name="tink_uncategorizedColor" format="color|reference"/>
     <attr name="tink_uncategorizedLightColor" format="color|reference"/>

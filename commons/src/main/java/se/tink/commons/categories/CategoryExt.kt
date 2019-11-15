@@ -45,7 +45,7 @@ fun Category.iconColor(): Int {
         code.isUncategorized() -> R.attr.tink_uncategorizedColor
         code.isIncome() -> R.attr.tink_incomeColor
         code.isExpense() -> R.attr.tink_expensesColor
-        else -> R.attr.tink_transferColor //TODO:PFMSDK
+        else -> R.attr.tink_transferColor
     }
 }
 
@@ -54,7 +54,7 @@ fun Category.iconBackgroundColor(): Int {
         code.isUncategorized() -> R.attr.tink_uncategorizedLightColor
         code.isIncome() -> R.attr.tink_incomeLightColor
         code.isExpense() -> R.attr.tink_expensesLightColor
-        else -> R.attr.tink_transferColor //TODO:PFMSDK
+        else -> R.attr.tink_transferLightColor
     }
 }
 
