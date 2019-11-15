@@ -75,16 +75,17 @@ class TransactionItemFactory @Inject constructor(
 
     fun createItem(
         id: String,
-        isUpcoming: Boolean,
+        isUpcoming: Boolean, // TODO: PFMSDK: Remove upcoming flag
         category: Category,
         date: DateTime,
         label: String,
         amount: Amount,
         dispensableAmount: Amount = Amount(ExactNumber.ZERO, "SEK"), // TODO:PFMSDK: Remove dispensableAmount
-        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null
+        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {
             val icon = if (isUpcoming) {
+                // TODO: PFMSDK: Remove upcoming transaction UI setting
                 ListItem.TransactionItem.Icon(
                     R.drawable.ic_all_expenses,
                     R.attr.tink_transferColor,
