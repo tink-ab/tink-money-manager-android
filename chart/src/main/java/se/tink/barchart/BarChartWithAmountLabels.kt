@@ -63,7 +63,7 @@ class BarChartWithAmountLabels : View {
 
     private val amountLabelPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.nano_text_size)
-        color = ContextCompat.getColor(context, R.color.greyblack)
+//        color = ContextCompat.getColor(context, R.color.greyblack) //TODO:PFMSDK
         typeface = ResourcesCompat.getFont(context, R.font.font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true

@@ -11,6 +11,7 @@ import com.tink.pfmsdk.view.Tera;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
 import com.tink.pfmsdk.view.TinkToolbar;
 import javax.inject.Inject;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkExpenseBarChartTabPageTheme implements TabExpensesBarChartFragment.Theme {
 
@@ -48,37 +49,37 @@ public class TinkExpenseBarChartTabPageTheme implements TabExpensesBarChartFragm
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_chartBackgroundColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_zeroLineColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_sixMonthBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_sixMonthNegativeBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesLightColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_meanValueColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_chartMeanValueColor);
 	}
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_twelveMonthBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.expensesBarChart_twelveMonthNegativeBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesLightColor);
 	}
 
 	// TODO: PFMSDK
@@ -91,7 +92,7 @@ public class TinkExpenseBarChartTabPageTheme implements TabExpensesBarChartFragm
 			}
 
 			@Override
-			public int getIconColor() {
+			public int getIconColorAttr() {
 				return ContextCompat.getColor(context, R.color.expensesDark);
 			}
 		};

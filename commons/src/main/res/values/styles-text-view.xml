@@ -19,7 +19,7 @@
   </style>
 
   <style name="h2.action">
-    <item name="android:textColor">?textColorAction</item>
+    <item name="android:textColor">?tink_textColorAction</item>
     <item name="android:fontFamily">@font/font_bold</item>
     <item name="android:textAllCaps">false</item>
   </style>
@@ -54,7 +54,7 @@
   </style>
 
   <style name="deci.action">
-    <item name="android:textColor">?textColorAction</item>
+    <item name="android:textColor">?tink_textColorAction</item>
   </style>
 
   <style name="deci.action.bold">
@@ -62,7 +62,7 @@
   </style>
 
   <style name="deci.colorPrimary">
-    <item name="android:textColor">?colorPrimary</item>
+    <item name="android:textColor">?tink_colorPrimary</item>
   </style>
 
   <style name="deci.colorPrimary.bold">
@@ -76,7 +76,7 @@
   </style>
 
   <style name="deci.title.action">
-    <item name="android:textColor">?textColorAction</item>
+    <item name="android:textColor">?tink_textColorAction</item>
   </style>
 
   <style name="deci.disabled">
@@ -125,7 +125,7 @@
   </style>
 
   <style name="hecto.action">
-    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:fontFamily">@font/font_bold</item>
     <item name="android:background">@drawable/ripple_button_background</item>
   </style>

@@ -4,7 +4,6 @@ import android.content.Context;
 import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.view.TinkToolbar;
-import com.tink.pfmsdk.view.TinkToolbar.Theme.ToolbarTextTheme;
 import javax.inject.Inject;
 import se.tink.commons.extensions.ContextUtils;
 
@@ -22,12 +21,12 @@ public class TinkLeftToSpendToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendToolbar_backgroundColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int getTitleColor() {
-		return ContextUtils.getColorCompat(context, R.color.colorOnPrimary);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnPrimary);
 	}
 
 	@Override

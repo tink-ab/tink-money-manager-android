@@ -31,6 +31,7 @@ import com.tink.pfmsdk.overview.charts.TransactionsItem
 import com.tink.pfmsdk.theme.getTabPieChartThemeForType
 import com.tink.pfmsdk.util.CurrencyUtils
 import se.tink.commons.extensions.getColorCompat
+import se.tink.commons.extensions.getColorFromAttr
 
 private const val TYPE_ARG = "type"
 
@@ -100,7 +101,7 @@ class HalfPieChartFragment : BaseFragment() {
         }
 
         binding.model = model
-        binding.itemTheme = HalfChartItemTheme(context!!.getColorCompat(ownTheme.chartItemColor))
+        binding.itemTheme = HalfChartItemTheme(context!!.getColorFromAttr(ownTheme.chartItemColor))
         binding.items = model.data.items.map { item ->
             HalfChartItem(
                 (item as? StatisticItem)?.getName(requireContext()) ?: item.name,

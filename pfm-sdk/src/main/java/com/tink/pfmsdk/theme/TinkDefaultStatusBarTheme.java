@@ -1,8 +1,8 @@
 package com.tink.pfmsdk.theme;
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkDefaultStatusBarTheme implements StatusBarTheme {
 
@@ -14,7 +14,7 @@ public class TinkDefaultStatusBarTheme implements StatusBarTheme {
 
 	@Override
 	public int getStatusBarColor() {
-		return ContextCompat.getColor(context, R.color.colorPrimaryDark);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorPrimaryDark);
 	}
 
 	@Override

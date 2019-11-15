@@ -17,6 +17,7 @@ import com.tink.pfmsdk.transaction.StatusSubtitleMode
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import com.tink.pfmsdk.transaction.TransactionsListMetaData
 import kotlinx.android.synthetic.main.fragment_latest_transactions.*
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -75,8 +76,8 @@ class LatestTransactionsFragment : BaseFragment() {
         val context = context ?: return
 
         val metaData = TransactionsListMetaData(
-            ContextCompat.getColor(context, R.color.colorPrimaryDark),
-            ContextCompat.getColor(context, R.color.colorPrimary),
+            context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
+            context.getColorFromAttr(R.attr.tink_colorPrimary),
             getString(R.string.overview_latest_transactions_title),
             false,
             null, null,

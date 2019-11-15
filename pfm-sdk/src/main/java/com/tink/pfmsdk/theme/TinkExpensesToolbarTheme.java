@@ -22,12 +22,12 @@ public class TinkExpensesToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.expenses);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesColor);
 	}
 
 	@Override
 	public int getTitleColor() {
-		return ContextUtils.getColorCompat(context, R.color.colorOnExpenses);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnExpenses);
 	}
 
 	@Override

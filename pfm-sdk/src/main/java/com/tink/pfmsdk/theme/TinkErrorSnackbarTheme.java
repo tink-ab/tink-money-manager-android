@@ -1,8 +1,8 @@
 package com.tink.pfmsdk.theme;
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkErrorSnackbarTheme extends TinkDefaultSnackbarTheme {
 
@@ -15,6 +15,6 @@ public class TinkErrorSnackbarTheme extends TinkDefaultSnackbarTheme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.colorWarning);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_warningColor);
 	}
 }

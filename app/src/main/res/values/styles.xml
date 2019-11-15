@@ -3,12 +3,39 @@
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">#ff461e7d</item>
-    <item name="colorAccent">#ff461e7d</item>
     <item name="android:colorBackground">@color/white_90</item>
+    <item name="tinkTheme">@style/TinkSamplePfmStyle</item>
+  </style>
 
-    <!-- TODO:PFMSDK: Consumers need to override this or the app will crash. Can we make this nicer? -->
-    <item name="textColorAction">@color/colorAccent</item>
+  <style name="TinkSamplePfmStyle" parent="TinkPfmStyle">
+    <item name="tink_chartMeanValueColor">@color/grey_light</item>
+    <item name="tink_chartAxisLabelColor">@color/grey_light</item>
+    <item name="tink_colorAccent">#ff461e7d</item>
+    <item name="tink_colorAccentDark">#ff461e7d</item>
+    <item name="tink_colorAccentLight">#ff461e7d</item>
+    <item name="tink_colorPrimary">#ff461e7d</item>
+    <item name="tink_colorPrimaryDark">#ff461e7d</item>
+    <item name="tink_colorPrimaryLight">#ff461e7d</item>
+    <item name="tink_expensesColor">#ff5638ff</item>
+    <item name="tink_expensesDarkColor">#ff5638ff</item>
+    <item name="tink_expensesLightColor">#ffe6e1ff</item>
+    <item name="tink_colorOnExpenses">@color/white</item>
+    <item name="tink_leftToSpendColor">#ffff016e</item>
+    <item name="tink_leftToSpendDarkColor">#ffff016e</item>
+    <item name="tink_leftToSpendLightColor">#40ff016e</item>
+    <item name="tink_colorOnLeftToSpend">@color/white</item>
+    <item name="tink_incomeColor">#ff36b472</item>
+    <item name="tink_incomeDarkColor">@color/salary_green_dark</item>
+    <item name="tink_incomeLightColor">#ffdffbed</item>
+    <item name="tink_colorOnIncome">@color/white</item>
+    <item name="tink_transferColor">@color/transfer_grey</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
+    <item name="tink_colorOnTransfer">@color/white</item>
+    <item name="tink_uncategorizedColor">@color/orange</item>
+    <item name="tink_uncategorizedLightColor">@color/orange_light</item>
+    <item name="tink_snackbarColor">@color/greyblack</item>
+    <item name="tink_colorOnSnackBar">@color/white</item>
+    <item name="tink_textColorAction">#ff461e7d</item>
   </style>
 
 <!--  Comment in for testing font overrides-->

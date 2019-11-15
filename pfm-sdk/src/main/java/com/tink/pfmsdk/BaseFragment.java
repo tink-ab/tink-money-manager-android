@@ -159,6 +159,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		viewLifecycle = new LifecycleRegistry(this);
 
 		if (view == null) {
+			getActivity().getTheme().applyStyle(R.style.TinkPfmStyle, false);
 			inflatedView = inflater.inflate(getLayoutId(), container, false);
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
@@ -170,9 +171,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 				setupToolbar();
 			}
 		}
-
-		// TODO: PFMSDK - Remove dependency of MainActivity
-		//getMainActivity().getWindow().setSoftInputMode(getSoftInputMode());
 
 		if (isAuthorized()) {
 			authorizedOnCreateView(inflater, container, savedInstanceState);
@@ -401,11 +399,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			toolbar.setTitle(title);
 		}
 	}
-
-	// TODO: PFMSDK - Remove dependency of MainActivity
-	/*public MainActivity getMainActivity() {
-		return (MainActivity) getActivity();
-	}*/
 
 	protected boolean isFirstCreation() {
 		return firstCreation;

@@ -6,9 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
 import android.graphics.Color
+import android.util.TypedValue
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.calculateStatistic
@@ -20,6 +22,7 @@ import se.tink.android.livedata.mapDistinct
 import se.tink.android.categories.CategoryRepository
 import com.tink.pfmsdk.repository.StatisticsRepository
 import com.tink.pfmsdk.util.CurrencyUtils
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.category.CategoryTree
 import se.tink.core.models.misc.Period
@@ -66,7 +69,9 @@ class OverviewChartViewModel @Inject constructor(
             it.categories.expenses.children,
             it.period
         ).items.map { it.amount }
-        val color = ContextCompat.getColor(context, R.color.expenses)
+        //val color = ContextCompat.getColor(context, R.color.expenses)
+        //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
+        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false);
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(context, R.string.expenses_title, data.sum(), period, color, DefaultColorGenerator, ArrayList(data))
     }
@@ -77,7 +82,9 @@ class OverviewChartViewModel @Inject constructor(
             it.categories.income.children,
             it.period
         ).items.map { it.amount }
-        val color = ContextCompat.getColor(context, R.color.income)
+        //val color = ContextCompat.getColor(context, R.color.income)
+        val color = context.getColorFromAttr(R.attr.tink_incomeColor);
+
         val periodString =
             getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(context, R.string.income_title, data.sum(), periodString, color, DefaultColorGenerator, ArrayList(data))
@@ -87,7 +94,9 @@ class OverviewChartViewModel @Inject constructor(
         fun update() = whenNonNull(expenses.value?.amountRaw, income.value?.amountRaw, period.value) { expenses, income, period ->
             val leftToSpend = income - expenses
             val data = ArrayList(listOf(expenses, maxOf(leftToSpend, 0f)))
-            val color = ContextCompat.getColor(context, R.color.leftToSpend)
+            //val color = ContextCompat.getColor(context, R.color.leftToSpend)
+            val color = context.getColorFromAttr(R.attr.tink_leftToSpendColor);
+
             val periodStr =
                 getPeriodString(dateUtils, period, context, false)
             value = OverviewChartModel(context, R.string.left_to_spend_title, leftToSpend, periodStr, color, LeftToSpendColorGenerator, data)
@@ -117,9 +126,11 @@ data class OverviewChartModel(
     val data: ArrayList<Float>
 ) {
     constructor(
-        context: Context, @StringRes title: Int,
+        context: Context,
+        @StringRes title: Int,
         amount: Float,
-        period: String, @ColorInt color: Int,
+        period: String,
+        @ColorInt color: Int,
         colorGenerator: ColorGenerator,
         data: ArrayList<Float>
     ) : this(

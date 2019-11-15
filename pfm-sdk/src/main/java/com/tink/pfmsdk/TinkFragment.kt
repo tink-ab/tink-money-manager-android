@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
@@ -44,6 +46,10 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var serviceCacheInitialization: ServiceCacheInitialization
 
+    val tinkStyle by lazy {
+        arguments!!.getInt("styleResId")
+    }
+
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
 
@@ -61,6 +67,8 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.theme?.applyStyle(tinkStyle, false)
+        activity?.applicationContext?.theme?.applyStyle(tinkStyle, false)
         return inflater.inflate(R.layout.fragment_tink, container, false)
     }
 
@@ -98,6 +106,12 @@ class TinkFragment : Fragment(), HasAndroidInjector {
             e.printStackTrace()
         } catch (e: NoSuchProviderException) {
             e.printStackTrace()
+        }
+    }
+
+    companion object {
+        fun newInstance(styleResId: Int) = TinkFragment().apply {
+            arguments = bundleOf("styleResId" to styleResId)
         }
     }
 }

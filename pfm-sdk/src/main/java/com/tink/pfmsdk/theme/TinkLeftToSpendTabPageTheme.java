@@ -12,6 +12,7 @@ import com.tink.pfmsdk.view.TinkTextView;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
 import com.tink.pfmsdk.view.TinkToolbar;
 import javax.inject.Inject;
+import se.tink.commons.extensions.ContextUtils;
 import se.tink.utils.ColorsUtils;
 
 public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme {
@@ -55,81 +56,81 @@ public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_chartBackgroundColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getCenterDateMarkColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_centerDateMarkColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int getLineChartZeroLine() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_lineChartZeroLine);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_zeroLineColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getAreaGradientBottomColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_areaGradientBottomColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getAreaGradientTopColor() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_areaGradientTopColor);
+		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getLinePaintColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_linePaintColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int getDateMarkerGradientBottom() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientBottom);
+		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getDateMarkerGradientTop50() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientTop50);
+		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int getDateMarkerGradientTop80() {
-		int color = ContextCompat.getColor(context, R.color.leftToSpendBarChart_dateMarkerGradientTop80);
+		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 		return ColorsUtils.adjustAlpha(color, 0.25f);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_sixMonthBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_sixMonthNegativeBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendLightColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendBarChart_meanValueColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_chartMeanValueColor);
 	}
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpend);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendLight);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendLightColor);
 	}
 
 	@Override
@@ -145,7 +146,7 @@ public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme
 
 	@Override
 	public int getAverageLineColor() {
-		return ContextCompat.getColor(context, R.color.chart_mean_value_color);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override

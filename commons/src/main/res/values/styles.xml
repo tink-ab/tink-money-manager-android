@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="TinkPfmStyle">
+    <item name="tink_expensesColor">@color/expensive_blue</item>
+    <item name="tink_expensesLightColor">@color/expensive_blue_light</item>
+    <item name="tink_expensesDarkColor">@color/expensive_blue_dark</item>
+    <item name="tink_colorOnExpenses">@color/white</item>
+    <item name="tink_leftToSpendColor">@color/tink_lax</item>
+    <item name="tink_leftToSpendLightColor">@color/tink_lax_light</item>
+    <item name="tink_leftToSpendDarkColor">@color/tink_lax_dark</item>
+    <item name="tink_colorOnLeftToSpend">@color/white</item>
+    <item name="tink_incomeColor">@color/salary_green</item>
+    <item name="tink_incomeLightColor">@color/salary_green_light</item>
+    <item name="tink_incomeDarkColor">@color/salary_green_dark</item>
+    <item name="tink_colorOnIncome">@color/white</item>
+    <item name="tink_transferColor">@color/transfer_grey</item>
+    <item name="tink_transferLightColor">@color/divider_grey</item>
+    <item name="tink_colorOnTransfer">@color/white</item>
+    <item name="tink_uncategorizedColor">@color/orange</item>
+    <item name="tink_uncategorizedLightColor">@color/orange_light</item>
+    <item name="tink_snackbarColor">@color/greyblack</item>
+    <item name="tink_colorOnSnackBar">@color/white</item>
+    <item name="tink_chartContainerBackgroundColor">@color/white</item>
+    <item name="tink_chartMeanValueColor">@color/grey_light</item>
+    <item name="tink_chartAxisLabelColor">@color/grey_light</item>
+    <item name="tink_tabNormalColor">@color/white_70</item>
+    <item name="tink_tabSelectedColor">@color/white</item>
+    <item name="tink_defaultButtonTextColor">@color/white</item>
+    <item name="tink_colorAccent">@color/tink_blue</item>
+    <item name="tink_colorAccentLight">@color/tink_blue_light</item>
+    <item name="tink_colorAccentDark">@color/tink_blue_dark</item>
+    <item name="tink_colorOnAccent">@color/white</item>
+    <item name="tink_colorPrimary">@color/tink_lax</item>
+    <item name="tink_colorPrimaryLight">@color/tink_lax_light</item>
+    <item name="tink_colorPrimaryDark">@color/tink_lax_dark</item>
+    <item name="tink_colorOnPrimary">@color/white</item>
+    <item name="tink_textColorAction">@color/tink_blue</item>
+  </style>
+</resources>

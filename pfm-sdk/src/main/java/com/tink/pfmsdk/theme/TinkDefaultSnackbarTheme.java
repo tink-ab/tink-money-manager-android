@@ -8,6 +8,7 @@ import com.tink.pfmsdk.view.Hecto;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.view.TinkSnackbar;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
 
@@ -21,14 +22,14 @@ public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
 		textTheme = new Hecto(context) {
 			@Override
 			public int getTextColor() {
-				return ContextCompat.getColor(context, R.color.color_on_snackbar_background);
+				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
 			}
 		};
 
 		buttonTheme = new Hecto(context) {
 			@Override
 			public int getTextColor() {
-				return ContextCompat.getColor(context, R.color.color_on_snackbar_background);
+				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
 			}
 
 			@Override
@@ -51,11 +52,11 @@ public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.snackbar_background);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_snackbarColor);
 	}
 
 	@Override
 	public int getLoadingIndicatorColor() {
-		return ContextCompat.getColor(context, R.color.color_on_snackbar_background);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
 	}
 }
