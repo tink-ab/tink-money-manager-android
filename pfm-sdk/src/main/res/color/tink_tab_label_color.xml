@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:state_selected="true"
-    android:color="@color/tab_label_selected_color" />
+    android:color="?tink_tabSelectedColor" />
   <item android:state_selected="false"
-    android:color="@color/tab_label_normal_color" />
+    android:color="?tink_tabNormalColor" />
 </selector>

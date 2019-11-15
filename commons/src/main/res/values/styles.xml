@@ -5,10 +5,10 @@
     <item name="tink_expensesLightColor">@color/expensive_blue_light</item>
     <item name="tink_expensesDarkColor">@color/expensive_blue_dark</item>
     <item name="tink_colorOnExpenses">@color/white</item>
-    <item name="tink_leftToSpendColor">@color/colorPrimary</item>
-    <item name="tink_leftToSpendLightColor">@color/colorPrimaryLight</item>
-    <item name="tink_leftToSpendDarkColor">@color/colorPrimaryDark</item>
-    <item name="tink_colorOnLeftToSpend">@color/colorOnPrimary</item>
+    <item name="tink_leftToSpendColor">@color/tink_lax</item>
+    <item name="tink_leftToSpendLightColor">@color/tink_lax_light</item>
+    <item name="tink_leftToSpendDarkColor">@color/tink_lax_dark</item>
+    <item name="tink_colorOnLeftToSpend">@color/white</item>
     <item name="tink_incomeColor">@color/salary_green</item>
     <item name="tink_incomeLightColor">@color/salary_green_light</item>
     <item name="tink_incomeDarkColor">@color/salary_green_dark</item>

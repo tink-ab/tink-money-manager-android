@@ -6,9 +6,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
 import android.graphics.Color
+import android.util.TypedValue
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.calculateStatistic
@@ -68,7 +70,8 @@ class OverviewChartViewModel @Inject constructor(
             it.period
         ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.expenses)
-        val color = context.getColorFromAttr(R.attr.tink_expensesColor);
+        //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
+        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false);
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(context, R.string.expenses_title, data.sum(), period, color, DefaultColorGenerator, ArrayList(data))
     }
@@ -123,9 +126,11 @@ data class OverviewChartModel(
     val data: ArrayList<Float>
 ) {
     constructor(
-        context: Context, @StringRes title: Int,
+        context: Context,
+        @StringRes title: Int,
         amount: Float,
-        period: String, @ColorInt color: Int,
+        period: String,
+        @ColorInt color: Int,
         colorGenerator: ColorGenerator,
         data: ArrayList<Float>
     ) : this(

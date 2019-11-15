@@ -4,47 +4,6 @@
   /* Semantic colors */
 
   <color name="status_bar_no_toolbar">@color/black</color>
-
   <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
-
-  <color name="chart_container_background_color">?tink_chartContainerBackgroundColor</color>
-  <color name="axis_label">?tink_chartAxisLabelColor</color>
-  <color name="tab_label_selected_color">?tink_tabSelectedColor</color>
-  <color name="tab_label_normal_color">?tink_tabNormalColor</color>
-  <color name="default_button_text_color">?tink_defaultButtonTextColor</color>
-
-  <color name="incomeBarChart_chartBackgroundColor">@color/transparent</color>
-  <color name="incomeBarChart_zeroLineColor">@color/transparent</color>
-  <color name="incomeBarChart_sixMonthBarColor">?tink_incomeColor</color>
-  <color name="incomeBarChart_sixMonthNegativeBarColor">?tink_incomeLightColor</color>
-  <color name="incomeBarChart_twelveMonthBarColor">?tink_incomeColor</color>
-  <color name="incomeBarChart_twelveMonthNegativeBarColor">?tink_incomeLightColor</color>
-  <color name="incomeBarChart_meanValueColor">?tink_chartMeanValueColor</color>
-
-  <color name="expensesBarChart_chartBackgroundColor">@color/transparent</color>
-  <color name="expensesBarChart_zeroLineColor">@color/transparent</color>
-  <color name="expensesBarChart_sixMonthBarColor">?tink_expensesColor</color>
-  <color name="expensesBarChart_sixMonthNegativeBarColor">?tink_expensesLightColor</color>
-  <color name="expensesBarChart_twelveMonthBarColor">?tink_expensesColor</color>
-  <color name="expensesBarChart_twelveMonthNegativeBarColor">?tink_expensesLightColor</color>
-  <color name="expensesBarChart_meanValueColor">?tink_chartMeanValueColor</color>
-
-  <color name="leftToSpendBarChart_chartBackgroundColor">@color/transparent</color>
-  <color name="leftToSpendBarChart_centerDateMarkColor">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_lineChartZeroLine">@color/transparent</color>
-  <color name="leftToSpendBarChart_zeroLineColor">@color/transparent</color>
-  <color name="leftToSpendBarChart_areaGradientBottomColor">@color/transparent</color>
-  <color name="leftToSpendBarChart_areaGradientTopColor">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_linePaintColor">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_dateMarkerGradientBottom">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_dateMarkerGradientTop50">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_dateMarkerGradientTop80">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_sixMonthBarColor">?tink_leftToSpendColor</color>
-  <color name="leftToSpendBarChart_sixMonthNegativeBarColor">?tink_leftToSpendLightColor</color>
-  <color name="leftToSpendBarChart_meanValueColor">?tink_chartMeanValueColor</color>
-
-  <color name="leftToSpendToolbar_backgroundColor">?tink_leftToSpendColor</color>
-  
-  <color name="chart_mean_value_color">?tink_chartMeanValueColor</color>
 
 </resources>

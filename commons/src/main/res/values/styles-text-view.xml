@@ -125,7 +125,7 @@
   </style>
 
   <style name="hecto.action">
-    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:fontFamily">@font/font_bold</item>
     <item name="android:background">@drawable/ripple_button_background</item>
   </style>

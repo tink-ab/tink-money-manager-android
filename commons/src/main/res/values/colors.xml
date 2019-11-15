@@ -56,15 +56,15 @@
   <color name="ripple_on_dark_background">#20ffffff</color>
 
   /* App colors */
-  <color name="colorPrimary">?tink_colorPrimary</color>
-  <color name="colorPrimaryDark">?tink_colorPrimaryDark</color>
-  <color name="colorPrimaryLight">?tink_colorPrimaryLight</color>
-  <color name="colorOnPrimary">?tink_colorOnPrimary</color>
+<!--  <color name="colorPrimary">?tink_colorPrimary</color>-->
+<!--  <color name="colorPrimaryDark">?tink_colorPrimaryDark</color>-->
+<!--  <color name="colorPrimaryLight">?tink_colorPrimaryLight</color>-->
+<!--  <color name="colorOnPrimary">?tink_colorOnPrimary</color>-->
 
-  <color name="colorAccent">?tink_colorAccent</color>
-  <color name="colorAccentDark">?tink_colorAccentDark</color>
-  <color name="colorAccentLight">?tink_colorAccentLight</color>
-  <color name="colorOnAccent">?tink_colorOnAccent</color>
+<!--  <color name="colorAccent">?tink_colorAccent</color>-->
+<!--  <color name="colorAccentDark">?tink_colorAccentDark</color>-->
+<!--  <color name="colorAccentLight">?tink_colorAccentLight</color>-->
+<!--  <color name="colorOnAccent">?tink_colorOnAccent</color>-->
 
   <color name="colorWarning">@color/orange</color>
   <color name="colorOnWarning">@color/white</color>
@@ -86,38 +86,38 @@
   <color name="textColorSecondary">@color/greyblack</color>
   <color name="textColorSecondaryDisabled">@color/disabled_greyblack</color>
   <color name="textColorTertiary">@color/grey_light</color>
-  <color name="textColorLink">@color/colorAccent</color>
-  <color name="textColorAction">@color/colorAccent</color>
+<!--  <color name="textColorLink">@color/colorAccent</color>-->
+<!--  <color name="textColorAction">@color/colorAccent</color>-->
 
   /* Semantic colors */
-  <color name="expenses">?tink_expensesColor</color>
-  <color name="expensesDark">?tink_expensesDarkColor</color>
-  <color name="expensesLight">?tink_expensesLightColor</color>
-  <color name="colorOnExpenses">?tink_colorOnExpenses</color>
+<!--  <color name="expenses">?tink_expensesColor</color>-->
+<!--  <color name="expensesDark">?tink_expensesDarkColor</color>-->
+<!--  <color name="expensesLight">?tink_expensesLightColor</color>-->
+<!--  <color name="colorOnExpenses">?tink_colorOnExpenses</color>-->
 
-  <color name="leftToSpend">?tink_leftToSpendColor</color>
-  <color name="leftToSpendDark">?tink_leftToSpendDarkColor</color>
-  <color name="leftToSpendLight">?tink_leftToSpendLightColor</color>
-  <color name="colorOnLeftToSpend">?tink_colorOnLeftToSpend</color>
+<!--  <color name="leftToSpend">?tink_leftToSpendColor</color>-->
+<!--  <color name="leftToSpendDark">?tink_leftToSpendDarkColor</color>-->
+<!--  <color name="leftToSpendLight">?tink_leftToSpendLightColor</color>-->
+<!--  <color name="colorOnLeftToSpend">?tink_colorOnLeftToSpend</color>-->
 
-  <color name="income">?tink_incomeColor</color>
-  <color name="incomeDark">?tink_incomeDarkColor</color>
-  <color name="incomeLight">?tink_incomeLightColor</color>
-  <color name="colorOnIncome">?tink_colorOnIncome</color>
+<!--  <color name="income">?tink_incomeColor</color>-->
+<!--  <color name="incomeDark">?tink_incomeDarkColor</color>-->
+<!--  <color name="incomeLight">?tink_incomeLightColor</color>-->
+<!--  <color name="colorOnIncome">?tink_colorOnIncome</color>-->
 
-  <color name="transfer">?tink_transferColor</color>
-  <color name="transferDark">?tink_transferDarkColor</color>
-  <color name="colorOnTransfer">?tink_colorOnTransfer</color>
+<!--  <color name="transfer">?tink_transferColor</color>-->
+<!--  <color name="transferDark">?tink_transferDarkColor</color>-->
+<!--  <color name="colorOnTransfer">?tink_colorOnTransfer</color>-->
 
   <color name="period_disabled_arrow">@color/grey_inactive</color>
   <color name="divider_color">@color/divider_grey</color>
   <color name="disabled">@color/grey_light</color>
 
-  <color name="uncategorized_transaction">?tink_uncategorizedColor</color>
-  <color name="uncategorizedLight">?tink_uncategorizedLightColor</color>
-  <color name="upcoming_transaction">@color/greyblack</color>
-  <color name="upcomingLight">@color/divider_color</color>
+<!--  <color name="uncategorized_transaction">?tink_uncategorizedColor</color>-->
+<!--  <color name="uncategorizedLight">?tink_uncategorizedLightColor</color>-->
+<!--  <color name="upcoming_transaction">@color/greyblack</color>-->
+<!--  <color name="upcomingLight">@color/divider_color</color>-->
 
-  <color name="snackbar_background">?tink_snackbarColor</color>
-  <color name="color_on_snackbar_background">?tink_colorOnSnackBar</color>
+<!--  <color name="snackbar_background">?tink_snackbarColor</color>-->
+<!--  <color name="color_on_snackbar_background">?tink_colorOnSnackBar</color>-->
 </resources>

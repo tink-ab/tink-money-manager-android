@@ -7,6 +7,7 @@ import com.tink.pfmsdk.view.Deci;
 import com.tink.pfmsdk.util.FontUtils;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.view.TinkToolbar;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkDefaultToolbarActionButtonTheme implements TinkToolbar.Theme.ToolbarTextTheme {
 
@@ -31,7 +32,7 @@ public class TinkDefaultToolbarActionButtonTheme implements TinkToolbar.Theme.To
 
 	@Override
 	public int getTextColor() {
-		return ContextCompat.getColor(context, R.color.default_button_text_color);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_defaultButtonTextColor);
 	}
 
 	@Override

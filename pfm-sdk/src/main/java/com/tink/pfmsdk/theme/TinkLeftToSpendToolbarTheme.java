@@ -21,7 +21,7 @@ public class TinkLeftToSpendToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.leftToSpendToolbar_backgroundColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_leftToSpendColor);
 	}
 
 	@Override

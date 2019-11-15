@@ -39,6 +39,7 @@ import com.tink.pfmsdk.theme.getTabPieChartThemeForType
 import com.tink.pfmsdk.util.CurrencyUtils
 import com.tink.pfmsdk.view.TinkIcon
 import se.tink.commons.extensions.getColorCompat
+import se.tink.commons.extensions.getColorFromAttr
 import kotlin.properties.Delegates
 
 private const val TYPE_ARG = "type"
@@ -87,8 +88,8 @@ class FullPieChartFragment : BaseFragment() {
     private fun createLabel(item: StatisticItem, startAngle: Float, sweep: Float): PieChartLabelView {
         val anchor = startAngle + sweep / 2f
         val lineWidth = resources.getDimension(R.dimen.pie_chart_label_line_width)
-        val iconColor = context!!.getColorCompat(ownTheme.iconTheme.iconColor)
-        val circleColor = context!!.getColorCompat(ownTheme.iconTheme.iconCircleColor)
+        val iconColor = context!!.getColorFromAttr(ownTheme.iconTheme.iconColorAttr)
+        val circleColor = context!!.getColorFromAttr(ownTheme.iconTheme.iconCircleColorAttr)
         return PieChartLabelView(context!!, anchor).also { label ->
             DataBindingUtil.inflate<PieChartLabelBinding>(LayoutInflater.from(context), R.layout.pie_chart_label, label, true).apply {
                 title.text = CurrencyUtils.formatAmountRoundWithCurrencySymbol(item.amount.toDouble())

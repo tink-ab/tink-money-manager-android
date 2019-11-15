@@ -11,6 +11,7 @@ import com.tink.pfmsdk.view.NanoPrimary;
 import com.tink.pfmsdk.view.Tera;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
 import javax.inject.Inject;
+import se.tink.commons.extensions.ContextUtils;
 
 public class TinkIncomeBarChartTabPageTheme implements TabIncomeBarChartFragment.Theme {
 
@@ -48,37 +49,37 @@ public class TinkIncomeBarChartTabPageTheme implements TabIncomeBarChartFragment
 
 	@Override
 	public int getChartBackgroundColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_chartBackgroundColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int getZeroLineColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_zeroLineColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_transparentColor);
 	}
 
 	@Override
 	public int get6MonthBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_sixMonthBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeColor);
 	}
 
 	@Override
 	public int get6MonthNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_sixMonthNegativeBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeLightColor);
 	}
 
 	@Override
 	public int getMeanValueColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_meanValueColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_chartMeanValueColor);
 	}
 
 	@Override
 	public int get1YearBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_twelveMonthBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeColor);
 	}
 
 	@Override
 	public int get1YearNegativeBarColor() {
-		return ContextCompat.getColor(context, R.color.incomeBarChart_twelveMonthNegativeBarColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeLightColor);
 	}
 
 	// TODO: PFMSDK
@@ -91,7 +92,7 @@ public class TinkIncomeBarChartTabPageTheme implements TabIncomeBarChartFragment
 //			}
 //
 //			@Override
-//			public int getIconColor() {
+//			public int getIconColorAttr() {
 //				return ContextCompat.getColor(context, R.color.incomeDark);
 //			}
 //		};

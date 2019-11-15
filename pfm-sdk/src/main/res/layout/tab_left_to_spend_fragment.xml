@@ -30,7 +30,7 @@
     android:padding="16dp"
     android:visibility="gone"
     android:src="@drawable/ic_info"
-    android:tint="@color/leftToSpend"/>
+    android:tint="?tink_leftToSpendColor"/>
 
   <se.tink.linechart.BalanceLineChartArea
     android:id="@+id/line_chart_current_month"
