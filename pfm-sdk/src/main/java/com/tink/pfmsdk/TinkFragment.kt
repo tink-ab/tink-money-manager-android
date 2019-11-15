@@ -68,6 +68,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         savedInstanceState: Bundle?
     ): View? {
         activity?.theme?.applyStyle(tinkStyle, false)
+        activity?.applicationContext?.theme?.applyStyle(tinkStyle, false)
         return inflater.inflate(R.layout.fragment_tink, container, false)
     }
 
