@@ -94,11 +94,6 @@
   <string name="income_1_year_header_description">Income the last year</string>
   <string name="income_bundled_transactions">Other</string>
 
-  <string name="left_to_spend_tutorial_description">Left to spend is calculated by subtracting your expenses from your monthly income.</string>
-  <string name="left_to_spend_tutorial_description_one">The colored line shows what you have left to spend</string>
-  <string name="left_to_spend_tutorial_description_two">The dashed line shows the average amount left to spend during a month</string>
-  <string name="left_to_spend_tutorial_description_three">The dot represents what\'s left of your monthly income right now</string>
-
   <string name="date_span_string">%1$s - %2$s</string>
   <string name="until_next_date">Until %s</string>
 

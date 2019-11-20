@@ -8,23 +8,17 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import butterknife.BindView;
 import com.google.common.collect.Lists;
 import com.tink.pfmsdk.BaseFragment;
-import com.tink.pfmsdk.FragmentAnimationFlags;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
-import com.tink.pfmsdk.TinkApp;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.view.PeriodPicker;
-import com.tink.pfmsdk.view.TinkIcon;
 import com.tink.pfmsdk.view.TinkTextView;
 import java.util.Collection;
 import java.util.HashMap;
@@ -87,8 +81,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	VerticalBarChartArea barChartView6Months;
 
 	VerticalBarChartArea barChartView12Months;
-
-	ImageView tutorialMarker;
 
 	private static final String ARG_POSITION = "arg_position";
 	private static final String TAG = "LeftToSpend";
@@ -161,7 +153,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		periodPicker = view.findViewById(R.id.period_picker);
 		barChartView6Months = view.findViewById(R.id.vertical_bar_chart_6_months);
 		barChartView12Months = view.findViewById(R.id.vertical_bar_chart_12_months);
-		tutorialMarker = view.findViewById(R.id.tutorial_marker);
 
 		setupWidthAndHeight();
 
@@ -188,7 +179,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	private void setupPieChart() {
 		if (index == TabsEnum.CURRENT_MONTH_PAGE) {
 			setupCurrentMonthChart();
-			setupTutorialView();
 		}
 	}
 
@@ -226,14 +216,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 				break;
 			}
 		}
-	}
-
-	private void setupTutorialView() {
-		tutorialMarker.setVisibility(View.VISIBLE);
-		tutorialMarker.setOnClickListener(v -> fragmentCoordinator.replace(
-			new LeftToSpendTutorialFragment(), true, FragmentAnimationFlags.NONE));
-		// TODO: PFMSDK: Fix this
-		//tutorialMarker.setText(TinkIcon.INFO);
 	}
 
 	private void setupCurrentMonthChart() {
@@ -606,19 +588,8 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		TinkTextView.Theme getXLabelTheme();
 
-		//TinkIconView.Theme getTutorialMarkerTheme();
-
 		int getAverageLineColor();
 	}
-
-	// TODO: PFMSDK: Remove this after fixing the marker button
-//	@Override
-//	protected void applyTheme(se.tink.android.fragments.base.BaseFragment.Theme theme) {
-//		super.applyTheme(theme);
-//
-//
-//		//tutorialMarker.setTheme(this.theme.getTutorialMarkerTheme());
-//	}
 
 	private void updateLeftToSpend() {
 		updatePeriods(); //might find new fallback period

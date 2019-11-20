@@ -17,7 +17,6 @@ import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.OverviewFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
-import com.tink.pfmsdk.overview.charts.LeftToSpendTutorialFragment
 import com.tink.pfmsdk.overview.charts.TabExpensesBarChartFragment
 import com.tink.pfmsdk.overview.charts.TabIncomeBarChartFragment
 import com.tink.pfmsdk.overview.charts.TabLeftToSpendFragment
@@ -28,7 +27,6 @@ import com.tink.pfmsdk.theme.TinkErrorSnackbarTheme
 import com.tink.pfmsdk.theme.TinkExpenseBarChartTabPageTheme
 import com.tink.pfmsdk.theme.TinkIncomeBarChartTabPageTheme
 import com.tink.pfmsdk.theme.TinkLeftToSpendTabPageTheme
-import com.tink.pfmsdk.theme.TinkLeftToSpendTutorialTheme
 import com.tink.pfmsdk.theme.TinkTransactionSimilarTheme
 import com.tink.pfmsdk.theme.TinkTransactionsListTheme
 import com.tink.pfmsdk.transaction.CategorizationFlowFragment
@@ -180,11 +178,6 @@ class ThemingModule {
     }
 
     @Provides
-    fun leftTospendTutorialTheme(@ApplicationScoped context: Context): LeftToSpendTutorialFragment.Theme {
-        return TinkLeftToSpendTutorialTheme(context)
-    }
-
-    @Provides
     @Named(TinkSnackbar.Theme.MESSAGE_THEME)
     fun messageSnackbarTheme(@ApplicationScoped context: Context): TinkSnackbar.Theme {
         return TinkDefaultSnackbarTheme(context)
@@ -239,9 +232,6 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun categoryListFragment(): CategorySelectionFragment
-
-    @ContributesAndroidInjector
-    fun leftToSpendTutorialFragment(): LeftToSpendTutorialFragment
 
     @ContributesAndroidInjector
     fun transactionListFragment(): TransactionsListFragment
