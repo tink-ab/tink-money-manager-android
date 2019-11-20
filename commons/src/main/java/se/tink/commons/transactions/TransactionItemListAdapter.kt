@@ -211,17 +211,17 @@ class UpcomingHeaderViewHolder(
 ) {
     fun bind(item: ListItem.UpcomingGroupHeaderItem) {
         itemView.upcomingGroupTitle.text = item.title
-        itemView.showTransactionsButton.setOnClickListener {
-            onToggleUpcomingTransactions?.invoke()
-        }
-        itemView.showTransactionsButton.text =
-            if (item.expanded) {
-                R.string.upcoming_transaction_hide
-            } else {
-                R.string.upcoming_transaction_show
-            }.let {
-                parent.context?.getString(it) ?: ""
-            }
+//        itemView.showTransactionsButton.setOnClickListener {
+//            onToggleUpcomingTransactions?.invoke()
+//        }
+//        itemView.showTransactionsButton.text =
+//            if (item.expanded) {
+//                R.string.upcoming_transaction_hide
+//            } else {
+//                R.string.upcoming_transaction_show
+//            }.let {
+//                parent.context?.getString(it) ?: ""
+//            }
     }
 }
 

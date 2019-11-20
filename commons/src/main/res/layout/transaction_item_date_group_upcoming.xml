@@ -21,19 +21,19 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toStartOf="@id/showTransactionsButton"
+    app:layout_constraintEnd_toEndOf="parent"
     tools:text="Kommande transaktioner (- 3 567 kr)"/>
 
-  <Button
-    android:id="@+id/showTransactionsButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:text="@string/upcoming_transaction_show"
-    app:layout_constraintBottom_toBottomOf="@id/upcomingGroupTitle"
-    app:layout_constraintStart_toEndOf="@id/upcomingGroupTitle"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/upcomingGroupTitle"
-    tools:text="Visa"/>
+<!--  <Button-->
+<!--    android:id="@+id/showTransactionsButton"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginStart="8dp"-->
+<!--    android:text="@string/upcoming_transaction_show"-->
+<!--    app:layout_constraintBottom_toBottomOf="@id/upcomingGroupTitle"-->
+<!--    app:layout_constraintStart_toEndOf="@id/upcomingGroupTitle"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="@id/upcomingGroupTitle"-->
+<!--    tools:text="Visa"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
