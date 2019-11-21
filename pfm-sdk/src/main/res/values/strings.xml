@@ -2,7 +2,6 @@
   <string name="app_name">PFM SDK</string>
   <string name="snackbar_utils_error_default">An error has occurred. Please try again later.</string>
   <string name="snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
-  <string name="snackbar_utils_error_already_exists">Already exists</string>
   <string name="onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
   <string name="date_format_human_today">Today</string>
@@ -18,7 +17,6 @@
   <string name="date_formatter_monthly_only">MM</string>
   <string name="date_formatter_monthly_compact">MMM</string>
   <string name="date_formatter_month_name">MMMMM</string>
-  <string name="date_formatter_month_name_short">MMMM</string>
   <string name="date_formatter_weekly">xxxx:ww</string>
   <string name="date_formatter_daily">yyyy-MM-dd</string>
   <string name="date_formatter_daily_compact">yy-MM-dd</string>
@@ -43,7 +41,6 @@
 
   <string name="all_categories">All categories</string>
 
-  <string name="overview_title">Overview</string>
   <string name="overview_latest_transactions_title">Latest transactions</string>
   <string name="overview_latest_transactions_view_all_link">See all</string>
 
@@ -54,8 +51,6 @@
   <string name="transaction_similar_marker_button_mark_text">Select all</string>
   <string name="transaction_similar_marker_button_unmark_text">Unselect all</string>
 
-  <string name="facebook_app_id" translatable="false">197362113769029</string>
-  <string name="amp" translatable="false">&amp;</string>
   <string name="pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
   <string name="amount_transition" translatable="false">%1$s-amount-transition</string>
   <string name="amount_title_transition" translatable="false">%1$s-amount-title-transition</string>
@@ -66,8 +61,6 @@
   <string name="toolbar_transition" translatable="false">toolbar-transition</string>
   <string name="transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
-  <string name="filter_search_item" translatable="false">FilterSearchItem</string>
-  <string name="alphanumeric_digits" translatable="false">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
 
   <string name="choose_category_text">Choose category</string>
 
@@ -76,29 +69,14 @@
   <string name="selector_1_months">1 month</string>
   <string name="selector_6_months">6 months</string>
   <string name="selector_12_months">12 months</string>
-  <string name="expenses_transactions">transactions</string>
   <string name="expenses_title">Expenses</string>
   <string name="expenses_header_description_average">%s on average per month</string>
-  <string name="expenses_6_months_header_description">Spent in the last 6 months</string>
-  <string name="expenses_1_year_header_description">Spent in the last year</string>
-  <string name="expenses_bundled_transactions">Other</string>
-  <string name="left_to_spend_transactions">transactions</string>
   <string name="left_to_spend_title">Left to spend</string>
   <string name="left_to_spend_header_description_more">%s more than usual</string>
   <string name="left_to_spend_header_description_less">%s less than usual</string>
   <string name="left_to_spend_header_description_average">%s on average per month</string>
-  <string name="income_transactions">transactions</string>
   <string name="income_title">Income</string>
   <string name="income_header_description_average">%s on average per month</string>
-  <string name="income_6_months_header_description">Income the last 6 months</string>
-  <string name="income_1_year_header_description">Income the last year</string>
-  <string name="income_bundled_transactions">Other</string>
-
-  <string name="left_to_spend_tutorial_description">Left to spend is calculated by subtracting your expenses from your monthly income.</string>
-  <string name="left_to_spend_tutorial_description_one">The colored line shows what you have left to spend</string>
-  <string name="left_to_spend_tutorial_description_two">The dashed line shows the average amount left to spend during a month</string>
-  <string name="left_to_spend_tutorial_description_three">The dot represents what\'s left of your monthly income right now</string>
-
   <string name="date_span_string">%1$s - %2$s</string>
   <string name="until_next_date">Until %s</string>
 
