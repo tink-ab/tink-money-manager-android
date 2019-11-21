@@ -12,7 +12,6 @@ import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.credential.Credential;
-import se.tink.core.models.follow.FollowItem;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.transaction.Transaction;
@@ -23,7 +22,6 @@ import se.tink.grpc.v1.services.BudgetServiceGrpc;
 import se.tink.grpc.v1.services.CredentialServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.FollowServiceGrpc;
 import se.tink.grpc.v1.services.LoanServiceGrpc;
 import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.ProviderServiceGrpc;
@@ -43,7 +41,6 @@ import se.tink.repository.cache.StasticCache;
 import se.tink.repository.cache.WritableCacheRepository;
 import se.tink.repository.manager.CategoryServiceCachedImpl;
 import se.tink.repository.manager.CredentialServiceCachedImpl;
-import se.tink.repository.manager.FollowRepositoryCachedImpl;
 import se.tink.repository.manager.ProviderServiceCachedImpl;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
@@ -54,8 +51,6 @@ import se.tink.repository.service.BudgetServiceImpl;
 import se.tink.repository.service.CategoryService;
 import se.tink.repository.service.CredentialService;
 import se.tink.repository.service.CredentialServiceImpl;
-import se.tink.repository.service.FollowService;
-import se.tink.repository.service.FollowServiceImpl;
 import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.PeriodServiceCachedImpl;
 import se.tink.repository.service.ProviderService;
@@ -134,23 +129,6 @@ public class ServiceModule {
 		LiveDataCache<List<Account>> cache
 	) {
 		return new AccountServiceCachedImpl(accountServiceApi, streamingServiceStub, converter, cache);
-	}
-
-	@Provides
-	@Singleton
-	public FollowService provideFollowRepository(
-		StreamingService streamingServiceStub,
-		Cache<List<FollowItem>> cache,
-		ModelConverter converter,
-		Channel channel
-	) {
-		return new FollowRepositoryCachedImpl(
-			new FollowServiceImpl(streamingServiceStub, converter,
-				FollowServiceGrpc.newStub(channel)),
-			streamingServiceStub,
-			cache,
-			converter
-		);
 	}
 
 	@Provides

@@ -5,7 +5,6 @@ import java.util.Map;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
 import se.tink.core.models.credential.Credential;
-import se.tink.core.models.follow.FollowItem;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
@@ -34,8 +33,6 @@ public interface StreamingService extends TinkService {
 	void subscribeForCategories(ObjectChangeObserver<CategoryTree> handler);
 
 	void subscribeForAccounts(ChangeObserver<Account> listener);
-
-	void subscribeForFollowItems(ChangeObserver<FollowItem> listener);
 
 	void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener);
 

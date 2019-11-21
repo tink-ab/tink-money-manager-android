@@ -12,10 +12,6 @@ import se.tink.converter.account.accountDetails.AccountDetailsEntityToAccountDet
 import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsEntityConverter;
 import se.tink.converter.category.CategoryEntityToCategoryConverter;
 import se.tink.converter.category.CategoryToCategoryEntityConverter;
-import se.tink.converter.follow.FollowHistoricalAmountEntityToPeriodExactNumberPairConverter;
-import se.tink.converter.follow.FollowItemEntityWithRelationsToFollowItemConverter;
-import se.tink.converter.follow.FollowItemToFollowItemEntityWithRelationsConverter;
-import se.tink.converter.follow.PeriodExactNumberPairToFollowHistoricalAmountEntityConverter;
 import se.tink.converter.misc.AmountEntityToAmountConverter;
 import se.tink.converter.misc.AmountToAmountEntityConverter;
 import se.tink.converter.misc.ExactNumberEntityToExactNumberConverter;
@@ -64,10 +60,6 @@ public class CacheConverterFactory {
 		converters.add(new AccountDetailsEntityToAccountDetailsConverter(converter));
 		converters.add(new AccountToAccountEntityConverter(converter));
 		converters.add(new AccountEntityToAccountConverter(converter));
-		converters.add(new FollowItemEntityWithRelationsToFollowItemConverter(converter));
-		converters.add(new FollowItemToFollowItemEntityWithRelationsConverter(converter));
-		converters.add(new FollowHistoricalAmountEntityToPeriodExactNumberPairConverter(converter));
-		converters.add(new PeriodExactNumberPairToFollowHistoricalAmountEntityConverter(converter));
 		converters.add(new AccountToAccountEntityAndAccountIdentifierEntityConverter(converter));
 		converters.add(new AccountSourceIdentifierEntityToStringConverter(converter));
 		converters.add(new UserConfigurationI18nConfigurationEntityToI18nConfigurationConverter());

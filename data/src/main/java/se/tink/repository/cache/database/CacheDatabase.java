@@ -16,11 +16,6 @@ import se.tink.repository.cache.models.StatisticEntity;
 import se.tink.repository.cache.models.TagEntity;
 import se.tink.repository.cache.models.TransactionEntity;
 import se.tink.repository.cache.models.budgets.BudgetEntity;
-import se.tink.repository.cache.models.follow.FollowExpenseCategoryCodeEntity;
-import se.tink.repository.cache.models.follow.FollowHistoricalAmountEntity;
-import se.tink.repository.cache.models.follow.FollowItemEntity;
-import se.tink.repository.cache.models.follow.FollowItemTransactionEntity;
-import se.tink.repository.cache.models.follow.FollowSavingAccountIdEntity;
 
 @Database(
         entities = {
@@ -32,11 +27,6 @@ import se.tink.repository.cache.models.follow.FollowSavingAccountIdEntity;
             I18ConfigurationEntity.class,
             StatisticEntity.class,
             AccountEntity.class,
-            FollowItemEntity.class,
-            FollowHistoricalAmountEntity.class,
-            FollowItemTransactionEntity.class,
-            FollowExpenseCategoryCodeEntity.class,
-            FollowSavingAccountIdEntity.class,
             AccountSourceIdentifierEntity.class,
             CounterpartEntity.class,
             CredentialsEntity.class,
@@ -59,16 +49,6 @@ public abstract class CacheDatabase extends RoomDatabase {
     public abstract StatisticsDao statisticsDao();
 
     public abstract AccountDao accountDao();
-
-    public abstract FollowItemDao followItemDao();
-
-    public abstract FollowHistoricalAmountDao followHistoricalAmountDao();
-
-    public abstract FollowItemTransactionDao followItemTransactionDao();
-
-    public abstract FollowExpenseCategoryCodeDao followExpenseCategoryCodeDao();
-
-    public abstract FollowSavingsAccountIdDao followSavingsAccountIdDao();
 
     public abstract AccountSourceIdentifierDao accountSourceIdentifierDao();
 
