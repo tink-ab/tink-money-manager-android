@@ -34,20 +34,6 @@ import se.tink.converter.device.DeviceConfigurationMarketResponseConverter;
 import se.tink.converter.device.DeviceConfigurationResponseConverter;
 import se.tink.converter.device.UpdateI18NSettingsRequestConverter;
 import se.tink.converter.device.UpdateI18NSettingsResponseConverter;
-import se.tink.converter.follow.ExpensesFollowCriteriaDTOToExpensesFollowCriteriaConverter;
-import se.tink.converter.follow.ExpensesFollowCriteriaToExpensesFollowCriteriaDTOConverter;
-import se.tink.converter.follow.FollowDataDTOToFollowDataConverter;
-import se.tink.converter.follow.FollowDataToFollowDataDTOConverter;
-import se.tink.converter.follow.FollowItemDTOToFollowItemConverter;
-import se.tink.converter.follow.FollowItemToCreateFollowItemRequestConverter;
-import se.tink.converter.follow.FollowItemToFollowItemDTOConverter;
-import se.tink.converter.follow.FollowItemToUpdateRequestConverter;
-import se.tink.converter.follow.PeriodExactNumberPairDTOToPeriodExactNumberPairConverter;
-import se.tink.converter.follow.PeriodExactNumberPairToPeriodExactNumberPairDTOConverter;
-import se.tink.converter.follow.SavingsFollowCriteriaDTOToSavingsFollowCriteriaConverter;
-import se.tink.converter.follow.SavingsFollowCriteriaToSavingsFollowCriteriaDTOConverter;
-import se.tink.converter.follow.SearchFollowCriteriaDTOToSearchFollowCriteriaConverter;
-import se.tink.converter.follow.SearchFollowCriteriaToSearchFollowCriteriaDTOConverter;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
@@ -166,7 +152,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupTrackingConverters();
         setupStreamingResponseConverter();
         setupRequestConverters();
-        setupFollowItemConverters();
         setupUserConfigurationConverters();
         setupUserConverters();
         setupSettingsConverters();
@@ -311,29 +296,6 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupRequestConverters() {
         addConverter(new TransactionToUpdateTransactionRequest(this));
-    }
-
-    private void setupFollowItemConverters() {
-        addConverter(new FollowItemDTOToFollowItemConverter(this));
-        addConverter(new FollowItemToFollowItemDTOConverter(this));
-
-        addConverter(new FollowDataDTOToFollowDataConverter(this));
-        addConverter(new FollowDataToFollowDataDTOConverter(this));
-
-        addConverter(new SavingsFollowCriteriaDTOToSavingsFollowCriteriaConverter(this));
-        addConverter(new SavingsFollowCriteriaToSavingsFollowCriteriaDTOConverter(this));
-
-        addConverter(new ExpensesFollowCriteriaDTOToExpensesFollowCriteriaConverter(this));
-        addConverter(new ExpensesFollowCriteriaToExpensesFollowCriteriaDTOConverter(this));
-
-        addConverter(new SearchFollowCriteriaDTOToSearchFollowCriteriaConverter(this));
-        addConverter(new SearchFollowCriteriaToSearchFollowCriteriaDTOConverter(this));
-
-        addConverter(new PeriodExactNumberPairDTOToPeriodExactNumberPairConverter(this));
-        addConverter(new PeriodExactNumberPairToPeriodExactNumberPairDTOConverter(this));
-
-        addConverter(new FollowItemToCreateFollowItemRequestConverter(this));
-        addConverter(new FollowItemToUpdateRequestConverter(this));
     }
 
     private void setupUserConfigurationConverters() {

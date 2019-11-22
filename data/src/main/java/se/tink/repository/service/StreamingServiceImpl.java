@@ -15,7 +15,6 @@ import se.tink.core.models.StreamingResponseType;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
 import se.tink.core.models.credential.Credential;
-import se.tink.core.models.follow.FollowItem;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
@@ -51,7 +50,6 @@ public class StreamingServiceImpl implements StreamingService {
 		.newArrayList();
 	private final List<ObjectChangeObserver<CategoryTree>> categoryListeners = Lists.newArrayList();
 	private final List<ChangeObserver<Account>> accountListeners = Lists.newArrayList();
-	private final List<ChangeObserver<FollowItem>> followItemListeners = Lists.newArrayList();
 	private Date latestStreamingTime = DateTime.now().toDate();
 	@Nullable
 	private StreamObserver<StreamingRequest> requestStreamObserver;
@@ -139,13 +137,6 @@ public class StreamingServiceImpl implements StreamingService {
 					.map(value.getStatistics(), StatisticTree.class);
 				notifyListeners(statistics, statisticsListeners, type);
 			}
-
-			if (value.hasFollowItems()) {
-				List<FollowItem> items = converter
-					.map(value.getFollowItems().getFollowItemList(),
-						FollowItem.class);
-				notifyListeners(items, followItemListeners, type);
-			}
 		}
 	};
 
@@ -199,11 +190,6 @@ public class StreamingServiceImpl implements StreamingService {
 	@Override
 	public void subscribeForAccounts(ChangeObserver<Account> listener) {
 		accountListeners.add(listener);
-	}
-
-	@Override
-	public void subscribeForFollowItems(ChangeObserver<FollowItem> listener) {
-		followItemListeners.add(listener);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ import se.tink.core.models.account.Account
 import se.tink.core.models.budgets.BudgetSummary
 import se.tink.core.models.credential.CachedCredential
 import se.tink.core.models.credential.Credential
-import se.tink.core.models.follow.FollowItem
 import se.tink.core.models.misc.Period
 import se.tink.core.models.provider.Provider
 import se.tink.core.models.transaction.Transaction
@@ -25,7 +24,6 @@ import se.tink.repository.cache.CacheHandle
 import se.tink.repository.cache.CategoryDatabaseCache
 import se.tink.repository.cache.CategoryTreeCache
 import se.tink.repository.cache.CredentialsDatabaseCache
-import se.tink.repository.cache.FollowItemDatabaseCache
 import se.tink.repository.cache.InMemoryCache
 import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.cache.PeriodDatabaseCache
@@ -128,14 +126,6 @@ class CacheModule(
         modelConverter: ModelConverter
     ): LiveDataCache<List<Account>> {
         return AccountDatabaseCache(cacheDatabase, modelConverter)
-    }
-
-    @Provides
-    fun followItemsCache(
-        cacheDatabase: CacheDatabase,
-        modelConverter: ModelConverter
-    ): Cache<List<FollowItem>> {
-        return FollowItemDatabaseCache(cacheDatabase, modelConverter)
     }
 
     @Provides

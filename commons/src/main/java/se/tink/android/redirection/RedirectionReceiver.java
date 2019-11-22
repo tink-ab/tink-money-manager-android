@@ -2,7 +2,6 @@ package se.tink.android.redirection;
 
 import java.util.List;
 import java.util.Map;
-import se.tink.core.models.follow.FollowItem;
 import se.tink.core.models.misc.Amount;
 
 public interface RedirectionReceiver {
@@ -38,10 +37,6 @@ public interface RedirectionReceiver {
 	void showProviders(boolean topOnly);
 
 	void showAddProvider(String name, boolean topOnly);
-
-	void showFollowDetails(String id, boolean topOnly);
-
-	void showSavingsDetails(FollowItem savingsItem, boolean topOnly);
 
 	void showCategory(boolean topOnly);
 
