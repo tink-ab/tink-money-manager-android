@@ -6,8 +6,12 @@ import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
+import se.tink.grpc.v1.rpc.GetStatisticsRequest;
+import se.tink.grpc.v1.rpc.StatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
+import se.tink.repository.MutationHandler;
 import se.tink.repository.ObjectChangeObserver;
+import se.tink.repository.SimpleStreamObserver;
 
 public class StatisticServiceImpl implements StatisticService {
 
@@ -72,5 +76,17 @@ public class StatisticServiceImpl implements StatisticService {
 	@Override
 	public void unsubscribe(ObjectChangeObserver<StatisticTree> listener) {
 		changeObserverers.remove(listener);
+	}
+
+	@Override
+	public void getStatistics(final MutationHandler<StatisticTree> handler) {
+		GetStatisticsRequest request = GetStatisticsRequest.getDefaultInstance();
+		service
+			.getStatistics(request, new SimpleStreamObserver<StatisticsResponse>(handler) {
+				@Override
+				public void onNext(StatisticsResponse value) {
+					handler.onNext(converter.map(value.getStatistics(), StatisticTree.class));
+				}
+			});
 	}
 }
