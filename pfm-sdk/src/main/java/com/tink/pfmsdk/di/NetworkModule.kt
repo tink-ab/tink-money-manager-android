@@ -100,14 +100,14 @@ class NetworkModule {
         @Named("production") production: NetworkConfiguration
     ): NetworkConfiguration {
 
-        return dataStorage.icecreamHackNetworkSettings ?: (if (BuildConfig.DEBUG) staging else production)
+        //return dataStorage.icecreamHackNetworkSettings ?: (if (BuildConfig.DEBUG) staging else production)
+        return production
     }
 
     @Provides
     @Singleton
-    fun provideInterceptor(dataStorage: ClientDataStorage, networkConfig: NetworkConfiguration): HeaderClientInterceptor {
+    fun provideInterceptor(dataStorage: ClientDataStorage): HeaderClientInterceptor {
         return HeaderClientInterceptor(
-            networkConfig.clientKey,
             dataStorage.uuid,
             "" //TODO:PFMSDK: AppUtils.getUserAgent()
         )
