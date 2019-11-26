@@ -1,6 +1,7 @@
 package se.tink.repository.service;
 
 import com.google.common.collect.Lists;
+import io.grpc.stub.StreamObserver;
 import java.util.List;
 import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
@@ -9,9 +10,7 @@ import se.tink.core.models.statistic.StatisticTree;
 import se.tink.grpc.v1.rpc.GetStatisticsRequest;
 import se.tink.grpc.v1.rpc.StatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
-import se.tink.repository.MutationHandler;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.SimpleStreamObserver;
 
 public class StatisticServiceImpl implements StatisticService {
 
@@ -79,13 +78,26 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public void getStatistics(final MutationHandler<StatisticTree> handler) {
+	public void refreshStatistics() {
 		GetStatisticsRequest request = GetStatisticsRequest.getDefaultInstance();
 		service
-			.getStatistics(request, new SimpleStreamObserver<StatisticsResponse>(handler) {
+			.getStatistics(request, new StreamObserver<StatisticsResponse>() {
 				@Override
 				public void onNext(StatisticsResponse value) {
-					handler.onNext(converter.map(value.getStatistics(), StatisticTree.class));
+					StatisticTree statisticTree = converter.map(value.getStatistics(), StatisticTree.class);
+					for (ObjectChangeObserver<StatisticTree> changeObserver : changeObserverers) {
+						changeObserver.onRead(statisticTree);
+					}
+				}
+
+				@Override
+				public void onError(Throwable t) {
+
+				}
+
+				@Override
+				public void onCompleted() {
+
 				}
 			});
 	}

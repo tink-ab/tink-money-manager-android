@@ -14,5 +14,5 @@ public interface StatisticService extends TinkService {
 
 	void unsubscribe(ObjectChangeObserver<StatisticTree> listener);
 
-	void getStatistics(MutationHandler<StatisticTree> statisticTree);
+	void refreshStatistics();
 }

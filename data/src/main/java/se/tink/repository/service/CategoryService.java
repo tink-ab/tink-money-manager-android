@@ -6,7 +6,7 @@ import se.tink.repository.ObjectChangeObserver;
 
 public interface CategoryService extends TinkService {
 
-	void list(MutationHandler<CategoryTree> handler);
+	void refreshCategories();
 
 	void subscribe(ObjectChangeObserver<CategoryTree> listener);
 
