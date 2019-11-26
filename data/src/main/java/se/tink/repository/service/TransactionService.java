@@ -1,10 +1,8 @@
 package se.tink.repository.service;
 
 import java.util.List;
-import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
-import se.tink.core.models.transaction.SuggestTransactionsResponse;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MutationHandler;
@@ -45,16 +43,4 @@ public interface TransactionService extends TinkService {
 
 	void getSimilarTransactions(final String transactionId,
 		final MutationHandler<List<Transaction>> handler);
-
-	void suggestTransactions(boolean evaluateEverything, int nrOfClusters,
-		final MutationHandler<SuggestTransactionsResponse> handler);
-
-	void updatePartAndCounterpart(String transactionId, String partId, Amount amount,
-		MutationHandler<Transaction> handler);
-
-	void deletePartAndCounterpart(String transactionId, String counterpartId,
-		MutationHandler<Transaction> mutationHandler);
-
-	void suggestCounterparts(String transactionId, int limit,
-		MutationHandler<List<Transaction>> mutationHandler);
 }
