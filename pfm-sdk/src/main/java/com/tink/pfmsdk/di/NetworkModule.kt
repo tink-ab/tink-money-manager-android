@@ -100,6 +100,7 @@ class NetworkModule {
         @Named("production") production: NetworkConfiguration
     ): NetworkConfiguration {
 
+        // TODO: This can be uncommented when data refresh logic is implemented
         //return dataStorage.icecreamHackNetworkSettings ?: (if (BuildConfig.DEBUG) staging else production)
         return production
     }
