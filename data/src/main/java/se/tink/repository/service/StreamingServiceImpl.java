@@ -28,6 +28,8 @@ import se.tink.repository.ExceptionTracker;
 import se.tink.repository.Listener;
 import se.tink.repository.MapChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
+import se.tink.repository.SimpleMutationHandler;
+import se.tink.repository.TinkNetworkError;
 import timber.log.Timber;
 
 public class StreamingServiceImpl implements StreamingService {
@@ -159,22 +161,23 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void subscribeForProviders(ChangeObserver<Provider> listener) {
-		providerListeners.add(listener);
+		//providerListeners.add(listener);
 	}
 
 	@Override
 	public void subscribeForTransactions(ChangeObserver<Transaction> listener) {
-		transactionListeners.add(listener);
+		//transactionListeners.add(listener);
 	}
 
 	@Override
 	public void subscribeForCredentials(ChangeObserver<Credential> listener) {
-		credentialListeners.add(listener);
+		//credentialListeners.add(listener);
 	}
 
 	@Override
 	public void subscribeForPeriods(ObjectChangeObserver<Map<String, Period>> listener) {
-		periodListeners.add(listener);
+		// TODO: PFMSDK: This is currently used in the bar chart tab pages. Do we need it?
+		//periodListeners.add(listener);
 	}
 
 	@Override
@@ -189,12 +192,13 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void subscribeForAccounts(ChangeObserver<Account> listener) {
-		accountListeners.add(listener);
+		//accountListeners.add(listener);
 	}
 
 	@Override
 	public void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener) {
-		userConfigurationListeners.add(listener);
+		// TODO: PFMSDK: This is needed for currency code unless we can get that info elsewhere
+		//userConfigurationListeners.add(listener);
 	}
 
 	@Override
@@ -222,7 +226,7 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void start(StreamingServiceErrorHandler streamingServiceErrorHandler) {
-		connectStreaming(streamingServiceErrorHandler, INITIAL_BACKOFF_TIME);
+		//connectStreaming(streamingServiceErrorHandler, INITIAL_BACKOFF_TIME);
 	}
 
 	private void connectStreaming(final StreamingServiceErrorHandler streamingServiceErrorHandler,
