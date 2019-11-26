@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.overview.OverviewFragment
@@ -15,6 +16,8 @@ import com.tink.pfmsdk.security.SecuredClientDataStorage
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import se.tink.repository.cache.CacheHandle
+import se.tink.repository.service.CategoryService
 import se.tink.repository.service.HeaderClientInterceptor
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -41,6 +44,12 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var interceptor: HeaderClientInterceptor
 
+    @Inject
+    lateinit var categoryService: CategoryService
+
+    @Inject
+    lateinit var cacheHandle: CacheHandle
+
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
 		starts because a side effect of the initialization of each "cached service" is to setup the
@@ -62,6 +71,8 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         DaggerFragmentComponent.factory().create(this).inject(this)
+        interceptor.setAccessToken(clientConfiguration.accessToken)
+        attachListeners()
         i18nConfiguration.initialize()
 
         context?.let(::initSecuredDataStorage)
@@ -80,7 +91,6 @@ class TinkFragment : Fragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        interceptor.setAccessToken(clientConfiguration.accessToken)
         fragmentCoordinator.add(OverviewFragment(), false, FragmentAnimationFlags.NONE)
     }
 
@@ -114,6 +124,24 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         } catch (e: NoSuchProviderException) {
             e.printStackTrace()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeListenersAndClearCache()
+    }
+
+    fun refreshData() {
+        // TODO: PFMSDK: To be filled in after data refresh logic is added
+    }
+
+    private fun attachListeners() {
+        Categories.getSharedInstance().attatchListener(categoryService)
+    }
+
+    private fun removeListenersAndClearCache() {
+        Categories.getSharedInstance().removeListener(categoryService)
+        cacheHandle.clearCache()
     }
 
     companion object {
