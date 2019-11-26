@@ -46,7 +46,6 @@ public class ClientDataStorage implements Clearable {
 	private final SharedPreferences settings;
 	private SharedPreferences.Editor editor;
 	private String uuid;
-	private String sessionId;
 
 	public static synchronized ClientDataStorage sharedInstance(Context context) {
 		if (instance == null) {
@@ -91,22 +90,6 @@ public class ClientDataStorage implements Clearable {
 		editor.putString("previousSearches", JsonUtils.toJson(previousSearches));
 		editor.remove("previousSerches"); //Remove old search result set.
 		editor.apply();
-	}
-
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-
-		SecuredClientDataStorage.getSharedInstance().edit().putString(SESSION_ID, sessionId)
-			.commit();
-	}
-
-	public synchronized String getSessionId() {
-		//TODO:PFMSDK
-//		if (sessionId == null) {
-//			sessionId = SecuredClientDataStorage.getSharedInstance().getString(SESSION_ID, null);
-//		}
-//		return sessionId;
-		return null;
 	}
 
 	public void setLastVisitedPageInOverview(int page) {
