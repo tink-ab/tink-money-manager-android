@@ -26,7 +26,6 @@ import com.tink.pfmsdk.theme.DefaultFragmentTheme;
 import com.tink.pfmsdk.theme.NoToolbarFragmentTheme;
 import com.tink.pfmsdk.theme.StatusBarTheme;
 import com.tink.pfmsdk.util.SoftKeyboardUtils;
-import com.tink.pfmsdk.util.StatusbarUtils;
 import com.tink.pfmsdk.view.SnackbarManager;
 import com.tink.pfmsdk.view.TinkToolbar;
 import dagger.android.AndroidInjector;
@@ -57,9 +56,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	@Inject
 	protected Analytics analytics;
-
-	@Inject
-	AuthController authController;
 
 	@Inject
 	DispatchingAndroidInjector<Object> androidInjector;
@@ -137,9 +133,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		//noinspection ConstantConditions - activity is not null in onCreate
 		callbacksExecutor = new UICallbackRunner(getLifecycle(),
 			getActivity().getApplicationContext());
-		if (isAuthorized()) {
-			authorizedOnCreate(savedInstanceState);
-		}
+		authorizedOnCreate(savedInstanceState);
 	}
 
 	@Override
@@ -171,10 +165,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 				setupToolbar();
 			}
 		}
-
-		if (isAuthorized()) {
-			authorizedOnCreateView(inflater, container, savedInstanceState);
-		}
+		authorizedOnCreateView(inflater, container, savedInstanceState);
 		firstCreation = false;
 
 		viewLifecycle.handleLifecycleEvent(Event.ON_CREATE);
@@ -273,9 +264,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	@Override
 	public final void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		if (isAuthorized()) {
-			authorizedOnViewCreated(view, savedInstanceState);
-		}
+		authorizedOnViewCreated(view, savedInstanceState);
 	}
 
 	protected void authorizedOnViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -290,9 +279,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		if (isVisible()) {
 			updateToolbar();
 		}
-		if (isAuthorized()) {
-			authorizedOnStart();
-		}
+		authorizedOnStart();
 		viewLifecycle.handleLifecycleEvent(Event.ON_START);
 	}
 
@@ -306,9 +293,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		if (isVisible()) {
 			trackScreenIfNecessary();
 		}
-		if (isAuthorized()) {
-			authorizedOnResume();
-		}
+		authorizedOnResume();
 		viewLifecycle.handleLifecycleEvent(Event.ON_RESUME);
 	}
 
@@ -402,10 +387,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	protected boolean isFirstCreation() {
 		return firstCreation;
-	}
-
-	protected boolean isAuthorized() {
-		return !needsLoginToBeAuthorized() || authController.isLoggedIn();
 	}
 
 	protected void applyTheme(Theme theme) {
