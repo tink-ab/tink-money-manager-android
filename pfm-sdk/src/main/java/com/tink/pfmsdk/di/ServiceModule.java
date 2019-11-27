@@ -265,11 +265,12 @@ public class ServiceModule {
 	@Singleton
 	public CategoryService provideCategoryRepository(
 		StreamingService stub,
-		CategoryServiceGrpc.CategoryServiceStub categoryServiceStub,
+		Channel channel,
 		ModelConverter converter,
 		CategoryTreeCache cache
 	) {
-		return new CategoryServiceCachedImpl(stub, categoryServiceStub, converter, cache);
+    return new CategoryServiceCachedImpl(
+    	stub, CategoryServiceGrpc.newStub(channel), converter, cache);
 	}
 
 	@Provides

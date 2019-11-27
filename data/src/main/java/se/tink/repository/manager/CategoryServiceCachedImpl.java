@@ -1,6 +1,7 @@
 package se.tink.repository.manager;
 
 import com.google.common.collect.Lists;
+import io.grpc.Channel;
 import io.grpc.stub.StreamObserver;
 import java.util.List;
 import javax.inject.Inject;
@@ -25,8 +26,8 @@ public class CategoryServiceCachedImpl implements CategoryService {
 
 	@Inject
 	public CategoryServiceCachedImpl(StreamingService stub,
-		CategoryServiceGrpc.CategoryServiceStub categoryServiceStub, ModelConverter converter,
-		CategoryTreeCache cache) {
+		CategoryServiceGrpc.CategoryServiceStub categoryServiceStub,
+		ModelConverter converter, CategoryTreeCache cache) {
 		this.service = stub;
 		this.categoryServiceStub = categoryServiceStub;
 		this.converter = converter;
