@@ -24,7 +24,6 @@ import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.extensions.AccountExtensionsKt;
 import se.tink.core.models.account.Account;
-import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
@@ -129,7 +128,7 @@ public class TransactionServiceCachedImpl implements TransactionService {
 				}
 			}
 		};
-		streamingService.subscribeForTransactions(streamingChangeObserver);
+		subscribe(streamingChangeObserver);
 
 		accountChangeObserver = new SimpleChangeObserver<Account>() {
 			@Override
@@ -194,30 +193,6 @@ public class TransactionServiceCachedImpl implements TransactionService {
 	public void getSimilarTransactions(final String transactionId,
 		final MutationHandler<List<Transaction>> handler) {
 		uncachedService.getSimilarTransactions(transactionId, handler);
-	}
-
-	@Override
-	public void suggestTransactions(boolean evaluateEverything, int nrOfClusters,
-		MutationHandler<se.tink.core.models.transaction.SuggestTransactionsResponse> handler) {
-		uncachedService.suggestTransactions(evaluateEverything, nrOfClusters, handler);
-	}
-
-	@Override
-	public void updatePartAndCounterpart(String transactionId, String partId, Amount amount,
-		MutationHandler<Transaction> handler) {
-		uncachedService.updatePartAndCounterpart(transactionId, partId, amount, handler);
-	}
-
-	@Override
-	public void deletePartAndCounterpart(String transactionId, String counterpartId,
-		MutationHandler<Transaction> mutationHandler) {
-		uncachedService.deletePartAndCounterpart(transactionId, counterpartId, mutationHandler);
-	}
-
-	@Override
-	public void suggestCounterparts(String transactionId, int limit,
-		MutationHandler<List<Transaction>> mutationHandler) {
-		uncachedService.suggestCounterparts(transactionId, limit, mutationHandler);
 	}
 
 	/**
@@ -428,8 +403,15 @@ public class TransactionServiceCachedImpl implements TransactionService {
 	}
 
 	@Override
+	public void subscribe(ChangeObserver<Transaction> changeObserver) {
+		uncachedService.subscribe(changeObserver);
+	}
+
+	@Override
 	public void unsubscribe(ChangeObserver<Transaction> listener) {
 		subscriptionsByObserver.remove(listener);
+
+		uncachedService.unsubscribe(listener);
 	}
 
 	private void addSubscriptionForListener(TransactionSubscription subscription,

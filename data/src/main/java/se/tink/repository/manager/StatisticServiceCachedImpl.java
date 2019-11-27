@@ -3,11 +3,9 @@ package se.tink.repository.manager;
 import com.google.common.collect.Lists;
 import java.util.List;
 import javax.inject.Inject;
-import se.tink.converter.ModelConverter;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
-import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.cache.StasticCache;
 import se.tink.repository.service.StatisticService;
@@ -15,18 +13,16 @@ import se.tink.repository.service.StreamingService;
 
 public class StatisticServiceCachedImpl implements StatisticService {
 
-	private final StatisticServiceGrpc.StatisticServiceStub service;
-	private final ModelConverter converter;
 	private final List<ObjectChangeObserver<StatisticTree>> changeObserverers;
 	private final StreamingService streamingService;
+	private final StatisticService uncachedService;
 	private final StasticCache cache;
 
 	@Inject
-	public StatisticServiceCachedImpl(StreamingService streamingStub, ModelConverter converter,
-		StatisticServiceGrpc.StatisticServiceStub serviceStub, StasticCache cache) {
-		service = serviceStub;
+	public StatisticServiceCachedImpl(StreamingService streamingStub,
+		StatisticService uncachedService, StasticCache cache) {
 		streamingService = streamingStub;
-		this.converter = converter;
+		this.uncachedService = uncachedService;
 		changeObserverers = Lists.newArrayList();
 		setupStreamingService();
 		this.cache = cache;
@@ -125,5 +121,11 @@ public class StatisticServiceCachedImpl implements StatisticService {
 	@Override
 	public void unsubscribe(ObjectChangeObserver<StatisticTree> listener) {
 		changeObserverers.remove(listener);
+	}
+
+	@Override
+	public void refreshStatistics() {
+		// TODO: PFMSDK: Do we need to update the cache here?
+		uncachedService.refreshStatistics();
 	}
 }

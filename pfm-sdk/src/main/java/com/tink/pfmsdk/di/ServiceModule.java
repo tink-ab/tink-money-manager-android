@@ -19,6 +19,7 @@ import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
 import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.BudgetServiceGrpc;
+import se.tink.grpc.v1.services.CategoryServiceGrpc;
 import se.tink.grpc.v1.services.CredentialServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
@@ -58,6 +59,7 @@ import se.tink.repository.service.ProviderServiceImpl;
 import se.tink.repository.service.SettingsService;
 import se.tink.repository.service.SettingsServiceImpl;
 import se.tink.repository.service.StatisticService;
+import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.StreamingServiceImpl;
 import se.tink.repository.service.TrackingService;
@@ -242,7 +244,8 @@ public class ServiceModule {
 		StatisticServiceGrpc.StatisticServiceStub serviceStub,
 		StasticCache cache
 	) {
-		return new StatisticServiceCachedImpl(streaming, converter, serviceStub, cache);
+    return new StatisticServiceCachedImpl(
+        streaming, new StatisticServiceImpl(streaming, converter, serviceStub), cache);
 	}
 
 	@Provides
@@ -262,10 +265,12 @@ public class ServiceModule {
 	@Singleton
 	public CategoryService provideCategoryRepository(
 		StreamingService stub,
+		Channel channel,
 		ModelConverter converter,
 		CategoryTreeCache cache
 	) {
-		return new CategoryServiceCachedImpl(stub, converter, cache);
+    return new CategoryServiceCachedImpl(
+    	stub, CategoryServiceGrpc.newStub(channel), converter, cache);
 	}
 
 	@Provides

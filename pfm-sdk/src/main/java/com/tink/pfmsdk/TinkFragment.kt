@@ -18,6 +18,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import se.tink.repository.cache.CacheHandle
 import se.tink.repository.service.CategoryService
+import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.HeaderClientInterceptor
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -50,6 +51,9 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var cacheHandle: CacheHandle
 
+    @Inject
+    lateinit var dataRefreshHandler: DataRefreshHandler
+
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
 		starts because a side effect of the initialization of each "cached service" is to setup the
@@ -74,6 +78,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         interceptor.setAccessToken(clientConfiguration.accessToken)
         attachListeners()
         i18nConfiguration.initialize()
+        refreshData()
 
         context?.let(::initSecuredDataStorage)
         //TODO:PFMSDK: Do we need Fresco and Timber?
@@ -132,7 +137,8 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     }
 
     fun refreshData() {
-        // TODO: PFMSDK: To be filled in after data refresh logic is added
+        dataRefreshHandler.refreshCategories()
+        dataRefreshHandler.refreshStatistics()
     }
 
     private fun attachListeners() {

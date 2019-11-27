@@ -9,6 +9,8 @@ import com.google.protobuf.Int32Value;
 import com.google.protobuf.StringValue;
 import com.google.protobuf.Timestamp;
 import io.grpc.stub.StreamObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -16,26 +18,16 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.Amount;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
-import se.tink.core.models.transaction.SuggestTransactionsResponse;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.grpc.v1.models.CurrencyDenominatedAmount;
 import se.tink.grpc.v1.models.Tag;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsRequest;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsResponse;
-import se.tink.grpc.v1.rpc.DeletePartAndCounterpartRequest;
-import se.tink.grpc.v1.rpc.DeletePartAndCounterpartResponse;
 import se.tink.grpc.v1.rpc.GetSimilarTransactionsRequest;
 import se.tink.grpc.v1.rpc.GetSimilarTransactionsResponse;
 import se.tink.grpc.v1.rpc.QueryTransactionsRequest;
 import se.tink.grpc.v1.rpc.QueryTransactionsResponse;
-import se.tink.grpc.v1.rpc.SuggestCounterpartsRequest;
-import se.tink.grpc.v1.rpc.SuggestCounterpartsResponse;
-import se.tink.grpc.v1.rpc.SuggestTransactionsRequest;
-import se.tink.grpc.v1.rpc.UpdatePartAndCounterpartRequest;
-import se.tink.grpc.v1.rpc.UpdatePartAndCounterpartResponse;
 import se.tink.grpc.v1.rpc.UpdateTransactionRequest;
 import se.tink.grpc.v1.rpc.UpdateTransactionResponse;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
@@ -43,7 +35,6 @@ import se.tink.helpers.CollectionsHelper;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MutationHandler;
 import se.tink.repository.PagingResult;
-import se.tink.repository.SimpleStreamObserver;
 import se.tink.repository.TinkNetworkError;
 
 public class TransactionServiceImpl implements TransactionService {
@@ -64,9 +55,19 @@ public class TransactionServiceImpl implements TransactionService {
 		startListeningToStream();
 	}
 
+	private PublishSubject<List<Transaction>> transactionUpdateStream = PublishSubject.create();
+
+	private Map<ChangeObserver<Transaction>, Disposable> updateSubscriptions = Maps.newHashMap();
+
+	@Override
+	public void subscribe(ChangeObserver<Transaction> changeObserver) {
+		Disposable disposable = transactionUpdateStream.subscribe(changeObserver::onUpdate, error -> {});
+		updateSubscriptions.put(changeObserver, disposable);
+	}
+
 	private void startListeningToStream() {
 
-		streamingService.subscribeForTransactions(new ChangeObserver<Transaction>() {
+		subscribe(new ChangeObserver<Transaction>() {
 			@Override
 			public void onCreate(List<Transaction> items) {
 				Collection<TransactionSubscription> allSubscriptions = getAllSubscriptions();
@@ -175,6 +176,8 @@ public class TransactionServiceImpl implements TransactionService {
 					}
 
 					handler.onNext(list);
+
+					transactionUpdateStream.onNext(list);
 				}
 
 				@Override
@@ -215,96 +218,6 @@ public class TransactionServiceImpl implements TransactionService {
 				@Override
 				public void onCompleted() {
 					handler.onCompleted();
-				}
-			});
-	}
-
-	@Override
-	public void suggestTransactions(boolean evaluateEverything, int nrOfClusters,
-		final MutationHandler<SuggestTransactionsResponse> handler) {
-
-		SuggestTransactionsRequest request = SuggestTransactionsRequest.newBuilder()
-			.setEvaluateEverything(evaluateEverything)
-			.setNumberOfClusters(nrOfClusters)
-			.build();
-
-		transactionServiceApi.suggestTransactions(request,
-			new StreamObserver<se.tink.grpc.v1.rpc.SuggestTransactionsResponse>() {
-				@Override
-				public void onNext(se.tink.grpc.v1.rpc.SuggestTransactionsResponse value) {
-					handler.onNext(converter.map(value, SuggestTransactionsResponse.class));
-				}
-
-				@Override
-				public void onError(Throwable t) {
-					handler.onError(new TinkNetworkError(t));
-				}
-
-				@Override
-				public void onCompleted() {
-					handler.onCompleted();
-				}
-			});
-	}
-
-	@Override
-	public void updatePartAndCounterpart(String transactionId, String partId, Amount amount,
-		final MutationHandler<Transaction> handler) {
-
-		CurrencyDenominatedAmount amountDTO = converter
-			.map(amount, CurrencyDenominatedAmount.class);
-
-		UpdatePartAndCounterpartRequest request = UpdatePartAndCounterpartRequest
-			.newBuilder()
-			.setTransactionId(transactionId)
-			.setPartId(partId)
-			.setPartAmount(amountDTO)
-			.build();
-
-		transactionServiceApi.updatePartAndCounterpart(request,
-			new SimpleStreamObserver<UpdatePartAndCounterpartResponse>(handler) {
-				@Override
-				public void onNext(UpdatePartAndCounterpartResponse value) {
-					Transaction updatedTransaction = converter
-						.map(value.getTransaction(), Transaction.class);
-					handler.onNext(updatedTransaction);
-				}
-			});
-	}
-
-	@Override
-	public void deletePartAndCounterpart(String transactionId, String counterpartId,
-		final MutationHandler<Transaction> handler) {
-		DeletePartAndCounterpartRequest request = DeletePartAndCounterpartRequest.newBuilder()
-			.setTransactionId(transactionId)
-			.setPartId(counterpartId) //TODO naming
-			.build();
-		transactionServiceApi.deletePartAndCounterpart(request,
-			new SimpleStreamObserver<DeletePartAndCounterpartResponse>(handler) {
-				@Override
-				public void onNext(DeletePartAndCounterpartResponse value) {
-					handler.onNext(converter.map(value.getTransaction(), Transaction.class));
-				}
-			});
-	}
-
-	@Override
-	public void suggestCounterparts(String transactionId, int limit,
-		final MutationHandler<List<Transaction>> handler) {
-
-		SuggestCounterpartsRequest request = SuggestCounterpartsRequest
-			.newBuilder()
-			.setTransactionId(transactionId)
-			.setLimit(limit)
-			.build();
-
-		transactionServiceApi.suggestCounterparts(request,
-			new SimpleStreamObserver<SuggestCounterpartsResponse>(handler) {
-				@Override
-				public void onNext(SuggestCounterpartsResponse value) {
-					List<Transaction> suggestedTransactions = converter
-						.map(value.getTransactionsList(), Transaction.class);
-					handler.onNext(suggestedTransactions);
 				}
 			});
 	}
@@ -408,6 +321,12 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void unsubscribe(ChangeObserver<Transaction> listener) {
 		subscriptionsByObserver.remove(listener);
+
+		Disposable disposable = updateSubscriptions.get(listener);
+		if(disposable != null) {
+			disposable.dispose();
+			updateSubscriptions.remove(listener);
+		}
 	}
 
 	private void addSubScriptionAndGetFirstPage(TransactionSubscription subscription,
