@@ -52,8 +52,6 @@ import se.tink.repository.service.BudgetServiceImpl;
 import se.tink.repository.service.CategoryService;
 import se.tink.repository.service.CredentialService;
 import se.tink.repository.service.CredentialServiceImpl;
-import se.tink.repository.service.DataRefreshHandler;
-import se.tink.repository.service.DataRefreshHandlerImpl;
 import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.PeriodServiceCachedImpl;
 import se.tink.repository.service.ProviderService;
@@ -300,14 +298,5 @@ public class ServiceModule {
 	@Provides
 	public BudgetService budgetService(ModelConverter modelConverter, Channel channel) {
 		return new BudgetServiceImpl(BudgetServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@Singleton
-	@Provides
-	public DataRefreshHandler refreshHandler(
-		CategoryService categoryService,
-		StatisticService statisticService
-	) {
-		return new DataRefreshHandlerImpl(categoryService, statisticService);
 	}
 }
