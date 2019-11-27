@@ -61,6 +61,7 @@ import se.tink.repository.service.ProviderServiceImpl;
 import se.tink.repository.service.SettingsService;
 import se.tink.repository.service.SettingsServiceImpl;
 import se.tink.repository.service.StatisticService;
+import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.StreamingServiceImpl;
 import se.tink.repository.service.TrackingService;
@@ -245,7 +246,8 @@ public class ServiceModule {
 		StatisticServiceGrpc.StatisticServiceStub serviceStub,
 		StasticCache cache
 	) {
-		return new StatisticServiceCachedImpl(streaming, converter, serviceStub, cache);
+    return new StatisticServiceCachedImpl(
+        streaming, new StatisticServiceImpl(streaming, converter, serviceStub), cache);
 	}
 
 	@Provides
