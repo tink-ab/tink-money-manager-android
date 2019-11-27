@@ -43,4 +43,6 @@ public interface TransactionService extends TinkService {
 
 	void getSimilarTransactions(final String transactionId,
 		final MutationHandler<List<Transaction>> handler);
+
+	void subscribe(ChangeObserver<Transaction> changeObserver);
 }

@@ -164,10 +164,10 @@ public class StreamingServiceImpl implements StreamingService {
 		//providerListeners.add(listener);
 	}
 
-	@Override
-	public void subscribeForTransactions(ChangeObserver<Transaction> listener) {
-		//transactionListeners.add(listener);
-	}
+//	@Override
+//	public void subscribeForTransactions(ChangeObserver<Transaction> listener) {
+//		transactionListeners.add(listener);
+//	}
 
 	@Override
 	public void subscribeForCredentials(ChangeObserver<Credential> listener) {

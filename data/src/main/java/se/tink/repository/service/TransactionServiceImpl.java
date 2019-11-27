@@ -9,6 +9,8 @@ import com.google.protobuf.Int32Value;
 import com.google.protobuf.StringValue;
 import com.google.protobuf.Timestamp;
 import io.grpc.stub.StreamObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -53,9 +55,19 @@ public class TransactionServiceImpl implements TransactionService {
 		startListeningToStream();
 	}
 
+	private PublishSubject<List<Transaction>> transactionUpdateStream = PublishSubject.create();
+
+	private Map<ChangeObserver<Transaction>, Disposable> updateSubscriptions = Maps.newHashMap();
+
+	@Override
+	public void subscribe(ChangeObserver<Transaction> changeObserver) {
+		Disposable disposable = transactionUpdateStream.subscribe(changeObserver::onUpdate, error -> {});
+		updateSubscriptions.put(changeObserver, disposable);
+	}
+
 	private void startListeningToStream() {
 
-		streamingService.subscribeForTransactions(new ChangeObserver<Transaction>() {
+		subscribe(new ChangeObserver<Transaction>() {
 			@Override
 			public void onCreate(List<Transaction> items) {
 				Collection<TransactionSubscription> allSubscriptions = getAllSubscriptions();
@@ -164,6 +176,8 @@ public class TransactionServiceImpl implements TransactionService {
 					}
 
 					handler.onNext(list);
+
+					transactionUpdateStream.onNext(list);
 				}
 
 				@Override
@@ -307,6 +321,12 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public void unsubscribe(ChangeObserver<Transaction> listener) {
 		subscriptionsByObserver.remove(listener);
+
+		Disposable disposable = updateSubscriptions.get(listener);
+		if(disposable != null) {
+			disposable.dispose();
+			updateSubscriptions.remove(listener);
+		}
 	}
 
 	private void addSubScriptionAndGetFirstPage(TransactionSubscription subscription,

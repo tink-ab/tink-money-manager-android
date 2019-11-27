@@ -128,7 +128,7 @@ public class TransactionServiceCachedImpl implements TransactionService {
 				}
 			}
 		};
-		streamingService.subscribeForTransactions(streamingChangeObserver);
+		subscribe(streamingChangeObserver);
 
 		accountChangeObserver = new SimpleChangeObserver<Account>() {
 			@Override
@@ -403,8 +403,15 @@ public class TransactionServiceCachedImpl implements TransactionService {
 	}
 
 	@Override
+	public void subscribe(ChangeObserver<Transaction> changeObserver) {
+		uncachedService.subscribe(changeObserver);
+	}
+
+	@Override
 	public void unsubscribe(ChangeObserver<Transaction> listener) {
 		subscriptionsByObserver.remove(listener);
+
+		uncachedService.unsubscribe(listener);
 	}
 
 	private void addSubscriptionForListener(TransactionSubscription subscription,

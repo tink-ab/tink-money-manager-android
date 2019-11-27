@@ -39,7 +39,7 @@ class TransactionTagsLiveData(
     override fun onActive() {
         super.onActive()
         if (!subscribed) {
-            streamingService.subscribeForTransactions(changeObserver)
+            transactionService.subscribe(changeObserver)
             subscribed = true
         }
     }

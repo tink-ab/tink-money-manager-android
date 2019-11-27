@@ -22,7 +22,7 @@ public interface StreamingService extends TinkService {
 
 	void subscribeForProviders(ChangeObserver<Provider> listener);
 
-	void subscribeForTransactions(ChangeObserver<Transaction> listener);
+//	void subscribeForTransactions(ChangeObserver<Transaction> listener);
 
 	void subscribeForCredentials(ChangeObserver<Credential> listener);
 

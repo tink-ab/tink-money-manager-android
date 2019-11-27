@@ -73,7 +73,7 @@ class SingleTransactionLiveData(
             })
         }
 
-        streamingService.subscribeForTransactions(changeObserver)
+        transactionService.subscribe(changeObserver)
     }
 
     fun dispose() {
