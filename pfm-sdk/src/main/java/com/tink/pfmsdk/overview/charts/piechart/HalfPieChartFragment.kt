@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
+import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.databinding.FragmentHalfPieChartBinding
 import kotlinx.android.synthetic.main.fragment_half_pie_chart.view.*
 import se.tink.android.charts.transitions.ChangePositionTransition
@@ -29,6 +30,8 @@ import com.tink.pfmsdk.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.StatisticItem
 import com.tink.pfmsdk.overview.charts.TransactionsItem
 import com.tink.pfmsdk.theme.getTabPieChartThemeForType
+import com.tink.pfmsdk.transaction.TransactionsListFragment
+import com.tink.pfmsdk.transaction.TransactionsListMetaData
 import com.tink.pfmsdk.util.CurrencyUtils
 import se.tink.commons.extensions.getColorCompat
 import se.tink.commons.extensions.getColorFromAttr
@@ -123,21 +126,17 @@ class HalfPieChartFragment : BaseFragment() {
     }
 
     private fun showTransactions(item: TransactionsItem) {
-        // TODO: PFMSDK: Show transactions
-        /*val fragment = when (item.ids.size) {
-            0 -> throw NoSuchElementException("List is empty")
-            1 -> TransactionFragment.newInstance(item.ids[0])
-            else -> {
-                val metaData = TransactionsListMetaData(
-                    statusBarColor = theme.statusBarTheme.statusBarColor,
-                    backgroundColor = theme.toolbarTheme.backgroundColor,
-                    title = item.name,
-                    transactionIds = item.ids
-                )
-                TransactionsListFragment.newInstance(metaData)
-            }
-        }
-        fragmentCoordinator.add(fragment, true, FragmentAnimationFlags.SLIDE_UP)*/
+        val metaData = TransactionsListMetaData(
+            statusBarColor = theme.statusBarTheme.statusBarColor,
+            backgroundColor = theme.toolbarTheme.backgroundColor,
+            title = item.name,
+            transactionIds = item.ids
+        )
+        fragmentCoordinator.add(
+            fragment = TransactionsListFragment.newInstance(metaData),
+            addToBackStack = true,
+            animation = FragmentAnimationFlags.SLIDE_UP
+        )
     }
 
     private fun changeTransition() = TransitionSet().apply {
