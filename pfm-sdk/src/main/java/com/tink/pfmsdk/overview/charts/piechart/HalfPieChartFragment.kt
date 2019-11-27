@@ -126,17 +126,21 @@ class HalfPieChartFragment : BaseFragment() {
     }
 
     private fun showTransactions(item: TransactionsItem) {
-        val metaData = TransactionsListMetaData(
-            statusBarColor = theme.statusBarTheme.statusBarColor,
-            backgroundColor = theme.toolbarTheme.backgroundColor,
-            title = item.name,
-            transactionIds = item.ids
-        )
-        fragmentCoordinator.add(
-            fragment = TransactionsListFragment.newInstance(metaData),
-            addToBackStack = true,
-            animation = FragmentAnimationFlags.SLIDE_UP
-        )
+        if (item.ids.isEmpty()) {
+            throw NoSuchElementException("List of transactions is empty.")
+        } else {
+            val metaData = TransactionsListMetaData(
+                statusBarColor = theme.statusBarTheme.statusBarColor,
+                backgroundColor = theme.toolbarTheme.backgroundColor,
+                title = item.name,
+                transactionIds = item.ids
+            )
+            fragmentCoordinator.add(
+                fragment = TransactionsListFragment.newInstance(metaData),
+                addToBackStack = true,
+                animation = FragmentAnimationFlags.SLIDE_UP
+            )
+        }
     }
 
     private fun changeTransition() = TransitionSet().apply {
