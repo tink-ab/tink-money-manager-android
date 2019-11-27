@@ -30,20 +30,22 @@ public class ServiceCoordinator {
 
 	public void updateLocaleAndInitializeStreaming(
 		final StreamingServiceErrorHandler streamingServiceErrorHandler, String locale, TinkNetworkErrorHandler errorHandler) {
-		final UpdateI18NSettingsRequest request = new UpdateI18NSettingsRequest();
-		request.setLocaleCode(locale);
-		settingsService.updateI18NSettings(request,
-			ErrorUtils
-				.withErrorHandler(errorHandler, new SimpleMutationHandler<UpdateI18NSettingsResponse>() {
-					@Override
-					public void onError(TinkNetworkError error) {
-						Timber.e(error);
-					}
-
-					@Override
-					public void onNext(UpdateI18NSettingsResponse item) {
-						initializeStreaming(streamingServiceErrorHandler);
-					}
-				}));
+//		final UpdateI18NSettingsRequest request = new UpdateI18NSettingsRequest();
+//		request.setLocaleCode(locale);
+//		settingsService.updateI18NSettings(request,
+//			ErrorUtils
+//				.withErrorHandler(errorHandler, new SimpleMutationHandler<UpdateI18NSettingsResponse>() {
+//					@Override
+//					public void onError(TinkNetworkError error) {
+//						Timber.e(error);
+//					}
+//
+//					@Override
+//					public void onNext(UpdateI18NSettingsResponse item) {
+//						initializeStreaming(streamingServiceErrorHandler);
+//					}
+//				}));
+		// TODO: PFMSDK: This can be cleaned up when we have the no-streaming implementation
+		initializeStreaming(streamingServiceErrorHandler);
 	}
 }

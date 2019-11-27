@@ -27,13 +27,11 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 	public static final Metadata.Key<String> USER_AGENT = Metadata.Key
 		.of("User-Agent", Metadata.ASCII_STRING_MARSHALLER);
 
-	private final String clientKey;
+	private String accessToken;
 	private final String deviceId;
-	private String session;
 	private String userAgent;
 
-	public HeaderClientInterceptor(String clientKey, String deviceId, String userAgent) {
-		this.clientKey = clientKey;
+	public HeaderClientInterceptor(String deviceId, String userAgent) {
 		this.deviceId = deviceId;
 		this.userAgent = userAgent;
 	}
@@ -49,11 +47,8 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 				if (!Strings.isNullOrEmpty(deviceId)) {
 					headers.put(DEVICE_ID_HEADER_NAME, deviceId);
 				}
-				if (!Strings.isNullOrEmpty(session)) {
-					headers.put(AUTHORIZATION, "Session " + session);
-				}
-				if (!Strings.isNullOrEmpty(clientKey)) {
-					headers.put(CLIENT_KEY_HEADER_NAME, clientKey);
+				if (!Strings.isNullOrEmpty(accessToken)) {
+					headers.put(AUTHORIZATION, "Bearer " + accessToken);
 				}
 
 				super.start(new SimpleForwardingClientCallListener<RespT>(responseListener) {
@@ -73,8 +68,8 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 
 	}
 
-	public void setSession(String session) {
-		this.session = session;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 }

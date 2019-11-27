@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.overview.OverviewFragment
@@ -16,6 +16,9 @@ import com.tink.pfmsdk.security.SecuredClientDataStorage
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import se.tink.repository.cache.CacheHandle
+import se.tink.repository.service.CategoryService
+import se.tink.repository.service.HeaderClientInterceptor
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidKeyException
@@ -38,24 +41,38 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var fragmentCoordinator: FragmentCoordinator
 
+    @Inject
+    lateinit var interceptor: HeaderClientInterceptor
+
+    @Inject
+    lateinit var categoryService: CategoryService
+
+    @Inject
+    lateinit var cacheHandle: CacheHandle
+
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
 		starts because a side effect of the initialization of each "cached service" is to setup the
 		cache as a streaming listener. And if we get events before this happens the data will be lost
 	 */
-    @Inject
-    lateinit var serviceCacheInitialization: ServiceCacheInitialization
+    //@Inject
+    //lateinit var serviceCacheInitialization: ServiceCacheInitialization
 
     val tinkStyle by lazy {
-        arguments!!.getInt("styleResId")
+        requireNotNull(arguments?.getInt(ARG_STYLE_RES))
+    }
+
+    val clientConfiguration by lazy {
+        requireNotNull(arguments?.getParcelable(ARG_CLIENT_CONFIGURATION) as? ClientConfiguration)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         DaggerFragmentComponent.factory().create(this).inject(this)
+        interceptor.setAccessToken(clientConfiguration.accessToken)
+        attachListeners()
         i18nConfiguration.initialize()
 
         context?.let(::initSecuredDataStorage)
@@ -109,9 +126,35 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        removeListenersAndClearCache()
+    }
+
+    fun refreshData() {
+        // TODO: PFMSDK: To be filled in after data refresh logic is added
+    }
+
+    private fun attachListeners() {
+        Categories.getSharedInstance().attatchListener(categoryService)
+    }
+
+    private fun removeListenersAndClearCache() {
+        Categories.getSharedInstance().removeListener(categoryService)
+        cacheHandle.clearCache()
+    }
+
     companion object {
-        fun newInstance(styleResId: Int) = TinkFragment().apply {
-            arguments = bundleOf("styleResId" to styleResId)
-        }
+
+        private const val ARG_STYLE_RES = "styleRes"
+        private const val ARG_CLIENT_CONFIGURATION = "clientConfiguration"
+
+        fun newInstance(styleResId: Int, clientConfiguration: ClientConfiguration) =
+            TinkFragment().apply {
+                arguments = bundleOf(
+                    ARG_STYLE_RES to styleResId,
+                    ARG_CLIENT_CONFIGURATION to clientConfiguration
+                )
+            }
     }
 }
