@@ -19,6 +19,7 @@ import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
+import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.view.TinkIcon;
@@ -60,6 +61,9 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 	@Inject
 	StatisticService statisticService;
+
+	@Inject
+	StatisticsRepository statisticsRepository;
 
 	@Inject
 	PeriodService periodService;
@@ -145,7 +149,10 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		userConfigurationService.subscribe(userConfigurationSubscription);
 		statisticService.subscribe(statisticChangeObserver, types);
-		periodService.subscribe(periodChangeObserver);
+		statisticsRepository.getPeriodMap().observe(this, periodMap -> {
+			periods = periodMap;
+			updatePeriods();
+		});
 	}
 
 	public void categorySelected(Category category) {
@@ -437,32 +444,6 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		public void onDelete(StatisticTree items) {
 			income = StatisticTree.delete(income, items.getIncomeByCategoryCode());
 			runUiDependant(() -> updateUi());
-		}
-	};
-
-	private ObjectChangeObserver<Map<String, Period>> periodChangeObserver = new ObjectChangeObserver<Map<String, Period>>() {
-		@Override
-		public void onCreate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-		}
-
-		@Override
-		public void onRead(Map<String, Period> item) {
-			periods = item;
-			updatePeriods();
-		}
-
-		@Override
-		public void onUpdate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-		}
-
-		@Override
-		public void onDelete(Map<String, Period> item) {
-			periods = Periods.delete(periods, item);
-			updatePeriods();
 		}
 	};
 

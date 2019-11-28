@@ -16,6 +16,7 @@ import com.tink.pfmsdk.TimezoneManager;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
+import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.view.PeriodPicker;
@@ -71,6 +72,9 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 	@Inject
 	SuitableLocaleFinder suitableLocaleFinder;
+
+	@Inject
+	StatisticsRepository statisticsRepository;
 
 	RelativeLayout headerContainer;
 
@@ -162,8 +166,12 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		types.add(Type.TYPE_LEFT_TO_SPEND);
 		types.add(Type.TYPE_LEFT_TO_SPEND_AVERAGE);
 
-		periodService.subscribe(periodChangeObserver);
 		userConfigurationService.subscribe(userConfigurationSubscription);
+		statisticsRepository.getPeriodMap().observe(this, stringPeriodMap -> {
+			periods = stringPeriodMap;
+			updatePeriods();
+			setupViews();
+		});
 		statisticService.subscribe(this, types);
 
 		setupPieChart();
@@ -679,38 +687,4 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		}
 		return latestPeriod;
 	}
-
-
-	private ObjectChangeObserver<Map<String, Period>> periodChangeObserver = new ObjectChangeObserver<Map<String, Period>>() {
-
-		private void update() {
-			updatePeriods();
-			runUiDependant(TabLeftToSpendFragment.this::setupViews);
-		}
-
-		@Override
-		public void onCreate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			update();
-		}
-
-		@Override
-		public void onRead(Map<String, Period> item) {
-			periods = item;
-			update();
-		}
-
-		@Override
-		public void onUpdate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			update();
-		}
-
-		@Override
-		public void onDelete(Map<String, Period> item) {
-			periods = Periods.delete(periods, item);
-			update();
-		}
-	};
-
 }
