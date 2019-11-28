@@ -3,6 +3,8 @@ package se.tink.core.models.statistic;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.jetbrains.annotations.NotNull;
+import se.tink.core.models.misc.Period;
 
 public class StatisticTree {
 
@@ -153,6 +155,32 @@ public class StatisticTree {
 				mergeMapUpdate(statisticToUpdate.getChildren(), updatedValue.getChildren());
 			} else {
 				mapToUpdate.put(key, updatedValue);
+			}
+		}
+	}
+
+	@NotNull
+	public Map<String, Period> extractPeriods() {
+		Map<String, Period> output = new HashMap<>();
+		extractPeriodsFromMap(balancesByAccountGroupType, output);
+		extractPeriodsFromMap(balancesByAccountId, output);
+		extractPeriodsFromMap(expensesByCategoryCode, output);
+		extractPeriodsFromMap(incomeByCategoryCode, output);
+		extractPeriodsFromMap(leftToSpendAverage, output);
+		extractPeriodsFromMap(leftToSpend, output);
+		return output;
+	}
+
+	private void extractPeriodsFromMap(Map<String, Statistic> input, Map<String, Period> output) {
+
+		if(input == null)
+			return;
+
+		for (Entry<String, Statistic> entry: input.entrySet()){
+			Period period = entry.getValue().getPeriod();
+			output.put(period.toString(), period);
+			if (entry.getValue().hasChildren()) {
+				extractPeriodsFromMap(entry.getValue().getChildren(), output);
 			}
 		}
 	}
