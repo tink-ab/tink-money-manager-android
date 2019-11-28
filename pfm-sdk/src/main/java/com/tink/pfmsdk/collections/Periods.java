@@ -1,7 +1,9 @@
 package com.tink.pfmsdk.collections;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import com.google.common.collect.Maps;
+import com.tink.pfmsdk.repository.StatisticsRepository;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +12,6 @@ import se.tink.core.models.misc.Period;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 
 /**
  * For @deprecated methods - use StatisticRepository for getting periods
@@ -90,9 +91,11 @@ public class Periods implements ObjectChangeObserver<Map<String, Period>>, Clear
 		return null;
 	}
 
+	private Observer<Map<String, Period>> periodObserver = stringPeriodMap -> map = stringPeriodMap;
 
-	public void removeListener(PeriodService periodService) {
-		periodService.unsubscribe(this);
+
+	public void removeListener(StatisticsRepository statisticsRepository) {
+		statisticsRepository.getPeriodMap().removeObserver(periodObserver);
 	}
 
 	@Override
@@ -115,8 +118,8 @@ public class Periods implements ObjectChangeObserver<Map<String, Period>>, Clear
 		map = delete(map, item);
 	}
 
-	public void attatchListener(PeriodService periodService) {
-		periodService.subscribe(this);
+	public void attatchListener(StatisticsRepository statisticsRepository) {
+		statisticsRepository.getPeriodMap().observeForever(periodObserver);
 	}
 
 	@Deprecated
