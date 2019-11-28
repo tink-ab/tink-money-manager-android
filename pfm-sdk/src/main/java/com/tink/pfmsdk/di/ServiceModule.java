@@ -245,7 +245,7 @@ public class ServiceModule {
 		StasticCache cache
 	) {
     return new StatisticServiceCachedImpl(
-        streaming, new StatisticServiceImpl(streaming, converter, serviceStub), cache);
+        new StatisticServiceImpl(streaming, converter, serviceStub), cache);
 	}
 
 	@Provides
