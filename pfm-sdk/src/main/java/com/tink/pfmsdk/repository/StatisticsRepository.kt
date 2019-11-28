@@ -4,27 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import org.joda.time.DateTime
+import se.tink.android.livedata.map
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
-import com.tink.pfmsdk.collections.Periods
 import se.tink.repository.ObjectChangeObserver
-import se.tink.repository.service.PeriodService
 import se.tink.repository.service.StatisticService
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class StatisticsRepository @Inject constructor(
-    private val statisticService: StatisticService,
-    private val periodService: PeriodService
+    private val statisticService: StatisticService
 ) {
-    private val periodMap = object : MutableLiveData<Map<String, Period>>() {
-        private val listener: PeriodObserver =
-            PeriodObserver(this)
 
-        override fun onActive() = periodService.subscribe(listener)
-        override fun onInactive() = periodService.unsubscribe(listener)
+    val periodMap = getStatisticsOf(Statistic.Type.TYPE_BY_CATEGORY).map {
+        it.extractPeriods().filter { entry ->
+            entry.value.isMonthPeriod
+        }
     }
 
     val periods: LiveData<List<Period>> = Transformations.map(periodMap) {
@@ -43,18 +40,6 @@ class StatisticsRepository @Inject constructor(
         override fun onActive() = statisticService.subscribe(listener, type)
         override fun onInactive() = statisticService.unsubscribe(listener)
     }
-}
-
-private class PeriodObserver(private val data: MutableLiveData<Map<String, Period>>) :
-    ObjectChangeObserver<Map<String, Period>> {
-    private val currentValue get() = data.value ?: emptyMap()
-
-    override fun onCreate(item: Map<String, Period>) = post(Periods.addOrUpdate(currentValue, item))
-    override fun onRead(item: Map<String, Period>) = post(item)
-    override fun onUpdate(item: Map<String, Period>) = post(Periods.addOrUpdate(currentValue, item))
-    override fun onDelete(item: Map<String, Period>) = post(Periods.delete(currentValue, item))
-
-    private fun post(item: Map<String, Period>) = data.postValue(item)
 }
 
 private class StatisticObserver(private val data: MutableLiveData<StatisticTree>) :
