@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.tink.pfmsdk.collections.Categories
+import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.overview.OverviewFragment
+import com.tink.pfmsdk.repository.StatisticsRepository
 import com.tink.pfmsdk.security.DefaultRecoveryHandler
 import com.tink.pfmsdk.security.SecuredClientDataStorage
 import dagger.android.AndroidInjector
@@ -59,8 +61,11 @@ class TinkFragment : Fragment(), HasAndroidInjector {
 		starts because a side effect of the initialization of each "cached service" is to setup the
 		cache as a streaming listener. And if we get events before this happens the data will be lost
 	 */
-    //@Inject
-    //lateinit var serviceCacheInitialization: ServiceCacheInitialization
+    @Inject
+    lateinit var serviceCacheInitialization: ServiceCacheInitialization
+
+    @Inject
+    lateinit var statisticsRepository: StatisticsRepository
 
     val tinkStyle by lazy {
         requireNotNull(arguments?.getInt(ARG_STYLE_RES))
@@ -143,10 +148,12 @@ class TinkFragment : Fragment(), HasAndroidInjector {
 
     private fun attachListeners() {
         Categories.getSharedInstance().attatchListener(categoryService)
+        Periods.getSharedInstance().attatchListener(statisticsRepository)
     }
 
     private fun removeListenersAndClearCache() {
         Categories.getSharedInstance().removeListener(categoryService)
+        Periods.getSharedInstance().removeListener(statisticsRepository)
         cacheHandle.clearCache()
     }
 
