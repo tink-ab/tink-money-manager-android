@@ -42,7 +42,6 @@ import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.linechart.BalanceLineChartArea;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
@@ -67,8 +66,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	@Inject
 	UserConfigurationService userConfigurationService;
 
-	@Inject
-	PeriodService periodService;
 
 	@Inject
 	SuitableLocaleFinder suitableLocaleFinder;

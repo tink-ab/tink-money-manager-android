@@ -42,7 +42,6 @@ import se.tink.core.models.user.UserConfiguration;
 import se.tink.piechart.Category;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
@@ -63,9 +62,6 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 	@Inject
 	UserConfigurationService userConfigurationService;
-
-	@Inject
-	PeriodService periodService;
 
 	@Inject
 	Theme theme;

@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-import butterknife.BindView;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
-import com.tink.pfmsdk.TinkApp;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
@@ -40,7 +38,6 @@ import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.piechart.Category;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
@@ -64,9 +61,6 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 	@Inject
 	StatisticsRepository statisticsRepository;
-
-	@Inject
-	PeriodService periodService;
 
 	@Inject
 	UserConfigurationService userConfigurationService;
