@@ -8,4 +8,6 @@ public interface UserConfigurationService extends TinkService {
 	void subscribe(ObjectChangeObserver<UserConfiguration> listener);
 
 	void unsubscribe(ObjectChangeObserver<UserConfiguration> listener);
+
+	void refreshUserConfiguration();
 }

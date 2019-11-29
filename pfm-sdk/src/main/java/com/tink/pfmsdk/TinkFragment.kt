@@ -144,6 +144,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
     fun refreshData() {
         dataRefreshHandler.refreshCategories()
         dataRefreshHandler.refreshStatistics()
+        dataRefreshHandler.refreshUserConfiguration()
     }
 
     private fun attachListeners() {
