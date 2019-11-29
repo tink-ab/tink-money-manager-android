@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import javax.inject.Inject;
 import se.tink.core.models.user.UserConfiguration;
+import se.tink.core.models.user.UserConfigurationI18NConfiguration;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.cache.Cache;
 
@@ -34,6 +35,27 @@ public class UserConfigurationServiceCachedImpl implements UserConfigurationServ
 	@Override
 	public void unsubscribe(ObjectChangeObserver<UserConfiguration> listener) {
 		changeObserverers.remove(listener);
+	}
+
+	@Override
+	public void refreshUserConfiguration() {
+		//TODO:PFMSDK: Use UserProfile implementation as soon as it is done on the backend
+		UserConfiguration mockUserConfiguration = new UserConfiguration();
+
+		UserConfigurationI18NConfiguration i18n = new UserConfigurationI18NConfiguration();
+
+		i18n.setCurrencyCode("SEK");
+		i18n.setTimezoneCode("Europe/Stockholm");
+		i18n.setLocaleCode("en_US");
+		i18n.setMarketCode("SE");
+
+		mockUserConfiguration.setI18nConfiguration(i18n);
+
+		new Thread(() -> {
+			for (ObjectChangeObserver<UserConfiguration> observer : changeObserverers) {
+				observer.onRead(mockUserConfiguration);
+			}
+		}).start();
 	}
 
 	private void startSubScribing() {
