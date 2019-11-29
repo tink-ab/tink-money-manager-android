@@ -13,11 +13,11 @@ import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.BuildConfig;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
-import com.tink.pfmsdk.TinkApp;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
+import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.view.TinkIcon;
@@ -42,7 +42,6 @@ import se.tink.core.models.user.UserConfiguration;
 import se.tink.piechart.Category;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
@@ -65,10 +64,10 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 	UserConfigurationService userConfigurationService;
 
 	@Inject
-	PeriodService periodService;
+	Theme theme;
 
 	@Inject
-	Theme theme;
+	StatisticsRepository statisticsRepository;
 
 	@Inject
 	ExceptionTracker exceptionTracker;
@@ -152,7 +151,11 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 		userConfigurationService.subscribe(userConfigurationSubscription);
 		statisticService.subscribe(statisticChangeObserver, types);
-		periodService.subscribe(periodChangeObserver);
+		statisticsRepository.getPeriodMap().observe(getViewLifecycleOwner(), periodMap -> {
+			periods = periodMap;
+			updatePeriods();
+			updateUi();
+		});
 	}
 
 	@Override
@@ -454,36 +457,6 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		@Override
 		public void onDelete(StatisticTree items) {
 			expenses = StatisticTree.delete(expenses, items.getExpensesByCategoryCode());
-			runUiDependant(TabExpensesBarChartFragment.this::updateUi);
-		}
-	};
-
-	private ObjectChangeObserver<Map<String, Period>> periodChangeObserver = new ObjectChangeObserver<Map<String, Period>>() {
-		@Override
-		public void onCreate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-			runUiDependant(TabExpensesBarChartFragment.this::updateUi);
-		}
-
-		@Override
-		public void onRead(Map<String, Period> item) {
-			periods = item;
-			updatePeriods();
-			runUiDependant(TabExpensesBarChartFragment.this::updateUi);
-		}
-
-		@Override
-		public void onUpdate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-			runUiDependant(TabExpensesBarChartFragment.this::updateUi);
-		}
-
-		@Override
-		public void onDelete(Map<String, Period> item) {
-			periods = Periods.delete(periods, item);
-			updatePeriods();
 			runUiDependant(TabExpensesBarChartFragment.this::updateUi);
 		}
 	};

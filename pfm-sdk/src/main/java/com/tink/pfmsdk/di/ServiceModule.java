@@ -5,14 +5,12 @@ import dagger.Provides;
 import io.grpc.Channel;
 import java.security.Security;
 import java.util.List;
-import java.util.Map;
 import javax.inject.Singleton;
 import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.credential.Credential;
-import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
@@ -52,8 +50,6 @@ import se.tink.repository.service.BudgetServiceImpl;
 import se.tink.repository.service.CategoryService;
 import se.tink.repository.service.CredentialService;
 import se.tink.repository.service.CredentialServiceImpl;
-import se.tink.repository.service.PeriodService;
-import se.tink.repository.service.PeriodServiceCachedImpl;
 import se.tink.repository.service.ProviderService;
 import se.tink.repository.service.ProviderServiceImpl;
 import se.tink.repository.service.SettingsService;
@@ -218,16 +214,6 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public PeriodService periodService(
-		Cache<Map<String, Period>> periodRepository,
-		StreamingService streamingService,
-		ModelConverter modelConverter
-	) {
-		return new PeriodServiceCachedImpl(periodRepository, streamingService, modelConverter);
-	}
-
-	@Provides
-	@Singleton
 	public UserConfigurationService userConfigurationService(
 		StreamingService streamingService,
 		ModelConverter modelConverter,
@@ -245,7 +231,7 @@ public class ServiceModule {
 		StasticCache cache
 	) {
     return new StatisticServiceCachedImpl(
-        streaming, new StatisticServiceImpl(streaming, converter, serviceStub), cache);
+        new StatisticServiceImpl(streaming, converter, serviceStub), cache);
 	}
 
 	@Provides

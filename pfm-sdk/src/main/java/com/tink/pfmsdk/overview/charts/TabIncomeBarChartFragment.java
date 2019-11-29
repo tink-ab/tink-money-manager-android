@@ -8,17 +8,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
-import butterknife.BindView;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
-import com.tink.pfmsdk.TinkApp;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
+import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.view.TinkIcon;
@@ -39,7 +38,6 @@ import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.piechart.Category;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.PeriodService;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
@@ -62,7 +60,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 	StatisticService statisticService;
 
 	@Inject
-	PeriodService periodService;
+	StatisticsRepository statisticsRepository;
 
 	@Inject
 	UserConfigurationService userConfigurationService;
@@ -145,7 +143,10 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		userConfigurationService.subscribe(userConfigurationSubscription);
 		statisticService.subscribe(statisticChangeObserver, types);
-		periodService.subscribe(periodChangeObserver);
+		statisticsRepository.getPeriodMap().observe(this, periodMap -> {
+			periods = periodMap;
+			updatePeriods();
+		});
 	}
 
 	public void categorySelected(Category category) {
@@ -437,32 +438,6 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		public void onDelete(StatisticTree items) {
 			income = StatisticTree.delete(income, items.getIncomeByCategoryCode());
 			runUiDependant(() -> updateUi());
-		}
-	};
-
-	private ObjectChangeObserver<Map<String, Period>> periodChangeObserver = new ObjectChangeObserver<Map<String, Period>>() {
-		@Override
-		public void onCreate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-		}
-
-		@Override
-		public void onRead(Map<String, Period> item) {
-			periods = item;
-			updatePeriods();
-		}
-
-		@Override
-		public void onUpdate(Map<String, Period> item) {
-			periods = Periods.addOrUpdate(periods, item);
-			updatePeriods();
-		}
-
-		@Override
-		public void onDelete(Map<String, Period> item) {
-			periods = Periods.delete(periods, item);
-			updatePeriods();
 		}
 	};
 

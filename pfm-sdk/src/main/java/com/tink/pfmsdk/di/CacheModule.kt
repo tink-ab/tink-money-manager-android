@@ -29,6 +29,7 @@ import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.cache.PeriodDatabaseCache
 import se.tink.repository.cache.StasticCache
 import se.tink.repository.cache.StatisticDatabaseCache
+import se.tink.repository.cache.StatisticInMemoryCache
 import se.tink.repository.cache.TransactionDatabaseCache
 import se.tink.repository.cache.UserConfigurationDatabaseCache
 import se.tink.repository.cache.WritableCacheRepository
@@ -37,25 +38,14 @@ import java.io.File
 import javax.inject.Singleton
 
 @Module(includes = [CacheBindingModule::class])
-class CacheModule(
-//    private val diskCacheAllowed: Boolean
-) {
+class CacheModule {
 
     @Provides
     @Singleton
     fun cacheDatabase(@ApplicationScoped context: Context): CacheDatabase {
-        val dbFile = File(context.cacheDir, "cache_db")
-
-        //TODO:PFMSDK: Should we have this check?
-//        return if (!diskCacheAllowed) {
-//            Room.inMemoryDatabaseBuilder(context, CacheDatabase::class.java)
-//                .fallbackToDestructiveMigration()
-//                .build()
-//        } else {
-            return Room.databaseBuilder(context, CacheDatabase::class.java, dbFile.absolutePath)
-                .fallbackToDestructiveMigration()
-                .build()
-//        }
+        return Room.inMemoryDatabaseBuilder(context, CacheDatabase::class.java)
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
@@ -115,9 +105,7 @@ class CacheModule(
         cacheDatabase: CacheDatabase,
         modelConverter: ModelConverter
     ): StasticCache {
-//        return if (diskCacheAllowed) { //TODO: PFMSDK
-            return StatisticDatabaseCache(cacheDatabase, modelConverter)
-//        } else StatisticInMemoryCache()
+        return StatisticInMemoryCache()
     }
 
     @Provides

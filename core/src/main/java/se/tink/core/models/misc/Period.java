@@ -91,7 +91,7 @@ public class Period implements Comparable<Period>, Parcelable {
 	}
 
 	public boolean isMonthPeriod() {
-		return month != null && day == null;
+		return (month != null && month != 0) && (day == null || day == 0);
 	}
 
 	public boolean isWeekPeriod() {

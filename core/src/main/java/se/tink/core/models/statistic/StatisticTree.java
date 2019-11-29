@@ -3,6 +3,8 @@ package se.tink.core.models.statistic;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import org.jetbrains.annotations.NotNull;
+import se.tink.core.models.misc.Period;
 
 public class StatisticTree {
 
@@ -80,25 +82,36 @@ public class StatisticTree {
 		return m == null || m.isEmpty();
 	}
 
-	public static StatisticTree addOrUpdate(StatisticTree currentStatistics, StatisticTree newStatistic) {
+	public static StatisticTree addOrUpdate(StatisticTree currentStatistics,
+		StatisticTree newStatistic) {
 		StatisticTree result = new StatisticTree();
-		result.balancesByAccountId = addOrUpdate(currentStatistics.balancesByAccountId, newStatistic.balancesByAccountId);
-		result.balancesByAccountGroupType = addOrUpdate(currentStatistics.balancesByAccountGroupType, newStatistic.balancesByAccountGroupType);
+		result.balancesByAccountId = addOrUpdate(currentStatistics.balancesByAccountId,
+			newStatistic.balancesByAccountId);
+		result.balancesByAccountGroupType = addOrUpdate(
+			currentStatistics.balancesByAccountGroupType, newStatistic.balancesByAccountGroupType);
 		result.leftToSpend = addOrUpdate(currentStatistics.leftToSpend, newStatistic.leftToSpend);
-		result.leftToSpendAverage = addOrUpdate(currentStatistics.leftToSpendAverage, newStatistic.leftToSpendAverage);
-		result.expensesByCategoryCode = addOrUpdate(currentStatistics.expensesByCategoryCode, newStatistic.expensesByCategoryCode);
-		result.incomeByCategoryCode = addOrUpdate(currentStatistics.incomeByCategoryCode, newStatistic.incomeByCategoryCode);
+		result.leftToSpendAverage = addOrUpdate(currentStatistics.leftToSpendAverage,
+			newStatistic.leftToSpendAverage);
+		result.expensesByCategoryCode = addOrUpdate(currentStatistics.expensesByCategoryCode,
+			newStatistic.expensesByCategoryCode);
+		result.incomeByCategoryCode = addOrUpdate(currentStatistics.incomeByCategoryCode,
+			newStatistic.incomeByCategoryCode);
 		return result;
 	}
 
 	public static StatisticTree delete(StatisticTree currentStatistics, StatisticTree toDelete) {
 		StatisticTree result = new StatisticTree();
-		result.balancesByAccountId = delete(currentStatistics.balancesByAccountId, toDelete.balancesByAccountId);
-		result.balancesByAccountGroupType = delete(currentStatistics.balancesByAccountGroupType, toDelete.balancesByAccountGroupType);
+		result.balancesByAccountId = delete(currentStatistics.balancesByAccountId,
+			toDelete.balancesByAccountId);
+		result.balancesByAccountGroupType = delete(currentStatistics.balancesByAccountGroupType,
+			toDelete.balancesByAccountGroupType);
 		result.leftToSpend = delete(currentStatistics.leftToSpend, toDelete.leftToSpend);
-		result.leftToSpendAverage = delete(currentStatistics.leftToSpendAverage, toDelete.leftToSpendAverage);
-		result.expensesByCategoryCode = delete(currentStatistics.expensesByCategoryCode, toDelete.expensesByCategoryCode);
-		result.incomeByCategoryCode = delete(currentStatistics.incomeByCategoryCode, toDelete.incomeByCategoryCode);
+		result.leftToSpendAverage = delete(currentStatistics.leftToSpendAverage,
+			toDelete.leftToSpendAverage);
+		result.expensesByCategoryCode = delete(currentStatistics.expensesByCategoryCode,
+			toDelete.expensesByCategoryCode);
+		result.incomeByCategoryCode = delete(currentStatistics.incomeByCategoryCode,
+			toDelete.incomeByCategoryCode);
 		return result;
 	}
 
@@ -138,7 +151,8 @@ public class StatisticTree {
 		}
 	}
 
-	public static void mergeMapUpdate(Map<String, Statistic> mapToUpdate, Map<String, Statistic> update) {
+	public static void mergeMapUpdate(Map<String, Statistic> mapToUpdate,
+		Map<String, Statistic> update) {
 		if (mapToUpdate == null || update == null) {
 			return;
 		}
@@ -153,6 +167,33 @@ public class StatisticTree {
 				mergeMapUpdate(statisticToUpdate.getChildren(), updatedValue.getChildren());
 			} else {
 				mapToUpdate.put(key, updatedValue);
+			}
+		}
+	}
+
+	@NotNull
+	public Map<String, Period> extractPeriods() {
+		Map<String, Period> output = new HashMap<>();
+		extractPeriodsFromMap(balancesByAccountGroupType, output);
+		extractPeriodsFromMap(balancesByAccountId, output);
+		extractPeriodsFromMap(expensesByCategoryCode, output);
+		extractPeriodsFromMap(incomeByCategoryCode, output);
+		extractPeriodsFromMap(leftToSpendAverage, output);
+		extractPeriodsFromMap(leftToSpend, output);
+		return output;
+	}
+
+	private void extractPeriodsFromMap(Map<String, Statistic> input, Map<String, Period> output) {
+
+		if (input == null) {
+			return;
+		}
+
+		for (Entry<String, Statistic> entry : input.entrySet()) {
+			Period period = entry.getValue().getPeriod();
+			output.put(period.toString(), period);
+			if (entry.getValue().hasChildren()) {
+				extractPeriodsFromMap(entry.getValue().getChildren(), output);
 			}
 		}
 	}
