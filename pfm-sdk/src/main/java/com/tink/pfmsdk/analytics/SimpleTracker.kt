@@ -5,10 +5,6 @@ import android.app.Activity
 
 open class SimpleTracker : Tracker {
 
-    override fun registerUser(identifier: String?, username: String?) {
-
-    }
-
     override fun track(event: AnalyticsEvent?) {
 
     }

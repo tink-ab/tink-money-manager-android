@@ -6,8 +6,6 @@ import java.util.Map;
 
 public interface Tracker {
 
-	void registerUser(String identifier, String username);
-
 	void track(AnalyticsEvent event);
 
 	void track(AnalyticsEvent event, Map<TrackerParameter, String> parameters);
