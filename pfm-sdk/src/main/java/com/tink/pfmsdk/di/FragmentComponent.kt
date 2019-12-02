@@ -7,7 +7,7 @@ import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.Timezone
 import com.tink.pfmsdk.TimezoneManager
-import com.tink.pfmsdk.TinkFragment
+import com.tink.pfmsdk.FinanceOverviewFragment
 import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
@@ -66,10 +66,10 @@ import javax.inject.Singleton
         FragmentBindingModule::class
     ]
 )
-interface FragmentComponent : AndroidInjector<TinkFragment> {
+interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
 
     @Component.Factory
-    interface Factory : AndroidInjector.Factory<TinkFragment>
+    interface Factory : AndroidInjector.Factory<FinanceOverviewFragment>
 }
 
 
@@ -96,7 +96,7 @@ class ContextModule {
 
     @Provides
     @ApplicationScoped
-    fun context(fragment: TinkFragment) = fragment.context!!.applicationContext
+    fun context(fragment: FinanceOverviewFragment) = fragment.context!!.applicationContext
 }
 
 @Module(includes = [TransitionModule::class, ServiceModule::class, NetworkModule::class])
@@ -105,7 +105,7 @@ class EverythingModule {
     @Singleton
     @Provides
     fun fragmentCoordinator(
-        fragment: TinkFragment,
+        fragment: FinanceOverviewFragment,
         transitionCoordinator: TransitionCoordinatorImpl
     ) =
         FragmentCoordinator(fragment.childFragmentManager, R.id.fragmentRoot, transitionCoordinator)
