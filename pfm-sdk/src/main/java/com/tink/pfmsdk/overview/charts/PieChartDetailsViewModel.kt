@@ -9,12 +9,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.repository.StatisticsRepository
 import se.tink.android.charts.ui.ColorGenerator
 import se.tink.android.charts.ui.DefaultColorGenerator
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
-import com.tink.pfmsdk.repository.StatisticsRepository
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
@@ -23,7 +23,6 @@ import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
-import timber.log.Timber
 import javax.inject.Inject
 
 private data class SourceData(val period: Period, val category: Category)
@@ -61,9 +60,7 @@ class PieChartDetailsViewModel @Inject constructor(
 
     private val sourceData = MediatorLiveData<SourceData>().apply {
         fun update() = whenNonNull(period.value, category.value) { period, category ->
-            value = SourceData(period, category).also {
-                Timber.tag("Jan").d("source data updated to $it")
-            }
+            value = SourceData(period, category)
         }
 
         addSource(period) { update() }
@@ -74,11 +71,10 @@ class PieChartDetailsViewModel @Inject constructor(
         Transformations.switchMap(sourceData) { source ->
             if (source.category.children.isNotEmpty()) {
                 Transformations.map(statistics) {
-                    Timber.tag("Jan").d("Statistics received: $it")
                     StatisticalData(
-                    source,
-                    it
-                ) as ChartData
+                        source,
+                        it
+                    )
                 }
             } else {
                 Transformations.map(
@@ -90,7 +86,7 @@ class PieChartDetailsViewModel @Inject constructor(
                     TransactionsData(
                         source,
                         transactions
-                    ) as ChartData
+                    )
                 }
             }
         }
