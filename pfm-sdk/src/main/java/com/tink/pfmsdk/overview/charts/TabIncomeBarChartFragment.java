@@ -138,11 +138,8 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		index = TabsEnum.getTabsEnumByIndex(getArguments().getInt(ARG_POSITION));
 
-		List<Type> types = Lists.newArrayList();
-		types.add(Type.TYPE_BY_CATEGORY);
-
 		userConfigurationService.subscribe(userConfigurationSubscription);
-		statisticService.subscribe(statisticChangeObserver, types);
+		statisticService.subscribe(statisticChangeObserver);
 		statisticsRepository.getPeriodMap().observe(this, periodMap -> {
 			periods = periodMap;
 			updatePeriods();

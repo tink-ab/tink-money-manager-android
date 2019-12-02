@@ -4,7 +4,6 @@ import io.reactivex.Flowable;
 import java.util.ArrayList;
 import java.util.List;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
@@ -36,17 +35,6 @@ public class StatisticDatabaseCache implements StasticCache, Clearable {
 			.build();
 		return tree;
 	}
-
-	@Override
-	public synchronized StatisticTree read(List<Type> types) {
-		List<StatisticEntity> databaseEntities = allStatistics.blockingFirst();
-
-		StatisticTree tree = StatisticsTreeConverter
-			.builder(databaseEntities, modelConverter, types).build();
-
-		return tree;
-	}
-
 
 	@Override
 	public synchronized void clearAndInsert(StatisticTree item) {

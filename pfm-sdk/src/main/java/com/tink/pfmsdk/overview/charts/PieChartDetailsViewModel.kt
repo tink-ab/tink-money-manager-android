@@ -25,6 +25,7 @@ import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
+import timber.log.Timber
 import javax.inject.Inject
 
 private data class SourceData(val period: Period, val category: Category)
@@ -45,7 +46,7 @@ class PieChartDetailsViewModel @Inject constructor(
     transactionRepository: TransactionRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatisticsOf(Statistic.Type.TYPE_BY_CATEGORY)
+    private val statistics = statisticRepository.getStatisticsOf()
     private val period = MediatorLiveData<Period>().apply {
         addSource(statisticRepository.currentPeriod) {
             if (value == null) value = it
@@ -62,7 +63,9 @@ class PieChartDetailsViewModel @Inject constructor(
 
     private val sourceData = MediatorLiveData<SourceData>().apply {
         fun update() = whenNonNull(period.value, category.value) { period, category ->
-            value = SourceData(period, category)
+            value = SourceData(period, category).also {
+                Timber.tag("Jan").d("source data updated to $it")
+            }
         }
 
         addSource(period) { update() }
@@ -72,7 +75,9 @@ class PieChartDetailsViewModel @Inject constructor(
     private val statisticData: LiveData<ChartData> =
         Transformations.switchMap(sourceData) { source ->
             if (source.category.children.isNotEmpty()) {
-                Transformations.map(statistics) { StatisticalData(
+                Transformations.map(statistics) {
+                    Timber.tag("Jan").d("Statistics received: $it")
+                    StatisticalData(
                     source,
                     it
                 ) as ChartData

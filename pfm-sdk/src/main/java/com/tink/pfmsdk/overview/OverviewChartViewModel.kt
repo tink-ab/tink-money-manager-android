@@ -41,7 +41,7 @@ class OverviewChartViewModel @Inject constructor(
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatisticsOf(Statistic.Type.TYPE_BY_CATEGORY)
+    private val statistics = statisticRepository.getStatisticsOf()
     private val period = statisticRepository.currentPeriod
     private val categories = categoryRepository.categories
 

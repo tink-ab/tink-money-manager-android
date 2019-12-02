@@ -146,11 +146,8 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		index = TabsEnum.getTabsEnumByIndex(
 			getArguments().getInt(ARG_INDEX, TabsEnum.SIX_MONTH_PAGE.getIndex()));
 
-		List<Type> types = Lists.newArrayList();
-		types.add(Type.TYPE_BY_CATEGORY);
-
 		userConfigurationService.subscribe(userConfigurationSubscription);
-		statisticService.subscribe(statisticChangeObserver, types);
+		statisticService.subscribe(statisticChangeObserver);
 		statisticsRepository.getPeriodMap().observe(getViewLifecycleOwner(), periodMap -> {
 			periods = periodMap;
 			updatePeriods();

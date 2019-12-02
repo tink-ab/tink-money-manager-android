@@ -159,17 +159,13 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		index = TabsEnum.getTabsEnumByIndex(getArguments().getInt(ARG_POSITION));
 
-		List<Type> types = Lists.newArrayList();
-		types.add(Type.TYPE_LEFT_TO_SPEND);
-		types.add(Type.TYPE_LEFT_TO_SPEND_AVERAGE);
-
 		userConfigurationService.subscribe(userConfigurationSubscription);
 		statisticsRepository.getPeriodMap().observe(this, stringPeriodMap -> {
 			periods = stringPeriodMap;
 			updatePeriods();
 			setupViews();
 		});
-		statisticService.subscribe(this, types);
+		statisticService.subscribe(this);
 
 		setupPieChart();
 	}
