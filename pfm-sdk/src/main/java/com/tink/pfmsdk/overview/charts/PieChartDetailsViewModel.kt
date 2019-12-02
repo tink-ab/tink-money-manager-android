@@ -3,25 +3,23 @@ package com.tink.pfmsdk.overview.charts
 import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.repository.StatisticsRepository
 import se.tink.android.charts.ui.ColorGenerator
 import se.tink.android.charts.ui.DefaultColorGenerator
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
-import com.tink.pfmsdk.repository.StatisticsRepository
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
@@ -45,7 +43,7 @@ class PieChartDetailsViewModel @Inject constructor(
     transactionRepository: TransactionRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatisticsOf(Statistic.Type.TYPE_BY_CATEGORY)
+    private val statistics = statisticRepository.getStatistics()
     private val period = MediatorLiveData<Period>().apply {
         addSource(statisticRepository.currentPeriod) {
             if (value == null) value = it
@@ -72,10 +70,11 @@ class PieChartDetailsViewModel @Inject constructor(
     private val statisticData: LiveData<ChartData> =
         Transformations.switchMap(sourceData) { source ->
             if (source.category.children.isNotEmpty()) {
-                Transformations.map(statistics) { StatisticalData(
-                    source,
-                    it
-                ) as ChartData
+                Transformations.map(statistics) {
+                    StatisticalData(
+                        source,
+                        it
+                    )
                 }
             } else {
                 Transformations.map(
@@ -87,7 +86,7 @@ class PieChartDetailsViewModel @Inject constructor(
                     TransactionsData(
                         source,
                         transactions
-                    ) as ChartData
+                    )
                 }
             }
         }

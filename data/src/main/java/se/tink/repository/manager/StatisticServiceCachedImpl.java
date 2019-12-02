@@ -1,10 +1,6 @@
 package se.tink.repository.manager;
 
-import com.google.common.collect.Lists;
-import java.util.List;
 import javax.inject.Inject;
-import se.tink.core.models.statistic.Statistic;
-import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.cache.StasticCache;
@@ -23,14 +19,9 @@ public class StatisticServiceCachedImpl implements StatisticService {
 	}
 
 	@Override
-	public void subscribe(ObjectChangeObserver<StatisticTree> listener, List<Type> types) {
-		uncachedService.subscribe(listener, types);
-		readFromCache(listener, Lists.newArrayList(Statistic.Type.values()));
-	}
-
-	@Override
-	public void subscribe(ObjectChangeObserver<StatisticTree> listener, Type type) {
-		uncachedService.subscribe(listener, type);
+	public void subscribe(ObjectChangeObserver<StatisticTree> listener) {
+		uncachedService.subscribe(listener);
+		readFromCache(listener);
 	}
 
 	private void addCacheAsObserver() {
@@ -54,14 +45,13 @@ public class StatisticServiceCachedImpl implements StatisticService {
 			public void onDelete(StatisticTree item) {
 				cache.delete(item);
 			}
-		}, Lists.newArrayList(Statistic.Type.values()));
+		});
 	}
 
 
-	private void readFromCache(final ObjectChangeObserver<StatisticTree> listener,
-		final List<Statistic.Type> types) {
+	private void readFromCache(final ObjectChangeObserver<StatisticTree> listener) {
 		new Thread(() -> {
-			StatisticTree tree = cache.read(types);
+			StatisticTree tree = cache.read();
 			if (tree != null && !tree.isEmpty()) {
 				listener.onRead(tree);
 			}

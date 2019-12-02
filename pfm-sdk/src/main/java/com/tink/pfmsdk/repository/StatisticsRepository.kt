@@ -6,7 +6,6 @@ import androidx.lifecycle.Transformations
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
 import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.repository.ObjectChangeObserver
 import se.tink.repository.service.StatisticService
@@ -18,7 +17,7 @@ class StatisticsRepository @Inject constructor(
     private val statisticService: StatisticService
 ) {
 
-    val periodMap = getStatisticsOf(Statistic.Type.TYPE_BY_CATEGORY).map {
+    val periodMap = getStatistics().map {
         it.extractPeriods().filter { entry ->
             entry.value.isMonthPeriod
         }
@@ -34,10 +33,10 @@ class StatisticsRepository @Inject constructor(
         }
     }
 
-    fun getStatisticsOf(type: Statistic.Type): LiveData<StatisticTree> = object : MutableLiveData<StatisticTree>() {
+    fun getStatistics(): LiveData<StatisticTree> = object : MutableLiveData<StatisticTree>() {
         private val listener = StatisticObserver(this)
 
-        override fun onActive() = statisticService.subscribe(listener, type)
+        override fun onActive() = statisticService.subscribe(listener)
         override fun onInactive() = statisticService.unsubscribe(listener)
     }
 }

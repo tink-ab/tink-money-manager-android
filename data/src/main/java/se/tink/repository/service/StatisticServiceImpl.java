@@ -63,12 +63,7 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	@Override
-	public void subscribe(ObjectChangeObserver<StatisticTree> listener, List<Type> types) {
-		changeObserverers.add(listener);
-	}
-
-	@Override
-	public void subscribe(ObjectChangeObserver<StatisticTree> listener, Type type) {
+	public void subscribe(ObjectChangeObserver<StatisticTree> listener) {
 		changeObserverers.add(listener);
 	}
 
