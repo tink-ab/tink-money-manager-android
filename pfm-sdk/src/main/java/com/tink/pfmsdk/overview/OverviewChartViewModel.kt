@@ -6,11 +6,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
 import android.graphics.Color
-import android.util.TypedValue
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.calculateStatistic
@@ -26,7 +23,6 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.category.CategoryTree
 import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -41,7 +37,7 @@ class OverviewChartViewModel @Inject constructor(
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatisticsOf()
+    private val statistics = statisticRepository.getStatistics()
     private val period = statisticRepository.currentPeriod
     private val categories = categoryRepository.categories
 

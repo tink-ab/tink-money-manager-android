@@ -17,7 +17,7 @@ class StatisticsRepository @Inject constructor(
     private val statisticService: StatisticService
 ) {
 
-    val periodMap = getStatisticsOf().map {
+    val periodMap = getStatistics().map {
         it.extractPeriods().filter { entry ->
             entry.value.isMonthPeriod
         }
@@ -33,7 +33,7 @@ class StatisticsRepository @Inject constructor(
         }
     }
 
-    fun getStatisticsOf(): LiveData<StatisticTree> = object : MutableLiveData<StatisticTree>() {
+    fun getStatistics(): LiveData<StatisticTree> = object : MutableLiveData<StatisticTree>() {
         private val listener = StatisticObserver(this)
 
         override fun onActive() = statisticService.subscribe(listener)

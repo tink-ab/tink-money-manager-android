@@ -3,7 +3,6 @@ package com.tink.pfmsdk.overview.charts
 import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -21,7 +20,6 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.Statistic
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
@@ -46,7 +44,7 @@ class PieChartDetailsViewModel @Inject constructor(
     transactionRepository: TransactionRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatisticsOf()
+    private val statistics = statisticRepository.getStatistics()
     private val period = MediatorLiveData<Period>().apply {
         addSource(statisticRepository.currentPeriod) {
             if (value == null) value = it
