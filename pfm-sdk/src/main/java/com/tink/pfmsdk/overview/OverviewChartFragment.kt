@@ -32,10 +32,10 @@ import com.tink.pfmsdk.overview.charts.piechart.addSegments
 import com.tink.pfmsdk.util.CurrencyUtils
 import kotlin.math.abs
 
-private const val PAGE_COUNT = 3
+private const val PAGE_COUNT = 2
 private const val PAGE_EXPENSES = 0
-private const val PAGE_LEFT_TO_SPEND = 1
-private const val PAGE_INCOME = 2
+//private const val PAGE_LEFT_TO_SPEND = 1
+private const val PAGE_INCOME = 1
 
 class OverviewChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[OverviewChartViewModel::class.java] }
@@ -126,7 +126,7 @@ class OverviewChartFragment : BaseFragment() {
 
         private fun getPageData(position: Int) = when (position) {
             PAGE_EXPENSES -> viewModel.expenses
-            PAGE_LEFT_TO_SPEND -> viewModel.leftToSpend
+//            PAGE_LEFT_TO_SPEND -> viewModel.leftToSpend
             PAGE_INCOME -> viewModel.income
             else -> throw IllegalArgumentException("Invalid position $position")
         }
@@ -135,10 +135,10 @@ class OverviewChartFragment : BaseFragment() {
             when (position) {
                 PAGE_EXPENSES -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(
                     ChartType.EXPENSES), page)
-                PAGE_LEFT_TO_SPEND -> {
-                    val fragment = ChartDetailsPagerFragment.newInstance(ChartType.LEFT_TO_SPEND)
-                    fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.NONE)
-                }
+//                PAGE_LEFT_TO_SPEND -> {
+//                    val fragment = ChartDetailsPagerFragment.newInstance(ChartType.LEFT_TO_SPEND)
+//                    fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.NONE)
+//                }
                 PAGE_INCOME -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(ChartType.INCOME), page)
                 else -> throw IllegalArgumentException("Invalid position $position")
             }
