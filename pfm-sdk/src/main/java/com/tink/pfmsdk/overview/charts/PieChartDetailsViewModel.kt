@@ -15,6 +15,7 @@ import se.tink.android.charts.ui.DefaultColorGenerator
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
+import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
@@ -74,7 +75,7 @@ class PieChartDetailsViewModel @Inject constructor(
                     StatisticalData(
                         source,
                         it
-                    )
+                    ) as ChartData
                 }
             } else {
                 Transformations.map(
@@ -86,7 +87,7 @@ class PieChartDetailsViewModel @Inject constructor(
                     TransactionsData(
                         source,
                         transactions
-                    )
+                    ) as ChartData
                 }
             }
         }
