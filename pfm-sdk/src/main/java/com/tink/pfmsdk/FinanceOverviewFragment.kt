@@ -33,7 +33,7 @@ import java.security.cert.CertificateException
 import javax.crypto.NoSuchPaddingException
 import javax.inject.Inject
 
-class TinkFragment : Fragment(), HasAndroidInjector {
+class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -164,7 +164,7 @@ class TinkFragment : Fragment(), HasAndroidInjector {
         private const val ARG_CLIENT_CONFIGURATION = "clientConfiguration"
 
         fun newInstance(styleResId: Int, clientConfiguration: ClientConfiguration) =
-            TinkFragment().apply {
+            FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_STYLE_RES to styleResId,
                     ARG_CLIENT_CONFIGURATION to clientConfiguration
