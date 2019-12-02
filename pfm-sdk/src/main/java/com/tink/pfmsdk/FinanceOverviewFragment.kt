@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.tink.pfmsdk.analytics.AnalyticsSingleton
+import com.tink.pfmsdk.analytics.Tracker
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration
@@ -163,12 +165,21 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_CLIENT_CONFIGURATION = "clientConfiguration"
 
-        fun newInstance(styleResId: Int, clientConfiguration: ClientConfiguration) =
-            FinanceOverviewFragment().apply {
+        @JvmOverloads
+        @JvmStatic
+        fun newInstance(
+            styleResId: Int,
+            clientConfiguration: ClientConfiguration,
+            tracker: Tracker? = null
+        ): FinanceOverviewFragment {
+            AnalyticsSingleton.tracker = tracker
+
+            return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_STYLE_RES to styleResId,
                     ARG_CLIENT_CONFIGURATION to clientConfiguration
                 )
             }
+        }
     }
 }
