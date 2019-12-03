@@ -94,11 +94,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		return null;
 	}
 
-	@Nullable
-	protected Map<TrackerParameter, String> getAnalyticsParameters() {
-		return null;
-	}
-
 	protected String getTitle() {
 		return null;
 	}
@@ -341,26 +336,14 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public void trackScreen() {
-		Activity activity = getActivity();
-		Tracker tracker = AnalyticsSingleton.getTracker();
-		if (activity != null && tracker != null) {
-			if (getAnalyticsParameters() != null) {
-				tracker.track(getAnalyticsScreen(), getAnalyticsParameters(), activity);
-			} else {
-				tracker.track(getAnalyticsScreen(), activity);
-			}
+		if (AnalyticsSingleton.getTracker() != null) {
+			AnalyticsSingleton.getTracker().track(getAnalyticsScreen());
 		}
 	}
 
 	public void trackEvent(AnalyticsEvent event) {
 		if (AnalyticsSingleton.getTracker() != null) {
 			AnalyticsSingleton.getTracker().track(event);
-		}
-	}
-
-	public void trackEvent(AnalyticsEvent event, Map<TrackerParameter, String> parameters) {
-		if (AnalyticsSingleton.getTracker() != null) {
-			AnalyticsSingleton.getTracker().track(event, parameters);
 		}
 	}
 
