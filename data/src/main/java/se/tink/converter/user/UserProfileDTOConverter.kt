@@ -1,9 +1,10 @@
 package se.tink.converter.user
 
-import se.tink.converter.EnumMappers
 import se.tink.core.models.device.AuthenticationMethod
 import se.tink.core.models.user.UserProfile
 import se.tink.modelConverter.AbstractConverter
+
+typealias AuthenticationMethodDTO = se.tink.grpc.v1.models.AuthenticationMethod
 
 class UserProfileDTOConverter :
     AbstractConverter<se.tink.grpc.v1.models.UserProfile, UserProfile>() {
@@ -12,38 +13,14 @@ class UserProfileDTOConverter :
         UserProfile(
             username = source.username,
             nationalId = source.nationalId,
-            authorizedLoginMethods = mapAuthorizedAuthenticationMethods(source),
-            availableAuthenticationMethods = mapAvailableAuthenticationMethods(source)
+            authorizedLoginMethods = source.authorizedLoginMethodsList.map { it.mapAuthenticationMethod() }.toSet(),
+            availableAuthenticationMethods = source.availableLoginMethodsList.map { it.mapAuthenticationMethod() }.toSet()
         )
 
-
-    private fun mapAuthorizedAuthenticationMethods(
-        source: se.tink.grpc.v1.models.UserProfile
-    ): Set<AuthenticationMethod> {
-
-        val authenticationMethods = mutableSetOf<AuthenticationMethod>()
-
-        for (authenticationMethod in source
-            .authorizedLoginMethodsList) {
-            authenticationMethods
-                .add(EnumMappers.AUTHENTICATION_METHOD_MAP[authenticationMethod]!!)
+    private fun AuthenticationMethodDTO.mapAuthenticationMethod() =
+        when (this) {
+            AuthenticationMethodDTO.AUTHENTICATION_METHOD_BANKID -> AuthenticationMethod.AUTHENTICATION_METHOD_BANKID
+            AuthenticationMethodDTO.AUTHENTICATION_METHOD_EMAIL_AND_PASSWORD -> AuthenticationMethod.AUTHENTICATION_METHOD_EMAIL_AND_PASSWORD
+            else -> AuthenticationMethod.AUTHENTICATION_METHOD_UNKNOWN
         }
-
-        return authenticationMethods
-    }
-
-    private fun mapAvailableAuthenticationMethods(
-        source: se.tink.grpc.v1.models.UserProfile
-    ): Set<AuthenticationMethod> {
-
-        val authenticationMethods = mutableSetOf<AuthenticationMethod>()
-
-        for (authenticationMethod in source
-            .availableLoginMethodsList) {
-            authenticationMethods
-                .add(EnumMappers.AUTHENTICATION_METHOD_MAP[authenticationMethod]!!)
-        }
-
-        return authenticationMethods
-    }
 }
