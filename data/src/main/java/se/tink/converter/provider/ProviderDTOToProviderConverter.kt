@@ -76,6 +76,7 @@ class ProviderDTOToProviderConverter(
     private fun ProviderCapabilityDTO.toCoreModel(): Provider.Capability =
         when (this) {
             ProviderCapabilityDTO.UNRECOGNIZED,
+            ProviderCapabilityDTO.CAPABILITY_EINVOICES,
             ProviderCapabilityDTO.CAPABILITY_UNKNOWN -> Provider.Capability.CAPABILITY_UNKNOWN
             ProviderCapabilityDTO.CAPABILITY_TRANSFERS -> Provider.Capability.CAPABILITY_TRANSFERS
             ProviderCapabilityDTO.CAPABILITY_MORTGAGE_AGGREGATION -> Provider.Capability.CAPABILITY_MORTGAGE_AGGREGATION
