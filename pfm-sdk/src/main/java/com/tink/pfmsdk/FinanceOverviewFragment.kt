@@ -69,12 +69,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var statisticsRepository: StatisticsRepository
 
-    val tinkStyle by lazy {
+    private val tinkStyle by lazy {
         requireNotNull(arguments?.getInt(ARG_STYLE_RES))
     }
 
-    val clientConfiguration by lazy {
-        requireNotNull(arguments?.getParcelable(ARG_CLIENT_CONFIGURATION) as? ClientConfiguration)
+    private val accessToken by lazy {
+        requireNotNull(arguments?.getString(ARG_ACCESS_TOKEN))
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -82,7 +82,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         DaggerFragmentComponent.factory().create(this).inject(this)
-        interceptor.setAccessToken(clientConfiguration.accessToken)
+        interceptor.setAccessToken(accessToken)
         attachListeners()
         i18nConfiguration.initialize()
         refreshData()
@@ -163,11 +163,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     companion object {
 
         private const val ARG_STYLE_RES = "styleRes"
-        private const val ARG_CLIENT_CONFIGURATION = "clientConfiguration"
+        private const val ARG_ACCESS_TOKEN = "accessToken"
 
         @JvmOverloads
         @JvmStatic
         fun newInstance(
+            accessToken: String,
             styleResId: Int,
             clientConfiguration: ClientConfiguration,
             tracker: Tracker? = null
@@ -180,8 +181,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             }
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
-                    ARG_STYLE_RES to styleResId,
-                    ARG_CLIENT_CONFIGURATION to clientConfiguration
+                    ARG_ACCESS_TOKEN to accessToken,
+                    ARG_STYLE_RES to styleResId
                 )
             }
         }

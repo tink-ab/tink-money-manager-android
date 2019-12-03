@@ -9,9 +9,10 @@ class MainActivity : FragmentActivity() {
 
     private var currentFinanceOverviewFragment: FinanceOverviewFragment? = null
 
+    private val accessToken = "eyJhbGciOiJFUzI1NiIsImtpZCI6IjE0N2QwZTY5LTJiOTYtNDcxNi1hNWYzLTljYzkyYzBjMGE5ZCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzUzODAxMDUsImlhdCI6MTU3NTM3MjkwNSwiaXNzIjoidGluazovL2F1dGgiLCJqdGkiOiI2OTdmZjEwYS02YjI5LTRkNmQtODc3ZS00ODVmYjMxOTdkZGQiLCJvcmlnaW4iOiJtYWluIiwic2NvcGVzIjpbImludmVzdG1lbnRzOnJlYWQiLCJzdHJlYW1pbmc6YWNjZXNzIiwiY2F0ZWdvcmllczpyZWFkIiwidXNlcjpyZWFkIiwic3RhdGlzdGljczpyZWFkIiwiYWNjb3VudHM6cmVhZCIsImNyZWRlbnRpYWxzOnJlYWQiLCJ0cmFuc2FjdGlvbnM6cmVhZCIsImlkZW50aXR5OnJlYWQiXSwic3ViIjoidGluazovL2F1dGgvdXNlci9iMjUwMTZhYzZlZjg0YmIyOTY0NGZhNmUxZTI3YjE1YyIsInRpbms6Ly9hcHAvaWQiOiJhMzY2MTQ4YThmY2I0Yjg2YTA0NWFmOTAzOThlZTU3YiJ9.ZbqmGEj01dSHv8VYW8rlRE4VFODiV6EjS-p3qaVcWs7R0lqf4AHMoXXAwS3zlZGRUziRM5lG_G6M-I81MZIbOw"
+
     private var sampleClientConfiguration =
         ClientConfiguration(
-            accessToken = "eyJhbGciOiJFUzI1NiIsImtpZCI6IjE0N2QwZTY5LTJiOTYtNDcxNi1hNWYzLTljYzkyYzBjMGE5ZCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NzUzODAxMDUsImlhdCI6MTU3NTM3MjkwNSwiaXNzIjoidGluazovL2F1dGgiLCJqdGkiOiI2OTdmZjEwYS02YjI5LTRkNmQtODc3ZS00ODVmYjMxOTdkZGQiLCJvcmlnaW4iOiJtYWluIiwic2NvcGVzIjpbImludmVzdG1lbnRzOnJlYWQiLCJzdHJlYW1pbmc6YWNjZXNzIiwiY2F0ZWdvcmllczpyZWFkIiwidXNlcjpyZWFkIiwic3RhdGlzdGljczpyZWFkIiwiYWNjb3VudHM6cmVhZCIsImNyZWRlbnRpYWxzOnJlYWQiLCJ0cmFuc2FjdGlvbnM6cmVhZCIsImlkZW50aXR5OnJlYWQiXSwic3ViIjoidGluazovL2F1dGgvdXNlci9iMjUwMTZhYzZlZjg0YmIyOTY0NGZhNmUxZTI3YjE1YyIsInRpbms6Ly9hcHAvaWQiOiJhMzY2MTQ4YThmY2I0Yjg2YTA0NWFmOTAzOThlZTU3YiJ9.ZbqmGEj01dSHv8VYW8rlRE4VFODiV6EjS-p3qaVcWs7R0lqf4AHMoXXAwS3zlZGRUziRM5lG_G6M-I81MZIbOw",
             endpoint = "main-grpc.production.oxford.tink.se",
             certificate = "-----BEGIN CERTIFICATE-----\n"
                     + "MIIEkjCCA3qgAwIBAgIQCgFBQgAAAVOFc2oLheynCDANBgkqhkiG9w0BAQsFADA/\n"
@@ -50,6 +51,7 @@ class MainActivity : FragmentActivity() {
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
+                accessToken = accessToken,
                 styleResId = R.style.TinkSamplePfmStyle,
                 clientConfiguration = sampleClientConfiguration,
                 tracker = LogTracker()
