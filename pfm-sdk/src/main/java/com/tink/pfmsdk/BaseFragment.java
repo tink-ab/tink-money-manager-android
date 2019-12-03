@@ -1,6 +1,5 @@
 package com.tink.pfmsdk;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,6 +21,7 @@ import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import butterknife.ButterKnife;
+import com.tink.pfmsdk.analytics.AnalyticsSingleton;
 import com.tink.pfmsdk.theme.DefaultFragmentTheme;
 import com.tink.pfmsdk.theme.NoToolbarFragmentTheme;
 import com.tink.pfmsdk.theme.StatusBarTheme;
@@ -34,10 +34,8 @@ import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import java.util.Map;
 import javax.inject.Inject;
-import com.tink.pfmsdk.analytics.Analytics;
 import com.tink.pfmsdk.analytics.AnalyticsEvent;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
-import com.tink.pfmsdk.analytics.TrackerParameter;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
 
@@ -53,9 +51,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	@Inject
 	protected SnackbarManager snackbarManager;
-
-	@Inject
-	protected Analytics analytics;
 
 	@Inject
 	DispatchingAndroidInjector<Object> androidInjector;
@@ -93,11 +88,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	@Nullable
 	protected AnalyticsScreen getAnalyticsScreen() {
-		return null;
-	}
-
-	@Nullable
-	protected Map<TrackerParameter, String> getAnalyticsParameters() {
 		return null;
 	}
 
@@ -343,22 +333,15 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public void trackScreen() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			if (getAnalyticsParameters() != null) {
-				analytics.track(getAnalyticsScreen(), getAnalyticsParameters(), getActivity());
-			} else {
-				analytics.track(getAnalyticsScreen(), getActivity());
-			}
+		if (AnalyticsSingleton.getTracker() != null && getAnalyticsScreen() != null) {
+			AnalyticsSingleton.getTracker().track(getAnalyticsScreen());
 		}
 	}
 
 	public void trackEvent(AnalyticsEvent event) {
-		analytics.track(event);
-	}
-
-	public void trackEvent(AnalyticsEvent event, Map<TrackerParameter, String> parameters) {
-		analytics.track(event, parameters);
+		if (AnalyticsSingleton.getTracker() != null && event != null) {
+			AnalyticsSingleton.getTracker().track(event);
+		}
 	}
 
 	protected void updateToolbar() {

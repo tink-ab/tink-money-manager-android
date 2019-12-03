@@ -11,7 +11,6 @@ import com.tink.pfmsdk.FinanceOverviewFragment
 import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
-import com.tink.pfmsdk.analytics.Analytics
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
 import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.OverviewFragment
@@ -119,9 +118,6 @@ class EverythingModule {
     @Provides
     fun providesTransitionCoordinator(transitionCoordinator: TransitionCoordinatorImpl): TransitionCoordinator =
         transitionCoordinator
-
-    @Provides
-    fun analytics() = Analytics(setOf())
 
     @Provides
     @Singleton
