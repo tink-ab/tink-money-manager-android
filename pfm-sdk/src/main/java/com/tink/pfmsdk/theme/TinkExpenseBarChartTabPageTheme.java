@@ -2,7 +2,6 @@ package com.tink.pfmsdk.theme;
 
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.overview.charts.TabExpensesBarChartFragment;
 import com.tink.pfmsdk.view.Hecto;
@@ -81,22 +80,6 @@ public class TinkExpenseBarChartTabPageTheme implements TabExpensesBarChartFragm
 	public int get1YearNegativeBarColor() {
 		return ContextUtils.getColorFromAttr(context, R.attr.tink_expensesLightColor);
 	}
-
-	// TODO: PFMSDK
-	/*@Override
-	public TinkIconView.Theme getIconTheme() {
-		return new TinkPlainIconTheme(context) {
-			@Override
-			public float getIconSize() {
-				return context.getResources().getDimension(R.dimen.icon_size_small);
-			}
-
-			@Override
-			public int getIconColorAttr() {
-				return ContextCompat.getColor(context, R.color.expensesDark);
-			}
-		};
-	}*/
 
 	@Override
 	public TinkToolbar.Theme getToolbarTheme() {

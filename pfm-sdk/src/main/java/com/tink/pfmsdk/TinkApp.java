@@ -59,12 +59,6 @@ public class TinkApp extends Application implements HasAndroidInjector {
 		}
 
 		BuildConfiguration config = BuildConfigurations.INSTANCE.getInstance();
-		// TODO: PFMSDK: Dagger setup
-		/*AppComponent appComponent = DaggerAppComponent.builder()
-			.cacheModule(new CacheModule(this, config.getFeatureConfigurations().hasFeature(Feature.DISK_CACHE)))
-			.applicationModule(new ApplicationModule(this, this))
-			.build();
-		appComponent.inject(this);*/
 
 		Timber.plant(config.getLoggingConfigurations().getTimberTree());
 

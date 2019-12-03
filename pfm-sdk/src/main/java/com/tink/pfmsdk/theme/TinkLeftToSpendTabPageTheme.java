@@ -2,7 +2,6 @@ package com.tink.pfmsdk.theme;
 
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.overview.charts.TabLeftToSpendFragment;
 import com.tink.pfmsdk.view.Hecto;
@@ -137,12 +136,6 @@ public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme
 	public Theme getXLabelTheme() {
 		return new AxisLabel(context);
 	}
-
-	// TODO: PFMSDK
-//	@Override
-//	public TinkIconView.Theme getTutorialMarkerTheme() {
-//		return new TinkPlainIconTheme(context);
-//	}
 
 	@Override
 	public int getAverageLineColor() {

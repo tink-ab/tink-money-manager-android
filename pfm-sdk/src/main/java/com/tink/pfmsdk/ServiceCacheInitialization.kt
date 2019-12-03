@@ -3,7 +3,6 @@ package com.tink.pfmsdk
 import se.tink.repository.service.AccountService
 import se.tink.repository.service.CategoryService
 import se.tink.repository.service.CredentialService
-import se.tink.repository.service.ProviderService
 import se.tink.repository.service.StatisticService
 import se.tink.repository.service.TransactionService
 import se.tink.repository.service.UserConfigurationService
@@ -15,7 +14,6 @@ class ServiceCacheInitialization @Inject constructor(
     accountService: AccountService,
     categoryService: CategoryService,
     credentialService: CredentialService,
-    providerService: ProviderService,
     statisticService: StatisticService,
     transactionService: TransactionService,
     userConfigurationService: UserConfigurationService
