@@ -13,6 +13,9 @@ class UserProfileDTOConverter :
         UserProfile(
             username = source.username,
             nationalId = source.nationalId,
+            locale = source.locale,
+            timeZone = source.timeZone,
+            currency = source.currency,
             authorizedLoginMethods = source.authorizedLoginMethodsList.map { it.mapAuthenticationMethod() }.toSet(),
             availableAuthenticationMethods = source.availableLoginMethodsList.map { it.mapAuthenticationMethod() }.toSet()
         )
