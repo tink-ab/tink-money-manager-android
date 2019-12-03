@@ -57,3 +57,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+# Ignore the sample configuration package.
+app/src/main/java/se/tink/android/tink_pfm_sdk_android/configuration
