@@ -173,7 +173,11 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             tracker: Tracker? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
-
+            NetworkConfigSingleton.apply {
+                endpoint = clientConfiguration.endpoint
+                certificate = clientConfiguration.certificate ?: ""
+                port = clientConfiguration.port
+            }
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_STYLE_RES to styleResId,
