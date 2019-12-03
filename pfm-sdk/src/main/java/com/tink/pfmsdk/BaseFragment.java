@@ -1,6 +1,5 @@
 package com.tink.pfmsdk;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import butterknife.ButterKnife;
 import com.tink.pfmsdk.analytics.AnalyticsSingleton;
-import com.tink.pfmsdk.analytics.Tracker;
 import com.tink.pfmsdk.theme.DefaultFragmentTheme;
 import com.tink.pfmsdk.theme.NoToolbarFragmentTheme;
 import com.tink.pfmsdk.theme.StatusBarTheme;
@@ -38,7 +36,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import com.tink.pfmsdk.analytics.AnalyticsEvent;
 import com.tink.pfmsdk.analytics.AnalyticsScreen;
-import com.tink.pfmsdk.analytics.TrackerParameter;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
 
@@ -336,13 +333,13 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public void trackScreen() {
-		if (AnalyticsSingleton.getTracker() != null) {
+		if (AnalyticsSingleton.getTracker() != null && getAnalyticsScreen() != null) {
 			AnalyticsSingleton.getTracker().track(getAnalyticsScreen());
 		}
 	}
 
 	public void trackEvent(AnalyticsEvent event) {
-		if (AnalyticsSingleton.getTracker() != null) {
+		if (AnalyticsSingleton.getTracker() != null && event != null) {
 			AnalyticsSingleton.getTracker().track(event);
 		}
 	}
