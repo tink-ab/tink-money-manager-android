@@ -1,11 +1,8 @@
 package se.tink.repository;
 
-import se.tink.core.models.device.UpdateI18NSettingsRequest;
-import se.tink.core.models.device.UpdateI18NSettingsResponse;
 import se.tink.repository.service.SettingsService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.StreamingServiceErrorHandler;
-import timber.log.Timber;
 
 public class ServiceCoordinator {
 
@@ -45,7 +42,5 @@ public class ServiceCoordinator {
 //						initializeStreaming(streamingServiceErrorHandler);
 //					}
 //				}));
-		// TODO: PFMSDK: This can be cleaned up when we have the no-streaming implementation
-		initializeStreaming(streamingServiceErrorHandler);
 	}
 }

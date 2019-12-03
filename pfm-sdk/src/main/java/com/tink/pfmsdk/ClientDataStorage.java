@@ -114,7 +114,6 @@ public class ClientDataStorage implements Clearable {
 		editor.apply();
 	}
 
-	// TODO: PFMSDK: Do we need this? It has a facebook sdk dependency
 	/*public Set<String> getPreselectedCredentialsIds() {
 		return settings.getStringSet("preselectedCredentialsIds", Sets.<String>newHashSet());
 	}*/

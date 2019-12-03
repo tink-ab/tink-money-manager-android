@@ -2,8 +2,6 @@ package com.tink.pfmsdk.theme;
 
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.overview.charts.TabIncomeBarChartFragment;
 import com.tink.pfmsdk.view.Hecto;
@@ -81,22 +79,6 @@ public class TinkIncomeBarChartTabPageTheme implements TabIncomeBarChartFragment
 	public int get1YearNegativeBarColor() {
 		return ContextUtils.getColorFromAttr(context, R.attr.tink_incomeLightColor);
 	}
-
-	// TODO: PFMSDK
-//	@Override
-//	public TinkIconView.Theme getIconTheme() {
-//		return new TinkPlainIconTheme(context) {
-//			@Override
-//			public float getIconSize() {
-//				return context.getResources().getDimension(R.dimen.icon_size_small);
-//			}
-//
-//			@Override
-//			public int getIconColorAttr() {
-//				return ContextCompat.getColor(context, R.color.incomeDark);
-//			}
-//		};
-//	}
 
 	@Override
 	public TinkIncomeToolbarTheme getToolbarTheme() {

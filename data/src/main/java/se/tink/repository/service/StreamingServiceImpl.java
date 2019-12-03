@@ -156,7 +156,6 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void subscribeForProviders(ObjectChangeObserver<Provider> listener) {
-		//TODO
 	}
 
 	@Override
@@ -176,7 +175,6 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void subscribeForPeriods(ObjectChangeObserver<Map<String, Period>> listener) {
-		// TODO: PFMSDK: This is currently used in the bar chart tab pages. Do we need it?
 		//periodListeners.add(listener);
 	}
 
