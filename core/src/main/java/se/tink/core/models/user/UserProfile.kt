@@ -4,12 +4,12 @@ import se.tink.core.models.device.AuthenticationMethod
 
 data class UserProfile(
     val username: String,
-    private val nationalId: String,
-    private val locale: String,
-    private val timeZone: String,
-    private val currency: String,
-    private val authorizedLoginMethods: Set<AuthenticationMethod>,
-    private val availableAuthenticationMethods: Set<AuthenticationMethod>
+    val nationalId: String,
+    val locale: String,
+    val timeZone: String,
+    val currency: String,
+    val authorizedLoginMethods: Set<AuthenticationMethod>,
+    val availableAuthenticationMethods: Set<AuthenticationMethod>
 ) {
     fun hasPassword(): Boolean {
         return authorizedLoginMethods
