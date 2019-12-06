@@ -1,11 +1,11 @@
 package com.tink.pfmsdk
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+data class ClientConfiguration(val environment: Environment, val certificate: String = "")
 
-@Parcelize
-data class ClientConfiguration(
-    val endpoint: String,
-    val certificate: String = "",
-    val port: Int
-) : Parcelable
+sealed class Environment(val grpcUrl: String, val port: Int) {
+
+    object Production : Environment(grpcUrl = "main-grpc.production.oxford.tink.se", port = 443)
+
+    class Custom(grpcApiUrl: String, portNumber: Int) :
+        Environment(grpcUrl = grpcApiUrl, port = portNumber)
+}
