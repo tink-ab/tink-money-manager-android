@@ -1,3 +1,57 @@
 # Customization
 
-// TODO: Add customization guide
+You can customize the fonts and colors used in the finance overview UI by adding customizations in your application's `styles.xml`
+
+## Customize fonts
+
+You can add custom font resources for three font typefaces which are represented by the custom attributes - `font_bold`, `font_semi_bold` and `font_regular`. Set these custom attributes to the 
+resource IDs of the font files you want to use.
+```xml
+<resources>
+    <item name="font_bold" type="font">@font/your_custom_bold_font</item>
+    <item name="font_semi_bold" type="font">@font/your_custom_semi_bold_font</item>
+    <item name="font_regular" type="font">@font/your_custom_regular_font</item>
+</resources>
+```
+
+## Customize colors
+You can customize colors by extending the existing `FinanceOverviewPfmStyle` from the SDK and overriding the custom attributes that are available.
+```xml
+<style name="YourCustomFinanceOverviewStyle" parent="FinanceOverviewStyle">
+    <item name="tink_expensesColor">@color/custom_expenses</item>
+    <item name="tink_expensesLightColor">@color/custom_expenses_light</item>
+    <item name="tink_expensesDarkColor">@color/custom_expenses_dark</item>
+    <item name="tink_colorOnExpenses">@color/custom_color_on_expenses</item>
+    <item name="tink_leftToSpendColor">@color/custom_left_to_spend</item>
+    <item name="tink_leftToSpendLightColor">@color/custom_left_to_spend_light</item>
+    <item name="tink_leftToSpendDarkColor">@color/custom_left_to_spend_dark</item>
+    <item name="tink_colorOnLeftToSpend">@color/custom_color_on_left_to_spend</item>
+    <item name="tink_incomeColor">@color/custom_income</item>
+    <item name="tink_incomeLightColor">@color/custom_income_light</item>
+    <item name="tink_incomeDarkColor">@color/custom_income_dark</item>
+    <item name="tink_colorOnIncome">@color/custom_color_on_income</item>
+    <item name="tink_transferColor">@color/custom_transfer</item>
+    <item name="tink_transferLightColor">@color/custom_transfer_light</item>
+    <item name="tink_colorOnTransfer">@color/custom_color_on_transfer</item>
+    <item name="tink_uncategorizedColor">@color/custom_uncategorized</item>
+    <item name="tink_uncategorizedLightColor">@color/custom_uncategorized_light</item>
+    <item name="tink_snackbarColor">@color/custom_snackbar</item>
+    <item name="tink_colorOnSnackBar">@color/custom_color_on_snackbar</item>
+    <item name="tink_chartContainerBackgroundColor">@color/custom_chart_container_background</item>
+    <item name="tink_chartMeanValueColor">@color/custom_chart_mean_value</item>
+    <item name="tink_chartAxisLabelColor">@color/custom_chart_axis_label</item>
+    <item name="tink_tabNormalColor">@color/custom_tab_normal</item>
+    <item name="tink_tabSelectedColor">@color/custom_tab_selected</item>
+    <item name="tink_defaultButtonTextColor">@color/custom_default_button_text</item>
+    <item name="tink_colorAccent">@color/colorAccent</item>
+    <item name="tink_colorAccentLight">@color/colorAccentLight</item>
+    <item name="tink_colorAccentDark">@color/colorAccentDark</item>
+    <item name="tink_colorOnAccent">@color/colorOnAccent</item>
+    <item name="tink_colorPrimary">@color/colorPrimary</item>
+    <item name="tink_colorPrimaryLight">@color/colorPrimaryLight</item>
+    <item name="tink_colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="tink_colorOnPrimary">@color/colorOnPrimary</item>
+    <item name="tink_textColorAction">@color/textColorAction</item>
+</style>
+```
+
