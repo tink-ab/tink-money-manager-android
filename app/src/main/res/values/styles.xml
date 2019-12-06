@@ -6,8 +6,7 @@
     <item name="android:colorBackground">@color/white_90</item>
   </style>
 
-  <!-- TODO: Should we rename this to FinanceOverviewStyle? -->
-  <style name="TinkSamplePfmStyle" parent="TinkPfmStyle">
+  <style name="FinanceOverviewSampleStyle" parent="FinanceOverviewStyle">
     <item name="tink_chartMeanValueColor">@color/grey_light</item>
     <item name="tink_chartAxisLabelColor">@color/grey_light</item>
     <item name="tink_colorAccent">#ff461e7d</item>

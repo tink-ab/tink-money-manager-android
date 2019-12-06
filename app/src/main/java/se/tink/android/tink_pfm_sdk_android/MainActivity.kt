@@ -17,7 +17,7 @@ class MainActivity : FragmentActivity() {
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
                 accessToken = Configuration.sampleAccessToken,
-                styleResId = R.style.TinkSamplePfmStyle,
+                styleResId = R.style.FinanceOverviewSampleStyle,
                 clientConfiguration = Configuration.sampleClientConfiguration,
                 tracker = LogTracker()
             ).also {
