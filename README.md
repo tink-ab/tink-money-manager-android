@@ -31,28 +31,34 @@ dependencies {
 
 ## Initialization
 
-1. Set up a configuration object with your specifics:
+1. Set up a client configuration object with your specifics:
 
 ```kotlin
 val config = 
     ClientConfiguration(
-        accessToken = "yourAccessToken" // [1]
+        environment = Environment.Production, // Or define your own environment
+        sslCertificate = "yourCertificate" // [1]
     )
 ```
+`[1]` The SSL certificate is used for certificate pinning. This is optional and you can choose to set it depending upon on your requirements.
 
-`[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
 
-2. Override the `TinkPfmStyle` for color customizations. Follow the Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
+2. Override the `TinkPfmStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
+
+3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI for analytics. Follow the [analytics tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) to set this up.
 
 3. Create an instance of `FinanceOverviewController`
 
 ```kotlin
 val financeOverviewFragment = 
     FinanceOverviewFragment.newInstance(
+        accessToken = "yourAccessToken", // [1]
         styleResId = R.style.YourCustomTinkPfmStyle, // Resource ID of your style that overrides TinkPfmStyle
-        clientConfiguration = ClientConfiguration(accessToken)
+        clientConfiguration = config, // Your client configuration object
+        tracker = yourTracker // Your Tracker implementation
     )
 ```
+`[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
 
 ## Handling back press
 
@@ -68,3 +74,4 @@ override fun onBackPressed() {
 
 ## Guides
 [Customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
+[Analytics Tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) This document outlines how to set up trackers for tracking screens and events in the finance overview UI for analytics
