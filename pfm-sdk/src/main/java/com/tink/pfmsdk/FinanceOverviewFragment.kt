@@ -176,7 +176,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             AnalyticsSingleton.tracker = tracker
             NetworkConfigSingleton.apply {
                 endpoint = clientConfiguration.environment.grpcUrl
-                certificate = clientConfiguration.certificate
+                sslCertificate = clientConfiguration.sslCertificate
                 port = clientConfiguration.environment.port
             }
             return FinanceOverviewFragment().apply {

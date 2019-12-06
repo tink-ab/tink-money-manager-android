@@ -1,6 +1,6 @@
 package com.tink.pfmsdk
 
-data class ClientConfiguration(val environment: Environment, val certificate: String = "")
+data class ClientConfiguration(val environment: Environment, val sslCertificate: String = "")
 
 sealed class Environment(val grpcUrl: String, val port: Int) {
 
