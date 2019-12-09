@@ -69,13 +69,4 @@ public class EnumMappers {
 				PeriodSetting.PeriodDateBreakType.UNKNOWN)
 			.build();
 
-	public static final BiMap<se.tink.grpc.v1.models.AuthenticationMethod, AuthenticationMethod> AUTHENTICATION_METHOD_MAP =
-		ImmutableBiMap.<se.tink.grpc.v1.models.AuthenticationMethod, AuthenticationMethod>builder()
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_UNKNOWN, AuthenticationMethod.AUTHENTICATION_METHOD_UNKNOWN)
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_BANKID, AuthenticationMethod.AUTHENTICATION_METHOD_BANKID)
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_EMAIL_AND_PASSWORD, AuthenticationMethod.AUTHENTICATION_METHOD_EMAIL_AND_PASSWORD)
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_SMS_OTP_AND_PIN6, AuthenticationMethod.AUTHENTICATION_METHOD_SMS_OTP_AND_PIN6)
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_PHONE_NUMBER_AND_PIN6, AuthenticationMethod.AUTHENTICATION_METHOD_PHONE_NUMBER_AND_PIN6)
-			.put(se.tink.grpc.v1.models.AuthenticationMethod.AUTHENTICATION_METHOD_ABN_AMRO_PIN5, AuthenticationMethod.AUTHENTICATION_METHOD_ABN_AMRO_PIN5)
-			.build();
 }

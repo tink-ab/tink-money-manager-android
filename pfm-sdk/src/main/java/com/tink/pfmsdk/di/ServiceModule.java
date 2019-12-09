@@ -164,10 +164,11 @@ public class ServiceModule {
 	@Singleton
 	public UserConfigurationService userConfigurationService(
 		StreamingService streamingService,
+		UserService userService,
 		ModelConverter modelConverter,
 		Cache<UserConfiguration> cache
 	) {
-		return new UserConfigurationServiceCachedImpl(streamingService, cache);
+		return new UserConfigurationServiceCachedImpl(streamingService, userService, cache);
 	}
 
 	@Provides
