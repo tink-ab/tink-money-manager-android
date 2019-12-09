@@ -12,7 +12,6 @@ class UserProfileDTOConverter :
     override fun convert(source: se.tink.grpc.v1.models.UserProfile) =
         UserProfile(
             username = source.username,
-            nationalId = source.nationalId,
             locale = source.locale,
             market = source.market,
             timeZone = source.timeZone,

@@ -4,7 +4,6 @@ import se.tink.core.models.device.AuthenticationMethod
 
 data class UserProfile(
     val username: String,
-    val nationalId: String,
     val locale: String,
     val market: String,
     val timeZone: String,
