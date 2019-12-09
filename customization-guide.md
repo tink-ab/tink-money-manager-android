@@ -4,13 +4,13 @@ You can customize the fonts and colors used in the finance overview UI by adding
 
 ## Customize fonts
 
-You can add custom font resources for three font typefaces which are represented by the custom attributes - `font_bold`, `font_semi_bold` and `font_regular`. Set these custom attributes to the 
+You can add custom font resources for three font typefaces which are represented by the custom attributes - `tink_font_bold`, `tink_font_semi_bold` and `tink_font_regular`. Set these custom attributes to the 
 resource IDs of the font files you want to use.
 ```xml
 <resources>
-    <item name="font_bold" type="font">@font/your_custom_bold_font</item>
-    <item name="font_semi_bold" type="font">@font/your_custom_semi_bold_font</item>
-    <item name="font_regular" type="font">@font/your_custom_regular_font</item>
+    <item name="tink_font_bold" type="font">@font/your_custom_bold_font</item>
+    <item name="tink_font_semi_bold" type="font">@font/your_custom_semi_bold_font</item>
+    <item name="tink_font_regular" type="font">@font/your_custom_regular_font</item>
 </resources>
 ```
 

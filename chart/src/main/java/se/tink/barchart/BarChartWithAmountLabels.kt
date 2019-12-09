@@ -11,7 +11,6 @@ import android.graphics.RectF
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import se.tink.android.charts.R
 import se.tink.android.delegates.InvalidateDelegate
@@ -19,7 +18,6 @@ import se.tink.commons.utils.extractTextStyle
 import se.tink.core.extensions.whenNonNull
 import se.tink.extensions.drawBarChartWithAmountLabels
 import se.tink.utils.ScreenUtils
-import kotlin.math.roundToInt
 
 
 class BarChartWithAmountLabels : View {
@@ -64,7 +62,7 @@ class BarChartWithAmountLabels : View {
     private val amountLabelPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.nano_text_size)
 //        color = ContextCompat.getColor(context, R.color.greyblack) //TODO:PFMSDK
-        typeface = ResourcesCompat.getFont(context, R.font.font_regular)
+        typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true
     }
