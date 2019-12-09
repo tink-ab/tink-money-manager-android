@@ -43,7 +43,7 @@ val config =
 `[1]` The SSL certificate is used for certificate pinning. This is optional and you can choose to set it depending on your requirements.
 
 
-2. Override the `FinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
+2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
 
 3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI for analytics. Follow the [analytics tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) to set this up.
 
@@ -53,7 +53,7 @@ val config =
 val financeOverviewFragment = 
     FinanceOverviewFragment.newInstance(
         accessToken = "yourAccessToken", // [1]
-        styleResId = R.style.YourCustomFinanceOverviewStyle, // Resource ID of your style that overrides FinanceOverviewStyle
+        styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that overrides TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
         tracker = yourTracker // Your Tracker implementation
     )

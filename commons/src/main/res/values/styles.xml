@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="FinanceOverviewStyle">
+  <style name="TinkFinanceOverviewStyle">
     <item name="tink_expensesColor">@color/expensive_blue</item>
     <item name="tink_expensesLightColor">@color/expensive_blue_light</item>
     <item name="tink_expensesDarkColor">@color/expensive_blue_dark</item>

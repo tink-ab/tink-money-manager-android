@@ -15,9 +15,9 @@ resource IDs of the font files you want to use.
 ```
 
 ## Customize colors
-You can customize colors by extending the existing `FinanceOverviewPfmStyle` from the SDK and overriding the custom attributes that are available.
+You can customize colors by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the custom attributes that are available.
 ```xml
-<style name="YourCustomFinanceOverviewStyle" parent="FinanceOverviewStyle">
+<style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
     <item name="tink_expensesColor">@color/custom_expenses</item>
     <item name="tink_expensesLightColor">@color/custom_expenses_light</item>
     <item name="tink_expensesDarkColor">@color/custom_expenses_dark</item>
