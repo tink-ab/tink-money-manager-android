@@ -40,7 +40,7 @@ val config =
         sslCertificate = "yourCertificate" // [1]
     )
 ```
-`[1]` The SSL certificate is used for certificate pinning. This is optional and you can choose to set it depending upon on your requirements.
+`[1]` The SSL certificate is used for certificate pinning. This is optional and you can choose to set it depending on your requirements.
 
 
 2. Override the `TinkPfmStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
