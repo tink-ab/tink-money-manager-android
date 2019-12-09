@@ -6,6 +6,7 @@ data class UserProfile(
     val username: String,
     val nationalId: String,
     val locale: String,
+    val market: String,
     val timeZone: String,
     val currency: String,
     val authorizedLoginMethods: Set<AuthenticationMethod>,
