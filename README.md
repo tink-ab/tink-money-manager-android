@@ -53,7 +53,7 @@ val config =
 val financeOverviewFragment = 
     FinanceOverviewFragment.newInstance(
         accessToken = "yourAccessToken", // [1]
-        styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that overrides TinkFinanceOverviewStyle
+        styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
         tracker = yourTracker // Your Tracker implementation
     )
