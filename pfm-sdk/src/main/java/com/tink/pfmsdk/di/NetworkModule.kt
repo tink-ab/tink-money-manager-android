@@ -26,9 +26,9 @@ class NetworkModule {
         NetworkConfiguration(
             serverAddress = NetworkConfigSingleton.endpoint,
             clientKey = "",
-            sslKey = NetworkConfigSingleton.certificate,
+            sslKey = NetworkConfigSingleton.sslCertificate,
             port = NetworkConfigSingleton.port,
-            useSsl = !NetworkConfigSingleton.certificate.isBlank()
+            useSsl = !NetworkConfigSingleton.sslCertificate.isBlank()
         )
 
     @Provides
