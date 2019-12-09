@@ -2,6 +2,8 @@ package com.tink.pfmsdk.overview.charts
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -17,9 +19,11 @@ import com.tink.pfmsdk.R
 import com.tink.pfmsdk.analytics.AnalyticsScreen
 import com.tink.pfmsdk.extensions.onPageSelected
 import com.tink.pfmsdk.theme.getChartDetailsThemeForType
-import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import com.tink.pfmsdk.transaction.TransactionsListMetaData
+import com.tink.pfmsdk.util.FontUtils
+import com.tink.pfmsdk.view.CustomTypefaceSpan
+import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import se.tink.core.models.misc.Period
@@ -74,6 +78,16 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.details_options_menu)
+        toolbar.menu?.getItem(0)?.let {  menuItem ->
+            val spannableTitle = SpannableString(menuItem.title)
+            spannableTitle.setSpan(
+                CustomTypefaceSpan("", FontUtils.getTypeface(R.font.tink_font_bold, context)),
+                0,
+                spannableTitle.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            menuItem.title = spannableTitle
+        }
     }
 
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
