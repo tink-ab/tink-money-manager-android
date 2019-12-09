@@ -19,5 +19,20 @@ class UserConfiguration {
     fun setFlags(flags: List<String>) {
         this.flags = UserFeatureFlags(flags)
     }
+
+    companion object {
+        @JvmStatic
+        fun fromProfile(userProfile: UserProfile): UserConfiguration {
+
+            val i18NConfiguration = UserConfigurationI18NConfiguration().apply {
+                marketCode = userProfile.market
+                localeCode = userProfile.locale
+                currencyCode = userProfile.currency
+                timezoneCode = userProfile.timeZone
+            }
+
+            return UserConfiguration().also { it.i18nConfiguration = i18NConfiguration }
+        }
+    }
 }
 
