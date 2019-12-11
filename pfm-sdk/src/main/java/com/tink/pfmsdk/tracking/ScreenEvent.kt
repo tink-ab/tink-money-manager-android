@@ -16,6 +16,7 @@ data class ScreenEvent private constructor(val name: String) {
         val TRANSACTIONS_LIST = ScreenEvent("Transactions.List")
         @JvmField
         val EXPENSES = ScreenEvent("Expenses")
+        // TODO: Add logic to track the Income screen.
         @JvmField
         val INCOME = ScreenEvent("Income")
     }
