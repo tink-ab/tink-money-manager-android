@@ -83,5 +83,6 @@
   <string name="transactions_list_toolbar_title">Transactions</string>
   <string name="expenses_menu_settings_tite">Transactions</string>
   <string name="other">Other</string>
+  <string name="category_default_child_format">%s - Other</string>
 
 </resources>
