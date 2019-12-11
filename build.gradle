@@ -29,6 +29,12 @@ allprojects {
     }
 }
 
+subprojects {
+    if(it.name != "app") {
+        apply from: "../maven-publish.gradle"
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
