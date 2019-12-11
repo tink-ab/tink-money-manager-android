@@ -4,7 +4,7 @@ import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ActionEvent
+import com.tink.pfmsdk.tracking.ActionEvent
 import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
 import se.tink.core.models.Category
 

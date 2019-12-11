@@ -21,7 +21,7 @@ import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import butterknife.ButterKnife;
-import com.tink.pfmsdk.analytics.AnalyticsSingleton;
+import com.tink.pfmsdk.tracking.AnalyticsSingleton;
 import com.tink.pfmsdk.theme.DefaultFragmentTheme;
 import com.tink.pfmsdk.theme.NoToolbarFragmentTheme;
 import com.tink.pfmsdk.theme.StatusBarTheme;
@@ -34,8 +34,8 @@ import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import java.util.Map;
 import javax.inject.Inject;
-import com.tink.pfmsdk.analytics.ActionEvent;
-import com.tink.pfmsdk.analytics.ScreenEvent;
+import com.tink.pfmsdk.tracking.ActionEvent;
+import com.tink.pfmsdk.tracking.ScreenEvent;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
 

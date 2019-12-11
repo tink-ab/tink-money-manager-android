@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.theme.getCategorySelectionThemeForType
 import com.tink.pfmsdk.view.TreeListSelectionAdapter
 import com.tink.pfmsdk.view.TreeListSelectionItem

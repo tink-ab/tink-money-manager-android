@@ -1,7 +1,7 @@
 package com.tink.pfmsdk.overview.charts.piechart
 
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import android.content.Context
 import android.os.Bundle
 import android.transition.Fade

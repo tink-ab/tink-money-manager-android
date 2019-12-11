@@ -1,4 +1,4 @@
-package com.tink.pfmsdk.analytics
+package com.tink.pfmsdk.tracking
 
 data class ScreenEvent private constructor(val name: String) {
 

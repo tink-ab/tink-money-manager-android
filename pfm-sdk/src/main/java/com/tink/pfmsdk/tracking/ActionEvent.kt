@@ -1,4 +1,4 @@
-package com.tink.pfmsdk.analytics
+package com.tink.pfmsdk.tracking
 
 data class ActionEvent private constructor(val category: String, val action: String, val label: String) {
 

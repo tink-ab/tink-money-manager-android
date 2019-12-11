@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.extensions.onPageSelected
 import com.tink.pfmsdk.theme.getChartDetailsThemeForType
 import com.tink.pfmsdk.transaction.TransactionsListFragment

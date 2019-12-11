@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.tink.pfmsdk.analytics.AnalyticsSingleton
-import com.tink.pfmsdk.analytics.Tracker
+import com.tink.pfmsdk.tracking.AnalyticsSingleton
+import com.tink.pfmsdk.tracking.Tracker
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration

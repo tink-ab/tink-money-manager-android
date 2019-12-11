@@ -18,7 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.databinding.FragmentFullPieChartBinding
 import com.tink.pfmsdk.databinding.PieChartLabelBinding
 import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*

@@ -1,7 +1,7 @@
 package com.tink.pfmsdk.transaction
 
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.view.TinkToolbar
 import android.os.Bundle
 import android.view.View

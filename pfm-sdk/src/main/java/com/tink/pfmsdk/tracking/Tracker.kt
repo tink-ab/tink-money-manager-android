@@ -1,4 +1,4 @@
-package com.tink.pfmsdk.analytics
+package com.tink.pfmsdk.tracking
 
 interface Tracker {
     fun track(actionEvent: ActionEvent)

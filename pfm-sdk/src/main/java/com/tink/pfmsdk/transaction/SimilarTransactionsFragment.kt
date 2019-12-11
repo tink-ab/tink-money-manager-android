@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.view.TinkSnackbar
 import kotlinx.android.synthetic.main.transaction_similar_fragment.*

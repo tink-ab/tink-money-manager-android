@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.ScreenEvent
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.databinding.FragmentOverviewChartBinding
 import com.tink.pfmsdk.databinding.OverviewChartPageBinding
 import com.tink.pfmsdk.extensions.onPageSelected
