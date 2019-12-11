@@ -31,7 +31,7 @@ The `EventTracker` implementation then needs to be configured when setting up th
 ```kotlin
 val financeOverviewFragment = 
     FinanceOverviewFragment.newInstance(
-        accessToken = "yourAccessToken", // [1]
+        accessToken = "yourAccessToken", // Your access token
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
         tracker = eventTracker // Your EventTracker implementation
