@@ -49,30 +49,34 @@ All the different events tracked by Tink PFM SDK are presented below.
 
 ### Screens 
 
-// TODO: Confirm screens
+// TODO: Confirm list of screens
 
 The different screen events that can occur are declared as public constants inside the `ScreenEvent` class. All screens have a `name` property which is consistent across platforms. 
 
 | `ScreenEvent` | `name` | Description |
 | -----|------|-----|
-| `transactionChooseCategory` | Transaction.ChooseCategory | Screen where user chooses category for a transaction. |
 | `overview` | Overview | The overview screen. |
+| `categoryList` | Category.List | Screen where user can choose from a list of categories. |
 | `expenses` | Expenses | The expenses screen. |
 | `income` | Income | The income screen. |
 | `transactionsList` | Transactions.List | The transaction list. |
 | `transactionsSimilar` | Transactions.Similar | Screen where user can select similar transactions. |
-| `expensesCategoryFilter` | Expenses.CategoryFilter | The expenses category filter screen. |
-| `incomeCategoryFilter` | Income.CategoryFilter | The income category filter screen. |
 
 
 ### Actions
 
-// TODO: Confirm actions
+// TODO: Confirm list of actions and add logic to track actions currently left untracked
 
 The different actions that can occur are declared as public constants inside the `ActionEvent` class. The event contains a `category` property to describe where the event happened, an `action` property to describe what occurred, and a `label` property that describes what the text was on the button (or similar) that triggered the event. 
 
-| `ActionEvent` | `screen` | `action` | `label` | Description
+| `ActionEvent` | `category` | `action` | `label` | Description
 | -----|------|-----|----|---|
+| `expensesShowPageOneMonth` | Expenses | Show page | One month | Occurs when the user presses the "One Month" tab in the Expenses screen. | 
+| `expensesShowPageSixMonths` | Expenses | Show page | Six months | Occurs when the user presses the "Six months" tab in the Expenses screen. | 
+| `expensesShowPageTwelveMonths` | Expenses | Show page | Twelve months | Occurs when the user presses the "Twelve months" tab in the Expenses screen. | 
+| `incomeShowPageOneMonth` | Income | Show page | One month | Occurs when the user presses the "One Month" tab in the Income screen. | 
+| `incomeShowPageSixMonths` | Income | Show page | Six months | Occurs when the user presses the "Six months" tab in the Income screen. | 
+| `incomeShowPageTwelveMonths` | Income | Show page | Twelve months | Occurs when the user presses the "Twelve months" tab in the Income screen. | 
 | `overviewButtonPressedShowAllTransactions` | Overview | Button pressed | Show all transacions | Occurs when the user press "All transactions" in the overview screen. | 
 | `expensesShowPageTransactions` | Expenses | Show page | Transactions | Occurs when the user press "Show transactions" in the expenses screen. | 
 | `incomeShowPageTransactions` | Income | Show page | Transactions | Occurs when the user press "Show transactions" in the income screen. | 
