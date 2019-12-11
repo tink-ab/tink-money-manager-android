@@ -1,14 +1,11 @@
 <resources>
-  <string name="app_name">PFM SDK</string>
   <string name="snackbar_utils_error_default">An error has occurred. Please try again later.</string>
   <string name="snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
   <string name="onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
   <string name="date_format_human_today">Today</string>
   <string name="date_format_human_yesterday">Yesterday</string>
-  <string name="date_format_human_day_before_yesterday">Day before yesterday</string>
   <string name="date_format_human_tomorrow">Tomorrow</string>
-  <string name="date_format_human_day_after_tomorrow">Day after tomorrow</string>
   <string name="date_formatter_monthly">yyyy-MM</string>
   <string name="date_formatter_yearly">yyyy</string>
   <string name="date_formatter_week_yearly">xxxx</string>
