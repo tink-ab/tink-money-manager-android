@@ -47,7 +47,7 @@ val config =
 
 3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI for analytics. Follow the [analytics tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) to set this up.
 
-3. Create an instance of `FinanceOverviewController`
+3. Create an instance of `FinanceOverviewFragment`
 
 ```kotlin
 val financeOverviewFragment = 
@@ -66,7 +66,7 @@ In order for back presses to work properly within the `FinanceOverviewFragment` 
 
 ```kotlin
 override fun onBackPressed() {
-    if (currentFinanceOverviewFragment?.handleBackPress() == false) {
+    if (financeOverviewFragment?.handleBackPress() == false) {
         super.onBackPressed()
     }
 }
