@@ -22,8 +22,6 @@ public class DateUtils {
 	public static final String KEY_TODAY = "today";
 	public static final String KEY_TOMORROW = "tomorrow";
 	public static final String KEY_YESTERDAY = "yesterday";
-	public static final String KEY_DAY_AFTER_TOMORROW = "day_after_tomorrow";
-	public static final String KEY_DAY_BEFORE_YESTERDAY = "day_before_yesterday";
 
 	private Locale defaultLocale;
 	private TimeZone defaultTimezone;
@@ -157,8 +155,6 @@ public class DateUtils {
 
 			if (!today.minusDays(1).isAfter(value)) {
 				return formatHumanStrings.get(KEY_YESTERDAY);
-			} else if (!today.minusDays(2).isAfter(value)) {
-				return formatHumanStrings.get(KEY_DAY_BEFORE_YESTERDAY);
 			} else if (!today.minusMonths(1).isAfter(value)) {
 				return upperFirstChar(ThreadSafeDateFormat
 					.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_WEEK, defaultLocale, timezoneCode)
@@ -170,8 +166,6 @@ public class DateUtils {
 				return formatHumanStrings.get(KEY_TODAY);
 			} else if (today.plusDays(2).isAfter(value)) {
 				return formatHumanStrings.get(KEY_TOMORROW);
-			} else if (today.plusDays(3).isAfter(value)) {
-				return formatHumanStrings.get(KEY_DAY_AFTER_TOMORROW);
 			} else if (today.plusMonths(1).isAfter(value)) {
 				return ThreadSafeDateFormat
 					.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_WEEK, defaultLocale, timezoneCode)

@@ -9,8 +9,6 @@ import com.tink.pfmsdk.TimezoneManager
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.repository.user.UserRepository
 import se.tink.core.models.user.UserConfiguration
-import se.tink.utils.DateUtils.KEY_DAY_AFTER_TOMORROW
-import se.tink.utils.DateUtils.KEY_DAY_BEFORE_YESTERDAY
 import se.tink.utils.DateUtils.KEY_TODAY
 import se.tink.utils.DateUtils.KEY_TOMORROW
 import se.tink.utils.DateUtils.KEY_YESTERDAY
@@ -74,9 +72,7 @@ class I18nConfiguration @Inject constructor(
         return mapOf(
             KEY_TODAY to getString(R.string.date_format_human_today),
             KEY_TOMORROW to getString(R.string.date_format_human_tomorrow),
-            KEY_YESTERDAY to getString(R.string.date_format_human_yesterday),
-            KEY_DAY_AFTER_TOMORROW to getString(R.string.date_format_human_day_after_tomorrow),
-            KEY_DAY_BEFORE_YESTERDAY to getString(R.string.date_format_human_day_before_yesterday)
+            KEY_YESTERDAY to getString(R.string.date_format_human_yesterday)
         )
     }
 
