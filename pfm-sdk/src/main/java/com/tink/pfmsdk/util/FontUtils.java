@@ -12,7 +12,7 @@ public class FontUtils {
 		return ResourcesCompat.getFont(context, fontResId);
 	}
 
-	public static final int BOLD_FONT = R.font.font_bold;
-	public static final int REGULAR_FONT = R.font.font_regular;
+	public static final int BOLD_FONT = R.font.tink_font_bold;
+	public static final int REGULAR_FONT = R.font.tink_font_regular;
 }
 

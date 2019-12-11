@@ -3,7 +3,7 @@
 
   <style name="btnLinkCta" parent="deci">
     <item name="android:textColor">@color/link_color</item>
-    <item name="android:fontFamily">@font/font_bold</item>
+    <item name="android:fontFamily">@font/tink_font_bold</item>
     <item name="android:textAllCaps">false</item>
     <item name="android:background">@drawable/ripple_button_background</item>
     <item name="android:elevation">0dp</item>

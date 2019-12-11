@@ -10,7 +10,7 @@
   <attr name="textColorPrimaryDisabled" format="reference|color"/>
   <attr name="textColorSecondaryDisabled" format="reference|color"/>
 
-  <declare-styleable name="TinkPfmStyle">
+  <declare-styleable name="TinkFinanceOverviewStyle">
     <attr name="tink_expensesColor" format="color|reference"/>
     <attr name="tink_expensesLightColor" format="color|reference"/>
     <attr name="tink_expensesDarkColor" format="color|reference" />

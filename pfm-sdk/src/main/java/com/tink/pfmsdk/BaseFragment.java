@@ -143,7 +143,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		viewLifecycle = new LifecycleRegistry(this);
 
 		if (view == null) {
-			getActivity().getTheme().applyStyle(R.style.TinkPfmStyle, false);
+			getActivity().getTheme().applyStyle(R.style.TinkFinanceOverviewStyle, false);
 			inflatedView = inflater.inflate(getLayoutId(), container, false);
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
