@@ -38,7 +38,7 @@ val financeOverviewFragment =
     )
 ```
 
-Note that the `eventTracker` is a weak property so you have to store and manage the tracker in your application. 
+Note that you have to store and manage `eventTracker` in your application.
 
 This is all you need to do to track events in the finance overview UI. 
 
