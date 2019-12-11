@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.view.TinkSnackbar
 import kotlinx.android.synthetic.main.transaction_similar_fragment.*
@@ -42,7 +42,7 @@ class SimilarTransactionsFragment : BaseFragment() {
     override fun hasToolbar(): Boolean = true
     override fun getTitle(): String? = getString(R.string.transaction_similar_title)
     override fun getTheme(): Theme? = ownTheme
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRANSACTIONS_SIMILAR
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS_SIMILAR
     override fun doNotRecreateView(): Boolean = false
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {

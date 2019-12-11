@@ -21,7 +21,7 @@ import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import butterknife.ButterKnife;
-import com.tink.pfmsdk.analytics.AnalyticsSingleton;
+import com.tink.pfmsdk.tracking.AnalyticsSingleton;
 import com.tink.pfmsdk.theme.DefaultFragmentTheme;
 import com.tink.pfmsdk.theme.NoToolbarFragmentTheme;
 import com.tink.pfmsdk.theme.StatusBarTheme;
@@ -34,8 +34,8 @@ import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import java.util.Map;
 import javax.inject.Inject;
-import com.tink.pfmsdk.analytics.AnalyticsEvent;
-import com.tink.pfmsdk.analytics.AnalyticsScreen;
+import com.tink.pfmsdk.tracking.ActionEvent;
+import com.tink.pfmsdk.tracking.ScreenEvent;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
 
@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	@Nullable
-	protected AnalyticsScreen getAnalyticsScreen() {
+	protected ScreenEvent getScreenEvent() {
 		return null;
 	}
 
@@ -322,7 +322,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	protected boolean shouldTrackScreen() {
-		return shouldTrackScreen && getAnalyticsScreen() != null;
+		return shouldTrackScreen && getScreenEvent() != null;
 	}
 
 	public void trackScreenIfNecessary() {
@@ -333,12 +333,12 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	public void trackScreen() {
-		if (AnalyticsSingleton.getTracker() != null && getAnalyticsScreen() != null) {
-			AnalyticsSingleton.getTracker().track(getAnalyticsScreen());
+		if (AnalyticsSingleton.getTracker() != null && getScreenEvent() != null) {
+			AnalyticsSingleton.getTracker().track(getScreenEvent());
 		}
 	}
 
-	public void trackEvent(AnalyticsEvent event) {
+	public void trackActionEvent(ActionEvent event) {
 		if (AnalyticsSingleton.getTracker() != null && event != null) {
 			AnalyticsSingleton.getTracker().track(event);
 		}

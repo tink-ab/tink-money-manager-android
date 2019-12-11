@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.extensions.onPageSelected
 import com.tink.pfmsdk.theme.getChartDetailsThemeForType
 import com.tink.pfmsdk.transaction.TransactionsListFragment
@@ -48,7 +48,7 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
 
     override fun getLayoutId() = R.layout.fragment_chart_details_pager
     override fun needsLoginToBeAuthorized() = true
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.EXPENSES
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.EXPENSES
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
     override fun getTheme(): Theme = ownTheme
@@ -57,7 +57,7 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
 
     override fun authorizedOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         with(view) {
-            pager.onPageSelected { trackEvent(type.analytics[it]) }
+            pager.onPageSelected { trackActionEvent(type.analytics[it]) }
             // Causes pager population that fixes wrong clipping somehow
             pager.onAttachedToWindow {
                 pager.adapter = adapter

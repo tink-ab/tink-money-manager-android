@@ -1,4 +1,4 @@
-package com.tink.pfmsdk.analytics
+package com.tink.pfmsdk.tracking
 
 internal object AnalyticsSingleton {
     @JvmStatic

@@ -1,20 +1,19 @@
 package com.tink.pfmsdk.overview.charts
 
 import androidx.annotation.AttrRes
-import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsEvent
+import com.tink.pfmsdk.tracking.ActionEvent
 import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
 import se.tink.core.models.Category
 
 enum class ChartType {
     EXPENSES {
         override val analytics = listOf(
-            AnalyticsEvent.EXPENSES_SHOW_PAGE_ONE_MONTH,
-            AnalyticsEvent.EXPENSES_SHOW_PAGE_SIX_MONTHS,
-            AnalyticsEvent.EXPENSES_SHOW_PAGE_TWELVE_MONTHS
+            ActionEvent.EXPENSES_SHOW_PAGE_ONE_MONTH,
+            ActionEvent.EXPENSES_SHOW_PAGE_SIX_MONTHS,
+            ActionEvent.EXPENSES_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.expenses_title
         override val color: Int get() = R.attr.tink_expensesColor
@@ -27,9 +26,9 @@ enum class ChartType {
     },
     LEFT_TO_SPEND {
         override val analytics = listOf(
-            AnalyticsEvent.LEFTTOSPEND_SHOW_PAGE_ONE_MONTH,
-            AnalyticsEvent.LEFTTOSPEND_SHOW_PAGE_SIX_MONTHS,
-            AnalyticsEvent.LEFTTOSPEND_SHOW_PAGE_TWELVE_MONTHS
+            ActionEvent.LEFTTOSPEND_SHOW_PAGE_ONE_MONTH,
+            ActionEvent.LEFTTOSPEND_SHOW_PAGE_SIX_MONTHS,
+            ActionEvent.LEFTTOSPEND_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.left_to_spend_title
         override val color: Int get() = R.attr.tink_leftToSpendColor
@@ -42,9 +41,9 @@ enum class ChartType {
     },
     INCOME {
         override val analytics = listOf(
-            AnalyticsEvent.INCOME_SHOW_PAGE_ONE_MONTH,
-            AnalyticsEvent.INCOME_SHOW_PAGE_SIX_MONTHS,
-            AnalyticsEvent.INCOME_SHOW_PAGE_TWELVE_MONTHS
+            ActionEvent.INCOME_SHOW_PAGE_ONE_MONTH,
+            ActionEvent.INCOME_SHOW_PAGE_SIX_MONTHS,
+            ActionEvent.INCOME_SHOW_PAGE_TWELVE_MONTHS
         )
         override val title: Int get() = R.string.income_title
         override val color: Int get() = R.attr.tink_incomeColor
@@ -56,7 +55,7 @@ enum class ChartType {
         override fun create12MonthFragment(): BaseFragment = TabIncomeBarChartFragment.newInstance(2)
     };
 
-    abstract val analytics: List<AnalyticsEvent>
+    abstract val analytics: List<ActionEvent>
     @get:AttrRes
     abstract val color: Int
     @get:StringRes

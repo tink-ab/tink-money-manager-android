@@ -18,7 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.databinding.FragmentFullPieChartBinding
 import com.tink.pfmsdk.databinding.PieChartLabelBinding
 import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
@@ -38,7 +38,6 @@ import com.tink.pfmsdk.overview.charts.StatisticItemsList
 import com.tink.pfmsdk.theme.getTabPieChartThemeForType
 import com.tink.pfmsdk.util.CurrencyUtils
 import com.tink.pfmsdk.view.TinkIcon
-import se.tink.commons.extensions.getColorCompat
 import se.tink.commons.extensions.getColorFromAttr
 import kotlin.properties.Delegates
 
@@ -52,7 +51,7 @@ class FullPieChartFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_full_pie_chart
     override fun needsLoginToBeAuthorized() = true
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRACKING_ERROR
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
     override fun getTheme(): Theme = ownTheme

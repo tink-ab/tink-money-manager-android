@@ -13,7 +13,7 @@ import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.BuildConfig;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
-import com.tink.pfmsdk.analytics.AnalyticsScreen;
+import com.tink.pfmsdk.tracking.ScreenEvent;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
@@ -36,7 +36,6 @@ import se.tink.core.models.PeriodBalance;
 import se.tink.core.models.VerticalBarChart;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
-import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.piechart.Category;
@@ -102,8 +101,8 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 	}
 
 	@Override
-	protected AnalyticsScreen getAnalyticsScreen() {
-		return AnalyticsScreen.TRACKING_ERROR;
+	protected ScreenEvent getScreenEvent() {
+		return ScreenEvent.TRACKING_ERROR;
 	}
 
 	@Override

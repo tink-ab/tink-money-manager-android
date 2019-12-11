@@ -11,7 +11,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.fragment_pie_chart.view.*
 import com.tink.pfmsdk.overview.charts.PeriodProvider
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
@@ -37,7 +37,7 @@ class TabPieChartFragment : BaseFragment(), PeriodProvider {
 
     override fun getLayoutId() = R.layout.fragment_pie_chart
     override fun needsLoginToBeAuthorized() = true
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRACKING_ERROR
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
     override fun viewReadyAfterLayout(): Boolean = false
