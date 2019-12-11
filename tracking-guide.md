@@ -38,8 +38,6 @@ val financeOverviewFragment =
     )
 ```
 
-Note that you have to store and manage `eventTracker` in your application.
-
 This is all you need to do to track events in the finance overview UI. 
 
 
