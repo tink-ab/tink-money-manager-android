@@ -5,9 +5,7 @@
 
   <string name="date_format_human_today">Oggi</string>
   <string name="date_format_human_yesterday">Ieri</string>
-  <string name="date_format_human_day_before_yesterday">Day before yesterday</string><!-- TODO: Remove this -->
   <string name="date_format_human_tomorrow">Domani</string>
-  <string name="date_format_human_day_after_tomorrow">Day after tomorrow</string><!-- TODO: Remove this -->
   <string name="date_formatter_monthly">yyyy-MM</string>
   <string name="date_formatter_yearly">yyyy</string>
   <string name="date_formatter_week_yearly">xxxx</string>
