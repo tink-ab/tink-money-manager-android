@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.analytics.ScreenEvent
 import com.tink.pfmsdk.theme.getCategorySelectionThemeForType
 import com.tink.pfmsdk.view.TreeListSelectionAdapter
 import com.tink.pfmsdk.view.TreeListSelectionItem
@@ -38,7 +38,7 @@ class CategorySelectionFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.fragment_select_category
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.CATEGORY_LIST
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_LIST
     override fun hasToolbar(): Boolean = false
     override fun doNotRecreateView(): Boolean = false
     override fun getTheme(): Theme = ownTheme

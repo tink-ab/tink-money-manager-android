@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.analytics
 
 interface Tracker {
-    fun track(event: AnalyticsEvent)
-    fun track(screen: AnalyticsScreen)
+    fun track(actionEvent: ActionEvent)
+    fun track(screenEvent: ScreenEvent)
 }

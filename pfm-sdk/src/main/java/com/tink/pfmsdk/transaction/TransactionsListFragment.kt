@@ -1,7 +1,7 @@
 package com.tink.pfmsdk.transaction
 
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.analytics.ScreenEvent
 import com.tink.pfmsdk.view.TinkToolbar
 import android.os.Bundle
 import android.view.View
@@ -11,12 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
-import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import kotlinx.android.synthetic.main.transactions_list_fragment.*
 import se.tink.commons.transactions.TransactionItemListAdapter
-import se.tink.core.models.Category
-import se.tink.core.models.misc.ExactNumber
-import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -31,7 +27,7 @@ class TransactionsListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.transactions_list_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): Theme = ownTheme
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRANSACTIONS_LIST
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS_LIST
     override fun hasToolbar(): Boolean = true
 
     private lateinit var adapter: TransactionItemListAdapter

@@ -1,7 +1,7 @@
 package com.tink.pfmsdk.overview.charts.piechart
 
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.analytics.AnalyticsScreen
+import com.tink.pfmsdk.analytics.ScreenEvent
 import android.content.Context
 import android.os.Bundle
 import android.transition.Fade
@@ -33,7 +33,6 @@ import com.tink.pfmsdk.theme.getTabPieChartThemeForType
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import com.tink.pfmsdk.transaction.TransactionsListMetaData
 import com.tink.pfmsdk.util.CurrencyUtils
-import se.tink.commons.extensions.getColorCompat
 import se.tink.commons.extensions.getColorFromAttr
 
 private const val TYPE_ARG = "type"
@@ -59,7 +58,7 @@ class HalfPieChartFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_half_pie_chart
     override fun needsLoginToBeAuthorized() = true
-    override fun getAnalyticsScreen(): AnalyticsScreen = AnalyticsScreen.TRACKING_ERROR
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
     override fun getTheme(): Theme = ownTheme
