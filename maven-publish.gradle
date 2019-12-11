@@ -1,0 +1,57 @@
+apply plugin: 'maven-publish'
+
+
+def aarPath(projectName) {
+    def fallback = "build/outputs/aar/" + projectName + "-release.aar"
+    return hasProperty('ARTIFACT_PATH') ? ARTIFACT_PATH : fallback
+}
+
+def pfmArtifactId(projectName) {
+    def fallback = "tink-pfm-sdk-$projectName"
+    return hasProperty('ARTIFACT_ID') ? ARTIFACT_ID : fallback
+}
+
+publishing {
+    publications {
+        tinkPfmSdk(MavenPublication) {
+
+            groupId GROUP
+            artifactId pfmArtifactId(project.name)
+
+            version PFM_SDK_VERSION
+
+            artifact(aarPath(project.name))
+
+            pom {
+                name = "Tink PFM SDK " + project.name
+                packaging = POM_PACKAGING
+                description = POM_DESCRIPTION
+
+                developers {
+                    developer {
+                        id = POM_DEVELOPER_ID
+                        name = POM_DEVELOPER_NAME
+                    }
+                }
+
+                withXml {
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each {
+                        if (it instanceof ProjectDependency) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            // Internal modules. Use the names of the generated public aars.
+                            dependencyNode.appendNode('groupId', 'com.tink')
+                            dependencyNode.appendNode('artifactId', pfmArtifactId(it.name))
+                            dependencyNode.appendNode('version', PFM_SDK_VERSION)
+                        } else if(it instanceof ExternalModuleDependency) {
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
