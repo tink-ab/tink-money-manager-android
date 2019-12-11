@@ -45,7 +45,7 @@ val config =
 
 2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
 
-3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) to set this up.
+3. Set up a `EventTracker` implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) to set this up.
 
 3. Create an instance of `FinanceOverviewFragment`
 
@@ -55,7 +55,7 @@ val financeOverviewFragment =
         accessToken = "yourAccessToken", // [1]
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
-        tracker = yourTracker // Your Tracker implementation
+        tracker = yourTracker // Your EventTracker implementation
     )
 ```
 `[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
