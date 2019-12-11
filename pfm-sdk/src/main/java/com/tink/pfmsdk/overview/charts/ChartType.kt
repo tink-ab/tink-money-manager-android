@@ -6,6 +6,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.tracking.ActionEvent
 import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
+import com.tink.pfmsdk.tracking.ScreenEvent
 import se.tink.core.models.Category
 
 enum class ChartType {
@@ -15,6 +16,7 @@ enum class ChartType {
             ActionEvent.EXPENSES_SHOW_PAGE_SIX_MONTHS,
             ActionEvent.EXPENSES_SHOW_PAGE_TWELVE_MONTHS
         )
+        override val screenEvent: ScreenEvent get() = ScreenEvent.EXPENSES
         override val title: Int get() = R.string.expenses_title
         override val color: Int get() = R.attr.tink_expensesColor
         override val topCategoryName: Int get() = R.string.all_categories
@@ -30,6 +32,7 @@ enum class ChartType {
             ActionEvent.LEFTTOSPEND_SHOW_PAGE_SIX_MONTHS,
             ActionEvent.LEFTTOSPEND_SHOW_PAGE_TWELVE_MONTHS
         )
+        override val screenEvent: ScreenEvent get() = ScreenEvent.TRACKING_ERROR // To be added when UI is not hidden
         override val title: Int get() = R.string.left_to_spend_title
         override val color: Int get() = R.attr.tink_leftToSpendColor
         override val showCategoryPicker = false
@@ -45,6 +48,7 @@ enum class ChartType {
             ActionEvent.INCOME_SHOW_PAGE_SIX_MONTHS,
             ActionEvent.INCOME_SHOW_PAGE_TWELVE_MONTHS
         )
+        override val screenEvent: ScreenEvent get() = ScreenEvent.INCOME
         override val title: Int get() = R.string.income_title
         override val color: Int get() = R.attr.tink_incomeColor
         override val topCategoryName: Int get() = R.string.all_categories
@@ -56,6 +60,7 @@ enum class ChartType {
     };
 
     abstract val analytics: List<ActionEvent>
+    abstract val screenEvent: ScreenEvent
     @get:AttrRes
     abstract val color: Int
     @get:StringRes
