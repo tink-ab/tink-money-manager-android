@@ -45,7 +45,7 @@ val config =
 
 2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
 
-3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI for analytics. Follow the [analytics tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) to set this up.
+3. Set up a `Tracker` implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) to set this up.
 
 3. Create an instance of `FinanceOverviewFragment`
 
@@ -74,4 +74,4 @@ override fun onBackPressed() {
 
 ## Guides
 - [Customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
-- [Analytics Tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/analytics-tracking-guide.md) This document outlines how to set up trackers for tracking screens and events in the finance overview UI for analytics
+- [Tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) This document outlines how to set up trackers for tracking screens and events in the finance overview UI
