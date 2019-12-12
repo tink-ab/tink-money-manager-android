@@ -57,7 +57,6 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
 
     override fun authorizedOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         with(view) {
-            pager.onPageSelected { trackActionEvent(type.analytics[it]) }
             // Causes pager population that fixes wrong clipping somehow
             pager.onAttachedToWindow {
                 pager.adapter = adapter
