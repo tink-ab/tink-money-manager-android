@@ -2,14 +2,18 @@ package se.tink.repository.service;
 
 import com.google.common.collect.Lists;
 import io.grpc.stub.StreamObserver;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
+import se.tink.core.models.transaction.Transaction;
 import se.tink.grpc.v1.rpc.GetStatisticsRequest;
 import se.tink.grpc.v1.rpc.StatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
+import se.tink.repository.ChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
 
 public class StatisticServiceImpl implements StatisticService {
@@ -18,16 +22,20 @@ public class StatisticServiceImpl implements StatisticService {
 	private final ModelConverter converter;
 	private final List<ObjectChangeObserver<StatisticTree>> changeObserverers;
 	private final StreamingService streamingService;
+	private final TransactionService transactionService;
 
 	@Inject
 	public StatisticServiceImpl(StreamingService streamingStub, ModelConverter converter,
-		StatisticServiceGrpc.StatisticServiceStub serviceStub) {
+		StatisticServiceGrpc.StatisticServiceStub serviceStub, TransactionService transactionService) {
 		service = serviceStub;
 		streamingService = streamingStub;
+		this.transactionService = transactionService;
 		this.converter = converter;
 		changeObserverers = Lists.newArrayList();
 		startSubScribing();
 	}
+
+	private PublishSubject<List<Transaction>> transactionUpdateStream = PublishSubject.create();
 
 	//TODO
 	private void startSubScribing() {
@@ -60,6 +68,35 @@ public class StatisticServiceImpl implements StatisticService {
 				}
 			}
 		});
+
+		transactionService.subscribe(new ChangeObserver<Transaction>() {
+			@Override
+			public void onCreate(List<Transaction> items) {
+
+			}
+
+			@Override
+			public void onRead(List<Transaction> items) {
+
+			}
+
+			@Override
+			public void onUpdate(List<Transaction> items) {
+				transactionUpdateStream.onNext(items);
+			}
+
+			@Override
+			public void onDelete(List<Transaction> items) {
+
+			}
+		});
+
+		int intervalPeriod = 3000;
+		int debounceTimeout = (intervalPeriod / 2) + 100;
+		transactionUpdateStream
+			.flatMap((List<Transaction> items) -> Observable.intervalRange(1, 4, 1000, intervalPeriod, TimeUnit.MILLISECONDS))
+			.debounce(debounceTimeout, TimeUnit.MILLISECONDS)
+			.subscribe((Long a) -> refreshStatistics());
 	}
 
 	@Override
