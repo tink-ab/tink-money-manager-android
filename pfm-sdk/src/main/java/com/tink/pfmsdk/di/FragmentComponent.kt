@@ -12,33 +12,12 @@ import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
-import com.tink.pfmsdk.overview.OverviewChartFragment
-import com.tink.pfmsdk.overview.OverviewFragment
-import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
-import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
-import com.tink.pfmsdk.overview.charts.TabExpensesBarChartFragment
-import com.tink.pfmsdk.overview.charts.TabIncomeBarChartFragment
-import com.tink.pfmsdk.overview.charts.TabLeftToSpendFragment
-import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
-import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
-import com.tink.pfmsdk.theme.TinkDefaultSnackbarTheme
-import com.tink.pfmsdk.theme.TinkErrorSnackbarTheme
-import com.tink.pfmsdk.theme.TinkExpenseBarChartTabPageTheme
-import com.tink.pfmsdk.theme.TinkIncomeBarChartTabPageTheme
-import com.tink.pfmsdk.theme.TinkLeftToSpendTabPageTheme
-import com.tink.pfmsdk.theme.TinkTransactionSimilarTheme
-import com.tink.pfmsdk.theme.TinkTransactionsListTheme
-import com.tink.pfmsdk.transaction.CategorizationFlowFragment
-import com.tink.pfmsdk.transaction.SimilarTransactionsFragment
-import com.tink.pfmsdk.transaction.TransactionsListFragment
-import com.tink.pfmsdk.view.TinkSnackbar
 import dagger.Binds
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.ContributesAndroidInjector
 import se.tink.android.AppExecutors
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.repository.DefaultErrorHandler
@@ -48,7 +27,6 @@ import se.tink.repository.service.DeviceService
 import se.tink.repository.service.DeviceServiceImpl
 import se.tink.utils.DateUtils
 import java.util.Locale
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -145,47 +123,6 @@ class EverythingModule {
     }
 }
 
-@Module
-class ThemingModule {
-
-    @Provides
-    fun provideTabExpensesBarChartTheme(@ApplicationScoped context: Context): TabExpensesBarChartFragment.Theme {
-        return TinkExpenseBarChartTabPageTheme(context)
-    }
-
-    @Provides
-    fun provideTabLeftToSpendPageTheme(@ApplicationScoped context: Context): TabLeftToSpendFragment.Theme {
-        return TinkLeftToSpendTabPageTheme(context)
-    }
-
-    @Provides
-    fun provideTabeIncomeBarChartPageTheme(@ApplicationScoped context: Context): TabIncomeBarChartFragment.Theme {
-        return TinkIncomeBarChartTabPageTheme(context)
-    }
-
-    @Provides
-    fun provideSimilarTransactionsTheme(@ApplicationScoped context: Context): SimilarTransactionsFragment.Theme {
-        return TinkTransactionSimilarTheme(context)
-    }
-
-    @Provides
-    fun provideTransactionsListTheme(@ApplicationScoped context: Context): TransactionsListFragment.Theme {
-        return TinkTransactionsListTheme(context)
-    }
-
-    @Provides
-    @Named(TinkSnackbar.Theme.MESSAGE_THEME)
-    fun messageSnackbarTheme(@ApplicationScoped context: Context): TinkSnackbar.Theme {
-        return TinkDefaultSnackbarTheme(context)
-    }
-
-    @Provides
-    @Named(TinkSnackbar.Theme.ERROR_THEME)
-    fun errorSnackbarTheme(@ApplicationScoped context: Context): TinkSnackbar.Theme {
-        return TinkErrorSnackbarTheme(context)
-    }
-}
-
 
 @Module
 interface AllBindings {
@@ -201,43 +138,3 @@ interface AllBindings {
     fun provideAppExecutors(executors: AppExecutorsDefaultImpl): AppExecutors
 }
 
-@Module
-interface FragmentBindingModule {
-
-    @ContributesAndroidInjector
-    fun overviewChartFragment(): OverviewChartFragment
-
-    @ContributesAndroidInjector
-    fun chartDetailsPagerFragment(): ChartDetailsPagerFragment
-
-    @TabPieChart
-    @ContributesAndroidInjector(modules = [TabPieChartModule::class])
-    fun tabPieChartFragment(): TabPieChartFragment
-
-    @ContributesAndroidInjector
-    fun tabExpensesBarChartFragment(): TabExpensesBarChartFragment
-
-    @ContributesAndroidInjector
-    fun latestTransactionsFragment(): LatestTransactionsFragment
-
-    @ContributesAndroidInjector
-    fun tabLeftToSpendFragment(): TabLeftToSpendFragment
-
-    @ContributesAndroidInjector
-    fun tabIncomeBarChartFragment(): TabIncomeBarChartFragment
-
-    @ContributesAndroidInjector
-    fun categoryListFragment(): CategorySelectionFragment
-
-    @ContributesAndroidInjector
-    fun transactionListFragment(): TransactionsListFragment
-
-    @ContributesAndroidInjector
-    fun categorizationFlowFragment(): CategorizationFlowFragment
-
-    @ContributesAndroidInjector
-    fun similarTransactionsFragment(): SimilarTransactionsFragment
-
-    @ContributesAndroidInjector
-    fun overviewFragment(): OverviewFragment
-}
