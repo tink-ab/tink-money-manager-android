@@ -279,7 +279,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	@Override
 	public final void onResume() {
 		super.onResume();
-		if (isVisible()) {
+		if (getUserVisibleHint()) {
 			trackScreenIfNecessary();
 		}
 		authorizedOnResume();
