@@ -3,14 +3,11 @@ package se.tink.repository.service;
 import com.google.common.collect.Lists;
 import io.grpc.stub.StreamObserver;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.statistic.Statistic.Type;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.grpc.v1.rpc.GetStatisticsRequest;
@@ -18,7 +15,6 @@ import se.tink.grpc.v1.rpc.StatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
-import timber.log.Timber;
 
 public class StatisticServiceImpl implements StatisticService {
 
