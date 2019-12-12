@@ -44,7 +44,6 @@ class OverviewChartFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.fragment_overview_chart
     override fun needsLoginToBeAuthorized() = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.OVERVIEW
-    override fun shouldTrackScreen(): Boolean = false
     override fun doNotRecreateView(): Boolean = false
     override fun viewReadyAfterLayout(): Boolean  = false
     override fun hasToolbar(): Boolean = false
