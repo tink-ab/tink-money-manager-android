@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.tink.pfmsdk.tracking.AnalyticsSingleton
-import com.tink.pfmsdk.tracking.Tracker
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration
@@ -17,6 +15,8 @@ import com.tink.pfmsdk.overview.OverviewFragment
 import com.tink.pfmsdk.repository.StatisticsRepository
 import com.tink.pfmsdk.security.DefaultRecoveryHandler
 import com.tink.pfmsdk.security.SecuredClientDataStorage
+import com.tink.pfmsdk.tracking.AnalyticsSingleton
+import com.tink.pfmsdk.tracking.Tracker
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -147,6 +147,19 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         dataRefreshHandler.refreshCategories()
         dataRefreshHandler.refreshStatistics()
         dataRefreshHandler.refreshUserConfiguration()
+        dataRefreshHandler.refreshRegistered()
+    }
+
+    fun setAccessToken(accessToken: String) {
+
+        if (arguments == null) {
+            arguments = bundleOf()
+        }
+        arguments!!.putString(ARG_ACCESS_TOKEN, accessToken)
+
+        if (::interceptor.isInitialized) {
+            interceptor.setAccessToken(accessToken)
+        }
     }
 
     private fun attachListeners() {
