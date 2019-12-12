@@ -27,7 +27,7 @@ class TransactionsListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.transactions_list_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): Theme = ownTheme
-    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS_LIST
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS
     override fun hasToolbar(): Boolean = true
 
     private lateinit var adapter: TransactionItemListAdapter
