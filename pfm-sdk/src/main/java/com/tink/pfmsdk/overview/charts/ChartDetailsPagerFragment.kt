@@ -48,7 +48,7 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
 
     override fun getLayoutId() = R.layout.fragment_chart_details_pager
     override fun needsLoginToBeAuthorized() = true
-    override fun getScreenEvent(): ScreenEvent = ScreenEvent.EXPENSES
+    override fun getScreenEvent(): ScreenEvent = type.screenEvent
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
     override fun getTheme(): Theme = ownTheme
