@@ -5,9 +5,7 @@
 
 ## Installation
 
-// TODO: Update if this is not confirmed
-
-1. Take the `com` folder (containing the Tink Link local Maven dependencies) and put it in `~/.m2/repository/`.
+1. Take the `com` folder (containing the Tink Sdk local maven dependencies) and put it in `~/.m2/repository/`.
 2. Add `mavenLocal()` as repository in your root level build.gradle file.
 
 ```groovy
@@ -21,11 +19,11 @@ allprojects {
 
 _Note: The `mavenLocal()` repository needs to be on top of the other repositories, as shown above._
 
-3. Add dependency on `com.tink:tink-pfm-android:1.0.0`: // TODO: Finalize name for the SDK
+3. Add dependency on the Tink Sdk:
 
 ```groovy
 dependencies {
-    implementation("com.tink:tink-pfm-android:1.0.0")
+    implementation("com.tink:pfm-sdk:1.0.0")
 }
 ```
 
