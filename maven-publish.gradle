@@ -7,7 +7,7 @@ def aarPath(projectName) {
 }
 
 def pfmArtifactId(projectName) {
-    def fallback = "tink-pfm-sdk-$projectName"
+    def fallback = "pfm-sdk-$projectName"
     return hasProperty('ARTIFACT_ID') ? ARTIFACT_ID : fallback
 }
 
