@@ -3,11 +3,11 @@ package com.tink.pfmsdk.di
 import android.content.Context
 import com.tink.pfmsdk.AppExecutorsDefaultImpl
 import com.tink.pfmsdk.ClientDataStorage
+import com.tink.pfmsdk.FinanceOverviewFragment
 import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.Timezone
 import com.tink.pfmsdk.TimezoneManager
-import com.tink.pfmsdk.FinanceOverviewFragment
 import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
@@ -35,7 +35,6 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ContextModule::class,
         CurrencyModule::class,
-//        BaseFragmentModule::class,
         ThemingModule::class,
         EverythingModule::class,
         AllBindings::class,
@@ -48,25 +47,6 @@ interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
     @Component.Factory
     interface Factory : AndroidInjector.Factory<FinanceOverviewFragment>
 }
-
-
-//@Module
-//interface BaseFragmentModule {
-//
-//    @ContributesAndroidInjector(
-//        modules = [
-//            EverythingModule::class,
-//            AllBindings::class,
-//            ViewModelModule::class,
-//            FragmentBindingModule::class
-//        ]
-//    )
-//    fun baseFragment(): BaseFragment
-//
-////    @Binds
-////    @ApplicationScoped
-////    fun bindContext(fragment: BaseFragment): Context
-//}
 
 @Module
 class ContextModule {
@@ -122,7 +102,6 @@ class EverythingModule {
         }
     }
 }
-
 
 @Module
 interface AllBindings {
