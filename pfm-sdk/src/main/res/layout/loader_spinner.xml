@@ -7,4 +7,5 @@
   android:layout_centerInParent="true"
   android:layout_gravity="center"
   android:indeterminateTintMode="src_atop"
+  android:indeterminateTint="?tink_colorAccent"
   android:visibility="invisible"/>
