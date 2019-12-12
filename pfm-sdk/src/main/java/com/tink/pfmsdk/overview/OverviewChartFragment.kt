@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.tracking.ScreenEvent
 import com.tink.pfmsdk.databinding.FragmentOverviewChartBinding
 import com.tink.pfmsdk.databinding.OverviewChartPageBinding
 import com.tink.pfmsdk.extensions.onPageSelected
@@ -43,8 +42,6 @@ class OverviewChartFragment : BaseFragment() {
 
     override fun getLayoutId() = R.layout.fragment_overview_chart
     override fun needsLoginToBeAuthorized() = true
-    override fun getScreenEvent(): ScreenEvent = ScreenEvent.OVERVIEW
-    override fun shouldTrackScreen(): Boolean = false
     override fun doNotRecreateView(): Boolean = false
     override fun viewReadyAfterLayout(): Boolean  = false
     override fun hasToolbar(): Boolean = false

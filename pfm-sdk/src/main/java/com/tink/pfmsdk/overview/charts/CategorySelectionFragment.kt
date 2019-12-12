@@ -38,7 +38,7 @@ class CategorySelectionFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.fragment_select_category
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_LIST
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_SELECTION
     override fun hasToolbar(): Boolean = false
     override fun doNotRecreateView(): Boolean = false
     override fun getTheme(): Theme = ownTheme

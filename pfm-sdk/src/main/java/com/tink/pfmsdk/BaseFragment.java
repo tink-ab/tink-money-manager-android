@@ -34,7 +34,6 @@ import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import java.util.Map;
 import javax.inject.Inject;
-import com.tink.pfmsdk.tracking.ActionEvent;
 import com.tink.pfmsdk.tracking.ScreenEvent;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
@@ -280,7 +279,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	@Override
 	public final void onResume() {
 		super.onResume();
-		if (isVisible()) {
+		if (getUserVisibleHint()) {
 			trackScreenIfNecessary();
 		}
 		authorizedOnResume();
@@ -335,12 +334,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public void trackScreen() {
 		if (AnalyticsSingleton.getTracker() != null && getScreenEvent() != null) {
 			AnalyticsSingleton.getTracker().track(getScreenEvent());
-		}
-	}
-
-	public void trackActionEvent(ActionEvent event) {
-		if (AnalyticsSingleton.getTracker() != null && event != null) {
-			AnalyticsSingleton.getTracker().track(event);
 		}
 	}
 

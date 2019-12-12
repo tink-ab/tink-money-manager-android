@@ -42,7 +42,7 @@ class SimilarTransactionsFragment : BaseFragment() {
     override fun hasToolbar(): Boolean = true
     override fun getTitle(): String? = getString(R.string.transaction_similar_title)
     override fun getTheme(): Theme? = ownTheme
-    override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS_SIMILAR
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.SIMILAR_TRANSACTIONS
     override fun doNotRecreateView(): Boolean = false
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
