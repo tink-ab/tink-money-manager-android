@@ -177,10 +177,11 @@ public class ServiceModule {
 		StreamingService streaming,
 		ModelConverter converter,
 		StatisticServiceGrpc.StatisticServiceStub serviceStub,
+		TransactionService transactionService,
 		StasticCache cache
 	) {
     return new StatisticServiceCachedImpl(
-        new StatisticServiceImpl(streaming, converter, serviceStub), cache);
+        new StatisticServiceImpl(streaming, converter, serviceStub, transactionService), cache);
 	}
 
 	@Provides
