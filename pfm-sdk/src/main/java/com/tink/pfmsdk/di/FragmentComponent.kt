@@ -1,17 +1,12 @@
 package com.tink.pfmsdk.di
 
-import android.content.Context
 import com.tink.pfmsdk.AppExecutorsDefaultImpl
-import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.FinanceOverviewFragment
 import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.Timezone
-import com.tink.pfmsdk.TimezoneManager
 import com.tink.pfmsdk.TransitionCoordinator
 import com.tink.pfmsdk.TransitionCoordinatorImpl
 import com.tink.pfmsdk.TransitionDescription
-import com.tink.pfmsdk.configuration.SuitableLocaleFinder
 import dagger.Binds
 import dagger.Component
 import dagger.Module
@@ -25,8 +20,6 @@ import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkErrorHandler
 import se.tink.repository.service.DeviceService
 import se.tink.repository.service.DeviceServiceImpl
-import se.tink.utils.DateUtils
-import java.util.Locale
 import javax.inject.Singleton
 
 @Singleton
@@ -34,9 +27,14 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         ContextModule::class,
+        ConfigurationModule::class,
         CurrencyModule::class,
+        FragmentModule::class,
+        NetworkModule::class,
+        ServiceModule::class,
         ThemingModule::class,
-        EverythingModule::class,
+        TrackingModule::class,
+        TransitionModule::class,
         AllBindings::class,
         ViewModelModule::class,
         FragmentBindingModule::class
@@ -54,53 +52,6 @@ class ContextModule {
     @Provides
     @ApplicationScoped
     fun context(fragment: FinanceOverviewFragment) = fragment.context!!.applicationContext
-}
-
-@Module(includes = [TransitionModule::class, ServiceModule::class, NetworkModule::class])
-class EverythingModule {
-
-    @Singleton
-    @Provides
-    fun fragmentCoordinator(
-        fragment: FinanceOverviewFragment,
-        transitionCoordinator: TransitionCoordinatorImpl
-    ) =
-        FragmentCoordinator(fragment.childFragmentManager, R.id.fragmentRoot, transitionCoordinator)
-
-    @Singleton
-    @Provides
-    fun providesTransitionCoordinatorImpl(transitions: Set<@JvmSuppressWildcards TransitionDescription>): TransitionCoordinatorImpl =
-        TransitionCoordinatorImpl(transitions)
-
-    @Singleton
-    @Provides
-    fun providesTransitionCoordinator(transitionCoordinator: TransitionCoordinatorImpl): TransitionCoordinator =
-        transitionCoordinator
-
-    @Provides
-    @Singleton
-    fun provideClientStorage(@ApplicationScoped context: Context): ClientDataStorage =
-        ClientDataStorage.sharedInstance(context)
-
-    @Provides
-    fun provideLocale(localeFinder: SuitableLocaleFinder): Locale {
-        return localeFinder.findLocale()
-    }
-
-    @Provides
-    fun provideTimezone(): Timezone = TimezoneManager.defaultTimezone
-
-    @Provides
-    fun provideDateUtils(locale: Locale, timezone: Timezone): DateUtils =
-        DateUtils.getInstance(locale, timezone)
-
-
-    @Provides //TODO:PFMSDK
-    fun exceptionTracker() = object : ExceptionTracker {
-        override fun <E : Exception> exceptionThrown(e: E) {
-            throw e
-        }
-    }
 }
 
 @Module
