@@ -28,8 +28,7 @@ public class DeviceServiceImpl implements DeviceService {
 	private ModelConverter converter;
 	private Executor threadPoolExecutor = Executors.newSingleThreadExecutor();
 
-	@Inject
-	DeviceServiceImpl(DeviceServiceStub deviceServiceStub, ModelConverter converter) {
+	public DeviceServiceImpl(DeviceServiceStub deviceServiceStub, ModelConverter converter) {
 		this.service = deviceServiceStub;
 		this.converter = converter;
 	}
