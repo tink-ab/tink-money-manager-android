@@ -27,6 +27,22 @@ dependencies {
 }
 ```
 
+4. Enable databinding. In your app-level `build.gradle`, inside the :
+```groovy
+dataBinding {
+   enabled = true
+}
+```
+
+5. Set the java compiler to Java 8 or higher: 
+```groovy
+//Inside your 
+compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+}
+```
+
 ## Initialization
 
 1. Set up a client configuration object with your specifics:
