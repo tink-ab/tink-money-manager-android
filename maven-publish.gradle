@@ -8,7 +8,7 @@ def aarPath(projectName) {
 
 def pfmArtifactId(projectName) {
     def fallback = "pfm-sdk-$projectName"
-    return hasProperty('ARTIFACT_ID') ? ARTIFACT_ID : fallback
+    return hasProperty('ARTIFACT_ID') && project.name == projectName ? ARTIFACT_ID : fallback
 }
 
 publishing {
