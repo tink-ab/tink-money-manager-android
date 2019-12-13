@@ -29,6 +29,7 @@
       android:layout_height="wrap_content"
       android:visibility="@{loaded}"
       app:color="?attr/tink_colorAccent"
+      android:layout_marginTop="16dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>

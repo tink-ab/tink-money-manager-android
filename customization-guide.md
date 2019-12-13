@@ -22,10 +22,6 @@ You can customize colors by extending the existing `TinkFinanceOverviewStyle` fr
     <item name="tink_expensesLightColor">@color/custom_expenses_light</item>
     <item name="tink_expensesDarkColor">@color/custom_expenses_dark</item>
     <item name="tink_colorOnExpenses">@color/custom_color_on_expenses</item>
-    <item name="tink_leftToSpendColor">@color/custom_left_to_spend</item>
-    <item name="tink_leftToSpendLightColor">@color/custom_left_to_spend_light</item>
-    <item name="tink_leftToSpendDarkColor">@color/custom_left_to_spend_dark</item>
-    <item name="tink_colorOnLeftToSpend">@color/custom_color_on_left_to_spend</item>
     <item name="tink_incomeColor">@color/custom_income</item>
     <item name="tink_incomeLightColor">@color/custom_income_light</item>
     <item name="tink_incomeDarkColor">@color/custom_income_dark</item>

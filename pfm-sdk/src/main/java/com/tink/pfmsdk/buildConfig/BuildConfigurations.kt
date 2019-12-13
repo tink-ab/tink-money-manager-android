@@ -26,13 +26,13 @@ object BuildConfigurations {
         BuildConfiguration(
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
-                supportedLangugaes = listOf("en_US", "sv_SE"),
+                supportedLangugaes = listOf("it_IT", "en_US"),
                 googleAnalyticsKey = "UA-34242137-6")
     } else {
         BuildConfiguration(
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
-                supportedLangugaes = listOf("en_US", "sv_SE"),
+                supportedLangugaes = listOf("it_IT", "en_US"),
                 googleAnalyticsKey = "UA-34242137-3")
     }
 

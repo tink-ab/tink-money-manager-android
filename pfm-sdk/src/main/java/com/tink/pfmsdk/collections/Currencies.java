@@ -11,7 +11,7 @@ import se.tink.repository.service.UserConfigurationService;
 public class Currencies implements ObjectChangeObserver<UserConfiguration>, Clearable {
 
 	private static Currencies instance;
-	private static final String DEFAULT_CURRENCY_CODE = "SEK";
+	private static final String DEFAULT_CURRENCY_CODE = "EUR";
 
 	private UserConfiguration userConfiguration;
 
