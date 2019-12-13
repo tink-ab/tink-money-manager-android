@@ -58,6 +58,8 @@ val financeOverviewFragment =
 ```
 `[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
 
+_Note: All data and connections are scoped to the lifecycle of the `FinanceOverviewFragment`, i.e. after it is destroyed, all cached content will be garbage collected. That means it is important to not leak a reference to the fragment so no sensitive user data is retained in memory after usage._
+
 ## Refreshing access tokens
 User access tokens expire after a set amount of time. You can keep your user logged in by exchanging your a refresh token for a new access token [(see Tink docs)](https://docs.tink.com/api/#get-an-authorization-token) and passing it to the Tink Sdk. This will overwrite the token that the fragment was initialzed with. If needed you can also refresh the statistics and latest transactions:
 
@@ -66,17 +68,29 @@ financeOverviewFragment.setAccessToken(yourNewToken)
 financeOverviewFragment.refreshData() // Optional
 ```
 
-## Handling back press
+## Additional requirements
 
-In order for back presses to work properly within the `FinanceOverviewFragment` please override the `onBackPressed()` method in your activity.
+There are some things you need to address for the Tink Finance Overview to work as expected.
+
+### Handling back press
+
+In order for navigation to work properly within the `FinanceOverviewFragment`, you need to forward back press events to it. This can be done by overriding the `onBackPressed()` method in your activity and call `handleBackPress()` on the fragment. This method will also return a boolean value indication whether the `FinanceOverviewFragment` has consumed the event or not.
 
 ```kotlin
+// In your activity:
+
 override fun onBackPressed() {
-    if (financeOverviewFragment?.handleBackPress() == false) {
-        super.onBackPressed()
-    }
+   val backpressHandled = financeOverviewFragment?.handleBackPress()
+   if (backpressHandled == false) {
+       super.onBackPressed() // Or do whatever suits your application
+   }
 }
 ```
+
+### Locking screen orientation
+
+The Tink Finance Overview only works correctly when the screen orientation is locked to portrait mode. Fixed landscape mode or changing the configuration dynamically will lead to unexpected results and suboptimal user experience.
+You can achieve this by setting `android:screenOrientation="portrait"` in your Android manifest on the Activity containing the `FinanceOverviewFragment`
 
 ## Guides
 - [Customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
