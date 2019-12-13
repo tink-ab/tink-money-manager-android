@@ -2,13 +2,12 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-    <!-- Customize your theme here. -->
-    <item name="android:colorBackground">@color/white_90</item>
+    <!-- Customize your application theme here. -->
   </style>
 
   <style name="TinkFinanceOverviewSampleStyle" parent="TinkFinanceOverviewStyle">
-    <item name="tink_chartMeanValueColor">@color/grey_light</item>
-    <item name="tink_chartAxisLabelColor">@color/grey_light</item>
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_chartAxisLabelColor">#A7A7A7</item>
     <item name="tink_colorAccent">#ff461e7d</item>
     <item name="tink_colorAccentDark">#ff461e7d</item>
     <item name="tink_colorAccentLight">#ff461e7d</item>
@@ -18,18 +17,18 @@
     <item name="tink_expensesColor">#ff5638ff</item>
     <item name="tink_expensesDarkColor">#ff5638ff</item>
     <item name="tink_expensesLightColor">#ffe6e1ff</item>
-    <item name="tink_colorOnExpenses">@color/white</item>
+    <item name="tink_colorOnExpenses">#ffffff</item>
     <item name="tink_incomeColor">#ff36b472</item>
-    <item name="tink_incomeDarkColor">@color/salary_green_dark</item>
+    <item name="tink_incomeDarkColor">#30A266</item>
     <item name="tink_incomeLightColor">#ffdffbed</item>
-    <item name="tink_colorOnIncome">@color/white</item>
-    <item name="tink_transferColor">@color/transfer_grey</item>
+    <item name="tink_colorOnIncome">#ffffff</item>
+    <item name="tink_transferColor">#494949</item>
     <item name="tink_transferLightColor">#EEEEEE</item>
-    <item name="tink_colorOnTransfer">@color/white</item>
-    <item name="tink_uncategorizedColor">@color/orange</item>
-    <item name="tink_uncategorizedLightColor">@color/orange_light</item>
-    <item name="tink_snackbarColor">@color/greyblack</item>
-    <item name="tink_colorOnSnackBar">@color/white</item>
+    <item name="tink_colorOnTransfer">#ffffff</item>
+    <item name="tink_uncategorizedColor">#FEAE22</item>
+    <item name="tink_uncategorizedLightColor">#FFF3DE</item>
+    <item name="tink_snackbarColor">#808080</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
     <item name="tink_textColorAction">#ff461e7d</item>
   </style>
 
