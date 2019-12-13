@@ -74,7 +74,7 @@ There are some things you need to address for the Tink Finance Overview to work 
 
 ### Handling back press
 
-In order for navigation to work properly within the `FinanceOverviewFragment`, you need to forward back press events to it. This can be done by overriding the `onBackPressed()` method in your activity and call `handleBackPress` on the fragment. This method will also return a boolean value indication whether the `FinanceOverviewFragment` has consumed the event or not.
+In order for navigation to work properly within the `FinanceOverviewFragment`, you need to forward back press events to it. This can be done by overriding the `onBackPressed()` method in your activity and call `handleBackPress()` on the fragment. This method will also return a boolean value indication whether the `FinanceOverviewFragment` has consumed the event or not.
 
 ```kotlin
 // In your activity:
@@ -90,7 +90,7 @@ override fun onBackPressed() {
 ### Locking screen orientation
 
 The Tink Finance Overview only works correctly when the screen orientation is locked to portrait mode. Fixed landscape mode or changing the configuration dynamically will lead to unexpected results and suboptimal user experience.
-You can achieve this by setting `android:screenOrientation="portrait"` in your Android manifest on the Activity containing the `FinanceOverviewFragments`
+You can achieve this by setting `android:screenOrientation="portrait"` in your Android manifest on the Activity containing the `FinanceOverviewFragment`
 
 ## Guides
 - [Customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
