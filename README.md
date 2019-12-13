@@ -51,10 +51,9 @@ compileOptions {
 val config = 
     ClientConfiguration(
         environment = Environment.Production, // Or define your own environment
-        sslCertificate = "yourCertificate" // [1]
+        sslCertificate = "yourCertificate" // The SSL certificate used for certificate pinning.
     )
 ```
-`[1]` The SSL certificate is used for certificate pinning. This is optional and you can choose to set it depending on your requirements.
 
 
 2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
