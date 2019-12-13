@@ -19,10 +19,6 @@
     <item name="tink_expensesDarkColor">#ff5638ff</item>
     <item name="tink_expensesLightColor">#ffe6e1ff</item>
     <item name="tink_colorOnExpenses">@color/white</item>
-    <item name="tink_leftToSpendColor">#ffff016e</item>
-    <item name="tink_leftToSpendDarkColor">#ffff016e</item>
-    <item name="tink_leftToSpendLightColor">#40ff016e</item>
-    <item name="tink_colorOnLeftToSpend">@color/white</item>
     <item name="tink_incomeColor">#ff36b472</item>
     <item name="tink_incomeDarkColor">@color/salary_green_dark</item>
     <item name="tink_incomeLightColor">#ffdffbed</item>
