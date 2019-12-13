@@ -1,6 +1,6 @@
 package com.tink.pfmsdk
 
-data class ClientConfiguration @JvmOverloads constructor(val environment: Environment, val sslCertificate: String = "")
+data class ClientConfiguration constructor(val environment: Environment, val sslCertificate: String)
 
 sealed class Environment(val grpcUrl: String, val port: Int) {
 
