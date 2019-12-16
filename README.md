@@ -56,9 +56,9 @@ val config =
 ```
 
 
-2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
+2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](/customization-guide.md) to set this up.
 
-3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) to set this up.
+3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](/tracking-guide.md) to set this up.
 
 3. Create an instance of `FinanceOverviewFragment`
 
