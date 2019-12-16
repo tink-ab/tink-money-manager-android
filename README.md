@@ -104,7 +104,7 @@ override fun onBackPressed() {
 ### Locking screen orientation
 
 The Tink Finance Overview only works correctly when the screen orientation is locked to portrait mode. Fixed landscape mode or changing the configuration dynamically will lead to unexpected results and suboptimal user experience.
-You can achieve this opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
+You can achieve this by opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
 
 ## Guides
 - [Customization guide](/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
