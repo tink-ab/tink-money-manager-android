@@ -27,19 +27,18 @@ dependencies {
 }
 ```
 
-4. Enable databinding. In your app-level `build.gradle`, inside the :
+4. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 dataBinding {
    enabled = true
 }
 ```
 
-5. Set the java compiler to Java 8 or higher: 
+5. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block: 
 ```groovy
-//Inside your 
 compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+   sourceCompatibility = JavaVersion.VERSION_1_8
+   targetCompatibility = JavaVersion.VERSION_1_8
 }
 ```
 
@@ -56,19 +55,19 @@ val config =
 ```
 
 
-2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://github.com/tink-ab/tink-link-android/blob/master/customization-guide.md) to set this up.
+2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](/customization-guide.md) to set this up.
 
-3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://github.com/tink-ab/tink-link-android/blob/master/tracking-guide.md) to set this up.
+3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](/tracking-guide.md) to set this up.
 
-3. Create an instance of `FinanceOverviewFragment`
+4. Create an instance of `FinanceOverviewFragment`
 
 ```kotlin
 val financeOverviewFragment = 
     FinanceOverviewFragment.newInstance(
         accessToken = "yourAccessToken", // [1]
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
-        clientConfiguration = config, // Your client configuration object
-        tracker = yourTracker // Your EventTracker implementation
+        clientConfiguration = config, // The client configuration object you created in step 1
+        tracker = yourTracker // Your EventTracker implementation (optional)
     )
 ```
 `[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
@@ -105,7 +104,7 @@ override fun onBackPressed() {
 ### Locking screen orientation
 
 The Tink Finance Overview only works correctly when the screen orientation is locked to portrait mode. Fixed landscape mode or changing the configuration dynamically will lead to unexpected results and suboptimal user experience.
-You can achieve this by setting `android:screenOrientation="portrait"` in your Android manifest on the Activity containing the `FinanceOverviewFragment`
+You can achieve this by opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
 
 ## Guides
 - [Customization guide](/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
