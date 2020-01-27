@@ -1,4 +1,4 @@
-object TinkLinkVersion {
+object TinkPfmVersion {
 
     private const val major = 1
     private const val minor = 0

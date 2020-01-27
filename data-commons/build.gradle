@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode TinkLinkVersion.code
-        versionName TinkLinkVersion.name
+        versionCode TinkPfmVersion.code
+        versionName TinkPfmVersion.name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
