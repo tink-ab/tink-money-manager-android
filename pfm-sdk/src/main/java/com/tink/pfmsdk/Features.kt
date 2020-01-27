@@ -11,7 +11,7 @@ enum class ChartType {
 }
 
 internal object FeatureSet {
-    private val features = mutableSetOf<OverviewFeature>()
+    val features = mutableSetOf<OverviewFeature>()
 
     fun initialize(featureSet: Set<OverviewFeature>) {
         features.addAll(featureSet)
