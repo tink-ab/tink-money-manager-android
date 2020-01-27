@@ -19,7 +19,8 @@ class MainActivity : FragmentActivity() {
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkFinanceOverviewSampleStyle,
                 clientConfiguration = Configuration.sampleClientConfiguration,
-                tracker = LogTracker()
+                tracker = LogTracker(),
+                featureSet = Configuration.sampleFeatureSet
             ).also {
                 currentFinanceOverviewFragment = it
             }
