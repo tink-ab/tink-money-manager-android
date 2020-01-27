@@ -10,22 +10,27 @@ import io.grpc.ForwardingClientCallListener.SimpleForwardingClientCallListener;
 import io.grpc.Metadata;
 import io.grpc.MethodDescriptor;
 import io.grpc.stub.MetadataUtils;
+import se.tink.tink_android_data.BuildConfig;
 
 
 public class HeaderClientInterceptor implements ClientInterceptor {
 
 	public static final Metadata.Key<String> AUTHORIZATION = Metadata.Key
 		.of("Authorization", Metadata.ASCII_STRING_MARSHALLER);
-	public static final Metadata.Key<String> CLIENT_KEY_HEADER_NAME = Metadata.Key
-		.of("X-Tink-Client-Key", Metadata.ASCII_STRING_MARSHALLER);
 	public static final Metadata.Key<String> DEVICE_ID_HEADER_NAME = Metadata.Key
 		.of("X-Tink-Device-ID", Metadata.ASCII_STRING_MARSHALLER);
+	public static final Metadata.Key<String> SDK_NAME_HEADER_NAME = Metadata.Key
+		.of("X-Tink-SDK-Name", Metadata.ASCII_STRING_MARSHALLER);
+	public static final Metadata.Key<String> SDK_VERSION_HEADER_NAME = Metadata.Key
+		.of("X-Tink-SDK-Version", Metadata.ASCII_STRING_MARSHALLER);
 	public static final Metadata.Key<String> OAUTH_CLIENT_ID_HEADER_NAME = Metadata.Key
 		.of("X-Tink-OAuth-Client-ID", Metadata.ASCII_STRING_MARSHALLER);
 	public static final Metadata.Key<String> REMOTE_ADDRESS = Metadata.Key
 		.of("X-Forwarded-For", Metadata.ASCII_STRING_MARSHALLER);
 	public static final Metadata.Key<String> USER_AGENT = Metadata.Key
 		.of("User-Agent", Metadata.ASCII_STRING_MARSHALLER);
+
+	private static final String SDK_NAME_HEADER_VALUE = "Tink PFM Android";
 
 	private String accessToken;
 	private final String deviceId;
@@ -50,6 +55,8 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 				if (!Strings.isNullOrEmpty(accessToken)) {
 					headers.put(AUTHORIZATION, "Bearer " + accessToken);
 				}
+				headers.put(SDK_NAME_HEADER_NAME, SDK_NAME_HEADER_VALUE);
+				headers.put(SDK_VERSION_HEADER_NAME, BuildConfig.VERSION_NAME);
 
 				super.start(new SimpleForwardingClientCallListener<RespT>(responseListener) {
 					@Override

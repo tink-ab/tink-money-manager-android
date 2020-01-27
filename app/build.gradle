@@ -12,8 +12,8 @@ android {
         applicationId "se.tink.android.pfmsdk"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode TinkPfmVersion.code
+        versionName TinkPfmVersion.name
     }
 
     buildTypes {
