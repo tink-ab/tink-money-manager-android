@@ -177,7 +177,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
-        private const val ARG_FEATURE_SET = "featureSet"
 
         @JvmOverloads
         @JvmStatic
