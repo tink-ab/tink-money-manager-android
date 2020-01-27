@@ -177,6 +177,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
+        private const val ARG_FEATURE_SET = "featureSet"
 
         @JvmOverloads
         @JvmStatic
@@ -184,7 +185,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             accessToken: String,
             styleResId: Int,
             clientConfiguration: ClientConfiguration,
-            tracker: Tracker? = null
+            tracker: Tracker? = null,
+            featureSet: Set<OverviewFeature> = FeatureSet.allFeatures
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             NetworkConfigSingleton.apply {
@@ -192,6 +194,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
                 sslCertificate = clientConfiguration.sslCertificate
                 port = clientConfiguration.environment.port
             }
+            FeatureSet.initialize(featureSet)
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
