@@ -35,4 +35,6 @@
   <dimen name="period_selector_height">40dp</dimen>
   <dimen name="card_divider_left_margin">76dp</dimen>
 
+  <dimen name="overview_chart_container_height">375dp</dimen>
+
 </resources>

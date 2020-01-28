@@ -77,6 +77,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         requireNotNull(arguments?.getString(ARG_ACCESS_TOKEN))
     }
 
+    private val overviewFeatures: OverviewFeatures by lazy {
+        requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_OVERVIEW_FEATURES))
+    }
+
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     override fun onAttach(context: Context?) {
@@ -103,7 +107,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fragmentCoordinator.add(OverviewFragment(), false, FragmentAnimationFlags.NONE)
+        fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures), false, FragmentAnimationFlags.NONE)
     }
 
     fun handleBackPress() =
@@ -177,6 +181,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
+        private const val ARG_OVERVIEW_FEATURES = "overviewFeatureSet"
 
         @JvmOverloads
         @JvmStatic
@@ -184,7 +189,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             accessToken: String,
             styleResId: Int,
             clientConfiguration: ClientConfiguration,
-            tracker: Tracker? = null
+            tracker: Tracker? = null,
+            featureSet: OverviewFeatures = OverviewFeatures.ALL
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             NetworkConfigSingleton.apply {
@@ -195,7 +201,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
-                    ARG_STYLE_RES to styleResId
+                    ARG_STYLE_RES to styleResId,
+                    ARG_OVERVIEW_FEATURES to featureSet
                 )
             }
         }
