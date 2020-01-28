@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.transaction
 import com.tink.pfmsdk.BaseFragment
-import com.tink.pfmsdk.FeatureSet
 import com.tink.pfmsdk.OverviewFeature
+import com.tink.pfmsdk.OverviewFeatures
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
@@ -20,20 +21,25 @@ class OverviewFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun viewReadyAfterLayout(): Boolean = false
 
+    private val overviewFeatures: OverviewFeatures by lazy {
+        requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_FEATURES))
+    }
+
+
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
-        for (feature in FeatureSet.features) {
+        for (feature in overviewFeatures.features) {
             addFeature(feature)
         }
     }
 
     private fun addFeature(feature: OverviewFeature) {
         when (feature) {
-            is OverviewFeature.Charts -> {
+            is OverviewFeature.Statistics -> {
                 fragmentManager?.transaction {
                     add(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
-                        OverviewChartFragment()
+                        OverviewChartFragment.newInstance(feature)
                     )
                 }
             }
@@ -57,7 +63,7 @@ class OverviewFragment : BaseFragment() {
         val containerView = FrameLayout(context)
         containerView.apply {
             when (feature) {
-                is OverviewFeature.Charts -> {
+                is OverviewFeature.Statistics -> {
                     id = R.id.overview_chart_container
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -75,6 +81,18 @@ class OverviewFragment : BaseFragment() {
         }
         parent.addView(containerView)
         return containerView.id
+    }
+
+    companion object {
+        private const val ARG_FEATURES = "ARG_FEATURES"
+
+        @JvmStatic
+        fun newInstance(features: OverviewFeatures): OverviewFragment =
+            OverviewFragment().apply {
+                arguments = bundleOf(
+                    ARG_FEATURES to features
+                )
+            }
     }
 
 }

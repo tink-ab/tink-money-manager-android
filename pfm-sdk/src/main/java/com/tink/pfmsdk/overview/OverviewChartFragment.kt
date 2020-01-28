@@ -8,6 +8,7 @@ import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,7 +16,9 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
+import com.tink.pfmsdk.OverviewFeature
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.StatisticType
 import com.tink.pfmsdk.databinding.FragmentOverviewChartBinding
 import com.tink.pfmsdk.databinding.OverviewChartPageBinding
 import com.tink.pfmsdk.extensions.onPageSelected
@@ -31,11 +34,6 @@ import com.tink.pfmsdk.overview.charts.piechart.addSegments
 import com.tink.pfmsdk.util.CurrencyUtils
 import kotlin.math.abs
 
-private const val PAGE_COUNT = 2
-private const val PAGE_EXPENSES = 0
-//private const val PAGE_LEFT_TO_SPEND = 1
-private const val PAGE_INCOME = 1
-
 class OverviewChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[OverviewChartViewModel::class.java] }
     private val pageTransformer by lazy { PageTransformer(resources) }
@@ -46,6 +44,10 @@ class OverviewChartFragment : BaseFragment() {
     override fun viewReadyAfterLayout(): Boolean  = false
     override fun hasToolbar(): Boolean = false
 
+    private val statistics: OverviewFeature.Statistics by lazy {
+        requireNotNull(arguments?.getParcelable<OverviewFeature.Statistics>(ARG_STATISTICS))
+    }
+
     override fun authorizedOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
         DataBindingUtil.bind<FragmentOverviewChartBinding>(view.chartRoot)?.also {
             it.loaded = viewModel.loaded
@@ -53,8 +55,8 @@ class OverviewChartFragment : BaseFragment() {
         }
         with(view) {
             with(pager) {
-                adapter = ChartPagerAdapter()
-                offscreenPageLimit = PAGE_COUNT
+                adapter = ChartPagerAdapter(statistics.statisticTypes)
+                offscreenPageLimit = statistics.statisticTypes.size
                 currentItem = viewModel.lastVisitedPageInOverview
                 setPageTransformer(false, pageTransformer)
                 onPageSelected { viewModel.lastVisitedPageInOverview = it }
@@ -63,9 +65,9 @@ class OverviewChartFragment : BaseFragment() {
         }
     }
 
-    private inner class ChartPagerAdapter : PagerAdapter() {
+    private inner class ChartPagerAdapter(val statisticTypes: List<StatisticType>) : PagerAdapter() {
         override fun isViewFromObject(view: View, obj: Any) = obj == view
-        override fun getCount() = PAGE_COUNT
+        override fun getCount() = statisticTypes.size
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) = container.removeView(obj as View)
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -121,22 +123,23 @@ class OverviewChartFragment : BaseFragment() {
             binding.executePendingBindings()
         }
 
-        private fun getPageData(position: Int) = when (position) {
-            PAGE_EXPENSES -> viewModel.expenses
-//            PAGE_LEFT_TO_SPEND -> viewModel.leftToSpend
-            PAGE_INCOME -> viewModel.income
-            else -> throw IllegalArgumentException("Invalid position $position")
+        private fun getPageData(position: Int) =
+            when (statisticTypes[position]) {
+                StatisticType.EXPENSES -> viewModel.expenses
+//                PAGE_LEFT_TO_SPEND -> viewModel.leftToSpend
+                StatisticType.INCOME -> viewModel.income
+                else -> throw IllegalArgumentException("Invalid position $position")
         }
 
         private fun onPageClicked(page: View, position: Int) {
-            when (position) {
-                PAGE_EXPENSES -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(
+            when (statisticTypes[position]) {
+                StatisticType.EXPENSES -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(
                     ChartType.EXPENSES), page)
 //                PAGE_LEFT_TO_SPEND -> {
 //                    val fragment = ChartDetailsPagerFragment.newInstance(ChartType.LEFT_TO_SPEND)
 //                    fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.NONE)
 //                }
-                PAGE_INCOME -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(ChartType.INCOME), page)
+                StatisticType.INCOME -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(ChartType.INCOME), page)
                 else -> throw IllegalArgumentException("Invalid position $position")
             }
         }
@@ -145,6 +148,18 @@ class OverviewChartFragment : BaseFragment() {
             fragment, true, FragmentAnimationFlags.NONE,
             sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.back_segment))
         )
+    }
+
+    companion object {
+        private const val ARG_STATISTICS = "ARG_STATISTICS"
+
+        @JvmStatic
+        fun newInstance(statistics: OverviewFeature.Statistics): OverviewChartFragment =
+            OverviewChartFragment().apply {
+                arguments = bundleOf(
+                    ARG_STATISTICS to statistics
+                )
+            }
     }
 }
 

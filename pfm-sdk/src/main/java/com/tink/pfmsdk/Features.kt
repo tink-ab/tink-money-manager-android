@@ -1,36 +1,59 @@
 package com.tink.pfmsdk
 
+import android.os.Parcel
+import android.os.Parcelable
+import kotlinx.android.parcel.Parceler
+import kotlinx.android.parcel.Parcelize
+
 sealed class OverviewFeature {
-    class Charts(val chartTypes: Set<ChartType>) : OverviewFeature()
+    @Parcelize
+    class Statistics(val statisticTypes: List<StatisticType>) : OverviewFeature(), Parcelable
+
     object LatestTransactions : OverviewFeature()
 }
 
-enum class ChartType {
+enum class StatisticType {
     EXPENSES,
     INCOME
 }
 
-internal object FeatureSet {
-    val features = mutableSetOf<OverviewFeature>()
+@Parcelize
+data class OverviewFeatures(val features: List<OverviewFeature>) : Parcelable {
 
-    fun initialize(featureSet: Set<OverviewFeature>) {
-        features.addAll(featureSet)
+    companion object : Parceler<OverviewFeatures> {
+
+        private fun readFromParcel(parcel: Parcel): OverviewFeatures {
+            return OverviewFeatures(
+                features = mutableListOf<OverviewFeature>().also {
+                    parcel.readList(
+                        it as List<OverviewFeature>,
+                        OverviewFeature::class.java.classLoader
+                    )
+                }
+            )
+        }
+
+        override fun OverviewFeatures.write(parcel: Parcel, flags: Int) {
+            parcel.apply {
+                writeList(features)
+            }
+        }
+
+        override fun create(parcel: Parcel): OverviewFeatures {
+            return readFromParcel(parcel)
+        }
+
+        val ALL =
+            OverviewFeatures(
+                listOf(
+                    OverviewFeature.Statistics(
+                        listOf(
+                            StatisticType.EXPENSES,
+                            StatisticType.INCOME
+                        )
+                    ),
+                    OverviewFeature.LatestTransactions
+                )
+            )
     }
-
-    fun showCharts(): Boolean = features.any { it is OverviewFeature.Charts }
-
-    fun showLatestTransactions(): Boolean =
-        features.any { it is OverviewFeature.LatestTransactions }
-
-    fun charts() =
-        features
-            .firstOrNull { it is OverviewFeature.Charts }
-            ?.let { (it as OverviewFeature.Charts).chartTypes }
-            ?: emptySet()
-
-    val allFeatures =
-        setOf(
-            OverviewFeature.Charts(setOf(ChartType.EXPENSES, ChartType.INCOME)),
-            OverviewFeature.LatestTransactions
-        )
 }
