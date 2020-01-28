@@ -62,6 +62,10 @@ class OverviewChartFragment : BaseFragment() {
                 onPageSelected { viewModel.lastVisitedPageInOverview = it }
             }
             pageIndicator.initialize(pager)
+            viewModel.loaded.observe(viewLifecycleOwner, Observer { loaded ->
+                pageIndicator.visibility =
+                    if (loaded && statistics.statisticTypes.size > 1) View.VISIBLE else View.GONE
+            })
         }
     }
 
