@@ -4,7 +4,6 @@ import android.app.Application;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tink.pfmsdk.buildConfig.BuildConfiguration;
 import com.tink.pfmsdk.buildConfig.BuildConfigurations;
-import com.tink.pfmsdk.configuration.I18nConfiguration;
 import com.tink.pfmsdk.security.DefaultRecoveryHandler;
 import com.tink.pfmsdk.security.SecuredClientDataStorage;
 import dagger.android.AndroidInjector;
@@ -28,10 +27,6 @@ public class TinkApp extends Application implements HasAndroidInjector {
 
 	@Inject
 	DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
-
-	@Inject
-	I18nConfiguration i18nConfiguration;
-
 
 	/*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
@@ -61,8 +56,6 @@ public class TinkApp extends Application implements HasAndroidInjector {
 		BuildConfiguration config = BuildConfigurations.INSTANCE.getInstance();
 
 		Timber.plant(config.getLoggingConfigurations().getTimberTree());
-
-		i18nConfiguration.initialize();
 	}
 
 	@Deprecated
