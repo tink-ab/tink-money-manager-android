@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="96dp"
+  android:layout_marginTop="16dp"
+  android:layout_marginBottom="16dp">
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/accountList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingStart="8dp"
+    android:paddingEnd="16dp" />
+
+  <FrameLayout
+    android:id="@+id/loader"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+      layout="@layout/loader_spinner"
+      android:visibility="visible" />
+
+  </FrameLayout>
+
+</FrameLayout>
