@@ -111,7 +111,15 @@ class FragmentCoordinator(
     fun backToMainScreen(popImmediate: Boolean = true) =
         backTo(null, FragmentManager.POP_BACK_STACK_INCLUSIVE, popImmediate)
 
-    fun handleBackPress() = topActiveFragment?.onBackPressed().isTrue() || popBackStackImmediate()
+    fun handleBackPress(): Boolean {
+        return if (topActiveFragment?.onBackPressed().isTrue()) {
+            true
+        } else {
+            // Temporary fix to use popBackStack() instead of popBackStackImmediate() since the latter doesn't seem to pop the fragment from the backstack in the current setup.
+            popBackStack()
+            true
+        }
+    }
 
     fun handleThirdPartyCallbackResult(state: String, parameters: Map<String, String>) =
         topActiveFragment?.handleThirdPartyCallbackResult(state, parameters).isTrue()
