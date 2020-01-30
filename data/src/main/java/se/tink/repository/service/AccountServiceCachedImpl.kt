@@ -12,7 +12,6 @@ import se.tink.grpc.v1.services.AccountServiceGrpc
 import se.tink.repository.ChangeObserver
 import se.tink.repository.MutationHandler
 import se.tink.repository.SimpleStreamObserver
-import se.tink.repository.TinkNetworkError
 import se.tink.repository.cache.WritableCache
 import se.tink.repository.cache.createChangeObserver
 import javax.inject.Inject
@@ -60,11 +59,7 @@ class AccountServiceCachedImpl @Inject constructor(
         val request = ListAccountsRequest.newBuilder().build()
         accountServiceApi.listAccounts(
             request,
-            object: io.grpc.stub.StreamObserver<ListAccountsResponse> {
-                override fun onError(t: Throwable) {
-                    handler.onError(TinkNetworkError(t))
-                }
-
+            object : SimpleStreamObserver<ListAccountsResponse>(handler) {
                 override fun onNext(value: ListAccountsResponse) {
                     val accountsList = mutableListOf<Account>()
                     for (account in value.accountsList) {
@@ -72,11 +67,6 @@ class AccountServiceCachedImpl @Inject constructor(
                     }
                     handler.onNext(accountsList)
                 }
-
-                override fun onCompleted() {
-                    handler.onCompleted()
-                }
-
             }
         )
     }
