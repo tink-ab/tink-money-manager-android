@@ -48,7 +48,7 @@ class AccountDetailsFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): TransactionsListFragment.Theme = ownTheme
-    override fun getScreenEvent(): ScreenEvent? = ScreenEvent.TRACKING_ERROR // TODO: Add tracking
+    override fun getScreenEvent(): ScreenEvent? = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true
 
     private val recyclerViewOnScrollListener = object : RecyclerView.OnScrollListener() {
