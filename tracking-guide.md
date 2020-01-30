@@ -42,3 +42,4 @@ The different screen events that can occur are declared as public constants insi
 | `INCOME` | Income | The income screen. |
 | `TRANSACTIONS` | Transactions | The transaction list. |
 | `SIMILAR_TRANSACTIONS` | Transactions.Similar | Screen where user can select similar transactions. |
+| `ACCOUNT_DETAILS` | Account Details | Screen where user can see balance and transactions of a specific account. |
