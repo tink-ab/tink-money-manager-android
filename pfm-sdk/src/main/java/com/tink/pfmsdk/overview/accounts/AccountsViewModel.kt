@@ -12,8 +12,7 @@ class AccountsViewModel @Inject constructor(
 ) : ViewModel() {
     val accounts: LiveData<List<Account>?> = accountRepository.accounts()
 
-    private val _loading = MediatorLiveData<Boolean>().apply {
+    val loading = MediatorLiveData<Boolean>().apply {
         addSource(accounts) { if (it != null) postValue(false) }
     }
-    val loading: LiveData<Boolean> = _loading
 }
