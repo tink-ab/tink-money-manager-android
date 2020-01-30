@@ -2,6 +2,7 @@ package com.tink.pfmsdk.di
 
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.overview.OverviewChartViewModel
+import com.tink.pfmsdk.overview.accounts.AccountDetailsViewModel
 import com.tink.pfmsdk.overview.accounts.AccountsViewModel
 import com.tink.pfmsdk.overview.charts.CategorySelectionViewModel
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
@@ -253,4 +254,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(AccountsViewModel::class)
     fun bindAccountsViewModel(model: AccountsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AccountDetailsViewModel::class)
+    fun bindAccountDetailsViewModel(model: AccountDetailsViewModel): ViewModel
 }
