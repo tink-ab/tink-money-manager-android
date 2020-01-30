@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
-import kotlinx.android.synthetic.main.fragment_accounts.*
+import kotlinx.android.synthetic.main.fragment_accounts_list.*
 
-class AccountsFragment : BaseFragment() {
-    override fun getLayoutId(): Int = R.layout.fragment_accounts
+class AccountsListFragment : BaseFragment() {
+    override fun getLayoutId(): Int = R.layout.fragment_accounts_list
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     private lateinit var viewModel: AccountsViewModel

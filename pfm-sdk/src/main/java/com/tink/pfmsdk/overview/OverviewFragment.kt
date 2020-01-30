@@ -11,7 +11,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.OverviewFeature
 import com.tink.pfmsdk.OverviewFeatures
 import com.tink.pfmsdk.R
-import com.tink.pfmsdk.overview.accounts.AccountsFragment
+import com.tink.pfmsdk.overview.accounts.AccountsListFragment
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.fragment_overview.*
@@ -49,7 +49,7 @@ class OverviewFragment : BaseFragment() {
                 fragmentManager?.transaction {
                     add(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
-                        AccountsFragment()
+                        AccountsListFragment()
                     )
                 }
             }

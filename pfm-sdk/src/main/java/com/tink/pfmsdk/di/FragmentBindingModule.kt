@@ -2,7 +2,7 @@ package com.tink.pfmsdk.di
 
 import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.OverviewFragment
-import com.tink.pfmsdk.overview.accounts.AccountsFragment
+import com.tink.pfmsdk.overview.accounts.AccountsListFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmsdk.overview.charts.TabExpensesBarChartFragment
@@ -57,5 +57,5 @@ interface FragmentBindingModule {
     fun overviewFragment(): OverviewFragment
 
     @ContributesAndroidInjector
-    fun accountsFragment(): AccountsFragment
+    fun accountsListFragment(): AccountsListFragment
 }
