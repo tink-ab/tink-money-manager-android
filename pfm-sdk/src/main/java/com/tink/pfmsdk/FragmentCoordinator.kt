@@ -112,13 +112,11 @@ class FragmentCoordinator(
         backTo(null, FragmentManager.POP_BACK_STACK_INCLUSIVE, popImmediate)
 
     fun handleBackPress(): Boolean {
-        return if (topActiveFragment?.onBackPressed().isTrue()) {
-            true
-        } else {
+        if (!topActiveFragment?.onBackPressed().isTrue()) {
             // Temporary fix to use popBackStack() instead of popBackStackImmediate() since the latter doesn't seem to pop the fragment from the backstack in the current setup.
             popBackStack()
-            true
         }
+        return true
     }
 
     fun handleThirdPartyCallbackResult(state: String, parameters: Map<String, String>) =
