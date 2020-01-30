@@ -12,6 +12,7 @@ import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import com.tink.pfmsdk.transaction.SimilarTransactionsFragment
+import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -58,4 +59,7 @@ interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun accountsListFragment(): AccountsListFragment
+
+    @ContributesAndroidInjector
+    fun accountDetailsFragment(): AccountDetailsFragment
 }
