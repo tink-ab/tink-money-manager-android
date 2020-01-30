@@ -15,7 +15,8 @@ data class TransactionsListMetaData(
     val categoryCode: String? = null,
     val isShowAll: Boolean = false,
     val statusSubtitleMode: StatusSubtitleMode = StatusSubtitleMode.SHOW_REDUCED_AMOUNT,
-    val transactionIds: List<String>? = null
+    val transactionIds: List<String>? = null,
+    val accountId: String? = null
 ) : Parcelable
 
 sealed class TransactionListMode {
@@ -33,6 +34,7 @@ fun TransactionsListMetaData.toListMode(): TransactionListMode =
         isLeftToSpend -> TransactionListMode.LeftToSpend(period)
         isShowAll -> TransactionListMode.All
         categoryCode?.isNotEmpty() == true -> TransactionListMode.Category(categoryCode, period)
+        accountId?.isNotEmpty() == true -> TransactionListMode.Account(accountId)
         else -> TransactionListMode.Invalid
     }
 
