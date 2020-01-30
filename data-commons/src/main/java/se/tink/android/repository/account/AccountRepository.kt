@@ -18,4 +18,8 @@ class AccountRepository @Inject constructor(private val accountService: AccountS
         accountService.listAccounts(liveData.createMutationHandler())
         return liveData.map { it.value ?: emptyList() }
     }
+
+    fun accountById(id: String): LiveData<Account?> = accounts().map { accountList ->
+        accountList?.firstOrNull { it.id == id }
+    }
 }
