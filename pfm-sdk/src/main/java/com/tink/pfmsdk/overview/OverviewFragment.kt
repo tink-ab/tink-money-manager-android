@@ -25,7 +25,6 @@ class OverviewFragment : BaseFragment() {
         requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_FEATURES))
     }
 
-
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
         for (feature in overviewFeatures.features) {
@@ -36,8 +35,8 @@ class OverviewFragment : BaseFragment() {
     private fun addFeature(feature: OverviewFeature) {
         when (feature) {
             is OverviewFeature.Statistics -> {
-                fragmentManager?.transaction {
-                    add(
+                childFragmentManager.transaction {
+                    replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
                         OverviewChartFragment.newInstance(feature)
                     )
@@ -45,8 +44,8 @@ class OverviewFragment : BaseFragment() {
             }
 
             is OverviewFeature.LatestTransactions -> {
-                fragmentManager?.transaction {
-                    add(
+                childFragmentManager.transaction {
+                    replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
                         LatestTransactionsFragment()
                     )
