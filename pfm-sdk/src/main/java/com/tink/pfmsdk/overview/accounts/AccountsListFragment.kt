@@ -42,7 +42,7 @@ class AccountsListFragment : BaseFragment() {
 
         viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
             TransitionManager.beginDelayedTransition(view as ViewGroup)
-            loader.visibility = if(loading) View.VISIBLE else View.GONE
+            loader.visibility = if (loading) View.VISIBLE else View.GONE
         })
     }
 }
