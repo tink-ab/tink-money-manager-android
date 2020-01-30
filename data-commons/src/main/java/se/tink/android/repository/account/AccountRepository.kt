@@ -12,15 +12,10 @@ import javax.inject.Singleton
 
 @Singleton
 class AccountRepository @Inject constructor(private val accountService: AccountService) {
+
     fun accounts(): LiveData<List<Account>?> {
-
         val liveData = MutableLiveData<ErrorOrValue<List<Account>>>()
-
         accountService.listAccounts(liveData.createMutationHandler())
-
-        return liveData.map {
-            if (it.error != null) emptyList()
-            else it.value
-        }
+        return liveData.map { it.value ?: emptyList() }
     }
 }
