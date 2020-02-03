@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AccountsViewModel @Inject constructor(
     accountRepository: AccountRepository
 ) : ViewModel() {
-    val accounts: LiveData<List<Account>?> = accountRepository.accounts()
+    val accounts: LiveData<List<Account>> = accountRepository.accounts()
 
     val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         addSource(accounts) { postValue(it == null) }
