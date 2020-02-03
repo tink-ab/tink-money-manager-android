@@ -4,6 +4,8 @@ package se.tink.repository.service
 import se.tink.converter.ModelConverter
 import se.tink.core.models.account.Account
 import se.tink.extensions.getStreamingServiceObserver
+import se.tink.grpc.v1.rpc.ListAccountsRequest
+import se.tink.grpc.v1.rpc.ListAccountsResponse
 import se.tink.grpc.v1.rpc.UpdateAccountRequest
 import se.tink.grpc.v1.rpc.UpdateAccountResponse
 import se.tink.grpc.v1.services.AccountServiceGrpc
@@ -51,5 +53,21 @@ class AccountServiceCachedImpl @Inject constructor(
 
     override fun unsubscribe(listener: ChangeObserver<Account>) {
         changeObservers.remove(listener)
+    }
+
+    override fun listAccounts(handler: MutationHandler<MutableList<Account>>) {
+        val request = ListAccountsRequest.newBuilder().build()
+        accountServiceApi.listAccounts(
+            request,
+            object : SimpleStreamObserver<ListAccountsResponse>(handler) {
+                override fun onNext(value: ListAccountsResponse) {
+                    val accountsList = mutableListOf<Account>()
+                    for (account in value.accountsList) {
+                        accountsList.add(converter.map(account, Account::class.java))
+                    }
+                    handler.onNext(accountsList)
+                }
+            }
+        )
     }
 }

@@ -9,6 +9,9 @@ sealed class OverviewFeature : Parcelable {
 
     @Parcelize
     object LatestTransactions : OverviewFeature()
+
+    @Parcelize
+    object Accounts : OverviewFeature()
 }
 
 enum class StatisticType {
@@ -28,6 +31,7 @@ data class OverviewFeatures(val features: List<OverviewFeature>) : Parcelable {
                             StatisticType.INCOME
                         )
                     ),
+                    OverviewFeature.Accounts,
                     OverviewFeature.LatestTransactions
                 )
             )

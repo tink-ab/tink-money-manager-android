@@ -11,6 +11,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.OverviewFeature
 import com.tink.pfmsdk.OverviewFeatures
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.overview.accounts.AccountsListFragment
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.fragment_overview.*
@@ -43,6 +44,15 @@ class OverviewFragment : BaseFragment() {
                 }
             }
 
+            is OverviewFeature.Accounts -> {
+                fragmentManager?.transaction {
+                    add(
+                        containerIdForFeature(feature, overviewContainer, requireContext()),
+                        AccountsListFragment()
+                    )
+                }
+            }
+
             is OverviewFeature.LatestTransactions -> {
                 childFragmentManager.transaction {
                     replace(
@@ -67,6 +77,13 @@ class OverviewFragment : BaseFragment() {
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         context.resources.getDimensionPixelSize(R.dimen.overview_chart_container_height)
+                    )
+                }
+                is OverviewFeature.Accounts -> {
+                    id = R.id.accounts_container
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
                     )
                 }
                 is OverviewFeature.LatestTransactions -> {

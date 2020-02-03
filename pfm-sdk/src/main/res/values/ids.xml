@@ -8,4 +8,5 @@
   <item name="tink_toolbar_custom_view_container" type="id"/>
   <item name="overview_chart_container" type="id"/>
   <item name="latest_transactions_container" type="id"/>
+  <item name="accounts_container" type="id"/>
 </resources>
