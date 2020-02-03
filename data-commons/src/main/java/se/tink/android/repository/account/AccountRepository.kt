@@ -13,9 +13,13 @@ import javax.inject.Singleton
 @Singleton
 class AccountRepository @Inject constructor(private val accountService: AccountService) {
 
-    fun accounts(): LiveData<List<Account>?> {
+    fun accounts(): LiveData<List<Account>> {
         val liveData = MutableLiveData<ErrorOrValue<List<Account>>>()
         accountService.listAccounts(liveData.createMutationHandler())
         return liveData.map { it.value ?: emptyList() }
+    }
+
+    fun accountById(id: String): LiveData<Account?> = accounts().map { accountList ->
+        accountList.firstOrNull { it.id == id }
     }
 }

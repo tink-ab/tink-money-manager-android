@@ -18,5 +18,7 @@ data class ScreenEvent private constructor(val name: String) {
         val EXPENSES = ScreenEvent("Expenses")
         @JvmField
         val INCOME = ScreenEvent("Income")
+        @JvmField
+        val ACCOUNT_DETAILS = ScreenEvent("Account Details")
     }
 }

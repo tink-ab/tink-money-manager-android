@@ -20,9 +20,8 @@ class AccountsListFragment : BaseFragment() {
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[AccountsViewModel::class.java]
-
         accountListAdapter.onAccountClickedListener = {
-            // TODO: Show account details screen with list of transactions
+            fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
         }
     }
 
