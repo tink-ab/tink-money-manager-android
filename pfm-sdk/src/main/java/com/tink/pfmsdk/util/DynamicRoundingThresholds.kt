@@ -2,7 +2,7 @@ package com.tink.pfmsdk.util
 
 private const val DEFAULT = 10
 
-object DynamicRoundingThresholds {
+internal object DynamicRoundingThresholds {
 
     val map: Map<String, Int> = mapOf(
         "SEK" to 10,

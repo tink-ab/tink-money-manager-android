@@ -6,13 +6,13 @@ import javax.inject.Inject
 import javax.inject.Provider
 import javax.inject.Singleton
 
-typealias ModelProviders = @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
+internal typealias ModelProviders = @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 
 /**
  * View model provider factory allows injection into view models
  */
 @Singleton
-open class ViewModelFactory @Inject constructor(
+internal open class ViewModelFactory @Inject constructor(
     private val providers: ModelProviders
 ) : ViewModelProvider.Factory {
 

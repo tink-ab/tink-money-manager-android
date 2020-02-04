@@ -15,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProviderRepository @Inject constructor(
+internal class ProviderRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val service: ProviderService
 ) {

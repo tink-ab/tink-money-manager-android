@@ -22,7 +22,7 @@ import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-class LatestTransactionsFragment : BaseFragment() {
+internal class LatestTransactionsFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_latest_transactions
     override fun needsLoginToBeAuthorized(): Boolean = true
 

@@ -16,7 +16,7 @@ import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.fragment_overview.*
 
-class OverviewFragment : BaseFragment() {
+internal class OverviewFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_overview
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.OVERVIEW
     override fun needsLoginToBeAuthorized(): Boolean = true

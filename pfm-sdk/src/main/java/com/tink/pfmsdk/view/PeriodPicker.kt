@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import se.tink.core.models.misc.Period
 
-class PeriodPicker @JvmOverloads constructor(
+internal class PeriodPicker @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

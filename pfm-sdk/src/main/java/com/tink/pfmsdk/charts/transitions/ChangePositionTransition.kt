@@ -13,12 +13,12 @@ import se.tink.core.extensions.whenNonNull
 
 private const val PARAMS = "view_center"
 
-val View.boundsOnScreen
+private val View.boundsOnScreen
     get() = Rect(0, 0, width, height).also {
         (rootView as ViewGroup).offsetDescendantRectToMyCoords(this, it)
     }
 
-class ChangePositionTransition : Transition() {
+internal class ChangePositionTransition : Transition() {
 
     override fun captureStartValues(transitionValues: TransitionValues) = captureValues(transitionValues)
     override fun captureEndValues(transitionValues: TransitionValues) = captureValues(transitionValues)

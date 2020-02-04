@@ -37,7 +37,7 @@ import se.tink.commons.extensions.getColorFromAttr
 
 private const val TYPE_ARG = "type"
 
-class HalfPieChartFragment : BaseFragment() {
+internal class HalfPieChartFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(
             parentFragment!!,
@@ -169,9 +169,9 @@ class HalfPieChartFragment : BaseFragment() {
     }
 }
 
-data class HalfChartItem(val title: String, val amount: String, val onClick: View.OnClickListener)
+internal data class HalfChartItem(val title: String, val amount: String, val onClick: View.OnClickListener)
 
-class HalfChartItemTheme(@ColorInt val textColor: Int)
+internal class HalfChartItemTheme(@ColorInt val textColor: Int)
 
 private fun StatisticItem.getName(context: Context) =
     category.getNameWithDefaultChildFormat(

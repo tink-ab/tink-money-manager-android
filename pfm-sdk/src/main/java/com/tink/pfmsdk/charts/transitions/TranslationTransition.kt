@@ -11,7 +11,7 @@ import se.tink.core.extensions.whenNonNull
 
 private const val TRANSLATION_Y = "translation_y_"
 
-class TranslationTransition : Transition() {
+internal class TranslationTransition : Transition() {
 
     override fun captureStartValues(transitionValues: TransitionValues) = captureValues(transitionValues)
     override fun captureEndValues(transitionValues: TransitionValues) = captureValues(transitionValues)

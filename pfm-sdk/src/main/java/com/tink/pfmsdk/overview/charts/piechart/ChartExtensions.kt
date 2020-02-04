@@ -11,7 +11,7 @@ import com.tink.pfmsdk.charts.ColorGenerator
 import com.tink.pfmsdk.charts.extensions.sumByFloat
 
 
-fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int) {
+internal fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int) {
     val color = ColorUtils.setAlphaComponent(baseColor, (0.4f * 255).toInt())
     val colorPressed = getPressedColor(color)
     addSegment(0f, 360f, color, colorPressed).apply {
@@ -21,7 +21,7 @@ fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int) {
     }
 }
 
-fun <T> PieChartView.addSegments(
+internal fun <T> PieChartView.addSegments(
     data: List<T>,
     value: (T) -> Float,
     colorGenerator: ColorGenerator,

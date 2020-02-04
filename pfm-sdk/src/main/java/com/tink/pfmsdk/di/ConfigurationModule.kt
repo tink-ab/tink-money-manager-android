@@ -13,7 +13,7 @@ import java.util.Locale
 import javax.inject.Singleton
 
 @Module
-class ConfigurationModule {
+internal class ConfigurationModule {
 
     @Provides
     @Singleton

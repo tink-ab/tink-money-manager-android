@@ -24,11 +24,14 @@ import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
+import kotlin.math.absoluteValue
 
 private data class SourceData(val period: Period, val category: Category)
 
 private sealed class ChartData(val source: SourceData)
 private class StatisticalData(source: SourceData, val statistic: StatisticTree) : ChartData(source)
+
+private const val MAX_TRANSACTIONS_TO_SHOW = 6
 
 private class TransactionsData(
     source: SourceData,
@@ -36,7 +39,7 @@ private class TransactionsData(
 ) : ChartData(source)
 
 
-class PieChartDetailsViewModel @Inject constructor(
+internal class PieChartDetailsViewModel @Inject constructor(
     private val dateUtils: DateUtils,
     @ApplicationScoped private val context: Context,
     statisticRepository: StatisticsRepository,
@@ -138,6 +141,45 @@ class PieChartDetailsViewModel @Inject constructor(
         }
     }
 
+    private fun calculateTransactionsStatistic(
+        other: String,
+        transactions: List<Transaction>
+    ): TransactionsItemsList {
+        val items = transactions
+            .groupBy { it.description }
+            .entries
+            .map { (name, transactions) ->
+                TransactionsItem(
+                    name,
+                    transactions.sumByFloat { transaction ->
+                        transaction
+                            .dispensableAmount.value
+                            .floatValue()
+                            .absoluteValue
+                    },
+                    transactions.map { it.id }
+                )
+            }
+            .sortedByDescending { it.amount }
+
+        if (items.size < MAX_TRANSACTIONS_TO_SHOW) {
+            return TransactionsItemsList(ArrayList(items))
+        }
+        return TransactionsItemsList(
+            ArrayList(items.take(MAX_TRANSACTIONS_TO_SHOW - 1))
+                .apply {
+                    val toOther =
+                        items.drop(MAX_TRANSACTIONS_TO_SHOW - 1)
+                    add(
+                        TransactionsItem(
+                            other,
+                            toOther.sumByFloat { it.amount },
+                            toOther.flatMap { it.ids })
+                    )
+                }
+        )
+    }
+
     fun setPeriod(p: Period) = period.postValue(p)
 
     fun setCategory(it: Category) {
@@ -145,7 +187,7 @@ class PieChartDetailsViewModel @Inject constructor(
     }
 }
 
-data class DetailsChartModel(
+internal data class DetailsChartModel(
     val title: String,
     val amount: Float,
     val period: String,

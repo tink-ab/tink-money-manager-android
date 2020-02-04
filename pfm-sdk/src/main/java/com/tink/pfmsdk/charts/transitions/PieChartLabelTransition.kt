@@ -17,7 +17,7 @@ private data class LParams(val view: PieChartLabelView, val anchorAngle: Float, 
 
 private const val PARAMS = "label_params"
 
-class PieChartLabelTransition : Transition() {
+internal class PieChartLabelTransition : Transition() {
 
     override fun captureStartValues(transitionValues: TransitionValues) = captureValues(transitionValues)
     override fun captureEndValues(transitionValues: TransitionValues) = captureValues(transitionValues)

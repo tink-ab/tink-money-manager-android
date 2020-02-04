@@ -19,7 +19,7 @@ import se.tink.commons.utils.extractTextStyle
 import se.tink.core.extensions.whenNonNull
 
 
-class BarChartWithAmountLabels : View {
+internal class BarChartWithAmountLabels : View {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         applyAttributes(attrs)

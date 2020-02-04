@@ -14,27 +14,27 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isUncategorized
 import se.tink.core.models.Category
 
-const val REIMBURSEMENT_CODE = "income:refund.other"
+private const val REIMBURSEMENT_CODE = "income:refund.other"
 
-fun String.isUncategorized(): Boolean = this.isUncategorized()
+internal fun String.isUncategorized(): Boolean = this.isUncategorized()
 
-fun Category.isUncategorized(): Boolean {
+internal fun Category.isUncategorized(): Boolean {
     return code.isUncategorized()
 }
 
-fun String.isIncome(): Boolean {
+internal fun String.isIncome(): Boolean {
     return this.startsWith(CategoryType.INCOME.stringCode)
 }
 
-fun String.isExpense(): Boolean {
+internal fun String.isExpense(): Boolean {
     return this.startsWith(CategoryType.EXPENSES.stringCode)
 }
 
-fun String.isReimbursement(): Boolean {
+internal fun String.isReimbursement(): Boolean {
     return REIMBURSEMENT_CODE == this
 }
 
-fun Category.findChildByCode(code: String): Category? {
+internal fun Category.findChildByCode(code: String): Category? {
     return when {
         this.code == code -> this
         children?.isEmpty() == false -> {
@@ -44,7 +44,7 @@ fun Category.findChildByCode(code: String): Category? {
     }
 }
 
-fun Category.nameWithDefaultChildFormat(context: Context): String {
+private fun Category.nameWithDefaultChildFormat(context: Context): String {
     return if (
         isDefaultChild &&
         parent.children.size > 1 &&
@@ -57,7 +57,7 @@ fun Category.nameWithDefaultChildFormat(context: Context): String {
 }
 
 
-fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
+internal fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
     return if (children.isEmpty()) {
         TreeListSelectionItem.ChildItem(
             id = code,
@@ -79,25 +79,25 @@ fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
     }
 }
 
-fun getColor(context: Context, category: Category?): Int {
+internal fun getColor(context: Context, category: Category?): Int {
     val type = getType(category)
     val id = getColorId(type)
     return ContextCompat.getColor(context, id)
 }
 
-fun getDarkColor(context: Context, category: Category?): Int {
+internal fun getDarkColor(context: Context, category: Category?): Int {
     val type = getType(category)
     val id = getDarkColorId(type)
     return ContextCompat.getColor(context, id)
 }
 
-fun getTextColor(context: Context, category: Category?): Int {
+internal fun getTextColor(context: Context, category: Category?): Int {
     val type = getType(category)
     val id = getTextColorId(type)
     return ContextCompat.getColor(context, id)
 }
 
-fun getType(category: Category?): Category.Type = category?.type ?: Category.Type.TYPE_UNKKNOWN
+private fun getType(category: Category?): Category.Type = category?.type ?: Category.Type.TYPE_UNKKNOWN
 
 private fun getDarkColorId(type: Category.Type): Int =
     when (type) {

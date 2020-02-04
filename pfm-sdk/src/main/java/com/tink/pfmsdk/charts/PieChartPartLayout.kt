@@ -8,7 +8,7 @@ import com.tink.pfmsdk.R
 import kotlin.math.atan
 import kotlin.math.sin
 
-class PieChartPartLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+internal class PieChartPartLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     ViewGroup(context, attrs, defStyleAttr) {
 
     private val visiblePart: Float

@@ -20,7 +20,7 @@ import se.tink.android.di.application.ApplicationScoped
 import javax.inject.Named
 
 @Module
-class ThemingModule {
+internal class ThemingModule {
 
     @Provides
     fun provideTabExpensesBarChartTheme(@ApplicationScoped context: Context): TabExpensesBarChartFragment.Theme {

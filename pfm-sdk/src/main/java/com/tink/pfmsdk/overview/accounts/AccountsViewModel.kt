@@ -7,7 +7,7 @@ import se.tink.android.repository.account.AccountRepository
 import se.tink.core.models.account.Account
 import javax.inject.Inject
 
-class AccountsViewModel @Inject constructor(
+internal class AccountsViewModel @Inject constructor(
     accountRepository: AccountRepository
 ) : ViewModel() {
     val accounts: LiveData<List<Account>> = accountRepository.accounts()

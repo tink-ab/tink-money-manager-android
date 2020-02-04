@@ -20,7 +20,7 @@ private data class SegmentInfo(val view: PieChartView.PieChartSegmentView?, val 
 
 private const val SEGMENTS = "segments_info"
 
-class PieChartSegmentTransition(private val group: Int? = null, private val transitions: Int = TRANSITION_ALL) : Transition() {
+internal class PieChartSegmentTransition(private val group: Int? = null, private val transitions: Int = TRANSITION_ALL) : Transition() {
 
     override fun captureStartValues(transitionValues: TransitionValues) = captureValues(transitionValues)
     override fun captureEndValues(transitionValues: TransitionValues) = captureValues(transitionValues)

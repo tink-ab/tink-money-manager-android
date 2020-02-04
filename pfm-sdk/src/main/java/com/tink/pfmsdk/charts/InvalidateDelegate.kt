@@ -4,7 +4,7 @@ import android.view.View
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-class InvalidateDelegate<T>(initial: T) : ReadWriteProperty<View, T>{
+internal class InvalidateDelegate<T>(initial: T) : ReadWriteProperty<View, T>{
 
     private var value: T = initial
 

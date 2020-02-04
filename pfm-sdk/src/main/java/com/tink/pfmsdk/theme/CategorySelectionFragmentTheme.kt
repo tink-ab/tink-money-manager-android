@@ -5,11 +5,11 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.view.TinkToolbar
 import se.tink.core.models.Category
 
-interface CategorySelectionFragmentTheme : BaseFragment.Theme {
+internal interface CategorySelectionFragmentTheme : BaseFragment.Theme {
     val iconTheme: CategoryIconTheme
 }
 
-fun getCategorySelectionThemeForType(context: Context, type: Category.Type): CategorySelectionFragmentTheme {
+internal fun getCategorySelectionThemeForType(context: Context, type: Category.Type): CategorySelectionFragmentTheme {
     return when (type) {
         Category.Type.TYPE_INCOME -> IncomeCategorySelectionFragmentTheme(context)
         Category.Type.TYPE_EXPENSES -> ExpensesCategorySelectionFragmentTheme(context)

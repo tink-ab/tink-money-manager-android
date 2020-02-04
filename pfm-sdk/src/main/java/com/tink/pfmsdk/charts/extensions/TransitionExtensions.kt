@@ -5,17 +5,17 @@ import android.transition.Transition
 import android.transition.TransitionValues
 
 @Suppress("UNCHECKED_CAST")
-operator fun <T> TransitionValues?.get(key: String): T? = this?.values?.get(key) as? T
+internal operator fun <T> TransitionValues?.get(key: String): T? = this?.values?.get(key) as? T
 
 //TODO: Use ktx when released
-fun Animator.doOnStart(action: () -> Unit) = addListener(object : Animator.AnimatorListener {
+internal fun Animator.doOnStart(action: () -> Unit) = addListener(object : Animator.AnimatorListener {
     override fun onAnimationRepeat(animation: Animator?) {}
     override fun onAnimationEnd(animation: Animator?) {}
     override fun onAnimationCancel(animation: Animator?) {}
     override fun onAnimationStart(animation: Animator?) = action()
 })
 
-fun Animator.doOnEnd(action: () -> Unit) = addListener(object : Animator.AnimatorListener {
+internal fun Animator.doOnEnd(action: () -> Unit) = addListener(object : Animator.AnimatorListener {
     override fun onAnimationRepeat(animation: Animator?) {}
     override fun onAnimationEnd(animation: Animator?) = action()
     override fun onAnimationCancel(animation: Animator?) {}
@@ -23,7 +23,7 @@ fun Animator.doOnEnd(action: () -> Unit) = addListener(object : Animator.Animato
 })
 
 //TODO: Use ktx when released
-fun Transition.doOnStart(action: () -> Unit) = addListener(object : Transition.TransitionListener {
+internal fun Transition.doOnStart(action: () -> Unit) = addListener(object : Transition.TransitionListener {
     override fun onTransitionEnd(transition: Transition?) {}
     override fun onTransitionResume(transition: Transition?) {}
     override fun onTransitionPause(transition: Transition?) {}
@@ -31,7 +31,7 @@ fun Transition.doOnStart(action: () -> Unit) = addListener(object : Transition.T
     override fun onTransitionStart(transition: Transition?) = action()
 })
 
-fun Transition.doOnEnd(action: () -> Unit) = addListener(object : Transition.TransitionListener {
+internal fun Transition.doOnEnd(action: () -> Unit) = addListener(object : Transition.TransitionListener {
     override fun onTransitionEnd(transition: Transition?) = action()
     override fun onTransitionResume(transition: Transition?) {}
     override fun onTransitionPause(transition: Transition?) {}

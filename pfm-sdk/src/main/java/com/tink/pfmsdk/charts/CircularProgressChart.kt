@@ -13,7 +13,7 @@ import com.tink.pfmsdk.R
 
 private const val START_ANGLE_OFFSET = -90
 
-class CircularProgressChart : View {
+internal class CircularProgressChart : View {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         applyAttributes(attrs)

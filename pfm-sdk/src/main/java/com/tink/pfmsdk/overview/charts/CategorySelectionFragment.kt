@@ -21,7 +21,7 @@ private const val ARG_TYPE = "arg_type"
 private const val ARG_CATEGORY_CODE = "arg_category"
 private const val ARG_OPTIONS = "arg_options"
 
-class CategorySelectionFragment : BaseFragment() {
+internal class CategorySelectionFragment : BaseFragment() {
     private val type by lazy {
         arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.TYPE_EXPENSES
     }
@@ -128,7 +128,7 @@ class CategorySelectionFragment : BaseFragment() {
     ) : Parcelable
 }
 
-interface CategorySelectionListener {
+internal interface CategorySelectionListener {
     fun onCategorySelected(updatedCategoryCode: String)
     fun onCategorySelectionCancelled() { }
 }

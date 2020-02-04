@@ -9,7 +9,7 @@ import se.tink.repository.TinkNetworkErrorHandler
 import javax.inject.Singleton
 
 @Module
-interface UtilsModule {
+internal interface UtilsModule {
 
     @Binds
     fun errorHandler(defaultErrorHandler: DefaultErrorHandler): TinkNetworkErrorHandler

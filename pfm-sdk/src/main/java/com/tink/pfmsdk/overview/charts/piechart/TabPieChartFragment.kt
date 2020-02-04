@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 private const val TYPE_ARG = "type"
 
-class TabPieChartFragment : BaseFragment(), PeriodProvider {
+internal class TabPieChartFragment : BaseFragment(), PeriodProvider {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[PieChartDetailsViewModel::class.java] }
     private val pageViewModel by lazy { ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java] }
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
@@ -68,7 +68,7 @@ class TabPieChartFragment : BaseFragment(), PeriodProvider {
 private const val FULL_CHART_TAG = "FragmentFullPieChart"
 private const val HALF_CHART_TAG = "FragmentHalfPieChart"
 
-class PieChartNavigation(private val coordinator: FragmentCoordinator) {
+internal class PieChartNavigation(private val coordinator: FragmentCoordinator) {
 
     fun onCategoryChanged(root: View, category: Category, type: ChartType) {
         val tag: String

@@ -43,7 +43,7 @@ import kotlin.properties.Delegates
 
 private const val TYPE_ARG = "type"
 
-class FullPieChartFragment : BaseFragment() {
+internal class FullPieChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(parentFragment!!, viewModelFactory)[PieChartDetailsViewModel::class.java] }
     private val pageViewModel by lazy { ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java] }
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
@@ -145,7 +145,7 @@ class FullPieChartFragment : BaseFragment() {
     }
 }
 
-class LabelDecorator(private val view: PieChartLabelView, @ColorInt color: Int, width: Float) : PieChartLabelView.Decorator {
+internal class LabelDecorator(private val view: PieChartLabelView, @ColorInt color: Int, width: Float) : PieChartLabelView.Decorator {
     private val icon = view.findViewById<View>(R.id.icon)
     private val tmp = Rect()
 

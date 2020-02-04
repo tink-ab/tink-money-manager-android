@@ -34,7 +34,7 @@ import com.tink.pfmsdk.overview.charts.piechart.addSegments
 import com.tink.pfmsdk.util.CurrencyUtils
 import kotlin.math.abs
 
-class OverviewChartFragment : BaseFragment() {
+internal class OverviewChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[OverviewChartViewModel::class.java] }
     private val pageTransformer by lazy { PageTransformer(resources) }
 
@@ -167,7 +167,7 @@ class OverviewChartFragment : BaseFragment() {
     }
 }
 
-class PageTransformer(resources: Resources) : ViewPager.PageTransformer {
+private class PageTransformer(resources: Resources) : ViewPager.PageTransformer {
     private val minRadius = resources.getDimensionPixelSize(R.dimen.overview_chart_preview_radius)
 
     override fun transformPage(page: View, wrongPos: Float) {

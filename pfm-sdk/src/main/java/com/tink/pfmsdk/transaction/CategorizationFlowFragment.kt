@@ -15,7 +15,7 @@ import se.tink.core.models.transaction.Transaction
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
-class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
+internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
 
     override fun getLayoutId(): Int = R.layout.fragment_category_selection_flow
     override fun needsLoginToBeAuthorized(): Boolean = true

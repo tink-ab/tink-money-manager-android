@@ -8,7 +8,7 @@ import com.tink.pfmsdk.overview.charts.piechart.CategorySelectionTransition
 import javax.inject.Inject
 
 
-class ChartToCategoryTransition @Inject constructor() : TransitionDescription {
+internal class ChartToCategoryTransition @Inject constructor() : TransitionDescription {
     override val fragment1 get() = ChartDetailsPagerFragment::class
     override val fragment2 get() = CategorySelectionFragment::class
 

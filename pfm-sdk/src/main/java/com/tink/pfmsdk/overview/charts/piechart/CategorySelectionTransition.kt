@@ -10,7 +10,7 @@ import android.transition.Visibility
 import android.view.View
 import android.view.ViewGroup
 
-class CategorySelectionTransition : Visibility() {
+internal class CategorySelectionTransition : Visibility() {
 
     override fun onAppear(sceneRoot: ViewGroup, view: View, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
         return animateClip(view, true)

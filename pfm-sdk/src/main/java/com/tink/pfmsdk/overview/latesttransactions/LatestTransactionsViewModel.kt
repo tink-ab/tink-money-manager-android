@@ -16,7 +16,7 @@ import se.tink.repository.service.Refreshable
 import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
-class LatestTransactionsViewModel @Inject constructor(
+internal class LatestTransactionsViewModel @Inject constructor(
     transactionRepository: TransactionRepository,
     exceptionTracker: ExceptionTracker,
     categoryRepository: CategoryRepository,

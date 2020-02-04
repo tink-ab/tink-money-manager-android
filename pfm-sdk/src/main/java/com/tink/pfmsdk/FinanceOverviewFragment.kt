@@ -38,25 +38,25 @@ import javax.inject.Inject
 class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+    internal lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
-    lateinit var i18nConfiguration: I18nConfiguration
+    internal lateinit var i18nConfiguration: I18nConfiguration
 
     @Inject
-    lateinit var fragmentCoordinator: FragmentCoordinator
+    internal lateinit var fragmentCoordinator: FragmentCoordinator
 
     @Inject
-    lateinit var interceptor: HeaderClientInterceptor
+    internal lateinit var interceptor: HeaderClientInterceptor
 
     @Inject
-    lateinit var categoryService: CategoryService
+    internal lateinit var categoryService: CategoryService
 
     @Inject
-    lateinit var cacheHandle: CacheHandle
+    internal lateinit var cacheHandle: CacheHandle
 
     @Inject
-    lateinit var dataRefreshHandler: DataRefreshHandler
+    internal lateinit var dataRefreshHandler: DataRefreshHandler
 
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
@@ -64,10 +64,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 		cache as a streaming listener. And if we get events before this happens the data will be lost
 	 */
     @Inject
-    lateinit var serviceCacheInitialization: ServiceCacheInitialization
+    internal lateinit var serviceCacheInitialization: ServiceCacheInitialization
 
     @Inject
-    lateinit var statisticsRepository: StatisticsRepository
+    internal lateinit var statisticsRepository: StatisticsRepository
 
     private val tinkStyle by lazy {
         requireNotNull(arguments?.getInt(ARG_STYLE_RES))

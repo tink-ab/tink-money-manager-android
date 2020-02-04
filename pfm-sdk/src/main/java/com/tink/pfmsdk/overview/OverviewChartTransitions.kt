@@ -19,7 +19,7 @@ import com.tink.pfmsdk.util.CurrencyUtils
 import javax.inject.Inject
 
 
-class OverviewChartTransition @Inject constructor() : TransitionDescription {
+internal class OverviewChartTransition @Inject constructor() : TransitionDescription {
     override val fragment1 get() = OverviewChartFragment::class
     override val fragment2 get() = FullPieChartFragment::class
 

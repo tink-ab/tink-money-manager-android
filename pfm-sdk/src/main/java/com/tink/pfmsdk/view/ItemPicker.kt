@@ -8,9 +8,9 @@ import com.tink.pfmsdk.R
 import kotlinx.android.synthetic.main.item_picker.view.*
 import kotlin.properties.Delegates
 
-typealias ItemSelectListener<T> = (T) -> Unit
+internal typealias ItemSelectListener<T> = (T) -> Unit
 
-abstract class ItemPicker<T : Any> @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
+internal abstract class ItemPicker<T : Any> @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
     FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
 
     init {

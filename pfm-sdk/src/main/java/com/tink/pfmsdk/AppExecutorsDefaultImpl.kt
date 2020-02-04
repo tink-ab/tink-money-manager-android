@@ -8,7 +8,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import javax.inject.Inject
 
-class AppExecutorsDefaultImpl @Inject constructor(
+internal class AppExecutorsDefaultImpl @Inject constructor(
     @ApplicationScoped context: Context
 ) : AppExecutors {
     private val mainThreadHandler = Handler(context.mainLooper)

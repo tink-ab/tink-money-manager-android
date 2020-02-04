@@ -18,7 +18,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-interface FragmentBindingModule {
+internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun overviewChartFragment(): OverviewChartFragment

@@ -6,7 +6,7 @@ import dagger.Provides
 import se.tink.android.di.application.ApplicationScoped
 
 @Module
-class ContextModule {
+internal class ContextModule {
 
     @Provides
     @ApplicationScoped

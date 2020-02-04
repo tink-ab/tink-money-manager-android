@@ -12,7 +12,7 @@ import se.tink.core.models.misc.Amount
 import javax.inject.Singleton
 
 @Module
-class CurrencyModule {
+internal class CurrencyModule {
 
     @Provides
     @Singleton

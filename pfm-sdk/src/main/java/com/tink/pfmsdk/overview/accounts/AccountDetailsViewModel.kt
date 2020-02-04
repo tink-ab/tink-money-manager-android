@@ -8,7 +8,7 @@ import se.tink.android.repository.account.AccountRepository
 import se.tink.core.models.account.Account
 import javax.inject.Inject
 
-class AccountDetailsViewModel @Inject constructor(
+internal class AccountDetailsViewModel @Inject constructor(
     accountRepository: AccountRepository
 ) : ViewModel() {
 

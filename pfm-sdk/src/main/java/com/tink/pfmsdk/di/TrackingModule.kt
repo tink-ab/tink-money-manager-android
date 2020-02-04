@@ -5,7 +5,7 @@ import dagger.Provides
 import se.tink.repository.ExceptionTracker
 
 @Module
-class TrackingModule {
+internal class TrackingModule {
 
     @Provides //TODO:PFMSDK
     fun exceptionTracker() = object : ExceptionTracker {

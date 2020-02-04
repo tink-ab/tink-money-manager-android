@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class StatisticsRepository @Inject constructor(
+internal class StatisticsRepository @Inject constructor(
     private val statisticService: StatisticService
 ) {
 

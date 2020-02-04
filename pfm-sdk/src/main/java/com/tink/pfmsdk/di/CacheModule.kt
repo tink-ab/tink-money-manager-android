@@ -38,7 +38,7 @@ import java.io.File
 import javax.inject.Singleton
 
 @Module(includes = [CacheBindingModule::class])
-class CacheModule {
+internal class CacheModule {
 
     @Provides
     @Singleton
@@ -145,7 +145,7 @@ class CacheModule {
 }
 
 @Module
-interface CacheBindingModule {
+internal interface CacheBindingModule {
 
     @Binds
     fun bindAccountLiveDataSource(cache: LiveDataCache<List<Account>>): LiveDataSource<List<Account>>

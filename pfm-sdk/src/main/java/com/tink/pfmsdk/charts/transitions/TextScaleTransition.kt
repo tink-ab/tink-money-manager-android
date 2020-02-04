@@ -11,7 +11,7 @@ import android.widget.TextView
 private const val PROPERTY_NAME_TEXT_SIZE = "tink:transition:textSize"
 private val TRANSITION_PROPERTIES = arrayOf(PROPERTY_NAME_TEXT_SIZE)
 
-class TextScaleTransition : Transition() {
+internal class TextScaleTransition : Transition() {
 
     override fun getTransitionProperties(): Array<String> {
         return TRANSITION_PROPERTIES

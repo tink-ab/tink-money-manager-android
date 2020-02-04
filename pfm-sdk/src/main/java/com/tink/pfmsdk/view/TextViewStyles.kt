@@ -13,87 +13,87 @@ import com.tink.pfmsdk.extensions.fetchThemeAttributesFromStyle
 import javax.inject.Singleton
 
 @Singleton
-open class H2(context: Context) : TextViewXmlTheme(context,
+internal open class H2(context: Context) : TextViewXmlTheme(context,
     R.style.h2
 )
 
-open class H2Action(context: Context) : TextViewXmlTheme(context,
+internal open class H2Action(context: Context) : TextViewXmlTheme(context,
     R.style.h2_action
 )
 
-open class Deci(context: Context) : TextViewXmlTheme(context,
+internal open class Deci(context: Context) : TextViewXmlTheme(context,
     R.style.deci
 )
-open class DeciBold(context: Context) : TextViewXmlTheme(context,
+internal open class DeciBold(context: Context) : TextViewXmlTheme(context,
     R.style.deci_bold
 )
-open class DeciPrimary(context: Context) : TextViewXmlTheme(context,
+internal open class DeciPrimary(context: Context) : TextViewXmlTheme(context,
     R.style.deci_primary
 )
-open class DeciActionBold(context: Context) : TextViewXmlTheme(context,
+internal open class DeciActionBold(context: Context) : TextViewXmlTheme(context,
     R.style.deci_action_bold
 )
-open class DeciDisabled(context: Context) : TextViewXmlTheme(context,
+internal open class DeciDisabled(context: Context) : TextViewXmlTheme(context,
     R.style.deci_disabled
 )
 
-open class Giga(context: Context) : TextViewXmlTheme(context,
+internal open class Giga(context: Context) : TextViewXmlTheme(context,
     R.style.giga
 )
-open class GigaRegular(context: Context) : TextViewXmlTheme(context,
+internal open class GigaRegular(context: Context) : TextViewXmlTheme(context,
     R.style.giga_regular
 )
 
-open class Hecto(context: Context) : TextViewXmlTheme(context,
+internal open class Hecto(context: Context) : TextViewXmlTheme(context,
     R.style.hecto
 )
-open class HectoSecondary(context: Context) : TextViewXmlTheme(context,
+internal open class HectoSecondary(context: Context) : TextViewXmlTheme(context,
     R.style.hecto_secondary
 )
-open class HectoTertiary(context: Context) : TextViewXmlTheme(context,
+internal open class HectoTertiary(context: Context) : TextViewXmlTheme(context,
     R.style.hecto_tertiary
 )
-open class HectoDisabled(context: Context) : TextViewXmlTheme(context,
+internal open class HectoDisabled(context: Context) : TextViewXmlTheme(context,
     R.style.hecto_disabled
 )
 
-open class Mega(context: Context) : TextViewXmlTheme(context,
+internal open class Mega(context: Context) : TextViewXmlTheme(context,
     R.style.mega
 )
-open class MegaBold(context: Context) : TextViewXmlTheme(context,
+internal open class MegaBold(context: Context) : TextViewXmlTheme(context,
     R.style.mega_bold
 )
 
-open class Micro(context: Context) : TextViewXmlTheme(context,
+internal open class Micro(context: Context) : TextViewXmlTheme(context,
     R.style.micro
 )
-open class MicroPrimary(context: Context) : TextViewXmlTheme(context,
+internal open class MicroPrimary(context: Context) : TextViewXmlTheme(context,
     R.style.micro_primary
 )
 
-open class Nano(context: Context) : TextViewXmlTheme(context,
+internal open class Nano(context: Context) : TextViewXmlTheme(context,
     R.style.nano
 )
-open class NanoPrimary(context: Context) : TextViewXmlTheme(context,
+internal open class NanoPrimary(context: Context) : TextViewXmlTheme(context,
     R.style.nano_primary
 )
-open class NanoTertiary(context: Context) : TextViewXmlTheme(context,
+internal open class NanoTertiary(context: Context) : TextViewXmlTheme(context,
     R.style.nano_tertiary
 )
-open class NanoTitle(context: Context) : TextViewXmlTheme(context,
+internal open class NanoTitle(context: Context) : TextViewXmlTheme(context,
     R.style.nano_title
 )
 
-open class Peta(context: Context) : TextViewXmlTheme(context,
+internal open class Peta(context: Context) : TextViewXmlTheme(context,
     R.style.peta
 )
 
-open class Tera(context: Context) : TextViewXmlTheme(context,
+internal open class Tera(context: Context) : TextViewXmlTheme(context,
     R.style.tera
 )
 
 
-open class TextViewXmlTheme(val context: Context, @StyleRes themeId: Int) :
+internal open class TextViewXmlTheme(val context: Context, @StyleRes themeId: Int) :
     TinkTextView.Theme {
     private var textColor = 0
     private var typeface: Typeface? = null

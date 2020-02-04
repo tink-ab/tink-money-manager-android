@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import com.tink.pfmsdk.BR
 
 @BindingAdapter("android:layout_height")
-fun setLayoutHeight(view: View, newHeight: Int) {
+internal fun setLayoutHeight(view: View, newHeight: Int) {
     view.layoutParams = view.layoutParams.apply { height = newHeight }
 }
 
 @BindingAdapter(value = ["layout", "items", "lifecycle", "theme"], requireAll = false)
-fun bindItems(view: ViewGroup, @LayoutRes layout: Int, items: List<Any>?, lifecycleOwner: LifecycleOwner? = null, theme: Any? = null) {
+internal fun bindItems(view: ViewGroup, @LayoutRes layout: Int, items: List<Any>?, lifecycleOwner: LifecycleOwner? = null, theme: Any? = null) {
     items?.let {
         with(view) {
             removeAllViews()

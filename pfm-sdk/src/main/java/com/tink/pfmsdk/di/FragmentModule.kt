@@ -11,7 +11,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class FragmentModule {
+internal class FragmentModule {
 
     @Singleton
     @Provides
