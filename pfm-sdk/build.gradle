@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-    implementation project(':chart')
     implementation project(':commons')
     implementation project(':data')
     implementation project(':data-commons')
@@ -84,6 +83,7 @@ dependencies {
     kapt libraries.dagger_compiler
 
     implementation libraries.joda_time
+    implementation libraries.guava
 
     implementation libraries.timber
 

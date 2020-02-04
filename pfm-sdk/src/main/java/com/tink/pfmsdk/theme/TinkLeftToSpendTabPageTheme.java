@@ -4,6 +4,7 @@ package com.tink.pfmsdk.theme;
 import android.content.Context;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.overview.charts.TabLeftToSpendFragment;
+import com.tink.pfmsdk.util.ColorsUtils;
 import com.tink.pfmsdk.view.Hecto;
 import com.tink.pfmsdk.view.NanoPrimary;
 import com.tink.pfmsdk.view.Tera;
@@ -12,7 +13,6 @@ import com.tink.pfmsdk.view.TinkTextView.Theme;
 import com.tink.pfmsdk.view.TinkToolbar;
 import javax.inject.Inject;
 import se.tink.commons.extensions.ContextUtils;
-import se.tink.utils.ColorsUtils;
 
 public class TinkLeftToSpendTabPageTheme implements TabLeftToSpendFragment.Theme {
 

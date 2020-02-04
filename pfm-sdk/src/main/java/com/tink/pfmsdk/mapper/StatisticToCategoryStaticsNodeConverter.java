@@ -1,9 +1,9 @@
 package com.tink.pfmsdk.mapper;
 
+import com.tink.pfmsdk.charts.models.CategoryStatisticsNode;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.modelConverter.AbstractConverter;
-import se.tink.piechart.CategoryStatisticsNode;
 
 public class StatisticToCategoryStaticsNodeConverter extends
 	AbstractConverter<Statistic, CategoryStatisticsNode> {

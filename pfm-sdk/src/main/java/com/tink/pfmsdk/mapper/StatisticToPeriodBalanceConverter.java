@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.mapper;
 
-import se.tink.core.models.PeriodBalance;
+import com.tink.pfmsdk.charts.models.PeriodBalance;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.modelConverter.AbstractConverter;

@@ -9,9 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.tabs.TabLayout;
 import com.tink.pfmsdk.R;
-import com.tink.pfmsdk.TinkApp;
 import com.tink.pfmsdk.util.DimensionUtils;
-import se.tink.utils.ScreenUtils;
+import com.tink.pfmsdk.util.ScreenUtils;
 
 public class TinkTabs extends TabLayout {
 

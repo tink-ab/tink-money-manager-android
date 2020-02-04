@@ -12,8 +12,8 @@ import com.tink.pfmsdk.ClientDataStorage
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.calculateStatistic
 import com.tink.pfmsdk.overview.charts.getPeriodString
-import se.tink.android.charts.ui.ColorGenerator
-import se.tink.android.charts.ui.DefaultColorGenerator
+import com.tink.pfmsdk.charts.ColorGenerator
+import com.tink.pfmsdk.charts.DefaultColorGenerator
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.categories.CategoryRepository

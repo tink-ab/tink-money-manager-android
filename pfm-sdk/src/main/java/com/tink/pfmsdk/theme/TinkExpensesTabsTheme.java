@@ -2,15 +2,14 @@ package com.tink.pfmsdk.theme;
 
 
 import android.content.Context;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
+import com.tink.pfmsdk.util.ColorsUtils;
 import com.tink.pfmsdk.util.DimensionUtils;
 import com.tink.pfmsdk.view.NanoTitle;
 import com.tink.pfmsdk.view.TinkTabs;
 import com.tink.pfmsdk.view.TinkTextView;
 import javax.inject.Inject;
 import se.tink.commons.extensions.ContextUtils;
-import se.tink.utils.ColorsUtils;
 
 public class TinkExpensesTabsTheme extends TinkTabsTheme implements TinkTabs.Theme {
 

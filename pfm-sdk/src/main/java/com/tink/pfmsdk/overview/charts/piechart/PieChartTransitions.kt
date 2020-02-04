@@ -8,12 +8,12 @@ import com.tink.pfmsdk.R
 import com.tink.pfmsdk.TransitionDescription
 import com.tink.pfmsdk.util.CurrencyUtils
 import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
-import se.tink.android.charts.piechart.PieChartView
-import se.tink.android.charts.transitions.ChangePositionTransition
-import se.tink.android.charts.transitions.PieChartSegmentTransition
-import se.tink.android.charts.transitions.PieChartTransition
-import se.tink.android.charts.transitions.TextAmountTransition
-import se.tink.android.extensions.doOnEnd
+import com.tink.pfmsdk.charts.PieChartView
+import com.tink.pfmsdk.charts.transitions.ChangePositionTransition
+import com.tink.pfmsdk.charts.transitions.PieChartSegmentTransition
+import com.tink.pfmsdk.charts.transitions.PieChartTransition
+import com.tink.pfmsdk.charts.transitions.TextAmountTransition
+import com.tink.pfmsdk.charts.extensions.doOnEnd
 import javax.inject.Inject
 
 

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.View.MeasureSpec
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
-import se.tink.utils.ScreenUtils
+import com.tink.pfmsdk.util.ScreenUtils
 
 class AccountLayoutManager(context: Context) : LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) {
 

@@ -3,8 +3,8 @@ package com.tink.pfmsdk.overview.charts
 import android.content.Context
 import com.tink.pfmsdk.R
 import org.joda.time.DateTime
-import se.tink.android.extensions.mergeValue
-import se.tink.android.extensions.sumByFloat
+import com.tink.pfmsdk.charts.extensions.mergeValue
+import com.tink.pfmsdk.charts.extensions.sumByFloat
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.Statistic

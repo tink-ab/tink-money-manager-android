@@ -10,12 +10,11 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.repository.StatisticsRepository
-import se.tink.android.charts.ui.ColorGenerator
-import se.tink.android.charts.ui.DefaultColorGenerator
+import com.tink.pfmsdk.charts.ColorGenerator
+import com.tink.pfmsdk.charts.DefaultColorGenerator
 import se.tink.android.di.application.ApplicationScoped
-import se.tink.android.extensions.sumByFloat
+import com.tink.pfmsdk.charts.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
-import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
