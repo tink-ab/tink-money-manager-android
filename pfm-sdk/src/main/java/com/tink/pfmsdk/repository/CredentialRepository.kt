@@ -34,7 +34,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CredentialRepository @Inject constructor(
+internal class CredentialRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val service: CredentialService,
     private val cache: LiveDataCache<List<CachedCredential>>
@@ -262,15 +262,15 @@ class CredentialRepository @Inject constructor(
     }
 }
 
-sealed class CredentialOperationStatus
-class CredentialOperationError(val error: TinkNetworkError?) : CredentialOperationStatus()
-class CredentialOperationSuccess(val statuses: List<LiveData<CredentialStatus?>>) :
+internal sealed class CredentialOperationStatus
+internal class CredentialOperationError(val error: TinkNetworkError?) : CredentialOperationStatus()
+internal class CredentialOperationSuccess(val statuses: List<LiveData<CredentialStatus?>>) :
     CredentialOperationStatus()
 
-sealed class CredentialStatus(val credential: Credential)
-class CredentialStatusError(credential: Credential) : CredentialStatus(credential)
-class CredentialStatusUpdating(credential: Credential) : CredentialStatus(credential)
-class CredentialStatusUpdated(credential: Credential) : CredentialStatus(credential)
-class CredentialStatusAuthRequired(credential: Credential) : CredentialStatus(credential)
-class CredentialStatusInfoRequired(credential: Credential) : CredentialStatus(credential)
-class CredentialStatusIntermediate(credential: Credential) : CredentialStatus(credential)
+internal sealed class CredentialStatus(val credential: Credential)
+internal class CredentialStatusError(credential: Credential) : CredentialStatus(credential)
+internal class CredentialStatusUpdating(credential: Credential) : CredentialStatus(credential)
+internal class CredentialStatusUpdated(credential: Credential) : CredentialStatus(credential)
+internal class CredentialStatusAuthRequired(credential: Credential) : CredentialStatus(credential)
+internal class CredentialStatusInfoRequired(credential: Credential) : CredentialStatus(credential)
+internal class CredentialStatusIntermediate(credential: Credential) : CredentialStatus(credential)

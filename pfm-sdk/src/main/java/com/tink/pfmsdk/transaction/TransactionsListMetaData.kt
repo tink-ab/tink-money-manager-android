@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 import se.tink.core.models.misc.Period
 
 @Parcelize
-data class TransactionsListMetaData(
+internal data class TransactionsListMetaData(
     @ColorInt val statusBarColor: Int,
     @ColorInt val backgroundColor: Int,
     val title: String,
@@ -19,7 +19,7 @@ data class TransactionsListMetaData(
     val accountId: String? = null
 ) : Parcelable
 
-sealed class TransactionListMode {
+internal sealed class TransactionListMode {
     object All : TransactionListMode()
     class LeftToSpend(val period: Period?) : TransactionListMode()
     class Category(val categoryCode: String, val period: Period?) : TransactionListMode()
@@ -28,7 +28,7 @@ sealed class TransactionListMode {
     object Invalid : TransactionListMode()
 }
 
-fun TransactionsListMetaData.toListMode(): TransactionListMode =
+internal fun TransactionsListMetaData.toListMode(): TransactionListMode =
     when {
         transactionIds?.isNotEmpty() == true -> TransactionListMode.PresetIds(transactionIds)
         isLeftToSpend -> TransactionListMode.LeftToSpend(period)
@@ -38,6 +38,6 @@ fun TransactionsListMetaData.toListMode(): TransactionListMode =
         else -> TransactionListMode.Invalid
     }
 
-enum class StatusSubtitleMode {
+internal enum class StatusSubtitleMode {
     HIDE, SHOW_DATE, SHOW_REDUCED_AMOUNT
 }

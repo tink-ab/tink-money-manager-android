@@ -15,9 +15,9 @@ private const val VALUE = "value"
 private const val STEP_COUNT = 100
 private const val MINUS = "-"
 
-typealias TextFormatter = (value: Float) -> String
+internal typealias TextFormatter = (value: Float) -> String
 
-class TextAmountTransition(
+internal class TextAmountTransition(
         private val negativeNumberSignFromFormatter:Char,
         private val formatter: TextFormatter
 ) : Transition() {

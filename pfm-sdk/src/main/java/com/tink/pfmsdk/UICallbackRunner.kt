@@ -9,7 +9,7 @@ import androidx.lifecycle.OnLifecycleEvent
 import java.util.LinkedList
 
 @MainThread
-class UICallbackRunner(private val lifecycle: Lifecycle, context: Context) : LifecycleObserver {
+internal class UICallbackRunner(private val lifecycle: Lifecycle, context: Context) : LifecycleObserver {
     private val uiDependantCallbacks = LinkedList<Runnable>()
     private val mainLooper = context.mainLooper
     private val mainThreadHandler = Handler(mainLooper)

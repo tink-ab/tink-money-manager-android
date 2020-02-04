@@ -8,13 +8,13 @@ import com.tink.pfmsdk.R
 import com.tink.pfmsdk.overview.charts.ChartType
 import com.tink.pfmsdk.view.TinkToolbar
 
-interface TabPieChartFragmentTheme : BaseFragment.Theme {
+internal interface TabPieChartFragmentTheme : BaseFragment.Theme {
     val iconTheme: CategoryIconTheme
     @get:AttrRes
     val chartItemColor: Int
 }
 
-fun getTabPieChartThemeForType(context: Context, type: ChartType): TabPieChartFragmentTheme {
+internal fun getTabPieChartThemeForType(context: Context, type: ChartType): TabPieChartFragmentTheme {
     return when (type) {
         ChartType.EXPENSES -> ExpensesTabPieChartFragmentTheme(context)
         ChartType.LEFT_TO_SPEND -> throw IllegalArgumentException("Wrong type $type")

@@ -18,7 +18,7 @@ import java.io.ByteArrayInputStream
 import javax.inject.Singleton
 
 @Module
-class NetworkModule {
+internal class NetworkModule {
 
     @Provides
     @Singleton

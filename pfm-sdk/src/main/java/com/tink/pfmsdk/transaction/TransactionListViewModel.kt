@@ -27,7 +27,7 @@ import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
 
-open class TransactionListViewModel @Inject constructor(
+internal open class TransactionListViewModel @Inject constructor(
     private val transactionRepository: TransactionRepository,
     private val exceptionTracker: ExceptionTracker,
     categoryRepository: CategoryRepository,

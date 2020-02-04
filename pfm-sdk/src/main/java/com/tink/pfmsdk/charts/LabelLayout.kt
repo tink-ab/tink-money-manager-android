@@ -1,7 +1,7 @@
 package com.tink.pfmsdk.charts
 
 
-object LabelLayout {
+internal object LabelLayout {
 
     fun layout(labels: List<PieChartLabelView>) {
         // Initial label positions

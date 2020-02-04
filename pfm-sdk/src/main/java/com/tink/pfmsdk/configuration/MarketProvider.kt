@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MarketProvider @Inject constructor(
+internal class MarketProvider @Inject constructor(
     @ApplicationScoped private val context: Context
 ) {
     val market: String?

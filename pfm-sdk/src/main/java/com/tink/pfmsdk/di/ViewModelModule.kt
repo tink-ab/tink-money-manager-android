@@ -23,7 +23,7 @@ import se.tink.android.di.viewmodel.ViewModelKey
  * @see ViewModelFactory
  */
 @Module
-interface ViewModelModule {
+internal interface ViewModelModule {
 
 //    @Binds
 //    @IntoMap

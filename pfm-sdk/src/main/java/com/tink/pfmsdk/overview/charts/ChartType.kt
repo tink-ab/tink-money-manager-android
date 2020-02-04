@@ -8,7 +8,7 @@ import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
 import se.tink.core.models.Category
 
-enum class ChartType {
+internal enum class ChartType {
     EXPENSES {
         override val screenEvent = ScreenEvent.EXPENSES
         override val title: Int get() = R.string.expenses_title

@@ -19,7 +19,7 @@ private data class PieChartInfo(val radius: Float, val thickness: Float) {
 
 private const val PIE_CHART = "pie_chart"
 
-class PieChartTransition : Transition() {
+internal class PieChartTransition : Transition() {
 
     override fun captureStartValues(transitionValues: TransitionValues) = captureValues(transitionValues)
     override fun captureEndValues(transitionValues: TransitionValues) = captureValues(transitionValues)

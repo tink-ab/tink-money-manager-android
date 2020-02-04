@@ -15,7 +15,7 @@ import se.tink.commons.categories.iconColor
 import se.tink.core.models.Category
 import javax.inject.Inject
 
-class CategorySelectionViewModel @Inject constructor(
+internal class CategorySelectionViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     @ApplicationScoped private val context: Context
 ) : ViewModel() {

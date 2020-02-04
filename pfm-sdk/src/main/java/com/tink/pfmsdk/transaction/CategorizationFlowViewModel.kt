@@ -16,7 +16,7 @@ import se.tink.core.models.transaction.Transaction
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject
 
-class CategorizationFlowViewModel @Inject constructor(
+internal class CategorizationFlowViewModel @Inject constructor(
     categoryRepository: CategoryRepository,
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {

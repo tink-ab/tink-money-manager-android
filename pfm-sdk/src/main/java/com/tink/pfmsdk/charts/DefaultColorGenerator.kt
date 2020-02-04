@@ -3,8 +3,7 @@ package com.tink.pfmsdk.charts
 import android.graphics.Color
 import androidx.annotation.ColorInt
 
-//TODO::
-object DefaultColorGenerator : ColorGenerator {
+internal object DefaultColorGenerator : ColorGenerator {
 
     @ColorInt
     override fun color(@ColorInt baseColor: Int, idx: Int) =

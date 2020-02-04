@@ -9,7 +9,7 @@ import dagger.Module
 import dagger.multibindings.IntoSet
 
 @Module
-interface TransitionModule {
+internal interface TransitionModule {
 
     @Binds
     @IntoSet

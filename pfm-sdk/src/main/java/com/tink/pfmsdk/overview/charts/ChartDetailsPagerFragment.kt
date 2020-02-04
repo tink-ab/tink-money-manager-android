@@ -35,7 +35,7 @@ private const val PAGE_YEAR = 2
 private val PAGE_TITLES = listOf(R.string.selector_1_months, R.string.selector_6_months, R.string.selector_12_months)
 private const val TYPE_ARG = "type"
 
-class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
+internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
     private val ownTheme by lazy { getChartDetailsThemeForType(context!!, type) }
     private val adapter by lazy { ChartPagerAdapter(context!!, childFragmentManager, type) }
@@ -176,10 +176,10 @@ class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
     }
 }
 
-interface TransitionAwareFragment {
+internal interface TransitionAwareFragment {
     fun prepareToExit(fragment: BaseFragment)
 }
 
-interface PeriodProvider {
+internal interface PeriodProvider {
     val period: Period?
 }

@@ -10,7 +10,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.R
 import kotlinx.android.synthetic.main.fragment_accounts_list.*
 
-class AccountsListFragment : BaseFragment() {
+internal class AccountsListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.fragment_accounts_list
     override fun needsLoginToBeAuthorized(): Boolean = true
 

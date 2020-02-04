@@ -18,7 +18,7 @@ import se.tink.commons.utils.extractTextStyle
 import se.tink.core.extensions.whenNonNull
 
 
-class BarChartWithThreshold : View {
+internal class BarChartWithThreshold : View {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         applyAttributes(attrs)

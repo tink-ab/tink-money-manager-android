@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 private class OverviewData(val statistic: StatisticTree, val period: Period, val categories: CategoryTree)
 
-class OverviewChartViewModel @Inject constructor(
+internal class OverviewChartViewModel @Inject constructor(
     private val dataStorage: ClientDataStorage,
     private val dateUtils: DateUtils,
     statisticRepository: StatisticsRepository,
@@ -103,7 +103,7 @@ class OverviewChartViewModel @Inject constructor(
     }) { it }
 }
 
-object LeftToSpendColorGenerator : ColorGenerator {
+private object LeftToSpendColorGenerator : ColorGenerator {
     @ColorInt
     override fun color(@ColorInt baseColor: Int, idx: Int) = when (idx) {
         0 -> Color.TRANSPARENT
@@ -111,7 +111,7 @@ object LeftToSpendColorGenerator : ColorGenerator {
     }
 }
 
-data class OverviewChartModel(
+internal data class OverviewChartModel(
     val title: String,
     val amountRaw: Float,
     val amount: String,

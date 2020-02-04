@@ -16,7 +16,7 @@ import se.tink.core.models.Category
 import se.tink.core.models.transaction.Transaction
 import javax.inject.Inject
 
-class SimilarTransactionsFragment : BaseFragment() {
+internal class SimilarTransactionsFragment : BaseFragment() {
 
     var onSimilarTransactionsDone: (() -> Unit)? = null
 

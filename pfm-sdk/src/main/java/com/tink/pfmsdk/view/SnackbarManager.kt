@@ -22,7 +22,7 @@ private interface SnackbarHandler {
 }
 
 @Singleton
-class SnackbarManager @Inject constructor() {
+internal class SnackbarManager @Inject constructor() {
     private val handlers = mutableListOf<SnackbarHandler>()
 
     fun displayError(error: TinkNetworkError?, context: Context?) {

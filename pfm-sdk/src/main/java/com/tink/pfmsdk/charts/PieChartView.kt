@@ -18,7 +18,7 @@ import kotlin.reflect.KProperty
 
 private const val ZERO_ANGLE = -90.0
 
-class PieChartView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+internal class PieChartView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     ViewGroup(context, attrs, defStyleAttr) {
 
     private val overlayViews = mutableListOf<View>()
@@ -228,7 +228,7 @@ class PieChartView @JvmOverloads constructor(context: Context, attrs: AttributeS
 
 
 @SuppressLint("ViewConstructor")
-open class PieChartLabelView(context: Context, anchorAngle: Float) : ViewGroup(context) {
+internal open class PieChartLabelView(context: Context, anchorAngle: Float) : ViewGroup(context) {
 
     private var centerX = 0f
     private var centerY = 0f

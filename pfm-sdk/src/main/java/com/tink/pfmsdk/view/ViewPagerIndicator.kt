@@ -15,7 +15,7 @@ import kotlin.math.roundToInt
 
 private const val SCALE_ADJUSTMENT = 0.05f
 
-class ViewPagerIndicator @JvmOverloads constructor(context: Context,
+internal class ViewPagerIndicator @JvmOverloads constructor(context: Context,
                                                    attrs: AttributeSet? = null,
                                                    defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
 

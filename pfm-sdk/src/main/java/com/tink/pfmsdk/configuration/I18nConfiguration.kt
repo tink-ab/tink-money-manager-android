@@ -45,7 +45,7 @@ import se.tink.utils.ThreadSafeDateFormat.FORMATTER_YEARLY
 import se.tink.utils.ThreadSafeDateFormat.setDateFormatsMap
 import javax.inject.Inject
 
-class I18nConfiguration @Inject constructor(
+internal class I18nConfiguration @Inject constructor(
     @ApplicationScoped private val context: Context,
     private val userRepository: UserRepository
 ) {

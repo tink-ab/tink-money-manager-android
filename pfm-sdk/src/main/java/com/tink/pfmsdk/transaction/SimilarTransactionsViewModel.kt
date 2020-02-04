@@ -19,7 +19,7 @@ import se.tink.core.models.transaction.Transaction
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject
 
-class SimilarTransactionsViewModel  @Inject constructor(
+internal class SimilarTransactionsViewModel  @Inject constructor(
     categoryRepository: CategoryRepository,
     private val transactionRepository: TransactionRepository,
     private val transactionItemFactory: TransactionItemFactory,

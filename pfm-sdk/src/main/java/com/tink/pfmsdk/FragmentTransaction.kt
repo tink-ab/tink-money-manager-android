@@ -2,11 +2,11 @@ package com.tink.pfmsdk
 
 import androidx.fragment.app.FragmentTransaction
 
-enum class FragmentAnimationFlags {
+internal enum class FragmentAnimationFlags {
     FULL, EXIT_ONLY, KEEP_BEHIND, FADE, FADE_IN, FADE_IN_ONLY, SLIDE_UP, NONE
 }
 
-fun FragmentTransaction.setAnimation(animation: FragmentAnimationFlags): FragmentTransaction {
+internal fun FragmentTransaction.setAnimation(animation: FragmentAnimationFlags): FragmentTransaction {
     return when (animation) {
         FragmentAnimationFlags.EXIT_ONLY ->
             setCustomAnimations(0, 0, R.anim.push_in, R.anim.right_slide_out)

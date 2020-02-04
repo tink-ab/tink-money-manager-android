@@ -6,11 +6,11 @@ import com.tink.pfmsdk.overview.charts.ChartType
 import com.tink.pfmsdk.view.TinkTabs
 import com.tink.pfmsdk.view.TinkToolbar
 
-interface ChartDetailsPagerFragmentTheme : BaseFragment.Theme {
+internal interface ChartDetailsPagerFragmentTheme : BaseFragment.Theme {
     val tabsTheme: TinkTabs.Theme
 }
 
-fun getChartDetailsThemeForType(context: Context, type: ChartType): ChartDetailsPagerFragmentTheme {
+internal fun getChartDetailsThemeForType(context: Context, type: ChartType): ChartDetailsPagerFragmentTheme {
     return when (type) {
         ChartType.EXPENSES -> ExpensesChartPageTheme(context)
         ChartType.LEFT_TO_SPEND -> LeftToSpendChartPageTheme(context)

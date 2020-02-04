@@ -1,9 +1,9 @@
 package com.tink.pfmsdk.extensions
 
-fun Boolean?.isTrue(): Boolean {
+internal fun Boolean?.isTrue(): Boolean {
     return this == true
 }
 
-fun Boolean?.isNullOrFalse(): Boolean {
+internal fun Boolean?.isNullOrFalse(): Boolean {
     return this != true
 }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
 import com.tink.pfmsdk.util.ScreenUtils
 
-class AccountLayoutManager(context: Context) : LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) {
+internal class AccountLayoutManager(context: Context) : LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) {
 
     private val standardWidth: Int = ScreenUtils.getScreenMetrics(context).widthPixels/2-ScreenUtils.getScreenMetrics(context).widthPixels/12
 

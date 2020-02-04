@@ -10,7 +10,7 @@ import com.tink.pfmsdk.charts.models.PeriodBalance
  * This should be used when looking at the previous X periods,
  * since the last one will then always be the current one and thus be incomplete.
  */
-fun List<PeriodBalance>.getAverageIgnoreLast(): Double {
+internal fun List<PeriodBalance>.getAverageIgnoreLast(): Double {
     return dropLast(1)
         .map { it.amount }
         .average()

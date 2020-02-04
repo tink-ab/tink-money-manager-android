@@ -14,10 +14,10 @@ import javax.inject.Named
 import javax.inject.Scope
 
 @Scope
-annotation class TabPieChart
+internal annotation class TabPieChart
 
 @Module(includes = [TabPieChartFragmentsModule::class])
-class TabPieChartModule {
+internal class TabPieChartModule {
 
     @Provides
     @TabPieChart
@@ -41,7 +41,7 @@ class TabPieChartModule {
 }
 
 @Module
-interface TabPieChartFragmentsModule {
+internal interface TabPieChartFragmentsModule {
 
     @ContributesAndroidInjector
     fun fullPieChartFragment(): FullPieChartFragment

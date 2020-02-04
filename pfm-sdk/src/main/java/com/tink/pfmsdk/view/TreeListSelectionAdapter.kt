@@ -16,7 +16,7 @@ import se.tink.commons.extensions.visible
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 
-class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolder>(),
+internal class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolder>(),
     OnViewHolderClickedListener {
 
     private var flatData: MutableList<TreeListSelectionItem> = mutableListOf()
@@ -184,7 +184,7 @@ class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolde
     }
 }
 
-sealed class TreeListSelectionItem {
+internal sealed class TreeListSelectionItem {
     var isSelected = false
     abstract val id: String
     abstract val label: String
@@ -267,7 +267,7 @@ sealed class TreeListSelectionItem {
     }
 }
 
-abstract class TreeListSelectionViewHolder(
+internal abstract class TreeListSelectionViewHolder(
     itemView: View,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : ClickableViewHolder(itemView, onViewHolderClickedListener) {

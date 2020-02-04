@@ -11,7 +11,7 @@ import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.inflate
 import se.tink.core.models.account.Account
 
-class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+internal class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
 
     private var accountItems: List<Account> = emptyList()
@@ -56,7 +56,7 @@ class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     }
 }
 
-class AccountItemViewHolder(
+internal class AccountItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : ClickableViewHolder(

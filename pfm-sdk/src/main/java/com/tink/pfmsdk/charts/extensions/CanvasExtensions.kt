@@ -9,7 +9,7 @@ import android.graphics.RectF
  * Draws a simple bar chart in the Rect defined. Bars will be rounded at the top.
  * Very small bars will be slightly adjusted to a minimum value to prevent  artifacts with the rounded-corners.
  */
-fun Canvas.drawBarChart(
+internal fun Canvas.drawBarChart(
     rectF: RectF,
     data: List<Float>,
     barWidth: Float,
@@ -35,7 +35,7 @@ fun Canvas.drawBarChart(
     }
 }
 
-fun Canvas.drawBarChartWithAmountLabels(
+internal fun Canvas.drawBarChartWithAmountLabels(
     rectF: RectF,
     data: List<Float>,
     barWidth: Float,

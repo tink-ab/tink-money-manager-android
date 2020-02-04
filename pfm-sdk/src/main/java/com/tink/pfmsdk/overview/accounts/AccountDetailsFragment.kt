@@ -28,7 +28,7 @@ import se.tink.core.models.account.Account
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-class AccountDetailsFragment : BaseFragment() {
+internal class AccountDetailsFragment : BaseFragment() {
 
     @Inject
     lateinit var ownTheme: TransactionsListFragment.Theme

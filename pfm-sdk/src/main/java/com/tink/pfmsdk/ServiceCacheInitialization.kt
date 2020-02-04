@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 
 @Suppress("UNUSED_PARAMETER") //only created so the services get initialized
-class ServiceCacheInitialization @Inject constructor(
+internal class ServiceCacheInitialization @Inject constructor(
     accountService: AccountService,
     categoryService: CategoryService,
     credentialService: CredentialService,

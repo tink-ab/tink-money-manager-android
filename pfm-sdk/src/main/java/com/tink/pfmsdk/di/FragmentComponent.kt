@@ -24,7 +24,7 @@ import javax.inject.Singleton
         FragmentBindingModule::class
     ]
 )
-interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
+internal interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
 
     @Component.Factory
     interface Factory : AndroidInjector.Factory<FinanceOverviewFragment>

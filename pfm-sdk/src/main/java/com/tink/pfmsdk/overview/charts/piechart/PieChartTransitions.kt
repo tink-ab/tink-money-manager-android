@@ -17,7 +17,7 @@ import com.tink.pfmsdk.charts.extensions.doOnEnd
 import javax.inject.Inject
 
 
-class FullToHalfChartTransition @Inject constructor() : TransitionDescription {
+internal class FullToHalfChartTransition @Inject constructor() : TransitionDescription {
     override val fragment1 get() = FullPieChartFragment::class
     override val fragment2 get() = HalfPieChartFragment::class
 

@@ -16,7 +16,7 @@ import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-class TransactionsListFragment : BaseFragment() {
+internal class TransactionsListFragment : BaseFragment() {
 
     @Inject
     lateinit var ownTheme: Theme

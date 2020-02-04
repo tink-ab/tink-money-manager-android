@@ -8,7 +8,7 @@ import se.tink.android.categories.CategoryRepository
 import se.tink.core.models.Category
 import javax.inject.Inject
 
-class ChartDetailsViewModel @Inject constructor(private val categoryRepository: CategoryRepository) : ViewModel() {
+internal class ChartDetailsViewModel @Inject constructor(private val categoryRepository: CategoryRepository) : ViewModel() {
 
     private val categoryType = MutableLiveData<Category.Type>()
     private val categoryId = MutableLiveData<String>()
