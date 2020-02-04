@@ -5,10 +5,10 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import com.tink.pfmsdk.R
-import se.tink.android.charts.piechart.PieChartLabelView
-import se.tink.android.charts.piechart.PieChartView
-import se.tink.android.charts.ui.ColorGenerator
-import se.tink.android.extensions.sumByFloat
+import com.tink.pfmsdk.charts.PieChartLabelView
+import com.tink.pfmsdk.charts.PieChartView
+import com.tink.pfmsdk.charts.ColorGenerator
+import com.tink.pfmsdk.charts.extensions.sumByFloat
 
 
 fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int) {

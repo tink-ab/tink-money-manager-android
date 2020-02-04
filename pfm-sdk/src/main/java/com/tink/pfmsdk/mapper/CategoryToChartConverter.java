@@ -1,6 +1,7 @@
 package com.tink.pfmsdk.mapper;
 
 import com.google.common.base.Objects;
+import com.tink.pfmsdk.charts.models.CategoryChartData;
 import com.tink.pfmsdk.view.TinkIcon;
 import se.tink.commons.categories.enums.CategoryExpenseType;
 import se.tink.commons.categories.enums.CategoryIncomeType;
@@ -8,14 +9,14 @@ import se.tink.core.models.Category;
 import se.tink.modelConverter.AbstractConverter;
 
 public class CategoryToChartConverter extends
-	AbstractConverter<Category, se.tink.piechart.Category> {
+	AbstractConverter<Category, CategoryChartData> {
 
 	@Override
-	public se.tink.piechart.Category convert(Category source) {
+	public CategoryChartData convert(Category source) {
 		String code = source.getCode();
 		String name = source.getName();
 
-		se.tink.piechart.Category category;
+		CategoryChartData category;
 
 		if (Objects.equal(code, CategoryExpenseType.EXPENSES_SHOPPING.getCode())) {
 			category = getExpensesShoppingCategory(code, name);
@@ -75,12 +76,12 @@ public class CategoryToChartConverter extends
 	}
 
 	@Override
-	public Class<se.tink.piechart.Category> getDestinationClass() {
-		return se.tink.piechart.Category.class;
+	public Class<CategoryChartData> getDestinationClass() {
+		return CategoryChartData.class;
 	}
 
-	private se.tink.piechart.Category getExpensesShoppingCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesShoppingCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -88,8 +89,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesHomeCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesHomeCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -97,8 +98,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesMiscCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesMiscCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -106,8 +107,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesFoodCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesFoodCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -115,8 +116,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesHouseCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesHouseCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -124,8 +125,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesTransportCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesTransportCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -133,8 +134,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesWellnessCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesWellnessCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -142,8 +143,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getExpensesEntertainmentCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getExpensesEntertainmentCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -151,8 +152,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomeSalaryCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomeSalaryCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -160,8 +161,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomePensionCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomePensionCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -169,8 +170,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomeRefundCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomeRefundCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -178,8 +179,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomeBenefitsCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomeBenefitsCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -187,8 +188,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomeFinancialCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomeFinancialCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -196,8 +197,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category getIncomeOtherCategory(String code, String name) {
-		se.tink.piechart.Category category = new se.tink.piechart.Category();
+	private CategoryChartData getIncomeOtherCategory(String code, String name) {
+		CategoryChartData category = new CategoryChartData();
 		category.setCode(code);
 		category.setIcon(TinkIcon.fromCategoryCode(code));
 		category.setName(name);
@@ -205,8 +206,8 @@ public class CategoryToChartConverter extends
 		return category;
 	}
 
-	private se.tink.piechart.Category mapCategory(se.tink.core.models.Category c) {
-		se.tink.piechart.Category cat = new se.tink.piechart.Category();
+	private CategoryChartData mapCategory(se.tink.core.models.Category c) {
+		CategoryChartData cat = new CategoryChartData();
 		cat.setCode(c.getCode());
 		cat.setIcon(TinkIcon.fromCategoryCode(c.getCode()));
 		cat.setName(c.getName());

@@ -40,7 +40,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
-    <se.tink.android.charts.piechart.PieChartPartLayout
+    <com.tink.pfmsdk.charts.PieChartPartLayout
       android:id="@+id/chartLayout"
       android:layout_width="0dp"
       android:layout_height="0dp"
@@ -51,13 +51,13 @@
       app:layout_constraintHorizontal_weight="1"
       app:layout_constraintTop_toBottomOf="@id/amount">
 
-      <se.tink.android.charts.piechart.PieChartView
+      <com.tink.pfmsdk.charts.PieChartView
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionGroup="true"
         android:transitionName="@{@string/pie_chart_transition(model.title)}"/>
-    </se.tink.android.charts.piechart.PieChartPartLayout>
+    </com.tink.pfmsdk.charts.PieChartPartLayout>
 
     <ScrollView
       android:id="@+id/list"

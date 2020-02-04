@@ -9,4 +9,5 @@
   <item name="overview_chart_container" type="id"/>
   <item name="latest_transactions_container" type="id"/>
   <item name="accounts_container" type="id"/>
+  <item name="clipping_info" type="id"/>
 </resources>

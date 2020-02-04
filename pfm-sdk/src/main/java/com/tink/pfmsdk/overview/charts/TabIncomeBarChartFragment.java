@@ -13,6 +13,13 @@ import com.google.common.collect.Maps;
 import com.tink.pfmsdk.BaseFragment;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.TimezoneManager;
+import com.tink.pfmsdk.charts.Charts;
+import com.tink.pfmsdk.charts.Constants;
+import com.tink.pfmsdk.charts.VerticalBarChartArea;
+import com.tink.pfmsdk.charts.models.CategoryChartData;
+import com.tink.pfmsdk.charts.models.Labels;
+import com.tink.pfmsdk.charts.models.PeriodBalance;
+import com.tink.pfmsdk.charts.models.VerticalBarChart;
 import com.tink.pfmsdk.tracking.ScreenEvent;
 import com.tink.pfmsdk.collections.Categories;
 import com.tink.pfmsdk.collections.Periods;
@@ -20,28 +27,21 @@ import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
 import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
+import com.tink.pfmsdk.util.ScreenUtils;
+import com.tink.pfmsdk.util.extensions.PeriodBalances;
 import com.tink.pfmsdk.view.TinkIcon;
 import com.tink.pfmsdk.view.TinkTextView;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
-import se.tink.Charts;
-import se.tink.Constants;
-import se.tink.barchart.VerticalBarChartArea;
-import se.tink.core.models.Labels;
-import se.tink.core.models.PeriodBalance;
-import se.tink.core.models.VerticalBarChart;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
-import se.tink.piechart.Category;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
-import se.tink.utils.PeriodBalances;
-import se.tink.utils.ScreenUtils;
 
 public class TabIncomeBarChartFragment extends BaseFragment implements
 	TransitionAwareFragment {
@@ -69,7 +69,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 	VerticalBarChartArea verticalBarChartArea;
 
 	private TabsEnum index;
-	private Category activeCategory;
+	private CategoryChartData activeCategory;
 	private List<PeriodBalance> incomeItemsFor1Year;
 	private Map<String, Statistic> income;
 	private Period endPeriod;
@@ -126,11 +126,11 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		ChartDetailsViewModel viewModel = ViewModelProviders.of(getRootFragment(), viewModelFactory).get(ChartDetailsViewModel.class);
 		viewModel.getCategory().observe(getViewLifecycle(), category -> {
-			Category cat = new Category();
-			cat.setCode(category.getCode());
-			cat.setIcon(TinkIcon.fromCategoryCode(category.getCode()));
-			cat.setName(category.getName());
-			categorySelected(cat);
+			CategoryChartData categoryChartData = new CategoryChartData();
+			categoryChartData.setCode(category.getCode());
+			categoryChartData.setIcon(TinkIcon.fromCategoryCode(category.getCode()));
+			categoryChartData.setName(category.getName());
+			categorySelected(categoryChartData);
 		});
 
 		income = Maps.newHashMap();
@@ -145,7 +145,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		});
 	}
 
-	public void categorySelected(Category category) {
+	public void categorySelected(CategoryChartData category) {
 		activeCategory = category;
 		runUiDependant(this::updateUi);
 	}

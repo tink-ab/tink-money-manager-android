@@ -24,9 +24,9 @@ import com.tink.pfmsdk.databinding.OverviewChartPageBinding
 import com.tink.pfmsdk.extensions.onPageSelected
 import kotlinx.android.synthetic.main.fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.overview_chart_page.view.*
-import se.tink.android.charts.transitions.PieChartLabelTransition
-import se.tink.android.charts.transitions.PieChartSegmentTransition
-import se.tink.android.charts.transitions.TextAmountTransition
+import com.tink.pfmsdk.charts.transitions.PieChartLabelTransition
+import com.tink.pfmsdk.charts.transitions.PieChartSegmentTransition
+import com.tink.pfmsdk.charts.transitions.TextAmountTransition
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmsdk.overview.charts.ChartType
 import com.tink.pfmsdk.overview.charts.piechart.addBackSegment

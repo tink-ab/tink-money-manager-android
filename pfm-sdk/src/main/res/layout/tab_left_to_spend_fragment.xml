@@ -10,7 +10,7 @@
     android:layout_height="100dp"
     android:layout_marginTop="10dp"/>
 
-  <se.tink.linechart.BalanceLineChartArea
+  <com.tink.pfmsdk.charts.BalanceLineChartArea
     android:id="@+id/line_chart_current_month"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +27,7 @@
     android:visibility="gone"
     tools:visibility="visible"/>
 
-  <se.tink.barchart.VerticalBarChartArea
+  <com.tink.pfmsdk.charts.VerticalBarChartArea
     android:id="@+id/vertical_bar_chart_6_months"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
     android:layout_below="@id/header_container"
     android:visibility="gone"/>
 
-  <se.tink.barchart.VerticalBarChartArea
+  <com.tink.pfmsdk.charts.VerticalBarChartArea
     android:id="@+id/vertical_bar_chart_12_months"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

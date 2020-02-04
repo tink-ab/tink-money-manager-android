@@ -18,10 +18,10 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.databinding.FragmentHalfPieChartBinding
 import kotlinx.android.synthetic.main.fragment_half_pie_chart.view.*
-import se.tink.android.charts.transitions.ChangePositionTransition
-import se.tink.android.charts.transitions.PieChartLabelTransition
-import se.tink.android.charts.transitions.PieChartSegmentTransition
-import se.tink.android.charts.transitions.TextAmountTransition
+import com.tink.pfmsdk.charts.transitions.ChangePositionTransition
+import com.tink.pfmsdk.charts.transitions.PieChartLabelTransition
+import com.tink.pfmsdk.charts.transitions.PieChartSegmentTransition
+import com.tink.pfmsdk.charts.transitions.TextAmountTransition
 import com.tink.pfmsdk.overview.charts.ChartDetailsViewModel
 import com.tink.pfmsdk.overview.charts.ChartItem
 import com.tink.pfmsdk.overview.charts.ChartType

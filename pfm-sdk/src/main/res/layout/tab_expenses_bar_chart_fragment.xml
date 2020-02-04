@@ -9,7 +9,7 @@
     android:layout_height="100dp"
     android:layout_marginTop="10dp"/>
 
-  <se.tink.barchart.VerticalBarChartArea
+  <com.tink.pfmsdk.charts.VerticalBarChartArea
     android:id="@+id/vertical_bar_chart"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
