@@ -69,9 +69,7 @@ public class ModelConverterImplementation implements ModelConverter {
 	}
 
 	private void setupChartConverters() {
-		addConverter(new CategoryToChartConverter());
 		addConverter(new AmountToDoubleConverter());
-		addConverter(new StatisticToCategoryStaticsNodeConverter(this));
 		addConverter(new StatisticToPeriodBalanceConverter(this));
 	}
 

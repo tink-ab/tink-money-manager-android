@@ -8,11 +8,11 @@ import com.tink.pfmsdk.util.FontUtils;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
 import se.tink.commons.extensions.ContextUtils;
 
-public class AxisLabel implements Theme {
+class AxisLabel implements Theme {
 
 	private final Context context;
 
-	public AxisLabel(Context context) {
+	AxisLabel(Context context) {
 		this.context = context;
 	}
 

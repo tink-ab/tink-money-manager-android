@@ -41,7 +41,7 @@ import se.tink.repository.service.DeviceService;
 import timber.log.Timber;
 
 @Singleton
-public class ConfigurationFacade {
+class ConfigurationFacade {
 	private final Context context;
 	private final ConfigurationCache cache;
 	private final List<ConfigurationReceivedListener> listeners = new LinkedList<>();

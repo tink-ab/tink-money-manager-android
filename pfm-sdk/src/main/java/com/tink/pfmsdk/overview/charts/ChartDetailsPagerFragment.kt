@@ -79,7 +79,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         toolbar.menu?.getItem(0)?.let {  menuItem ->
             val spannableTitle = SpannableString(menuItem.title)
             spannableTitle.setSpan(
-                CustomTypefaceSpan("", FontUtils.getTypeface(R.font.tink_font_bold, context)),
+                CustomTypefaceSpan(FontUtils.getTypeface(R.font.tink_font_bold, context)),
                 0,
                 spannableTitle.length,
                 Spannable.SPAN_INCLUSIVE_INCLUSIVE

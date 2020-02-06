@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.overview.charts;
 
-public enum TabsEnum {
+enum TabsEnum {
 
 	CURRENT_MONTH_PAGE(0),
 	SIX_MONTH_PAGE(1),
@@ -12,7 +12,7 @@ public enum TabsEnum {
 		this.index = index;
 	}
 
-	public static TabsEnum getTabsEnumByIndex(int index) {
+	static TabsEnum getTabsEnumByIndex(int index) {
 		for (TabsEnum result : TabsEnum.values()) {
 			if (result.getIndex() == index) {
 				return result;
@@ -21,7 +21,7 @@ public enum TabsEnum {
 		return null;
 	}
 
-	public int getIndex() {
+	int getIndex() {
 		return index;
 	}
 

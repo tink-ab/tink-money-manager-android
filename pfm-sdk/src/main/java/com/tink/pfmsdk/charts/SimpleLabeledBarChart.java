@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import java.util.List;
 
-public class SimpleLabeledBarChart extends View {
+class SimpleLabeledBarChart extends View {
 
 	private List<Double> data;
 	private List<String> labels;
@@ -29,19 +29,19 @@ public class SimpleLabeledBarChart extends View {
 	int chartPaddingBottom;
 	int viewPaddingBottom;
 
-	public SimpleLabeledBarChart(Context context) {
+	SimpleLabeledBarChart(Context context) {
 		super(context);
 	}
 
-	public SimpleLabeledBarChart(Context context, @Nullable AttributeSet attrs) {
+	SimpleLabeledBarChart(Context context, @Nullable AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public SimpleLabeledBarChart(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+	SimpleLabeledBarChart(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public void initialize(List<Double> data, List<String> labels) {
+	void initialize(List<Double> data, List<String> labels) {
 
 		this.data = data;
 		this.labels = labels;
@@ -86,7 +86,7 @@ public class SimpleLabeledBarChart extends View {
 		super.draw(canvas);
 	}
 
-	public void applySettings(VisualSettings settings) {
+	void applySettings(VisualSettings settings) {
 		activeBarPaint.setColor(settings.activeColor);
 		passiveBarPaint.setColor(settings.passiveColor);
 		textPaint.setColor(settings.labelColor);
@@ -101,17 +101,17 @@ public class SimpleLabeledBarChart extends View {
 		invalidate();
 	}
 
-	public static class VisualSettings {
+	static class VisualSettings {
 
-		public int activeColor;
-		public int passiveColor;
-		public int labelColor;
-		public float labelTextSize;
-		public Typeface labelTypeface;
-		public float barWidth;
-		public float barCornerRadius;
-		public int viewPaddingTop;
-		public int chartPaddingBottom;
-		public int viewPaddingBottom;
+		int activeColor;
+		int passiveColor;
+		int labelColor;
+		float labelTextSize;
+		Typeface labelTypeface;
+		float barWidth;
+		float barCornerRadius;
+		int viewPaddingTop;
+		int chartPaddingBottom;
+		int viewPaddingBottom;
 	}
 }

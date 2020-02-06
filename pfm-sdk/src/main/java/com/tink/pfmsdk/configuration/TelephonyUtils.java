@@ -4,7 +4,7 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 import androidx.annotation.Nullable;
 
-public final class TelephonyUtils {
+final class TelephonyUtils {
 
 	@Nullable
 	public static String getTelephonySimMarket(Context context) {

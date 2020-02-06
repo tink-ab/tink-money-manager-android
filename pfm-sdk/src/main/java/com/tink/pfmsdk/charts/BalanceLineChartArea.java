@@ -542,7 +542,9 @@ public class BalanceLineChartArea extends ChartArea {
 	private List<String> getDatesFromPeriodBalances(List<PeriodBalance> periodBalances) {
 		List<String> dates = new ArrayList<>();
 		for (PeriodBalance periodBalance : periodBalances) {
-			dates.add(periodBalance.getPeriod().toString());
+			if (periodBalance.getPeriod() != null) {
+				dates.add(periodBalance.getPeriod().toString());
+			}
 		}
 		return dates;
 	}

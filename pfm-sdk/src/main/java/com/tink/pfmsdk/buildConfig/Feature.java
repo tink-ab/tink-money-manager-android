@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.buildConfig;
 
-public enum Feature {
+enum Feature {
 	LEFT_TO_SPEND,
 	TAG_VIEW,
 	FAB,

@@ -15,7 +15,7 @@ import se.tink.android.di.application.ApplicationScoped;
 import se.tink.core.models.device.DeviceConfigurationResponse;
 import timber.log.Timber;
 
-public final class ConfigurationCache {
+final class ConfigurationCache {
 
 	private static final String CONFIGURATION_KEY = "configuration";
 	private static final String PREF_NAME = "configurationCache";

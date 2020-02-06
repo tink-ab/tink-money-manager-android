@@ -8,6 +8,7 @@ import com.tink.pfmsdk.view.NanoTitle;
 import com.tink.pfmsdk.view.TinkTabs;
 import com.tink.pfmsdk.view.TinkTextView;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import se.tink.commons.extensions.ContextUtils;
 
 public class TinkTabsTheme implements TinkTabs.Theme {
@@ -15,7 +16,7 @@ public class TinkTabsTheme implements TinkTabs.Theme {
 	private Context context;
 
 	@Inject
-	public TinkTabsTheme(Context context) {
+	TinkTabsTheme(Context context) {
 		this.context = context;
 	}
 
@@ -34,6 +35,7 @@ public class TinkTabsTheme implements TinkTabs.Theme {
 		return 4;
 	}
 
+	@NotNull
 	@Override
 	public TinkTextView.Theme getTabsTitle() {
 		return new NanoTitle(context);

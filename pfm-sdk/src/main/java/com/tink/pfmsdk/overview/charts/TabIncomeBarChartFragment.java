@@ -16,7 +16,6 @@ import com.tink.pfmsdk.TimezoneManager;
 import com.tink.pfmsdk.charts.Charts;
 import com.tink.pfmsdk.charts.Constants;
 import com.tink.pfmsdk.charts.VerticalBarChartArea;
-import com.tink.pfmsdk.charts.models.CategoryChartData;
 import com.tink.pfmsdk.charts.models.Labels;
 import com.tink.pfmsdk.charts.models.PeriodBalance;
 import com.tink.pfmsdk.charts.models.VerticalBarChart;
@@ -29,11 +28,11 @@ import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.util.ScreenUtils;
 import com.tink.pfmsdk.util.extensions.PeriodBalances;
-import com.tink.pfmsdk.view.TinkIcon;
 import com.tink.pfmsdk.view.TinkTextView;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import se.tink.core.models.Category;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
@@ -69,7 +68,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 	VerticalBarChartArea verticalBarChartArea;
 
 	private TabsEnum index;
-	private CategoryChartData activeCategory;
+	private Category activeCategory;
 	private List<PeriodBalance> incomeItemsFor1Year;
 	private Map<String, Statistic> income;
 	private Period endPeriod;
@@ -125,13 +124,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		headerContainer = view.findViewById(R.id.header_container);
 
 		ChartDetailsViewModel viewModel = ViewModelProviders.of(getRootFragment(), viewModelFactory).get(ChartDetailsViewModel.class);
-		viewModel.getCategory().observe(getViewLifecycle(), category -> {
-			CategoryChartData categoryChartData = new CategoryChartData();
-			categoryChartData.setCode(category.getCode());
-			categoryChartData.setIcon(TinkIcon.fromCategoryCode(category.getCode()));
-			categoryChartData.setName(category.getName());
-			categorySelected(categoryChartData);
-		});
+		viewModel.getCategory().observe(getViewLifecycle(), this::categorySelected);
 
 		income = Maps.newHashMap();
 
@@ -145,7 +138,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		});
 	}
 
-	public void categorySelected(CategoryChartData category) {
+	public void categorySelected(Category category) {
 		activeCategory = category;
 		runUiDependant(this::updateUi);
 	}
@@ -198,7 +191,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		}
 
 
-		incomeItemsFor1Year = ModelMapperManager.getInstance()
+		incomeItemsFor1Year = ModelMapperManager
 			.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
 				income, endPeriod, periods, categoryCode);
 
@@ -222,7 +215,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		Map<String, Period> periodMap = Periods.getSharedInstance().getPeriodMap();
 
-		incomeItemsFor1Year = ModelMapperManager.getInstance()
+		incomeItemsFor1Year = ModelMapperManager
 			.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
 				income, endPeriod, periodMap, categoryCode);
 
@@ -232,7 +225,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 	private void setup6MonthsChart() {
 		verticalBarChartArea.setVisibility(View.VISIBLE);
 
-		List<PeriodBalance> items = ModelMapperManager.getInstance()
+		List<PeriodBalance> items = ModelMapperManager
 			.getLatest6MonthsFrom12MonthsItems(incomeItemsFor1Year);
 
 		setupHeaders(items);
@@ -270,7 +263,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -311,7 +304,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -356,7 +349,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		int labelTwoPadding = ScreenUtils.dpToPixels(getContext(), Constants.LABEL_PADDING_DP);
 
 		int screenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
-		Charts.sharedInstance()
+		Charts
 			.setupLabels(getContext(), headerContainer, labels, screenWidth, padding,
 				labelTwoPadding);
 	}

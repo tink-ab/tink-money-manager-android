@@ -16,7 +16,6 @@ import com.tink.pfmsdk.TimezoneManager;
 import com.tink.pfmsdk.charts.Charts;
 import com.tink.pfmsdk.charts.Constants;
 import com.tink.pfmsdk.charts.VerticalBarChartArea;
-import com.tink.pfmsdk.charts.models.CategoryChartData;
 import com.tink.pfmsdk.charts.models.Labels;
 import com.tink.pfmsdk.charts.models.PeriodBalance;
 import com.tink.pfmsdk.charts.models.VerticalBarChart;
@@ -29,7 +28,6 @@ import com.tink.pfmsdk.util.CurrencyUtils;
 import com.tink.pfmsdk.util.ModelMapperManager;
 import com.tink.pfmsdk.util.ScreenUtils;
 import com.tink.pfmsdk.util.extensions.PeriodBalances;
-import com.tink.pfmsdk.view.TinkIcon;
 import com.tink.pfmsdk.view.TinkTextView;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.jetbrains.annotations.Nullable;
+import se.tink.core.models.Category;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
@@ -80,7 +79,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 	private Map<String, Statistic> expenses;
 
 	private Map<String, Period> periods = new HashMap<>();
-	private CategoryChartData activeCategory;
+	private Category activeCategory;
 	private Period endPeriod;
 	private TabsEnum index;
 	private UserConfiguration userConfiguration;
@@ -134,13 +133,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 
 		ChartDetailsViewModel viewModel = ViewModelProviders.of(getRootFragment(), viewModelFactory).get(ChartDetailsViewModel.class);
-		viewModel.getCategory().observe(getViewLifecycle(), category -> {
-			CategoryChartData categoryChartData = new CategoryChartData();
-			categoryChartData.setCode(category.getCode());
-			categoryChartData.setIcon(TinkIcon.fromCategoryCode(category.getCode()));
-			categoryChartData.setName(category.getName());
-			categorySelected(categoryChartData);
-		});
+		viewModel.getCategory().observe(getViewLifecycle(), this::categorySelected);
 
 		index = TabsEnum.getTabsEnumByIndex(
 			getArguments().getInt(ARG_INDEX, TabsEnum.SIX_MONTH_PAGE.getIndex()));
@@ -192,7 +185,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		}
 
 		if (endPeriod != null || BuildConfig.DEBUG) {
-			expensesItemsFor1Year = ModelMapperManager.getInstance()
+			expensesItemsFor1Year = ModelMapperManager
 				.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
 					expenses, endPeriod, periods, categoryCode);
 
@@ -222,7 +215,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 		Map<String, Period> periodMap = Periods.getSharedInstance().getPeriodMap();
 		if (endPeriod != null) {
-			expensesItemsFor1Year = ModelMapperManager.getInstance()
+			expensesItemsFor1Year = ModelMapperManager
 				.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
 					expenses, endPeriod, periodMap, categoryCode);
 
@@ -233,7 +226,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 	private void setup6MonthsChart() {
 		verticalBarChartArea.setVisibility(View.VISIBLE);
 
-		List<PeriodBalance> items = ModelMapperManager.getInstance()
+		List<PeriodBalance> items = ModelMapperManager
 			.getLatest6MonthsFrom12MonthsItems(expensesItemsFor1Year);
 
 		setupHeaders(items);
@@ -271,7 +264,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -311,7 +304,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -356,7 +349,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		int labelTwoPadding = ScreenUtils.dpToPixels(getContext(), Constants.LABEL_PADDING_DP);
 
 		int screenWidth = getContext().getResources().getDisplayMetrics().widthPixels;
-		Charts.sharedInstance()
+		Charts
 			.setupLabels(getContext(), headerContainer, labels, screenWidth, padding,
 				labelTwoPadding);
 	}
@@ -423,7 +416,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 	}
 
-	public void categorySelected(CategoryChartData category) {
+	public void categorySelected(Category category) {
 		activeCategory = category;
 		runUiDependant(this::updateUi);
 	}

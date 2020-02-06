@@ -189,7 +189,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			return;
 		}
 
-		itemsFor1Year = ModelMapperManager.getInstance()
+		itemsFor1Year = ModelMapperManager
 			.mapLeftToSpendStatisticsToPeriodBalanceFor1Year(
 				leftToSpend.get(LEFT_TO_SPEND_ACTUAL).getChildren(),
 				chosenPeriod, periods);
@@ -229,7 +229,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		boolean showXLabels = true;
 		boolean showYLabels = true;
 
-		Charts.sharedInstance().setupLineChart(
+		Charts.setupLineChart(
 			lineChartContainer,
 			getContext(),
 			userConfiguration.getI18nConfiguration().getCurrencyCode(),
@@ -334,7 +334,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -375,7 +375,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		barChart.setAmountLabelsAboveBars(true);
 		barChart.setCornerRadii(Constants.BAR_CHART_CORNER_RADII_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
 				new SuitableLocaleFinder().findLocale(),
@@ -418,7 +418,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			if (currentlyLeftToSpend != null) {
 
 				Map<String, Period> periodMap = Periods.getSharedInstance().getPeriodMap();
-				List<PeriodBalance> averageDataForAMonth = ModelMapperManager.getInstance()
+				List<PeriodBalance> averageDataForAMonth = ModelMapperManager
 					.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 						leftToSpend.get(LEFT_TO_SPEND_AVERAGE)
 							.getChildren(),
@@ -470,7 +470,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		int labelTwoPadding = ScreenUtils.dpToPixels(getContext(), Constants.LABEL_PADDING_DP);
 
-		Charts.sharedInstance()
+		Charts
 			.setupLabels(getContext(), headerContainer, labels, screenWidth, padding,
 				labelTwoPadding);
 	}
@@ -485,18 +485,17 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			return;
 		}
 
-		List<PeriodBalance> items = ModelMapperManager.getInstance()
+		List<PeriodBalance> items = ModelMapperManager
 			.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 				leftToSpend.get(LEFT_TO_SPEND_ACTUAL).getChildren(),
 				chosenPeriod, periodMap);
 
-		List<PeriodBalance> averageDataForAMonth = ModelMapperManager.getInstance()
+		List<PeriodBalance> averageDataForAMonth = ModelMapperManager
 			.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 				leftToSpend.get(LEFT_TO_SPEND_AVERAGE).getChildren(),
 				chosenPeriod, periodMap);
 
-		Charts.sharedInstance()
-				.updateStatisticsForLineChart(lineChartContainer, items, averageDataForAMonth);
+		Charts.updateStatisticsForLineChart(lineChartContainer, items, averageDataForAMonth);
 
 		setupHeaders(items, true);
 	}
@@ -533,7 +532,9 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	@Override
 	public Period getPeriod() {
 		if (index == TabsEnum.CURRENT_MONTH_PAGE) {
-			return ModelMapperManager.getInstance().map(chosenPeriod, Period.class);
+			// TODO: Not sure why we need to do this at all if it is already an instance of Period.
+			//return ModelMapperManager.map(chosenPeriod, Period.class);
+			return chosenPeriod;
 		} else if (index == TabsEnum.SIX_MONTH_PAGE) {
 			return Period.createPeriodWithWholeMonths(chosenPeriod.getStart().minusMonths(6), chosenPeriod.getStop());
 		} else if (index == TabsEnum.TWELVE_MONTH_PAGE) {

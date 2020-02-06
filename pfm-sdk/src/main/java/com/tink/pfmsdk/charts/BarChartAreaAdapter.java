@@ -4,13 +4,13 @@ import com.tink.pfmsdk.charts.models.PeriodBalance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BarChartAreaAdapter {
+class BarChartAreaAdapter {
 
 	private List<PeriodBalance> items;
 	private double maxValue;
 	private double minValue;
 
-	public BarChartAreaAdapter(List<PeriodBalance> items, double minValue, double maxValue) {
+	BarChartAreaAdapter(List<PeriodBalance> items, double minValue, double maxValue) {
 		this.items = items;
 		if (this.items == null) {
 			this.items = new ArrayList<>();
@@ -24,23 +24,23 @@ public class BarChartAreaAdapter {
 		return items;
 	}
 
-	public int getCount() {
+	int getCount() {
 		return items.size();
 	}
 
-	public double getMaxValue() {
+	double getMaxValue() {
 		return maxValue;
 	}
 
-	public double getMinValue() {
+	double getMinValue() {
 		return minValue;
 	}
 
-	public double getDifference() {
+	double getDifference() {
 		return maxValue - minValue;
 	}
 
-	public double getTotalValue() {
+	private double getTotalValue() {
 		int total = 0;
 		for (PeriodBalance periodBalance : items) {
 			total += periodBalance.getAmount();
@@ -48,15 +48,15 @@ public class BarChartAreaAdapter {
 		return total;
 	}
 
-	public double getMeanValue() {
+	double getMeanValue() {
 		return getTotalValue() / items.size();
 	}
 
-	public void setMinValue(double minValue) {
+	void setMinValue(double minValue) {
 		this.minValue = minValue;
 	}
 
-	public void setMaxValue(double maxValue) {
+	void setMaxValue(double maxValue) {
 		this.maxValue = maxValue;
 	}
 }

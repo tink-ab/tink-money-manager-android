@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.charts;
 
-public enum YLabelAlignment {
+enum YLabelAlignment {
 
 	NONE,
 	LEFT_OUTSIDE_CHARTAREA,

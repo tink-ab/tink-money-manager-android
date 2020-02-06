@@ -1,14 +1,14 @@
 package com.tink.pfmsdk.view;
 
-public class BaseLineHelper {
+class BaseLineHelper {
 
 	private final float materialStep;
 
-	public BaseLineHelper(float materialStep) {
+	BaseLineHelper(float materialStep) {
 		this.materialStep = materialStep;
 	}
 
-	public int putHeightOnGrid(int height) {
+	int putHeightOnGrid(int height) {
 		float offsetFromGrid = height % materialStep;
 		if (offsetFromGrid > 0) {
 			return (int) (materialStep - Math.floor(offsetFromGrid));
@@ -17,7 +17,7 @@ public class BaseLineHelper {
 	}
 
 
-	public int getCompoundTopPaddingToPutBaselineOnGrid(int baseLine) {
+	int getCompoundTopPaddingToPutBaselineOnGrid(int baseLine) {
 		float offsetFromGrid = baseLine % materialStep;
 		if (offsetFromGrid > 0) {
 			return (int) (materialStep - Math.ceil(offsetFromGrid));
