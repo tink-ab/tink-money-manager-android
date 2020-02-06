@@ -12,7 +12,7 @@ typealias ModelProviders = @JvmSuppressWildcards Map<Class<out ViewModel>, Provi
  * View model provider factory allows injection into view models
  */
 @Singleton
-open class ViewModelFactory @Inject constructor(
+internal open class ViewModelFactory @Inject constructor(
     private val providers: ModelProviders
 ) : ViewModelProvider.Factory {
 

@@ -6,7 +6,7 @@ import com.google.common.collect.Lists
 import se.tink.core.models.account.Account
 import java.util.NoSuchElementException
 
-object Accounts {
+internal object Accounts {
 
     @JvmStatic
     fun filterAccountsByCredentialsId(

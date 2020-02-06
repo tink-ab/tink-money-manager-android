@@ -11,7 +11,8 @@ import com.tink.pfmsdk.extensions.isTrue
 /**
  * All the methods should be called when UI change is allowed
  */
-@UiThread internal class FragmentCoordinator(
+@UiThread
+internal class FragmentCoordinator(
     private val fragmentManager: FragmentManager,
     private val containerViewId: Int,
     private val transitionCoordinator: TransitionCoordinatorImpl? = null
@@ -27,10 +28,12 @@ import com.tink.pfmsdk.extensions.isTrue
         get() = fragmentManager.fragments.lastOrNull { it is BaseFragment && it.isVisible && it.isResumed } as BaseFragment?
 
     @JvmOverloads
-    fun add(fragment: BaseFragment,
-            addToBackStack: Boolean = true,
-            animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
-            stateName: String? = fragment.javaClass.canonicalName) {
+    fun add(
+        fragment: BaseFragment,
+        addToBackStack: Boolean = true,
+        animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
+        stateName: String? = fragment.javaClass.canonicalName
+    ) {
         if (fragmentManager.isStateSaved) return
 
         fragmentManager.transaction {
@@ -43,12 +46,13 @@ import com.tink.pfmsdk.extensions.isTrue
     }
 
     @JvmOverloads
-    fun replace(fragment: BaseFragment,
-                addToBackStack: Boolean = true,
-                animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
-                stateName: String? = fragment.javaClass.canonicalName,
-                sharedViews: List<View> = emptyList(),
-                tag: String? = null
+    fun replace(
+        fragment: BaseFragment,
+        addToBackStack: Boolean = true,
+        animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
+        stateName: String? = fragment.javaClass.canonicalName,
+        sharedViews: List<View> = emptyList(),
+        tag: String? = null
     ) {
         if (fragmentManager.isStateSaved) return
 
@@ -91,7 +95,7 @@ import com.tink.pfmsdk.extensions.isTrue
         return fragmentManager.popBackStackImmediate()
     }
 
-    private fun backTo(stateName: String?, flag: Int,  popImmediate: Boolean = true) {
+    private fun backTo(stateName: String?, flag: Int, popImmediate: Boolean = true) {
         if (fragmentManager.isStateSaved) return
 
         transitionCoordinator?.onExiting(topActiveFragment)
