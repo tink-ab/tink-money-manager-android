@@ -1,4 +1,4 @@
-package com.tink.pfmsdk.util
+package com.tink.pfmsdk.mapper
 
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
@@ -6,7 +6,6 @@ import com.tink.pfmsdk.TimezoneManager
 import com.tink.pfmsdk.charts.models.PeriodBalance
 import com.tink.pfmsdk.collections.Currencies
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder
-import com.tink.pfmsdk.mapper.ModelConverterImplementation
 import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
 import se.tink.core.extensions.whenNonNull
@@ -32,7 +31,13 @@ internal object ModelMapperManager : ModelConverter {
         val keySet = source.keys
         for (key in keySet) {
             val value = source[key]
-            returnMap[map(key, destinationKeyType)] = map(value, destinationValueType)
+            returnMap[map(
+                key,
+                destinationKeyType
+            )] = map(
+                value,
+                destinationValueType
+            )
         }
         return returnMap
     }
@@ -43,7 +48,12 @@ internal object ModelMapperManager : ModelConverter {
     ): List<D> {
         val destinationList = ArrayList<D>()
         for (sourceObject in source) {
-            destinationList.add(map(sourceObject, destinationType))
+            destinationList.add(
+                map(
+                    sourceObject,
+                    destinationType
+                )
+            )
         }
         return destinationList
     }
@@ -97,13 +107,14 @@ internal object ModelMapperManager : ModelConverter {
         endPeriod: Period?,
         periodMap: Map<String, Period>
     ): List<PeriodBalance> {
-        val items = convertToPeriodBalances(
-            StatisticsToMap(
-                statistics,
-                endPeriod,
-                periodMap
+        val items =
+            convertToPeriodBalances(
+                StatisticsToMap(
+                    statistics,
+                    endPeriod,
+                    periodMap
+                )
             )
-        )
         for (item in items) {
             item.amount = abs(item.amount)
         }
@@ -131,7 +142,11 @@ internal object ModelMapperManager : ModelConverter {
         for (key in codesToRemove) {
             statisticsCopy.remove(key)
         }
-        return mapStatisticsToPeriodBalanceFor1Year(statisticsCopy, endPeriod, periodMap)
+        return mapStatisticsToPeriodBalanceFor1Year(
+            statisticsCopy,
+            endPeriod,
+            periodMap
+        )
     }
 
     @JvmStatic
@@ -217,11 +232,16 @@ internal object ModelMapperManager : ModelConverter {
                     .getYearMonthStringFor1YearByEndYearMonth(
                         source.period, source.periods, true
                     )
-            items = addPeriodsToItems(periods)
+            items = addPeriodsToItems(
+                periods
+            )
             for (item in items) {
                 if (source.isLeftToSpendData) {
                     val monthly = source.statistics[item.period?.toMonthString()]
-                    handleLeftToSpendMonthly(item, monthly)
+                    handleLeftToSpendMonthly(
+                        item,
+                        monthly
+                    )
                 } else {
                     for (key in source.statistics.keys) {
                         val statistic =

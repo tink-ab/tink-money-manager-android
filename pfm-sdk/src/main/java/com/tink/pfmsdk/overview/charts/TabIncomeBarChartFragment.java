@@ -25,7 +25,7 @@ import com.tink.pfmsdk.collections.Periods;
 import com.tink.pfmsdk.configuration.SuitableLocaleFinder;
 import com.tink.pfmsdk.repository.StatisticsRepository;
 import com.tink.pfmsdk.util.CurrencyUtils;
-import com.tink.pfmsdk.util.ModelMapperManager;
+import com.tink.pfmsdk.mapper.ModelMapperManager;
 import com.tink.pfmsdk.util.ScreenUtils;
 import com.tink.pfmsdk.util.extensions.PeriodBalances;
 import com.tink.pfmsdk.view.TinkTextView;
