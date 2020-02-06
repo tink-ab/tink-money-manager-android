@@ -40,7 +40,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	// Make every new fragment above previous ones
 	private static int sTranslationZ = 0;
-	protected int translationZ = sTranslationZ++;
+	private int translationZ = sTranslationZ++;
 
 	@Inject
 	protected FragmentCoordinator fragmentCoordinator;
@@ -227,7 +227,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		}
 	}
 
-	protected TinkToolbar getToolbar() {
+	private TinkToolbar getToolbar() {
 		if (toolbar != null) {
 			return toolbar;
 		}

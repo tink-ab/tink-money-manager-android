@@ -8,7 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.common.base.Strings
 import com.tink.pfmsdk.util.DimensionUtils
 
-internal class TinkTextView : AppCompatTextView {
+class TinkTextView : AppCompatTextView {
     private var theme: Theme? = null
     private var compundPaddingTop = 0
     private var ignoreBaseLine = false
