@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.tink.pfmsdk.buildConfig.BuildConfigurations
 import com.tink.pfmsdk.collections.Categories
 import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration
@@ -24,6 +26,7 @@ import se.tink.repository.cache.CacheHandle
 import se.tink.repository.service.CategoryService
 import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.HeaderClientInterceptor
+import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidKeyException
@@ -85,6 +88,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        Fresco.initialize(context)
+        setupTimber()
         DaggerFragmentComponent.factory().create(this).inject(this)
         interceptor.setAccessToken(accessToken)
         attachListeners()
@@ -175,6 +180,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         Categories.getSharedInstance().removeListener(categoryService)
         Periods.getSharedInstance().removeListener(statisticsRepository)
         cacheHandle.clearCache()
+    }
+
+    private fun setupTimber() {
+        Timber.plant(BuildConfigurations.instance.loggingConfigurations.getTimberTree())
     }
 
     companion object {
