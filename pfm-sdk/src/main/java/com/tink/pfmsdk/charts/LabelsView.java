@@ -16,7 +16,7 @@ import com.tink.pfmsdk.util.ScreenUtils;
 import java.util.List;
 
 
-public class LabelsView extends View {
+class LabelsView extends View {
 
 	private Labels labels;
 	private Context context;
@@ -45,19 +45,19 @@ public class LabelsView extends View {
 
 	private static final String REFERENCE_HEIGHT_LETTER = "M";
 
-	public LabelsView(Context context, AttributeSet attrs, int defStyleAttr) {
+	LabelsView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 	}
 
-	public LabelsView(Context context, AttributeSet attrs) {
+	LabelsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
-	public LabelsView(Context context) {
+	LabelsView(Context context) {
 		super(context);
 	}
 
-	public void initialize(Context context, Labels labels, int screenWidth, int screenHeight,
+	void initialize(Context context, Labels labels, int screenWidth, int screenHeight,
 		int paddingTop, float opticalVerticalAdjustment) {
 
 		this.labels = labels;
@@ -159,42 +159,42 @@ public class LabelsView extends View {
 		}
 	}
 
-	public void updateScrolledForText2(int text2X, int text2Y) {
+	void updateScrolledForText2(int text2X, int text2Y) {
 		this.text2X = text2X;
 		this.text2Y = text2Y;
 	}
 
-	public void updateScrolledForText1(int text1X, int text1Y) {
+	void updateScrolledForText1(int text1X, int text1Y) {
 		this.text1X = text1X;
 		this.text1Y = text1Y;
 	}
 
-	public void updateScrolledForText3(int text3X, int text3Y) {
+	void updateScrolledForText3(int text3X, int text3Y) {
 		this.text3X = text3X;
 		this.text3Y = text3Y;
 	}
 
-	public void updateText1Size(float textSize) {
+	void updateText1Size(float textSize) {
 		text1Size = textSize;
 	}
 
-	public void updateTextSize2(float textSize) {
+	void updateTextSize2(float textSize) {
 		text2Size = textSize;
 	}
 
-	public void updateText3Size(float textSize) {
+	void updateText3Size(float textSize) {
 		text3Size = textSize;
 	}
 
-	public void updateColorForText1(int color) {
+	void updateColorForText1(int color) {
 		text1Color = color;
 	}
 
-	public void updateColorForText2(int color) {
+	void updateColorForText2(int color) {
 		text2Color = color;
 	}
 
-	public void updateColorForText3(int color) {
+	void updateColorForText3(int color) {
 		text3Color = color;
 	}
 
@@ -212,9 +212,8 @@ public class LabelsView extends View {
 		return textPaint;
 	}
 
-	public void updateLabels(Labels labels) {
+	void updateLabels(Labels labels) {
 		this.labels = labels;
 		invalidate();
 	}
-
 }

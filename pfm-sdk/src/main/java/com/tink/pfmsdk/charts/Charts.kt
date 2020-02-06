@@ -19,8 +19,8 @@ internal object Charts {
     @JvmStatic
     fun updateStatisticsForLineChart(
         chart: BalanceLineChartArea,
-        items: List<PeriodBalance?>?,
-        averageDataForAMonth: List<PeriodBalance?>?
+        items: List<PeriodBalance>,
+        averageDataForAMonth: List<PeriodBalance>
     ) {
         chart.setData(items, averageDataForAMonth)
         chart.invalidate()
@@ -42,44 +42,45 @@ internal object Charts {
             barChart.items, minValue,
             maxValue
         )
-        val chart = barChart.barChartView
-        chart.initialize(context, locale, timezoneCode, currencyCode)
-        chart.setAdapter(adapter)
-        chart.setPaddingBetweenBars(
-            ScreenUtils.dpToPixels(context, barChart.paddingBetweenBars)
-        )
-        chart.setBackgroundColor(barChart.backgroundColor)
-        chart.barColor = barChart.barColor
-        chart.negativeBarColor = barChart.negativeBarColor
-        chart.setZeroLineColor(barChart.zerolineColor)
-        chart.setMeanValueColor(barChart.meanValueColor)
-        chart.setupAmountTextPaint(
-            barChart.typefaceAmountLabel,
-            barChart.textColorAmountLabel,
-            barChart.textSizeAmountLabel, barChart.textLineHeightAmountLabel,
-            barChart.textSpacingAmountLabel
-        )
-        chart.setupDateTextPaint(
-            barChart.typefaceDateLabel, barChart.textColorDateLabel,
-            barChart.textSizeDateLabel, barChart.textLineHeightDateLabel,
-            barChart.textSpacingDateLabel
-        )
-        chart.setShowXLines(barChart.isShowXLines)
-        chart.setShowZeroLine(barChart.isShowZeroLine)
-        chart.setShowMeanLine(barChart.isShowMeanLine)
-        chart.setShowAmountLabels(barChart.isShowAmountLabels)
-        chart.setShowPeriodLabels(barChart.isShowPeriodLabels)
-        chart.setIncludeVerticalPadding(barChart.isIncludeVerticalPadding)
-        chart.setAmountLabelsAboveBars(barChart.isAmountLabelsAboveBars)
-        chart.setIsSelector(barChart.isSelector)
-        chart.setCornerRadii(barChart.cornerRadii)
-        chart.selectedIndex = barChart.selectedIndex
-        chart.setSelectedBarColor(barChart.selectedBarColor)
-        chart
-            .setupAmountYLabelTextPaint(
+        barChart.barChartView?.apply {
+            initialize(locale, timezoneCode, currencyCode)
+            setAdapter(adapter)
+            setPaddingBetweenBars(
+                ScreenUtils.dpToPixels(context, barChart.paddingBetweenBars)
+            )
+            setBackgroundColor(barChart.backgroundColor)
+            barColor = barChart.barColor
+            negativeBarColor = barChart.negativeBarColor
+            setZeroLineColor(barChart.zerolineColor)
+            setMeanValueColor(barChart.meanValueColor)
+            setupAmountTextPaint(
+                barChart.typefaceAmountLabel,
+                barChart.textColorAmountLabel,
+                barChart.textSizeAmountLabel,
+                barChart.textSpacingAmountLabel
+            )
+            setupDateTextPaint(
+                barChart.typefaceDateLabel,
+                barChart.textColorDateLabel,
+                barChart.textSizeDateLabel,
+                barChart.textSpacingDateLabel
+            )
+            setShowXLines(barChart.isShowXLines)
+            setShowZeroLine(barChart.isShowZeroLine)
+            setShowMeanLine(barChart.isShowMeanLine)
+            setShowAmountLabels(barChart.isShowAmountLabels)
+            setShowPeriodLabels(barChart.isShowPeriodLabels)
+            setIncludeVerticalPadding(barChart.isIncludeVerticalPadding)
+            setAmountLabelsAboveBars(barChart.isAmountLabelsAboveBars)
+            setIsSelector(barChart.isSelector)
+            setCornerRadii(barChart.cornerRadii)
+            selectedIndex = barChart.selectedIndex
+            setSelectedBarColor(barChart.selectedBarColor)
+            setupAmountYLabelTextPaint(
                 barChart.typefaceYLabel, barChart.yLabelTextColor,
                 barChart.textSizeYLabel, barChart.spacingYLabel
             )
+        }
     }
 
     fun setupLineChart(
@@ -101,7 +102,11 @@ internal object Charts {
         val transparentColor =
             context.getColorFromAttr(R.attr.tink_transparentColor)
         setupLineChart(
-            lineChart, context, currencyCode, locale, timezoneCode, showXLabels,
+            lineChart,
+            currencyCode,
+            locale,
+            timezoneCode,
+            showXLabels,
             showYLabels,
             showDateMarker,
             backgroundColor, centerDateMarkColor,
@@ -114,7 +119,6 @@ internal object Charts {
     @JvmStatic
     fun setupLineChart(
         lineChart: BalanceLineChartArea,
-        context: Context?,
         currencyCode: String?,
         locale: Locale?,
         timezoneCode: String?,
@@ -134,7 +138,7 @@ internal object Charts {
         dateMarkerGradientTop50: Int,
         dateMarkerGradientTop80: Int
     ) {
-        lineChart.initialize(context, currencyCode, locale, timezoneCode)
+        lineChart.initialize(currencyCode, locale, timezoneCode)
         lineChart.markToday = showDateMarker
         lineChart.setBackgroundColor(backgroundColor)
         lineChart.setDateMarkerCenterColor(centerDateMarkColor)

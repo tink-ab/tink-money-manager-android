@@ -226,17 +226,13 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		lineChartContainer.setVisibility(View.VISIBLE);
 
-		boolean showXLabels = true;
-		boolean showYLabels = true;
-
 		Charts.setupLineChart(
 			lineChartContainer,
-			getContext(),
 			userConfiguration.getI18nConfiguration().getCurrencyCode(),
 			new SuitableLocaleFinder().findLocale(),
 			TimezoneManager.defaultTimezone,
-			showXLabels,
-			showYLabels,
+			true,
+			true,
 			true,
 			theme.getChartBackgroundColor(),
 			theme.getCenterDateMarkColor(),
