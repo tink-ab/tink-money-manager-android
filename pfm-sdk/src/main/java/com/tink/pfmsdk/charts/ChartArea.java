@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.util.ScreenUtils;
 
-public abstract class ChartArea extends View {
+abstract class ChartArea extends View {
 
 	private Paint xLabelPaint;
 	private Paint yLabelPaint;
@@ -22,7 +22,7 @@ public abstract class ChartArea extends View {
 	private float yAmountTextSize;
 	private Typeface yAmountTypeface;
 
-	public ChartArea(Context context) {
+	ChartArea(Context context) {
 		this(context, null);
 	}
 

@@ -1,22 +1,21 @@
 package com.tink.pfmsdk.transaction
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tink.pfmsdk.SingleLiveEvent
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import se.tink.android.AppExecutors
 import se.tink.android.categories.CategoryRepository
-import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.repository.transaction.AllTransactionPagesLiveData
 import se.tink.android.repository.transaction.CategoryTransactionPagesLiveData
 import se.tink.android.repository.transaction.LeftToSpendTransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.livedata.map
+import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.core.extensions.whenNonNull
@@ -33,13 +32,12 @@ internal open class TransactionListViewModel @Inject constructor(
     categoryRepository: CategoryRepository,
     private val transactionService: TransactionService,
     private val appExecutors: AppExecutors,
-    private val transactionItemFactory: TransactionItemFactory,
-    @ApplicationScoped private val context: Context
+    private val transactionItemFactory: TransactionItemFactory
 ) : ViewModel() {
 
 
-    private val _errors = SingleLiveEvent<TinkNetworkError>()
-    val errors: LiveData<TinkNetworkError> = _errors
+    private val _errors = MutableLiveData<Event<TinkNetworkError>>()
+    val errors: LiveData<Event<TinkNetworkError>> = _errors
 
     @SuppressLint("CheckResult")
     private fun presetTransactions(ids: List<String>): TransactionPagesLiveData {
@@ -53,7 +51,7 @@ internal open class TransactionListViewModel @Inject constructor(
                     { postValue(it) },
                     {
                         when (it) {
-                            is TinkNetworkError -> _errors.postValue(it)
+                            is TinkNetworkError -> _errors.postValue(Event(it))
                             is Exception -> exceptionTracker.exceptionThrown(it)
                             else -> throw it
                         }

@@ -6,17 +6,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Manager {
+class Manager {
 
 	private static Manager sharedInstance = new Manager();
 
-	public static Manager sharedInstance() {
+	static Manager sharedInstance() {
 		return sharedInstance;
 	}
 
 	private Manager() { }
 
-	public double[] getMinAndMaxValue(List<PeriodBalance> items) {
+	double[] getMinAndMaxValue(List<PeriodBalance> items) {
 		double[] minAndMax = new double[2];
 
 		if (items == null || items.size() == 0) {

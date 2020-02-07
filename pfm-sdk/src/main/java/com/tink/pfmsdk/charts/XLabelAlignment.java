@@ -1,6 +1,6 @@
 package com.tink.pfmsdk.charts;
 
-public enum XLabelAlignment {
+enum XLabelAlignment {
 
 	NONE,
 	BOTTOM_OUTSIDE_CHARTAREA,

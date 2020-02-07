@@ -4,22 +4,22 @@ import com.tink.pfmsdk.BuildConfig
 import com.tink.pfmsdk.buildConfig.Feature.*
 import timber.log.Timber
 
-interface FeatureConfigurations {
+internal interface FeatureConfigurations {
     fun hasFeature(feature: Feature): Boolean
 }
 
-interface LoggingConfigurations {
+internal interface LoggingConfigurations {
     fun shouldStartFabric(): Boolean
     fun shouldLogTracking(): Boolean
     fun getTimberTree(): Timber.Tree
 }
 
-class BuildConfiguration(val featureConfigurations: FeatureConfigurations,
+internal class BuildConfiguration(val featureConfigurations: FeatureConfigurations,
                          val loggingConfigurations: LoggingConfigurations,
                          val supportedLangugaes: List<String>,
                          val googleAnalyticsKey: String)
 
-object BuildConfigurations {
+internal object BuildConfigurations {
 
     @Deprecated("Use DI")
     val instance = if (BuildConfig.DEBUG) {

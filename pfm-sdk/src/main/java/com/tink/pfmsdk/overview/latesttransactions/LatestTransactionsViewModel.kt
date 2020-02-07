@@ -31,8 +31,7 @@ internal class LatestTransactionsViewModel @Inject constructor(
     categoryRepository,
     transactionService,
     appExecutors,
-    transactionItemFactory,
-    context
+    transactionItemFactory
 ), Refreshable {
 
     init {

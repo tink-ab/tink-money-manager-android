@@ -28,10 +28,12 @@ internal class FragmentCoordinator(
         get() = fragmentManager.fragments.lastOrNull { it is BaseFragment && it.isVisible && it.isResumed } as BaseFragment?
 
     @JvmOverloads
-    fun add(fragment: BaseFragment,
-            addToBackStack: Boolean = true,
-            animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
-            stateName: String? = fragment.javaClass.canonicalName) {
+    fun add(
+        fragment: BaseFragment,
+        addToBackStack: Boolean = true,
+        animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
+        stateName: String? = fragment.javaClass.canonicalName
+    ) {
         if (fragmentManager.isStateSaved) return
 
         fragmentManager.transaction {
@@ -44,12 +46,13 @@ internal class FragmentCoordinator(
     }
 
     @JvmOverloads
-    fun replace(fragment: BaseFragment,
-                addToBackStack: Boolean = true,
-                animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
-                stateName: String? = fragment.javaClass.canonicalName,
-                sharedViews: List<View> = emptyList(),
-                tag: String? = null
+    fun replace(
+        fragment: BaseFragment,
+        addToBackStack: Boolean = true,
+        animation: FragmentAnimationFlags = FragmentAnimationFlags.KEEP_BEHIND,
+        stateName: String? = fragment.javaClass.canonicalName,
+        sharedViews: List<View> = emptyList(),
+        tag: String? = null
     ) {
         if (fragmentManager.isStateSaved) return
 
@@ -92,7 +95,7 @@ internal class FragmentCoordinator(
         return fragmentManager.popBackStackImmediate()
     }
 
-    private fun backTo(stateName: String?, flag: Int,  popImmediate: Boolean = true) {
+    private fun backTo(stateName: String?, flag: Int, popImmediate: Boolean = true) {
         if (fragmentManager.isStateSaved) return
 
         transitionCoordinator?.onExiting(topActiveFragment)

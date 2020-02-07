@@ -95,10 +95,12 @@ internal open class Tera(context: Context) : TextViewXmlTheme(context,
 
 internal open class TextViewXmlTheme(val context: Context, @StyleRes themeId: Int) :
     TinkTextView.Theme {
-    private var textColor = 0
+    override var textColor = 0
     private var typeface: Typeface? = null
-    private var textSize = 0f
-    private var lineHeight = 0f
+    override var textSize = 0f
+    override var lineHeight = 0f
+    override val font: Typeface? = typeface
+    override val spacing: Float = 0f
     private var letterSpacing = 0f
     private var textAllCaps = false
 
@@ -122,26 +124,6 @@ internal open class TextViewXmlTheme(val context: Context, @StyleRes themeId: In
             }
         )
         context.fetchThemeAttributesFromStyle(themeId, attrs)
-    }
-
-    override fun getTextColor(): Int {
-        return textColor
-    }
-
-    override fun getFont(): Typeface? {
-        return typeface
-    }
-
-    override fun getTextSize(): Float {
-        return textSize
-    }
-
-    override fun getLineHeight(): Float {
-        return lineHeight
-    }
-
-    override fun getSpacing(): Float {
-        return letterSpacing
     }
 
     override fun toUpperCase(): Boolean {

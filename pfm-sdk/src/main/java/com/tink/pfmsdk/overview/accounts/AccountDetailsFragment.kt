@@ -108,11 +108,11 @@ internal class AccountDetailsFragment : BaseFragment() {
                 accountNumber.text = account.accountNumber
             }
         })
-        transactionListViewModel.errors.observe(viewLifecycleOwner, Observer { error ->
-            snackbarManager.displayError(
-                error,
-                requireContext()
-            )
+
+        transactionListViewModel.errors.observe(viewLifecycleOwner, Observer { event ->
+            event?.getContentIfNotHandled()?.let { error ->
+                snackbarManager.displayError(error, requireContext())
+            }
         })
 
         transactionListViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->

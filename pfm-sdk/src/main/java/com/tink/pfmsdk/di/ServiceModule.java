@@ -54,7 +54,7 @@ import se.tink.repository.service.UserService;
 import se.tink.repository.service.UserServiceImpl;
 
 @Module(includes = {ConverterModule.class, CacheModule.class})
-public class ServiceModule {
+class ServiceModule {
 
 	public ServiceModule() {
 		Security.insertProviderAt(Conscrypt.newProvider("GmsCore_OpenSSL"), 1);
@@ -62,25 +62,25 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public StreamingServiceGrpc.StreamingServiceStub providesStreamingService(Channel channel) {
+	StreamingServiceGrpc.StreamingServiceStub providesStreamingService(Channel channel) {
 		return StreamingServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public AccountServiceGrpc.AccountServiceStub accountServiceApi(Channel channel) {
+	AccountServiceGrpc.AccountServiceStub accountServiceApi(Channel channel) {
 		return AccountServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public LoanServiceGrpc.LoanServiceStub loanServiceStub(Channel channel) {
+	LoanServiceGrpc.LoanServiceStub loanServiceStub(Channel channel) {
 		return LoanServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public TransactionServiceGrpc.TransactionServiceStub provideTransactionService(
+	TransactionServiceGrpc.TransactionServiceStub provideTransactionService(
 		Channel channel
 	) {
 		return TransactionServiceGrpc.newStub(channel);
@@ -88,19 +88,19 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public UserServiceGrpc.UserServiceStub userServiceStub(Channel channel) {
+	UserServiceGrpc.UserServiceStub userServiceStub(Channel channel) {
 		return UserServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public StatisticServiceGrpc.StatisticServiceStub statisticServiceStub(Channel channel) {
+	StatisticServiceGrpc.StatisticServiceStub statisticServiceStub(Channel channel) {
 		return StatisticServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public AccountService provideAccountService(
+	AccountService provideAccountService(
 		AccountServiceGrpc.AccountServiceStub accountServiceApi,
 		StreamingService streamingServiceStub,
 		ModelConverter converter,
@@ -111,13 +111,13 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public CredentialServiceGrpc.CredentialServiceStub credentialServiceApi(Channel channel) {
+	CredentialServiceGrpc.CredentialServiceStub credentialServiceApi(Channel channel) {
 		return CredentialServiceGrpc.newStub(channel);
 	}
 
 	@Provides
 	@Singleton
-	public TransactionService provideTransactionRepository(
+	TransactionService provideTransactionRepository(
 		TransactionServiceGrpc.TransactionServiceStub transactionServiceApi,
 		StreamingService streamingServiceStub,
 		Cache<List<Transaction>> cache,
@@ -136,7 +136,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public UserService provideUserService(
+	UserService provideUserService(
 		ModelConverter converter,
 		UserServiceGrpc.UserServiceStub userService,
 		Channel channel
@@ -152,7 +152,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public CredentialService provideCredentialRepository(
+	CredentialService provideCredentialRepository(
 		CredentialServiceGrpc.CredentialServiceStub api,
 		StreamingService streamingServiceStub,
 		WritableCacheRepository<Credential> cache,
@@ -165,7 +165,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public UserConfigurationService userConfigurationService(
+	UserConfigurationService userConfigurationService(
 		StreamingService streamingService,
 		UserService userService,
 		ModelConverter modelConverter,
@@ -176,7 +176,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public StatisticService provideStatisticService(
+	StatisticService provideStatisticService(
 		StreamingService streaming,
 		ModelConverter converter,
 		StatisticServiceGrpc.StatisticServiceStub serviceStub,
@@ -189,7 +189,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public StreamingService provideStreamingService(
+	StreamingService provideStreamingService(
 		StreamingServiceGrpc.StreamingServiceStub stub,
 		ModelConverter converter,
 		ExceptionTracker tracker
@@ -202,7 +202,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public CategoryService provideCategoryRepository(
+	CategoryService provideCategoryRepository(
 		StreamingService stub,
 		Channel channel,
 		ModelConverter converter,
@@ -214,7 +214,7 @@ public class ServiceModule {
 
 	@Provides
 	@Singleton
-	public DeviceService provideDeviceService(Channel channel, ModelConverter modelConverter) {
+	DeviceService provideDeviceService(Channel channel, ModelConverter modelConverter) {
 		return new DeviceServiceImpl(DeviceServiceGrpc.newStub(channel), modelConverter);
 	}
 }

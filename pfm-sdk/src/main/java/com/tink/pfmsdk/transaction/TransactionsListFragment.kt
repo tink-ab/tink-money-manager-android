@@ -80,14 +80,11 @@ internal class TransactionsListFragment : BaseFragment() {
             }
         )
 
-        viewModel.errors.observe(
-            viewLifecycleOwner,
-            Observer { error ->
-                snackbarManager.displayError(
-                    error,
-                    requireContext()
-                )
-            })
+        viewModel.errors.observe(viewLifecycleOwner, Observer { event ->
+            event?.getContentIfNotHandled()?.let { error ->
+                snackbarManager.displayError(error, requireContext())
+            }
+        })
 
         viewModel.loading.observe(
             viewLifecycleOwner,

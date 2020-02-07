@@ -1,9 +1,6 @@
 package com.tink.pfmsdk.collections;
 
-import android.content.Context;
 import com.google.common.collect.Lists;
-import com.tink.pfmsdk.R;
-import com.tink.pfmsdk.TinkApp;
 import java.util.List;
 import se.tink.core.models.Category;
 import se.tink.core.models.Category.Type;
@@ -46,24 +43,6 @@ public class Categories implements ObjectChangeObserver<CategoryTree>, Clearable
 		}
 
 		return tree.getIncome();
-	}
-
-	public Category getIncomeCategoriesForPicker() {
-		Category parent = getParentIncomeCategory();
-		Context context = TinkApp.sharedInstance().getApplicationContext();
-		String allCategories = context.getResources()
-			.getString(R.string.all_categories);
-
-		return createAllCategory(parent, allCategories, Type.TYPE_INCOME);
-	}
-
-	public Category getExpenseCategoriesForPicker() {
-		Category parent = getParentExpenseCategory();
-		Context context = TinkApp.sharedInstance().getApplicationContext();
-		String allCategoryTitle = context.getResources()
-			.getString(R.string.all_categories);
-
-		return createAllCategory(parent, allCategoryTitle, Type.TYPE_EXPENSES);
 	}
 
 	private Category createAllCategory(Category parent, String allCategoryTitle, Type type) {

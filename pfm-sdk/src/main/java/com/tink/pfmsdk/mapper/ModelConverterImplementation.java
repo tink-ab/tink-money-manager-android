@@ -15,7 +15,7 @@ import se.tink.converter.pushnotifications.RegisterPushNotificationTokenRequestT
 import se.tink.converter.pushnotifications.ResponseToRegisterPushNotificationTokenResponseConverter;
 import se.tink.modelConverter.AbstractConverter;
 
-public class ModelConverterImplementation implements ModelConverter {
+class ModelConverterImplementation implements ModelConverter {
 
 	private final Map<Integer, AbstractConverter> converterMap = new HashMap<Integer, AbstractConverter>();
 
@@ -69,9 +69,7 @@ public class ModelConverterImplementation implements ModelConverter {
 	}
 
 	private void setupChartConverters() {
-		addConverter(new CategoryToChartConverter());
 		addConverter(new AmountToDoubleConverter());
-		addConverter(new StatisticToCategoryStaticsNodeConverter(this));
 		addConverter(new StatisticToPeriodBalanceConverter(this));
 	}
 

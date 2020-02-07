@@ -9,6 +9,7 @@ import com.tink.pfmsdk.view.NanoTitle;
 import com.tink.pfmsdk.view.TinkTabs;
 import com.tink.pfmsdk.view.TinkTextView;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import se.tink.commons.extensions.ContextUtils;
 
 public class TinkExpensesTabsTheme extends TinkTabsTheme implements TinkTabs.Theme {
@@ -33,6 +34,7 @@ public class TinkExpensesTabsTheme extends TinkTabsTheme implements TinkTabs.The
 		return ColorsUtils.adjustAlpha(color, 0.4f);
 	}
 
+	@NotNull
 	@Override
 	public TinkTextView.Theme getTabsTitle() {
 		return new NanoTitle(context) {
