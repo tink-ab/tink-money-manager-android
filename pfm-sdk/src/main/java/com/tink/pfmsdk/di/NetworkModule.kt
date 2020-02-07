@@ -34,10 +34,7 @@ internal class NetworkModule {
     @Provides
     @Singleton
     fun provideInterceptor(dataStorage: ClientDataStorage): HeaderClientInterceptor {
-        return HeaderClientInterceptor(
-            dataStorage.uuid,
-            "" //TODO:PFMSDK: AppUtils.getUserAgent()
-        )
+        return HeaderClientInterceptor(dataStorage.uuid)
     }
 
     @Provides
