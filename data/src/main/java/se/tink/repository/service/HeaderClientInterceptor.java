@@ -23,22 +23,14 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 		.of("X-Tink-SDK-Name", Metadata.ASCII_STRING_MARSHALLER);
 	public static final Metadata.Key<String> SDK_VERSION_HEADER_NAME = Metadata.Key
 		.of("X-Tink-SDK-Version", Metadata.ASCII_STRING_MARSHALLER);
-	public static final Metadata.Key<String> OAUTH_CLIENT_ID_HEADER_NAME = Metadata.Key
-		.of("X-Tink-OAuth-Client-ID", Metadata.ASCII_STRING_MARSHALLER);
-	public static final Metadata.Key<String> REMOTE_ADDRESS = Metadata.Key
-		.of("X-Forwarded-For", Metadata.ASCII_STRING_MARSHALLER);
-	public static final Metadata.Key<String> USER_AGENT = Metadata.Key
-		.of("User-Agent", Metadata.ASCII_STRING_MARSHALLER);
 
 	private static final String SDK_NAME_HEADER_VALUE = "Tink PFM Android";
 
 	private String accessToken;
 	private final String deviceId;
-	private String userAgent;
 
-	public HeaderClientInterceptor(String deviceId, String userAgent) {
+	public HeaderClientInterceptor(String deviceId) {
 		this.deviceId = deviceId;
-		this.userAgent = userAgent;
 	}
 
 	@Override
