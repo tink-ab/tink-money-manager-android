@@ -50,6 +50,7 @@
     <attr name="tink_warningColor" format="color|reference" />
     <attr name="tink_textColorPrimary" format="color|reference" />
     <attr name="tink_textColorSecondary" format="color|reference" />
+    <attr name="tink_textColorTertiary" format="color|reference" />
     <attr name="tink_dividerColor" format="color|reference" />
   </declare-styleable>
 

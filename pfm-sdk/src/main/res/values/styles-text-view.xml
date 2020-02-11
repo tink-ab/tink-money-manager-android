@@ -11,7 +11,7 @@
 
   <style name="chart_label">
     <item name="android:textSize">@dimen/chart_label_text_size</item>
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
   </style>
 

@@ -6,7 +6,7 @@
   <item name="tink_font_regular" type="font">@font/lota_grotesque_regular</item>
 
   <style name="h2">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/h2_text_size</item>
     <item name="lineHeight">@dimen/h2_line_height</item>
@@ -135,7 +135,7 @@
   </style>
 
   <style name="hecto.tertiary">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="hecto.disabled">
@@ -160,7 +160,7 @@
   </style>
 
   <style name="mega.hint">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="micro">
@@ -194,7 +194,7 @@
   </style>
 
   <style name="nano.tertiary">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="nano.semibold">

@@ -39,5 +39,6 @@
     <item name="tink_dividerColor">@color/divider_color</item>
     <item name="tink_textColorPrimary">@color/black</item>
     <item name="tink_textColorSecondary">@color/greyblack</item>
+    <item name="tink_textColorTertiary">@color/grey_light</item>
   </style>
 </resources>
