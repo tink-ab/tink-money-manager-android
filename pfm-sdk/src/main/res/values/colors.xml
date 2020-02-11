@@ -4,7 +4,6 @@
   /* Semantic colors */
 
   <color name="status_bar_no_toolbar">@color/black</color>
-  <color name="tree_list_selection_top_level_item_default_color">@color/textColorSecondary</color>
 
   <color name="vertical_bar_chart_default_color">@color/white_40</color>
   <color name="chart_area_label">@color/plain_black</color>

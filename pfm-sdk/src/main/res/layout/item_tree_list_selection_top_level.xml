@@ -24,7 +24,7 @@
     android:id="@+id/icon"
     android:layout_width="@dimen/category_icon_size"
     android:layout_height="@dimen/category_icon_size"
-    android:tint="@color/tree_list_selection_top_level_item_default_color"
+    android:tint="?tink_textColorSecondary"
     app:layout_constraintBottom_toBottomOf="@id/iconBackground"
     app:layout_constraintStart_toStartOf="@id/iconBackground"
     app:layout_constraintTop_toTopOf="@id/iconBackground"

@@ -38,5 +38,6 @@
     <item name="tink_textColorAction">@color/tink_blue</item>
     <item name="tink_dividerColor">@color/divider_color</item>
     <item name="tink_textColorPrimary">@color/black</item>
+    <item name="tink_textColorSecondary">@color/greyblack</item>
   </style>
 </resources>
