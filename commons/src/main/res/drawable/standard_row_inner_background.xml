@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item>
     <shape>
-      <solid android:color="?tink_backgroundColor"/>
+      <solid android:color="?tink_transparentColor"/>
     </shape>
   </item>
 </layer-list>

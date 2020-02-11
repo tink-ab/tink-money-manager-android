@@ -13,6 +13,7 @@
     android:layout_marginTop="16dp"
     android:layout_marginEnd="24dp"
     android:layout_marginBottom="16dp"
+    android:backgroundTint="?tink_cardBackgroundColor"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

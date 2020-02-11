@@ -52,6 +52,7 @@
     <attr name="tink_textColorSecondaryDisabled" format="color|reference" />
     <attr name="tink_textColorTertiary" format="color|reference" />
     <attr name="tink_dividerColor" format="color|reference" />
+    <attr name="tink_cardBackgroundColor" format="color|reference" />
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>
