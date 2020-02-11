@@ -1,5 +1,8 @@
 package com.tink.pfmsdk.tracking
 
+/**
+ * This class represents an event that occurs when a user navigates to a new screen within the Finance Overview UI.
+ */
 data class ScreenEvent private constructor(val name: String) {
 
     companion object {

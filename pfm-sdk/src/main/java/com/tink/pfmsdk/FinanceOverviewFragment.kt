@@ -38,6 +38,10 @@ import java.security.cert.CertificateException
 import javax.crypto.NoSuchPaddingException
 import javax.inject.Inject
 
+/**
+ * Fragment responsible for displaying an overview of the end-user's finances.
+ * This is the entry point to the various flows which are part of the finance overview UI.
+ */
 class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
@@ -192,6 +196,15 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_ACCESS_TOKEN = "accessToken"
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatureSet"
 
+        /**
+         * Creates a new instance of the [FinanceOverviewFragment].
+         *
+         * @param accessToken A valid access token for the user
+         * @param styleResId The resource ID of your style that extends [R.style.TinkFinanceOverviewStyle]
+         * @param clientConfiguration The [ClientConfiguration] object
+         * @param tracker An optional [Tracker] implementation
+         * @param featureSet The [OverviewFeatures] object with the list of overview features to be included
+         */
         @JvmOverloads
         @JvmStatic
         fun newInstance(
