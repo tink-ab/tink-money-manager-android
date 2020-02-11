@@ -16,7 +16,7 @@
   </style>
 
   <style name="chart_label.white">
-    <item name="android:textColor">?android:textColorPrimaryInverse</item>
+    <item name="android:textColor">?tink_textColorPrimaryInverse</item>
   </style>
 
 </resources>
