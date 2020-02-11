@@ -15,7 +15,7 @@
   <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="?tink_backgroundColor"
     tools:ignore="ContentDescription">
 
     <com.tink.pfmsdk.view.TinkToolbar
@@ -68,7 +68,7 @@
       android:layout_height="match_parent"
       android:layout_alignParentBottom="true"
       android:layout_marginTop="@dimen/account_details_header_height_plus_spacing"
-      android:background="@color/colorBackground" />
+      android:background="?tink_backgroundColor" />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recyclerView"

@@ -3,7 +3,8 @@
   android:layout_width="match_parent"
   android:layout_height="96dp"
   android:layout_marginTop="16dp"
-  android:layout_marginBottom="16dp">
+  android:layout_marginBottom="16dp"
+  android:background="?tink_backgroundColor">
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/accountList"
