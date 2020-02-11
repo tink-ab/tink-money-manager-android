@@ -7,9 +7,6 @@
     <attr name="android:text"/>
   </declare-styleable>
 
-  <attr name="textColorPrimaryDisabled" format="reference|color"/>
-  <attr name="textColorSecondaryDisabled" format="reference|color"/>
-
   <declare-styleable name="TinkFinanceOverviewStyle">
     <attr name="tink_backgroundColor" format="color|reference"/>
     <attr name="tink_expensesColor" format="color|reference"/>
@@ -49,7 +46,9 @@
     <attr name="tink_transparentColor" format="color|reference" />
     <attr name="tink_warningColor" format="color|reference" />
     <attr name="tink_textColorPrimary" format="color|reference" />
+    <attr name="tink_textColorPrimaryDisabled" format="color|reference" />
     <attr name="tink_textColorSecondary" format="color|reference" />
+    <attr name="tink_textColorSecondaryDisabled" format="color|reference" />
     <attr name="tink_textColorTertiary" format="color|reference" />
     <attr name="tink_dividerColor" format="color|reference" />
   </declare-styleable>

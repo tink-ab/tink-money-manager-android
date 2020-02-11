@@ -80,7 +80,7 @@
   </style>
 
   <style name="deci.disabled">
-    <item name="android:textColor">?textColorSecondaryDisabled</item>
+    <item name="android:textColor">?tink_textColorSecondaryDisabled</item>
   </style>
 
   <style name="giga">
@@ -139,7 +139,7 @@
   </style>
 
   <style name="hecto.disabled">
-    <item name="android:textColor">?textColorPrimaryDisabled</item>
+    <item name="android:textColor">?tink_textColorPrimaryDisabled</item>
   </style>
 
   <style name="mega">

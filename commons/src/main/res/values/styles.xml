@@ -40,5 +40,8 @@
     <item name="tink_textColorPrimary">@color/black</item>
     <item name="tink_textColorSecondary">@color/greyblack</item>
     <item name="tink_textColorTertiary">@color/grey_light</item>
+    <item name="tink_textColorPrimaryDisabled">@color/black_50</item>
+    <item name="tink_textColorSecondaryDisabled">@color/disabled_greyblack</item>
+
   </style>
 </resources>
