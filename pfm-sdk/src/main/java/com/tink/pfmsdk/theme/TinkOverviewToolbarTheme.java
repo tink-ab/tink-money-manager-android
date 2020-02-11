@@ -26,7 +26,7 @@ public class TinkOverviewToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getTitleColor() {
-		return ContextUtils.getColorFromAttr(context, android.R.attr.textColorPrimary);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_textColorPrimary);
 	}
 
 	@Override
