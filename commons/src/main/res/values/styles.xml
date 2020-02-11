@@ -36,5 +36,6 @@
     <item name="tink_colorPrimaryDark">@color/tink_lax_dark</item>
     <item name="tink_colorOnPrimary">@color/white</item>
     <item name="tink_textColorAction">@color/tink_blue</item>
+    <item name="tink_dividerColor">@color/divider_color</item>
   </style>
 </resources>
