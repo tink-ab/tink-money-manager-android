@@ -37,24 +37,22 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 		return new TinkDefaultStatusBarTheme(context) {
 			@Override
 			public int getStatusBarColor() {
-				// TODO: Confirm with design the expected behavior - do we change the color according to new category type?
-//				int id;
-//				Type type =
-//					(category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
-//				switch (type) {
-//					case TYPE_EXPENSES:
-//						id = R.attr.tink_expensesDarkColor;
-//						break;
-//					case TYPE_INCOME:
-//						id = R.attr.tink_incomeDarkColor;
-//						break;
-//					case TYPE_TRANSFER:
-//					case TYPE_UNKKNOWN:
-//					default:
-//						id = R.attr.tink_transferColor;
-//				}
-//				return ContextCompat.getColor(context, id);
-				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorPrimaryDark);
+				int id;
+				Type type =
+					(category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
+				switch (type) {
+					case TYPE_EXPENSES:
+						id = R.attr.tink_expensesDarkColor;
+						break;
+					case TYPE_INCOME:
+						id = R.attr.tink_incomeDarkColor;
+						break;
+					case TYPE_TRANSFER:
+					case TYPE_UNKKNOWN:
+					default:
+						id = R.attr.tink_transferColor;
+				}
+				return ContextCompat.getColor(context, id);
 			}
 		};
 	}
@@ -65,23 +63,21 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 	}
 
 	private int getColor() {
-		// TODO: Confirm with design the expected behavior - do we change the color according to new category type?
-//		int id;
-//
-//		Type type = (category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
-//		switch (type) {
-//			case TYPE_EXPENSES:
-//				id = R.attr.tink_expensesColor;
-//				break;
-//			case TYPE_INCOME:
-//				id = R.attr.tink_incomeColor;
-//				break;
-//			case TYPE_TRANSFER:
-//			case TYPE_UNKKNOWN:
-//			default:
-//				id = R.attr.tink_transferColor;
-//		}
-//		return ContextUtils.getColorFromAttr(context, id);
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorPrimary);
+		int id;
+
+		Type type = (category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
+		switch (type) {
+			case TYPE_EXPENSES:
+				id = R.attr.tink_expensesColor;
+				break;
+			case TYPE_INCOME:
+				id = R.attr.tink_incomeColor;
+				break;
+			case TYPE_TRANSFER:
+			case TYPE_UNKKNOWN:
+			default:
+				id = R.attr.tink_transferColor;
+		}
+		return ContextUtils.getColorFromAttr(context, id);
 	}
 }
