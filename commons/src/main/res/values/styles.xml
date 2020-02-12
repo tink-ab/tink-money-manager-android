@@ -23,7 +23,6 @@
     <item name="tink_colorOnSnackBar">@color/white</item>
     <item name="tink_chartContainerBackgroundColor">@color/white</item>
     <item name="tink_chartMeanValueColor">@color/grey_light</item>
-    <item name="tink_chartAxisLabelColor">@color/grey_light</item>
     <item name="tink_tabNormalColor">@color/white_70</item>
     <item name="tink_tabSelectedColor">@color/white</item>
     <item name="tink_defaultButtonTextColor">@color/white</item>

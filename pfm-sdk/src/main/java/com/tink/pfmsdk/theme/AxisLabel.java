@@ -2,7 +2,6 @@ package com.tink.pfmsdk.theme;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import androidx.core.content.ContextCompat;
 import com.tink.pfmsdk.R;
 import com.tink.pfmsdk.util.FontUtils;
 import com.tink.pfmsdk.view.TinkTextView.Theme;
@@ -18,7 +17,7 @@ class AxisLabel implements Theme {
 
 	@Override
 	public int getTextColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_chartAxisLabelColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_textColorSecondary);
 	}
 
 	@Override

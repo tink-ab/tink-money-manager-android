@@ -30,7 +30,6 @@
     <attr name="tink_colorOnSnackBar" format="color|reference"/>
     <attr name="tink_chartContainerBackgroundColor" format="color|reference"/>
     <attr name="tink_chartMeanValueColor" format="color|reference"/>
-    <attr name="tink_chartAxisLabelColor" format="color|reference"/>
     <attr name="tink_tabNormalColor" format="color|reference"/>
     <attr name="tink_tabSelectedColor" format="color|reference"/>
     <attr name="tink_defaultButtonTextColor" format="color|reference"/>

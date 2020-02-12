@@ -7,7 +7,6 @@
 
   <style name="TinkFinanceOverviewSampleStyle" parent="TinkFinanceOverviewStyle">
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
-    <item name="tink_chartAxisLabelColor">#A7A7A7</item>
     <item name="tink_colorAccent">#ff461e7d</item>
     <item name="tink_colorAccentDark">#ff461e7d</item>
     <item name="tink_colorAccentLight">#ff461e7d</item>
@@ -38,7 +37,6 @@
   <style name="TinkStyle_Default" parent="TinkFinanceOverviewStyle">
     <item name="tink_backgroundColor">#FBFBFC</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
-    <item name="tink_chartAxisLabelColor">#A7A7A7</item>
     <item name="tink_colorAccent">#4E7681</item>
     <item name="tink_colorAccentDark">#4E7681</item>
     <item name="tink_colorAccentLight">#4E7681</item>
@@ -67,7 +65,6 @@
   <style name="TinkStyle_Strict" parent="TinkFinanceOverviewStyle">
     <item name="tink_backgroundColor">#F7F7F8</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
-    <item name="tink_chartAxisLabelColor">#A7A7A7</item>
     <item name="tink_colorAccent">#333439</item>
     <item name="tink_colorAccentDark">#333439</item>
     <item name="tink_colorAccentLight">#333439</item>
@@ -96,7 +93,6 @@
   <style name="TinkStyle_ChewingGum" parent="TinkFinanceOverviewStyle">
     <item name="tink_backgroundColor">#353035</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
-    <item name="tink_chartAxisLabelColor">#A7A7A7</item>
     <item name="tink_colorAccent">#e8a9e0</item>
     <item name="tink_colorAccentDark">#e8a9e0</item>
     <item name="tink_colorAccentLight">#463A45</item>
