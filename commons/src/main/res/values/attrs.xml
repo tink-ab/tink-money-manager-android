@@ -32,7 +32,6 @@
     <attr name="tink_chartMeanValueColor" format="color|reference"/>
     <attr name="tink_tabNormalColor" format="color|reference"/>
     <attr name="tink_tabSelectedColor" format="color|reference"/>
-    <attr name="tink_defaultButtonTextColor" format="color|reference"/>
     <attr name="tink_colorAccent" format="color|reference"/>
     <attr name="tink_colorAccentLight" format="color|reference"/>
     <attr name="tink_colorAccentDark" format="color|reference"/>

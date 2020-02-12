@@ -115,7 +115,6 @@
     <item name="tink_snackbarColor">#2A262A</item>
     <item name="tink_colorOnSnackBar">#ffffff</item>
     <item name="tink_textColorAction">#e8a9e0</item>
-    <item name="tink_defaultButtonTextColor">#ffffff</item>
     <item name="tink_chartContainerBackgroundColor">#2A262A</item>
     <item name="tink_dividerColor">#2B2B2B</item>
     <item name="tink_textColorPrimary">#FFFFFF</item>

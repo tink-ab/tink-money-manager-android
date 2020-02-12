@@ -37,7 +37,6 @@ You can customize colors by extending the existing `TinkFinanceOverviewStyle` fr
     <item name="tink_chartMeanValueColor">@color/custom_chart_mean_value</item>
     <item name="tink_tabNormalColor">@color/custom_tab_normal</item>
     <item name="tink_tabSelectedColor">@color/custom_tab_selected</item>
-    <item name="tink_defaultButtonTextColor">@color/custom_default_button_text</item>
     <item name="tink_colorAccent">@color/colorAccent</item>
     <item name="tink_colorAccentLight">@color/colorAccentLight</item>
     <item name="tink_colorAccentDark">@color/colorAccentDark</item>
