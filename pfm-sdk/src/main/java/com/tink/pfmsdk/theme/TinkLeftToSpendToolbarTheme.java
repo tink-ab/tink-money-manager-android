@@ -26,13 +26,18 @@ public class TinkLeftToSpendToolbarTheme implements TinkToolbar.Theme {
 
 	@Override
 	public int getTitleColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnPrimary);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnLeftToSpend);
 	}
 
 	@Override
 	public ToolbarTextTheme getActionButtonTheme() {
 		if (actionButtonTheme == null) {
-			actionButtonTheme = new TinkDefaultToolbarActionButtonTheme(context);
+			actionButtonTheme = new TinkDefaultToolbarActionButtonTheme(context) {
+				@Override
+				public int getTextColor() {
+					return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnLeftToSpend);
+				}
+			};
 		}
 		return actionButtonTheme;
 	}

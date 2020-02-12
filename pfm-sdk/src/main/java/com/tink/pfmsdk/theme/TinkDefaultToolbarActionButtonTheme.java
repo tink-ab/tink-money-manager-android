@@ -32,7 +32,7 @@ public class TinkDefaultToolbarActionButtonTheme implements TinkToolbar.Theme.To
 
 	@Override
 	public int getTextColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_defaultButtonTextColor);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnPrimary);
 	}
 
 	@Override

@@ -1,14 +1,17 @@
 package com.tink.pfmsdk.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.util.ColorsUtils
 import com.tink.pfmsdk.util.DimensionUtils
 import com.tink.pfmsdk.util.ScreenUtils
+import se.tink.commons.extensions.getColorFromAttr
 
 internal class TinkTabs @JvmOverloads constructor(
     context: Context,
@@ -34,17 +37,25 @@ internal class TinkTabs @JvmOverloads constructor(
     ) {
         val tinkTextView = TinkTextView(context)
         tinkTextView.setTheme(theme!!.tabsTitle)
-        tinkTextView.setTextColor(
-            ContextCompat.getColorStateList(
-                tinkTextView.context,
-                R.color.tink_tab_label_color
+        val colorStateList = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_selected),
+                intArrayOf()
+            ),
+            intArrayOf(
+                selectedTabColor(),
+                normalTabColor()
             )
         )
+        tinkTextView.setTextColor(colorStateList)
         tinkTextView.text = tab.text
         tinkTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
         tab.customView = tinkTextView
         super.addTab(tab, position, setSelected)
     }
+
+    private fun normalTabColor(): Int = ColorsUtils.adjustAlpha(theme!!.markerColor, 0.4f)
+    private fun selectedTabColor(): Int = theme!!.markerColor
 
     fun updateNameOnFirstTab(name: String?) {
         val tinkTextView = getTabAt(0)!!.customView as TinkTextView?

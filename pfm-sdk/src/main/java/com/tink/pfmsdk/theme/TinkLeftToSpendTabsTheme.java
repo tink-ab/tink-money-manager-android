@@ -30,8 +30,7 @@ public class TinkLeftToSpendTabsTheme extends TinkTabsTheme implements TinkTabs.
 
 	@Override
 	public int getMarkerColor() {
-		int color = ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnLeftToSpend);
-		return ColorsUtils.adjustAlpha(color, 0.4f);
+		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnLeftToSpend);
 	}
 
 	@NotNull
@@ -46,6 +45,11 @@ public class TinkLeftToSpendTabsTheme extends TinkTabsTheme implements TinkTabs.
 			@Override
 			public float getSpacing() {
 				return DimensionUtils.getEmFromDp(2);
+			}
+
+			@Override
+			public int getTextColor() {
+				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnLeftToSpend);
 			}
 		};
 	}
