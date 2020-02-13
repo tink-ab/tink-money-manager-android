@@ -80,12 +80,12 @@
   <color name="colorOnSurface">@color/black</color>
 
   /* Text colors */
-  <color name="textColorPrimary">@color/black</color>
-  <color name="textColorPrimaryDisabled">@color/black_50</color>
-  <color name="textColorPrimaryInverse">@color/white</color>
-  <color name="textColorSecondary">@color/greyblack</color>
-  <color name="textColorSecondaryDisabled">@color/disabled_greyblack</color>
-  <color name="textColorTertiary">@color/grey_light</color>
+<!--  <color name="textColorPrimary">@color/black</color>-->
+<!--  <color name="textColorPrimaryDisabled">@color/black_50</color>-->
+<!--  <color name="textColorPrimaryInverse">@color/white</color>-->
+<!--  <color name="textColorSecondary">@color/greyblack</color>-->
+<!--  <color name="textColorSecondaryDisabled">@color/disabled_greyblack</color>-->
+<!--  <color name="textColorTertiary">@color/grey_light</color>-->
 <!--  <color name="textColorLink">@color/colorAccent</color>-->
 <!--  <color name="textColorAction">@color/colorAccent</color>-->
 

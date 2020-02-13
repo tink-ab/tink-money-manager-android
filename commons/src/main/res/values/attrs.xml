@@ -7,10 +7,8 @@
     <attr name="android:text"/>
   </declare-styleable>
 
-  <attr name="textColorPrimaryDisabled" format="reference|color"/>
-  <attr name="textColorSecondaryDisabled" format="reference|color"/>
-
   <declare-styleable name="TinkFinanceOverviewStyle">
+    <attr name="tink_backgroundColor" format="color|reference"/>
     <attr name="tink_expensesColor" format="color|reference"/>
     <attr name="tink_expensesLightColor" format="color|reference"/>
     <attr name="tink_expensesDarkColor" format="color|reference" />
@@ -32,10 +30,8 @@
     <attr name="tink_colorOnSnackBar" format="color|reference"/>
     <attr name="tink_chartContainerBackgroundColor" format="color|reference"/>
     <attr name="tink_chartMeanValueColor" format="color|reference"/>
-    <attr name="tink_chartAxisLabelColor" format="color|reference"/>
     <attr name="tink_tabNormalColor" format="color|reference"/>
     <attr name="tink_tabSelectedColor" format="color|reference"/>
-    <attr name="tink_defaultButtonTextColor" format="color|reference"/>
     <attr name="tink_colorAccent" format="color|reference"/>
     <attr name="tink_colorAccentLight" format="color|reference"/>
     <attr name="tink_colorAccentDark" format="color|reference"/>
@@ -47,6 +43,14 @@
     <attr name="tink_textColorAction" format="reference|color"/>
     <attr name="tink_transparentColor" format="color|reference" />
     <attr name="tink_warningColor" format="color|reference" />
+    <attr name="tink_textColorPrimary" format="color|reference" />
+    <attr name="tink_textColorPrimaryDisabled" format="color|reference" />
+    <attr name="tink_textColorPrimaryInverse" format="color|reference" />
+    <attr name="tink_textColorSecondary" format="color|reference" />
+    <attr name="tink_textColorSecondaryDisabled" format="color|reference" />
+    <attr name="tink_textColorTertiary" format="color|reference" />
+    <attr name="tink_dividerColor" format="color|reference" />
+    <attr name="tink_cardBackgroundColor" format="color|reference" />
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

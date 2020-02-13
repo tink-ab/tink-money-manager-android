@@ -31,7 +31,12 @@ public class TinkIncomeToolbarTheme implements TinkToolbar.Theme {
 	@Override
 	public ToolbarTextTheme getActionButtonTheme() {
 		if (actionButtonTheme == null) {
-			actionButtonTheme = new TinkDefaultToolbarActionButtonTheme(context);
+			actionButtonTheme = new TinkDefaultToolbarActionButtonTheme(context) {
+				@Override
+				public int getTextColor() {
+					return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnIncome);
+				}
+			};
 		}
 		return actionButtonTheme;
 	}

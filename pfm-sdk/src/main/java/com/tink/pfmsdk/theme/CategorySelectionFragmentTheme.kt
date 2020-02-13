@@ -5,9 +5,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.view.TinkToolbar
 import se.tink.core.models.Category
 
-internal interface CategorySelectionFragmentTheme : BaseFragment.Theme {
-    val iconTheme: CategoryIconTheme
-}
+internal interface CategorySelectionFragmentTheme : BaseFragment.Theme
 
 internal fun getCategorySelectionThemeForType(context: Context, type: Category.Type): CategorySelectionFragmentTheme {
     return when (type) {
@@ -20,11 +18,9 @@ internal fun getCategorySelectionThemeForType(context: Context, type: Category.T
 private class ExpensesCategorySelectionFragmentTheme(private val context: Context) : CategorySelectionFragmentTheme {
     override fun getToolbarTheme(): TinkToolbar.Theme = TinkExpensesToolbarTheme(context)
     override fun getStatusBarTheme(): StatusBarTheme = TinkExpenseStatusBarTheme(context)
-    override val iconTheme: CategoryIconTheme = ExpensesIconTheme()
 }
 
 private class IncomeCategorySelectionFragmentTheme(private val context: Context) : CategorySelectionFragmentTheme {
     override fun getToolbarTheme(): TinkToolbar.Theme = TinkIncomeToolbarTheme(context)
     override fun getStatusBarTheme(): StatusBarTheme = TinkIncomeStatusBarTheme(context)
-    override val iconTheme: CategoryIconTheme = IncomeIconTheme()
 }

@@ -6,7 +6,7 @@
   <item name="tink_font_regular" type="font">@font/lota_grotesque_regular</item>
 
   <style name="h2">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/h2_text_size</item>
     <item name="lineHeight">@dimen/h2_line_height</item>
@@ -25,7 +25,7 @@
   </style>
 
   <style name="deci">
-    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textColor">?tink_textColorSecondary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/deci_text_size</item>
     <item name="lineHeight">@dimen/deci_line_height</item>
@@ -42,7 +42,7 @@
   </style>
 
   <style name="deci.primary">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
   </style>
 
   <style name="deci.primary.bold">
@@ -80,11 +80,11 @@
   </style>
 
   <style name="deci.disabled">
-    <item name="android:textColor">?textColorSecondaryDisabled</item>
+    <item name="android:textColor">?tink_textColorSecondaryDisabled</item>
   </style>
 
   <style name="giga">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
     <item name="android:textSize">@dimen/giga_text_size</item>
     <item name="lineHeight">@dimen/giga_line_height</item>
@@ -108,7 +108,7 @@
   </style>
 
   <style name="hecto">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/hecto_text_size</item>
     <item name="lineHeight">@dimen/hecto_line_height</item>
@@ -131,19 +131,19 @@
   </style>
 
   <style name="hecto.secondary">
-    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textColor">?tink_textColorSecondary</item>
   </style>
 
   <style name="hecto.tertiary">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="hecto.disabled">
-    <item name="android:textColor">?textColorPrimaryDisabled</item>
+    <item name="android:textColor">?tink_textColorPrimaryDisabled</item>
   </style>
 
   <style name="mega">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/mega_text_size</item>
     <item name="lineHeight">@dimen/mega_line_height</item>
@@ -160,11 +160,11 @@
   </style>
 
   <style name="mega.hint">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="micro">
-    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textColor">?tink_textColorSecondary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/micro_text_size</item>
     <item name="lineHeight">@dimen/micro_line_height</item>
@@ -177,11 +177,11 @@
   </style>
 
   <style name="micro.primary">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
   </style>
 
   <style name="nano">
-    <item name="android:textColor">?android:textColorSecondary</item>
+    <item name="android:textColor">?tink_textColorSecondary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
     <item name="android:textSize">@dimen/nano_text_size</item>
     <item name="lineHeight">@dimen/nano_line_height</item>
@@ -190,11 +190,11 @@
   </style>
 
   <style name="nano.primary">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
   </style>
 
   <style name="nano.tertiary">
-    <item name="android:textColor">?android:textColorTertiary</item>
+    <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
 
   <style name="nano.semibold">
@@ -208,7 +208,7 @@
   </style>
 
   <style name="peta">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
     <item name="android:textSize">@dimen/peta_text_size</item>
     <item name="lineHeight">@dimen/peta_line_height</item>
@@ -224,7 +224,7 @@
   </style>
 
   <style name="tera">
-    <item name="android:textColor">?android:textColorPrimary</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
     <item name="android:textSize">@dimen/tera_text_size</item>
     <item name="lineHeight">@dimen/tera_line_height</item>

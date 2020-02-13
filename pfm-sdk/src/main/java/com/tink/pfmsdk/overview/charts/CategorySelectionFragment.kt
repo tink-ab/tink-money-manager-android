@@ -54,6 +54,7 @@ internal class CategorySelectionFragment : BaseFragment() {
         if (!options.dropdownToolbarAppearance) {
             view.category.setCompoundDrawables(null, null, null, null)
         }
+        view.category.setTextColor(ownTheme.toolbarTheme.titleColor)
 
         val categories = viewModel.getCategoryItems(
             type,

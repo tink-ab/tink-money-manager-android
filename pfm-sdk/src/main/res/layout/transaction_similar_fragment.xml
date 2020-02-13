@@ -4,7 +4,7 @@
   android:id="@+id/transaction_similar_fragment_main"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/colorBackground">
+  android:background="?tink_backgroundColor">
 
   <include layout="@layout/toolbar_default"/>
 
@@ -44,12 +44,10 @@
 
   <Button
     android:id="@+id/skipBtn"
-    style="@style/button"
+    style="@style/Button.Default"
     android:layout_width="match_parent"
-    android:backgroundTint="@null"
     android:layout_height="@dimen/button_height"
     android:text="@string/transaction_similar_button_skip_text"
-    android:textColor="?tink_colorAccent"
     app:layout_constraintBottom_toTopOf="@id/doneBtn"/>
 
   <Button
