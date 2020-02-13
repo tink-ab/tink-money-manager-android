@@ -96,19 +96,20 @@ internal open class Tera(context: Context) : TextViewXmlTheme(context,
 internal open class TextViewXmlTheme(val context: Context, @StyleRes themeId: Int) :
     TinkTextView.Theme {
     override var textColor = 0
-    private var typeface: Typeface? = null
     override var textSize = 0f
     override var lineHeight = 0f
-    override val font: Typeface? = typeface
+    override var font: Typeface? = null
     override val spacing: Float = 0f
     private var letterSpacing = 0f
     private var textAllCaps = false
 
     init {
         val attrs = listOf(
-            ColorAttribute(android.R.attr.textColor) { textColor = it },
+            ColorAttribute(android.R.attr.textColor) {
+                textColor = it
+            },
             TypefaceAttribute(android.R.attr.fontFamily) {
-                typeface = it
+                font = it
             },
             DimensionAttribute(android.R.attr.textSize) {
                 textSize = it

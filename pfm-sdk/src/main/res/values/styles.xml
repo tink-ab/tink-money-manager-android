@@ -3,6 +3,6 @@
   <style name="leftToSpendTutorialDescription" parent="hecto"/>
   <style name="leftToSpendTutorialStepDescription" parent="deci.primary"/>
   <style name="leftToSpendTutorialStepNumber" parent="leftToSpendTutorialStepDescription">
-    <item name="android:fontFamily">@font/lota_grotesque_bold</item>
+    <item name="android:fontFamily">@font/tink_font_bold</item>
   </style>
 </resources>
