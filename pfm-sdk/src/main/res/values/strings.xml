@@ -1,11 +1,11 @@
 <resources>
-  <string name="snackbar_utils_error_default">Qualcosa è andato storto! Ci scusiamo, riprova più tardi.</string>
-  <string name="snackbar_utils_error_status_code_408">Qualcosa è andato storto! Ci scusiamo, riprova più tardi.</string>
+  <string name="snackbar_utils_error_default">An error has occurred. Please try again later.</string>
+  <string name="snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
   <string name="onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
-  <string name="date_format_human_today">Oggi</string>
-  <string name="date_format_human_yesterday">Ieri</string>
-  <string name="date_format_human_tomorrow">Domani</string>
+  <string name="date_format_human_today">Today</string>
+  <string name="date_format_human_yesterday">Yesterday</string>
+  <string name="date_format_human_tomorrow">Tomorrow</string>
   <string name="date_formatter_monthly">yyyy-MM</string>
   <string name="date_formatter_yearly">yyyy</string>
   <string name="date_formatter_week_yearly">xxxx</string>
@@ -36,17 +36,17 @@
   <string name="date_formatter_month_and_year">MMMM yyyy</string>
   <string name="date_formatter_month_and_year_compact">MMM yyyy</string>
 
-  <string name="all_categories">Tutte le categorie</string>
+  <string name="all_categories">All categories</string>
 
-  <string name="overview_latest_transactions_title">Ultime transazioni</string>
-  <string name="overview_latest_transactions_view_all_link">Vedi tutte le transazioni</string>
+  <string name="overview_latest_transactions_title">Latest transactions</string>
+  <string name="overview_latest_transactions_view_all_link">See all</string>
 
-  <string name="transaction_similar_title">Transazioni simili</string>
-  <string name="transaction_similar_description">Vuoi assegnare anche queste transazioni alla categoria?</string>
-  <string name="transaction_similar_button_skip_text">Salta</string>
-  <string name="transaction_similar_button_accept_text">Modifica</string>
-  <string name="transaction_similar_marker_button_mark_text">Seleziona tutto</string>
-  <string name="transaction_similar_marker_button_unmark_text">Deseleziona tutto</string>
+  <string name="transaction_similar_title">Similar transactions</string>
+  <string name="transaction_similar_description">Do you want to categorize these transactions as well?</string>
+  <string name="transaction_similar_button_skip_text">Skip</string>
+  <string name="transaction_similar_button_accept_text">Yes, change selected</string>
+  <string name="transaction_similar_marker_button_mark_text">Select all</string>
+  <string name="transaction_similar_marker_button_unmark_text">Unselect all</string>
 
   <string name="pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
   <string name="amount_transition" translatable="false">%1$s-amount-transition</string>
@@ -59,30 +59,29 @@
   <string name="transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
 
-  <string name="choose_category_text">Scegli una categoria</string>
+  <string name="choose_category_text">Choose category</string>
 
-  <string name="category_list_fragment_button_text">Seleziona</string>
+  <string name="category_list_fragment_button_text">Select</string>
 
-  <string name="selector_1_months">1 mese</string>
-  <string name="selector_6_months">6 mesi</string>
-  <string name="selector_12_months">12 mesi</string>
-  <string name="expenses_title">Spese</string>
-  <string name="expenses_header_description_average">%s in media per mese</string>
-  <string name="left_to_spend_title">Da spendere</string>
-  <string name="left_to_spend_header_description_more">%s sopra la media</string>
-  <string name="left_to_spend_header_description_less">%s sotto la media</string>
-  <string name="left_to_spend_header_description_average">%s in media per mese</string>
-  <string name="income_title">Entrate</string>
-  <string name="income_header_description_average">%s in media per mese</string>
+  <string name="selector_1_months">1 month</string>
+  <string name="selector_6_months">6 months</string>
+  <string name="selector_12_months">12 months</string>
+  <string name="expenses_title">Expenses</string>
+  <string name="expenses_header_description_average">%s on average per month</string>
+  <string name="left_to_spend_title">Left to spend</string>
+  <string name="left_to_spend_header_description_more">%s more than usual</string>
+  <string name="left_to_spend_header_description_less">%s less than usual</string>
+  <string name="left_to_spend_header_description_average">%s on average per month</string>
+  <string name="income_title">Income</string>
+  <string name="income_header_description_average">%s on average per month</string>
   <string name="date_span_string">%1$s - %2$s</string>
-  <string name="until_next_date">Fino a %s</string>
+  <string name="until_next_date">Until %s</string>
 
-  <string name="transactions_list_toolbar_title">Transazioni</string>
-  <string name="expenses_menu_settings_tite">Transazioni</string>
-  <string name="other">Altro</string>
-  <string name="category_default_child_format">%s - Altro</string>
+  <string name="transactions_list_toolbar_title">Transactions</string>
+  <string name="expenses_menu_settings_tite">Transactions</string>
+  <string name="other">Other</string>
+  <string name="category_default_child_format">%s - Other</string>
 
-  <!-- TODO: Change default strings resources to English and remove Italian strings-->
   <string name="insights_tab_title">Events</string>
   <string name="insights_archive_title">Archive</string>
   <string name="insights_empty_state_title">You handled all events!</string>
