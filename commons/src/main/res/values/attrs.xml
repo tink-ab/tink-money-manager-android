@@ -43,6 +43,7 @@
     <attr name="tink_textColorAction" format="reference|color"/>
     <attr name="tink_transparentColor" format="color|reference" />
     <attr name="tink_warningColor" format="color|reference" />
+    <attr name="tink_criticalColor" format="color|reference" />
     <attr name="tink_textColorPrimary" format="color|reference" />
     <attr name="tink_textColorPrimaryDisabled" format="color|reference" />
     <attr name="tink_textColorPrimaryInverse" format="color|reference" />
