@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="16dp"
+  app:cardCornerRadius="@dimen/card_corner_radius"
+  app:cardElevation="@dimen/card_elevation">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+      android:id="@+id/insight_top_part"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="24dp"
+      android:paddingBottom="20dp"
+      android:background="@color/insight_budget_create_suggestion_background"
+      android:gravity="center">
+
+      <com.tink.pfmsdk.insights.views.InsightBubbleView
+        android:id="@+id/insightBubbleCurrentSpending"
+        android:layout_width="156dp"
+        android:layout_height="156dp"
+        app:bubbleBackgroundTint="@color/insight_bubble_current_spending_background"
+        app:iconTint="@color/insight_bubble_current_spending_iconColor"
+        app:primaryTextStyle="@style/giga"
+        app:secondaryTextStyle="@style/nano"
+        app:textColor="@color/insight_bubble_current_spending_textColor"
+        tools:icon="@drawable/ic_foodanddrinks"
+        tools:primaryText="3 200 kr"
+        tools:secondaryText="Ditt snitt per manad"/>
+
+      <com.tink.pfmsdk.insights.views.InsightBubbleView
+        android:id="@+id/insightBubbleNewCategory"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="-16dp"
+        android:layout_toEndOf="@id/insightBubbleCurrentSpending"
+        app:bubbleBackgroundTint="@color/insight_bubble_new_category_background"
+        app:iconTint="@color/insight_bubble_new_category_iconColor"
+        app:primaryTextStyle="@style/hecto.bold"
+        app:secondaryTextStyle="@style/nano.semibold"
+        app:textColor="@color/insight_bubble_new_category_textColor"
+        tools:icon="@drawable/ic_foodanddrinks"
+        tools:primaryText="2 880 kr"
+        tools:secondaryText="Ny budget"/>
+
+      <com.tink.pfmsdk.insights.views.InsightBubbleView
+        android:id="@+id/insightBubbleSavePercentage"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="-4dp"
+        android:layout_marginStart="-32dp"
+        android:layout_alignTop="@id/insightBubbleNewCategory"
+        android:layout_toEndOf="@id/insightBubbleNewCategory"
+        app:bubbleBackgroundTint="@color/insight_bubble_save_percentage_background"
+        app:primaryTextStyle="@style/micro.semibold"
+        app:textColor="@color/insight_bubble_save_percentage_textColor"
+        tools:primaryText="-10%"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/insight_title_description_actions"/>
+
+  </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

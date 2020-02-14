@@ -1,7 +1,11 @@
 package com.tink.pfmsdk.di
 
+import com.tink.pfmsdk.insights.di.InsightsModule
+import com.tink.pfmsdk.insights.fragments.ArchivedInsightsFragment
+import com.tink.pfmsdk.insights.fragments.InsightsFragment
 import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.OverviewFragment
+import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
 import com.tink.pfmsdk.overview.accounts.AccountsListFragment
 import com.tink.pfmsdk.overview.charts.CategorySelectionFragment
 import com.tink.pfmsdk.overview.charts.ChartDetailsPagerFragment
@@ -12,7 +16,6 @@ import com.tink.pfmsdk.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import com.tink.pfmsdk.transaction.SimilarTransactionsFragment
-import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
 import com.tink.pfmsdk.transaction.TransactionsListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -62,4 +65,10 @@ internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun accountDetailsFragment(): AccountDetailsFragment
+
+    @ContributesAndroidInjector(modules = [InsightsModule::class])
+    fun insightsFragment(): InsightsFragment
+
+    @ContributesAndroidInjector(modules = [InsightsModule::class])
+    fun archivedInsightsFragment(): ArchivedInsightsFragment
 }

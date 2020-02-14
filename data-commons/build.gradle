@@ -36,6 +36,8 @@ dependencies {
     implementation libraries.rxandroid
     implementation libraries.android_lifecycle_rx_ktx
 
+    implementation libraries.joda_time
+
     implementation libraries.dagger
     kapt libraries.dagger_compiler
     testImplementation libraries.dagger

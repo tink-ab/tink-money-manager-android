@@ -42,6 +42,8 @@ dependencies {
     implementation project(':data-commons')
     implementation project(':core')
     implementation project(':rpc')
+    compileOnly project(':annotations')
+    kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib
     implementation libraries.android_core_ktx

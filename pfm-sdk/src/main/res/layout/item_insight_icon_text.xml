@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:cardCornerRadius="@dimen/card_corner_radius"
+  android:layout_margin="16dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <ImageView
+      android:id="@+id/iconBackground"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="32dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:alpha="0.1"
+      android:background="@drawable/circle"
+      android:backgroundTint="?tink_expensesColor"
+      app:layout_constraintEnd_toStartOf="@+id/title"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+      android:id="@+id/icon"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:drawable="@drawable/ic_foodanddrinks"
+      android:tint="?tink_expensesColor"
+      app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
+      app:layout_constraintEnd_toEndOf="@+id/iconBackground"
+      app:layout_constraintStart_toStartOf="@+id/iconBackground"
+      app:layout_constraintTop_toTopOf="@+id/iconBackground"/>
+
+    <TextView
+      android:id="@+id/title"
+      style="@style/hecto.bold"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="28dp"
+      android:layout_marginEnd="24dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/iconBackground"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Your balance on Transaktionskonto is low"/>
+
+    <TextView
+      android:id="@+id/description"
+      style="@style/deci.primary"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/primaryButton"
+      app:layout_constraintEnd_toEndOf="@+id/title"
+      app:layout_constraintStart_toStartOf="@+id/title"
+      app:layout_constraintTop_toBottomOf="@+id/title"
+      tools:text="Your balance on Transaktionskonto is low. Do you want to transfer money to this account?"/>
+
+    <Button
+      android:id="@+id/primaryButton"
+      style="@style/primaryButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/description"
+      tools:text="Yes, sounds good!"/>
+
+    <Button
+      android:id="@+id/secondaryButton"
+      style="@style/secondaryButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toStartOf="@+id/primaryButton"
+      app:layout_constraintTop_toTopOf="@+id/primaryButton"
+      tools:text="No, archive"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

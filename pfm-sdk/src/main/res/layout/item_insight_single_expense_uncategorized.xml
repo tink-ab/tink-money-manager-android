@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="16dp"
+  android:background="@color/colorSurface"
+  app:cardCornerRadius="@dimen/card_corner_radius">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+      android:id="@+id/topContainer"
+      android:layout_width="match_parent"
+      android:layout_height="140dp"
+      android:background="?tink_uncategorizedLightColor"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+      android:id="@+id/iconBackground"
+      android:layout_width="40dp"
+      android:layout_height="40dp"
+      android:layout_marginStart="24dp"
+      android:background="@drawable/circle"
+      android:backgroundTint="@color/colorSurface"
+      app:layout_constraintBottom_toBottomOf="@+id/topContainer"
+      app:layout_constraintStart_toStartOf="@+id/topContainer"
+      app:layout_constraintTop_toTopOf="@+id/topContainer"/>
+
+
+    <ImageView
+      android:id="@+id/icon"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:drawable="@drawable/ic_uncategorized"
+      android:tint="?tink_uncategorizedColor"
+      app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
+      app:layout_constraintEnd_toEndOf="@+id/iconBackground"
+      app:layout_constraintStart_toStartOf="@+id/iconBackground"
+      app:layout_constraintTop_toTopOf="@+id/iconBackground"/>
+
+    <TextView
+      android:id="@+id/transactionDescription"
+      style="@style/deci.primary"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:layout_marginStart="16dp"
+      app:layout_constraintEnd_toEndOf="@+id/amount"
+      app:layout_constraintStart_toEndOf="@+id/iconBackground"
+      app:layout_constraintTop_toTopOf="@+id/iconBackground"
+      tools:text="Shell petrol"/>
+
+    <TextView
+      android:id="@+id/date"
+      style="@style/micro"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:layout_marginStart="16dp"
+      android:text="Yesterday"
+      app:layout_constraintEnd_toEndOf="@+id/amount"
+      app:layout_constraintStart_toEndOf="@id/iconBackground"
+      app:layout_constraintTop_toBottomOf="@+id/transactionDescription"
+      app:layout_constraintVertical_bias="1.0"/>
+
+    <TextView
+      android:id="@+id/amount"
+      style="@style/hecto"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="24dp"
+      app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/iconBackground"
+      tools:text="220kr"/>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/topContainer">
+
+      <include layout="@layout/insight_title_description_actions"/>
+
+    </FrameLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
