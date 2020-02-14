@@ -22,8 +22,8 @@
   <color name="insight_bubble_save_percentage_textColor">@color/expensive_blue</color>
 
   <color name="over_budget">@color/orange</color>
-  <color name="over_budget_light">#1AFEAE22</color> <!-- @color/orange with 10% opacity -->
   <color name="within_budget">@color/expensive_blue</color>
   <color name="within_budget_light">#1A0E9EC2</color> <!-- @color/expensive_blue with 10% opacity -->
+  <color name="over_budget_light">?tink_warningLightColor</color>
 
 </resources>
