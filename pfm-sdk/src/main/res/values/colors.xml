@@ -13,17 +13,17 @@
   <color name="insight_budget_create_suggestion_background">#0D0E9EC2</color>
 
   <color name="insight_bubble_current_spending_background">@color/expensive_blue_light</color>
-  <color name="insight_bubble_current_spending_textColor">@color/expensive_blue</color>
-  <color name="insight_bubble_current_spending_iconColor">@color/expensive_blue</color>
-  <color name="insight_bubble_new_category_background">@color/expensive_blue</color>
-  <color name="insight_bubble_new_category_textColor">@color/white</color>
-  <color name="insight_bubble_new_category_iconColor">@color/white</color>
-  <color name="insight_bubble_save_percentage_background">@color/expensive_blue_light</color>
-  <color name="insight_bubble_save_percentage_textColor">@color/expensive_blue</color>
+  <color name="insight_bubble_current_spending_textColor">?tink_expensesColor</color>
+  <color name="insight_bubble_current_spending_iconColor">?tink_expensesColor</color>
+  <color name="insight_bubble_new_category_background">?tink_expensesColor</color>
+  <color name="insight_bubble_new_category_textColor">?tink_colorOnExpenses</color>
+  <color name="insight_bubble_new_category_iconColor">?tink_colorOnExpenses</color>
+  <color name="insight_bubble_save_percentage_background">?tink_expensesLightColor</color>
+  <color name="insight_bubble_save_percentage_textColor">?tink_expensesColor</color>
 
-  <color name="over_budget">@color/orange</color>
-  <color name="within_budget">@color/expensive_blue</color>
-  <color name="within_budget_light">#1A0E9EC2</color> <!-- @color/expensive_blue with 10% opacity -->
+  <color name="over_budget">?tink_warningColor</color>
   <color name="over_budget_light">?tink_warningLightColor</color>
+  <color name="within_budget">?tink_expensesColor</color>
+  <color name="within_budget_light">?tink_expensesLightColor</color>
 
 </resources>
