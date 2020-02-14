@@ -48,4 +48,15 @@
     <attr format="dimension" name="horizontal_margin"/>
   </declare-styleable>
 
+  <declare-styleable name="InsightBubbleView">
+    <attr format="color" name="bubbleBackgroundTint"/>
+    <attr format="reference" name="icon"/>
+    <attr format="color" name="iconTint"/>
+    <attr format="string" name="primaryText"/>
+    <attr format="string" name="secondaryText"/>
+    <attr format="reference|integer" name="primaryTextStyle"/>
+    <attr format="reference|integer" name="secondaryTextStyle"/>
+    <attr format="color" name="textColor"/>
+  </declare-styleable>
+
 </resources>

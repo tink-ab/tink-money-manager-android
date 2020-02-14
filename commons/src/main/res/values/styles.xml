@@ -33,6 +33,9 @@
     <item name="tink_colorPrimaryLight">@color/tink_lax_light</item>
     <item name="tink_colorPrimaryDark">@color/tink_lax_dark</item>
     <item name="tink_colorOnPrimary">@color/white</item>
+    <item name="tink_warningColor">@color/orange</item>
+    <item name="tink_warningLightColor">@color/orange_light</item>
+    <item name="tink_criticalColor">@color/red</item>
     <item name="tink_textColorAction">@color/tink_blue</item>
     <item name="tink_dividerColor">@color/divider_color</item>
     <item name="tink_textColorPrimary">@color/black</item>

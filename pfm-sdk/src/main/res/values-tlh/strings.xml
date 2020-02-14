@@ -82,4 +82,9 @@
   <string name="other">Other</string>
   <string name="category_default_child_format">%s - Other</string>
 
+  <string name="insights_tab_title">Events</string>
+  <string name="insights_archive_title">Archive</string>
+  <string name="insights_empty_state_title">You handled all events!</string>
+  <string name="insights_empty_state_subtitle">Check the archive if you want to see your previous ones</string>
+
 </resources>
