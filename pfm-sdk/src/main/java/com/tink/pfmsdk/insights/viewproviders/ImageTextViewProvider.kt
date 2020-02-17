@@ -36,7 +36,7 @@ class ImageTextViewHolder(
 
     override fun bind(data: InsightDataHolder, insight: Insight) {
         view.image.setImageResource(insight.image)
-        view.image.setBackgroundResource(insight.backgroundColor(view.context))
+        view.image.setBackgroundColor(insight.backgroundColor(view.context))
         setupCommonBottomPart(insight)
     }
 }
