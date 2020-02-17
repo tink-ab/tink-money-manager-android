@@ -3,7 +3,7 @@ package com.tink.pfmsdk.insights.viewproviders
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.annotation.ColorRes
+import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.insights.actionhandling.ActionHandler
@@ -14,7 +14,7 @@ import com.tink.pfmsdk.insights.extensions.getIcon
 import kotlinx.android.synthetic.main.item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
-import se.tink.commons.extensions.getColorCompat
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
@@ -39,9 +39,9 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
         val iconColor: BudgetColor
     )
 
-    sealed class BudgetColor(@ColorRes val color: Int, @ColorRes val lightColor: Int) {
-        object OverBudget : BudgetColor(R.color.over_budget, R.color.over_budget_light)
-        object WithinBudget : BudgetColor(R.color.within_budget, R.color.within_budget_light)
+    sealed class BudgetColor(@AttrRes val color: Int, @AttrRes val lightColor: Int) {
+        object OverBudget : BudgetColor(R.attr.tink_warningColor, R.attr.tink_warningLightColor)
+        object WithinBudget : BudgetColor(R.attr.tink_expensesColor, R.attr.tink_expensesLightColor)
     }
 
     override val viewType: InsightViewType = getViewType()
@@ -131,8 +131,8 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
         }
 
         private fun setUpProgress(data: BudgetMonthlySummaryDataHolder) {
-            val resolvedColor = view.context.getColorCompat(data.progressChartColor.color)
-            val resolvedLightColor = view.context.getColorCompat(data.progressChartColor.lightColor)
+            val resolvedColor = view.context.getColorFromAttr(data.progressChartColor.color)
+            val resolvedLightColor = view.context.getColorFromAttr(data.progressChartColor.lightColor)
 
             with(view.progress) {
                 progress = data.progress
