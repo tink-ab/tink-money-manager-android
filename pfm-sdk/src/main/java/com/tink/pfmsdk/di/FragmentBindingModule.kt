@@ -3,6 +3,7 @@ package com.tink.pfmsdk.di
 import com.tink.pfmsdk.insights.di.InsightsModule
 import com.tink.pfmsdk.insights.fragments.ArchivedInsightsFragment
 import com.tink.pfmsdk.insights.fragments.InsightsFragment
+import com.tink.pfmsdk.insights.fragments.OverviewInsightsFragment
 import com.tink.pfmsdk.overview.OverviewChartFragment
 import com.tink.pfmsdk.overview.OverviewFragment
 import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
@@ -65,6 +66,9 @@ internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun accountDetailsFragment(): AccountDetailsFragment
+
+    @ContributesAndroidInjector(modules = [InsightsModule::class])
+    fun overviewInsightsFragment(): OverviewInsightsFragment
 
     @ContributesAndroidInjector(modules = [InsightsModule::class])
     fun insightsFragment(): InsightsFragment

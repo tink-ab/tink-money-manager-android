@@ -86,5 +86,7 @@
   <string name="insights_archive_title">Archive</string>
   <string name="insights_empty_state_title">You handled all events!</string>
   <string name="insights_empty_state_subtitle">Check the archive if you want to see your previous ones</string>
+  <string name="insights_overview_card_title">New Insights</string>
+  <string name="insights_overview_card_action_text">View</string>
 
 </resources>
