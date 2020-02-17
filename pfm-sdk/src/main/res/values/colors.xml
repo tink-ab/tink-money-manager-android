@@ -21,9 +21,4 @@
   <color name="insight_bubble_save_percentage_background">?tink_expensesLightColor</color>
   <color name="insight_bubble_save_percentage_textColor">?tink_expensesColor</color>
 
-  <color name="over_budget">?tink_warningColor</color>
-  <color name="over_budget_light">?tink_warningLightColor</color>
-  <color name="within_budget">?tink_expensesColor</color>
-  <color name="within_budget_light">?tink_expensesLightColor</color>
-
 </resources>
