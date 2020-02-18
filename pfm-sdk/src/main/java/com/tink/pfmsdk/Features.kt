@@ -28,6 +28,9 @@ sealed class OverviewFeature : Parcelable {
      */
     @Parcelize
     object Accounts : OverviewFeature()
+
+    @Parcelize
+    object ActionableInsights : OverviewFeature()
 }
 
 /**
@@ -56,6 +59,7 @@ data class OverviewFeatures(val features: List<OverviewFeature>) : Parcelable {
         val ALL =
             OverviewFeatures(
                 listOf(
+                    OverviewFeature.ActionableInsights,
                     OverviewFeature.Statistics(
                         listOf(
                             StatisticType.EXPENSES,

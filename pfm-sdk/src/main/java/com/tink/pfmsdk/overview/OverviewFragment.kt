@@ -11,6 +11,7 @@ import com.tink.pfmsdk.BaseFragment
 import com.tink.pfmsdk.OverviewFeature
 import com.tink.pfmsdk.OverviewFeatures
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.insights.fragments.OverviewInsightsFragment
 import com.tink.pfmsdk.overview.accounts.AccountsListFragment
 import com.tink.pfmsdk.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmsdk.tracking.ScreenEvent
@@ -61,6 +62,15 @@ internal class OverviewFragment : BaseFragment() {
                     )
                 }
             }
+
+            is OverviewFeature.ActionableInsights -> {
+                childFragmentManager.transaction {
+                    replace(
+                        containerIdForFeature(feature, overviewContainer, requireContext()),
+                        OverviewInsightsFragment()
+                    )
+                }
+            }
         }
     }
 
@@ -88,6 +98,13 @@ internal class OverviewFragment : BaseFragment() {
                 }
                 is OverviewFeature.LatestTransactions -> {
                     id = R.id.latest_transactions_container
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+                is OverviewFeature.ActionableInsights -> {
+                    id = R.id.overview_insights_container
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
