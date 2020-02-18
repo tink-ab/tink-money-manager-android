@@ -72,8 +72,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
 
             view.apply {
                 icon.setImageResource(data.icon)
-                icon.tint(context.getColorFromAttr(data.colorAttr))
-                iconBackground.backgroundTint(context.getColorFromAttr(data.colorAttr))
+                icon.tint(data.colorAttr)
+                iconBackground.backgroundTint(data.colorAttr)
                 title.setTextColor(
                     context.getColorFromAttr(
                         if (data.isCritical) R.attr.tink_criticalColor else R.attr.tink_textColorPrimary
