@@ -65,7 +65,8 @@ internal class AccountItemViewHolder(
 ) {
     fun bind(account: Account) {
         with(itemView) {
-            bankLogo.setImageURI(account.images.icon)
+            // Hiding the bank logo for now to align with iOS
+//            bankLogo.setImageURI(account.images.icon)
             accountName.text = account.name
             accountBalance.text = CurrencyUtils.formatCurrency(account.balance)
         }
