@@ -91,7 +91,6 @@ class InsightsFragment : BaseFragment() {
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         super.onCreateToolbarMenu(toolbar)
-        toolbar.navigationIcon = null
         toolbar.inflateMenu(R.menu.menu_insights)
         toolbar.menu.findItem(R.id.action_archive).isVisible = showArchiveAction
     }
