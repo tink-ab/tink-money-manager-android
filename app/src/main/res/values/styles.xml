@@ -114,6 +114,8 @@
     <item name="tink_colorOnTransfer">#353035</item>
     <item name="tink_uncategorizedColor">#85B9DC</item>
     <item name="tink_uncategorizedLightColor">#3E3A3D</item>
+    <item name="tink_warningColor">#FEAE22</item>
+    <item name="tink_warningLightColor">#3F3A3B</item>
     <item name="tink_snackbarColor">#2A262A</item>
     <item name="tink_colorOnSnackBar">#ffffff</item>
     <item name="tink_textColorAction">#e8a9e0</item>
