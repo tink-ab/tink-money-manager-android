@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Account name"/>
 
-      <TextView
+      <com.tink.pfmsdk.view.TinkTextView
         android:id="@+id/accountBalance"
         style="@style/giga.autoSize"
         android:layout_width="0dp"

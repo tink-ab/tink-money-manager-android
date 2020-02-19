@@ -41,7 +41,7 @@
         tools:backgroundRingColor="@color/within_budget_light"
         tools:progressArcColor="@color/within_budget"/>
 
-      <TextView
+      <com.tink.pfmsdk.view.TinkTextView
         android:id="@+id/currentSpending"
         style="@style/giga.autoSize"
         android:layout_width="80dp"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="4 800 kr"/>
 
-      <TextView
+      <com.tink.pfmsdk.view.TinkTextView
         android:id="@+id/totalBudget"
         style="@style/giga.autoSize"
         android:layout_width="80dp"
