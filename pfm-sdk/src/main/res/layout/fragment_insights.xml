@@ -12,7 +12,16 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="?tink_backgroundColor">
+
+    <com.tink.pfmsdk.view.TinkToolbar
+      android:id="@+id/tink_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:transitionName="@string/toolbar_transition"
+      app:navigationIcon="?android:homeAsUpIndicator"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
       android:id="@+id/emptyStateIllustration"
@@ -63,7 +72,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
 
     <ProgressBar
       android:layout_width="wrap_content"

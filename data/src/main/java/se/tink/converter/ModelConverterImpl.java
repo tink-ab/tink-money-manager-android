@@ -34,6 +34,7 @@ import se.tink.converter.device.DeviceConfigurationMarketResponseConverter;
 import se.tink.converter.device.DeviceConfigurationResponseConverter;
 import se.tink.converter.device.UpdateI18NSettingsRequestConverter;
 import se.tink.converter.device.UpdateI18NSettingsResponseConverter;
+import se.tink.converter.insights.InsightConverters;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
@@ -44,6 +45,7 @@ import se.tink.converter.misc.ImagesConverter;
 import se.tink.converter.misc.PeriodDTOToPeriodConverter;
 import se.tink.converter.misc.PeriodToPeriodDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
+import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
 import se.tink.converter.provider.ProviderDTOToProviderConverter;
 import se.tink.converter.provider.ProviderToProviderDTOConverter;
 import se.tink.converter.pushnotifications.DeviceFromDTOConverter;
@@ -159,6 +161,7 @@ public class ModelConverterImpl implements ModelConverter {
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
         setupBudgetConverters();
+        setupActionableInsightConverters();
     }
 
     private void addConverter(AbstractConverter abstractConverter) {
@@ -278,6 +281,8 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new TimestampToDateTimeConverter());
         addConverter(new TimestampToLongConverter(this));
 
+        addConverter(new YearWeekDTOToYearWeekConverter());
+
         addConverter(new StringToStringValueConverter(this));
         addConverter(new ImagesConverter());
     }
@@ -326,5 +331,9 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupBudgetConverters() {
         addConverters(BudgetConverters.forConverter(this));
+    }
+
+    private void setupActionableInsightConverters() {
+        addConverters(InsightConverters.INSTANCE.forConverter(this));
     }
 }

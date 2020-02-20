@@ -8,22 +8,4 @@
   <color name="vertical_bar_chart_default_color">@color/white_40</color>
   <color name="chart_area_label">@color/plain_black</color>
 
-  <!-- TODO: PFMSDK: Use custom color attributes -->
-  <!-- The below color setting uses the @color/expensive_blue with a 5% opacity -->
-  <color name="insight_budget_create_suggestion_background">#0D0E9EC2</color>
-
-  <color name="insight_bubble_current_spending_background">@color/expensive_blue_light</color>
-  <color name="insight_bubble_current_spending_textColor">?tink_expensesColor</color>
-  <color name="insight_bubble_current_spending_iconColor">?tink_expensesColor</color>
-  <color name="insight_bubble_new_category_background">?tink_expensesColor</color>
-  <color name="insight_bubble_new_category_textColor">?tink_colorOnExpenses</color>
-  <color name="insight_bubble_new_category_iconColor">?tink_colorOnExpenses</color>
-  <color name="insight_bubble_save_percentage_background">?tink_expensesLightColor</color>
-  <color name="insight_bubble_save_percentage_textColor">?tink_expensesColor</color>
-
-  <color name="over_budget">?tink_warningColor</color>
-  <color name="over_budget_light">?tink_warningLightColor</color>
-  <color name="within_budget">?tink_expensesColor</color>
-  <color name="within_budget_light">?tink_expensesLightColor</color>
-
 </resources>

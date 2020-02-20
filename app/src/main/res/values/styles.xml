@@ -91,7 +91,7 @@
   </style>
 
   <style name="TinkStyle_ChewingGum" parent="TinkFinanceOverviewStyle">
-    <item name="tink_backgroundColor">#353035</item>
+    <item name="tink_backgroundColor">#343035</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
     <item name="tink_colorAccent">#e8a9e0</item>
     <item name="tink_colorAccentDark">#e8a9e0</item>
@@ -114,6 +114,8 @@
     <item name="tink_colorOnTransfer">#353035</item>
     <item name="tink_uncategorizedColor">#85B9DC</item>
     <item name="tink_uncategorizedLightColor">#3E3A3D</item>
+    <item name="tink_warningColor">#FEAE22</item>
+    <item name="tink_warningLightColor">#3F3A3B</item>
     <item name="tink_snackbarColor">#2A262A</item>
     <item name="tink_colorOnSnackBar">#ffffff</item>
     <item name="tink_textColorAction">#e8a9e0</item>
@@ -122,7 +124,7 @@
     <item name="tink_textColorPrimary">#FFFFFF</item>
     <item name="tink_textColorSecondary">#FFFFFF</item>
     <item name="tink_textColorTertiary">#FFFFFF</item>
-    <item name="tink_cardBackgroundColor">#000000</item>
+    <item name="tink_cardBackgroundColor">#29262A</item>
   </style>
 
 <!--  Comment in for testing font overrides-->
