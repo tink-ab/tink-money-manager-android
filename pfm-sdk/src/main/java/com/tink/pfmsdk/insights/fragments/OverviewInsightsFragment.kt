@@ -1,5 +1,6 @@
 package com.tink.pfmsdk.insights.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -12,6 +13,7 @@ import com.tink.pfmsdk.insights.CurrentInsightsViewModel
 import com.tink.pfmsdk.insights.InsightsViewModel
 import com.tink.pfmsdk.insights.di.InsightsViewModelFactory
 import kotlinx.android.synthetic.main.fragment_overview_insights.view.*
+import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
 
 internal class OverviewInsightsFragment : BaseFragment() {
@@ -41,6 +43,22 @@ internal class OverviewInsightsFragment : BaseFragment() {
         }
         viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
             view.insightsCount.text = insightsList.size.toString()
+        })
+        viewModel.hasItems.observe(viewLifecycleOwner, Observer { hasItems ->
+            view.apply {
+                if (hasItems) {
+                    // new events UI
+                    insightsCard.backgroundTintList = ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent))
+                    insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
+                    insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
+                } else {
+                    // archived events UI
+                    insightsCard.backgroundTintList = ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor))
+                    insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
+                    insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
+                }
+                insightsCard.visibility = View.VISIBLE
+            }
         })
         view.insightsCardButton.setOnClickListener { fragmentCoordinator.replace(InsightsFragment()) }
     }
