@@ -17,7 +17,6 @@
     android:layout_marginTop="24dp"
     android:layout_marginEnd="24dp"
     android:layout_marginBottom="16dp"
-    android:visibility="@{viewModel.hasItems ?? false}"
     android:backgroundTint="?tink_colorAccent"
     app:cardCornerRadius="8dp">
 
@@ -33,6 +32,7 @@
         android:layout_margin="12dp"
         android:background="@drawable/circle"
         android:backgroundTint="?tink_colorOnAccent"
+        android:visibility="@{viewModel.hasItems ?? false}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -44,6 +44,7 @@
         android:layout_height="wrap_content"
         android:textColor="?tink_colorAccent"
         android:gravity="center"
+        android:visibility="@{viewModel.hasItems ?? false}"
         app:layout_constraintBottom_toBottomOf="@id/insightsCountBackground"
         app:layout_constraintEnd_toEndOf="@id/insightsCountBackground"
         app:layout_constraintStart_toStartOf="@id/insightsCountBackground"
@@ -51,9 +52,11 @@
 
       <Space
         android:id="@+id/spacer"
-        android:layout_width="2dp"
-        android:layout_height="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/insightsCountBackground"
+        android:layout_width="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:visibility="@{!(viewModel.hasItems ?? false)}"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/insightsCountBackground" />
 
       <TextView
@@ -61,17 +64,19 @@
         style="@style/deci"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:gravity="center_vertical"
         android:textColor="?tink_colorOnAccent"
-        android:text="@string/insights_overview_card_title"
+        android:text="@{(viewModel.hasItems ?? false) ? @string/insights_overview_card_new_events_title : @string/insights_overview_card_archived_events_title}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/insightsCardButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/insightsCountBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/insightsCountBackground"/>
+        app:layout_constraintStart_toEndOf="@+id/spacer"/>
 
       <TextView
         android:id="@+id/insightsCardButton"
