@@ -9,85 +9,108 @@
       type="com.tink.pfmsdk.insights.InsightsViewModel"/>
   </data>
 
-  <androidx.cardview.widget.CardView
-    android:id="@+id/insightsCard"
+  <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginTop="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginBottom="16dp"
-    android:visibility="@{viewModel.hasItems ?? false}"
-    android:backgroundTint="?tink_colorAccent"
-    app:cardCornerRadius="8dp">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/insightsCardContent"
+    <ProgressBar
+      android:id="@+id/loader"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:visibility="@{viewModel.loading ?? false}"
+      android:indeterminateTint="?tink_colorAccent"
+      android:layout_gravity="center_horizontal"/>
+
+    <com.google.android.material.card.MaterialCardView
+      android:id="@+id/insightsCard"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginTop="24dp"
+      android:layout_marginEnd="24dp"
+      android:layout_marginBottom="16dp"
+      android:visibility="gone"
+      android:foreground="?selectableItemBackground"
+      app:cardBackgroundColor="?tink_colorAccent"
+      app:cardElevation="4dp"
+      app:cardCornerRadius="8dp">
 
-      <ImageView
-        android:id="@+id/insightsCountBackground"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="12dp"
-        android:background="@drawable/circle"
-        android:backgroundTint="?tink_colorOnAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/insightsCardContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-      <TextView
-        android:id="@+id/insightsCount"
-        style="@style/deci.bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="?tink_colorAccent"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@id/insightsCountBackground"
-        app:layout_constraintEnd_toEndOf="@id/insightsCountBackground"
-        app:layout_constraintStart_toStartOf="@id/insightsCountBackground"
-        app:layout_constraintTop_toTopOf="@id/insightsCountBackground"/>
+        <ImageView
+          android:id="@+id/insightsCountBackground"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_margin="12dp"
+          android:background="@drawable/circle"
+          android:backgroundTint="?tink_colorOnAccent"
+          android:visibility="@{viewModel.hasItems ?? false}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"/>
 
-      <Space
-        android:id="@+id/spacer"
-        android:layout_width="2dp"
-        android:layout_height="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/insightsCountBackground"
-        app:layout_constraintStart_toEndOf="@+id/insightsCountBackground" />
+        <TextView
+          android:id="@+id/insightsCount"
+          style="@style/deci.bold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="?tink_colorAccent"
+          android:gravity="center"
+          android:visibility="@{viewModel.hasItems ?? false}"
+          app:layout_constraintBottom_toBottomOf="@id/insightsCountBackground"
+          app:layout_constraintEnd_toEndOf="@id/insightsCountBackground"
+          app:layout_constraintStart_toStartOf="@id/insightsCountBackground"
+          app:layout_constraintTop_toTopOf="@id/insightsCountBackground"/>
 
-      <TextView
-        android:id="@+id/insightsCardTitle"
-        style="@style/deci"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:gravity="center_vertical"
-        android:textColor="?tink_colorOnAccent"
-        android:text="@string/insights_overview_card_title"
-        app:layout_constraintEnd_toStartOf="@+id/insightsCardButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/insightsCountBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/insightsCountBackground"/>
+        <Space
+          android:id="@+id/spacer"
+          android:layout_width="8dp"
+          android:layout_height="0dp"
+          android:layout_marginTop="12dp"
+          android:visibility="@{!(viewModel.hasItems ?? false)}"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/insightsCountBackground" />
 
-      <TextView
-        android:id="@+id/insightsCardButton"
-        style="@style/deci.action.bold"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/insights_overview_card_action_text"
-        android:textColor="?tink_colorOnAccent"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/insightsCardTitle"
-        app:layout_constraintBottom_toBottomOf="@id/insightsCardTitle"/>
+        <TextView
+          android:id="@+id/insightsCardTitle"
+          style="@style/deci"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginTop="12dp"
+          android:layout_marginBottom="12dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:gravity="center_vertical"
+          android:textColor="?tink_colorOnAccent"
+          android:text="@{(viewModel.hasItems ?? false) ? @string/insights_overview_card_new_events_title : @string/insights_overview_card_archived_events_title}"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintEnd_toStartOf="@+id/insightsCardButton"
+          app:layout_constraintStart_toEndOf="@+id/spacer"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+          android:id="@+id/insightsCardButton"
+          style="@style/deci.action.bold"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:text="@string/insights_overview_card_action_text"
+          android:textColor="?tink_colorOnAccent"
+          android:gravity="center_vertical"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="@id/insightsCardTitle"
+          app:layout_constraintBottom_toBottomOf="@id/insightsCardTitle"/>
 
-  </androidx.cardview.widget.CardView>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+  </FrameLayout>
 
 </layout>
