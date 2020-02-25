@@ -32,7 +32,7 @@
       android:layout_marginBottom="16dp"
       android:visibility="gone"
       android:foreground="?selectableItemBackground"
-      android:backgroundTint="?tink_colorAccent"
+      app:cardBackgroundColor="?tink_colorAccent"
       app:cardCornerRadius="8dp">
 
       <androidx.constraintlayout.widget.ConstraintLayout

@@ -48,12 +48,12 @@ internal class OverviewInsightsFragment : BaseFragment() {
             view.apply {
                 if (hasItems) {
                     // new events UI
-                    insightsCard.backgroundTintList = ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent))
+                    insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent)))
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
                 } else {
                     // archived events UI
-                    insightsCard.backgroundTintList = ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor))
+                    insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor)))
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                 }
