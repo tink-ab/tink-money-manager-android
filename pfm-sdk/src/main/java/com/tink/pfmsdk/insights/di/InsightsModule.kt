@@ -2,6 +2,7 @@ package com.tink.pfmsdk.insights.di
 
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.ViewModelFactory
+import com.tink.pfmsdk.di.RedirectionModule
 import com.tink.pfmsdk.insights.ArchivedInsightsViewModel
 import com.tink.pfmsdk.insights.CurrentInsightsViewModel
 import com.tink.pfmsdk.insights.actionhandling.ActionHandler
@@ -13,7 +14,6 @@ import com.tink.pfmsdk.insights.actionhandling.PassiveActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewBudgetActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewTransactionsActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewTransactionsByCategoryActionHandler
-import com.tink.pfmsdk.redirection.DefaultRedirectionReceiver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -21,10 +21,10 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
-import se.tink.android.redirection.RedirectionReceiver
 
 @Module(
     includes = [
+        RedirectionModule::class,
         InsightsViewProviderBindingModule::class,
         InsightEnrichmentModule::class,
         InsightsViewModelModule::class
@@ -80,9 +80,6 @@ class InsightsModule {
             }
         }
     }
-
-    @Provides
-    fun redirectionReceiver(): RedirectionReceiver = DefaultRedirectionReceiver()
 }
 
 @Module

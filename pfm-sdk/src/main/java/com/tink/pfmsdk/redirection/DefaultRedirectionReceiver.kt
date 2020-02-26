@@ -9,7 +9,7 @@ import se.tink.core.models.misc.Amount
 /**
  * TODO: Implement redirection logic when possible
  */
-internal class DefaultRedirectionReceiver(
+internal class DefaultRedirectionReceiver @Inject constructor(
     @ApplicationScoped private val context: Context,
     private val fragmentCoordinator: FragmentCoordinator
 ) : RedirectionReceiver {
