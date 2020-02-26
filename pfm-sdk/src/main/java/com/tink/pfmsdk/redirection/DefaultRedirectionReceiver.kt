@@ -26,7 +26,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun showAccountDetails(accountId: String, topOnly: Boolean) {
+    override fun showAccountDetails(accountId: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -71,7 +71,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun showCategory(topOnly: Boolean) {
+    override fun showCategory() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

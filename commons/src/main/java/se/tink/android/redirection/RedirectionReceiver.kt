@@ -6,13 +6,13 @@ interface RedirectionReceiver {
     fun showTransactionDetails(transactionId: String)
     fun categorizeTransaction(transactionId: String)
     fun showTransactionListForIds(transactionIds: List<String>)
-    fun showAccountDetails(accountId: String, topOnly: Boolean)
+    fun showAccountDetails(accountId: String)
     fun showTransfer(transferId: String)
     fun showTransfer(
         sourceAccountId: String,
         destinationAccountId: String,
         amount: Amount
     )
-    fun showCategory(topOnly: Boolean)
+    fun showCategory()
     fun showBudget(id: String, periodStart: String)
 }
