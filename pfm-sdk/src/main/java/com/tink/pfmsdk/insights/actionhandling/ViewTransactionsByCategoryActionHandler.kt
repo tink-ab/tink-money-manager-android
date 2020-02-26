@@ -12,7 +12,8 @@ class ViewTransactionsByCategoryActionHandler @Inject constructor(
 
     override fun handle(action: InsightAction, insight: Insight): Boolean =
         (action.data as? InsightAction.Data.ViewTransactionsByCategory)?.run {
-            redirectionReceiver.showCategory(true)
+            // TODO: Show transaction list instead of category
+            //redirectionReceiver.showCategory(true)
             actionPerformed(action, insight)
             true
         } ?: false

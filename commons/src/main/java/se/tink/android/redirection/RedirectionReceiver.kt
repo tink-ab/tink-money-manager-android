@@ -13,6 +13,6 @@ interface RedirectionReceiver {
         destinationAccountId: String,
         amount: Amount
     )
-    fun showCategory()
+    fun showCategory(categoryCode: String)
     fun showBudget(id: String, periodStart: String)
 }

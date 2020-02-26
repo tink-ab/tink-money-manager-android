@@ -71,7 +71,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun showCategory() {
+    override fun showCategory(categoryCode: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
