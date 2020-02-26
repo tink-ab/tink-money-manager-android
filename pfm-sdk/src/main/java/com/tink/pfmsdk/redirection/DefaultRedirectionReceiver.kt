@@ -4,6 +4,7 @@ import android.content.Context
 import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.FragmentCoordinator
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
 import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import com.tink.pfmsdk.transaction.StatusSubtitleMode
 import com.tink.pfmsdk.transaction.TransactionsListFragment
@@ -27,7 +28,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
     }
 
     override fun showAccountDetails(accountId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        fragmentCoordinator.replace(AccountDetailsFragment.newInstance(accountId))
     }
 
     override fun showTransactionListForIds(transactionIds: List<String>) {
