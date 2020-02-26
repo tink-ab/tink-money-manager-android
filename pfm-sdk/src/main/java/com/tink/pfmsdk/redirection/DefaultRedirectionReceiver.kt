@@ -5,6 +5,7 @@ import com.tink.pfmsdk.FragmentCoordinator
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
 import se.tink.core.models.misc.Amount
+import javax.inject.Inject
 
 /**
  * TODO: Implement redirection logic when possible
