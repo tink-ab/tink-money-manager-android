@@ -1,12 +1,18 @@
 package com.tink.pfmsdk.redirection
 
+import android.content.Context
+import com.tink.pfmsdk.FragmentCoordinator
+import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
 import se.tink.core.models.misc.Amount
 
 /**
  * TODO: Implement redirection logic when possible
  */
-internal class DefaultRedirectionReceiver : RedirectionReceiver {
+internal class DefaultRedirectionReceiver(
+    @ApplicationScoped private val context: Context,
+    private val fragmentCoordinator: FragmentCoordinator
+) : RedirectionReceiver {
 
     override fun showBudget(id: String, periodStart: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
