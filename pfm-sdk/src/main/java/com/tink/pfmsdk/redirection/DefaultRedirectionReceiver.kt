@@ -15,16 +15,13 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.models.misc.Amount
 import javax.inject.Inject
 
-/**
- * TODO: Implement redirection logic when possible
- */
 internal class DefaultRedirectionReceiver @Inject constructor(
     @ApplicationScoped private val context: Context,
     private val fragmentCoordinator: FragmentCoordinator
 ) : RedirectionReceiver {
 
     override fun showBudget(id: String, periodStart: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when budget feature is available
     }
 
     override fun showAccountDetails(accountId: String) {
@@ -50,7 +47,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
     }
 
     override fun showTransactionDetails(transactionId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when we have a transaction details screen
     }
 
     override fun categorizeTransaction(transactionId: String) {
@@ -61,7 +58,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
     }
 
     override fun showTransfer(transferId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when we can support transfer flows
     }
 
     override fun showTransfer(
@@ -69,10 +66,10 @@ internal class DefaultRedirectionReceiver @Inject constructor(
         destinationAccountId: String,
         amount: Amount
     ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when we can support transfer flows
     }
 
     override fun showCategory(categoryCode: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Show statistics screen for the category
     }
 }
