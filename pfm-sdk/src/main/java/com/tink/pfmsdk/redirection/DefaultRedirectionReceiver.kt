@@ -1,7 +1,9 @@
 package com.tink.pfmsdk.redirection
 
 import android.content.Context
+import com.tink.pfmsdk.FragmentAnimationFlags
 import com.tink.pfmsdk.FragmentCoordinator
+import com.tink.pfmsdk.transaction.CategorizationFlowFragment
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
 import se.tink.core.models.misc.Amount
@@ -29,6 +31,13 @@ internal class DefaultRedirectionReceiver @Inject constructor(
 
     override fun showTransactionDetails(transactionId: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun categorizeTransaction(transactionId: String) {
+        fragmentCoordinator.replace(
+            CategorizationFlowFragment.newInstance(transactionId),
+            animation = FragmentAnimationFlags.FADE_IN_ONLY
+        )
     }
 
     override fun showTransfer(transferId: String) {

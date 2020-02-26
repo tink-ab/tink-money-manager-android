@@ -4,6 +4,7 @@ import se.tink.core.models.misc.Amount
 
 interface RedirectionReceiver {
     fun showTransactionDetails(transactionId: String)
+    fun categorizeTransaction(transactionId: String)
     fun showTransactionListForIds(transactionIds: List<String>)
     fun showAccountDetails(accountId: String, topOnly: Boolean)
     fun showTransfer(transferId: String)
