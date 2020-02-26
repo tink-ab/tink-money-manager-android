@@ -16,7 +16,7 @@ internal class DefaultRedirectionReceiver : RedirectionReceiver {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun showTransactionListForIds(transactionIds: MutableList<String>) {
+    override fun showTransactionListForIds(transactionIds: List<String>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
