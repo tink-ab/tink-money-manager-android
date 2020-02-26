@@ -12,8 +12,11 @@ class ViewTransactionsByCategoryActionHandler @Inject constructor(
 
     override fun handle(action: InsightAction, insight: Insight): Boolean =
         (action.data as? InsightAction.Data.ViewTransactionsByCategory)?.run {
-            // TODO: Show transaction list instead of category
-            //redirectionReceiver.showCategory(true)
+            // Flatten the lists of transactions IDs into one list and show it
+            transactionsByCategory.values
+                .flatten()
+                .takeIf { it.isNotEmpty() }
+                ?.let { redirectionReceiver.showTransactionListForIds(it) }
             actionPerformed(action, insight)
             true
         } ?: false
