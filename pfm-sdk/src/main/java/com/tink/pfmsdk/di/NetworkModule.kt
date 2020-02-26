@@ -44,7 +44,7 @@ internal class NetworkModule {
             if (networkConfig.useSsl) {
                 sslSocketFactory(TLSHelper.getSslSocketFactory(ByteArrayInputStream(networkConfig.sslKey.toByteArray())))
             } else {
-                usePlaintext(true)
+                usePlaintext()
             }
 //            userAgent(AppUtils.getUserAgent()) //TODO:PFMSDK
         }.build()
