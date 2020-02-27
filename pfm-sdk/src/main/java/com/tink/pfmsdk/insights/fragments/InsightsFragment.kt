@@ -103,6 +103,10 @@ class InsightsFragment : BaseFragment() {
         return super.onToolbarMenuItemSelected(item)
     }
 
+    companion object {
+        fun newInstance() = InsightsFragment()
+    }
+
 //    private fun showBottomNavBar() =
 //        activity?.findViewById<TinkBottomNavBar>(R.id.bottomNavigation)?.show()
 }
