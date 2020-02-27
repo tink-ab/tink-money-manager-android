@@ -1,10 +1,12 @@
 package com.tink.pfmsdk.insights.actionhandling
 
+import com.tink.pfmsdk.extensions.isTrue
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightAction
 import se.tink.core.models.insights.PerformedInsightAction
 import javax.inject.Inject
 
+// TODO: PFMSDK: Make this interface internal
 interface ActionHandler {
 
     /**
@@ -42,7 +44,10 @@ class GeneralActionHandler @Inject constructor(
         insight: Insight
     ): Boolean {
         tracker.trackButtonPressEvent()
-        return handlers.any { it.handle(action, insight) }
+        if (!CustomInsightActionHandler.handle(action, insight).isTrue()) {
+            handlers.any { it.handle(action, insight) }
+        }
+        return false
     }
 
 }
