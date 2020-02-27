@@ -11,8 +11,10 @@ class CreateTransferActionHandler @Inject constructor(
 ) : AbstractActionHandler(actionEventBus) {
     override fun handle(action: InsightAction, insight: Insight) =
         (action.data as? InsightAction.Data.CreateTransfer)?.let {
-            redirectionReceiver.showTransfer(it.sourceUri, it.destinationUri, it.amount)
-            actionPerformed(action, insight)
-            true
+            // TODO: PFMSDK: Implement this when we support transfers in the SDK
+//            redirectionReceiver.showTransfer(it.sourceUri, it.destinationUri, it.amount)
+//            actionPerformed(action, insight)
+//            true
+            false
         } ?: false
 }

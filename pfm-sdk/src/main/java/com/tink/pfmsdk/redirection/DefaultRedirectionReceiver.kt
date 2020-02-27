@@ -12,7 +12,6 @@ import com.tink.pfmsdk.transaction.TransactionsListMetaData
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.core.models.misc.Amount
 import javax.inject.Inject
 
 internal class DefaultRedirectionReceiver @Inject constructor(
@@ -55,18 +54,6 @@ internal class DefaultRedirectionReceiver @Inject constructor(
             CategorizationFlowFragment.newInstance(transactionId),
             animation = FragmentAnimationFlags.FADE_IN_ONLY
         )
-    }
-
-    override fun showTransfer(transferId: String) {
-        // TODO: PFMSDK: Implement this when we can support transfer flows
-    }
-
-    override fun showTransfer(
-        sourceAccountId: String,
-        destinationAccountId: String,
-        amount: Amount
-    ) {
-        // TODO: PFMSDK: Implement this when we can support transfer flows
     }
 
     override fun showCategory(categoryCode: String) {
