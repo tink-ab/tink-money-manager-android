@@ -21,7 +21,7 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class ThreadSafeDateFormat {
 
-	private static final CharMatcher TRIMMER = CharMatcher.WHITESPACE;
+	private static final CharMatcher TRIMMER = CharMatcher.whitespace();
 
 	public static final String FORMATTER_YEARLY = "FORMATTER_YEARLY";
 	public static final String FORMATTER_WEEK_YEARLY = "FORMATTER_WEEK_YEARLY";
