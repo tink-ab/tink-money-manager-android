@@ -1,104 +1,62 @@
 package com.tink.pfmsdk.redirection
 
+import android.content.Context
+import com.tink.pfmsdk.FragmentAnimationFlags
+import com.tink.pfmsdk.FragmentCoordinator
+import com.tink.pfmsdk.R
+import com.tink.pfmsdk.overview.accounts.AccountDetailsFragment
+import com.tink.pfmsdk.transaction.CategorizationFlowFragment
+import com.tink.pfmsdk.transaction.StatusSubtitleMode
+import com.tink.pfmsdk.transaction.TransactionsListFragment
+import com.tink.pfmsdk.transaction.TransactionsListMetaData
+import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
-import se.tink.core.models.misc.Amount
+import se.tink.commons.extensions.getColorFromAttr
+import javax.inject.Inject
 
-/**
- * TODO: Implement redirection logic when possible
- */
-internal class DefaultRedirectionReceiver : RedirectionReceiver {
-    override fun showCredentialsDetail(id: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+internal class DefaultRedirectionReceiver @Inject constructor(
+    @ApplicationScoped private val context: Context,
+    private val fragmentCoordinator: FragmentCoordinator
+) : RedirectionReceiver {
 
     override fun showBudget(id: String, periodStart: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when budget feature is available
     }
 
-    override fun showOverview() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showAccountDetails(accountId: String) {
+        fragmentCoordinator.replace(AccountDetailsFragment.newInstance(accountId))
     }
 
-    override fun handleThirdPartyCallbackResult(
-        state: String,
-        parameters: MutableMap<String, String>?
-    ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showFeed() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showProviders(topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showAddProvider(name: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showRateThisApp(agreedToRate: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showAccountDetails(accountId: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showLeftToSpend(periodKey: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showProfile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showIdControlList(topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showSearch(query: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun handleIceCreamHackVisibility() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showSuggestions() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showTransactionListForIds(transactionIds: MutableList<String>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showIdControlDetail(id: String, topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showAccountsList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showTransactionListForIds(transactionIds: List<String>) {
+        fragmentCoordinator.replace(
+            TransactionsListFragment.newInstance(
+                data = TransactionsListMetaData(
+                    statusBarColor = context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
+                    backgroundColor = context.getColorFromAttr(R.attr.tink_colorPrimary),
+                    title = context.getString(R.string.transactions_list_toolbar_title),
+                    period = null,
+                    categoryCode = null,
+                    isShowAll = false,
+                    statusSubtitleMode = StatusSubtitleMode.SHOW_REDUCED_AMOUNT,
+                    transactionIds = transactionIds,
+                    accountId = null
+                )
+            )
+        )
     }
 
     override fun showTransactionDetails(transactionId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO: PFMSDK: Implement this when we have a transaction details screen
     }
 
-    override fun showTransfer(transferId: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun categorizeTransaction(transactionId: String) {
+        fragmentCoordinator.replace(
+            CategorizationFlowFragment.newInstance(transactionId),
+            animation = FragmentAnimationFlags.FADE_IN_ONLY
+        )
     }
 
-    override fun showTransfer(
-        sourceAccountId: String,
-        destinationAccountId: String,
-        amount: Amount
-    ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun showCategory(topOnly: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showCategory(categoryCode: String) {
+        // TODO: PFMSDK: Show statistics screen for the category
     }
 }

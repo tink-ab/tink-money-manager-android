@@ -11,8 +11,7 @@ class CategorizeExpenseActionHandler @Inject constructor(
 
     override fun handle(action: InsightAction, insight: Insight): Boolean =
         (action.data as? InsightAction.Data.CategorizeExpense)?.let {
-            //TODO: Redirect to categorization directly after transaction refactor is merged
-            redirectionReceiver.showTransactionDetails(it.transactionId)
+            redirectionReceiver.categorizeTransaction(it.transactionId)
             true
         } ?: false
 }

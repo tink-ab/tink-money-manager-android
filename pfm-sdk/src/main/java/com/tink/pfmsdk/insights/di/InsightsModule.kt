@@ -13,7 +13,6 @@ import com.tink.pfmsdk.insights.actionhandling.PassiveActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewBudgetActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewTransactionsActionHandler
 import com.tink.pfmsdk.insights.actionhandling.ViewTransactionsByCategoryActionHandler
-import com.tink.pfmsdk.redirection.DefaultRedirectionReceiver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -21,7 +20,6 @@ import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
-import se.tink.android.redirection.RedirectionReceiver
 
 @Module(
     includes = [
@@ -80,9 +78,6 @@ class InsightsModule {
             }
         }
     }
-
-    @Provides
-    fun redirectionReceiver(): RedirectionReceiver = DefaultRedirectionReceiver()
 }
 
 @Module

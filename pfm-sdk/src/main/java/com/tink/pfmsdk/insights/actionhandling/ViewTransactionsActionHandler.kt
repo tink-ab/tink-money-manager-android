@@ -14,9 +14,10 @@ class ViewTransactionsActionHandler @Inject constructor(
         (action.data as? InsightAction.Data.ViewTransactions)?.run {
             when {
                 transactionIds.isEmpty() -> return@run false
-                transactionIds.size == 1 -> redirectionReceiver.showTransactionDetails(
-                    transactionIds.first()
-                )
+                // TODO: PFMSDK: Show the list of transactions until we have a transaction details screen
+//                transactionIds.size == 1 -> redirectionReceiver.showTransactionDetails(
+//                    transactionIds.first()
+//                )
                 else -> redirectionReceiver.showTransactionListForIds(transactionIds)
             }
             actionPerformed(action, insight)
