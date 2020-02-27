@@ -2,7 +2,6 @@ package com.tink.pfmsdk.insights.di
 
 import androidx.lifecycle.ViewModel
 import com.tink.pfmsdk.ViewModelFactory
-import com.tink.pfmsdk.di.RedirectionModule
 import com.tink.pfmsdk.insights.ArchivedInsightsViewModel
 import com.tink.pfmsdk.insights.CurrentInsightsViewModel
 import com.tink.pfmsdk.insights.actionhandling.ActionHandler
@@ -24,7 +23,6 @@ import se.tink.android.di.viewmodel.ViewModelKey
 
 @Module(
     includes = [
-        RedirectionModule::class,
         InsightsViewProviderBindingModule::class,
         InsightEnrichmentModule::class,
         InsightsViewModelModule::class

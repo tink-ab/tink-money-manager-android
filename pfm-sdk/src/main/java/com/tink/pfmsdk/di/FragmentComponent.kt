@@ -21,6 +21,7 @@ import javax.inject.Singleton
         TransitionModule::class,
         UtilsModule::class,
         ViewModelModule::class,
+        RedirectionModule::class,
         FragmentBindingModule::class
     ]
 )
