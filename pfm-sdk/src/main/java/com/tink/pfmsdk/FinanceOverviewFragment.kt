@@ -14,7 +14,7 @@ import com.tink.pfmsdk.collections.Periods
 import com.tink.pfmsdk.configuration.I18nConfiguration
 import com.tink.pfmsdk.di.DaggerFragmentComponent
 import com.tink.pfmsdk.insights.actionhandling.CustomInsightActionHandler
-import com.tink.pfmsdk.insights.actionhandling.TinkInsightActionHandler
+import com.tink.pfmsdk.insights.actionhandling.InsightActionHandler
 import com.tink.pfmsdk.overview.OverviewFragment
 import com.tink.pfmsdk.repository.StatisticsRepository
 import com.tink.pfmsdk.security.DefaultRecoveryHandler
@@ -206,7 +206,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          * @param clientConfiguration The [ClientConfiguration] object
          * @param tracker An optional [Tracker] implementation
          * @param featureSet The [OverviewFeatures] object with the list of overview features to be included
-         * @param insightActionHandler The optional [TinkInsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
+         * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
          */
         @JvmOverloads
         @JvmStatic
@@ -216,10 +216,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             clientConfiguration: ClientConfiguration,
             tracker: Tracker? = null,
             featureSet: OverviewFeatures = OverviewFeatures.ALL,
-            insightActionHandler: TinkInsightActionHandler? = null
+            insightActionHandler: InsightActionHandler? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
-            insightActionHandler?.let { CustomInsightActionHandler.setTinkInsightActionHandler(it) }
+            insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
             NetworkConfigSingleton.apply {
                 endpoint = clientConfiguration.environment.grpcUrl
                 sslCertificate = clientConfiguration.sslCertificate

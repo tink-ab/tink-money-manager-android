@@ -7,35 +7,35 @@ import javax.inject.Singleton
 @Singleton
 internal object CustomInsightActionHandler : ActionHandler {
 
-    private var tinkInsightActionHandler: TinkInsightActionHandler? = null
+    private var insightActionHandler: InsightActionHandler? = null
 
-    fun setTinkInsightActionHandler(tinkInsightActionHandler: TinkInsightActionHandler) {
-        this.tinkInsightActionHandler = tinkInsightActionHandler
+    fun setInsightActionHandler(insightActionHandler: InsightActionHandler) {
+        this.insightActionHandler = insightActionHandler
     }
 
     override fun handle(action: InsightAction, insight: Insight): Boolean {
         return when (action.data) {
             is InsightAction.Data.CategorizeExpense -> {
-                tinkInsightActionHandler
+                insightActionHandler
                     ?.categorizeTransaction((action.data as InsightAction.Data.CategorizeExpense).transactionId)
                     ?: false
             }
 
             is InsightAction.Data.ViewTransactions -> {
-                tinkInsightActionHandler
+                insightActionHandler
                     ?.viewTransactions((action.data as InsightAction.Data.ViewTransactions).transactionIds)
                     ?: false
             }
 
             is InsightAction.Data.ViewTransactionsByCategory -> {
-                tinkInsightActionHandler
+                insightActionHandler
                     ?.viewTransactionsByCategory((action.data as InsightAction.Data.ViewTransactionsByCategory).transactionsByCategory)
                     ?: false
             }
 
             is InsightAction.Data.ViewBudget -> {
                 (action.data as InsightAction.Data.ViewBudget).let {
-                    tinkInsightActionHandler
+                    insightActionHandler
                         ?.viewBudget(it.budgetId, it.periodStartDate.toString())
                         ?: false
                 }
@@ -43,7 +43,7 @@ internal object CustomInsightActionHandler : ActionHandler {
 
             is InsightAction.Data.CreateTransfer -> {
                 (action.data as InsightAction.Data.CreateTransfer).let {
-                    tinkInsightActionHandler
+                    insightActionHandler
                         ?.showTransfer(it.sourceUri, it.destinationUri, it.amount)
                         ?: false
                 }
