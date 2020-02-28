@@ -90,4 +90,6 @@
   <string name="insights_overview_card_archived_events_title">Archived Events</string>
   <string name="insights_overview_card_action_text">View</string>
 
+  <string name="insights_expenses_by_day_average_text">Average</string>
+
 </resources>
