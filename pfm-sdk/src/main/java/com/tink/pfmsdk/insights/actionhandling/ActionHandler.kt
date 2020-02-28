@@ -1,6 +1,5 @@
 package com.tink.pfmsdk.insights.actionhandling
 
-import com.tink.pfmsdk.extensions.isTrue
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightAction
 import se.tink.core.models.insights.PerformedInsightAction
@@ -43,10 +42,10 @@ class GeneralActionHandler @Inject constructor(
         insight: Insight
     ): Boolean {
         tracker.trackButtonPressEvent()
-        if (!CustomInsightActionHandler.handle(action, insight).isTrue()) {
-            handlers.any { it.handle(action, insight) }
-        }
-        return false
+        return CustomInsightActionHandler.handle(
+            action,
+            insight
+        ) || handlers.any { it.handle(action, insight) }
     }
 
 }
