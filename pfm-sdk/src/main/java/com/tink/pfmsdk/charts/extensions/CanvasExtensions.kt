@@ -13,11 +13,12 @@ internal fun Canvas.drawBarChart(
     rectF: RectF,
     data: List<Float>,
     barWidth: Float,
-    barPaint: Paint
+    barPaint: Paint,
+    barCornerRadius: Float? = null
 ) {
     val count = data.size
     val betweenMargin = (rectF.width() - count * barWidth) / (count - 1)
-    val barCornerRadius = barWidth / 2
+    val cornerRadius = barCornerRadius ?: barWidth / 2
     val bottom = rectF.bottom
 
     val max = data.max() ?: return
@@ -28,7 +29,7 @@ internal fun Canvas.drawBarChart(
             top,
             bottom,
             barWidth,
-            barCornerRadius,
+            cornerRadius,
             betweenMargin,
             barPaint
         )

@@ -13,6 +13,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.charts.extensions.drawBarChart
 import com.tink.pfmsdk.charts.extensions.drawBarChartWithAmountLabels
 import com.tink.pfmsdk.util.ScreenUtils
 import se.tink.commons.utils.extractTextStyle
@@ -128,15 +129,12 @@ internal class BarChartWithAmountLabels : View {
 
         if (canvas == null
             || data.isNullOrEmpty()
-            || labels.isNullOrEmpty()
-            || amountLabels.isNullOrEmpty()
         ) return
 
         whenNonNull(
             canvas,
-            data,
-            amountLabels
-        ) { canvas, data, amountLabels ->
+            data
+        ) { canvas, data ->
 
             //Compute bounds
 
@@ -162,17 +160,29 @@ internal class BarChartWithAmountLabels : View {
 
             //Draw items
 
-            canvas.drawBarChartWithAmountLabels(
-                barChartBounds,
-                data,
-                barWidth,
-                barPaint,
-                barChartCornerRadius,
-                amountLabels,
-                amountLabelPaint,
-                amountLabelTopMargin,
-                amountLabelBottomMargin
-            )
+            if (amountLabels.isNullOrEmpty()) {
+                canvas.drawBarChart(
+                    barChartBounds,
+                    data,
+                    barWidth,
+                    barPaint,
+                    barChartCornerRadius
+                )
+            } else {
+                canvas.drawBarChartWithAmountLabels(
+                    barChartBounds,
+                    data,
+                    barWidth,
+                    barPaint,
+                    barChartCornerRadius,
+                    amountLabels!!,
+                    amountLabelPaint,
+                    amountLabelTopMargin,
+                    amountLabelBottomMargin
+                )
+
+            }
+
 
             // Draw average line
 
