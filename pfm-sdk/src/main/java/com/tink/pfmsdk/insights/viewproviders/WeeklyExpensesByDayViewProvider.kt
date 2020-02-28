@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.insights.actionhandling.ActionHandler
+import kotlinx.android.synthetic.main.item_insight_weekly_expenses_by_day.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
@@ -43,6 +44,13 @@ class WeeklyExpensesByDayInsightViewHolder(
 
         view.apply {
             // TODO: PFMSDK: Set data
+            totalExpensesChart.data = listOf(5.0f, 10.0f, 7.0f, 6.0f, 10.0f, 2.0f, 4.0f)
+            totalExpensesChart.amountLabels = listOf("500", "1000", "700", "600", "1000", "200", "400")
+            totalExpensesChart.labels = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+
+            averageExpensesChart.data = listOf(8.0f, 6.0f, 10.0f, 10.0f, 5.0f, 2.0f, 3.0f)
+            averageExpensesChart.amountLabels = listOf()
+            averageExpensesChart.labels = listOf()
         }
     }
 }
