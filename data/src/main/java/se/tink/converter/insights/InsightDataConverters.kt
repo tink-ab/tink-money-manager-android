@@ -29,8 +29,8 @@ class InsightDataConverter(private val converter: ModelConverter) :
                 DataCase.SINGLE_UNCATEGORIZED_EXPENSE -> singleUncategorizedExpense.toCoreModel()
                 DataCase.WEEKLY_EXPENSES_BY_CATEGORY -> weeklyExpensesByCategory.toCoreModel()
                 DataCase.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> weeklyUncategorizedTransactions.toCoreModel()
+                DataCase.WEEKLY_EXPENSES_BY_DAY -> weeklyExpensesByDay.toCoreModel()
                 DataCase.MONTHLY_EXPENSES_BY_CATEGORY -> monthlyExpensesByCategory.toCoreModel()
-                DataCase.WEEKLY_EXPENSES_BY_DAY, //TODO
                 DataCase.LEFT_TO_SPEND_NEGATIVE, //TODO
                 null, DataCase.DATA_NOT_SET -> InsightData.NoData
             }
@@ -98,6 +98,12 @@ class InsightDataConverter(private val converter: ModelConverter) :
         InsightData.WeeklyExpensesByCategoryData(
             week = converter.map(week, YearWeek::class.java),
             expenses = spendingByCategoryList.toAmountByCategoryList()
+        )
+
+    fun InsightDataDTO.Data.WeeklyExpensesByDay.toCoreModel() =
+        InsightData.WeeklyExpensesByDayData(
+            week = converter.map(week, YearWeek::class.java),
+            statistics = expenseStatisticsByDayList.toStatisticsByDayList()
         )
 
     fun InsightDataDTO.Data.WeeklyUncategorizedTransactions.toCoreModel() =
