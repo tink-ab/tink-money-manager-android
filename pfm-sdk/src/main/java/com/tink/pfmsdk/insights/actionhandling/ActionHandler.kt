@@ -6,7 +6,6 @@ import se.tink.core.models.insights.InsightAction
 import se.tink.core.models.insights.PerformedInsightAction
 import javax.inject.Inject
 
-// TODO: PFMSDK: Make this interface internal
 interface ActionHandler {
 
     /**
