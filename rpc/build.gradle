@@ -65,6 +65,8 @@ sourceSets {
             exclude "common_repository_service/*"
             exclude "payment_compliance_service/*"
             exclude "console_admin_service/*"
+            exclude "event_producer_service/*"
+            exclude "statistics_service/*"
             exclude "third_party/*"
             exclude "tink/*"
         }
