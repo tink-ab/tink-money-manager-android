@@ -12,7 +12,7 @@ buildscript {
     }
 }
 
-def grpcVersion = "1.27.0"
+def grpcVersion = "1.27.2"
 def protoVersion = "3.11.0"
 
 dependencies {
@@ -35,16 +35,19 @@ protobuf {
         }
     }
     generateProtoTasks {
-        all().each { task ->
-            task.builtins {
-                java { option 'lite' }
-            }
-            task.plugins {
-                grpc {
-                    // Options added to --grpc_out
-                    option 'lite'
-                }
-            }
+//        all().each { task ->
+//            task.builtins {
+//                java { option 'lite' }
+//            }
+//            task.plugins {
+//                grpc {
+//                    // Options added to --grpc_out
+//                    option 'lite'
+//                }
+//            }
+//        }
+        all()*.plugins {
+            grpc {}
         }
     }
 }
