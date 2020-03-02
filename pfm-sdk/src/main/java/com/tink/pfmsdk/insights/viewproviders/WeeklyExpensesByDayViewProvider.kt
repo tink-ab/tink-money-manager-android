@@ -13,17 +13,23 @@ import se.tink.core.models.insights.InsightData
 import se.tink.core.models.insights.InsightType
 import se.tink.core.models.relations.StatisticsByDay
 import se.tink.insights.getViewType
+import se.tink.utils.DateUtils
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
 class WeeklyExpensesByDayViewProvider @Inject constructor(
+    private val dateUtils: DateUtils,
     private val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
         WeeklyExpensesByDayInsightViewHolder(parent, actionHandler)
 
-    override fun getDataHolder(insight: Insight): InsightDataHolder =
-        WeeklyExpensesByDayDataHolder((insight.data as InsightData.WeeklyExpensesByDayData).statistics)
+    override fun getDataHolder(insight: Insight): InsightDataHolder {
+        val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
+            .statistics
+            .toChartData(dateUtils, amountFormatter)
+        return WeeklyExpensesByDayDataHolder(chartData)
+    }
 
     override val viewType = getViewType()
 
@@ -43,18 +49,42 @@ class WeeklyExpensesByDayInsightViewHolder(
         setupCommonBottomPart(insight)
 
         view.apply {
-            // TODO: PFMSDK: Set data
-            totalExpensesChart.data = listOf(5.0f, 10.0f, 7.0f, 6.0f, 10.0f, 2.0f, 4.0f)
-            totalExpensesChart.amountLabels = listOf("500", "1000", "700", "600", "1000", "200", "400")
-            totalExpensesChart.labels = listOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+            totalExpensesChart.data = data.chartData.totalAmountData
+            totalExpensesChart.amountLabels = data.chartData.totalAmountLabels
+            totalExpensesChart.labels = data.chartData.dayLabels
 
-            averageExpensesChart.data = listOf(8.0f, 6.0f, 10.0f, 10.0f, 5.0f, 2.0f, 3.0f)
+            averageExpensesChart.data = data.chartData.averageAmountData
             averageExpensesChart.amountLabels = listOf()
             averageExpensesChart.labels = listOf()
         }
     }
 }
 
+private fun List<StatisticsByDay>.toChartData(
+    dateUtils: DateUtils,
+    amountFormatter: AmountFormatter
+) =
+    ExpensesByDayChartData(
+        map { dateUtils.getDayOfWeek(it.date) },
+        map { it.totalAmount.value.floatValue() },
+        map {
+            amountFormatter.format(
+                amount = it.totalAmount,
+                useSymbol = false,
+                useSign = false,
+                explicitlyPositive = true
+            )
+        },
+        map { it.averageAmount.value.floatValue() }
+    )
+
 data class WeeklyExpensesByDayDataHolder(
-    val statistics: List<StatisticsByDay>
+    val chartData: ExpensesByDayChartData
 ) : InsightDataHolder
+
+data class ExpensesByDayChartData(
+    val dayLabels: List<String>,
+    val totalAmountData: List<Float>,
+    val totalAmountLabels: List<String>,
+    val averageAmountData: List<Float>
+)

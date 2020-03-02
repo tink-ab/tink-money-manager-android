@@ -267,6 +267,11 @@ public class DateUtils {
                 .format(dateTime);
     }
 
+    public String getDayOfWeek(DateTime dateTime) {
+		return ThreadSafeDateFormat
+			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK, defaultLocale, timezoneCode).format(dateTime);
+	}
+
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent, String timezoneCode) {
 		if (date.getYear() == DateTime.now().getYear() || !includeYearIfNotCurrent) {
 			return ThreadSafeDateFormat
