@@ -29,6 +29,8 @@ class InsightDataConverter(private val converter: ModelConverter) :
                 DataCase.WEEKLY_EXPENSES_BY_CATEGORY -> weeklyExpensesByCategory.toCoreModel()
                 DataCase.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> weeklyUncategorizedTransactions.toCoreModel()
                 DataCase.WEEKLY_EXPENSES_BY_DAY, //TODO
+                DataCase.LEFT_TO_SPEND_NEGATIVE, //TODO
+                DataCase.MONTHLY_EXPENSES_BY_CATEGORY, //TODO
                 null, DataCase.DATA_NOT_SET -> InsightData.NoData
             }
         }

@@ -60,5 +60,7 @@ fun InsightActionDTO.convertData(): InsightAction.Data =
             }
         )
 
+        InsightActionDataCase.VIEW_EXPECTED_AND_ACTUAL_AMOUNT, //TODO
+
         null, InsightActionDataCase.DATA_NOT_SET -> InsightAction.Data.NoData
     }
