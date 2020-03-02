@@ -3,6 +3,7 @@ package se.tink.core.models.insights
 import org.joda.time.DateTime
 import se.tink.core.models.budgets.Budget
 import se.tink.core.models.misc.Amount
+import se.tink.core.models.misc.YearMonth
 import se.tink.core.models.misc.YearWeek
 import se.tink.core.models.relations.AmountByCategory
 
@@ -83,7 +84,8 @@ enum class InsightType {
     LARGE_EXPENSE,
     DOUBLE_CHARGE,
     WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
-    WEEKLY_UNCATEGORIZED_TRANSACTIONS
+    WEEKLY_UNCATEGORIZED_TRANSACTIONS,
+    MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
 }
 
 sealed class InsightState {
@@ -151,5 +153,10 @@ sealed class InsightData {
     data class WeeklyUncategorizedTransactionsData(
         val week: YearWeek,
         val transactionIds: List<String>
+    ) : InsightData()
+
+    data class MonthlySummaryExpensesByCategoryData(
+        val month: YearMonth,
+        val expenses: List<AmountByCategory>
     ) : InsightData()
 }

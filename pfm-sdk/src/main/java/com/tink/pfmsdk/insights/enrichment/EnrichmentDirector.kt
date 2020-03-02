@@ -28,6 +28,8 @@ internal class EnrichmentDirector(
 
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
 
+            InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
+
             else -> EnrichmentType.NONE
         }
 

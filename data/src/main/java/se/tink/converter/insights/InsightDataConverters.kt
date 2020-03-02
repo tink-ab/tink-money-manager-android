@@ -5,6 +5,7 @@ import se.tink.converter.date.toDateTime
 import se.tink.converter.misc.toAmount
 import se.tink.core.models.budgets.Budget
 import se.tink.core.models.insights.InsightData
+import se.tink.core.models.misc.YearMonth
 import se.tink.core.models.misc.YearWeek
 import se.tink.modelConverter.AbstractConverter
 import se.tink.grpc.v1.models.InsightData as InsightDataDTO
@@ -28,9 +29,9 @@ class InsightDataConverter(private val converter: ModelConverter) :
                 DataCase.SINGLE_UNCATEGORIZED_EXPENSE -> singleUncategorizedExpense.toCoreModel()
                 DataCase.WEEKLY_EXPENSES_BY_CATEGORY -> weeklyExpensesByCategory.toCoreModel()
                 DataCase.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> weeklyUncategorizedTransactions.toCoreModel()
+                DataCase.MONTHLY_EXPENSES_BY_CATEGORY -> monthlyExpensesByCategory.toCoreModel()
                 DataCase.WEEKLY_EXPENSES_BY_DAY, //TODO
                 DataCase.LEFT_TO_SPEND_NEGATIVE, //TODO
-                DataCase.MONTHLY_EXPENSES_BY_CATEGORY, //TODO
                 null, DataCase.DATA_NOT_SET -> InsightData.NoData
             }
         }
@@ -103,5 +104,11 @@ class InsightDataConverter(private val converter: ModelConverter) :
         InsightData.WeeklyUncategorizedTransactionsData(
             week = converter.map(week, YearWeek::class.java),
             transactionIds = transactionIdsList
+        )
+
+    fun InsightDataDTO.Data.MonthlySummaryExpensesByCategory.toCoreModel() =
+        InsightData.MonthlySummaryExpensesByCategoryData(
+            month = converter.map(month, YearMonth::class.java),
+            expenses = spendingByCategoryList.toAmountByCategoryList()
         )
 }
