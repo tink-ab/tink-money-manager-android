@@ -42,10 +42,8 @@ class GeneralActionHandler @Inject constructor(
         insight: Insight
     ): Boolean {
         tracker.trackButtonPressEvent()
-        return CustomInsightActionHandler.handle(
-            action,
-            insight
-        ) || handlers.any { it.handle(action, insight) }
+        return CustomInsightActionHandler.handle(action, insight)
+                || handlers.any { it.handle(action, insight) }
     }
 
 }
