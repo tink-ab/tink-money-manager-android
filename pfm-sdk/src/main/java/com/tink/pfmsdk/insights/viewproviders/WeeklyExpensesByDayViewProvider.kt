@@ -11,8 +11,7 @@ import se.tink.commons.extensions.inflate
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightData
 import se.tink.core.models.insights.InsightType
-import se.tink.core.models.relations.StatisticsByDay
-import se.tink.insights.getViewType
+import se.tink.core.models.relations.ExpensesByDay
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -26,7 +25,7 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
         val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
-            .statistics
+            .expensesByDay
             .toChartData(dateUtils, amountFormatter)
         return WeeklyExpensesByDayDataHolder(chartData)
     }
@@ -60,7 +59,7 @@ class WeeklyExpensesByDayInsightViewHolder(
     }
 }
 
-private fun List<StatisticsByDay>.toChartData(
+private fun List<ExpensesByDay>.toChartData(
     dateUtils: DateUtils,
     amountFormatter: AmountFormatter
 ) =

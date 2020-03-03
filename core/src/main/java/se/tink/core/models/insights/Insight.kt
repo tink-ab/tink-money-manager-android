@@ -6,7 +6,7 @@ import se.tink.core.models.misc.Amount
 import se.tink.core.models.misc.YearMonth
 import se.tink.core.models.misc.YearWeek
 import se.tink.core.models.relations.AmountByCategory
-import se.tink.core.models.relations.StatisticsByDay
+import se.tink.core.models.relations.ExpensesByDay
 
 data class Insight(
     val id: String,
@@ -154,7 +154,7 @@ sealed class InsightData {
 
     data class WeeklyExpensesByDayData(
         val week: YearWeek,
-        val statistics: List<StatisticsByDay>
+        val expensesByDay: List<ExpensesByDay>
     ) : InsightData()
 
     data class WeeklyUncategorizedTransactionsData(
