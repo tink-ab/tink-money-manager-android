@@ -12,6 +12,7 @@ import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightData
 import se.tink.core.models.insights.InsightType
 import se.tink.core.models.relations.ExpensesByDay
+import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 

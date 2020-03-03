@@ -8,6 +8,7 @@ import com.tink.pfmsdk.insights.viewproviders.ImageTextViewProvider
 import com.tink.pfmsdk.insights.viewproviders.InsightViewProvider
 import com.tink.pfmsdk.insights.viewproviders.SingleExpenseUncategorizedViewProvider
 import com.tink.pfmsdk.insights.viewproviders.ExpensesByCategoryViewProvider
+import com.tink.pfmsdk.insights.viewproviders.WeeklyExpensesByDayViewProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
@@ -38,6 +39,10 @@ abstract class InsightsViewProviderBindingModule {
     @Binds
     @IntoSet
     abstract fun bindExpensesByCategoryViewProvider(viewProvider: ExpensesByCategoryViewProvider): InsightViewProvider
+
+    @Binds
+    @IntoSet
+    abstract fun bindWeeklyExpensesByDayViewProvider(viewProvider: WeeklyExpensesByDayViewProvider): InsightViewProvider
 
     @Binds
     @IntoSet
