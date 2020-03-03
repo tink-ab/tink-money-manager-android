@@ -45,6 +45,7 @@ import se.tink.converter.misc.ImagesConverter;
 import se.tink.converter.misc.PeriodDTOToPeriodConverter;
 import se.tink.converter.misc.PeriodToPeriodDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
+import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
 import se.tink.converter.provider.ProviderDTOToProviderConverter;
 import se.tink.converter.provider.ProviderToProviderDTOConverter;
@@ -282,6 +283,7 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new TimestampToLongConverter(this));
 
         addConverter(new YearWeekDTOToYearWeekConverter());
+        addConverter(new YearMonthDTOToYearMonthConverter());
 
         addConverter(new StringToStringValueConverter(this));
         addConverter(new ImagesConverter());
