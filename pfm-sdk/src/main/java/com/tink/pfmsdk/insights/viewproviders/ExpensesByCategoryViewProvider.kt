@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.tink.pfmsdk.R
 import com.tink.pfmsdk.insights.actionhandling.ActionHandler
 import com.tink.pfmsdk.insights.enrichment.CategoryTreeViewDetails
-import kotlinx.android.synthetic.main.item_insight_weekly_spendings.view.*
+import kotlinx.android.synthetic.main.item_insight_expenses_by_category.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.currency.AmountFormatter
@@ -17,22 +17,22 @@ import se.tink.insights.getViewType
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
-class MonthlySpendingsViewProvider @Inject constructor(
+class ExpensesByCategoryViewProvider @Inject constructor(
     private val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
-        MonthlySpendingsInsightViewHolder(parent, actionHandler)
+        ExpensesByCategoryViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
 
         val categoryTree = (insight.viewDetails as CategoryTreeViewDetails).categories
 
-        val sortedAmounts = (insight.data as InsightData.MonthlySummaryExpensesByCategoryData)
-            .expenses
+        val sortedAmounts = insight.data
+            .expenses()
             .sortedByDescending { it.amount.abs().value }
             .map {
                 val categoryName = categoryTree.findCategoryByCode(it.categoryCode)?.name ?: ""
-                MonthlySpending(
+                ExpensesByCategory(
                     iconFromCategoryCode(it.categoryCode),
                     categoryName,
                     amountFormatter.format(it.amount.abs())
@@ -43,23 +43,33 @@ class MonthlySpendingsViewProvider @Inject constructor(
         val second = sortedAmounts.elementAtOrNull(1)
         val third = sortedAmounts.elementAtOrNull(2)
 
-        return MonthlySpendingsDataHolder(first, second, third)
+        return ExpensesByCategoryDataHolder(first, second, third)
     }
 
     override val viewType = getViewType()
 
-    override val supportedInsightTypes = listOf(InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY)
+    override val supportedInsightTypes = listOf(
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
+        InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
+    )
 }
 
-class MonthlySpendingsInsightViewHolder(
+private fun InsightData.expenses() =
+    when (this) {
+        is InsightData.WeeklyExpensesByCategoryData -> expenses
+        is InsightData.MonthlySummaryExpensesByCategoryData -> expenses
+        else -> emptyList() // This wouldn't happen and is prevented by the supportedInsightTypes property
+    }
+
+class ExpensesByCategoryViewHolder(
     parent: ViewGroup,
     actionHandler: ActionHandler
-) : InsightViewHolder(parent.inflate(R.layout.item_insight_monthly_spendings), actionHandler),
+) : InsightViewHolder(parent.inflate(R.layout.item_insight_expenses_by_category), actionHandler),
     InsightCommonBottomPart {
     override val view: View = itemView
 
     override fun bind(data: InsightDataHolder, insight: Insight) {
-        require(data is MonthlySpendingsDataHolder)
+        require(data is ExpensesByCategoryDataHolder)
 
         setupCommonBottomPart(insight)
 
@@ -93,13 +103,13 @@ class MonthlySpendingsInsightViewHolder(
     }
 }
 
-data class MonthlySpendingsDataHolder(
-    val first: MonthlySpending?,
-    val second: MonthlySpending?,
-    val third: MonthlySpending?
+data class ExpensesByCategoryDataHolder(
+    val first: ExpensesByCategory?,
+    val second: ExpensesByCategory?,
+    val third: ExpensesByCategory?
 ) : InsightDataHolder
 
-data class MonthlySpending(
+data class ExpensesByCategory(
     val categoryIcon: Int,
     val categoryName: String,
     val amount: String
