@@ -16,7 +16,7 @@
     <View
       android:id="@+id/topContainer"
       android:layout_width="match_parent"
-      android:layout_height="140dp"
+      android:layout_height="96dp"
       android:background="?tink_uncategorizedLightColor"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
