@@ -62,20 +62,19 @@ class WeeklyExpensesByDayInsightViewHolder(
 private fun List<ExpensesByDay>.toChartData(
     dateUtils: DateUtils,
     amountFormatter: AmountFormatter
-) =
-    ExpensesByDayChartData(
-        map { dateUtils.getDayOfWeek(it.date) },
-        map { it.totalAmount.value.floatValue() },
-        map {
-            amountFormatter.format(
-                amount = it.totalAmount,
-                useSymbol = false,
-                useSign = false,
-                explicitlyPositive = true
-            )
-        },
-        map { it.averageAmount.value.floatValue() }
-    )
+) = ExpensesByDayChartData(
+    map { dateUtils.getDayOfWeek(it.date) },
+    map { it.totalAmount.value.floatValue() },
+    map {
+        amountFormatter.format(
+            amount = it.totalAmount,
+            useSymbol = false,
+            useSign = false,
+            explicitlyPositive = true
+        )
+    },
+    map { it.averageAmount.value.floatValue() }
+)
 
 data class WeeklyExpensesByDayDataHolder(
     val chartData: ExpensesByDayChartData
