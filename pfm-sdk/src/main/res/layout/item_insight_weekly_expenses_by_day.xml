@@ -22,7 +22,6 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TODO: PFMSDK: Replace this with the bar charts -->
     <View
       android:id="@+id/expensesByDayContainer"
       android:layout_width="0dp"
@@ -31,7 +30,7 @@
       android:background="?tink_cardBackgroundColor"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/description" />
+      app:layout_constraintTop_toBottomOf="@+id/averageText" />
 
     <com.tink.pfmsdk.charts.BarChartWithAmountLabels
       android:id="@+id/averageExpensesChart"
@@ -63,19 +62,6 @@
       app:layout_constraintStart_toStartOf="@+id/expensesByDayContainer"
       app:layout_constraintTop_toTopOf="@+id/expensesByDayContainer" />
 
-    <TextView
-      android:id="@+id/description"
-      style="@style/hecto.bold"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginEnd="48dp"
-      app:layout_constraintEnd_toStartOf="@+id/averageText"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="Expenses by day" />
-
     <ImageView
       android:id="@+id/averageCircle"
       android:layout_width="14dp"
@@ -91,30 +77,53 @@
       android:id="@+id/averageText"
       style="@style/micro"
       android:layout_width="wrap_content"
-      android:layout_height="0dp"
-      android:layout_marginEnd="24dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginEnd="20dp"
       android:gravity="end|center_vertical"
       android:text="@string/insights_expenses_by_day_average_text"
-      app:layout_constraintBottom_toBottomOf="@+id/description"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@+id/description" />
+      app:layout_constraintTop_toTopOf="parent" />
 
     <Space
       android:id="@+id/barrierSpace"
       android:layout_width="match_parent"
-      android:layout_height="16dp"
+      android:layout_height="24dp"
       app:layout_constraintTop_toBottomOf="@+id/expensesByDayContainer" />
+
+    <TextView
+      android:id="@+id/title"
+      style="@style/hecto.bold"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/barrierSpace"
+      tools:text="Expenses last week" />
+
+    <TextView
+      android:id="@+id/description"
+      style="@style/deci.primary"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/primaryButton"
+      app:layout_constraintEnd_toEndOf="@+id/title"
+      app:layout_constraintStart_toStartOf="@+id/title"
+      app:layout_constraintTop_toBottomOf="@+id/title"
+      tools:text="Expenses by day" />
 
     <Button
       android:id="@+id/primaryButton"
       style="@style/primaryButton"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
+      android:layout_height="0dp"
       android:layout_marginEnd="8dp"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/barrierSpace"
+      app:layout_constraintTop_toBottomOf="@+id/description"
       tools:text="Yes, sounds good!" />
 
     <Button
@@ -125,12 +134,6 @@
       app:layout_constraintEnd_toStartOf="@+id/primaryButton"
       app:layout_constraintTop_toTopOf="@+id/primaryButton"
       tools:text="No, archive" />
-
-    <TextView
-      android:id="@+id/title"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="gone" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
