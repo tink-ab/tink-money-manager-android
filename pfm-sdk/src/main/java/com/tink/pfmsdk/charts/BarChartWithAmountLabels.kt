@@ -16,6 +16,7 @@ import com.tink.pfmsdk.R
 import com.tink.pfmsdk.charts.extensions.drawBarChart
 import com.tink.pfmsdk.charts.extensions.drawBarChartWithAmountLabels
 import com.tink.pfmsdk.util.ScreenUtils
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
 import se.tink.core.extensions.whenNonNull
 
@@ -61,7 +62,7 @@ internal class BarChartWithAmountLabels : View {
 
     private val amountLabelPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.nano_text_size)
-//        color = ContextCompat.getColor(context, R.color.greyblack) //TODO:PFMSDK
+        color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true
