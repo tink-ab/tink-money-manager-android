@@ -19,6 +19,7 @@ import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_PRETTY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK
+import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_FILENAME_SAFE
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_INTEGER_DATE
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_INTEGER_DATE_COMPACT
@@ -102,6 +103,7 @@ internal class I18nConfiguration @Inject constructor(
             FORMATTER_FILENAME_SAFE to getString(R.string.date_formatter_filename_safe),
             FORMATTER_LOGGING to getString(R.string.date_formatter_logging),
             FORMATTER_DAY_OF_WEEK to getString(R.string.date_formatter_day_of_week),
+            FORMATTER_DAY_OF_WEEK_COMPACT to getString(R.string.date_formatter_day_of_week_compact),
             FORMATTER_MONTH_AND_DAY_OF_WEEK to getString(R.string.date_formatter_month_and_day_of_week),
             FORMATTER_MONTH_AND_DAY to getString(R.string.date_formatter_month_and_day),
             FORMATTER_MONTH_AND_DAY_AND_YEAR to getString(R.string.date_formatter_month_and_day_and_year),
