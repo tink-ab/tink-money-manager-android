@@ -47,6 +47,7 @@ public class ThreadSafeDateFormat {
 	public static final String FORMATTER_FILENAME_SAFE = "FORMATTER_FILENAME_SAFE";
 	public static final String FORMATTER_LOGGING = "FORMATTER_LOGGING";
 	public static final String FORMATTER_DAY_OF_WEEK = "FORMATTER_DAY_OF_WEEK";
+	public static final String FORMATTER_DAY_OF_WEEK_COMPACT = "FORMATTER_DAY_OF_WEEK_COMPACT";
 	public static final String FORMATTER_MONTH_AND_DAY_OF_WEEK = "FORMATTER_MONTH_AND_DAY_OF_WEEK";
 	public static final String FORMATTER_MONTH_AND_DAY = "FORMATTER_MONTH_AND_DAY";
 	public static final String FORMATTER_MONTH_AND_DAY_AND_YEAR = "FORMATTER_MONTH_AND_DAY_AND_YEAR";

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="16dp"
+  app:cardBackgroundColor="?tink_cardBackgroundColor"
+  app:cardCornerRadius="@dimen/card_corner_radius">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <View
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:background="?tink_cardBackgroundColor"
+      app:layout_constraintBottom_toBottomOf="@+id/barrierSpace"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+      android:id="@+id/expensesByDayContainer"
+      android:layout_width="0dp"
+      android:layout_height="200dp"
+      android:layout_marginTop="24dp"
+      android:background="?tink_cardBackgroundColor"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/averageText" />
+
+    <com.tink.pfmsdk.charts.BarChartWithAmountLabels
+      android:id="@+id/averageExpensesChart"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="32dp"
+      android:layout_marginEnd="12dp"
+      app:bar_color_below_threshold="?tink_expensesLightColor"
+      app:bar_label_style="@style/chart_label"
+      app:bar_width="28dp"
+      app:horizontal_margin="24dp"
+      app:layout_constraintBottom_toBottomOf="@+id/expensesByDayContainer"
+      app:layout_constraintEnd_toEndOf="@+id/expensesByDayContainer"
+      app:layout_constraintStart_toStartOf="@+id/expensesByDayContainer"
+      app:layout_constraintTop_toTopOf="@+id/expensesByDayContainer" />
+
+    <com.tink.pfmsdk.charts.BarChartWithAmountLabels
+      android:id="@+id/totalExpensesChart"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="20dp"
+      app:bar_color_below_threshold="?tink_expensesColor"
+      app:bar_label_style="@style/chart_label"
+      app:bar_width="28dp"
+      app:horizontal_margin="24dp"
+      app:layout_constraintBottom_toBottomOf="@+id/expensesByDayContainer"
+      app:layout_constraintEnd_toEndOf="@+id/expensesByDayContainer"
+      app:layout_constraintStart_toStartOf="@+id/expensesByDayContainer"
+      app:layout_constraintTop_toTopOf="@+id/expensesByDayContainer" />
+
+    <ImageView
+      android:id="@+id/averageCircle"
+      android:layout_width="14dp"
+      android:layout_height="0dp"
+      android:layout_marginEnd="4dp"
+      android:src="@drawable/circle"
+      android:tint="?tink_expensesLightColor"
+      app:layout_constraintBottom_toBottomOf="@+id/averageText"
+      app:layout_constraintEnd_toStartOf="@id/averageText"
+      app:layout_constraintTop_toTopOf="@+id/averageText" />
+
+    <TextView
+      android:id="@+id/averageText"
+      style="@style/micro"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginEnd="20dp"
+      android:gravity="end|center_vertical"
+      android:text="@string/insights_expenses_by_day_average_text"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+      android:id="@+id/barrierSpace"
+      android:layout_width="match_parent"
+      android:layout_height="24dp"
+      app:layout_constraintTop_toBottomOf="@+id/expensesByDayContainer" />
+
+    <TextView
+      android:id="@+id/title"
+      style="@style/hecto.bold"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/barrierSpace"
+      tools:text="Expenses last week" />
+
+    <TextView
+      android:id="@+id/description"
+      style="@style/deci.primary"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="6dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toTopOf="@+id/primaryButton"
+      app:layout_constraintEnd_toEndOf="@+id/title"
+      app:layout_constraintStart_toStartOf="@+id/title"
+      app:layout_constraintTop_toBottomOf="@+id/title"
+      tools:text="Expenses by day" />
+
+    <Button
+      android:id="@+id/primaryButton"
+      style="@style/primaryButton"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/description"
+      app:layout_constraintBottom_toBottomOf="parent"
+      tools:text="Yes, sounds good!" />
+
+    <Button
+      android:id="@+id/secondaryButton"
+      style="@style/secondaryButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toStartOf="@+id/primaryButton"
+      app:layout_constraintTop_toTopOf="@+id/primaryButton"
+      tools:text="No, archive" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

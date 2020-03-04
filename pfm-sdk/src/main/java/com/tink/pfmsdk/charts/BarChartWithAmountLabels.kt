@@ -13,8 +13,10 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.tink.pfmsdk.R
+import com.tink.pfmsdk.charts.extensions.drawBarChart
 import com.tink.pfmsdk.charts.extensions.drawBarChartWithAmountLabels
 import com.tink.pfmsdk.util.ScreenUtils
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
 import se.tink.core.extensions.whenNonNull
 
@@ -60,7 +62,7 @@ internal class BarChartWithAmountLabels : View {
 
     private val amountLabelPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.nano_text_size)
-//        color = ContextCompat.getColor(context, R.color.greyblack) //TODO:PFMSDK
+        color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true
@@ -128,15 +130,12 @@ internal class BarChartWithAmountLabels : View {
 
         if (canvas == null
             || data.isNullOrEmpty()
-            || labels.isNullOrEmpty()
-            || amountLabels.isNullOrEmpty()
         ) return
 
         whenNonNull(
             canvas,
-            data,
-            amountLabels
-        ) { canvas, data, amountLabels ->
+            data
+        ) { canvas, data ->
 
             //Compute bounds
 
@@ -162,17 +161,29 @@ internal class BarChartWithAmountLabels : View {
 
             //Draw items
 
-            canvas.drawBarChartWithAmountLabels(
-                barChartBounds,
-                data,
-                barWidth,
-                barPaint,
-                barChartCornerRadius,
-                amountLabels,
-                amountLabelPaint,
-                amountLabelTopMargin,
-                amountLabelBottomMargin
-            )
+            if (amountLabels.isNullOrEmpty()) {
+                canvas.drawBarChart(
+                    barChartBounds,
+                    data,
+                    barWidth,
+                    barPaint,
+                    barChartCornerRadius
+                )
+            } else {
+                canvas.drawBarChartWithAmountLabels(
+                    barChartBounds,
+                    data,
+                    barWidth,
+                    barPaint,
+                    barChartCornerRadius,
+                    amountLabels!!,
+                    amountLabelPaint,
+                    amountLabelTopMargin,
+                    amountLabelBottomMargin
+                )
+
+            }
+
 
             // Draw average line
 

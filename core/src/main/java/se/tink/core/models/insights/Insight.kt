@@ -6,6 +6,7 @@ import se.tink.core.models.misc.Amount
 import se.tink.core.models.misc.YearMonth
 import se.tink.core.models.misc.YearWeek
 import se.tink.core.models.relations.AmountByCategory
+import se.tink.core.models.relations.ExpensesByDay
 
 data class Insight(
     val id: String,
@@ -84,6 +85,7 @@ enum class InsightType {
     LARGE_EXPENSE,
     DOUBLE_CHARGE,
     WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
+    WEEKLY_SUMMARY_EXPENSES_BY_DAY,
     WEEKLY_UNCATEGORIZED_TRANSACTIONS,
     MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
 }
@@ -148,6 +150,11 @@ sealed class InsightData {
     data class WeeklyExpensesByCategoryData(
         val week: YearWeek,
         val expenses: List<AmountByCategory>
+    ) : InsightData()
+
+    data class WeeklyExpensesByDayData(
+        val week: YearWeek,
+        val expensesByDay: List<ExpensesByDay>
     ) : InsightData()
 
     data class WeeklyUncategorizedTransactionsData(

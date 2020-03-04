@@ -30,6 +30,7 @@
   <string name="date_formatter_filename_safe">yyyy-MM-dd&#45;&#45;HH:mm:ss.SSS</string>
   <string name="date_formatter_logging">yyyy-MM-dd HH:mm:ss,SSS</string>
   <string name="date_formatter_day_of_week">EEEE</string>
+  <string name="date_formatter_day_of_week_compact">EEE</string>
   <string name="date_formatter_month_and_day_of_week">EEEE MMM d</string>
   <string name="date_formatter_month_and_day">MMMM d</string>
   <string name="date_formatter_month_and_day_and_year">MMMM d yyyy</string>
@@ -89,5 +90,7 @@
   <string name="insights_overview_card_new_events_title">New Events</string>
   <string name="insights_overview_card_archived_events_title">Archived Events</string>
   <string name="insights_overview_card_action_text">View</string>
+
+  <string name="insights_expenses_by_day_average_text">Average</string>
 
 </resources>
