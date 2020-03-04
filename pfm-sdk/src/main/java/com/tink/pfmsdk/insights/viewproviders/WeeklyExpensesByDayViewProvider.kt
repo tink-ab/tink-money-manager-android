@@ -70,8 +70,7 @@ private fun List<ExpensesByDay>.toChartData(
         amountFormatter.format(
             amount = it.totalAmount,
             useSymbol = false,
-            useSign = false,
-            explicitlyPositive = true
+            useSign = false
         )
     },
     map { it.averageAmount.value.floatValue() }
