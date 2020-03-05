@@ -103,9 +103,7 @@ class InsightDataConverter(private val converter: ModelConverter) :
     fun InsightDataDTO.Data.WeeklyExpensesByDay.toCoreModel() =
         InsightData.WeeklyExpensesByDayData(
             week = converter.map(week, YearWeek::class.java),
-            expensesByDay = expenseStatisticsByDayList
-                .map { it.toExpensesByDay() }
-                .reversed()
+            expensesByDay = expenseStatisticsByDayList.map { it.toExpensesByDay() }
         )
 
     fun InsightDataDTO.Data.WeeklyUncategorizedTransactions.toCoreModel() =
