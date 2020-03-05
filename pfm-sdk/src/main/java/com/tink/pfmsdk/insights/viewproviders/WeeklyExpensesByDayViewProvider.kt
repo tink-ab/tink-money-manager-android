@@ -27,6 +27,7 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
     override fun getDataHolder(insight: Insight): InsightDataHolder {
         val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
             .expensesByDay
+            .sortedBy { it.date }
             .toChartData(dateUtils, amountFormatter)
         return WeeklyExpensesByDayDataHolder(chartData)
     }
