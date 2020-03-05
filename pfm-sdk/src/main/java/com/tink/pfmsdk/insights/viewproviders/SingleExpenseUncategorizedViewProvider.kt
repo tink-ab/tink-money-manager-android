@@ -22,7 +22,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
     val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
-        listOf(InsightType.SINGLE_EXPENSE_UNCATEGORIZED)
+        listOf(InsightType.SINGLE_UNCATEGORIZED_TRANSACTION)
 
     override val viewType: InsightViewType = getViewType()
 
