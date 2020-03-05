@@ -24,7 +24,7 @@ internal class EnrichmentDirector(
             InsightType.BUDGET_SUCCESS,
             InsightType.BUDGET_OVERSPENT -> EnrichmentType.BUDGET_STATE
 
-            InsightType.SINGLE_EXPENSE_UNCATEGORIZED -> EnrichmentType.TRANSACTION
+            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION -> EnrichmentType.TRANSACTION
 
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
 
