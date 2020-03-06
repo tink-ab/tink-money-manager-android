@@ -27,7 +27,7 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
     override fun getDataHolder(insight: Insight): InsightDataHolder {
         val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
             .expensesByDay
-            .sortedBy { it.date }
+            .sortedBy { it.date } // This will ensure we show data oldest to newest, from left to right in the chart
             .toChartData(dateUtils, amountFormatter)
         return WeeklyExpensesByDayDataHolder(chartData)
     }
