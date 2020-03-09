@@ -55,8 +55,4 @@ internal class DefaultRedirectionReceiver @Inject constructor(
             animation = FragmentAnimationFlags.FADE_IN_ONLY
         )
     }
-
-    override fun showCategory(categoryCode: String) {
-        // TODO: PFMSDK: Show statistics screen for the category
-    }
 }

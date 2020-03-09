@@ -18,6 +18,4 @@ open class InsightActionHandler {
         destinationUri: String,
         amount: Amount
     ): Boolean = false
-
-    fun showCategory(categoryCode: String): Boolean = false
 }
