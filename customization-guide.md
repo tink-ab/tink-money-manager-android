@@ -1,10 +1,10 @@
 # Customization
 
-You can customize the fonts and colors used in the finance overview UI by adding customizations in your application's `styles.xml`
+Tink PFM SDK allows you to perform various customizations to the UI.
 
 ## Customize fonts
 
-You can add custom font resources for three font typefaces which are represented by the custom attributes - `tink_font_bold`, `tink_font_semi_bold` and `tink_font_regular`. Set these custom attributes to the 
+You can add custom font resources in your application's `styles.xml` for three font typefaces which are represented by the custom attributes - `tink_font_bold`, `tink_font_semi_bold` and `tink_font_regular`. Set these custom attributes to the
 resource IDs of the font files you want to use.
 ```xml
 <resources>
@@ -16,6 +16,7 @@ resource IDs of the font files you want to use.
 
 ## Customize colors
 You can customize colors by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the custom attributes that are available.
+Add your extended style in your application's `styles.xml`.
 ```xml
 <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
     <item name="tink_expensesColor">@color/custom_expenses</item>
@@ -49,3 +50,18 @@ You can customize colors by extending the existing `TinkFinanceOverviewStyle` fr
 </style>
 ```
 
+# Customize Overview Features
+You can customize the various sections shown in the Overview screen by creating an `OverviewFeatures` instance and setting a list of features you want to show.
+```kotlin
+val sampleFeatureSet =
+        OverviewFeatures(
+            listOf(
+                OverviewFeature.ActionableInsights,
+                OverviewFeature.Statistics(listOf(StatisticType.EXPENSES, StatisticType.INCOME)),
+                OverviewFeature.Accounts,
+                OverviewFeature.LatestTransactions
+            )
+        )
+```
+You can also change the ordering of the sections and specifying the desired order in the list above.
+You have to pass this `OverviewFeatures` instance as parameter while setting up the `FinanceOverviewFragment`.
