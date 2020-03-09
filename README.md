@@ -61,6 +61,8 @@ val config =
 
 4. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](/customization-guide.md) to set this up.
 
+5. Extend the `InsightActionHandler` class. This is optional and you can add this subclass if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](/insight-actions-guide.md) to set this up.
+
 5. Create an instance of `FinanceOverviewFragment`
 
 ```kotlin
@@ -71,6 +73,7 @@ val financeOverviewFragment =
         clientConfiguration = config, // The client configuration object you created in step 1
         tracker = yourTracker // Your EventTracker implementation (optional),
         featureSet = yourOverviewFeatures // Your OverviewFeatures instance (optional)
+        insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass
     )
 ```
 `[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
