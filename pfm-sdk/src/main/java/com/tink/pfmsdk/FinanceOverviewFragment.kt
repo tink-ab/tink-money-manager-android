@@ -196,7 +196,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
-        private const val ARG_OVERVIEW_FEATURES = "overviewFeatureSet"
+        private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
@@ -205,7 +205,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          * @param styleResId The resource ID of your style that extends [R.style.TinkFinanceOverviewStyle]
          * @param clientConfiguration The [ClientConfiguration] object
          * @param tracker An optional [Tracker] implementation
-         * @param featureSet The [OverviewFeatures] object with the list of overview features to be included
+         * @param overviewFeatures The [OverviewFeatures] object with the list of overview features to be included
          * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
          */
         @JvmOverloads
@@ -215,7 +215,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             styleResId: Int,
             clientConfiguration: ClientConfiguration,
             tracker: Tracker? = null,
-            featureSet: OverviewFeatures = OverviewFeatures.ALL,
+            overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
             insightActionHandler: InsightActionHandler? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
@@ -229,7 +229,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
-                    ARG_OVERVIEW_FEATURES to featureSet
+                    ARG_OVERVIEW_FEATURES to overviewFeatures
                 )
             }
         }
