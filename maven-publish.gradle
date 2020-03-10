@@ -18,7 +18,7 @@ publishing {
             groupId GROUP
             artifactId pfmArtifactId(project.name)
 
-            version PFM_SDK_VERSION
+            version PFM_UI_VERSION
 
             artifact(aarPath(project.name))
 
@@ -42,7 +42,7 @@ publishing {
                             // Internal modules. Use the names of the generated public aars.
                             dependencyNode.appendNode('groupId', 'com.tink')
                             dependencyNode.appendNode('artifactId', pfmArtifactId(it.name))
-                            dependencyNode.appendNode('version', PFM_SDK_VERSION)
+                            dependencyNode.appendNode('version', PFM_UI_VERSION)
                         } else if(it instanceof ExternalModuleDependency) {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)

@@ -1,6 +1,6 @@
 # Customization
 
-Tink PFM SDK allows you to perform various customizations to the UI.
+Tink PFM UI allows you to perform various customizations to the UI.
 
 ## Customize fonts
 

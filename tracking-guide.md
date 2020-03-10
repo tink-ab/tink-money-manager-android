@@ -1,6 +1,6 @@
 # Tracking
 
-Tink PFM SDK allows you to track certain user events.
+Tink PFM UI allows you to track certain user events.
 
 A _Screen_ event occurs when a user navigates to a new screen within the Finance Overview UI.
 
