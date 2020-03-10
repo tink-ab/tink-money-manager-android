@@ -61,7 +61,7 @@ val config =
 
 4. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](/customization-guide.md) to set this up.
 
-5. Extend the `InsightActionHandler` class. This is optional and you can add this subclass if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](/insight-actions-guide.md) to set this up.
+5. [Optional] Extend the `InsightActionHandler` class, if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](/insight-actions-guide.md) to set this up.
 
 5. Create an instance of `FinanceOverviewFragment`
 
