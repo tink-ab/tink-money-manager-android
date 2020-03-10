@@ -23,8 +23,6 @@ val financeOverviewFragment =
         accessToken = "yourAccessToken", // Your access token
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
-        featureSet = yourOverviewFeatures, // Your OverviewFeatures instance (optional)
-        insightActionHandler = yourInsightActionHandler, // Your InsightActionHandler subclass (optional)
         tracker = eventTracker // Your EventTracker implementation
     )
 ```
