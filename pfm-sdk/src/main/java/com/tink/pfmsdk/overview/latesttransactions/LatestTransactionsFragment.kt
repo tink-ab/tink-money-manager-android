@@ -34,8 +34,12 @@ internal class LatestTransactionsFragment : BaseFragment() {
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
+
+        //Try scoping the ViewModel to the parent fragment to allow data retention
+        val scope = parentFragment ?: this
+
         viewModel = ViewModelProviders
-            .of(this, viewModelFactory)[LatestTransactionsViewModel::class.java]
+            .of(scope, viewModelFactory)[LatestTransactionsViewModel::class.java]
 
         transactionsAdapter = TransactionItemListAdapter(dateUtils, groupByDates = false)
         transactionsAdapter.onTransactionItemClickedListener = {
