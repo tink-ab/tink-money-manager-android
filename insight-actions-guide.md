@@ -9,10 +9,11 @@ In order to perform custom logic for insight actions, you have to extend the `In
 class ExampleActionHandler(val navController: NavController) : InsightActionHandler() {
     override fun viewTransactions(transactionIds: List<String>): Boolean {
         navController.navigate(MyTransactionListFragment.newInstance(transactionIds))
-        return true
+        return true // [1]
     }
 }
 ```
+`[1]` The overridden method must return `true` or `false` to notify the SDK whether the action has been handled for an insight. If the value is `true`, the insight will be archived.
 
 The `InsightActionHandler` subclass then needs to be configured when setting up the `FinanceOverviewFragment`.
 
