@@ -28,6 +28,4 @@ val financeOverviewFragment =
     )
 ```
 
-This is all you need to do to perform custom logic for insight actions in the finance overview UI.
-
-This is optional and if not set, the Tink PFM SDK uses the default internal action handler to handle the insight actions.
+Adding your own action handler is optional and if not set, the Tink PFM SDK will use the default internal action handler to handle the insight actions.
