@@ -13,7 +13,7 @@ class ExampleActionHandler(val navController: NavController) : InsightActionHand
     }
 }
 ```
-`[1]` The overridden method must return `true` or `false` to notify the SDK whether the action has been handled for an insight. If the value is `true`, the insight will be archived.
+`[1]` The overridden method must return `true` or `false` to notify the SDK whether the action has been handled for an insight. If the value is `true`, the insight will be marked as handled and removed from the list.
 
 The `InsightActionHandler` subclass then needs to be configured when setting up the `FinanceOverviewFragment`.
 
