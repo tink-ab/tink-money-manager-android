@@ -39,7 +39,7 @@ dependencies {
 //    implementation project(':data')
 //    implementation project(':data-commons')
 //    implementation project(':rpc')
-    implementation project(':pfm-sdk')
+    implementation project(':pfm-ui')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat

@@ -7,7 +7,7 @@ def aarPath(projectName) {
 }
 
 def pfmArtifactId(projectName) {
-    def fallback = "pfm-sdk-$projectName"
+    def fallback = "pfm-ui-$projectName"
     return hasProperty('ARTIFACT_ID') && project.name == projectName ? ARTIFACT_ID : fallback
 }
 
@@ -23,7 +23,7 @@ publishing {
             artifact(aarPath(project.name))
 
             pom {
-                name = "Tink PFM SDK " + project.name
+                name = "Tink PFM UI " + project.name
                 packaging = POM_PACKAGING
                 description = POM_DESCRIPTION
 

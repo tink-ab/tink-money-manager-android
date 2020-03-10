@@ -3,7 +3,7 @@ apply plugin: 'kotlin-kapt'
 apply from: '../dependencies.gradle'
 
 dependencies {
-    compile project(':annotations')
+    implementation project(':annotations')
     implementation libraries.kotlin_stdlib
     implementation libraries.auto_service
     kapt libraries.auto_service
