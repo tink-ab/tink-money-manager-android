@@ -64,4 +64,16 @@ val sampleFeatureSet =
         )
 ```
 You can also change the ordering of the sections and specifying the desired order in the list above.
+
 You have to pass this `OverviewFeatures` instance as parameter while setting up the `FinanceOverviewFragment`.
+
+```kotlin
+val financeOverviewFragment =
+    FinanceOverviewFragment.newInstance(
+        accessToken = "yourAccessToken", // Your access token
+        styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
+        clientConfiguration = config, // Your client configuration object
+        tracker = eventTracker, // Your EventTracker implementation (optional)
+        insightActionHandler = yourInsightActionHandler, // Your InsightActionHandler subclass (optional)
+        featureSet = yourOverviewFeatures // Your OverviewFeatures instance
+    )
