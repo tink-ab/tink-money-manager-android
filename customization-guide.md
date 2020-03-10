@@ -53,7 +53,7 @@ Add your extended style in your application's `styles.xml`.
 # Customize Overview Features
 You can customize the various sections shown in the Overview screen by creating an `OverviewFeatures` instance and setting a list of features you want to show.
 ```kotlin
-val sampleFeatureSet =
+val sampleOverviewFeatures =
         OverviewFeatures(
             listOf(
                 OverviewFeature.ActionableInsights,
@@ -73,5 +73,5 @@ val financeOverviewFragment =
         accessToken = "yourAccessToken", // Your access token
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // Your client configuration object
-        featureSet = yourOverviewFeatures // Your OverviewFeatures instance
+        overviewFeatures = yourOverviewFeatures // Your OverviewFeatures instance
     )

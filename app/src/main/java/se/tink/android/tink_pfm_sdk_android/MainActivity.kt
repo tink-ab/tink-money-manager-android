@@ -20,7 +20,7 @@ class MainActivity : FragmentActivity() {
                 styleResId = R.style.TinkStyle_Default,
                 clientConfiguration = Configuration.sampleClientConfiguration,
                 tracker = LogTracker(),
-                featureSet = Configuration.sampleFeatureSet
+                overviewFeatures = Configuration.sampleOverviewFeatures
             ).also {
                 currentFinanceOverviewFragment = it
             }
