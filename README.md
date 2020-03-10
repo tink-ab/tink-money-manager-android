@@ -71,9 +71,9 @@ val financeOverviewFragment =
         accessToken = "yourAccessToken", // [1]
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
         clientConfiguration = config, // The client configuration object you created in step 1
-        tracker = yourTracker // Your EventTracker implementation (optional),
-        featureSet = yourOverviewFeatures // Your OverviewFeatures instance (optional)
-        insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass
+        tracker = yourTracker, // Your EventTracker implementation (optional),
+        featureSet = yourOverviewFeatures, // Your OverviewFeatures instance (optional)
+        insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass (optional)
     )
 ```
 `[1]` Tink PFM SDK needs a valid access token for a specific user to function correctly. Since Tink PFM SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
