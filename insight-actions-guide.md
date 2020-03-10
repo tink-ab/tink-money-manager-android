@@ -1,6 +1,6 @@
 # Handling Insight Actions
 
-Tink PFM SDK allows you to add your own action handlers to perform the necessary logic when the user selects an action for an insight that requires more user interaction.
+Tink PFM UI allows you to add your own action handlers to perform the necessary logic when the user selects an action for an insight that requires more user interaction.
 
 ## Getting started
 In order to perform custom logic for insight actions, you have to extend the `InsightActionHandler` class. A very simple subclass could be:
@@ -27,4 +27,4 @@ val financeOverviewFragment =
     )
 ```
 
-Adding your own action handler is optional and if not set, the Tink PFM SDK will use the default internal action handler to handle the insight actions.
+Adding your own action handler is optional and if not set, the Tink PFM UI will use the default internal action handler to handle the insight actions.

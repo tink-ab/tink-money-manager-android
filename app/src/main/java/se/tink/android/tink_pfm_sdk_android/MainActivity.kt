@@ -2,7 +2,7 @@ package se.tink.android.tink_pfm_sdk_android
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-import com.tink.pfmsdk.FinanceOverviewFragment
+import com.tink.pfmui.FinanceOverviewFragment
 import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
 class MainActivity : FragmentActivity() {

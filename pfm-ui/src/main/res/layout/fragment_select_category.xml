@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/root_view"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor"
+  android:transitionGroup="false">
+
+  <com.tink.pfmui.view.TinkToolbar
+    android:id="@+id/tink_toolbar"
+    android:layout_width="0dp"
+    android:layout_height="?actionBarSize"
+    android:transitionName="@string/toolbar_transition"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <com.tink.pfmui.view.TinkTextView
+      android:id="@+id/category"
+      style="@style/mega"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:paddingStart="8dp"
+      android:paddingEnd="4dp"
+      android:background="?selectableItemBackground"
+      android:drawableEnd="@drawable/ic_arrow_down_white"
+      android:drawablePadding="8dp"
+      android:gravity="center"
+      android:maxLines="1"
+      android:text="@string/choose_category_text"
+      android:textColor="?tink_colorOnPrimary"/>
+
+  </com.tink.pfmui.view.TinkToolbar>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="?tink_backgroundColor"
+    android:transitionGroup="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tink_toolbar">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/list"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:transitionGroup="true"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintBottom_toTopOf="@id/button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+      android:id="@+id/button"
+      style="@style/button"
+      android:layout_width="0dp"
+      android:layout_height="@dimen/button_height"
+      android:text="@string/category_list_fragment_button_text"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

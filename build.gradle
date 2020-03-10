@@ -30,7 +30,7 @@ allprojects {
 }
 
 subprojects {
-    if(it.name != "app") {
+    if(it.name != "app" && it.name != "annotations" && it.name != "codegen") {
         apply from: "../maven-publish.gradle"
     }
 }
