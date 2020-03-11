@@ -1,7 +1,5 @@
 apply plugin: 'maven-publish'
 
-version TinkPfmVersion.name
-
 def aarPath(projectName) {
     def fallback = "build/outputs/aar/" + projectName + "-release.aar"
     return hasProperty('ARTIFACT_PATH') ? ARTIFACT_PATH : fallback
@@ -19,7 +17,7 @@ publishing {
             groupId GROUP
             artifactId pfmArtifactId(project.name)
 
-            version this.version
+            version TinkPfmVersion.name
 
             artifact(aarPath(project.name))
 
@@ -43,7 +41,7 @@ publishing {
                             // Internal modules. Use the names of the generated public aars.
                             dependencyNode.appendNode('groupId', 'com.tink')
                             dependencyNode.appendNode('artifactId', pfmArtifactId(it.name))
-                            dependencyNode.appendNode('version', this.version)
+                            dependencyNode.appendNode('version', TinkPfmVersion.name)
                         } else if(it instanceof ExternalModuleDependency) {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)
