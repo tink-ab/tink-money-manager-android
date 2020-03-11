@@ -46,5 +46,26 @@
     <item name="tink_textColorPrimaryInverse">@color/white</item>
     <item name="tink_cardBackgroundColor">@color/white</item>
 
+    <!--    Icons-->
+    <item name="tink_icon_category_all_expenses">@drawable/ic_all_expenses</item>
+    <item name="tink_icon_category_all_income">@drawable/ic_all_income</item>
+    <item name="tink_icon_category_expenses_transport">@drawable/ic_transport</item>
+    <item name="tink_icon_category_expenses_foodanddrinks">@drawable/ic_foodanddrinks</item>
+    <item name="tink_icon_category_expenses_home">@drawable/ic_home</item>
+    <item name="tink_icon_category_expenses_healthandbeauty">@drawable/ic_healthandbeauty</item>
+    <item name="tink_icon_category_expenses_leisure">@drawable/ic_leisure</item>
+    <item name="tink_icon_category_expenses_houseandgarden">@drawable/ic_houseandgarden</item>
+    <item name="tink_icon_category_expenses_shopping">@drawable/ic_shopping</item>
+    <item name="tink_icon_category_expenses_other">@drawable/ic_other</item>
+    <item name="tink_icon_category_income_benefits">@drawable/ic_benefits</item>
+    <item name="tink_icon_category_income_financial">@drawable/ic_financial</item>
+    <item name="tink_icon_category_income_pension">@drawable/ic_pension</item>
+    <item name="tink_icon_category_income_salary">@drawable/ic_salary</item>
+    <item name="tink_icon_category_income_reimbursements">@drawable/ic_reimbursements</item>
+    <item name="tink_icon_category_income_other">@drawable/ic_other</item>
+    <item name="tink_icon_category_transfers_exclude">@drawable/ic_exclude</item>
+    <item name="tink_icon_category_transfers_savings">@drawable/ic_savings</item>
+    <item name="tink_icon_category_transfers_other">@drawable/ic_other</item>
+    <item name="tink_icon_category_uncategorized">@drawable/ic_uncategorized</item>
   </style>
 </resources>

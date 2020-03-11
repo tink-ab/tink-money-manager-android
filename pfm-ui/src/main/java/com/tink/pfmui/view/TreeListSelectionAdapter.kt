@@ -15,6 +15,7 @@ import se.tink.commons.extensions.tint
 import se.tink.commons.extensions.visible
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
+import se.tink.commons.extensions.getDrawableFromAttr
 
 internal class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolder>(),
     OnViewHolderClickedListener {
@@ -302,7 +303,7 @@ private class TopLevelViewHolder(
         val categoryItem = (item as? TreeListSelectionItem.TopLevelItem)
             ?: throw IllegalStateException("Attempted to use TopLevelItemViewHolder for another item.")
 
-        icon.setImageResource(categoryItem.iconRes)
+        icon.setImageResource(itemView.context.getDrawableFromAttr(categoryItem.iconRes))
         icon.tint(categoryItem.iconColor)
         iconBackground.backgroundTint(categoryItem.iconBackgroundColor)
         setIsExpanded(categoryItem.isExpanded)
@@ -335,6 +336,7 @@ private class ActionItemViewHolder(
         super.bind(item)
         val actionItem = (item as? TreeListSelectionItem.ActionItem)
             ?: throw IllegalStateException("Attempted to use ActionItemViewHolder for another item.")
-        icon.setImageResource(actionItem.iconRes)
+
+        icon.setImageResource(itemView.context.getDrawableFromAttr(actionItem.iconRes))
     }
 }
