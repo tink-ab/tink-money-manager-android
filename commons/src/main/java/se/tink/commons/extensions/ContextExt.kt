@@ -20,12 +20,12 @@ fun Context.getColorFromAttr(
 }
 
 @JvmOverloads
-fun Context.getDrawableFromAttr(
-    @AttrRes attrColor: Int,
+fun Context.getDrawableResIdFromAttr(
+    @AttrRes attrId: Int,
     typedValue: TypedValue = TypedValue(),
     resolveRefs: Boolean = true
 ): Int {
-    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    theme.resolveAttribute(attrId, typedValue, resolveRefs)
     return typedValue.resourceId
 }
 
