@@ -8,7 +8,9 @@ import com.tink.pfmui.insights.enrichment.TransactionViewDetails
 import kotlinx.android.synthetic.main.item_insight_single_expense_uncategorized.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
+import se.tink.commons.extensions.getDrawableResIdFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightType
 import se.tink.insights.InsightViewType
@@ -56,7 +58,7 @@ class SingleExpenseUncategorizedViewHolder(
             transactionDescription.text = data.description
             date.text = data.date
             amount.text = data.amount
-            icon.setImageResource(R.drawable.ic_uncategorized)
+            icon.setImageResFromAttr(R.attr.tink_icon_category_uncategorized)
         }
 
         setupCommonBottomPart(insight)

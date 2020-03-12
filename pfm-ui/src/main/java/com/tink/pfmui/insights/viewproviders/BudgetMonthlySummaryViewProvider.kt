@@ -16,6 +16,7 @@ import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightType
@@ -124,7 +125,7 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
             } else {
                 group?.visibility = View.VISIBLE
 
-                icon.setImageResource(category.icon)
+                icon.setImageResFromAttr(category.icon)
                 icon.tint(category.iconColor.color)
                 background.backgroundTint(category.iconColor.lightColor)
             }

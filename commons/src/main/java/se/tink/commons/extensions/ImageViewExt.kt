@@ -11,3 +11,6 @@ fun ImageView.tint(color: Int) {
 fun ImageView.backgroundTint(color: Int) {
     backgroundTintList = ColorStateList.valueOf(context.getColorFromAttr(color))
 }
+
+fun ImageView.setImageResFromAttr(attrResId: Int) =
+    context.getDrawableResIdFromAttr(attrResId).also(::setImageResource)
