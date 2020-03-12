@@ -80,7 +80,7 @@
   <string name="tink_until_next_date">Until %s</string>
 
   <string name="tink_transactions_list_toolbar_title">Transactions</string>
-  <string name="tink_expenses_menu_settings_tite">Transactions</string>
+  <string name="tink_expenses_menu_settings_title">Transactions</string>
   <string name="tink_other">Other</string>
   <string name="tink_category_default_child_format">%s - Other</string>
 

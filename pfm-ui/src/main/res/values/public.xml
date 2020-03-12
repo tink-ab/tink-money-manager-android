@@ -34,7 +34,7 @@
   <public name="tink_until_next_date" type="string"/>
 
   <public name="tink_transactions_list_toolbar_title" type="string"/>
-  <public name="tink_expenses_menu_settings_tite" type="string"/>
+  <public name="tink_expenses_menu_settings_title" type="string"/>
   <public name="tink_other" type="string"/>
   <public name="tink_category_default_child_format" type="string"/>
 
