@@ -272,7 +272,7 @@ class ConfigurationFacade {
 				.setLoginMethods(Arrays.asList(AuthenticationMethod.values()))
 				.setRegisterMethods(Arrays.asList(AuthenticationMethod.values()))
 				.setSuggested(true)
-				.setTermsAndConditionsLink(context.getString(R.string.onboarding_new_user_terms_link))
+				.setTermsAndConditionsLink(context.getString(R.string.tink_onboarding_new_user_terms_link))
 				.createDeviceConfigurationMarket();
 
 			DeviceConfigurationResponse defaultResponse = new DeviceConfigurationResponse();

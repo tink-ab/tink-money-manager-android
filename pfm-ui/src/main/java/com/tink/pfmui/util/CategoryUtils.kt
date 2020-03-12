@@ -50,7 +50,7 @@ private fun Category.nameWithDefaultChildFormat(context: Context): String {
         parent.children.size > 1 &&
         !this.code.startsWith(CategoryExpenseType.EXPENSES_MISC.code) // to avoid "Other Other"
     ) {
-        String.format(context.getString(R.string.category_default_child_format), name)
+        String.format(context.getString(R.string.tink_category_default_child_format), name)
     } else {
         name
     }

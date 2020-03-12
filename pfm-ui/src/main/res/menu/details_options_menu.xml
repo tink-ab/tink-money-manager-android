@@ -3,6 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
     android:id="@+id/action_transactions"
-    android:title="@string/expenses_menu_settings_tite"
+    android:title="@string/tink_expenses_menu_settings_tite"
     app:showAsAction="never"/>
 </menu>

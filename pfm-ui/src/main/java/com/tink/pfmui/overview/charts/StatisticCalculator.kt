@@ -31,13 +31,13 @@ internal data class TransactionsItemsList(override val items: ArrayList<Transact
 internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Context, toToday: Boolean = true): String {
     return if (toToday && period.isInPeriod(DateTime.now())) {
         context.getString(
-            R.string.date_span_string,
+            R.string.tink_date_span_string,
             dateUtils.formatDateHumanShort(period.start),
-            context.getString(R.string.date_format_human_today)
+            context.getString(R.string.tink_date_format_human_today)
         )
     } else {
         context.getString(
-            R.string.until_next_date,
+            R.string.tink_until_next_date,
             dateUtils.formatDateHumanShort(period.stop)
         )
     }

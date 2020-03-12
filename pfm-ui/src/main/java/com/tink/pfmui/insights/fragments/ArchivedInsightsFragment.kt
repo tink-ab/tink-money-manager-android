@@ -22,7 +22,7 @@ class ArchivedInsightsFragment : BaseFragment() {
     override fun doNotRecreateView(): Boolean = false
     override fun getLayoutId(): Int = R.layout.fragment_insights
     override fun hasToolbar(): Boolean = true
-    override fun getTitle(): String = getString(R.string.insights_archive_title)
+    override fun getTitle(): String = getString(R.string.tink_insights_archive_title)
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.EVENTS_ARCHIVE
 
     @Inject

@@ -1,53 +1,53 @@
 <resources>
-  <string name="snackbar_utils_error_default">An error has occurred. Please try again later.</string>
-  <string name="snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
-  <string name="onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
+  <string name="tink_snackbar_utils_error_default">An error has occurred. Please try again later.</string>
+  <string name="tink_snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
+  <string name="tink_onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
-  <string name="date_format_human_today">Today</string>
-  <string name="date_format_human_yesterday">Yesterday</string>
-  <string name="date_format_human_tomorrow">Tomorrow</string>
-  <string name="date_formatter_monthly">yyyy-MM</string>
-  <string name="date_formatter_yearly">yyyy</string>
-  <string name="date_formatter_week_yearly">xxxx</string>
-  <string name="date_formatter_integer_date">yyyyMMdd</string>
-  <string name="date_formatter_integer_date_compact">yyMMdd</string>
-  <string name="date_formatter_monthly_only">MM</string>
-  <string name="date_formatter_monthly_compact">MMM</string>
-  <string name="date_formatter_month_name">MMMMM</string>
-  <string name="date_formatter_weekly">xxxx:ww</string>
-  <string name="date_formatter_daily">yyyy-MM-dd</string>
-  <string name="date_formatter_daily_compact">yy-MM-dd</string>
-  <string name="date_formatter_daily_pretty">MMM d</string>
-  <string name="date_formatter_daily_monthly">dd MMM</string>
-  <string name="date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
-  <string name="date_formatter_minutes">yyyy-MM-dd HH:mm</string>
-  <string name="date_formatter_seconds">yyyy-MM-dd HH:mm:ss</string>
-  <string name="date_formatter_seconds_dashes">yyyy-MM-dd&#45;&#45;HH:mm:ss</string>
-  <string name="date_formatter_seconds_t">yyyy-MM-dd\'T\'HH:mm:ss</string>
-  <string name="date_formatter_seconds_with_timezone">yyyy-MM-dd HH:mm:ssZ</string>
-  <string name="date_formatter_milliseconds_with_timezone">yyyy-MM-dd\'T\'HH:mm:ss.SSSZ</string>
-  <string name="date_formatter_time_millis">HH:mm:ss,SSS</string>
-  <string name="date_formatter_filename_safe">yyyy-MM-dd&#45;&#45;HH:mm:ss.SSS</string>
-  <string name="date_formatter_logging">yyyy-MM-dd HH:mm:ss,SSS</string>
-  <string name="date_formatter_day_of_week">EEEE</string>
-  <string name="date_formatter_day_of_week_compact">EEE</string>
-  <string name="date_formatter_month_and_day_of_week">EEEE MMM d</string>
-  <string name="date_formatter_month_and_day">MMMM d</string>
-  <string name="date_formatter_month_and_day_and_year">MMMM d yyyy</string>
-  <string name="date_formatter_month_and_year">MMMM yyyy</string>
-  <string name="date_formatter_month_and_year_compact">MMM yyyy</string>
+  <string name="tink_date_format_human_today">Today</string>
+  <string name="tink_date_format_human_yesterday">Yesterday</string>
+  <string name="tink_date_format_human_tomorrow">Tomorrow</string>
+  <string name="tink_date_formatter_monthly">yyyy-MM</string>
+  <string name="tink_date_formatter_yearly">yyyy</string>
+  <string name="tink_date_formatter_week_yearly">xxxx</string>
+  <string name="tink_date_formatter_integer_date">yyyyMMdd</string>
+  <string name="tink_date_formatter_integer_date_compact">yyMMdd</string>
+  <string name="tink_date_formatter_monthly_only">MM</string>
+  <string name="tink_date_formatter_monthly_compact">MMM</string>
+  <string name="tink_date_formatter_month_name">MMMMM</string>
+  <string name="tink_date_formatter_weekly">xxxx:ww</string>
+  <string name="tink_date_formatter_daily">yyyy-MM-dd</string>
+  <string name="tink_date_formatter_daily_compact">yy-MM-dd</string>
+  <string name="tink_date_formatter_daily_pretty">MMM d</string>
+  <string name="tink_date_formatter_daily_monthly">dd MMM</string>
+  <string name="tink_date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
+  <string name="tink_date_formatter_minutes">yyyy-MM-dd HH:mm</string>
+  <string name="tink_date_formatter_seconds">yyyy-MM-dd HH:mm:ss</string>
+  <string name="tink_date_formatter_seconds_dashes">yyyy-MM-dd&#45;&#45;HH:mm:ss</string>
+  <string name="tink_date_formatter_seconds_t">yyyy-MM-dd\'T\'HH:mm:ss</string>
+  <string name="tink_date_formatter_seconds_with_timezone">yyyy-MM-dd HH:mm:ssZ</string>
+  <string name="tink_date_formatter_milliseconds_with_timezone">yyyy-MM-dd\'T\'HH:mm:ss.SSSZ</string>
+  <string name="tink_date_formatter_time_millis">HH:mm:ss,SSS</string>
+  <string name="tink_date_formatter_filename_safe">yyyy-MM-dd&#45;&#45;HH:mm:ss.SSS</string>
+  <string name="tink_date_formatter_logging">yyyy-MM-dd HH:mm:ss,SSS</string>
+  <string name="tink_date_formatter_day_of_week">EEEE</string>
+  <string name="tink_date_formatter_day_of_week_compact">EEE</string>
+  <string name="tink_date_formatter_month_and_day_of_week">EEEE MMM d</string>
+  <string name="tink_date_formatter_month_and_day">MMMM d</string>
+  <string name="tink_date_formatter_month_and_day_and_year">MMMM d yyyy</string>
+  <string name="tink_date_formatter_month_and_year">MMMM yyyy</string>
+  <string name="tink_date_formatter_month_and_year_compact">MMM yyyy</string>
 
-  <string name="all_categories">All categories</string>
+  <string name="tink_all_categories">All categories</string>
 
-  <string name="overview_latest_transactions_title">Latest transactions</string>
-  <string name="overview_latest_transactions_view_all_link">See all</string>
+  <string name="tink_overview_latest_transactions_title">Latest transactions</string>
+  <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
-  <string name="transaction_similar_title">Similar transactions</string>
-  <string name="transaction_similar_description">Do you want to categorize these transactions as well?</string>
-  <string name="transaction_similar_button_skip_text">Skip</string>
-  <string name="transaction_similar_button_accept_text">Yes, change selected</string>
-  <string name="transaction_similar_marker_button_mark_text">Select all</string>
-  <string name="transaction_similar_marker_button_unmark_text">Unselect all</string>
+  <string name="tink_transaction_similar_title">Similar transactions</string>
+  <string name="tink_transaction_similar_description">Do you want to categorize these transactions as well?</string>
+  <string name="tink_transaction_similar_button_skip_text">Skip</string>
+  <string name="tink_transaction_similar_button_accept_text">Yes, change selected</string>
+  <string name="tink_transaction_similar_marker_button_mark_text">Select all</string>
+  <string name="tink_transaction_similar_marker_button_unmark_text">Unselect all</string>
 
   <string name="pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
   <string name="amount_transition" translatable="false">%1$s-amount-transition</string>
@@ -60,37 +60,38 @@
   <string name="transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
 
-  <string name="choose_category_text">Choose category</string>
+  <string name="tink_choose_category_text">Choose category</string>
 
-  <string name="category_list_fragment_button_text">Select</string>
+  <string name="tink_category_list_fragment_button_text">Select</string>
 
-  <string name="selector_1_months">1 month</string>
-  <string name="selector_6_months">6 months</string>
-  <string name="selector_12_months">12 months</string>
-  <string name="expenses_title">Expenses</string>
-  <string name="expenses_header_description_average">%s on average per month</string>
+  <string name="tink_selector_1_months">1 month</string>
+  <string name="tink_selector_6_months">6 months</string>
+  <string name="tink_selector_12_months">12 months</string>
+  <string name="tink_expenses_title">Expenses</string>
+  <string name="tink_expenses_header_description_average">%s on average per month</string>
+  <!-- We can make this public when we enable Left to Spend feature -->
   <string name="left_to_spend_title">Left to spend</string>
   <string name="left_to_spend_header_description_more">%s more than usual</string>
   <string name="left_to_spend_header_description_less">%s less than usual</string>
   <string name="left_to_spend_header_description_average">%s on average per month</string>
-  <string name="income_title">Income</string>
-  <string name="income_header_description_average">%s on average per month</string>
-  <string name="date_span_string">%1$s - %2$s</string>
-  <string name="until_next_date">Until %s</string>
+  <string name="tink_income_title">Income</string>
+  <string name="tink_income_header_description_average">%s on average per month</string>
+  <string name="tink_date_span_string">%1$s - %2$s</string>
+  <string name="tink_until_next_date">Until %s</string>
 
-  <string name="transactions_list_toolbar_title">Transactions</string>
-  <string name="expenses_menu_settings_tite">Transactions</string>
-  <string name="other">Other</string>
-  <string name="category_default_child_format">%s - Other</string>
+  <string name="tink_transactions_list_toolbar_title">Transactions</string>
+  <string name="tink_expenses_menu_settings_tite">Transactions</string>
+  <string name="tink_other">Other</string>
+  <string name="tink_category_default_child_format">%s - Other</string>
 
-  <string name="insights_tab_title">Events</string>
-  <string name="insights_archive_title">Archive</string>
-  <string name="insights_empty_state_title">You handled all events!</string>
-  <string name="insights_empty_state_subtitle">Check the archive if you want to see your previous ones</string>
-  <string name="insights_overview_card_new_events_title">New Events</string>
-  <string name="insights_overview_card_archived_events_title">Archived Events</string>
-  <string name="insights_overview_card_action_text">View</string>
+  <string name="tink_insights_tab_title">Events</string>
+  <string name="tink_insights_archive_title">Archive</string>
+  <string name="tink_insights_empty_state_title">You handled all events!</string>
+  <string name="tink_insights_empty_state_subtitle">Check the archive if you want to see your previous ones</string>
+  <string name="tink_insights_overview_card_new_events_title">New Events</string>
+  <string name="tink_insights_overview_card_archived_events_title">Archived Events</string>
+  <string name="tink_insights_overview_card_action_text">View</string>
 
-  <string name="insights_expenses_by_day_average_text">Average</string>
+  <string name="tink_insights_expenses_by_day_average_text">Average</string>
 
 </resources>
