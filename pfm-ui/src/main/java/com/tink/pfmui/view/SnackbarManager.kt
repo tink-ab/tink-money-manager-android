@@ -33,10 +33,10 @@ internal class SnackbarManager @Inject constructor() {
                      theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)
     ) {
         val message = when {
-            error?.statusCode?.value() == 408 -> context.getString(R.string.snackbar_utils_error_status_code_408)
+            error?.statusCode?.value() == 408 -> context.getString(R.string.tink_snackbar_utils_error_status_code_408)
             error != null && error.errorCode != ErrorCode.UNHANDLED_ERROR ->
-                error.backendMessage ?: context.getString(R.string.snackbar_utils_error_default)
-            else -> context.getString(R.string.snackbar_utils_error_default)
+                error.backendMessage ?: context.getString(R.string.tink_snackbar_utils_error_default)
+            else -> context.getString(R.string.tink_snackbar_utils_error_default)
         }
         displayError(message, theme)
     }

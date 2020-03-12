@@ -69,7 +69,7 @@ internal class OverviewChartViewModel @Inject constructor(
         //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
         val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false);
         val period = getPeriodString(dateUtils, it.period, context)
-        OverviewChartModel(context, R.string.expenses_title, data.sum(), period, color, DefaultColorGenerator, ArrayList(data))
+        OverviewChartModel(context, R.string.tink_expenses_title, data.sum(), period, color, DefaultColorGenerator, ArrayList(data))
     }
 
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
@@ -83,7 +83,7 @@ internal class OverviewChartViewModel @Inject constructor(
 
         val periodString =
             getPeriodString(dateUtils, it.period, context)
-        OverviewChartModel(context, R.string.income_title, data.sum(), periodString, color, DefaultColorGenerator, ArrayList(data))
+        OverviewChartModel(context, R.string.tink_income_title, data.sum(), periodString, color, DefaultColorGenerator, ArrayList(data))
     }
 
     val leftToSpend: LiveData<OverviewChartModel> = mapDistinct(MediatorLiveData<OverviewChartModel>().apply {

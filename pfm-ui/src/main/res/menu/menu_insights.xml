@@ -3,6 +3,6 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
     android:id="@+id/action_archive"
-    android:title="@string/insights_archive_title"
+    android:title="@string/tink_insights_archive_title"
     app:showAsAction="ifRoom|withText"/>
 </menu>

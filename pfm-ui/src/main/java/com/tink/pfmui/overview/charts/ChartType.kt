@@ -11,9 +11,9 @@ import se.tink.core.models.Category
 internal enum class ChartType {
     EXPENSES {
         override val screenEvent = ScreenEvent.EXPENSES
-        override val title: Int get() = R.string.expenses_title
+        override val title: Int get() = R.string.tink_expenses_title
         override val color: Int get() = R.attr.tink_expensesColor
-        override val topCategoryName: Int get() = R.string.all_categories
+        override val topCategoryName: Int get() = R.string.tink_all_categories
         override val type: Category.Type get() = Category.Type.TYPE_EXPENSES
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
@@ -33,9 +33,9 @@ internal enum class ChartType {
     },
     INCOME {
         override val screenEvent = ScreenEvent.INCOME
-        override val title: Int get() = R.string.income_title
+        override val title: Int get() = R.string.tink_income_title
         override val color: Int get() = R.attr.tink_incomeColor
-        override val topCategoryName: Int get() = R.string.all_categories
+        override val topCategoryName: Int get() = R.string.tink_all_categories
         override val type: Category.Type get() = Category.Type.TYPE_INCOME
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)

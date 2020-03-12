@@ -15,7 +15,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/horizontal_margin"
     android:layout_marginTop="@dimen/similar_transactions_header_padding"
-    android:text="@string/transaction_similar_description"
+    android:text="@string/tink_transaction_similar_description"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
@@ -28,7 +28,7 @@
     android:layout_marginTop="16dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="32dp"
-    android:text="@string/transaction_similar_marker_button_unmark_text"
+    android:text="@string/tink_transaction_similar_marker_button_unmark_text"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/description"
     app:layout_constraintBottom_toTopOf="@id/recyclerView"/>
@@ -47,7 +47,7 @@
     style="@style/Button.Default"
     android:layout_width="match_parent"
     android:layout_height="@dimen/button_height"
-    android:text="@string/transaction_similar_button_skip_text"
+    android:text="@string/tink_transaction_similar_button_skip_text"
     app:layout_constraintBottom_toTopOf="@id/doneBtn"/>
 
   <Button
@@ -56,7 +56,7 @@
     android:layout_height="@dimen/button_height"
     android:layout_width="match_parent"
     android:elevation="@dimen/button_elevation"
-    android:text="@string/transaction_similar_button_accept_text"
+    android:text="@string/tink_transaction_similar_button_accept_text"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

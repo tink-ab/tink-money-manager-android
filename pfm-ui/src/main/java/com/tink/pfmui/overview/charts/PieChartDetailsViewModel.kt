@@ -117,7 +117,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
     private fun calculateStatistic(type: ChartType, data: ChartData): ChartList {
         return when (data) {
             is TransactionsData -> calculateTransactionsStatistic(
-                context.getString(R.string.other),
+                context.getString(R.string.tink_other),
                 data.transactions
             )
             is StatisticalData -> {
