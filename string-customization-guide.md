@@ -15,7 +15,7 @@ For example, you can add a Swedish translation of the text in your application's
   <string name="tink_all_categories">Alla kategorier</string>
 </resources>
 ```
-Here's a list of all the public string resources in the Tink PFM UI, that can be overridden.
+Here's a list of all the public string resources in the Tink PFM UI that can be overridden:
 
 | String Resource ID | English Text |
 |------|-----|
