@@ -4,12 +4,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.AttrRes
-import androidx.annotation.DrawableRes
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.BudgetState
 import com.tink.pfmui.insights.enrichment.BudgetSummaryDetailItem
 import com.tink.pfmui.insights.enrichment.BudgetSummaryViewDetails
+import com.tink.pfmui.insights.extensions.IconResource
 import com.tink.pfmui.insights.extensions.getIcon
 import kotlinx.android.synthetic.main.item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
@@ -36,7 +36,7 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
     ) : InsightDataHolder
 
     data class BudgetMonthlySummaryCategory(
-        @DrawableRes val icon: Int,
+        val icon: IconResource,
         val iconColor: BudgetColor
     )
 
@@ -125,7 +125,10 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
             } else {
                 group?.visibility = View.VISIBLE
 
-                icon.setImageResFromAttr(category.icon)
+                when(category.icon) {
+                    is IconResource.Attribute -> icon.setImageResFromAttr(category.icon.attrResId)
+                    is IconResource.DrawableId -> icon.setImageResource(category.icon.drawableResId)
+                }
                 icon.tint(category.iconColor.color)
                 background.backgroundTint(category.iconColor.lightColor)
             }

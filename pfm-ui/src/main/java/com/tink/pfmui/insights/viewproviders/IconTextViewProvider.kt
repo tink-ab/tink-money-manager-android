@@ -6,11 +6,13 @@ import androidx.annotation.AttrRes
 import androidx.annotation.DrawableRes
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
+import com.tink.pfmui.insights.extensions.IconResource
 import kotlinx.android.synthetic.main.item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightAction
@@ -26,7 +28,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     data class IconTextViewDataHolder(
         val title: String,
         val description: String,
-        @DrawableRes val icon: Int,
+        val icon: IconResource,
         @AttrRes val colorAttr: Int,
         val state: InsightState,
         val actions: List<InsightAction>,
@@ -71,7 +73,10 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
             setupCommonBottomPart(insight)
 
             view.apply {
-                icon.setImageResource(data.icon)
+                when(data.icon) {
+                    is IconResource.Attribute -> icon.setImageResFromAttr(data.icon.attrResId)
+                    is IconResource.DrawableId -> icon.setImageResource(data.icon.drawableResId)
+                }
                 icon.tint(data.colorAttr)
                 iconBackground.backgroundTint(data.colorAttr)
                 title.setTextColor(
@@ -84,11 +89,10 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     }
 
     private fun Insight.getIcon() = when (type) {
-        //TODO: use attributes
-        InsightType.DOUBLE_CHARGE -> R.drawable.ic_doubletransaction
-        InsightType.LARGE_EXPENSE -> R.drawable.ic_category_all_expenses
-        InsightType.ACCOUNT_BALANCE_LOW -> R.drawable.ic_alert
-        else -> R.drawable.ic_uncategorized
+        InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.ic_doubletransaction)
+        InsightType.LARGE_EXPENSE -> IconResource.DrawableId(R.drawable.ic_category_all_expenses)
+        InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.ic_alert)
+        else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 
     private fun Insight.getColorAttr() = when (type) {
