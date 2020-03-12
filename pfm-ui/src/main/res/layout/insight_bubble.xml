@@ -41,7 +41,6 @@
     app:layout_constraintBottom_toTopOf="@+id/primaryText"
     app:layout_constraintEnd_toEndOf="@id/circle"
     app:layout_constraintStart_toStartOf="@id/circle"
-    tools:src="@drawable/ic_foodanddrinks"
     tools:tint="@color/expensive_blue"/>
 
   <TextView
