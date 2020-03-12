@@ -113,5 +113,5 @@ The Tink Finance Overview only works correctly when the screen orientation is lo
 You can achieve this by opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
 
 ## Guides
-- [Customization guide](/customization-guide.md) This document outlines how to customize colors and fonts for the finance overview UI
+- [Customization guide](/customization-guide.md) This document outlines how to set up various customizations available for the finance overview UI
 - [Tracking guide](/tracking-guide.md) This document outlines how to set up trackers for tracking screens and events in the finance overview UI

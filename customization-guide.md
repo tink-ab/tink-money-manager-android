@@ -50,6 +50,10 @@ Add your extended style in your application's `styles.xml`.
 </style>
 ```
 
+# Customize strings
+You can customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the Tink PFM UI.
+Follow the [string customization guide](/string-customization-guide.md) to set this up.
+
 # Customize Overview Features
 You can customize the various sections shown in the Overview screen by creating an `OverviewFeatures` instance and setting a list of features you want to show.
 ```kotlin
