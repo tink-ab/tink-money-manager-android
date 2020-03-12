@@ -40,6 +40,7 @@ import se.tink.commons.categories.getIcon
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import kotlin.properties.Delegates
 
@@ -92,12 +93,11 @@ internal class FullPieChartFragment : BaseFragment() {
         val iconColor = ownTheme.iconTheme.iconColorAttr
         val circleColorRes = ownTheme.iconTheme.iconCircleColorAttr
         val circleColor = requireContext().getColorFromAttr(circleColorRes)
-        val iconRes = requireContext().getDrawableResIdFromAttr(item.category.getIcon())
         return PieChartLabelView(context!!, anchor).also { label ->
             DataBindingUtil.inflate<PieChartLabelBinding>(LayoutInflater.from(context), R.layout.pie_chart_label, label, true).apply {
                 title.text = CurrencyUtils.formatAmountRoundWithCurrencySymbol(item.amount.toDouble())
                 type = item.category.code
-                icon.setImageResource(iconRes)
+                icon.setImageResFromAttr(item.category.getIcon())
                 icon.tint(iconColor)
                 icon.backgroundTint(circleColorRes)
                 icon.setOnClickListener { onItemClick(item) }

@@ -10,6 +10,7 @@ import se.tink.commons.R
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getDrawableResIdFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 
 typealias Marked = SimilarTransactionsAdapter.Marked
@@ -174,7 +175,7 @@ class SimilarTransactionsAdapter :
             with(itemView) {
 
                 val (iconRes, iconColor, iconBackgroundColor) = item.icon
-                icon.setImageResource(context.getDrawableResIdFromAttr(iconRes))
+                icon.setImageResFromAttr(iconRes)
                 icon.tint(iconColor)
                 iconBackground.setImageResource(0)
                 iconBackground.backgroundTint(iconBackgroundColor)
