@@ -9,13 +9,14 @@ import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.BudgetState
 import com.tink.pfmui.insights.enrichment.BudgetSummaryDetailItem
 import com.tink.pfmui.insights.enrichment.BudgetSummaryViewDetails
-import com.tink.pfmui.insights.extensions.IconResource
+import se.tink.commons.icons.IconResource
 import com.tink.pfmui.insights.extensions.getIcon
 import kotlinx.android.synthetic.main.item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setIconRes
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
@@ -124,11 +125,7 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
                 group?.visibility = View.GONE
             } else {
                 group?.visibility = View.VISIBLE
-
-                when(category.icon) {
-                    is IconResource.Attribute -> icon.setImageResFromAttr(category.icon.attrResId)
-                    is IconResource.DrawableId -> icon.setImageResource(category.icon.drawableResId)
-                }
+                icon.setIconRes(category.icon)
                 icon.tint(category.iconColor.color)
                 background.backgroundTint(category.iconColor.lightColor)
             }

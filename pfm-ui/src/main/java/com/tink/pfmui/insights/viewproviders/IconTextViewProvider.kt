@@ -3,15 +3,15 @@ package com.tink.pfmui.insights.viewproviders
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AttrRes
-import androidx.annotation.DrawableRes
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import com.tink.pfmui.insights.extensions.IconResource
+import se.tink.commons.icons.IconResource
 import kotlinx.android.synthetic.main.item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setIconRes
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
@@ -73,10 +73,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
             setupCommonBottomPart(insight)
 
             view.apply {
-                when(data.icon) {
-                    is IconResource.Attribute -> icon.setImageResFromAttr(data.icon.attrResId)
-                    is IconResource.DrawableId -> icon.setImageResource(data.icon.drawableResId)
-                }
+                icon.setIconRes(data.icon)
                 icon.tint(data.colorAttr)
                 iconBackground.backgroundTint(data.colorAttr)
                 title.setTextColor(
