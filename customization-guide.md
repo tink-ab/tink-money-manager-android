@@ -57,7 +57,6 @@ Add your extended style in your application's `styles.xml`.
     <item name="tink_textColorTertiary">@color/textColorTertiary</item>
     <item name="tink_textColorPrimaryDisabled">@color/textColorPrimaryDisabled</item>
     <item name="tink_textColorSecondaryDisabled">@color/textColorSecondaryDisabled</item>
-    <item name="tink_textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
     <item name="tink_cardBackgroundColor">@color/custom_cardBackgroundColor</item>
 </style>
 ```
