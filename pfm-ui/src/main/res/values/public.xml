@@ -2,7 +2,6 @@
 <resources>
   <public name="tink_snackbar_utils_error_default" type="string"/>
   <public name="tink_snackbar_utils_error_status_code_408" type="string"/>
-  <public name="tink_onboarding_new_user_terms_link" type="string"/>
 
   <public name="tink_date_format_human_today" type="string"/>
   <public name="tink_date_format_human_yesterday" type="string"/>
