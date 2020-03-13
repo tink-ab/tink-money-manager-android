@@ -46,5 +46,26 @@
     <item name="tink_textColorPrimaryInverse">@color/white</item>
     <item name="tink_cardBackgroundColor">@color/white</item>
 
+    <!--    Icons-->
+    <item name="tink_icon_category_all_expenses">@drawable/ic_category_all_expenses</item>
+    <item name="tink_icon_category_all_income">@drawable/ic_category_all_income</item>
+    <item name="tink_icon_category_expenses_transport">@drawable/ic_category_transport</item>
+    <item name="tink_icon_category_expenses_foodanddrinks">@drawable/ic_category_foodanddrinks</item>
+    <item name="tink_icon_category_expenses_home">@drawable/ic_category_home</item>
+    <item name="tink_icon_category_expenses_healthandbeauty">@drawable/ic_category_healthandbeauty</item>
+    <item name="tink_icon_category_expenses_leisure">@drawable/ic_category_leisure</item>
+    <item name="tink_icon_category_expenses_houseandgarden">@drawable/ic_category_houseandgarden</item>
+    <item name="tink_icon_category_expenses_shopping">@drawable/ic_category_shopping</item>
+    <item name="tink_icon_category_expenses_other">@drawable/ic_category_other</item>
+    <item name="tink_icon_category_income_benefits">@drawable/ic_category_benefits</item>
+    <item name="tink_icon_category_income_financial">@drawable/ic_category_financial</item>
+    <item name="tink_icon_category_income_pension">@drawable/ic_category_pension</item>
+    <item name="tink_icon_category_income_salary">@drawable/ic_category_salary</item>
+    <item name="tink_icon_category_income_reimbursements">@drawable/ic_category_reimbursement</item>
+    <item name="tink_icon_category_income_other">@drawable/ic_category_other</item>
+    <item name="tink_icon_category_transfers_exclude">@drawable/ic_category_excluded</item>
+    <item name="tink_icon_category_transfers_savings">@drawable/ic_category_savings</item>
+    <item name="tink_icon_category_transfers_other">@drawable/ic_category_other</item>
+    <item name="tink_icon_category_uncategorized">@drawable/ic_uncategorized</item>
   </style>
 </resources>

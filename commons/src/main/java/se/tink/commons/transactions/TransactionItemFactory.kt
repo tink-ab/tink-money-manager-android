@@ -87,7 +87,7 @@ class TransactionItemFactory @Inject constructor(
             val icon = if (isUpcoming) {
                 // TODO: PFMSDK: Remove upcoming transaction UI setting
                 ListItem.TransactionItem.Icon(
-                    R.drawable.ic_all_expenses,
+                    R.attr.tink_icon_category_all_expenses,
                     R.attr.tink_transferColor,
                     R.attr.tink_transferLightColor
                 )

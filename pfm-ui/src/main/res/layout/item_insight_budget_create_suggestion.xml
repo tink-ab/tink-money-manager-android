@@ -33,7 +33,6 @@
         app:primaryTextStyle="@style/giga"
         app:secondaryTextStyle="@style/nano"
         app:textColor="?tink_expensesColor"
-        tools:icon="@drawable/ic_foodanddrinks"
         tools:primaryText="3 200 kr"
         tools:secondaryText="Ditt snitt per manad"/>
 
@@ -49,7 +48,6 @@
         app:primaryTextStyle="@style/hecto.bold"
         app:secondaryTextStyle="@style/nano.semibold"
         app:textColor="?tink_colorOnExpenses"
-        tools:icon="@drawable/ic_foodanddrinks"
         tools:primaryText="2 880 kr"
         tools:secondaryText="Ny budget"/>
 

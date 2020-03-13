@@ -41,8 +41,7 @@
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground0"
       app:layout_constraintStart_toStartOf="@+id/iconBackground0"
-      app:layout_constraintTop_toTopOf="@+id/iconBackground0"
-      tools:drawable="@drawable/ic_foodanddrinks" />
+      app:layout_constraintTop_toTopOf="@+id/iconBackground0" />
 
     <ImageView
       android:id="@+id/iconBackground1"
@@ -63,8 +62,7 @@
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground1"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground1"
       app:layout_constraintStart_toStartOf="@+id/iconBackground1"
-      app:layout_constraintTop_toTopOf="@+id/iconBackground1"
-      tools:drawable="@drawable/ic_foodanddrinks" />
+      app:layout_constraintTop_toTopOf="@+id/iconBackground1" />
 
     <ImageView
       android:id="@+id/iconBackground2"
@@ -85,8 +83,7 @@
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground2"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground2"
       app:layout_constraintStart_toStartOf="@+id/iconBackground2"
-      app:layout_constraintTop_toTopOf="@+id/iconBackground2"
-      tools:drawable="@drawable/ic_foodanddrinks" />
+      app:layout_constraintTop_toTopOf="@+id/iconBackground2" />
 
     <TextView
       android:id="@+id/categoryName0"

@@ -84,5 +84,5 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
     }
 
     // TODO: Update once the data from backend
-    private fun Insight.getIcon() = R.drawable.ic_foodanddrinks
+    private fun Insight.getIcon() = R.drawable.ic_alert
 }
