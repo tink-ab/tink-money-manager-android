@@ -3,16 +3,16 @@ package com.tink.pfmui.view
 import android.content.Context
 import android.graphics.Typeface
 import androidx.annotation.StyleRes
+import com.tink.annotations.PfmScope
+import com.tink.pfmui.R
 import com.tink.pfmui.extensions.BooleanAttribute
 import com.tink.pfmui.extensions.ColorAttribute
 import com.tink.pfmui.extensions.DimensionAttribute
 import com.tink.pfmui.extensions.FloatAttribute
-import com.tink.pfmui.R
 import com.tink.pfmui.extensions.TypefaceAttribute
 import com.tink.pfmui.extensions.fetchThemeAttributesFromStyle
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal open class H2(context: Context) : TextViewXmlTheme(context,
     R.style.h2
 )

@@ -2,6 +2,7 @@ package com.tink.pfmui.insights.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.tink.annotations.PfmScope
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createMutationHandler
@@ -11,9 +12,8 @@ import se.tink.core.models.insights.Insight
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.service.InsightService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class InsightsRepository @Inject constructor(
     private val insightService: InsightService
 ) {

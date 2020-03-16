@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import androidx.annotation.Nullable;
 import com.google.common.base.Optional;
+import com.tink.annotations.PfmScope;
 import com.tink.pfmui.ClientDataStorage;
 import com.tink.pfmui.R;
 import io.reactivex.Completable;
@@ -27,7 +28,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import se.tink.android.di.application.ApplicationScoped;
 import se.tink.core.models.device.AuthenticationMethod;
 import se.tink.core.models.device.DeviceConfigurationMarket;
@@ -38,7 +38,7 @@ import se.tink.repository.TinkNetworkError;
 import se.tink.repository.service.DeviceService;
 import timber.log.Timber;
 
-@Singleton
+@PfmScope
 class ConfigurationFacade {
 	private final Context context;
 	private final ConfigurationCache cache;

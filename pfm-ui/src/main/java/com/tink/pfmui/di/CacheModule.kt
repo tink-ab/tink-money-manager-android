@@ -2,6 +2,7 @@ package com.tink.pfmui.di
 
 import android.content.Context
 import androidx.room.Room
+import com.tink.annotations.PfmScope
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -33,13 +34,12 @@ import se.tink.repository.cache.TransactionDatabaseCache
 import se.tink.repository.cache.UserConfigurationDatabaseCache
 import se.tink.repository.cache.WritableCacheRepository
 import se.tink.repository.cache.database.CacheDatabase
-import javax.inject.Singleton
 
 @Module(includes = [CacheBindingModule::class])
 internal class CacheModule {
 
     @Provides
-    @Singleton
+    @PfmScope
     fun cacheDatabase(@ApplicationScoped context: Context): CacheDatabase {
         return Room.inMemoryDatabaseBuilder(context, CacheDatabase::class.java)
             .fallbackToDestructiveMigration()
@@ -130,13 +130,13 @@ internal class CacheModule {
     }
 
     @Provides
-    @Singleton
+    @PfmScope
     fun providerCache(): WritableCacheRepository<Provider> {
         return InMemoryCache()
     }
 
     @Provides
-    @Singleton
+    @PfmScope
     fun credentialCache(): WritableCacheRepository<Credential> {
         return InMemoryCache()
     }

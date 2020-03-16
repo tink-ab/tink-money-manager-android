@@ -1,10 +1,10 @@
 package com.tink.pfmui.insights.actionhandling
 
+import com.tink.annotations.PfmScope
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightAction
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal object CustomInsightActionHandler : ActionHandler {
 
     private var insightActionHandler: InsightActionHandler? = null

@@ -1,9 +1,9 @@
 package se.tink.repository.service
 
+import com.tink.annotations.PfmScope
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class DataRefreshHandler @Inject constructor(
     private val categoryService: CategoryService,
     private val statisticService: StatisticService,

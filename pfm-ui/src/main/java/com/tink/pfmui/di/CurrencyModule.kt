@@ -7,17 +7,17 @@ import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSignAndSymbol
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSymbol
+import com.tink.annotations.PfmScope
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.models.misc.Amount
-import javax.inject.Singleton
 
 @Module
 internal class CurrencyModule {
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideAmountFormatter(): AmountFormatter =
         object : AmountFormatter {
             override fun format(

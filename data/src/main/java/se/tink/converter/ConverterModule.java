@@ -1,14 +1,14 @@
 package se.tink.converter;
 
+import com.tink.annotations.PfmScope;
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 
 @Module
 public class ConverterModule {
 
 	@Provides
-	@Singleton
+	@PfmScope
 	public ModelConverter provideModelConverter() {
 		return new ModelConverterImpl();
 	}

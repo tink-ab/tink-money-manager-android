@@ -3,6 +3,7 @@ package com.tink.pfmui.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.tink.annotations.PfmScope
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
 import se.tink.core.models.misc.Period
@@ -10,9 +11,8 @@ import se.tink.core.models.statistic.StatisticTree
 import se.tink.repository.ObjectChangeObserver
 import se.tink.repository.service.StatisticService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal class StatisticsRepository @Inject constructor(
     private val statisticService: StatisticService
 ) {

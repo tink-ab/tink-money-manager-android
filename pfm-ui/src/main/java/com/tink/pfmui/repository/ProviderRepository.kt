@@ -2,6 +2,7 @@ package com.tink.pfmui.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.tink.annotations.PfmScope
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
@@ -12,9 +13,8 @@ import se.tink.core.models.provider.Provider
 import se.tink.repository.service.ProviderService
 import se.tink.tink_android_data.BuildConfig
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal class ProviderRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val service: ProviderService

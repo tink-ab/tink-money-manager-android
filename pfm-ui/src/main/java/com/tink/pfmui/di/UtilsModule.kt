@@ -1,12 +1,12 @@
 package com.tink.pfmui.di
 
+import com.tink.annotations.PfmScope
 import com.tink.pfmui.AppExecutorsDefaultImpl
 import dagger.Binds
 import dagger.Module
 import se.tink.android.AppExecutors
 import se.tink.repository.DefaultErrorHandler
 import se.tink.repository.TinkNetworkErrorHandler
-import javax.inject.Singleton
 
 @Module
 internal interface UtilsModule {
@@ -15,6 +15,6 @@ internal interface UtilsModule {
     fun errorHandler(defaultErrorHandler: DefaultErrorHandler): TinkNetworkErrorHandler
 
     @Binds
-    @Singleton
+    @PfmScope
     fun provideAppExecutors(executors: AppExecutorsDefaultImpl): AppExecutors
 }

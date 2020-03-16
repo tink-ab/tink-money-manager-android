@@ -2,6 +2,7 @@ package com.tink.pfmui.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.annotations.PfmScope
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
@@ -31,9 +32,8 @@ import se.tink.repository.TinkNetworkError
 import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.service.CredentialService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal class CredentialRepository @Inject constructor(
     private val appExecutors: AppExecutors,
     private val service: CredentialService,

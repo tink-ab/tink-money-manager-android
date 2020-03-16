@@ -7,13 +7,13 @@ import android.content.Context
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import android.view.View
+import com.tink.annotations.PfmScope
 import com.tink.pfmui.R
 import com.tink.pfmui.theme.TinkDefaultSnackbarTheme
 import com.tink.pfmui.theme.TinkErrorSnackbarTheme
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.TinkNetworkError.ErrorCode
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 private interface SnackbarHandler {
@@ -21,7 +21,7 @@ private interface SnackbarHandler {
     fun displayLoader(message: String, theme: TinkSnackbar.Theme): TinkSnackbar
 }
 
-@Singleton
+@PfmScope
 internal class SnackbarManager @Inject constructor() {
     private val handlers = mutableListOf<SnackbarHandler>()
 

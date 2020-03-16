@@ -1,6 +1,7 @@
 package com.tink.pfmui.di
 
 import android.content.Context
+import com.tink.annotations.PfmScope
 import com.tink.pfmui.ClientDataStorage
 import com.tink.pfmui.buildConfig.NetworkConfiguration
 import dagger.Module
@@ -14,19 +15,18 @@ import se.tink.repository.TLSHelper
 import se.tink.repository.service.ChannelConnector
 import se.tink.repository.service.HeaderClientInterceptor
 import java.io.ByteArrayInputStream
-import javax.inject.Singleton
 
 @Module
 internal class NetworkModule {
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideInterceptor(dataStorage: ClientDataStorage): HeaderClientInterceptor {
         return HeaderClientInterceptor(dataStorage.uuid)
     }
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideChannel(networkConfig: NetworkConfiguration, interceptor: HeaderClientInterceptor, @ApplicationScoped context: Context): Channel {
         val channel = OkHttpChannelBuilder.forAddress(networkConfig.serverAddress, networkConfig.port).apply {
             if (networkConfig.useSsl) {

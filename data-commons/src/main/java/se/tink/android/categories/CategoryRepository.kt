@@ -1,13 +1,13 @@
 package se.tink.android.categories
 
 import androidx.lifecycle.MutableLiveData
+import com.tink.annotations.PfmScope
 import se.tink.core.models.category.CategoryTree
 import se.tink.repository.ObjectChangeObserver
 import se.tink.repository.service.CategoryService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class CategoryRepository @Inject constructor(service: CategoryService) {
 
     val categories: MutableLiveData<CategoryTree> = object : MutableLiveData<CategoryTree>() {

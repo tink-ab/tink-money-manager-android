@@ -1,11 +1,11 @@
 package com.tink.pfmui.di;
 
+import com.tink.annotations.PfmScope;
 import dagger.Module;
 import dagger.Provides;
 import io.grpc.Channel;
 import java.security.Security;
 import java.util.List;
-import javax.inject.Singleton;
 import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
@@ -67,25 +67,25 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	StreamingServiceGrpc.StreamingServiceStub providesStreamingService(Channel channel) {
 		return StreamingServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	AccountServiceGrpc.AccountServiceStub accountServiceApi(Channel channel) {
 		return AccountServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	LoanServiceGrpc.LoanServiceStub loanServiceStub(Channel channel) {
 		return LoanServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	TransactionServiceGrpc.TransactionServiceStub provideTransactionService(
 		Channel channel
 	) {
@@ -93,19 +93,19 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	UserServiceGrpc.UserServiceStub userServiceStub(Channel channel) {
 		return UserServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	StatisticServiceGrpc.StatisticServiceStub statisticServiceStub(Channel channel) {
 		return StatisticServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	AccountService provideAccountService(
 		AccountServiceGrpc.AccountServiceStub accountServiceApi,
 		StreamingService streamingServiceStub,
@@ -116,13 +116,13 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	CredentialServiceGrpc.CredentialServiceStub credentialServiceApi(Channel channel) {
 		return CredentialServiceGrpc.newStub(channel);
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	TransactionService provideTransactionRepository(
 		TransactionServiceGrpc.TransactionServiceStub transactionServiceApi,
 		StreamingService streamingServiceStub,
@@ -141,7 +141,7 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	UserService provideUserService(
 		ModelConverter converter,
 		UserServiceGrpc.UserServiceStub userService,
@@ -157,7 +157,7 @@ class ServiceModule {
 
 
 	@Provides
-	@Singleton
+	@PfmScope
 	CredentialService provideCredentialRepository(
 		CredentialServiceGrpc.CredentialServiceStub api,
 		StreamingService streamingServiceStub,
@@ -170,7 +170,7 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	UserConfigurationService userConfigurationService(
 		StreamingService streamingService,
 		UserService userService,
@@ -181,7 +181,7 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	StatisticService provideStatisticService(
 		StreamingService streaming,
 		ModelConverter converter,
@@ -194,7 +194,7 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	StreamingService provideStreamingService(
 		StreamingServiceGrpc.StreamingServiceStub stub,
 		ModelConverter converter,
@@ -207,7 +207,7 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	CategoryService provideCategoryRepository(
 		StreamingService stub,
 		Channel channel,
@@ -219,18 +219,18 @@ class ServiceModule {
 	}
 
 	@Provides
-	@Singleton
+	@PfmScope
 	DeviceService provideDeviceService(Channel channel, ModelConverter modelConverter) {
 		return new DeviceServiceImpl(DeviceServiceGrpc.newStub(channel), modelConverter);
 	}
 
-	@Singleton
+	@PfmScope
 	@Provides
 	public BudgetService budgetService(ModelConverter modelConverter, Channel channel) {
 		return new BudgetServiceImpl(BudgetServiceGrpc.newStub(channel), modelConverter);
 	}
 
-	@Singleton
+	@PfmScope
 	@Provides
 	InsightService insightService(ModelConverter modelConverter, Channel channel) {
 		return new InsightServiceImpl(InsightsServiceGrpc.newStub(channel), modelConverter);

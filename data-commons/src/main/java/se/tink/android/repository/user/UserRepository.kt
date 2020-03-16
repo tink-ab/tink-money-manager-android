@@ -2,14 +2,14 @@ package se.tink.android.repository.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.tink.annotations.PfmScope
 import se.tink.core.models.user.UserConfiguration
 import se.tink.core.models.user.UserFeatureFlags
 import se.tink.repository.SimpleObjectChangeObserver
 import se.tink.repository.service.UserConfigurationService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class UserRepository @Inject constructor(private val userConfigurationService: UserConfigurationService) {
 
     val userConfiguration = object : LiveData<UserConfiguration?>() {

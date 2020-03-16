@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.tink.core.Tink
+import com.tink.core.TinkComponent
 import com.tink.pfmui.buildConfig.BuildConfigurations
-import com.tink.pfmui.buildConfig.NetworkConfiguration
 import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.collections.Periods
@@ -96,20 +97,15 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_OVERVIEW_FEATURES))
     }
 
-    private val networkConfiguration: NetworkConfiguration by lazy {
-        requireNotNull(arguments?.getParcelable<NetworkConfiguration>(ARG_NETWORK_CONFIG))
-    }
-
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Fresco.initialize(context)
         setupTimber()
-        DaggerFragmentComponent.builder()
-            .networkConfiguration(networkConfiguration)
-            .fragment(this)
-            .create()
+        DaggerFragmentComponent
+            .factory()
+            .create(Tink.requireComponent(), this)
             .inject(this)
         interceptor.setAccessToken(accessToken)
         attachListeners()
@@ -213,7 +209,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
-        private const val ARG_NETWORK_CONFIG = "networkConfig"
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
@@ -237,19 +232,11 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
-            val networkConfig = NetworkConfiguration(
-                serverAddress = clientConfiguration.environment.grpcUrl,
-                clientKey = "",
-                sslKey = clientConfiguration.sslCertificate,
-                port = clientConfiguration.environment.port,
-                useSsl = !clientConfiguration.sslCertificate.isBlank()
-            )
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
-                    ARG_OVERVIEW_FEATURES to overviewFeatures,
-                    ARG_NETWORK_CONFIG to networkConfig
+                    ARG_OVERVIEW_FEATURES to overviewFeatures
                 )
             }
         }

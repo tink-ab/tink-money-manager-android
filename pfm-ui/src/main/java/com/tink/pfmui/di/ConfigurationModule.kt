@@ -1,6 +1,7 @@
 package com.tink.pfmui.di
 
 import android.content.Context
+import com.tink.annotations.PfmScope
 import com.tink.pfmui.ClientDataStorage
 import com.tink.pfmui.Timezone
 import com.tink.pfmui.TimezoneManager
@@ -10,13 +11,12 @@ import dagger.Provides
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.utils.DateUtils
 import java.util.Locale
-import javax.inject.Singleton
 
 @Module
 internal class ConfigurationModule {
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideClientStorage(@ApplicationScoped context: Context): ClientDataStorage =
         ClientDataStorage.sharedInstance(context)
 

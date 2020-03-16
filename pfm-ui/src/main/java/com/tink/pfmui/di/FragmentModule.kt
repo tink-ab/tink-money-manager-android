@@ -1,5 +1,6 @@
 package com.tink.pfmui.di
 
+import com.tink.annotations.PfmScope
 import com.tink.pfmui.FinanceOverviewFragment
 import com.tink.pfmui.FragmentCoordinator
 import com.tink.pfmui.R
@@ -8,12 +9,11 @@ import com.tink.pfmui.TransitionCoordinatorImpl
 import com.tink.pfmui.TransitionDescription
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 internal class FragmentModule {
 
-    @Singleton
+    @PfmScope
     @Provides
     fun fragmentCoordinator(
         fragment: FinanceOverviewFragment,
@@ -21,12 +21,12 @@ internal class FragmentModule {
     ) =
         FragmentCoordinator(fragment.childFragmentManager, R.id.fragmentRoot, transitionCoordinator)
 
-    @Singleton
+    @PfmScope
     @Provides
     fun providesTransitionCoordinatorImpl(transitions: Set<@JvmSuppressWildcards TransitionDescription>): TransitionCoordinatorImpl =
         TransitionCoordinatorImpl(transitions)
 
-    @Singleton
+    @PfmScope
     @Provides
     fun providesTransitionCoordinator(transitionCoordinator: TransitionCoordinatorImpl): TransitionCoordinator =
         transitionCoordinator

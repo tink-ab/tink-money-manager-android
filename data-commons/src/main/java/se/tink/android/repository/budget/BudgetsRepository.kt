@@ -2,6 +2,7 @@ package se.tink.android.repository.budget
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.annotations.PfmScope
 import org.joda.time.DateTime
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
@@ -25,9 +26,8 @@ import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.service.BudgetService
 import se.tink.repository.service.TransactionService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class BudgetsRepository @Inject constructor(
     private val budgetService: BudgetService,
     private val transactionService: TransactionService,

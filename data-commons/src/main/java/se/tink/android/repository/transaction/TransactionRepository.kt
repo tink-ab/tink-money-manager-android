@@ -3,6 +3,7 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
+import com.tink.annotations.PfmScope
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
@@ -23,9 +24,8 @@ import se.tink.repository.TinkNetworkErrorHandler
 import se.tink.repository.service.StreamingService
 import se.tink.repository.service.TransactionService
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
     private val streamingService: StreamingService,
