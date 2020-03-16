@@ -1,6 +1,7 @@
 package se.tink.android.livedata
 
 import androidx.lifecycle.MutableLiveData
+import com.tink.service.handler.ResultHandler
 import se.tink.android.AppExecutors
 import se.tink.repository.ChangeObserver
 import se.tink.repository.MutationHandler
@@ -26,7 +27,10 @@ fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): 
             value.removeAll(deleted)
         }
 
-        private fun doUpdate(items: List<T>?, action: (value: MutableList<T>, items: List<T>) -> Unit) {
+        private fun doUpdate(
+            items: List<T>?,
+            action: (value: MutableList<T>, items: List<T>) -> Unit
+        ) {
             executors.mainThreadExecutor.execute {
                 items?.let { created ->
                     value = (value ?: mutableListOf()).toMutableList().also {
@@ -54,11 +58,20 @@ fun <T> MutableLiveData<ErrorOrValue<T>>.createMutationHandler() = object : Muta
 
 }
 
+fun <T> MutableLiveData<ErrorOrValue<T>>.createResultHandler() = ResultHandler<T>(
+    onSuccess = { item ->
+        postValue(ErrorOrValue(item))
+    },
+    onError = {
+        postValue(ErrorOrValue(TinkNetworkError(it)))
+    }
+)
+
 class ErrorOrValue<T>
-    private constructor(
-            val value: T?,
-            val error: TinkNetworkError?
-    ) {
+private constructor(
+    val value: T?,
+    val error: TinkNetworkError?
+) {
 
     constructor(value: T) : this(value, null)
     constructor(error: TinkNetworkError) : this(null, error)
