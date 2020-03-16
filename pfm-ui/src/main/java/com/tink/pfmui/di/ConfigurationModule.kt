@@ -21,7 +21,7 @@ internal class ConfigurationModule {
         ClientDataStorage.sharedInstance(context)
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideSuitableLocaleFinder(@FragmentScoped context: Context): SuitableLocaleFinder =
         SuitableLocaleFinder(context)
 

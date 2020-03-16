@@ -42,6 +42,10 @@ dependencies {
     implementation project(':data-commons')
     implementation project(':core')
     implementation project(':rpc')
+
+    implementation libraries.tink_core
+    implementation libraries.tink_service
+
     compileOnly project(':annotations')
     kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])

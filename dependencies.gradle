@@ -12,6 +12,8 @@ ext {
     kotlin_coroutines_version = "1.2.1"
     materialVersion = '1.2.0'
 
+    tinkCoreVersion = "0.2.0"
+
     libraries = [
             android_core_ktx                    : "androidx.core:core-ktx:$supportLibVersion",
             android_fragment_ktx                : "androidx.fragment:fragment-ktx:$supportLibVersion",
@@ -64,6 +66,10 @@ ext {
             test_mockk                          : "io.mockk:mockk:1.8.7",
             test_assertj                        : "org.assertj:assertj-core:3.11.1",
 
-            timber                              : "com.jakewharton.timber:timber:$timberVersion"
+            timber                              : "com.jakewharton.timber:timber:$timberVersion",
+
+            tink_core                           : "com.tink:core:$tinkCoreVersion",
+            tink_service                        : "com.tink:service:$tinkCoreVersion",
+            tink_models                         : "com.tink:models:$tinkCoreVersion",
     ]
 }
