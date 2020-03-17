@@ -4,14 +4,14 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import kotlinx.android.synthetic.main.item_insight_image_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
 import se.tink.insights.getViewType
 import javax.inject.Inject
 

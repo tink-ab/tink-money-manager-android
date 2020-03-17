@@ -34,7 +34,6 @@ import se.tink.converter.device.DeviceConfigurationMarketResponseConverter;
 import se.tink.converter.device.DeviceConfigurationResponseConverter;
 import se.tink.converter.device.UpdateI18NSettingsRequestConverter;
 import se.tink.converter.device.UpdateI18NSettingsResponseConverter;
-import se.tink.converter.insights.InsightConverters;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
@@ -162,7 +161,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
         setupBudgetConverters();
-        setupActionableInsightConverters();
     }
 
     private void addConverter(AbstractConverter abstractConverter) {
@@ -333,9 +331,5 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupBudgetConverters() {
         addConverters(BudgetConverters.forConverter(this));
-    }
-
-    private void setupActionableInsightConverters() {
-        addConverters(InsightConverters.INSTANCE.forConverter(this));
     }
 }

@@ -44,9 +44,10 @@ public class HeaderClientInterceptor implements ClientInterceptor {
 				if (!Strings.isNullOrEmpty(deviceId)) {
 					headers.put(DEVICE_ID_HEADER_NAME, deviceId);
 				}
-				if (!Strings.isNullOrEmpty(accessToken)) {
-					headers.put(AUTHORIZATION, "Bearer " + accessToken);
-				}
+				headers.put(AUTHORIZATION, "Session " + "29715ef8cda84affa8a2e833cd33b3e2");
+//				if (!Strings.isNullOrEmpty(accessToken)) {
+//					headers.put(AUTHORIZATION, "Bearer " + accessToken);
+//				}
 				headers.put(SDK_NAME_HEADER_NAME, SDK_NAME_HEADER_VALUE);
 				headers.put(SDK_VERSION_HEADER_NAME, BuildConfig.VERSION_NAME);
 

@@ -2,10 +2,10 @@ package com.tink.pfmui.insights.enrichment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import io.reactivex.subjects.PublishSubject
 import se.tink.android.livedata.map
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -24,13 +24,15 @@ internal class EnrichmentDirector(
             InsightType.BUDGET_SUCCESS,
             InsightType.BUDGET_OVERSPENT -> EnrichmentType.BUDGET_STATE
 
-            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION -> EnrichmentType.TRANSACTION
+            InsightType.SINGLE_EXPENSE_UNCATEGORIZED -> EnrichmentType.TRANSACTION
 
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
 
-            InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
+//            InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
 
             else -> EnrichmentType.NONE
+        }.also {
+            TODO("Core setup")
         }
 
     private val enrichedStreams: List<LiveData<List<Insight>>> =

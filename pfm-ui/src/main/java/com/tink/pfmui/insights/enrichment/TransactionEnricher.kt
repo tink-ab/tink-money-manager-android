@@ -1,13 +1,15 @@
 package com.tink.pfmui.insights.enrichment
 
 import androidx.lifecycle.LiveData
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
+import com.tink.model.misc.Amount
+import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
-import se.tink.core.models.misc.Amount
+import se.tink.commons.extensions.toNewAmount
 import javax.inject.Inject
 
 class TransactionEnricher @Inject constructor(
@@ -38,7 +40,7 @@ class TransactionEnricher @Inject constructor(
                                     TransactionViewDetails(
                                         description = it.description,
                                         date = it.timestamp,
-                                        amount = it.amount
+                                        amount = it.amount.toNewAmount()
                                     )
                                 }
                     }
@@ -47,7 +49,8 @@ class TransactionEnricher @Inject constructor(
     }
 }
 
-internal class TransactionViewDetails(
+@Parcelize
+internal data class TransactionViewDetails(
     val description: String,
     val date: DateTime,
     val amount: Amount

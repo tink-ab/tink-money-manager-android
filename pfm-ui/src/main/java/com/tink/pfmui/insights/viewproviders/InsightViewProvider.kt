@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightState
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import kotlinx.android.synthetic.main.insight_title_description_actions.view.*
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightState
-import se.tink.core.models.insights.InsightType
 import se.tink.insights.InsightViewType
 
 private const val PRIMARY_ACTION_INDEX = 0

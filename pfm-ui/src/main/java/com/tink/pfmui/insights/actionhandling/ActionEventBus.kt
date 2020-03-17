@@ -1,9 +1,9 @@
 package com.tink.pfmui.insights.actionhandling
 
 import com.tink.annotations.PfmScope
+import com.tink.model.insights.PerformedInsightAction
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
-import se.tink.core.models.insights.PerformedInsightAction
 import javax.inject.Inject
 
 @PfmScope

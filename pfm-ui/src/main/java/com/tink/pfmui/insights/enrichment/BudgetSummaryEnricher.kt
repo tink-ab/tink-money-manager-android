@@ -2,22 +2,24 @@ package com.tink.pfmui.insights.enrichment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
+import com.tink.model.misc.Amount
 import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
-import se.tink.commons.currency.AmountFormatter
-import se.tink.core.extensions.minus
-import se.tink.core.extensions.plus
-import se.tink.core.extensions.sum
+import se.tink.commons.currency.NewAmountFormatter
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.minus
+import se.tink.commons.extensions.plus
+import se.tink.commons.extensions.sum
+import se.tink.commons.extensions.toNewAmount
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
-import se.tink.core.models.misc.Amount
 import javax.inject.Inject
 
 
 internal class BudgetSummaryEnricher @Inject constructor(
     budgetsRepository: BudgetsRepository,
-    private val amountFormatter: AmountFormatter
+    private val amountFormatter: NewAmountFormatter
 ) : InsightsEnricher {
 
     private val budgets = budgetsRepository.budgets.map {
@@ -68,8 +70,8 @@ internal class BudgetSummaryEnricher @Inject constructor(
         )
 
     private fun dataForBudgetSummary(
-        achievedBudgets: List<InsightData.BudgetSummary>,
-        overspentBudgets: List<InsightData.BudgetSummary>,
+        achievedBudgets: List<InsightData.BudgetIdToPeriod>,
+        overspentBudgets: List<InsightData.BudgetIdToPeriod>,
         differenceAmount: Amount,
         overspent: Boolean
     ): BudgetSummaryViewDetails? {
@@ -99,7 +101,7 @@ internal class BudgetSummaryEnricher @Inject constructor(
 
         val targetAmountSum = budgets.value
             ?.filter { (achievedIds + overspentIds).contains(it.id) }
-            ?.map { it.amount }
+            ?.map { it.amount.toNewAmount() } //TODO: Core setup
             ?.takeIf { it.isNotEmpty() }
             ?.sum()
 

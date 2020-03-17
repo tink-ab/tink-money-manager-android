@@ -2,17 +2,17 @@ package com.tink.pfmui.insights.viewproviders
 
 import android.view.View
 import android.view.ViewGroup
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.TransactionViewDetails
 import kotlinx.android.synthetic.main.item_insight_single_expense_uncategorized.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.currency.NewAmountFormatter
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
@@ -21,10 +21,12 @@ import javax.inject.Inject
 @ContributesInsightViewProvider
 class SingleExpenseUncategorizedViewProvider @Inject constructor(
     val dateUtils: DateUtils,
-    val amountFormatter: AmountFormatter
+    private val amountFormatter: NewAmountFormatter
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
-        listOf(InsightType.SINGLE_UNCATEGORIZED_TRANSACTION)
+        listOf(
+          //TODO: Missing insight type  InsightType.SINGLE_UNCATEGORIZED_TRANSACTION
+        )
 
     override val viewType: InsightViewType = getViewType()
 

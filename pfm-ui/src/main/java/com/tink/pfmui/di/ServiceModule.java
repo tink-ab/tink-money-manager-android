@@ -46,8 +46,6 @@ import se.tink.repository.service.CredentialService;
 import se.tink.repository.service.CredentialServiceImpl;
 import se.tink.repository.service.DeviceService;
 import se.tink.repository.service.DeviceServiceImpl;
-import se.tink.repository.service.InsightService;
-import se.tink.repository.service.InsightServiceImpl;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
@@ -228,11 +226,5 @@ class ServiceModule {
 	@Provides
 	public BudgetService budgetService(ModelConverter modelConverter, Channel channel) {
 		return new BudgetServiceImpl(BudgetServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@PfmScope
-	@Provides
-	InsightService insightService(ModelConverter modelConverter, Channel channel) {
-		return new InsightServiceImpl(InsightsServiceGrpc.newStub(channel), modelConverter);
 	}
 }

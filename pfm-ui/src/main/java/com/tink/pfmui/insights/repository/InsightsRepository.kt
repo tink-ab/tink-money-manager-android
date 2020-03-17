@@ -3,14 +3,14 @@ package com.tink.pfmui.insights.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
+import com.tink.model.insights.Insight
+import com.tink.service.insight.InsightService
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createMutationHandler
+import se.tink.android.livedata.createResultHandler
 import se.tink.android.livedata.map
 import se.tink.commons.livedata.Event
-import se.tink.core.models.insights.Insight
 import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.InsightService
 import javax.inject.Inject
 
 @PfmScope
@@ -18,7 +18,7 @@ class InsightsRepository @Inject constructor(
     private val insightService: InsightService
 ) {
     private val _insights: AutoFetchLiveData<ErrorOrValue<List<Insight>>> = AutoFetchLiveData {
-        insightService.listInsights(it.createMutationHandler())
+        insightService.listInsights(it.createResultHandler())
     }
 
     val insights: LiveData<List<Insight>> = Transformations.map(_insights) {
@@ -27,7 +27,7 @@ class InsightsRepository @Inject constructor(
 
     private val _archivedInsights: AutoFetchLiveData<ErrorOrValue<List<Insight>>> =
         AutoFetchLiveData {
-            insightService.listArchived(it.createMutationHandler())
+            insightService.listArchived(it.createResultHandler())
         }
 
     val archivedInsights: LiveData<List<Insight>> = Transformations.map(_archivedInsights) {

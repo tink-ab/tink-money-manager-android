@@ -2,10 +2,10 @@ package com.tink.pfmui.insights.enrichment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
 import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
 import javax.inject.Inject
 
 

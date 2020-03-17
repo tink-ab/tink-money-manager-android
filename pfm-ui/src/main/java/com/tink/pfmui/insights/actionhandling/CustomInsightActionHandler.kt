@@ -1,8 +1,8 @@
 package com.tink.pfmui.insights.actionhandling
 
 import com.tink.annotations.PfmScope
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightAction
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
 
 @PfmScope
 internal object CustomInsightActionHandler : ActionHandler {

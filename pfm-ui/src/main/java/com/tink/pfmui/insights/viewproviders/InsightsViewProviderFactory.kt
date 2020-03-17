@@ -1,6 +1,6 @@
 package com.tink.pfmui.insights.viewproviders
 
-import se.tink.core.models.insights.InsightType
+import com.tink.model.insights.InsightType
 import se.tink.insights.InsightViewType
 import javax.inject.Inject
 

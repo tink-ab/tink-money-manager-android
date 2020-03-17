@@ -3,11 +3,11 @@ package com.tink.pfmui.insights
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.insights.Insight
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.viewproviders.InsightViewHolder
 import com.tink.pfmui.insights.viewproviders.InsightViewProvider
 import com.tink.pfmui.insights.viewproviders.InsightViewProviderFactory
-import se.tink.core.models.insights.Insight
 import se.tink.insights.InsightViewType
 import javax.inject.Inject
 

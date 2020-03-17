@@ -3,9 +3,9 @@ package com.tink.pfmui.insights
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import se.tink.android.livedata.map
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
 import com.tink.pfmui.insights.enrichment.EnrichmentDirectorFactory
 
 abstract class AbstractInsightsViewModel internal constructor(

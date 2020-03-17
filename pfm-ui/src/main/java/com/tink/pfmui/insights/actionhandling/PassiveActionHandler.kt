@@ -1,7 +1,7 @@
 package com.tink.pfmui.insights.actionhandling
 
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightAction
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
 import javax.inject.Inject
 
 class PassiveActionHandler @Inject constructor(
