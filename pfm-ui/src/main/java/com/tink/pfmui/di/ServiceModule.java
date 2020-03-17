@@ -15,12 +15,10 @@ import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
 import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.BudgetServiceGrpc;
 import se.tink.grpc.v1.services.CategoryServiceGrpc;
 import se.tink.grpc.v1.services.CredentialServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.InsightsServiceGrpc;
 import se.tink.grpc.v1.services.LoanServiceGrpc;
 import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
@@ -39,8 +37,6 @@ import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
 import se.tink.repository.service.AccountService;
 import se.tink.repository.service.AccountServiceCachedImpl;
-import se.tink.repository.service.BudgetService;
-import se.tink.repository.service.BudgetServiceImpl;
 import se.tink.repository.service.CategoryService;
 import se.tink.repository.service.CredentialService;
 import se.tink.repository.service.CredentialServiceImpl;
@@ -220,11 +216,5 @@ class ServiceModule {
 	@PfmScope
 	DeviceService provideDeviceService(Channel channel, ModelConverter modelConverter) {
 		return new DeviceServiceImpl(DeviceServiceGrpc.newStub(channel), modelConverter);
-	}
-
-	@PfmScope
-	@Provides
-	public BudgetService budgetService(ModelConverter modelConverter, Channel channel) {
-		return new BudgetServiceImpl(BudgetServiceGrpc.newStub(channel), modelConverter);
 	}
 }

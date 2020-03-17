@@ -1,7 +1,7 @@
 package se.tink.core.models.insights
 //
 //import org.joda.time.DateTime
-//import se.tink.core.models.budgets.Budget
+//import com.tink.model.budget.Budget
 //import se.tink.core.models.misc.Amount
 //import se.tink.core.models.misc.YearMonth
 //import se.tink.core.models.misc.YearWeek

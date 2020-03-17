@@ -3,7 +3,7 @@ package se.tink.converter.insights
 //import se.tink.converter.ModelConverter
 //import se.tink.converter.date.toDateTime
 //import se.tink.converter.misc.toAmount
-//import se.tink.core.models.budgets.Budget
+//import com.tink.model.budget.Budget
 //import se.tink.core.models.insights.InsightData
 //import se.tink.core.models.misc.YearMonth
 //import se.tink.core.models.misc.YearWeek

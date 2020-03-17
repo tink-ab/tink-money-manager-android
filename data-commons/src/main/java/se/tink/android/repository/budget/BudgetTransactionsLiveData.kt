@@ -3,14 +3,15 @@ package se.tink.android.repository.budget
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
-import org.joda.time.DateTime
+import com.tink.model.budget.BudgetTransaction
+import com.tink.service.budget.BudgetService
+import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createMutationHandler
-import se.tink.core.models.budgets.BudgetTransaction
+import se.tink.android.livedata.createResultHandler
+import se.tink.commons.extensions.toNewAmount
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
-import se.tink.repository.service.BudgetService
 import se.tink.repository.service.TransactionService
 
 
@@ -18,14 +19,14 @@ class BudgetTransactionsLiveData(
     private val transactionService: TransactionService,
     private val budgetService: BudgetService,
     private val budgetId: String,
-    private val start: DateTime,
-    private val end: DateTime
+    private val start: Instant,
+    private val end: Instant
 ) : MediatorLiveData<ErrorOrValue<List<BudgetTransaction>>>() {
 
     private val liveData = AutoFetchLiveData<ErrorOrValue<List<BudgetTransaction>>> {
         budgetService.listTransactionsForBudget(
             budgetId, start, end,
-            it.createMutationHandler()
+            it.createResultHandler()
         )
     }
 
@@ -71,11 +72,11 @@ class BudgetTransactionsLiveData(
                 BudgetTransaction(
                     it.id,
                     it.accountId,
-                    it.amount,
-                    it.dispensableAmount,
+                    it.amount.toNewAmount(),
+                    it.dispensableAmount.toNewAmount(),
                     it.categoryCode,
                     it.description,
-                    it.timestamp
+                    Instant.ofEpochMilli(it.timestamp.millis)
                 )
             }
             ?.filter { currentTransactions?.value?.contains(it) ?: false }

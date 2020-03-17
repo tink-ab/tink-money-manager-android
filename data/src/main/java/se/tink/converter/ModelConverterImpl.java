@@ -16,7 +16,6 @@ import se.tink.converter.account.loan.LoanToLoanDTOConverter;
 import se.tink.converter.authentication.AuthenticationResponseConverter;
 import se.tink.converter.authentication.AuthenticationStatusConverter;
 import se.tink.converter.authentication.ThirdPartyAppAuthenticationDTOToThirdPartyAppAuthenticationConverter;
-import se.tink.converter.budgets.BudgetConverters;
 import se.tink.converter.category.CategoryDTOToCategoryConverter;
 import se.tink.converter.category.CategoryToCategoryDTOConverter;
 import se.tink.converter.category.CategoryTreeDTOToCategoryTreeConverter;
@@ -160,7 +159,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupPushNotificationsConverters();
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
-        setupBudgetConverters();
     }
 
     private void addConverter(AbstractConverter abstractConverter) {
@@ -327,9 +325,5 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupCacheEntityConverters() {
         addConverters(CacheConverterFactory.getCacheConverters(this));
-    }
-
-    private void setupBudgetConverters() {
-        addConverters(BudgetConverters.forConverter(this));
     }
 }

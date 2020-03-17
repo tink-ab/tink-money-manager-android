@@ -12,7 +12,6 @@ import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.plus
 import se.tink.commons.extensions.sum
-import se.tink.commons.extensions.toNewAmount
 import se.tink.core.extensions.whenNonNull
 import javax.inject.Inject
 
@@ -101,7 +100,7 @@ internal class BudgetSummaryEnricher @Inject constructor(
 
         val targetAmountSum = budgets.value
             ?.filter { (achievedIds + overspentIds).contains(it.id) }
-            ?.map { it.amount.toNewAmount() } //TODO: Core setup
+            ?.map { it.amount }
             ?.takeIf { it.isNotEmpty() }
             ?.sum()
 

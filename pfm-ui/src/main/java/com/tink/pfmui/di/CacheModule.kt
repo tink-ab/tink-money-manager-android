@@ -10,7 +10,7 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.converter.ModelConverter
 import se.tink.core.models.Category
 import se.tink.core.models.account.Account
-import se.tink.core.models.budgets.BudgetSummary
+import com.tink.model.budget.BudgetSummary
 import se.tink.core.models.credential.CachedCredential
 import se.tink.core.models.credential.Credential
 import se.tink.core.models.misc.Period
@@ -19,7 +19,7 @@ import se.tink.core.models.transaction.Transaction
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
 import se.tink.repository.cache.AccountDatabaseCache
-import se.tink.repository.cache.BudgetsDatabaseCache
+//import se.tink.repository.cache.BudgetsDatabaseCache
 import se.tink.repository.cache.Cache
 import se.tink.repository.cache.CacheHandle
 import se.tink.repository.cache.CategoryDatabaseCache
@@ -114,12 +114,12 @@ internal class CacheModule {
         return AccountDatabaseCache(cacheDatabase, modelConverter)
     }
 
-    @Provides
-    fun budgetsCache(
-        cacheDatabase: CacheDatabase
-    ): LiveDataCache<List<BudgetSummary>> {
-        return BudgetsDatabaseCache(cacheDatabase)
-    }
+//    @Provides
+//    fun budgetsCache(
+//        cacheDatabase: CacheDatabase
+//    ): LiveDataCache<List<BudgetSummary>> {
+//        return BudgetsDatabaseCache(cacheDatabase)
+//    }
 
     @Provides
     fun credentialsCache(
