@@ -17,7 +17,6 @@ import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.CategoryServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.LoanServiceGrpc;
 import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
@@ -64,12 +63,6 @@ class ServiceModule {
 	@PfmScope
 	AccountServiceGrpc.AccountServiceStub accountServiceApi(Channel channel) {
 		return AccountServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
-	LoanServiceGrpc.LoanServiceStub loanServiceStub(Channel channel) {
-		return LoanServiceGrpc.newStub(channel);
 	}
 
 	@Provides

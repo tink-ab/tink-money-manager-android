@@ -12,7 +12,6 @@ import se.tink.converter.account.AccountToAccountDTOConverter;
 import se.tink.converter.account.UpdateAccountRequestConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsDTOtoAccountDetailsConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsDTOConverter;
-import se.tink.converter.account.loan.LoanToLoanDTOConverter;
 import se.tink.converter.authentication.AuthenticationResponseConverter;
 import se.tink.converter.authentication.AuthenticationStatusConverter;
 import se.tink.converter.authentication.ThirdPartyAppAuthenticationDTOToThirdPartyAppAuthenticationConverter;
@@ -274,8 +273,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new AccountDetailsDTOtoAccountDetailsConverter(this));
 
         addConverter(new UpdateAccountRequestConverter(this));
-
-        addConverter(new LoanToLoanDTOConverter(this));
     }
 
     private void setupRequestConverters() {
