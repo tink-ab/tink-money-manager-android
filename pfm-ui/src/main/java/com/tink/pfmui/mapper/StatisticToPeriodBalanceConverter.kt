@@ -1,6 +1,7 @@
 package com.tink.pfmui.mapper
 
 import com.tink.pfmui.charts.models.PeriodBalance
+import se.tink.commons.extensions.doubleValue
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.Statistic
 import se.tink.modelConverter.AbstractConverter

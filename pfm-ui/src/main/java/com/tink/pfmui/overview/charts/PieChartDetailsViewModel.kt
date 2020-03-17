@@ -16,6 +16,7 @@ import se.tink.android.di.application.ApplicationScoped
 import com.tink.pfmui.charts.extensions.sumByFloat
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category

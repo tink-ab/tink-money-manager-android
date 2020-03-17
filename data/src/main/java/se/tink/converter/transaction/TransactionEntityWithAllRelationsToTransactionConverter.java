@@ -3,7 +3,7 @@ package se.tink.converter.transaction;
 import java.util.List;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 import se.tink.core.models.transaction.Tag;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.modelConverter.AbstractConverter;

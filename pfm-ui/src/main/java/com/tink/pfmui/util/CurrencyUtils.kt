@@ -6,14 +6,21 @@ import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.pfmui.collections.Currencies
 import se.tink.commons.extensions.ExactNumberZERO
+import se.tink.commons.extensions.absValue
+import se.tink.commons.extensions.divide
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.isBiggerThan
+import se.tink.commons.extensions.isInteger
+import se.tink.commons.extensions.isSmallerThan
+import se.tink.commons.extensions.longValue
+import se.tink.commons.extensions.round
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Currency
 import java.util.HashMap
 import java.util.Locale
-import kotlin.collections.MutableMap
 import kotlin.collections.set
-import kotlin.collections.toTypedArray
+
 
 object CurrencyUtils {
     // When using dynamic currency format:
@@ -46,7 +53,7 @@ object CurrencyUtils {
     }
 
     fun formatCurrencyRoundWithoutSignAndSymbol(amount: Amount): String {
-        val amountWithoutSign: Double = amount.value.absValue().doubleValue()
+        val amountWithoutSign: Double = amount.value.doubleValue()
         return formatAmountRoundWithoutCurrencySymbol(amountWithoutSign)
     }
 
@@ -115,8 +122,8 @@ object CurrencyUtils {
         } else if (currencyFormat and CurrencyFormat.SHORT == CurrencyFormat.SHORT) {
             formatShort(absValue, currencyCode)
         } else { // CurrencyFormat.DYNAMIC
-            if (absValue.isSmallerThan(DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode)) && absValue
-                    .isBiggerThan(ZERO)
+            if (absValue.toBigDecimal().toInt() < DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode) &&
+                absValue.isBiggerThan(ZERO)
             ) {
                 formatAmount(absValue, 2, currencyCode)
             } else {
@@ -148,6 +155,7 @@ object CurrencyUtils {
         return formatAmountRound(amount, false)
     }
 
+    @JvmStatic
     fun formatAmountRoundWithCurrencySymbol(amount: Double): String {
         return formatAmountRound(amount, true)
     }
@@ -183,7 +191,7 @@ object CurrencyUtils {
         currencyCode: String?
     ): String {
         return getDecimalFormat(currencyCode, decimals)
-            .format(amount.round(decimals).asBigDecimal())
+            .format(amount.round(decimals).toBigDecimal())
     }
 
     private fun getDecimalFormat(
@@ -214,6 +222,37 @@ object CurrencyUtils {
         return format
     }
 
+    fun formatCurrencyExactWithExplicitPositive(amount: Amount): String {
+        return formatCurrency(
+            amount,
+            CurrencyFormat.EXACT or CurrencyFormat.SYMBOL or CurrencyFormat.AMOUNT_SIGN,
+            true
+        )
+    }
+
+    fun formatCurrencyExactWithoutSymbol(amount: Amount): String {
+        return formatCurrency(
+            amount,
+            CurrencyFormat.EXACT or CurrencyFormat.AMOUNT_SIGN
+        )
+    }
+
+    fun formatAmountExactWithoutCurrencySymbol(amount: Double): String {
+        return formatAmount(amount, 2, false);
+    }
+
+    fun formatCurrencyExactWithoutSignAndSymbol(amount: Amount): String {
+        return formatAmount(amount.value.absValue().doubleValue(), 2, false)
+    }
+
+    fun formatAmountExactWithCurrencySymbol(amount: Double): String {
+        return formatAmount(amount, 2, true);
+    }
+
+    fun formatCurrencyExactWithoutSign(amount: Amount): String {
+        return formatCurrency(amount, CurrencyFormat.EXACT or CurrencyFormat.SYMBOL)
+    }
+
     fun formatAmountExact(amount: ExactNumber): String {
         return formatAmount(amount, amount.scale.toInt(), null)
     }
@@ -224,6 +263,22 @@ object CurrencyUtils {
     ): String {
         return formatAmount(amount, amount.scale.toInt(), currencyCode)
     }
+
+    private fun formatAmount(amount: Double, decimals: Int, useCurrencySymbol: Boolean): String {
+        val format = getDecimalFormat(null, decimals)
+        var formatted = format.format(amount)
+        if (!useCurrencySymbol) {
+            val symbol = (format as DecimalFormat).decimalFormatSymbols.currencySymbol
+            if (formatted.contains(symbol)) {
+                //Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
+                formatted = formatted.replace(symbol + "\\s".toRegex(), "")
+                formatted = formatted.replace("\\s" + symbol.toRegex(), "")
+                formatted = formatted.replace(symbol.toRegex(), "")
+            }
+        }
+        return formatted
+    }
+
 
     fun formatShort(
         value: ExactNumber,
@@ -242,8 +297,7 @@ object CurrencyUtils {
             }
         }
         val language = locale.language
-        val localeUnits =
-            UNITS[language]!!
+        val localeUnits = UNITS[language]!!
         for (unitCandidate in localeUnits) {
             unit = if (value.compareTo(unitCandidate.e) >= 0) {
                 unitCandidate
@@ -344,10 +398,10 @@ object CurrencyUtils {
                     StringExactNumberPair("mln", MILLION),
                     StringExactNumberPair("mjd", BILLION)
                 )
-        UNITS["en"] = com.tink.pfmui.util.enUsMap
-        UNITS["sv"] = com.tink.pfmui.util.svSeMap
-        UNITS["fr"] = com.tink.pfmui.util.frFRMap
-        UNITS[""] = com.tink.pfmui.util.defaultMap
-        UNITS["nl"] = com.tink.pfmui.util.nlNlMap
+        UNITS["en"] = enUsMap
+        UNITS["sv"] = svSeMap
+        UNITS["fr"] = frFRMap
+        UNITS[""] = defaultMap
+        UNITS["nl"] = nlNlMap
     }
 }

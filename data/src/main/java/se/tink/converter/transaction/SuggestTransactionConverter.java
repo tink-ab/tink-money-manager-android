@@ -2,7 +2,7 @@ package se.tink.converter.transaction;
 
 import java.util.List;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.ExactNumber;
 import se.tink.core.models.transaction.TransactionCluster;
 import se.tink.grpc.v1.rpc.SuggestTransactionsResponse;
 import se.tink.modelConverter.AbstractConverter;

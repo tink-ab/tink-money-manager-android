@@ -1,6 +1,6 @@
 package se.tink.commons.currency
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
 
 interface AmountFormatter {
     fun format(

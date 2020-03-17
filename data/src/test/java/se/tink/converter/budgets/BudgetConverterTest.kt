@@ -13,8 +13,8 @@ import com.tink.model.budget.BudgetSpecification
 import com.tink.model.budget.BudgetTransaction
 import com.tink.model.budget.OneOffPeriodicity
 import com.tink.model.budget.RecurringPeriodicity
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import se.tink.grpc.v1.models.CurrencyDenominatedAmount
 import se.tink.grpc.v1.rpc.CreateBudgetRequest
 import se.tink.grpc.v1.models.ExactNumber as ExactNumberDTO

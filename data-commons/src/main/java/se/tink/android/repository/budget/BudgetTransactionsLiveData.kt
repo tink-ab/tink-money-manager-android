@@ -9,7 +9,6 @@ import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
-import se.tink.commons.extensions.toNewAmount
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
 import se.tink.repository.service.TransactionService
@@ -72,8 +71,8 @@ class BudgetTransactionsLiveData(
                 BudgetTransaction(
                     it.id,
                     it.accountId,
-                    it.amount.toNewAmount(),
-                    it.dispensableAmount.toNewAmount(),
+                    it.amount,
+                    it.dispensableAmount,
                     it.categoryCode,
                     it.description,
                     Instant.ofEpochMilli(it.timestamp.millis)

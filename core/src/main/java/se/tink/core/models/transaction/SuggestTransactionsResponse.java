@@ -1,7 +1,7 @@
 package se.tink.core.models.transaction;
 
 import java.util.List;
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.ExactNumber;
 
 public class SuggestTransactionsResponse {
 

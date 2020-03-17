@@ -151,7 +151,7 @@ internal class HalfPieChartFragment : BaseFragment() {
             addTransition(PieChartSegmentTransition(R.id.transition_group_main))
             addTransition(Fade().apply { addTarget(R.id.back_segment) })
             // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
-//            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//            addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble()).apply { }
 //            }.apply {
 //                addTarget(R.id.amount)

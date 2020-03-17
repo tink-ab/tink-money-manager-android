@@ -2,7 +2,7 @@ package se.tink.core.models.statistic;
 
 import java.util.HashMap;
 import java.util.Map;
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 import se.tink.core.models.misc.Period;
 
 public class Statistic {

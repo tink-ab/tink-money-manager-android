@@ -10,8 +10,9 @@ import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.Amount
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.toExactNumber
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.Statistic
 import se.tink.utils.DateUtils
@@ -242,11 +243,7 @@ internal object ModelMapperManager : ModelConverter {
             }
             val nrOfPeriods = currentYearChildren.size.toDouble()
             val averageForCategory = totalForAllPeriods / nrOfPeriods
-            val afc = ExactNumber(
-                BigDecimal(
-                    abs(averageForCategory)
-                )
-            )
+            val afc = BigDecimal(abs(averageForCategory)).toExactNumber()
             average[categoryCode] = Amount(afc, Currencies.getSharedInstance().defaultCurrencyCode)
         }
         return average

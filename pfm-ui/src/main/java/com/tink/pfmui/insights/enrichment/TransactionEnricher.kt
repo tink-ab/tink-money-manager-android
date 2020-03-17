@@ -9,7 +9,6 @@ import org.joda.time.DateTime
 import se.tink.android.livedata.map
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
-import se.tink.commons.extensions.toNewAmount
 import javax.inject.Inject
 
 class TransactionEnricher @Inject constructor(
@@ -40,7 +39,7 @@ class TransactionEnricher @Inject constructor(
                                     TransactionViewDetails(
                                         description = it.description,
                                         date = it.timestamp,
-                                        amount = it.amount.toNewAmount()
+                                        amount = it.amount
                                     )
                                 }
                     }

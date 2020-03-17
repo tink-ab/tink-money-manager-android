@@ -2,7 +2,7 @@ package se.tink.converter.transaction;
 
 
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.grpc.v1.rpc.QueryTransactionsResponse;
 import se.tink.modelConverter.AbstractConverter;

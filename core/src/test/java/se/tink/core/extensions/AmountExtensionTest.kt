@@ -3,8 +3,8 @@ package se.tink.core.extensions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import java.math.BigDecimal
 import java.math.MathContext
 

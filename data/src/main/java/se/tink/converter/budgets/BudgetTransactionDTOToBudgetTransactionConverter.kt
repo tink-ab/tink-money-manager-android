@@ -4,7 +4,7 @@ package se.tink.converter.budgets
 //import org.joda.time.DateTime
 //import se.tink.converter.ModelConverter
 //import com.tink.model.budget.BudgetTransaction
-//import se.tink.core.models.misc.Amount
+//import com.tink.model.misc.Amount
 //import se.tink.grpc.v1.models.CurrencyDenominatedAmount
 //import se.tink.modelConverter.AbstractConverter
 //

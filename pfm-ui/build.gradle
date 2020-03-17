@@ -45,6 +45,7 @@ dependencies {
 
     implementation libraries.tink_core
     implementation libraries.tink_service
+    implementation libraries.tink_models
 
     compileOnly project(':annotations')
     kapt project(':codegen')

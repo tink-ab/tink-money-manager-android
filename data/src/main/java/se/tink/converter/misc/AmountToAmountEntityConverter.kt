@@ -1,7 +1,7 @@
 package se.tink.converter.misc
 
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
 import se.tink.modelConverter.AbstractConverter
 import se.tink.repository.cache.models.AmountEntity
 

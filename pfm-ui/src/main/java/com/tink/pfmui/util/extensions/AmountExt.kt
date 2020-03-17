@@ -1,7 +1,7 @@
 package com.tink.pfmui.util.extensions
 
 import com.tink.pfmui.util.CurrencyUtils
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
 
 internal fun Amount.formatCurrencyRound(): String? {
     return CurrencyUtils.formatCurrencyRound(this)

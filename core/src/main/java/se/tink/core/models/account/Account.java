@@ -2,10 +2,10 @@ package se.tink.core.models.account;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import com.tink.model.misc.Amount;
 import java.util.List;
 import se.tink.core.models.Images;
-import se.tink.core.models.misc.Amount;
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.ExactNumber;
 
 
 public class Account implements Comparable<Account>, Parcelable {

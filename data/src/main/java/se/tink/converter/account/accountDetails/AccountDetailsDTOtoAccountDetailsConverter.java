@@ -2,7 +2,7 @@ package se.tink.converter.account.accountDetails;
 
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.account.AccountDetails;
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.ExactNumber;
 import se.tink.modelConverter.AbstractConverter;
 
 public class AccountDetailsDTOtoAccountDetailsConverter extends

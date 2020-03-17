@@ -53,7 +53,7 @@ internal class OverviewChartTransition @Inject constructor() : TransitionDescrip
                 addTransition(PieChartTransition())
                 addTransition(PieChartSegmentTransition(R.id.transition_group_main))
                 // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
-//                addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//                addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
 //                }.apply {
 //                    addTarget(R.id.amount)

@@ -1,7 +1,7 @@
 package se.tink.core.models.transaction;
 
 
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 
 public class SearchResultMetadata {
 

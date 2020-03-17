@@ -1,7 +1,7 @@
 package se.tink.converter.statistic;
 
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.grpc.v1.models.StatisticNode;

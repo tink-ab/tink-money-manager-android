@@ -1,8 +1,8 @@
 package se.tink.converter.misc
 
 
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import se.tink.modelConverter.AbstractConverter
 import se.tink.repository.cache.models.AmountEntity
 
@@ -13,7 +13,7 @@ class AmountEntityToAmountConverter : AbstractConverter<AmountEntity, Amount>() 
 }
 
 fun AmountEntity.toCoreModel() =
-    Amount().also {
-        it.value = ExactNumber(unscaledValue, scale)
-        it.currencyCode = currencyCode
-    }
+    Amount(
+        value = ExactNumber(unscaledValue, scale),
+        currencyCode = currencyCode
+    )

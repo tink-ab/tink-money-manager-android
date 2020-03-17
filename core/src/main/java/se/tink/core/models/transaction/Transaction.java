@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.DateTime;
-import se.tink.core.models.misc.Amount;
+import com.tink.model.misc.Amount;
 
 public class Transaction implements Comparable<Transaction>, Parcelable {
 

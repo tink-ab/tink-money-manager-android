@@ -11,7 +11,7 @@ import com.tink.annotations.PfmScope
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
 
 @Module
 internal class CurrencyModule {

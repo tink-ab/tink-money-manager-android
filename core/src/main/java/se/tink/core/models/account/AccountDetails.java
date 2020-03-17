@@ -1,7 +1,7 @@
 package se.tink.core.models.account;
 
 
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.ExactNumber;
 import android.os.Parcel;
 import android.os.Parcelable;
 

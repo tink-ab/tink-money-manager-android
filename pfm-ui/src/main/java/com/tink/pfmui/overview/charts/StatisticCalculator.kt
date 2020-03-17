@@ -4,6 +4,7 @@ import android.content.Context
 import com.tink.pfmui.R
 import org.joda.time.DateTime
 import com.tink.pfmui.charts.extensions.mergeValue
+import se.tink.commons.extensions.floatValue
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.Statistic

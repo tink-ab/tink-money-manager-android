@@ -1,6 +1,7 @@
 package se.tink.converter.misc
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import se.tink.grpc.v1.models.CurrencyDenominatedAmount
 import se.tink.modelConverter.AbstractConverter
 
@@ -10,6 +11,6 @@ class AmountDTOToAmountConverter : AbstractConverter<CurrencyDenominatedAmount, 
 
 fun CurrencyDenominatedAmount.toAmount() =
     Amount(
-        value.toCoreModel(),
+        ExactNumber(value.unscaledValue, value.scale),
         currencyCode
     )

@@ -1,14 +1,13 @@
 package com.tink.pfmui.mapper
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
+import se.tink.commons.extensions.doubleValue
 import se.tink.modelConverter.AbstractConverter
 
 internal class AmountToDoubleConverter :
     AbstractConverter<Amount, Double>() {
     override fun convert(source: Amount): Double {
-        return if (source.value != null) {
-            source.value.doubleValue()
-        } else 0.0
+        return source.value.doubleValue()
     }
 
     override fun getSourceClass(): Class<Amount> {

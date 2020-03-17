@@ -10,7 +10,9 @@ import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.CategorySelectionListener
 import se.tink.core.models.Category
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.ExactNumber
+import se.tink.commons.extensions.ExactNumberZERO
+import se.tink.commons.extensions.isBiggerThan
 import se.tink.core.models.transaction.Transaction
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
@@ -55,7 +57,7 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     private fun showCategoryPickerView(transaction: Transaction) {
 
         val categoryType =
-            if (transaction.amount.value.isBiggerThan(ExactNumber.ZERO)) {
+            if (transaction.amount.value.isBiggerThan(ExactNumberZERO)) {
                 Category.Type.TYPE_INCOME
             } else {
                 Category.Type.TYPE_EXPENSES

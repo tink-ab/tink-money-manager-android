@@ -2,7 +2,7 @@ package se.tink.core.models.insights
 //
 //import org.joda.time.DateTime
 //import com.tink.model.budget.Budget
-//import se.tink.core.models.misc.Amount
+//import com.tink.model.misc.Amount
 //import se.tink.core.models.misc.YearMonth
 //import se.tink.core.models.misc.YearWeek
 //import se.tink.core.models.relations.AmountByCategory

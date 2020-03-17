@@ -11,8 +11,9 @@ import se.tink.commons.categories.isExcluded
 import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.models.Category
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
+import se.tink.commons.extensions.isValid
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -80,7 +81,7 @@ class TransactionItemFactory @Inject constructor(
         date: DateTime,
         label: String,
         amount: Amount,
-        dispensableAmount: Amount = Amount(ExactNumber.ZERO, "SEK"), // TODO:PFMSDK: Remove dispensableAmount
+        dispensableAmount: Amount = Amount(ExactNumber(0,0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {

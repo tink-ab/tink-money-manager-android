@@ -5,8 +5,8 @@ import se.tink.converter.ModelConverter;
 import se.tink.core.models.Images;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.account.AccountDetails;
-import se.tink.core.models.misc.Amount;
-import se.tink.core.models.misc.ExactNumber;
+import com.tink.model.misc.Amount;
+import com.tink.model.misc.ExactNumber;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.models.AccountEntity;
 

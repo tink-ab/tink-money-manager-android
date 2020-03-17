@@ -11,6 +11,7 @@ import se.tink.commons.extensions.inflate
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
+import se.tink.commons.extensions.floatValue
 import se.tink.core.models.relations.ExpensesByDay
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils

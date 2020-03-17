@@ -5,16 +5,13 @@ import com.tink.model.category.CategoryTree
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlin.math.absoluteValue
 
 // Put all extensions on classes from the new core here
 // TODO: Refactor later into separate files/classes
 
 fun Amount.abs() = Amount(ExactNumber(value.unscaledValue.absoluteValue, value.scale), currencyCode)
-
-// Preliminary function to ease transition between new and old core
-fun se.tink.core.models.misc.Amount.toNewAmount() =
-    Amount(ExactNumber(value.unscaledValue, value.scale), currencyCode)
 
 fun BigDecimal.toExactNumber() = ExactNumber(unscaledValue().toLong(), scale().toLong())
 
@@ -27,6 +24,22 @@ fun ExactNumber.divide(other: ExactNumber) =
 
 fun ExactNumber.add(other: ExactNumber) = toBigDecimal().add(other.toBigDecimal()).toExactNumber()
 fun ExactNumber.doubleValue() = toBigDecimal().toDouble()
+fun ExactNumber.floatValue() = toBigDecimal().toFloat()
+fun ExactNumber.absValue() = toBigDecimal().abs().toExactNumber()
+fun ExactNumber.longValue() = toBigDecimal().longValueExact()
+
+fun ExactNumber.isInteger() = toBigDecimal().stripTrailingZeros().scale() <= 0
+
+fun ExactNumber.isBiggerThan(other: ExactNumber) = toBigDecimal() > other.toBigDecimal()
+fun ExactNumber.isSmallerThan(other: ExactNumber) = toBigDecimal() < other.toBigDecimal()
+
+
+fun ExactNumber.round() = round(0)
+
+fun ExactNumber.round(decimals: Int) =
+    toBigDecimal().setScale(decimals, RoundingMode.HALF_UP).toExactNumber()
+
+val ExactNumberZERO = ExactNumber(0,0)
 
 
 operator fun Amount.compareTo(other: Amount): Int {
@@ -67,3 +80,5 @@ private fun requireSameCurrencyCode(first: Amount, second: Amount) = require(
 fun CategoryTree.findCategoryByCode(code: String): Category {
     TODO("Core setup")
 }
+
+val Amount.isValid get() = currencyCode.isNotEmpty()
