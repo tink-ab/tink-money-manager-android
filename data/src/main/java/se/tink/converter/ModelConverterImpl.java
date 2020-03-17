@@ -42,8 +42,6 @@ import se.tink.converter.misc.PeriodToPeriodDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
-import se.tink.converter.provider.ProviderDTOToProviderConverter;
-import se.tink.converter.provider.ProviderToProviderDTOConverter;
 import se.tink.converter.pushnotifications.DeviceFromDTOConverter;
 import se.tink.converter.pushnotifications.DeviceToDeviceDTOConverter;
 import se.tink.converter.pushnotifications.RegisterPushNotificationTokenRequestToSendConverter;
@@ -141,7 +139,6 @@ public class ModelConverterImpl implements ModelConverter {
     private void addConverters() {
         setupAuthenticationConverters();
         setupAccountConverters();
-        setupProviderConverters();
         setupStatisticConverters();
         setupTransactionConverters();
         setupSupportModelConverters();
@@ -239,11 +236,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new StatisticTreeDTOStatisticTreeConverter(this));
         addConverter(new StatisticToStatisticDTOConverter(this));
         addConverter(new StatisticDTOToStatisticConverter(this));
-    }
-
-    private void setupProviderConverters() {
-        addConverter(new ProviderDTOToProviderConverter(this));
-        addConverter(new ProviderToProviderDTOConverter(this));
     }
 
     private void setupSupportModelConverters() {

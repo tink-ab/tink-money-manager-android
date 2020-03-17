@@ -15,7 +15,6 @@ import se.tink.core.models.StreamingResponseType;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
 import se.tink.core.models.misc.Period;
-import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
@@ -42,7 +41,6 @@ public class StreamingServiceImpl implements StreamingService {
 	private static final int SUCCESS_DELAY = 1 * 30 * 1000;
 	private static final int FAIL_DELAY = 1 * 1000;
 
-	private final List<ChangeObserver<Provider>> providerListeners = Lists.newArrayList();
 	private final List<ChangeObserver<Transaction>> transactionListeners = Lists.newArrayList();
 	private final List<ObjectChangeObserver<Map<String, Period>>> periodListeners = Lists
 		.newArrayList();
@@ -105,13 +103,6 @@ public class StreamingServiceImpl implements StreamingService {
 				notifyListeners(periods, periodListeners, type);
 			}
 			
-			if (value.hasProviders()) {
-				List<Provider> providers = converter
-					.map(value.getProviders().getProviderList(),
-						Provider.class);
-				notifyListeners(providers, providerListeners, type);
-			}
-
 			if (value.hasAccounts()) {
 				List<Account> accounts = converter
 					.map(value.getAccounts().getAccountList(), Account.class);
@@ -143,15 +134,6 @@ public class StreamingServiceImpl implements StreamingService {
 	@Override
 	public Date getLatestStreamingDate() {
 		return latestStreamingTime;
-	}
-
-	@Override
-	public void subscribeForProviders(ObjectChangeObserver<Provider> listener) {
-	}
-
-	@Override
-	public void subscribeForProviders(ChangeObserver<Provider> listener) {
-		//providerListeners.add(listener);
 	}
 
 //	@Override
@@ -192,7 +174,6 @@ public class StreamingServiceImpl implements StreamingService {
 
 	@Override
 	public void unsubscribe(ChangeObserver listener) {
-		providerListeners.remove(listener);
 		transactionListeners.remove(listener);
 		categoryListeners.remove(listener);
 		accountListeners.remove(listener);

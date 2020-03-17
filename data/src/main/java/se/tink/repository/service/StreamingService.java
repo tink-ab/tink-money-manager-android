@@ -5,9 +5,7 @@ import java.util.Map;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
 import se.tink.core.models.misc.Period;
-import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
-import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MapChangeObserver;
@@ -16,10 +14,6 @@ import se.tink.repository.ObjectChangeObserver;
 public interface StreamingService extends TinkService {
 
 	Date getLatestStreamingDate();
-
-	void subscribeForProviders(ObjectChangeObserver<Provider> listener);
-
-	void subscribeForProviders(ChangeObserver<Provider> listener);
 
 //	void subscribeForTransactions(ChangeObserver<Transaction> listener);
 

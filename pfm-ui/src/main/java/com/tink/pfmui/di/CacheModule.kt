@@ -12,7 +12,6 @@ import se.tink.core.models.Category
 import se.tink.core.models.account.Account
 import com.tink.model.budget.BudgetSummary
 import se.tink.core.models.misc.Period
-import se.tink.core.models.provider.Provider
 import se.tink.core.models.transaction.Transaction
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
@@ -45,12 +44,11 @@ internal class CacheModule {
 
     @Provides
     fun cacheHandle(
-        cacheDatabase: CacheDatabase,
-        providerCache: WritableCacheRepository<Provider>
+        cacheDatabase: CacheDatabase
     ): CacheHandle {
         return CacheHandle(
             cacheDatabase,
-            setOf(providerCache)
+            setOf() //TODO: Core setup
         )
     }
 
@@ -116,12 +114,6 @@ internal class CacheModule {
 //    ): LiveDataCache<List<BudgetSummary>> {
 //        return BudgetsDatabaseCache(cacheDatabase)
 //    }
-
-    @Provides
-    @PfmScope
-    fun providerCache(): WritableCacheRepository<Provider> {
-        return InMemoryCache()
-    }
 }
 
 @Module
