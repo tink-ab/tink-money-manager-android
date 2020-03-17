@@ -1,9 +1,8 @@
 package se.tink.converter.provider
 
-import se.tink.converter.EnumMappers
+import com.tink.model.credential.Credential
 import se.tink.converter.ModelConverter
 import se.tink.core.models.Images
-import se.tink.core.models.credential.Credential
 import se.tink.core.models.misc.Field
 import se.tink.core.models.provider.Provider
 import se.tink.modelConverter.AbstractConverter
@@ -19,8 +18,7 @@ class ProviderDTOToProviderConverter(
                 displayName = displayName,
                 type = type.toCoreModel(),
                 status = status.toCoreModel(),
-                credentialType = EnumMappers.GRPC_TO_MODEL_CREDENTIAL_TYPE_MAP[credentialType]
-                    ?: Credential.Type.TYPE_UNKNOWN,
+                credentialType = Credential.Type.UNKNOWN, //TODO: Core Setup
                 helpText = helpText,
                 isPopular = popular,
                 fields = fieldsOrEmpty(),
@@ -76,7 +74,6 @@ class ProviderDTOToProviderConverter(
     private fun ProviderCapabilityDTO.toCoreModel(): Provider.Capability =
         when (this) {
             ProviderCapabilityDTO.UNRECOGNIZED,
-            ProviderCapabilityDTO.CAPABILITY_EINVOICES,
             ProviderCapabilityDTO.CAPABILITY_UNKNOWN -> Provider.Capability.CAPABILITY_UNKNOWN
             ProviderCapabilityDTO.CAPABILITY_TRANSFERS -> Provider.Capability.CAPABILITY_TRANSFERS
             ProviderCapabilityDTO.CAPABILITY_MORTGAGE_AGGREGATION -> Provider.Capability.CAPABILITY_MORTGAGE_AGGREGATION
@@ -88,6 +85,7 @@ class ProviderDTOToProviderConverter(
             ProviderCapabilityDTO.CAPABILITY_PAYMENTS -> Provider.Capability.CAPABILITY_PAYMENTS
             ProviderCapabilityDTO.CAPABILITY_MORTGAGE_LOAN -> Provider.Capability.CAPABILITY_MORTGAGE_LOAN
             ProviderCapabilityDTO.CAPABILITY_IDENTITY_DATA -> Provider.Capability.CAPABILITY_IDENTITY_DATA
+            else -> TODO("Core setup")
         }
 
     private fun ProviderAuthenticationFlowDTO.toCoreModel(): Provider.AuthenticationFlow =

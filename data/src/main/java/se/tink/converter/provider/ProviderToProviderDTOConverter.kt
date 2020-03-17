@@ -19,7 +19,7 @@ class ProviderToProviderDTOConverter(
                 .setDisplayName(displayName)
                 .setType(type.toDTO())
                 .setStatus(status.toDTO())
-                .setCredentialType(EnumMappers.GRPC_TO_MODEL_CREDENTIAL_TYPE_MAP.inverse()[credentialType])
+//        TODO        .setCredentialType(EnumMappers.GRPC_TO_MODEL_CREDENTIAL_TYPE_MAP.inverse()[credentialType])
                 .setHelpText(helpText)
                 .setPopular(isPopular)
                 .setGroupDisplayName(groupDisplayName)

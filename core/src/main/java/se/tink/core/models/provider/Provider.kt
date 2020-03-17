@@ -1,7 +1,7 @@
 package se.tink.core.models.provider
 
+import com.tink.model.credential.Credential
 import se.tink.core.models.Images
-import se.tink.core.models.credential.Credential
 import se.tink.core.models.misc.Field
 import java.io.Serializable
 

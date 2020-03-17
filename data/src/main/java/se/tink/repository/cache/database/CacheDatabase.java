@@ -8,7 +8,6 @@ import se.tink.repository.cache.models.AccountSourceIdentifierEntity;
 import se.tink.repository.cache.models.CategoryDao;
 import se.tink.repository.cache.models.CategoryEntity;
 import se.tink.repository.cache.models.CounterpartEntity;
-import se.tink.repository.cache.models.CredentialsEntity;
 import se.tink.repository.cache.models.FlagEntity;
 import se.tink.repository.cache.models.I18ConfigurationEntity;
 import se.tink.repository.cache.models.IdentifiablePeriodEntity;
@@ -29,7 +28,6 @@ import se.tink.repository.cache.models.budgets.BudgetEntity;
             AccountEntity.class,
             AccountSourceIdentifierEntity.class,
             CounterpartEntity.class,
-            CredentialsEntity.class,
             BudgetEntity.class
         },
         version = 1,
@@ -51,8 +49,6 @@ public abstract class CacheDatabase extends RoomDatabase {
     public abstract AccountDao accountDao();
 
     public abstract AccountSourceIdentifierDao accountSourceIdentifierDao();
-
-    public abstract CredentialsDao credentialsDao();
 
     public abstract BudgetsDao budgetsDao();
 }

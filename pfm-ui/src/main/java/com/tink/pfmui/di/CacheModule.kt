@@ -11,8 +11,6 @@ import se.tink.converter.ModelConverter
 import se.tink.core.models.Category
 import se.tink.core.models.account.Account
 import com.tink.model.budget.BudgetSummary
-import se.tink.core.models.credential.CachedCredential
-import se.tink.core.models.credential.Credential
 import se.tink.core.models.misc.Period
 import se.tink.core.models.provider.Provider
 import se.tink.core.models.transaction.Transaction
@@ -24,7 +22,6 @@ import se.tink.repository.cache.Cache
 import se.tink.repository.cache.CacheHandle
 import se.tink.repository.cache.CategoryDatabaseCache
 import se.tink.repository.cache.CategoryTreeCache
-import se.tink.repository.cache.CredentialsDatabaseCache
 import se.tink.repository.cache.InMemoryCache
 import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.cache.PeriodDatabaseCache
@@ -49,12 +46,11 @@ internal class CacheModule {
     @Provides
     fun cacheHandle(
         cacheDatabase: CacheDatabase,
-        providerCache: WritableCacheRepository<Provider>,
-        credentialCache: WritableCacheRepository<Credential>
+        providerCache: WritableCacheRepository<Provider>
     ): CacheHandle {
         return CacheHandle(
             cacheDatabase,
-            setOf(providerCache, credentialCache)
+            setOf(providerCache)
         )
     }
 
@@ -122,22 +118,8 @@ internal class CacheModule {
 //    }
 
     @Provides
-    fun credentialsCache(
-        cacheDatabase: CacheDatabase,
-        modelConverter: ModelConverter
-    ): LiveDataCache<List<CachedCredential>> {
-        return CredentialsDatabaseCache(cacheDatabase, modelConverter)
-    }
-
-    @Provides
     @PfmScope
     fun providerCache(): WritableCacheRepository<Provider> {
-        return InMemoryCache()
-    }
-
-    @Provides
-    @PfmScope
-    fun credentialCache(): WritableCacheRepository<Credential> {
         return InMemoryCache()
     }
 }

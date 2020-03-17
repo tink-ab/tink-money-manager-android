@@ -10,13 +10,11 @@ import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.account.Account;
-import se.tink.core.models.credential.Credential;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
 import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.CategoryServiceGrpc;
-import se.tink.grpc.v1.services.CredentialServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.LoanServiceGrpc;
@@ -30,16 +28,12 @@ import se.tink.repository.cache.Cache;
 import se.tink.repository.cache.CategoryTreeCache;
 import se.tink.repository.cache.LiveDataCache;
 import se.tink.repository.cache.StasticCache;
-import se.tink.repository.cache.WritableCacheRepository;
 import se.tink.repository.manager.CategoryServiceCachedImpl;
-import se.tink.repository.manager.CredentialServiceCachedImpl;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
 import se.tink.repository.service.AccountService;
 import se.tink.repository.service.AccountServiceCachedImpl;
 import se.tink.repository.service.CategoryService;
-import se.tink.repository.service.CredentialService;
-import se.tink.repository.service.CredentialServiceImpl;
 import se.tink.repository.service.DeviceService;
 import se.tink.repository.service.DeviceServiceImpl;
 import se.tink.repository.service.StatisticService;
@@ -111,12 +105,6 @@ class ServiceModule {
 
 	@Provides
 	@PfmScope
-	CredentialServiceGrpc.CredentialServiceStub credentialServiceApi(Channel channel) {
-		return CredentialServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
 	TransactionService provideTransactionRepository(
 		TransactionServiceGrpc.TransactionServiceStub transactionServiceApi,
 		StreamingService streamingServiceStub,
@@ -147,20 +135,6 @@ class ServiceModule {
 			EmailAndPasswordAuthenticationServiceGrpc.newStub(channel),
 			userService,
 			converter);
-	}
-
-
-	@Provides
-	@PfmScope
-	CredentialService provideCredentialRepository(
-		CredentialServiceGrpc.CredentialServiceStub api,
-		StreamingService streamingServiceStub,
-		WritableCacheRepository<Credential> cache,
-		ModelConverter converter
-	) {
-		CredentialService innerService = new CredentialServiceImpl(streamingServiceStub, converter,
-			api);
-		return new CredentialServiceCachedImpl(innerService, streamingServiceStub, cache);
 	}
 
 	@Provides

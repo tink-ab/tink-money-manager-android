@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Map;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
-import se.tink.core.models.credential.Credential;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
@@ -23,8 +22,6 @@ public interface StreamingService extends TinkService {
 	void subscribeForProviders(ChangeObserver<Provider> listener);
 
 //	void subscribeForTransactions(ChangeObserver<Transaction> listener);
-
-	void subscribeForCredentials(ChangeObserver<Credential> listener);
 
 	void subscribeForPeriods(ObjectChangeObserver<Map<String, Period>> listener);
 

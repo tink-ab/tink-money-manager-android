@@ -67,6 +67,8 @@ dependencies {
     implementation project(':core')
     implementation project(':annotations')
 
+    implementation libraries.tink_core
+
     implementation libraries.timber
 
     implementation libraries.arch_lifecycle_livedata

@@ -19,9 +19,6 @@ import se.tink.converter.authentication.ThirdPartyAppAuthenticationDTOToThirdPar
 import se.tink.converter.category.CategoryDTOToCategoryConverter;
 import se.tink.converter.category.CategoryToCategoryDTOConverter;
 import se.tink.converter.category.CategoryTreeDTOToCategoryTreeConverter;
-import se.tink.converter.credential.CachedCredentialToCredentialsEntity;
-import se.tink.converter.credential.CredentialDTOToCredentialConverter;
-import se.tink.converter.credential.CredentialsEntityToCachedCredential;
 import se.tink.converter.date.DateTimeToDateConverter;
 import se.tink.converter.date.DateTimeToTimestampConverter;
 import se.tink.converter.date.DateToDateTimeConverter;
@@ -144,7 +141,6 @@ public class ModelConverterImpl implements ModelConverter {
     private void addConverters() {
         setupAuthenticationConverters();
         setupAccountConverters();
-        setupCredentialConverters();
         setupProviderConverters();
         setupStatisticConverters();
         setupTransactionConverters();
@@ -248,13 +244,6 @@ public class ModelConverterImpl implements ModelConverter {
     private void setupProviderConverters() {
         addConverter(new ProviderDTOToProviderConverter(this));
         addConverter(new ProviderToProviderDTOConverter(this));
-    }
-
-    private void setupCredentialConverters() {
-        addConverter(new CredentialDTOToCredentialConverter(this));
-
-        addConverter(new CredentialsEntityToCachedCredential());
-        addConverter(new CachedCredentialToCredentialsEntity());
     }
 
     private void setupSupportModelConverters() {

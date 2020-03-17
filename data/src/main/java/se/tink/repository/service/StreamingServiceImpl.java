@@ -14,7 +14,6 @@ import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
 import se.tink.core.models.account.Account;
 import se.tink.core.models.category.CategoryTree;
-import se.tink.core.models.credential.Credential;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.provider.Provider;
 import se.tink.core.models.statistic.StatisticTree;
@@ -45,7 +44,6 @@ public class StreamingServiceImpl implements StreamingService {
 
 	private final List<ChangeObserver<Provider>> providerListeners = Lists.newArrayList();
 	private final List<ChangeObserver<Transaction>> transactionListeners = Lists.newArrayList();
-	private final List<ChangeObserver<Credential>> credentialListeners = Lists.newArrayList();
 	private final List<ObjectChangeObserver<Map<String, Period>>> periodListeners = Lists
 		.newArrayList();
 	private final List<ObjectChangeObserver<StatisticTree>> statisticsListeners = Lists
@@ -114,13 +112,6 @@ public class StreamingServiceImpl implements StreamingService {
 				notifyListeners(providers, providerListeners, type);
 			}
 
-			if (value.hasCredentials()) {
-				List<Credential> credentials = converter
-					.map(value.getCredentials().getCredentialList(),
-						Credential.class);
-				notifyListeners(credentials, credentialListeners, type);
-			}
-
 			if (value.hasAccounts()) {
 				List<Account> accounts = converter
 					.map(value.getAccounts().getAccountList(), Account.class);
@@ -169,11 +160,6 @@ public class StreamingServiceImpl implements StreamingService {
 //	}
 
 	@Override
-	public void subscribeForCredentials(ChangeObserver<Credential> listener) {
-		//credentialListeners.add(listener);
-	}
-
-	@Override
 	public void subscribeForPeriods(ObjectChangeObserver<Map<String, Period>> listener) {
 		//periodListeners.add(listener);
 	}
@@ -208,7 +194,6 @@ public class StreamingServiceImpl implements StreamingService {
 	public void unsubscribe(ChangeObserver listener) {
 		providerListeners.remove(listener);
 		transactionListeners.remove(listener);
-		credentialListeners.remove(listener);
 		categoryListeners.remove(listener);
 		accountListeners.remove(listener);
 	}
