@@ -19,7 +19,8 @@ import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+import se.tink.commons.extensions.parent
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction

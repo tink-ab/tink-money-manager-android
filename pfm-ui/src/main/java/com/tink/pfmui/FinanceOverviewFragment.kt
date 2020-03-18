@@ -24,11 +24,11 @@ import com.tink.pfmui.security.DefaultRecoveryHandler
 import com.tink.pfmui.security.SecuredClientDataStorage
 import com.tink.pfmui.tracking.AnalyticsSingleton
 import com.tink.pfmui.tracking.Tracker
+import com.tink.service.category.CategoryService
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import se.tink.repository.cache.CacheHandle
-import se.tink.repository.service.CategoryService
 import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.HeaderClientInterceptor
 import se.tink.repository.service.UserConfigurationService

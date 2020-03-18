@@ -15,6 +15,7 @@ import se.tink.android.repository.transaction.LeftToSpendTransactionPagesLiveDat
 import se.tink.android.repository.transaction.TransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.livedata.map
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory

@@ -9,7 +9,7 @@ import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.CategorySelectionListener
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import com.tink.model.misc.ExactNumber
 import se.tink.commons.extensions.ExactNumberZERO
 import se.tink.commons.extensions.isBiggerThan
@@ -58,9 +58,9 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
 
         val categoryType =
             if (transaction.amount.value.isBiggerThan(ExactNumberZERO)) {
-                Category.Type.TYPE_INCOME
+                Category.Type.INCOME
             } else {
-                Category.Type.TYPE_EXPENSES
+                Category.Type.EXPENSE
             }
 
         CategorySelectionFragment

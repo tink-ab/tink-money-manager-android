@@ -2,13 +2,11 @@ package com.tink.pfmui.theme;
 
 import android.content.Context;
 import androidx.core.content.ContextCompat;
-import com.tink.pfmui.R;
+import com.tink.model.category.Category;
 import com.tink.pfmui.transaction.SimilarTransactionsFragment;
 import com.tink.pfmui.view.TinkSnackbar;
 import com.tink.pfmui.view.TinkToolbar.Theme;
 import se.tink.commons.extensions.ContextUtils;
-import se.tink.core.models.Category;
-import se.tink.core.models.Category.Type;
 
 public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.Theme {
 
@@ -37,21 +35,22 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 		return new TinkDefaultStatusBarTheme(context) {
 			@Override
 			public int getStatusBarColor() {
-				int id;
-				Type type =
-					(category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
-				switch (type) {
-					case TYPE_EXPENSES:
-						id = R.attr.tink_expensesDarkColor;
-						break;
-					case TYPE_INCOME:
-						id = R.attr.tink_incomeDarkColor;
-						break;
-					case TYPE_TRANSFER:
-					case TYPE_UNKKNOWN:
-					default:
-						id = R.attr.tink_transferColor;
-				}
+				int id = 0;
+				//TODO: Core setup
+//				Category.Type type =
+//					(category == null) || (category.getType() == null) ? Category.Type.TYPE_UNKKNOWN : category.getType();
+//				switch (type) {
+//					case TYPE_EXPENSES:
+//						id = R.attr.tink_expensesDarkColor;
+//						break;
+//					case INCOME:
+//						id = R.attr.tink_incomeDarkColor;
+//						break;
+//					case TRANSFER:
+//					case TYPE_UNKKNOWN:
+//					default:
+//						id = R.attr.tink_transferColor;
+//				}
 				return ContextCompat.getColor(context, id);
 			}
 		};
@@ -63,21 +62,22 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 	}
 
 	private int getColor() {
-		int id;
+		int id = 0;
 
-		Type type = (category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
-		switch (type) {
-			case TYPE_EXPENSES:
-				id = R.attr.tink_expensesColor;
-				break;
-			case TYPE_INCOME:
-				id = R.attr.tink_incomeColor;
-				break;
-			case TYPE_TRANSFER:
-			case TYPE_UNKKNOWN:
-			default:
-				id = R.attr.tink_transferColor;
-		}
+		//TODO: Core setup
+//		Type type = (category == null) || (category.getType() == null) ? Type.TYPE_UNKKNOWN : category.getType();
+//		switch (type) {
+//			case TYPE_EXPENSES:
+//				id = R.attr.tink_expensesColor;
+//				break;
+//			case INCOME:
+//				id = R.attr.tink_incomeColor;
+//				break;
+//			case TRANSFER:
+//			case TYPE_UNKKNOWN:
+//			default:
+//				id = R.attr.tink_transferColor;
+//		}
 		return ContextUtils.getColorFromAttr(context, id);
 	}
 }

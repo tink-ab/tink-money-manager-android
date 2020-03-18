@@ -14,7 +14,8 @@ import se.tink.commons.transactions.Marked
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.category.CategoryTree
+import com.tink.model.category.CategoryTree
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject

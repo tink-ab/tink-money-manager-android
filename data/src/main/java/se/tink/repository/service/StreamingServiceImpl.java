@@ -13,7 +13,7 @@ import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
 import se.tink.core.models.account.Account;
-import se.tink.core.models.category.CategoryTree;
+import com.tink.model.category.CategoryTree;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;

@@ -1,21 +1,20 @@
 package com.tink.pfmui.collections;
 
-import com.google.common.collect.Lists;
-import java.util.List;
-import se.tink.core.models.Category;
-import se.tink.core.models.Category.Type;
-import se.tink.core.models.category.CategoryTree;
+import com.tink.model.category.Category;
+import com.tink.model.category.CategoryTree;
+import com.tink.service.category.CategoryService;
+import com.tink.service.observer.ChangeObserver;
+import javax.annotation.Nullable;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
-import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.CategoryService;
 
 @Deprecated
-public class Categories implements ObjectChangeObserver<CategoryTree>, Clearable {
+public class Categories implements ChangeObserver<CategoryTree>, Clearable {
 
 	private static Categories instance;
 
-	private CategoryTree tree = new CategoryTree();
+	@Nullable
+	private CategoryTree tree;
 
 	public static Categories getSharedInstance() {
 		if (instance == null) {
@@ -28,49 +27,12 @@ public class Categories implements ObjectChangeObserver<CategoryTree>, Clearable
 		DataWipeManager.sharedInstance().register(this);
 	}
 
-	public Category getParentCategoryFromCategoryCode(String code) {
-		Category childCategory = getCategory(code);
-		Category parentNode = childCategory.getParent();
-		if (parentNode != null) {
-			return getCategory(parentNode.getCode());
-		}
-		return childCategory;
-	}
-
 	public Category getParentIncomeCategory() {
 		if (tree == null) {
 			return null;
 		}
 
 		return tree.getIncome();
-	}
-
-	private Category createAllCategory(Category parent, String allCategoryTitle, Type type) {
-
-		Category newParent = new Category();
-		newParent.setName(parent.getName());
-		newParent.setCode(parent.getCode());
-		newParent.setType(parent.getType());
-		newParent.setSortOrder(0);
-		newParent.setParent(parent.getParent());
-
-		List<Category> categories = Lists.newArrayList(parent.getChildren());
-
-		Category allCategories = createCategory(allCategoryTitle, newParent.getCode(), null);
-		allCategories.setType(type);
-		categories.add(0, allCategories);
-
-		newParent.setChildren(categories);
-
-		return newParent;
-	}
-
-	private Category createCategory(String name, String code, Category parent) {
-		Category category = new Category();
-		category.setParent(parent);
-		category.setName(name);
-		category.setCode(code);
-		return category;
 	}
 
 	public Category getParentExpenseCategory() {
@@ -96,25 +58,12 @@ public class Categories implements ObjectChangeObserver<CategoryTree>, Clearable
 		return category;
 	}
 
-	public Category getCategoryTreeRoot(Type categoryType) {
-		switch (categoryType) {
-			case TYPE_EXPENSES:
-				return tree.getExpenses();
-			case TYPE_INCOME:
-				return tree.getIncome();
-			case TYPE_TRANSFER:
-				return tree.getTransfers();
-			case TYPE_UNKKNOWN:
-			default:
-				return null;
-		}
-	}
-
 	private Category findRecursive(Category category, String categoryCode) {
 		if (category.getCode().equals(categoryCode)) {
 			return category;
 		}
-		if (category.getChildren() == null || category.getChildren().isEmpty()) {
+		category.getChildren();
+		if (category.getChildren().isEmpty()) {
 			return null;
 		}
 		for (Category childCategory : category.getChildren()) {
@@ -156,6 +105,6 @@ public class Categories implements ObjectChangeObserver<CategoryTree>, Clearable
 
 	@Override
 	public void clear() {
-		tree = new CategoryTree();
+		tree = null;
 	}
 }

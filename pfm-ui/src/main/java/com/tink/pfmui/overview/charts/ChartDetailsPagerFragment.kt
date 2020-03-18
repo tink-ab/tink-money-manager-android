@@ -24,6 +24,7 @@ import com.tink.pfmui.util.FontUtils
 import com.tink.pfmui.view.CustomTypefaceSpan
 import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
+import se.tink.commons.extensions.parent
 import se.tink.commons.extensions.visible
 import se.tink.core.models.misc.Period
 

@@ -3,7 +3,7 @@ package se.tink.repository.service;
 import java.util.Date;
 import java.util.Map;
 import se.tink.core.models.account.Account;
-import se.tink.core.models.category.CategoryTree;
+import com.tink.model.category.CategoryTree;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;

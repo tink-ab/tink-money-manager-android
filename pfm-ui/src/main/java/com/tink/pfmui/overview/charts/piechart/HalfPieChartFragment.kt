@@ -34,6 +34,7 @@ import com.tink.pfmui.transaction.TransactionsListMetaData
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
+import se.tink.commons.extensions.getNameWithDefaultChildFormat
 
 private const val TYPE_ARG = "type"
 

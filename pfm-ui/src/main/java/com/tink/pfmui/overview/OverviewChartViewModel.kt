@@ -21,7 +21,7 @@ import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.category.CategoryTree
+import com.tink.model.category.CategoryTree
 import se.tink.core.models.misc.Period
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.utils.DateUtils

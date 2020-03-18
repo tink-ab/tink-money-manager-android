@@ -4,6 +4,7 @@ package com.tink.pfmui.util
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import com.tink.model.category.Category
 import com.tink.pfmui.R
 import com.tink.pfmui.view.TreeListSelectionItem
 import se.tink.commons.categories.enums.CategoryExpenseType
@@ -12,7 +13,9 @@ import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
 import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isUncategorized
-import se.tink.core.models.Category
+
+import se.tink.commons.extensions.parent
+import se.tink.commons.extensions.type
 
 private const val REIMBURSEMENT_CODE = "income:refund.other"
 
@@ -97,30 +100,26 @@ internal fun getTextColor(context: Context, category: Category?): Int {
     return ContextCompat.getColor(context, id)
 }
 
-private fun getType(category: Category?): Category.Type = category?.type ?: Category.Type.TYPE_UNKKNOWN
+private fun getType(category: Category?): Category.Type = category?.type ?: TODO("Core setup")
 
 private fun getDarkColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.attr.tink_expensesDarkColor
-        Category.Type.TYPE_INCOME -> R.attr.tink_incomeDarkColor
-        Category.Type.TYPE_TRANSFER,
-        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferColor
-        else -> R.attr.tink_transferColor
+        Category.Type.EXPENSE -> R.attr.tink_expensesDarkColor
+        Category.Type.INCOME -> R.attr.tink_incomeDarkColor
+        Category.Type.TRANSFER -> R.attr.tink_transferColor
     }
 
 private fun getTextColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.attr.tink_colorOnExpenses
-        Category.Type.TYPE_INCOME -> R.attr.tink_colorOnIncome
-        Category.Type.TYPE_TRANSFER,
-        Category.Type.TYPE_UNKKNOWN -> R.attr.tink_colorOnTransfer
-        else -> R.attr.tink_colorOnTransfer
+        Category.Type.EXPENSE -> R.attr.tink_colorOnExpenses
+        Category.Type.INCOME -> R.attr.tink_colorOnIncome
+        Category.Type.TRANSFER -> R.attr.tink_colorOnTransfer
     }
 
 private fun getColorId(type: Category.Type): Int =
     when (type) {
-        Category.Type.TYPE_EXPENSES -> R.attr.tink_expensesColor
-        Category.Type.TYPE_INCOME -> R.attr.tink_incomeColor
-        Category.Type.TYPE_TRANSFER, Category.Type.TYPE_UNKKNOWN -> R.attr.tink_transferColor
+        Category.Type.EXPENSE -> R.attr.tink_expensesColor
+        Category.Type.INCOME -> R.attr.tink_incomeColor
+        Category.Type.TRANSFER -> R.attr.tink_transferColor
         else -> R.attr.tink_transferColor
     }

@@ -13,7 +13,7 @@ import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createChangeObserver
 import se.tink.android.livedata.createMutationHandler
 import se.tink.android.livedata.map
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import se.tink.core.models.misc.Period
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.ErrorUtils

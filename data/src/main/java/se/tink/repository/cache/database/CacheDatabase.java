@@ -5,8 +5,6 @@ import androidx.room.RoomDatabase;
 import se.tink.repository.cache.models.AccountEntity;
 import se.tink.repository.cache.models.AccountSourceIdentifierDao;
 import se.tink.repository.cache.models.AccountSourceIdentifierEntity;
-import se.tink.repository.cache.models.CategoryDao;
-import se.tink.repository.cache.models.CategoryEntity;
 import se.tink.repository.cache.models.CounterpartEntity;
 import se.tink.repository.cache.models.FlagEntity;
 import se.tink.repository.cache.models.I18ConfigurationEntity;
@@ -18,7 +16,6 @@ import se.tink.repository.cache.models.budgets.BudgetEntity;
 
 @Database(
         entities = {
-            CategoryEntity.class,
             IdentifiablePeriodEntity.class,
             TransactionEntity.class,
             TagEntity.class,
@@ -33,8 +30,6 @@ import se.tink.repository.cache.models.budgets.BudgetEntity;
         version = 1,
         exportSchema = false)
 public abstract class CacheDatabase extends RoomDatabase {
-
-    public abstract CategoryDao categoryDao();
 
     public abstract PeriodDao periodDao();
 

@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.content.res.Resources
 import se.tink.android.categories.CategoryRepository
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+import se.tink.commons.extensions.findCategoryByCode
+import se.tink.commons.extensions.getCategoryByType
 import javax.inject.Inject
 
 internal class ChartDetailsViewModel @Inject constructor(private val categoryRepository: CategoryRepository) : ViewModel() {

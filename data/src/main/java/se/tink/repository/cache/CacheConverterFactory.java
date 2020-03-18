@@ -10,8 +10,6 @@ import se.tink.converter.account.AccountToAccountEntityAndAccountIdentifierEntit
 import se.tink.converter.account.AccountToAccountEntityConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsEntityToAccountDetailsConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsEntityConverter;
-import se.tink.converter.category.CategoryEntityToCategoryConverter;
-import se.tink.converter.category.CategoryToCategoryEntityConverter;
 import se.tink.converter.misc.AmountEntityToAmountConverter;
 import se.tink.converter.misc.AmountToAmountEntityConverter;
 import se.tink.converter.misc.ExactNumberEntityToExactNumberConverter;
@@ -37,8 +35,6 @@ public class CacheConverterFactory {
 
 	public static List<AbstractConverter<?, ?>> getCacheConverters(ModelConverter converter) {
 		List<AbstractConverter<?, ?>> converters = new ArrayList<>();
-		converters.add(new CategoryEntityToCategoryConverter());
-		converters.add(new CategoryToCategoryEntityConverter());
 		converters.add(new PeriodEntityToPeriodConverter());
 		converters.add(new PeriodToPeriodEntityConverter());
 		converters.add(new TransactionToTransactionWithAllRelationsConverter(converter));

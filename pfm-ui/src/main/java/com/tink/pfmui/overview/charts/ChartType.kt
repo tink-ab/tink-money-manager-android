@@ -6,7 +6,7 @@ import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmui.tracking.ScreenEvent
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 
 internal enum class ChartType {
     EXPENSES {
@@ -25,7 +25,7 @@ internal enum class ChartType {
         override val title: Int get() = R.string.left_to_spend_title
         override val color: Int get() = R.attr.tink_leftToSpendColor
         override val showCategoryPicker = false
-        override val type: Category.Type get() = Category.Type.TYPE_UNKKNOWN
+        override val type: Category.Type get() = Category.Type.TYPE_UNKNOWN
 
         override fun create1MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(0)
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()

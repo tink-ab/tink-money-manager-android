@@ -15,7 +15,8 @@ import com.tink.pfmui.view.TreeListSelectionAdapter
 import com.tink.pfmui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_select_category.view.*
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+
 
 private const val ARG_TYPE = "arg_type"
 private const val ARG_CATEGORY_CODE = "arg_category"
@@ -23,7 +24,7 @@ private const val ARG_OPTIONS = "arg_options"
 
 internal class CategorySelectionFragment : BaseFragment() {
     private val type by lazy {
-        arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.TYPE_EXPENSES
+        arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.EXPENSE
     }
     private val checkedCategoryCode by lazy { arguments?.getString(ARG_CATEGORY_CODE) }
     private val options: Options by lazy { requireNotNull(arguments?.getParcelable<Options>(ARG_OPTIONS) ) }

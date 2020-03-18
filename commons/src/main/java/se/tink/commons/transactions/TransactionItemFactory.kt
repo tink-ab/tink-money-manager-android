@@ -10,7 +10,7 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isExcluded
 import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import se.tink.commons.extensions.isValid

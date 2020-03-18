@@ -2,6 +2,7 @@ package se.tink.repository.service
 
 import com.tink.annotations.PfmScope
 import javax.inject.Inject
+import com.tink.service.category.CategoryService
 
 @PfmScope
 class DataRefreshHandler @Inject constructor(

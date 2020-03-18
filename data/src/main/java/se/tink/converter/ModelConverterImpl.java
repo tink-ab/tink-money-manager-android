@@ -15,9 +15,6 @@ import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsDT
 import se.tink.converter.authentication.AuthenticationResponseConverter;
 import se.tink.converter.authentication.AuthenticationStatusConverter;
 import se.tink.converter.authentication.ThirdPartyAppAuthenticationDTOToThirdPartyAppAuthenticationConverter;
-import se.tink.converter.category.CategoryDTOToCategoryConverter;
-import se.tink.converter.category.CategoryToCategoryDTOConverter;
-import se.tink.converter.category.CategoryTreeDTOToCategoryTreeConverter;
 import se.tink.converter.date.DateTimeToDateConverter;
 import se.tink.converter.date.DateTimeToTimestampConverter;
 import se.tink.converter.date.DateToDateTimeConverter;
@@ -141,7 +138,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupStatisticConverters();
         setupTransactionConverters();
         setupSupportModelConverters();
-        setupCategoryConverters();
         setupTrackingConverters();
         setupStreamingResponseConverter();
         setupRequestConverters();
@@ -206,12 +202,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new TrackingViewToTrackingViewDTOConverter(this));
         addConverter(
                 new TrackingConfigurationResponseDTOToTrackingConfigurationResponseConverter());
-    }
-
-    private void setupCategoryConverters() {
-        addConverter(new CategoryDTOToCategoryConverter(this));
-        addConverter(new CategoryToCategoryDTOConverter(this));
-        addConverter(new CategoryTreeDTOToCategoryTreeConverter(this));
     }
 
     private void setupTransactionConverters() {

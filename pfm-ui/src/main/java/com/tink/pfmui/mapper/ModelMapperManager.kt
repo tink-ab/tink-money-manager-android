@@ -9,7 +9,7 @@ import com.tink.pfmui.configuration.SuitableLocaleFinder
 import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.toExactNumber

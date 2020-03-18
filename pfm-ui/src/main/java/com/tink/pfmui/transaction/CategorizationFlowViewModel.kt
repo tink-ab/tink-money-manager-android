@@ -11,7 +11,8 @@ import se.tink.android.repository.transaction.TransactionReceived
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.livedata.Event
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject

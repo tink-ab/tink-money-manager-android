@@ -2,9 +2,9 @@ package se.tink.android.categories
 
 import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
-import se.tink.core.models.category.CategoryTree
-import se.tink.repository.ObjectChangeObserver
-import se.tink.repository.service.CategoryService
+import com.tink.model.category.CategoryTree
+import com.tink.service.category.CategoryService
+import com.tink.service.observer.ChangeObserver
 import javax.inject.Inject
 
 @PfmScope
@@ -15,10 +15,10 @@ class CategoryRepository @Inject constructor(service: CategoryService) {
         override fun onInactive() = service.unsubscribe(categoryTreeObserver)
     }
 
-    private val categoryTreeObserver = object : ObjectChangeObserver<CategoryTree> {
-        override fun onCreate(item: CategoryTree) = categories.postValue(item)
-        override fun onRead(item: CategoryTree) = categories.postValue(item)
-        override fun onUpdate(item: CategoryTree) = categories.postValue(item)
-        override fun onDelete(item: CategoryTree) {}
+    private val categoryTreeObserver = object : ChangeObserver<CategoryTree> {
+        override fun onCreate(items: CategoryTree) = categories.postValue(items)
+        override fun onRead(items: CategoryTree) = categories.postValue(items)
+        override fun onUpdate(items: CategoryTree) = categories.postValue(items)
+        override fun onDelete(items: CategoryTree) {}
     }
 }

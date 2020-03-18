@@ -12,7 +12,7 @@ import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.transaction_similar_fragment.*
 import kotlinx.android.synthetic.main.transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import se.tink.core.models.transaction.Transaction
 import javax.inject.Inject
 

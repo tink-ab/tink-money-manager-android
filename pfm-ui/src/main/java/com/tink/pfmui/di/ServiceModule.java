@@ -14,7 +14,6 @@ import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
 import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.CategoryServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
@@ -24,15 +23,12 @@ import se.tink.grpc.v1.services.TransactionServiceGrpc;
 import se.tink.grpc.v1.services.UserServiceGrpc;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.cache.Cache;
-import se.tink.repository.cache.CategoryTreeCache;
 import se.tink.repository.cache.LiveDataCache;
 import se.tink.repository.cache.StasticCache;
-import se.tink.repository.manager.CategoryServiceCachedImpl;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
 import se.tink.repository.service.AccountService;
 import se.tink.repository.service.AccountServiceCachedImpl;
-import se.tink.repository.service.CategoryService;
 import se.tink.repository.service.DeviceService;
 import se.tink.repository.service.DeviceServiceImpl;
 import se.tink.repository.service.StatisticService;
@@ -165,18 +161,6 @@ class ServiceModule {
 		impl.setExceptionTracker(tracker);
 		return impl;
 
-	}
-
-	@Provides
-	@PfmScope
-	CategoryService provideCategoryRepository(
-		StreamingService stub,
-		Channel channel,
-		ModelConverter converter,
-		CategoryTreeCache cache
-	) {
-    return new CategoryServiceCachedImpl(
-    	stub, CategoryServiceGrpc.newStub(channel), converter, cache);
 	}
 
 	@Provides

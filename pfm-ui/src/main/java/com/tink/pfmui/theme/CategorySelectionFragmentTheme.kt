@@ -3,14 +3,15 @@ package com.tink.pfmui.theme
 import android.content.Context
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.view.TinkToolbar
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+
 
 internal interface CategorySelectionFragmentTheme : BaseFragment.Theme
 
 internal fun getCategorySelectionThemeForType(context: Context, type: Category.Type): CategorySelectionFragmentTheme {
     return when (type) {
-        Category.Type.TYPE_INCOME -> IncomeCategorySelectionFragmentTheme(context)
-        Category.Type.TYPE_EXPENSES -> ExpensesCategorySelectionFragmentTheme(context)
+        Category.Type.INCOME -> IncomeCategorySelectionFragmentTheme(context)
+        Category.Type.EXPENSE -> ExpensesCategorySelectionFragmentTheme(context)
         else -> throw IllegalArgumentException("Wrong type $type")
     }
 }
