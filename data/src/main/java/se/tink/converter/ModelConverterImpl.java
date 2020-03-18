@@ -12,8 +12,6 @@ import se.tink.converter.account.AccountToAccountDTOConverter;
 import se.tink.converter.account.UpdateAccountRequestConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsDTOtoAccountDetailsConverter;
 import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsDTOConverter;
-import se.tink.converter.authentication.AuthenticationResponseConverter;
-import se.tink.converter.authentication.AuthenticationStatusConverter;
 import se.tink.converter.date.DateTimeToDateConverter;
 import se.tink.converter.date.DateTimeToTimestampConverter;
 import se.tink.converter.date.DateToDateTimeConverter;
@@ -23,8 +21,6 @@ import se.tink.converter.date.TimestampToLongConverter;
 import se.tink.converter.device.AuthenticationMethodEnumResponsConverter;
 import se.tink.converter.device.DeviceConfigurationMarketResponseConverter;
 import se.tink.converter.device.DeviceConfigurationResponseConverter;
-import se.tink.converter.device.UpdateI18NSettingsRequestConverter;
-import se.tink.converter.device.UpdateI18NSettingsResponseConverter;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
@@ -36,7 +32,6 @@ import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
 import se.tink.converter.request.TransactionToUpdateTransactionRequest;
-import se.tink.converter.settings.I18NSettingsConverter;
 import se.tink.converter.statistic.StatisticDTOToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticDTOConverter;
 import se.tink.converter.statistic.StatisticTreeDTOStatisticTreeConverter;
@@ -109,7 +104,6 @@ public class ModelConverterImpl implements ModelConverter {
     }
 
     private void addConverters() {
-        setupAuthenticationConverters();
         setupAccountConverters();
         setupStatisticConverters();
         setupTransactionConverters();
@@ -134,11 +128,6 @@ public class ModelConverterImpl implements ModelConverter {
         for (AbstractConverter converter : converters) {
             addConverter(converter);
         }
-    }
-
-    private void setupAuthenticationConverters() {
-        addConverter(new AuthenticationStatusConverter());
-        addConverter(new AuthenticationResponseConverter(this));
     }
 
     private void setupUserConverters() {
@@ -222,9 +211,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new DeviceConfigurationResponseConverter(this));
 
         addConverter(new AuthenticationMethodEnumResponsConverter(this));
-        addConverter(new UpdateI18NSettingsRequestConverter(this));
-        addConverter(new UpdateI18NSettingsResponseConverter(this));
-        addConverter(new I18NSettingsConverter());
     }
 
     private void setupCacheEntityConverters() {
