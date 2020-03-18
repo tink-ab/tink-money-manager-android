@@ -11,8 +11,6 @@ import java.util.Set;
 import se.tink.converter.ModelConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
-import se.tink.converter.pushnotifications.RegisterPushNotificationTokenRequestToSendConverter;
-import se.tink.converter.pushnotifications.ResponseToRegisterPushNotificationTokenResponseConverter;
 import se.tink.modelConverter.AbstractConverter;
 
 class ModelConverterImplementation implements ModelConverter {
@@ -60,8 +58,6 @@ class ModelConverterImplementation implements ModelConverter {
 	private void addConverters() {
 		addConverter(new ExactNumberToExactNumberDTOConverter(this));
 		addConverter(new ExactNumberDTOToExactNumberConverter());
-		addConverter(new RegisterPushNotificationTokenRequestToSendConverter(this));
-		addConverter(new ResponseToRegisterPushNotificationTokenResponseConverter(this));
 
 		setupChartConverters();
 		setupCalendarConverters();

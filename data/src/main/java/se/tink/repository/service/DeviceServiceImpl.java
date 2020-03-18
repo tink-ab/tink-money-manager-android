@@ -3,7 +3,6 @@ package se.tink.repository.service;
 import androidx.annotation.Nullable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import javax.inject.Inject;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.device.DeviceConfigurationResponse;
@@ -14,7 +13,6 @@ import se.tink.grpc.v1.models.DeviceAppsFlyerOrigin;
 import se.tink.grpc.v1.models.DeviceFacebookOrigin;
 import se.tink.grpc.v1.rpc.GetDeviceConfigurationRequest;
 import se.tink.grpc.v1.rpc.GetDeviceConfigurationRequest.Builder;
-import se.tink.grpc.v1.rpc.RegisterPushNotificationTokenResponse;
 import se.tink.grpc.v1.rpc.SetOriginResponse;
 import se.tink.grpc.v1.services.DeviceServiceGrpc.DeviceServiceStub;
 import se.tink.repository.MutationHandler;
@@ -31,28 +29,6 @@ public class DeviceServiceImpl implements DeviceService {
 	public DeviceServiceImpl(DeviceServiceStub deviceServiceStub, ModelConverter converter) {
 		this.service = deviceServiceStub;
 		this.converter = converter;
-	}
-
-	@Override
-	public void registerPushNotificationToken(String deviceId, String token,
-		String notificationPublicKey,
-		final MutationHandler<se.tink.core.models.device.pushnotifications.RegisterPushNotificationTokenResponse> handler) {
-
-		se.tink.grpc.v1.rpc.RegisterPushNotificationTokenRequest.Builder request = se.tink.grpc.v1.rpc.RegisterPushNotificationTokenRequest
-			.newBuilder();
-
-		request.setDeviceId(deviceId);
-		request.setNotificationToken(token);
-		request.setNotificationPublicKey(notificationPublicKey);
-
-		service.registerPushNotificationToken(request.build(),
-			new SimpleStreamObserver<RegisterPushNotificationTokenResponse>(handler) {
-				@Override
-				public void onNext(RegisterPushNotificationTokenResponse value) {
-					handler.onNext(converter.map(value,
-						se.tink.core.models.device.pushnotifications.RegisterPushNotificationTokenResponse.class));
-				}
-			});
 	}
 
 	@Override

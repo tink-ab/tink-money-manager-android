@@ -14,7 +14,6 @@ import se.tink.converter.account.accountDetails.AccountDetailsDTOtoAccountDetail
 import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsDTOConverter;
 import se.tink.converter.authentication.AuthenticationResponseConverter;
 import se.tink.converter.authentication.AuthenticationStatusConverter;
-import se.tink.converter.authentication.ThirdPartyAppAuthenticationDTOToThirdPartyAppAuthenticationConverter;
 import se.tink.converter.date.DateTimeToDateConverter;
 import se.tink.converter.date.DateTimeToTimestampConverter;
 import se.tink.converter.date.DateToDateTimeConverter;
@@ -30,34 +29,18 @@ import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
-import se.tink.converter.misc.FieldDTOToFieldConverter;
-import se.tink.converter.misc.FieldToFieldDTOConverter;
 import se.tink.converter.misc.ImagesConverter;
 import se.tink.converter.misc.PeriodDTOToPeriodConverter;
 import se.tink.converter.misc.PeriodToPeriodDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
-import se.tink.converter.pushnotifications.DeviceFromDTOConverter;
-import se.tink.converter.pushnotifications.DeviceToDeviceDTOConverter;
-import se.tink.converter.pushnotifications.RegisterPushNotificationTokenRequestToSendConverter;
-import se.tink.converter.pushnotifications.ResponseToRegisterPushNotificationTokenResponseConverter;
 import se.tink.converter.request.TransactionToUpdateTransactionRequest;
 import se.tink.converter.settings.I18NSettingsConverter;
-import se.tink.converter.settings.NotificationSettingsConverter;
-import se.tink.converter.settings.NotificationSettingsResponseConverter;
-import se.tink.converter.settings.NotificationSettingsUpdateRequestConverter;
-import se.tink.converter.settings.PeriodSettingsConverter;
-import se.tink.converter.settings.PeriodSettingsConverterUpdateRequest;
 import se.tink.converter.statistic.StatisticDTOToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticDTOConverter;
 import se.tink.converter.statistic.StatisticTreeDTOStatisticTreeConverter;
 import se.tink.converter.streaming.StringToStreamingResponseTypeConverter;
-import se.tink.converter.tracking.TrackingConfigurationResponseDTOToTrackingConfigurationResponseConverter;
-import se.tink.converter.tracking.TrackingEventToTrackingDTOConverter;
-import se.tink.converter.tracking.TrackingRequestToTrackingRequestDTOConverter;
-import se.tink.converter.tracking.TrackingTimingToTrackingTimingDTOConverter;
-import se.tink.converter.tracking.TrackingViewToTrackingViewDTOConverter;
 import se.tink.converter.transaction.QueryTransactionResponseDTOToSearchResultMetadataConverter;
 import se.tink.converter.transaction.SuggestTransactionConverter;
 import se.tink.converter.transaction.SuggestTransactionsResponseConverter;
@@ -68,14 +51,7 @@ import se.tink.converter.transaction.TransactionDTOToTransactionConverter;
 import se.tink.converter.transaction.TransactionDetailsDTOToTransactionDetailsConverter;
 import se.tink.converter.transaction.TransactionDetailsToTransactionDetailsDTOConverter;
 import se.tink.converter.transaction.TransactionToTransactionDTOConverter;
-import se.tink.converter.user.CollectBankIdAuthenticationRequestDTOConverter;
-import se.tink.converter.user.DeleteUserReasonConverter;
-import se.tink.converter.user.EmailAndPasswordAuthenticationResponseDTOConverter;
 import se.tink.converter.user.GetProfileResponseDTOConverter;
-import se.tink.converter.user.InitiateBankIdAuthenticationResponseDTOConverter;
-import se.tink.converter.user.LoginResponseDTOConverter;
-import se.tink.converter.user.RegisterResponseMapper;
-import se.tink.converter.user.UpdateEmailResponseDTOConverter;
 import se.tink.converter.user.UserConfigurationDTOToUserConfigurationConverter;
 import se.tink.converter.user.UserConfigurationToUserConfigurationDTOConverter;
 import se.tink.converter.user.UserProfileDTOConverter;
@@ -138,13 +114,10 @@ public class ModelConverterImpl implements ModelConverter {
         setupStatisticConverters();
         setupTransactionConverters();
         setupSupportModelConverters();
-        setupTrackingConverters();
         setupStreamingResponseConverter();
         setupRequestConverters();
         setupUserConfigurationConverters();
         setupUserConverters();
-        setupSettingsConverters();
-        setupPushNotificationsConverters();
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
     }
@@ -166,42 +139,15 @@ public class ModelConverterImpl implements ModelConverter {
     private void setupAuthenticationConverters() {
         addConverter(new AuthenticationStatusConverter());
         addConverter(new AuthenticationResponseConverter(this));
-        addConverter(
-                new ThirdPartyAppAuthenticationDTOToThirdPartyAppAuthenticationConverter());
-    }
-
-    private void setupSettingsConverters() {
-        addConverter(new PeriodSettingsConverter(this));
-        addConverter(new PeriodSettingsConverterUpdateRequest(this));
-
-        addConverter(new NotificationSettingsConverter(this));
-        addConverter(new NotificationSettingsUpdateRequestConverter(this));
-        addConverter(new NotificationSettingsResponseConverter(this));
     }
 
     private void setupUserConverters() {
         addConverter(new UserProfileDTOConverter());
-        addConverter(new LoginResponseDTOConverter(this));
-        addConverter(new CollectBankIdAuthenticationRequestDTOConverter(this));
-        addConverter(new EmailAndPasswordAuthenticationResponseDTOConverter(this));
-        addConverter(new UpdateEmailResponseDTOConverter(this));
         addConverter(new GetProfileResponseDTOConverter(this));
-        addConverter(new RegisterResponseMapper(this));
-        addConverter(new InitiateBankIdAuthenticationResponseDTOConverter(this));
-        addConverter(new DeleteUserReasonConverter(this));
     }
 
     private void setupStreamingResponseConverter() {
         addConverter(new StringToStreamingResponseTypeConverter(this));
-    }
-
-    private void setupTrackingConverters() {
-        addConverter(new TrackingEventToTrackingDTOConverter(this));
-        addConverter(new TrackingRequestToTrackingRequestDTOConverter(this));
-        addConverter(new TrackingTimingToTrackingTimingDTOConverter(this));
-        addConverter(new TrackingViewToTrackingViewDTOConverter(this));
-        addConverter(
-                new TrackingConfigurationResponseDTOToTrackingConfigurationResponseConverter());
     }
 
     private void setupTransactionConverters() {
@@ -228,9 +174,6 @@ public class ModelConverterImpl implements ModelConverter {
     }
 
     private void setupSupportModelConverters() {
-        addConverter(new FieldToFieldDTOConverter(this));
-        addConverter(new FieldDTOToFieldConverter(this));
-
         addConverter(new PeriodDTOToPeriodConverter(this));
         addConverter(new PeriodToPeriodDTOConverter(this));
 
@@ -274,16 +217,9 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new UserConfigurationDTOToUserConfigurationConverter(this));
     }
 
-    private void setupPushNotificationsConverters() {
-        addConverter(new RegisterPushNotificationTokenRequestToSendConverter(this));
-        addConverter(new ResponseToRegisterPushNotificationTokenResponseConverter(this));
-    }
-
     private void setupDeviceConfigurationConverters() {
         addConverter(new DeviceConfigurationMarketResponseConverter(this));
         addConverter(new DeviceConfigurationResponseConverter(this));
-        addConverter(new DeviceFromDTOConverter(this));
-        addConverter(new DeviceToDeviceDTOConverter(this));
 
         addConverter(new AuthenticationMethodEnumResponsConverter(this));
         addConverter(new UpdateI18NSettingsRequestConverter(this));
