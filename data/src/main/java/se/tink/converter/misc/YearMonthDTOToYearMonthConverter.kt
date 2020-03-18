@@ -1,6 +1,6 @@
 package se.tink.converter.misc
 
-import se.tink.core.models.misc.YearMonth
+import com.tink.model.time.YearMonth
 import se.tink.modelConverter.AbstractConverter
 
 typealias YearMonthDTO = se.tink.grpc.v1.models.YearMonth

@@ -1,6 +1,6 @@
 package se.tink.converter.misc
 
-import se.tink.core.models.misc.YearWeek
+import com.tink.model.time.YearWeek
 import se.tink.modelConverter.AbstractConverter
 
 typealias YearWeekDTO = se.tink.grpc.v1.models.YearWeek
