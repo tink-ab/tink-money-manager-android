@@ -4,6 +4,8 @@ import com.tink.model.category.Category
 import com.tink.model.category.CategoryTree
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
+import org.joda.time.DateTime
+import org.threeten.bp.Instant
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.absoluteValue
@@ -102,3 +104,5 @@ fun Category.getNameWithDefaultChildFormat(defaultChildFormat: String?): String?
         name
     }
 }
+
+fun Instant.toDateTime(): DateTime = DateTime(this.toEpochMilli())

@@ -11,8 +11,9 @@ import se.tink.commons.extensions.inflate
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
+import com.tink.model.relations.ExpensesByDay
 import se.tink.commons.extensions.floatValue
-import se.tink.core.models.relations.ExpensesByDay
+import se.tink.commons.extensions.toDateTime
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -26,19 +27,17 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
         WeeklyExpensesByDayInsightViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
-        //TODO
-//        val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
-//            .expensesByDay
-//            .sortedBy { it.date } // This will ensure we show data oldest to newest, from left to right in the chart
-//            .toChartData(dateUtils, amountFormatter)
-//        return WeeklyExpensesByDayDataHolder(chartData)
-        return object : InsightDataHolder {}
+        val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
+            .expensesByDay
+            .sortedBy { it.date } // This will ensure we show data oldest to newest, from left to right in the chart
+            .toChartData(dateUtils, amountFormatter)
+        return WeeklyExpensesByDayDataHolder(chartData)
     }
 
     override val viewType = getViewType()
 
-    override val supportedInsightTypes = listOf<InsightType>(
-      //TODO: Missing type  InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY
+    override val supportedInsightTypes = listOf(
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY
     )
 }
 
@@ -70,7 +69,7 @@ private fun List<ExpensesByDay>.toChartData(
     dateUtils: DateUtils,
     amountFormatter: AmountFormatter
 ) = ExpensesByDayChartData(
-    map { dateUtils.getDayOfWeek(it.date) },
+    map { dateUtils.getDayOfWeek(it.date.toDateTime()) },
     map { it.totalAmount.value.floatValue() },
     map {
         amountFormatter.format(
