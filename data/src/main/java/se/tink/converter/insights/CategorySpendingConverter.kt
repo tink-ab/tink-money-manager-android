@@ -1,7 +1,7 @@
 package se.tink.converter.insights
 
+import com.tink.model.relations.AmountByCategory
 import se.tink.converter.misc.toAmount
-import se.tink.core.models.relations.AmountByCategory
 import se.tink.grpc.v1.models.InsightData
 
 @JvmName("weeklySpendingToAmountByCategoryList")
