@@ -18,7 +18,6 @@ import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
-import se.tink.grpc.v1.services.UserServiceGrpc;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.cache.Cache;
 import se.tink.repository.cache.LiveDataCache;
@@ -63,12 +62,6 @@ class ServiceModule {
 		Channel channel
 	) {
 		return TransactionServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
-	UserServiceGrpc.UserServiceStub userServiceStub(Channel channel) {
-		return UserServiceGrpc.newStub(channel);
 	}
 
 	@Provides
