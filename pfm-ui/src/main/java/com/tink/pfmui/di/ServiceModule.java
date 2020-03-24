@@ -1,6 +1,7 @@
 package com.tink.pfmui.di;
 
 import com.tink.annotations.PfmScope;
+import com.tink.service.account.AccountService;
 import com.tink.service.user.UserProfileService;
 import dagger.Module;
 import dagger.Provides;
@@ -10,22 +11,17 @@ import java.util.List;
 import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.account.Account;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
-import se.tink.grpc.v1.services.AccountServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
 import se.tink.repository.ExceptionTracker;
 import se.tink.repository.cache.Cache;
-import se.tink.repository.cache.LiveDataCache;
 import se.tink.repository.cache.StasticCache;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
-import se.tink.repository.service.AccountService;
-import se.tink.repository.service.AccountServiceCachedImpl;
 import se.tink.repository.service.DeviceService;
 import se.tink.repository.service.DeviceServiceImpl;
 import se.tink.repository.service.StatisticService;
@@ -52,12 +48,6 @@ class ServiceModule {
 
 	@Provides
 	@PfmScope
-	AccountServiceGrpc.AccountServiceStub accountServiceApi(Channel channel) {
-		return AccountServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
 	TransactionServiceGrpc.TransactionServiceStub provideTransactionService(
 		Channel channel
 	) {
@@ -68,17 +58,6 @@ class ServiceModule {
 	@PfmScope
 	StatisticServiceGrpc.StatisticServiceStub statisticServiceStub(Channel channel) {
 		return StatisticServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
-	AccountService provideAccountService(
-		AccountServiceGrpc.AccountServiceStub accountServiceApi,
-		StreamingService streamingServiceStub,
-		ModelConverter converter,
-		LiveDataCache<List<Account>> cache
-	) {
-		return new AccountServiceCachedImpl(accountServiceApi, streamingServiceStub, converter, cache);
 	}
 
 	@Provides

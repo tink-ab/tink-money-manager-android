@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import se.tink.android.repository.account.AccountRepository
-import se.tink.core.models.account.Account
+import com.tink.model.account.Account
 import javax.inject.Inject
 
 internal class AccountsViewModel @Inject constructor(

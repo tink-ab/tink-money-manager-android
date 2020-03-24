@@ -7,11 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import se.tink.converter.account.AccountDTOToAccountConverter;
-import se.tink.converter.account.AccountToAccountDTOConverter;
-import se.tink.converter.account.UpdateAccountRequestConverter;
-import se.tink.converter.account.accountDetails.AccountDetailsDTOtoAccountDetailsConverter;
-import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsDTOConverter;
 import se.tink.converter.date.DateTimeToDateConverter;
 import se.tink.converter.date.DateTimeToTimestampConverter;
 import se.tink.converter.date.DateToDateTimeConverter;
@@ -102,7 +97,6 @@ public class ModelConverterImpl implements ModelConverter {
     }
 
     private void addConverters() {
-        setupAccountConverters();
         setupStatisticConverters();
         setupTransactionConverters();
         setupSupportModelConverters();
@@ -177,16 +171,6 @@ public class ModelConverterImpl implements ModelConverter {
 
         addConverter(new StringToStringValueConverter(this));
         addConverter(new ImagesConverter());
-    }
-
-    private void setupAccountConverters() {
-        addConverter(new AccountDTOToAccountConverter(this));
-        addConverter(new AccountToAccountDTOConverter(this));
-
-        addConverter(new AccountDetailsToAccountDetailsDTOConverter(this));
-        addConverter(new AccountDetailsDTOtoAccountDetailsConverter(this));
-
-        addConverter(new UpdateAccountRequestConverter(this));
     }
 
     private void setupRequestConverters() {

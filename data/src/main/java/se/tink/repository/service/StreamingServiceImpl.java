@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
-import se.tink.core.models.account.Account;
+import com.tink.model.account.Account;
 import com.tink.model.category.CategoryTree;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.StatisticTree;

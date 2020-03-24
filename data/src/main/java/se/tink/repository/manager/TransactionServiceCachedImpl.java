@@ -9,6 +9,8 @@ import com.google.common.collect.Sets;
 import com.google.protobuf.BoolValue;
 import com.google.protobuf.Int32Value;
 import com.google.protobuf.StringValue;
+import com.tink.model.account.Account;
+import com.tink.service.account.AccountService;
 import io.grpc.stub.StreamObserver;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +25,6 @@ import javax.inject.Inject;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.extensions.AccountExtensionsKt;
-import se.tink.core.models.account.Account;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
@@ -40,7 +41,6 @@ import se.tink.repository.SimpleChangeObserver;
 import se.tink.repository.SimpleStreamObserver;
 import se.tink.repository.TinkNetworkError;
 import se.tink.repository.cache.Cache;
-import se.tink.repository.service.AccountService;
 import se.tink.repository.service.Pageable;
 import se.tink.repository.service.PagingHandler;
 import se.tink.repository.service.StreamingService;
@@ -130,16 +130,17 @@ public class TransactionServiceCachedImpl implements TransactionService {
 		};
 		subscribe(streamingChangeObserver);
 
-		accountChangeObserver = new SimpleChangeObserver<Account>() {
-			@Override
-			public void onDelete(List<Account> items) {
-				for (TransactionSubscription subscription : getAllSubscriptions()) {
-					subscription.deleteTransactionsForAccounts(items);
-				}
-			}
-		};
-
-		accountService.subscribe(accountChangeObserver);
+		throw new RuntimeException("TODO: Core setup");
+//		accountChangeObserver = new SimpleChangeObserver<Account>() {
+//			@Override
+//			public void onDelete(List<Account> items) {
+//				for (TransactionSubscription subscription : getAllSubscriptions()) {
+//					subscription.deleteTransactionsForAccounts(items);
+//				}
+//			}
+//		};
+//
+//		accountService.subscribe(accountChangeObserver);
 
 	}
 

@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_account_details.*
 import kotlinx.android.synthetic.main.transactions_list_fragment.recyclerView
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
-import se.tink.core.models.account.Account
+import com.tink.model.account.Account
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 

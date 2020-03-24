@@ -4,17 +4,16 @@ package com.tink.pfmui.di
 import android.content.Context
 import androidx.room.Room
 import com.tink.annotations.PfmScope
+import com.tink.model.account.Account
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.converter.ModelConverter
-import se.tink.core.models.account.Account
 import se.tink.core.models.misc.Period
 import se.tink.core.models.transaction.Transaction
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
-import se.tink.repository.cache.AccountDatabaseCache
 import se.tink.repository.cache.Cache
 import se.tink.repository.cache.CacheHandle
 import se.tink.repository.cache.LiveDataCache
@@ -79,14 +78,6 @@ internal class CacheModule {
         modelConverter: ModelConverter
     ): StasticCache {
         return StatisticInMemoryCache()
-    }
-
-    @Provides
-    fun accountsCache(
-        cacheDatabase: CacheDatabase,
-        modelConverter: ModelConverter
-    ): LiveDataCache<List<Account>> {
-        return AccountDatabaseCache(cacheDatabase, modelConverter)
     }
 
 //    @Provides

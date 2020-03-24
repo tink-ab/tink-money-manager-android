@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.account.AccountRepository
-import se.tink.core.models.account.Account
+import com.tink.model.account.Account
 import javax.inject.Inject
 
 internal class AccountDetailsViewModel @Inject constructor(

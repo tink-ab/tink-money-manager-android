@@ -4,12 +4,6 @@ package se.tink.repository.cache;
 import java.util.ArrayList;
 import java.util.List;
 import se.tink.converter.ModelConverter;
-import se.tink.converter.account.AccountEntityToAccountConverter;
-import se.tink.converter.account.AccountSourceIdentifierEntityToStringConverter;
-import se.tink.converter.account.AccountToAccountEntityAndAccountIdentifierEntityConverter;
-import se.tink.converter.account.AccountToAccountEntityConverter;
-import se.tink.converter.account.accountDetails.AccountDetailsEntityToAccountDetailsConverter;
-import se.tink.converter.account.accountDetails.AccountDetailsToAccountDetailsEntityConverter;
 import se.tink.converter.misc.AmountEntityToAmountConverter;
 import se.tink.converter.misc.AmountToAmountEntityConverter;
 import se.tink.converter.misc.ExactNumberEntityToExactNumberConverter;
@@ -52,12 +46,6 @@ public class CacheConverterFactory {
 		converters.add(new ImagesEntityToImagesConverter());
 		converters.add(new ExactNumberEntityToExactNumberConverter());
 		converters.add(new ExactNumberToExactNumberEntityConverter());
-		converters.add(new AccountDetailsToAccountDetailsEntityConverter(converter));
-		converters.add(new AccountDetailsEntityToAccountDetailsConverter(converter));
-		converters.add(new AccountToAccountEntityConverter(converter));
-		converters.add(new AccountEntityToAccountConverter(converter));
-		converters.add(new AccountToAccountEntityAndAccountIdentifierEntityConverter(converter));
-		converters.add(new AccountSourceIdentifierEntityToStringConverter(converter));
 		converters.add(new UserConfigurationI18nConfigurationEntityToI18nConfigurationConverter());
 
 		return converters;

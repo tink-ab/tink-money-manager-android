@@ -2,9 +2,6 @@ package se.tink.repository.cache.database;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import se.tink.repository.cache.models.AccountEntity;
-import se.tink.repository.cache.models.AccountSourceIdentifierDao;
-import se.tink.repository.cache.models.AccountSourceIdentifierEntity;
 import se.tink.repository.cache.models.CounterpartEntity;
 import se.tink.repository.cache.models.FlagEntity;
 import se.tink.repository.cache.models.I18ConfigurationEntity;
@@ -22,8 +19,6 @@ import se.tink.repository.cache.models.budgets.BudgetEntity;
             FlagEntity.class,
             I18ConfigurationEntity.class,
             StatisticEntity.class,
-            AccountEntity.class,
-            AccountSourceIdentifierEntity.class,
             CounterpartEntity.class,
             BudgetEntity.class
         },
@@ -40,10 +35,6 @@ public abstract class CacheDatabase extends RoomDatabase {
     public abstract UserConfigurationDao userConfigurationDao();
 
     public abstract StatisticsDao statisticsDao();
-
-    public abstract AccountDao accountDao();
-
-    public abstract AccountSourceIdentifierDao accountSourceIdentifierDao();
 
     public abstract BudgetsDao budgetsDao();
 }
