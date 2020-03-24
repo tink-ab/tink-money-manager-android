@@ -11,7 +11,7 @@ import java.util.List;
 import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;

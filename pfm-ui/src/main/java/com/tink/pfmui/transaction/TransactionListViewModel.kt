@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.model.transaction.Transaction
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import se.tink.android.AppExecutors
@@ -20,7 +21,6 @@ import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.transaction.Transaction
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.service.TransactionService
@@ -89,7 +89,6 @@ internal open class TransactionListViewModel @Inject constructor(
 
                 value = TransactionItems(
                     transactions = transactions
-                        .filterNot { it.isUpcoming }
                         .mapNotNull { it.toItem() }
                 )
             }

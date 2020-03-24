@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
 import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.grpc.v1.models.Tag;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsRequest;
 import se.tink.grpc.v1.rpc.CategorizeTransactionsResponse;
@@ -111,9 +111,9 @@ public class TransactionServiceImpl implements TransactionService {
 	public void updateTransaction(Transaction transaction,
 		final MutationHandler<Transaction> handler) {
 		List<Tag> tags = Lists.newArrayList();
-		for (se.tink.core.models.transaction.Tag tag : transaction.getTags()) {
-			tags.add(Tag.newBuilder().setName(tag.getName()).build());
-		}
+//		for (se.tink.core.models.transaction.Tag tag : transaction.getTags()) {
+//			tags.add(Tag.newBuilder().setName(tag.getName()).build());
+//		}
 
 		UpdateTransactionRequest.Builder builder = UpdateTransactionRequest.newBuilder();
 
@@ -121,11 +121,11 @@ public class TransactionServiceImpl implements TransactionService {
 		builder.setDescription(
 			StringValue.newBuilder().setValue(transaction.getDescription()).build());
 
-		if (transaction.getTimestamp() != null) {
-			long millis = transaction.getTimestamp().getMillis();
-			builder.setDate(Timestamp.newBuilder().setSeconds(millis / 1000)
-				.setNanos((int) ((millis % 1000) * 1000000)));
-		}
+//		if (transaction.getTimestamp() != null) {
+//			long millis = transaction.getTimestamp().getMillis();
+//			builder.setDate(Timestamp.newBuilder().setSeconds(millis / 1000)
+//				.setNanos((int) ((millis % 1000) * 1000000)));
+//		}
 
 		builder.setNotes(StringValue.newBuilder().setValue(transaction.getNotes()).build());
 		builder.addAllTags(tags);

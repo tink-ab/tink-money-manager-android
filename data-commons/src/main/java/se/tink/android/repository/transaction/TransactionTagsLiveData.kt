@@ -3,11 +3,11 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
+import com.tink.model.transaction.Tag
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.createChangeObserver
-import se.tink.core.models.transaction.Tag
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
 import se.tink.repository.service.StreamingService
 import se.tink.repository.service.TransactionService

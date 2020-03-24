@@ -15,7 +15,7 @@ import se.tink.android.livedata.createMutationHandler
 import se.tink.android.livedata.map
 import com.tink.model.category.Category
 import com.tink.model.time.Period
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.ErrorUtils
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.SimpleMutationHandler

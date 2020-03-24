@@ -5,7 +5,7 @@ import se.tink.android.AppExecutors
 import se.tink.android.livedata.createChangeObserver
 import com.tink.model.time.Period
 import se.tink.core.models.transaction.SearchResultMetadata
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.MutationHandler
 import se.tink.repository.PagingResult
 import se.tink.repository.TinkNetworkError

@@ -10,7 +10,7 @@ import dagger.Module
 import dagger.Provides
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.converter.ModelConverter
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.LiveDataSource
 import se.tink.repository.cache.Cache
 import se.tink.repository.cache.CacheHandle

@@ -1,7 +1,7 @@
 package se.tink.core.extensions
 
 import com.tink.model.account.Account
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 
 fun Account.transactionsBelongingTo(accounts: Collection<Transaction>) =
     accounts.filter { it.accountId == this.id }.toSet()

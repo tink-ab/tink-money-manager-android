@@ -14,7 +14,8 @@ import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import se.tink.commons.extensions.isValid
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
+import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -31,21 +32,13 @@ class TransactionItemFactory @Inject constructor(
         with(transaction) {
             createItem(
                 id = id,
-                isUpcoming = isUpcoming,
+                isUpcoming = false,
                 category = category,
-                date = timestamp,
+                date = this.date.toDateTime(), //TODO: Core setup
                 label = description,
                 amount = amount,
                 dispensableAmount = dispensableAmount,
-                upcomingTransactionData = if (isUpcoming) {
-                    ListItem.TransactionItem.UpcomingTransactionData(
-                        pending = isPending,
-                        editable = isEditable,
-                        transferId = "" //TODO: Core setup
-                    )
-                } else {
-                    null
-                }
+                upcomingTransactionData = null //TODO: Core setup
             )
         }
 
@@ -65,7 +58,7 @@ class TransactionItemFactory @Inject constructor(
                     label = description,
                     amount = amountFormatter.format(amount = amount, explicitlyPositive = true),
                     description = category.name,
-                    date = dateUtils.getDailyMonthlyYearly(timestamp),
+                    date = dateUtils.getDailyMonthlyYearly(date.toDateTime()),
                     merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
                     selected = isSelected
                 )

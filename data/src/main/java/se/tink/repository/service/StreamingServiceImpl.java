@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
 import se.tink.core.models.statistic.StatisticTree;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.grpc.v1.rpc.StreamingRequest;
 import se.tink.grpc.v1.rpc.StreamingResponse;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;

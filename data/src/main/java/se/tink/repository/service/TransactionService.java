@@ -3,7 +3,7 @@ package se.tink.repository.service;
 import java.util.List;
 import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MutationHandler;
 

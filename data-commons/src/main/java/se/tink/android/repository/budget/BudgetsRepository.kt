@@ -20,7 +20,7 @@ import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
 import se.tink.repository.cache.LiveDataCache
 import se.tink.repository.service.TransactionService

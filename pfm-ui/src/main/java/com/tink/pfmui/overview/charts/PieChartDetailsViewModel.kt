@@ -23,7 +23,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.parent
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.statistic.StatisticTree
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.absoluteValue

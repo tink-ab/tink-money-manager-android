@@ -27,7 +27,7 @@ import se.tink.converter.ModelConverter;
 import se.tink.core.extensions.AccountExtensionsKt;
 import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.grpc.v1.rpc.GetTransactionRequest;
 import se.tink.grpc.v1.rpc.GetTransactionResponse;
 import se.tink.grpc.v1.rpc.QueryTransactionsRequest;
@@ -496,10 +496,11 @@ public class TransactionServiceCachedImpl implements TransactionService {
 //						return false;
 //					}
 
-					if (!includeUpcomming && (input.isUpcoming() || input.getTimestamp()
-						.isAfter(DateTime.now().withMillisOfDay(0).plusDays(1).minusMillis(1)))) {
-						return false;
-					}
+					//TODO: Core setup
+//					if (!includeUpcomming && (input.isUpcoming() || input.getTimestamp()
+//						.isAfter(DateTime.now().withMillisOfDay(0).plusDays(1).minusMillis(1)))) {
+//						return false;
+//					}
 
 					return true;
 				}

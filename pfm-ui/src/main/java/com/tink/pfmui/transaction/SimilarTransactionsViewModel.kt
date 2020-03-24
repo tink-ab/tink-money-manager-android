@@ -16,7 +16,7 @@ import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.core.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import se.tink.commons.extensions.findCategoryByCode
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject
 

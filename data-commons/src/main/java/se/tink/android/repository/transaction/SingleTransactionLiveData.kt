@@ -1,7 +1,7 @@
 package se.tink.android.repository.transaction
 
 import androidx.lifecycle.MutableLiveData
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 import se.tink.repository.ChangeObserver
 import se.tink.repository.MutationHandler
 import se.tink.repository.TinkNetworkError

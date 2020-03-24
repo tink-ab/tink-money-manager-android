@@ -13,6 +13,7 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.currency.NewAmountFormatter
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.toDateTime
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
@@ -37,7 +38,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
         return (insight.viewDetails as? TransactionViewDetails)?.let {
             SingleExpenseUncategorizedDataHolder(
                 it.description,
-                dateUtils.formatDateHuman(it.date),
+                dateUtils.formatDateHuman(it.date.toDateTime()), //TODO: Core setup
                 amountFormatter.format(it.amount)
             )
         } ?: SingleExpenseUncategorizedDataHolder("", "", "")

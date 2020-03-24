@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.transaction_similar_fragment.*
 import kotlinx.android.synthetic.main.transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import com.tink.model.category.Category
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
+import se.tink.commons.transactions.ListItem
 import javax.inject.Inject
 
 internal class SimilarTransactionsFragment : BaseFragment() {
@@ -27,8 +28,10 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     private val transactions: List<Transaction> by lazy {
         requireNotNull(
-            arguments?.getParcelableArrayList<Transaction>(TRANSACTION_SIMILAR_TRANSACTIONS)
-        ).toList().sorted()
+            arguments?.getParcelableArrayList<Transaction>(
+                TRANSACTION_SIMILAR_TRANSACTIONS
+            )
+        ).toList().sortedWith(compareByDescending<Transaction> { it.date }.thenBy { it.id })
     }
 
     private val newCategoryCode by lazy {

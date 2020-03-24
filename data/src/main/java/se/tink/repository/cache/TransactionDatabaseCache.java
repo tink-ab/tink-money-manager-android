@@ -3,7 +3,7 @@ package se.tink.repository.cache;
 import java.util.ArrayList;
 import java.util.List;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.transaction.Transaction;
+import com.tink.model.transaction.Transaction;
 import se.tink.repository.cache.database.CacheDatabase;
 import se.tink.repository.cache.database.TagDao;
 import se.tink.repository.cache.database.TransactionDao;

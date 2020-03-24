@@ -6,6 +6,7 @@ import com.tink.model.insights.InsightData
 import com.tink.model.misc.Amount
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
+import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
@@ -38,7 +39,7 @@ class TransactionEnricher @Inject constructor(
                                 ?.let {
                                     TransactionViewDetails(
                                         description = it.description,
-                                        date = it.timestamp,
+                                        date = it.date,
                                         amount = it.amount
                                     )
                                 }
@@ -51,6 +52,6 @@ class TransactionEnricher @Inject constructor(
 @Parcelize
 internal data class TransactionViewDetails(
     val description: String,
-    val date: DateTime,
+    val date: Instant,
     val amount: Amount
 ) : Insight.ViewDetails

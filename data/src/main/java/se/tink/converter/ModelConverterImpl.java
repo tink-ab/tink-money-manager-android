@@ -20,7 +20,6 @@ import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
-import se.tink.converter.request.TransactionToUpdateTransactionRequest;
 import se.tink.converter.statistic.StatisticDTOToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticDTOConverter;
 import se.tink.converter.statistic.StatisticTreeDTOStatisticTreeConverter;
@@ -28,8 +27,6 @@ import se.tink.converter.streaming.StringToStreamingResponseTypeConverter;
 import se.tink.converter.transaction.QueryTransactionResponseDTOToSearchResultMetadataConverter;
 import se.tink.converter.transaction.TagDTOToTagConverter;
 import se.tink.converter.transaction.TagToTagDTOConverter;
-import se.tink.converter.transaction.TransactionDTOToTransactionConverter;
-import se.tink.converter.transaction.TransactionToTransactionDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.CacheConverterFactory;
 
@@ -88,7 +85,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupTransactionConverters();
         setupSupportModelConverters();
         setupStreamingResponseConverter();
-        setupRequestConverters();
         setupCacheEntityConverters();
     }
 
@@ -111,9 +107,6 @@ public class ModelConverterImpl implements ModelConverter {
     }
 
     private void setupTransactionConverters() {
-        addConverter(new TransactionDTOToTransactionConverter(this));
-        addConverter(new TransactionToTransactionDTOConverter(this));
-
         addConverter(new TagToTagDTOConverter(this));
         addConverter(new TagDTOToTagConverter(this));
 
@@ -145,10 +138,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new YearMonthDTOToYearMonthConverter());
 
         addConverter(new StringToStringValueConverter(this));
-    }
-
-    private void setupRequestConverters() {
-        addConverter(new TransactionToUpdateTransactionRequest(this));
     }
 
     private void setupCacheEntityConverters() {

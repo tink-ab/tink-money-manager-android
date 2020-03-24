@@ -13,7 +13,7 @@ import com.tink.model.category.Category
 import com.tink.model.misc.ExactNumber
 import se.tink.commons.extensions.ExactNumberZERO
 import se.tink.commons.extensions.isBiggerThan
-import se.tink.core.models.transaction.Transaction
+import com.tink.model.transaction.Transaction
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
