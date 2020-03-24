@@ -1,6 +1,7 @@
 package com.tink.pfmui.di;
 
 import com.tink.annotations.PfmScope;
+import com.tink.service.user.UserProfileService;
 import dagger.Module;
 import dagger.Provides;
 import io.grpc.Channel;
@@ -13,10 +14,7 @@ import se.tink.core.models.account.Account;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.AccountServiceGrpc;
-import se.tink.grpc.v1.services.AuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
-import se.tink.grpc.v1.services.EmailAndPasswordAuthenticationServiceGrpc;
-import se.tink.grpc.v1.services.MobileBankIdAuthenticationServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
@@ -39,8 +37,6 @@ import se.tink.repository.service.TransactionService;
 import se.tink.repository.service.TransactionServiceImpl;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.repository.service.UserConfigurationServiceCachedImpl;
-import se.tink.repository.service.UserService;
-import se.tink.repository.service.UserServiceImpl;
 
 @Module(includes = {ConverterModule.class, CacheModule.class})
 class ServiceModule {
@@ -111,26 +107,12 @@ class ServiceModule {
 		);
 	}
 
-	@Provides
-	@PfmScope
-	UserService provideUserService(
-		ModelConverter converter,
-		UserServiceGrpc.UserServiceStub userService,
-		Channel channel
-	) {
-		return new UserServiceImpl(
-			AuthenticationServiceGrpc.newStub(channel),
-			MobileBankIdAuthenticationServiceGrpc.newStub(channel),
-			EmailAndPasswordAuthenticationServiceGrpc.newStub(channel),
-			userService,
-			converter);
-	}
 
 	@Provides
 	@PfmScope
 	UserConfigurationService userConfigurationService(
 		StreamingService streamingService,
-		UserService userService,
+		UserProfileService userService,
 		ModelConverter modelConverter,
 		Cache<UserConfiguration> cache
 	) {

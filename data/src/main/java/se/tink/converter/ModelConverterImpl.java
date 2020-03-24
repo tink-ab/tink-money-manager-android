@@ -46,10 +46,8 @@ import se.tink.converter.transaction.TransactionDTOToTransactionConverter;
 import se.tink.converter.transaction.TransactionDetailsDTOToTransactionDetailsConverter;
 import se.tink.converter.transaction.TransactionDetailsToTransactionDetailsDTOConverter;
 import se.tink.converter.transaction.TransactionToTransactionDTOConverter;
-import se.tink.converter.user.GetProfileResponseDTOConverter;
 import se.tink.converter.user.UserConfigurationDTOToUserConfigurationConverter;
 import se.tink.converter.user.UserConfigurationToUserConfigurationDTOConverter;
-import se.tink.converter.user.UserProfileDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.CacheConverterFactory;
 
@@ -111,7 +109,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupStreamingResponseConverter();
         setupRequestConverters();
         setupUserConfigurationConverters();
-        setupUserConverters();
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
     }
@@ -128,11 +125,6 @@ public class ModelConverterImpl implements ModelConverter {
         for (AbstractConverter converter : converters) {
             addConverter(converter);
         }
-    }
-
-    private void setupUserConverters() {
-        addConverter(new UserProfileDTOConverter());
-        addConverter(new GetProfileResponseDTOConverter(this));
     }
 
     private void setupStreamingResponseConverter() {

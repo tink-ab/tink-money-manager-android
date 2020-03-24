@@ -1,5 +1,7 @@
 package se.tink.core.models.user
 
+import com.tink.model.user.UserProfile
+
 data class UserFeatureFlags(private val list: List<String>) : List<String> by list {
     val hasTransfers = list.contains("TRANSFERS")
     val hasBillPay = list.contains("BILLPAY")

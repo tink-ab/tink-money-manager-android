@@ -1,13 +1,12 @@
 package se.tink.repository.service;
 
 import com.google.common.collect.Lists;
+import com.tink.service.handler.ResultHandler;
+import com.tink.service.user.UserProfileService;
 import java.util.List;
 import javax.inject.Inject;
-import se.tink.core.models.user.GetProfileResponse;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.SimpleMutationHandler;
-import se.tink.repository.TinkNetworkError;
 import se.tink.repository.cache.Cache;
 
 public class UserConfigurationServiceCachedImpl implements UserConfigurationService {
@@ -15,11 +14,11 @@ public class UserConfigurationServiceCachedImpl implements UserConfigurationServ
 	private StreamingService streamingService;
 	private List<ObjectChangeObserver<UserConfiguration>> changeObserverers;
 	private Cache<UserConfiguration> cache;
-	private UserService userService;
+	private UserProfileService userService;
 
 	@Inject
 	public UserConfigurationServiceCachedImpl(StreamingService streamingService,
-		UserService userService,
+		UserProfileService userService,
 		Cache<UserConfiguration> cache) {
 		this.streamingService = streamingService;
 		this.userService = userService;
@@ -44,19 +43,13 @@ public class UserConfigurationServiceCachedImpl implements UserConfigurationServ
 
 	@Override
 	public void refreshUserConfiguration() {
-		userService.getProfile(new SimpleMutationHandler<GetProfileResponse>() {
-
-			@Override
-			public void onError(TinkNetworkError error) {
-				//TODO:PFMSDK Error handling
-			}
-
-			@Override
-			public void onNext(GetProfileResponse item) {
-				notifyOnRead(UserConfiguration.fromProfile(item.getUserProfile()));
-			}
-
-		});
+		userService.getProfile(new ResultHandler<>(
+				item -> notifyOnRead(UserConfiguration.fromProfile(item)),
+				error -> {
+					//TODO("Core setup")
+				}
+			)
+		);
 	}
 
 	private void notifyOnRead(UserConfiguration userConfiguration) {
