@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
+import com.tink.model.time.MonthPeriod
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
+import se.tink.commons.extensions.isInPeriod
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.repository.ObjectChangeObserver
 import se.tink.repository.service.StatisticService
@@ -19,7 +21,7 @@ internal class StatisticsRepository @Inject constructor(
 
     val periodMap = getStatistics().map {
         it.extractPeriods().filter { entry ->
-            entry.value.isMonthPeriod
+            entry.value is MonthPeriod
         }
     }
 

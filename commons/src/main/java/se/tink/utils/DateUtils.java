@@ -6,6 +6,9 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.tink.model.time.DayPeriod;
+import com.tink.model.time.MonthPeriod;
+import com.tink.model.time.YearPeriod;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +19,9 @@ import java.util.TimeZone;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
+import org.threeten.bp.Instant;
+import se.tink.commons.extensions.NewCoreExtensionsKt;
 
 public class DateUtils {
 	public static final String KEY_TODAY = "today";
@@ -111,15 +116,6 @@ public class DateUtils {
 
 	public Calendar getCalendar() {
 		return Calendar.getInstance(getDefaultTimezone(), getDefaultLocale());
-	}
-
-	public Period getPeriod(final Date date, List<Period> periods) {
-		return Iterables.find(periods, new Predicate<Period>() {
-			@Override
-			public boolean apply(Period period) {
-				return period.isDateWithin(date);
-			}
-		}, null);
 	}
 
 	public DateTime getToday() {
@@ -240,9 +236,8 @@ public class DateUtils {
 	}
 
 	private DateTime getDateTimeFromPeriod(Period period) {
-		return period.getStop() == null
-			? new DateTime(period.toString())
-			: period.getStop();
+		//TODO: Core setup
+		return NewCoreExtensionsKt.toDateTime(period.getEnd());
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent) {
@@ -273,13 +268,23 @@ public class DateUtils {
 		}
 	}
 
+	//TODO: Core setup - revisit
 	public ArrayList<Period> getYearMonthStringFor1YearByEndYearMonth(
 		Period endPeriod, Map<String, Period> periodMap, boolean paddToYear) {
 
 		ArrayList<Period> periods = Lists.newArrayList();
 
-		Integer year = endPeriod.getYear();
-		Integer month = endPeriod.getMonth();
+		Integer year = 0, month = 0;
+
+		if (endPeriod instanceof MonthPeriod) {
+			MonthPeriod monthPeriod = (MonthPeriod) endPeriod;
+			year = monthPeriod.getYear();
+			month = monthPeriod.getMonthOfYear();
+		} else if (endPeriod instanceof DayPeriod) {
+			DayPeriod dayPeriod = (DayPeriod) endPeriod;
+			year = dayPeriod.getYear();
+			month = dayPeriod.getMonthOfYear();
+		}
 
 		int y = year;
 		Integer m = month;
@@ -302,20 +307,13 @@ public class DateUtils {
 		return periods;
 	}
 
+	//TODO: Core setup - revisit
 	private Period createMissingPeriod(int year, int month) {
-		Period newPeriod = new Period();
-		newPeriod.setYear(year);
-		newPeriod.setMonth(month);
-
 		DateTime date = new DateTime(year, month, 1, 0, 0, 0, 0);
-
 		DateTime start = getSalaryDateFromDate(date);
-		newPeriod.setStart(start);
-
 		DateTime stop = getSalaryDateFromDate(date.plusMonths(1));
-		newPeriod.setStop(stop.minusDays(1));
-
-		return newPeriod;
+		return new MonthPeriod(month, year, Instant.ofEpochMilli(start.getMillis()),
+			Instant.ofEpochMilli(stop.getMillis()));
 	}
 
 	public String createStringYearMonthDay(int year, Integer month, Integer day) {

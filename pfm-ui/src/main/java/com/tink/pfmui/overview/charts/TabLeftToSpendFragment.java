@@ -39,6 +39,10 @@ import kotlin.text.StringsKt;
 import org.jetbrains.annotations.Nullable;
 import se.tink.commons.currency.AmountFormatter;
 import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
+import org.threeten.bp.Instant;
+import org.threeten.bp.temporal.ChronoUnit;
+import se.tink.commons.extensions.PeriodUtil;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
@@ -535,11 +539,19 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			//return ModelMapperManager.map(chosenPeriod, Period.class);
 			return chosenPeriod;
 		} else if (index == TabsEnum.SIX_MONTH_PAGE) {
-			return Period.createPeriodWithWholeMonths(chosenPeriod.getStart().minusMonths(6), chosenPeriod.getStop());
+			return createPeriodWithWholeMonths(chosenPeriod.getStart().minus(6, ChronoUnit.MONTHS), chosenPeriod.getEnd());
 		} else if (index == TabsEnum.TWELVE_MONTH_PAGE) {
-			return Period.createPeriodWithWholeMonths(chosenPeriod.getStart().minusMonths(12), chosenPeriod.getStop());
+			return createPeriodWithWholeMonths(chosenPeriod.getStart().minus(12, ChronoUnit.MONTHS), chosenPeriod.getEnd());
 		}
 		return null;
+	}
+
+	private Period createPeriodWithWholeMonths(Instant earliest, Instant end) {
+//		Period period = new Period();
+//		period.setStart(earliest.withDayOfMonth(1));
+//		period.setStop(latest.withDayOfMonth(latest.dayOfMonth().getMaximumValue()));
+//		return period;
+		throw new RuntimeException("TODO: Core setup");
 	}
 
 	public interface Theme extends BaseFragment.Theme {
@@ -671,8 +683,8 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 				continue;
 			}
 			for (Statistic secondLevelStatistic : statistic.getChildren().values()) {
-				if (latestPeriod == null || secondLevelStatistic.getPeriod()
-					.isAfter(latestPeriod)) {
+				if (latestPeriod == null ||
+					PeriodUtil.isAfter(secondLevelStatistic.getPeriod(), latestPeriod)){
 					latestPeriod = secondLevelStatistic.getPeriod();
 				}
 			}

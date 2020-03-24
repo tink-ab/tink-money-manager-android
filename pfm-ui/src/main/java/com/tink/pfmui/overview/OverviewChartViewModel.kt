@@ -22,7 +22,7 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.utils.DateUtils
 import javax.inject.Inject

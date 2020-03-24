@@ -13,7 +13,10 @@ import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.toExactNumber
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
+import org.threeten.bp.Instant
+import org.threeten.bp.temporal.ChronoUnit
+import se.tink.commons.extensions.toMonthString
 import se.tink.core.models.statistic.Statistic
 import se.tink.utils.DateUtils
 import java.math.BigDecimal
@@ -84,7 +87,7 @@ internal object ModelMapperManager : ModelConverter {
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
             whenNonNull(t1.period, t2.period) { period1, period2 ->
-                period1.start.millis.compareTo(period2.start.millis)
+                period1.start.toEpochMilli().compareTo(period2.start.toEpochMilli())
             } ?: 0
         })
         return mappedItems
@@ -222,11 +225,11 @@ internal object ModelMapperManager : ModelConverter {
             val statistic = statisticMap[categoryCode]
             val children =
                 statistic!!.children
-            val oneYearAgo = DateTime.now().minusYears(1)
+            val oneYearAgo = Instant.now().minus(1, ChronoUnit.YEARS)
             val currentYearChildren: MutableMap<String, Statistic> =
                 Maps.newHashMap()
             for ((key, value) in children) {
-                val periodEnd = value.period.stop
+                val periodEnd = value.period.end
                 // We're interested in statistics from one year back
                 if (oneYearAgo.isBefore(periodEnd)) {
                     currentYearChildren[key] = value

@@ -3,7 +3,7 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.MutableLiveData
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.createChangeObserver
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 import se.tink.core.models.transaction.SearchResultMetadata
 import se.tink.core.models.transaction.Transaction
 import se.tink.repository.MutationHandler

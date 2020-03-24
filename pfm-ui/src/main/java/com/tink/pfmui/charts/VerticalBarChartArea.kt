@@ -19,6 +19,7 @@ import com.tink.pfmui.R
 import com.tink.pfmui.util.ChartCurrencyUtils
 import com.tink.pfmui.util.PortableChartUtils
 import com.tink.pfmui.util.ScreenUtils
+import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 import java.util.ArrayList
 import java.util.Locale
@@ -276,7 +277,7 @@ internal class VerticalBarChartArea : ChartArea {
         for (i in 0 until adapter!!.count) {
             val item = adapter!!.items[i]
             val date = DateUtils.getInstance(locale, timezoneCode)
-                .getMonthFromDateTime(item.period!!.stop)
+                .getMonthFromDateTime(item.period!!.end.toDateTime()) //TODO: Core setup
             val bounds = bounds(canvas)
             val y = bounds.bottom - ScreenUtils
                 .dpToPixels(

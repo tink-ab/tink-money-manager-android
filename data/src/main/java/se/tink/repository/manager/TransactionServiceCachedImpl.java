@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.extensions.AccountExtensionsKt;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.grpc.v1.rpc.GetTransactionRequest;
@@ -455,7 +455,7 @@ public class TransactionServiceCachedImpl implements TransactionService {
 		private final Function<Transaction, String> getTransactionId;
 		private final SortedSet<Transaction> transactionSet;
 		private final ChangeObserver<Transaction> subscriberChangeObserver;
-		private final se.tink.core.models.misc.Period period;
+		private final com.tink.model.time.Period period;
 		private final String query;
 		private final boolean includeUpcomming;
 		private final int pageSize;
@@ -491,9 +491,10 @@ public class TransactionServiceCachedImpl implements TransactionService {
 						return false;
 					}
 
-					if (period != null && !period.isInPeriod(input.getTimestamp())) {
-						return false;
-					}
+					//TODO: Core setup
+//					if (period != null && !period.isInPeriod(input.getTimestamp())) {
+//						return false;
+//					}
 
 					if (!includeUpcomming && (input.isUpcoming() || input.getTimestamp()
 						.isAfter(DateTime.now().withMillisOfDay(0).plusDays(1).minusMillis(1)))) {
@@ -624,12 +625,13 @@ public class TransactionServiceCachedImpl implements TransactionService {
 				categoryCodes.add(categoryId);
 				request.addAllCategoryCodes(categoryCodes);
 			}
-			if (period != null) {
-				request.setStartDate(converter.map(period.getStart().toDate(),
-					com.google.protobuf.Timestamp.class));
-				request.setEndDate(converter.map(period.getStop().toDate(),
-					com.google.protobuf.Timestamp.class));
-			}
+			//TODO: Core setup
+//			if (period != null) {
+//				request.setStartDate(converter.map(period.getStart().toDate(),
+//					com.google.protobuf.Timestamp.class));
+//				request.setEndDate(converter.map(period.getStop().toDate(),
+//					com.google.protobuf.Timestamp.class));
+//			}
 			if (query != null) {
 				request.setQueryString(converter.map(query, StringValue.class));
 			}

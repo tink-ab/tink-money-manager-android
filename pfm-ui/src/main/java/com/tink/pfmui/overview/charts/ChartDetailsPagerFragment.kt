@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.parent
 import se.tink.commons.extensions.visible
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 
 private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0

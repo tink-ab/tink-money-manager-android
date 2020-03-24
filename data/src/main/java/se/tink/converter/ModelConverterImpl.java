@@ -21,8 +21,6 @@ import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
 import se.tink.converter.misc.ImagesConverter;
-import se.tink.converter.misc.PeriodDTOToPeriodConverter;
-import se.tink.converter.misc.PeriodToPeriodDTOConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
@@ -149,9 +147,6 @@ public class ModelConverterImpl implements ModelConverter {
     }
 
     private void setupSupportModelConverters() {
-        addConverter(new PeriodDTOToPeriodConverter(this));
-        addConverter(new PeriodToPeriodDTOConverter(this));
-
         addConverter(new ExactNumberDTOToExactNumberConverter());
         addConverter(new ExactNumberToExactNumberDTOConverter(this));
 

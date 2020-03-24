@@ -26,8 +26,6 @@ import se.tink.repository.cache.models.budgets.BudgetEntity;
         exportSchema = false)
 public abstract class CacheDatabase extends RoomDatabase {
 
-    public abstract PeriodDao periodDao();
-
     public abstract TransactionDao transactionDao();
 
     public abstract TagDao tagDao();

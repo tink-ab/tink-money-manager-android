@@ -3,7 +3,7 @@ package se.tink.core.models.statistic;
 import java.util.HashMap;
 import java.util.Map;
 import com.tink.model.misc.Amount;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 
 public class Statistic {
 

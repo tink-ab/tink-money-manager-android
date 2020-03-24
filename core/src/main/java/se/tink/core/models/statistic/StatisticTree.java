@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.jetbrains.annotations.NotNull;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 
 public class StatisticTree {
 

@@ -6,7 +6,9 @@ import org.joda.time.DateTime
 import com.tink.pfmui.charts.extensions.mergeValue
 import se.tink.commons.extensions.floatValue
 import com.tink.model.category.Category
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
+import se.tink.commons.extensions.isInPeriod
+import se.tink.commons.extensions.toDateTime
 import se.tink.core.models.statistic.Statistic
 import se.tink.utils.DateUtils
 
@@ -29,17 +31,18 @@ internal sealed class ChartList {
 internal data class StatisticItemsList(override val items: ArrayList<StatisticItem>) : ChartList()
 internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) : ChartList()
 
+//TODO: Core setup
 internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Context, toToday: Boolean = true): String {
     return if (toToday && period.isInPeriod(DateTime.now())) {
         context.getString(
             R.string.tink_date_span_string,
-            dateUtils.formatDateHumanShort(period.start),
+            dateUtils.formatDateHumanShort(period.start.toDateTime()),
             context.getString(R.string.tink_date_format_human_today)
         )
     } else {
         context.getString(
             R.string.tink_until_next_date,
-            dateUtils.formatDateHumanShort(period.stop)
+            dateUtils.formatDateHumanShort(period.end.toDateTime())
         )
     }
 }

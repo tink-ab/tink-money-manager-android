@@ -8,20 +8,20 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.tink.model.category.Category
+import com.tink.model.time.Period
 import com.tink.pfmui.R
-import com.tink.pfmui.repository.StatisticsRepository
 import com.tink.pfmui.charts.ColorGenerator
 import com.tink.pfmui.charts.DefaultColorGenerator
-import se.tink.android.di.application.ApplicationScoped
 import com.tink.pfmui.charts.extensions.sumByFloat
+import com.tink.pfmui.repository.StatisticsRepository
+import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.core.extensions.whenNonNull
-import com.tink.model.category.Category
 import se.tink.commons.extensions.parent
-import se.tink.core.models.misc.Period
+import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.statistic.StatisticTree
 import se.tink.core.models.transaction.Transaction
 import se.tink.utils.DateUtils
@@ -56,8 +56,20 @@ internal class PieChartDetailsViewModel @Inject constructor(
     }
     val category = MutableLiveData<Category>()
 
+
+    //TODO: Core setup - revisit
+    private val periodComparator = Comparator<Period> { first, second ->
+        when {
+            first.start.isAfter(second.start) ->  -1
+            first.start.isBefore(second.start) ->  1
+            first.end.isAfter(second.end) ->  -1
+            first.end.isBefore(second.end) ->  1
+            else -> 0
+        }
+    }
+
     val periods: LiveData<List<Period>> = Transformations.map(statisticRepository.periods) {
-        it?.sortedDescending()?.takeLast(12)
+        it.sortedWith(periodComparator).reversed().takeLast(12)
     }
     val selectedPeriod: LiveData<Period> get() = period
     val periodFormatter: (Period) -> String =

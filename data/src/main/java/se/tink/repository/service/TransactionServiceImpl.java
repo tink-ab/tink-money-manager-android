@@ -18,7 +18,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.grpc.v1.models.Tag;
@@ -284,7 +284,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public Pageable<Transaction> listAndSubscribeForCategoryCodeAndPeriod(String categoryCode,
-		se.tink.core.models.misc.Period period, ChangeObserver<Transaction> listener) {
+		com.tink.model.time.Period period, ChangeObserver<Transaction> listener) {
 		return null;
 	}
 
@@ -295,7 +295,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public Pageable<Transaction> listAndSubscribeForLeftToSpendAndPeriod(
-		se.tink.core.models.misc.Period period,
+		com.tink.model.time.Period period,
 		ChangeObserver<Transaction> listener) {
 		return null;
 	}

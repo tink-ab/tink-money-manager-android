@@ -8,7 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
+import se.tink.commons.extensions.PeriodUtil;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
 import se.tink.repository.ObjectChangeObserver;
@@ -53,7 +54,7 @@ public class Periods implements ObjectChangeObserver<Map<String, Period>>, Clear
 	@Deprecated
 	public Period getPeriod(DateTime date) {
 		for (Period period : map.values()) {
-			if (period.isInPeriod(date)) {
+			if (PeriodUtil.isInPeriod(date, period)) {
 				return period;
 			}
 		}
@@ -84,7 +85,7 @@ public class Periods implements ObjectChangeObserver<Map<String, Period>>, Clear
 	@Deprecated
 	public static Period getPeriod(DateTime date, @NonNull Map<String, Period> periodMap) {
 		for (Period period : periodMap.values()) {
-			if (period.isInPeriod(date)) {
+			if (PeriodUtil.isInPeriod(date, period)) {
 				return period;
 			}
 		}

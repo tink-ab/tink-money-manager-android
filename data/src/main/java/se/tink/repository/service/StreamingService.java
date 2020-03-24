@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Map;
 import com.tink.model.account.Account;
 import com.tink.model.category.CategoryTree;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ChangeObserver;

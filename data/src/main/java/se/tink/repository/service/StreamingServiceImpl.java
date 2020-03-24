@@ -14,7 +14,7 @@ import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
 import com.tink.model.account.Account;
 import com.tink.model.category.CategoryTree;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.core.models.user.UserConfiguration;

@@ -3,7 +3,7 @@ package com.tink.pfmui.transaction
 import android.os.Parcelable
 import androidx.annotation.ColorInt
 import kotlinx.android.parcel.Parcelize
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 
 @Parcelize
 internal data class TransactionsListMetaData(

@@ -10,14 +10,12 @@ import dagger.Module
 import dagger.Provides
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.converter.ModelConverter
-import se.tink.core.models.misc.Period
 import se.tink.core.models.transaction.Transaction
 import se.tink.core.models.user.UserConfiguration
 import se.tink.repository.LiveDataSource
 import se.tink.repository.cache.Cache
 import se.tink.repository.cache.CacheHandle
 import se.tink.repository.cache.LiveDataCache
-import se.tink.repository.cache.PeriodDatabaseCache
 import se.tink.repository.cache.StasticCache
 import se.tink.repository.cache.StatisticInMemoryCache
 import se.tink.repository.cache.TransactionDatabaseCache
@@ -43,14 +41,6 @@ internal class CacheModule {
             cacheDatabase,
             setOf() //TODO: Core setup
         )
-    }
-
-    @Provides
-    fun periodCache(
-        cacheDatabase: CacheDatabase,
-        modelConverter: ModelConverter
-    ): Cache<Map<String, Period>> {
-        return PeriodDatabaseCache(cacheDatabase, modelConverter)
     }
 
     @Provides

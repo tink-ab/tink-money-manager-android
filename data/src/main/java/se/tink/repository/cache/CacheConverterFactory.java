@@ -10,8 +10,6 @@ import se.tink.converter.misc.ExactNumberEntityToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberEntityConverter;
 import se.tink.converter.misc.ImagesEntityToImagesConverter;
 import se.tink.converter.misc.ImagesToImagesEntityConverter;
-import se.tink.converter.misc.PeriodEntityToPeriodConverter;
-import se.tink.converter.misc.PeriodToPeriodEntityConverter;
 import se.tink.converter.statistic.StatisticEntityToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticEntityConverter;
 import se.tink.converter.transaction.TagEntityToTagConverter;
@@ -29,8 +27,6 @@ public class CacheConverterFactory {
 
 	public static List<AbstractConverter<?, ?>> getCacheConverters(ModelConverter converter) {
 		List<AbstractConverter<?, ?>> converters = new ArrayList<>();
-		converters.add(new PeriodEntityToPeriodConverter());
-		converters.add(new PeriodToPeriodEntityConverter());
 		converters.add(new TransactionToTransactionWithAllRelationsConverter(converter));
 		converters.add(new TransactionEntityWithAllRelationsToTransactionConverter(converter));
 		converters.add(new TagEntityToTagConverter());

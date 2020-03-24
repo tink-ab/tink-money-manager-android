@@ -1,7 +1,7 @@
 package se.tink.repository.service;
 
 import java.util.List;
-import se.tink.core.models.misc.Period;
+import com.tink.model.time.Period;
 import se.tink.core.models.transaction.SearchResultMetadata;
 import se.tink.core.models.transaction.Transaction;
 import se.tink.repository.ChangeObserver;
