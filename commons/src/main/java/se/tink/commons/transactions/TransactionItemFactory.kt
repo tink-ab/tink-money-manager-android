@@ -41,7 +41,7 @@ class TransactionItemFactory @Inject constructor(
                     ListItem.TransactionItem.UpcomingTransactionData(
                         pending = isPending,
                         editable = isEditable,
-                        transferId = details?.transferId ?: ""
+                        transferId = "" //TODO: Core setup
                     )
                 } else {
                     null

@@ -30,6 +30,9 @@ public class TransactionEntity {
 	@Embedded(prefix = "dispensable_")
 	private AmountEntity dispensableAmount;
 
+	public TransactionEntity() {
+	}
+
 	public String getAccountId() {
 		return accountId;
 	}
@@ -108,17 +111,6 @@ public class TransactionEntity {
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
-	}
-
-	@Embedded
-	private TransactionDetailsEntity details;
-
-	public TransactionDetailsEntity getDetails() {
-		return details;
-	}
-
-	public void setDetails(TransactionDetailsEntity details) {
-		this.details = details;
 	}
 
 	public AmountEntity getAmount() {

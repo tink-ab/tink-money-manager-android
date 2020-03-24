@@ -5,7 +5,6 @@ import se.tink.converter.ModelConverter;
 import com.tink.model.misc.Amount;
 import se.tink.core.models.transaction.Tag;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.transaction.TransactionDetails;
 import se.tink.modelConverter.AbstractConverter;
 
 public class TransactionDTOToTransactionConverter extends
@@ -37,7 +36,6 @@ public class TransactionDTOToTransactionConverter extends
 		destination.setInsertionTime(converter.map(source.getInserted(), DateTime.class));
 		destination.setPending(source.getPending());
 		destination.setUpcoming(source.getUpcoming());
-		destination.setDetails(converter.map(source.getDetails(), TransactionDetails.class));
 		if (source.getTagsList() != null) {
 			//noinspection unchecked
 			destination.setTags(converter.map(source.getTagsList(), Tag.class));

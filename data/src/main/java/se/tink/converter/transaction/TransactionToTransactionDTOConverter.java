@@ -31,8 +31,6 @@ public class TransactionToTransactionDTOConverter extends
 		destination.setOriginalDescription(source.getOriginalDescription());
 		destination.setPending(source.isPending());
 		destination.setUpcoming(source.isUpcoming());
-		destination.setDetails(converter
-			.map(source.getDetails(), se.tink.grpc.v1.models.Transaction.TransactionDetails.class));
 
 		return destination.build();
 	}

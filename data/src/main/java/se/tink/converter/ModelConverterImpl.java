@@ -26,14 +26,9 @@ import se.tink.converter.statistic.StatisticToStatisticDTOConverter;
 import se.tink.converter.statistic.StatisticTreeDTOStatisticTreeConverter;
 import se.tink.converter.streaming.StringToStreamingResponseTypeConverter;
 import se.tink.converter.transaction.QueryTransactionResponseDTOToSearchResultMetadataConverter;
-import se.tink.converter.transaction.SuggestTransactionConverter;
-import se.tink.converter.transaction.SuggestTransactionsResponseConverter;
 import se.tink.converter.transaction.TagDTOToTagConverter;
 import se.tink.converter.transaction.TagToTagDTOConverter;
-import se.tink.converter.transaction.TransactionClusterConverter;
 import se.tink.converter.transaction.TransactionDTOToTransactionConverter;
-import se.tink.converter.transaction.TransactionDetailsDTOToTransactionDetailsConverter;
-import se.tink.converter.transaction.TransactionDetailsToTransactionDetailsDTOConverter;
 import se.tink.converter.transaction.TransactionToTransactionDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.CacheConverterFactory;
@@ -119,15 +114,8 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new TransactionDTOToTransactionConverter(this));
         addConverter(new TransactionToTransactionDTOConverter(this));
 
-        addConverter(new TransactionDetailsDTOToTransactionDetailsConverter(this));
-        addConverter(new TransactionDetailsToTransactionDetailsDTOConverter(this));
-
         addConverter(new TagToTagDTOConverter(this));
         addConverter(new TagDTOToTagConverter(this));
-
-        addConverter(new SuggestTransactionConverter(this));
-        addConverter(new SuggestTransactionsResponseConverter(this));
-        addConverter(new TransactionClusterConverter(this));
 
         addConverter(new QueryTransactionResponseDTOToSearchResultMetadataConverter(this));
     }

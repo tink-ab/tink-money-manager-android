@@ -23,7 +23,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 	private DateTime timestamp;
 	private DateTime insertionTime;
 	private String type;
-	private TransactionDetails details;
 	private List<Tag> tags;
 
 	public Transaction() {
@@ -45,7 +44,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 		insertionTime = new DateTime(in.readLong());
 		amount = in.readParcelable(Amount.class.getClassLoader());
 		dispensableAmount = in.readParcelable(Amount.class.getClassLoader());
-		details = in.readParcelable(TransactionDetails.class.getClassLoader());
 		tags = new ArrayList<>();
 		in.readList(tags, null);
 	}
@@ -67,7 +65,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 		parcel.writeLong(insertionTime != null ? insertionTime.getMillis() : 0L);
 		parcel.writeParcelable(amount, i);
 		parcel.writeParcelable(dispensableAmount, i);
-		parcel.writeParcelable(details, i);
 		parcel.writeList(tags);
 	}
 
@@ -181,14 +178,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 
 	private boolean upcoming;
 
-	public TransactionDetails getDetails() {
-		return details;
-	}
-
-	public void setDetails(TransactionDetails details) {
-		this.details = details;
-	}
-
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -268,6 +257,6 @@ public class Transaction implements Comparable<Transaction>, Parcelable {
 	}
 
 	public boolean isEditable() {
-		return upcoming && pending && details != null && !details.getTransferId().isEmpty();
+		return upcoming && pending;
 	}
 }
