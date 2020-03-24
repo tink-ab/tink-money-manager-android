@@ -8,8 +8,6 @@ import se.tink.converter.misc.AmountEntityToAmountConverter;
 import se.tink.converter.misc.AmountToAmountEntityConverter;
 import se.tink.converter.misc.ExactNumberEntityToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberEntityConverter;
-import se.tink.converter.misc.ImagesEntityToImagesConverter;
-import se.tink.converter.misc.ImagesToImagesEntityConverter;
 import se.tink.converter.statistic.StatisticEntityToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticEntityConverter;
 import se.tink.converter.transaction.TagEntityToTagConverter;
@@ -38,8 +36,6 @@ public class CacheConverterFactory {
 		converters.add(new AmountToAmountEntityConverter());
 		converters.add(new StatisticToStatisticEntityConverter(converter));
 		converters.add(new StatisticEntityToStatisticConverter(converter));
-		converters.add(new ImagesToImagesEntityConverter());
-		converters.add(new ImagesEntityToImagesConverter());
 		converters.add(new ExactNumberEntityToExactNumberConverter());
 		converters.add(new ExactNumberToExactNumberEntityConverter());
 		converters.add(new UserConfigurationI18nConfigurationEntityToI18nConfigurationConverter());

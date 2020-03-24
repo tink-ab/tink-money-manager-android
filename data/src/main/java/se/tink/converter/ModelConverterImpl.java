@@ -20,7 +20,6 @@ import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
 import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
-import se.tink.converter.misc.ImagesConverter;
 import se.tink.converter.misc.StringToStringValueConverter;
 import se.tink.converter.misc.YearMonthDTOToYearMonthConverter;
 import se.tink.converter.misc.YearWeekDTOToYearWeekConverter;
@@ -165,7 +164,6 @@ public class ModelConverterImpl implements ModelConverter {
         addConverter(new YearMonthDTOToYearMonthConverter());
 
         addConverter(new StringToStringValueConverter(this));
-        addConverter(new ImagesConverter());
     }
 
     private void setupRequestConverters() {
