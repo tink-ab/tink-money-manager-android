@@ -12,7 +12,6 @@ import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
@@ -83,12 +82,10 @@ class ServiceModule {
 	@Provides
 	@PfmScope
 	UserConfigurationService userConfigurationService(
-		StreamingService streamingService,
 		UserProfileService userService,
-		ModelConverter modelConverter,
-		Cache<UserConfiguration> cache
+		ModelConverter modelConverter
 	) {
-		return new UserConfigurationServiceCachedImpl(streamingService, userService, cache);
+		return new UserConfigurationServiceCachedImpl(userService);
 	}
 
 	@Provides

@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.google.common.collect.Lists;
+import com.tink.model.time.Period;
+import com.tink.model.user.UserProfile;
 import com.tink.pfmui.BaseFragment;
 import com.tink.pfmui.R;
 import com.tink.pfmui.TimezoneManager;
@@ -20,10 +22,12 @@ import com.tink.pfmui.charts.VerticalBarChartArea;
 import com.tink.pfmui.charts.models.Labels;
 import com.tink.pfmui.charts.models.PeriodBalance;
 import com.tink.pfmui.charts.models.VerticalBarChart;
-import com.tink.pfmui.tracking.ScreenEvent;
 import com.tink.pfmui.collections.Periods;
 import com.tink.pfmui.configuration.SuitableLocaleFinder;
+import com.tink.pfmui.mapper.ModelMapperManager;
 import com.tink.pfmui.repository.StatisticsRepository;
+import com.tink.pfmui.tracking.ScreenEvent;
+import com.tink.pfmui.util.CurrencyUtils;
 import com.tink.pfmui.mapper.ModelMapperManager;
 import com.tink.pfmui.util.ScreenUtils;
 import com.tink.pfmui.util.extensions.PeriodBalances;
@@ -45,7 +49,6 @@ import org.threeten.bp.temporal.ChronoUnit;
 import se.tink.commons.extensions.PeriodUtil;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
-import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
@@ -98,7 +101,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	private List<PeriodBalance> itemsFor1Year;
 	private Period chosenPeriod;
 	private TabsEnum index;
-	private UserConfiguration userConfiguration;
+	private UserProfile userProfile;
 	private boolean currentMothChartSetup;
 	private DateUtils dateUtils;
 
@@ -165,7 +168,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		index = TabsEnum.getTabsEnumByIndex(getArguments().getInt(ARG_POSITION));
 
-		userConfigurationService.subscribe(userConfigurationSubscription);
+		userConfigurationService.subscribe(userProfileSubscription);
 		statisticsRepository.getPeriodMap().observe(this, stringPeriodMap -> {
 			periods = stringPeriodMap;
 			updatePeriods();
@@ -180,7 +183,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	public void onDestroy() {
 		super.onDestroy();
 		statisticService.unsubscribe(this);
-		userConfigurationService.unsubscribe(userConfigurationSubscription);
+		userConfigurationService.unsubscribe(userProfileSubscription);
 	}
 
 	private void setupPieChart() {
@@ -226,7 +229,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	}
 
 	private void setupCurrentMonthChart() {
-		if (currentMothChartSetup || userConfiguration == null) {
+		if (currentMothChartSetup || userProfile == null) {
 			return;
 		}
 		currentMothChartSetup = true;
@@ -235,7 +238,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 		Charts.setupLineChart(
 			lineChartContainer,
-			userConfiguration.getI18nConfiguration().getCurrencyCode(),
+			userProfile.getCurrency(),
 			suitableLocaleFinder.findLocale(),
 			TimezoneManager.defaultTimezone,
 			true,
@@ -525,10 +528,10 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	}
 
 	public String getCurrencyCode() {
-		if (userConfiguration == null) {
+		if (userProfile == null) {
 			return "";
 		}
-		return userConfiguration.getI18nConfiguration().getCurrencyCode();
+		return userProfile.getCurrency();
 	}
 
 	@Nullable
@@ -633,27 +636,27 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	}
 
 
-	private ObjectChangeObserver<UserConfiguration> userConfigurationSubscription = new ObjectChangeObserver<UserConfiguration>() {
+	private ObjectChangeObserver<UserProfile> userProfileSubscription = new ObjectChangeObserver<UserProfile>() {
 
 		@Override
-		public void onCreate(UserConfiguration item) {
+		public void onCreate(UserProfile item) {
 			//No valid operation
 		}
 
 		@Override
-		public void onRead(UserConfiguration item) {
-			userConfiguration = item;
+		public void onRead(UserProfile item) {
+			userProfile = item;
 			runUiDependant(() -> setupCurrentMonthChart());
 		}
 
 		@Override
-		public void onUpdate(UserConfiguration item) {
-			userConfiguration = item;
+		public void onUpdate(UserProfile item) {
+			userProfile = item;
 			runUiDependant(() -> setupCurrentMonthChart());
 		}
 
 		@Override
-		public void onDelete(UserConfiguration item) {
+		public void onDelete(UserProfile item) {
 			//No valid operation.
 		}
 	};

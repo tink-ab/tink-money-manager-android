@@ -38,8 +38,6 @@ import se.tink.converter.transaction.TransactionDTOToTransactionConverter;
 import se.tink.converter.transaction.TransactionDetailsDTOToTransactionDetailsConverter;
 import se.tink.converter.transaction.TransactionDetailsToTransactionDetailsDTOConverter;
 import se.tink.converter.transaction.TransactionToTransactionDTOConverter;
-import se.tink.converter.user.UserConfigurationDTOToUserConfigurationConverter;
-import se.tink.converter.user.UserConfigurationToUserConfigurationDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.CacheConverterFactory;
 
@@ -99,7 +97,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupSupportModelConverters();
         setupStreamingResponseConverter();
         setupRequestConverters();
-        setupUserConfigurationConverters();
         setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
     }
@@ -168,11 +165,6 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupRequestConverters() {
         addConverter(new TransactionToUpdateTransactionRequest(this));
-    }
-
-    private void setupUserConfigurationConverters() {
-        addConverter(new UserConfigurationToUserConfigurationDTOConverter(this));
-        addConverter(new UserConfigurationDTOToUserConfigurationConverter(this));
     }
 
     private void setupDeviceConfigurationConverters() {

@@ -30,8 +30,6 @@ public abstract class CacheDatabase extends RoomDatabase {
 
     public abstract TagDao tagDao();
 
-    public abstract UserConfigurationDao userConfigurationDao();
-
     public abstract StatisticsDao statisticsDao();
 
     public abstract BudgetsDao budgetsDao();

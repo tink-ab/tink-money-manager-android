@@ -3,6 +3,9 @@ package se.tink.repository.service;
 import android.os.Handler;
 import com.google.common.collect.Lists;
 import com.google.protobuf.Timestamp;
+import com.tink.model.account.Account;
+import com.tink.model.category.CategoryTree;
+import com.tink.model.time.Period;
 import io.grpc.stub.StreamObserver;
 import java.util.Date;
 import java.util.List;
@@ -12,12 +15,8 @@ import javax.annotation.Nullable;
 import org.joda.time.DateTime;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.StreamingResponseType;
-import com.tink.model.account.Account;
-import com.tink.model.category.CategoryTree;
-import com.tink.model.time.Period;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.core.models.user.UserConfiguration;
 import se.tink.grpc.v1.rpc.StreamingRequest;
 import se.tink.grpc.v1.rpc.StreamingResponse;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
@@ -26,8 +25,6 @@ import se.tink.repository.ExceptionTracker;
 import se.tink.repository.Listener;
 import se.tink.repository.MapChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.SimpleMutationHandler;
-import se.tink.repository.TinkNetworkError;
 import timber.log.Timber;
 
 public class StreamingServiceImpl implements StreamingService {
@@ -59,8 +56,6 @@ public class StreamingServiceImpl implements StreamingService {
 			.toMillis(timestamp.getNanos()));
 	}
 
-	private List<ObjectChangeObserver<UserConfiguration>> userConfigurationListeners = Lists
-		.newArrayList();
 	private Listener<StreamingResponse> streamSuccessListener = new Listener<StreamingResponse>() {
 		@Override
 		public void onResponse(StreamingResponse value) {
@@ -79,11 +74,12 @@ public class StreamingServiceImpl implements StreamingService {
 				latestStreamingTime = DateTime.now().toDate();
 			}
 
-			if (value.hasUserConfiguration()) {
-				UserConfiguration userConfiguration = converter
-					.map(value.getUserConfiguration(), UserConfiguration.class);
-				notifyListeners(userConfiguration, userConfigurationListeners, type);
-			}
+			//TODO: Core setup
+//			if (value.hasUserConfiguration()) {
+//				UserConfiguration userConfiguration = converter
+//					.map(value.getUserConfiguration(), UserConfiguration.class);
+//				notifyListeners(userConfiguration, userConfigurationListeners, type);
+//			}
 
       /*
 	  Listeners are notified in an order so that nothing that
@@ -162,12 +158,6 @@ public class StreamingServiceImpl implements StreamingService {
 	}
 
 	@Override
-	public void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener) {
-		// TODO: PFMSDK: This is needed for currency code unless we can get that info elsewhere
-		//userConfigurationListeners.add(listener);
-	}
-
-	@Override
 	public void unsubscribe(MapChangeObserver listener) {
 		statisticsListeners.remove(listener);
 	}
@@ -184,7 +174,6 @@ public class StreamingServiceImpl implements StreamingService {
 		categoryListeners.remove(listener);
 		statisticsListeners.remove(listener);
 		periodListeners.remove(listener);
-		userConfigurationListeners.remove(listener);
 	}
 
 

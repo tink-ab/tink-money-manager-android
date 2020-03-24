@@ -1,13 +1,13 @@
 package se.tink.repository.service;
 
-import se.tink.core.models.user.UserConfiguration;
+import com.tink.model.user.UserProfile;
 import se.tink.repository.ObjectChangeObserver;
 
 public interface UserConfigurationService extends TinkService {
 
-	void subscribe(ObjectChangeObserver<UserConfiguration> listener);
+	void subscribe(ObjectChangeObserver<UserProfile> listener);
 
-	void unsubscribe(ObjectChangeObserver<UserConfiguration> listener);
+	void unsubscribe(ObjectChangeObserver<UserProfile> listener);
 
 	void refreshUserConfiguration();
 }

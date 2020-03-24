@@ -1,12 +1,11 @@
 package se.tink.repository.service;
 
-import java.util.Date;
-import java.util.Map;
 import com.tink.model.account.Account;
 import com.tink.model.category.CategoryTree;
 import com.tink.model.time.Period;
+import java.util.Date;
+import java.util.Map;
 import se.tink.core.models.statistic.StatisticTree;
-import se.tink.core.models.user.UserConfiguration;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MapChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
@@ -24,8 +23,6 @@ public interface StreamingService extends TinkService {
 	void subscribeForCategories(ObjectChangeObserver<CategoryTree> handler);
 
 	void subscribeForAccounts(ChangeObserver<Account> listener);
-
-	void subscribeForUserConfiguration(ObjectChangeObserver<UserConfiguration> listener);
 
 	void unsubscribe(MapChangeObserver listener);
 

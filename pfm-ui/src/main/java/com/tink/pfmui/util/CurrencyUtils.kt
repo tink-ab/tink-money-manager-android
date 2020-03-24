@@ -21,7 +21,6 @@ import java.util.HashMap
 import java.util.Locale
 import kotlin.collections.set
 
-
 object CurrencyUtils {
     // When using dynamic currency format:
     // if amount >= DYNAMIC_ROUNDING_THRESHOLD then rounded format is applied
@@ -200,15 +199,12 @@ object CurrencyUtils {
     ): NumberFormat {
         var currencyCode = currencyCode
         var locale = Locale.getDefault()
-        val userConfiguration =
-            Currencies.getSharedInstance().userConfiguration
-        if (userConfiguration != null) {
-            val config = userConfiguration.i18nConfiguration
-            if (config != null) {
-                val localeCode = config.localeCode
-                val splits = localeCode.split("_").toTypedArray()
-                locale = Locale(splits[0], config.marketCode)
-            }
+        val userProfile =
+            Currencies.getSharedInstance().userProfile
+        if (userProfile != null) {
+            val localeCode = userProfile.locale
+            val splits = localeCode.split("_").toTypedArray()
+            locale = Locale(splits[0], userProfile.market)
         }
         if (currencyCode == null) {
             currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
@@ -286,15 +282,11 @@ object CurrencyUtils {
     ): String {
         var unit: StringExactNumberPair? = null
         var locale = Locale.getDefault()
-        val userConfiguration =
+        val userProfile =
             Currencies.getSharedInstance()
-                .userConfiguration
-        if (userConfiguration != null) {
-            val i18nConfiguration = userConfiguration
-                .i18nConfiguration
-            if (i18nConfiguration != null) {
-                locale = Locale(i18nConfiguration.localeCode)
-            }
+                .userProfile
+        if (userProfile != null) {
+            locale = Locale(userProfile.locale)
         }
         val language = locale.language
         val localeUnits = UNITS[language]!!

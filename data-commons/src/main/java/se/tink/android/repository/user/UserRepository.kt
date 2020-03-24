@@ -1,10 +1,8 @@
 package se.tink.android.repository.user
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
-import se.tink.core.models.user.UserConfiguration
-import se.tink.core.models.user.UserFeatureFlags
+import com.tink.model.user.UserProfile
 import se.tink.repository.SimpleObjectChangeObserver
 import se.tink.repository.service.UserConfigurationService
 import javax.inject.Inject
@@ -12,38 +10,18 @@ import javax.inject.Inject
 @PfmScope
 class UserRepository @Inject constructor(private val userConfigurationService: UserConfigurationService) {
 
-    val userConfiguration = object : LiveData<UserConfiguration?>() {
+    val userProfile = object : LiveData<UserProfile?>() {
 
-        private val observer = object : SimpleObjectChangeObserver<UserConfiguration>() {
-            override fun onCreate(item: UserConfiguration) = update(item)
-            override fun onRead(item: UserConfiguration) = update(item)
-            override fun onUpdate(item: UserConfiguration) = update(item)
-            override fun onDelete(item: UserConfiguration?) = update(null)
+        private val observer = object : SimpleObjectChangeObserver<UserProfile>() {
+            override fun onCreate(item: UserProfile) = update(item)
+            override fun onRead(item: UserProfile) = update(item)
+            override fun onUpdate(item: UserProfile) = update(item)
+            override fun onDelete(item: UserProfile?) = update(null)
         }
 
-        fun update(config: UserConfiguration?) = postValue(config)
+        fun update(config: UserProfile?) = postValue(config)
 
         override fun onActive() = userConfigurationService.subscribe(observer)
         override fun onInactive() = userConfigurationService.unsubscribe(observer)
-    }
-
-    val hasNewBudgets: LiveData<Boolean> = Transformations.map(userConfiguration) {
-        it?.flags?.hasBudgets == true
-    }
-
-    val hasRecurringTransactions: LiveData<Boolean> = Transformations.map(userConfiguration) {
-        it?.flags?.hasRecurringTransactions == true
-    }
-
-    val isTinkEmployee: LiveData<Boolean> = Transformations.map(userConfiguration) {
-        it?.flags?.isEmployee ?: false
-    }
-
-    val featureFlags: LiveData<UserFeatureFlags> = Transformations.map(userConfiguration) {
-        it?.flags
-    }
-
-    val hasActionableInsights: LiveData<Boolean> = Transformations.map(userConfiguration) {
-        it?.flags?.run { isEmployee && hasInsights } ?: false
     }
 }
