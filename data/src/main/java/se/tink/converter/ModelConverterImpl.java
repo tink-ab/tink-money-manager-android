@@ -13,9 +13,6 @@ import se.tink.converter.date.DateToDateTimeConverter;
 import se.tink.converter.date.DateToTimestampConverter;
 import se.tink.converter.date.TimestampToDateTimeConverter;
 import se.tink.converter.date.TimestampToLongConverter;
-import se.tink.converter.device.AuthenticationMethodEnumResponsConverter;
-import se.tink.converter.device.DeviceConfigurationMarketResponseConverter;
-import se.tink.converter.device.DeviceConfigurationResponseConverter;
 import se.tink.converter.misc.AmountDTOToAmountConverter;
 import se.tink.converter.misc.AmountToAmountDTOConverter;
 import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
@@ -97,7 +94,6 @@ public class ModelConverterImpl implements ModelConverter {
         setupSupportModelConverters();
         setupStreamingResponseConverter();
         setupRequestConverters();
-        setupDeviceConfigurationConverters();
         setupCacheEntityConverters();
     }
 
@@ -165,13 +161,6 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupRequestConverters() {
         addConverter(new TransactionToUpdateTransactionRequest(this));
-    }
-
-    private void setupDeviceConfigurationConverters() {
-        addConverter(new DeviceConfigurationMarketResponseConverter(this));
-        addConverter(new DeviceConfigurationResponseConverter(this));
-
-        addConverter(new AuthenticationMethodEnumResponsConverter(this));
     }
 
     private void setupCacheEntityConverters() {

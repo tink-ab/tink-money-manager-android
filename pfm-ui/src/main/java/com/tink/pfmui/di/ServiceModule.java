@@ -12,7 +12,6 @@ import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.grpc.v1.services.DeviceServiceGrpc;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.grpc.v1.services.TransactionServiceGrpc;
@@ -21,8 +20,6 @@ import se.tink.repository.cache.Cache;
 import se.tink.repository.cache.StasticCache;
 import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.manager.TransactionServiceCachedImpl;
-import se.tink.repository.service.DeviceService;
-import se.tink.repository.service.DeviceServiceImpl;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
@@ -112,11 +109,5 @@ class ServiceModule {
 		impl.setExceptionTracker(tracker);
 		return impl;
 
-	}
-
-	@Provides
-	@PfmScope
-	DeviceService provideDeviceService(Channel channel, ModelConverter modelConverter) {
-		return new DeviceServiceImpl(DeviceServiceGrpc.newStub(channel), modelConverter);
 	}
 }
