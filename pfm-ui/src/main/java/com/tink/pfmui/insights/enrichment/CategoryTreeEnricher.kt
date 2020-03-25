@@ -16,9 +16,7 @@ class CategoryTreeEnricher @Inject constructor(
     override fun enrich(input: LiveData<List<Insight>>): LiveData<List<Insight>> {
         return input.switchMap { insightList ->
             categoryRepository.categories.map { categoryTree ->
-                TODO("category tree")
-                insightList
-//                insightList.onEach { it.viewDetails = CategoryTreeViewDetails(categoryTree) }
+                insightList.onEach { it.viewDetails = CategoryTreeViewDetails(categoryTree) }
             }
         }
     }

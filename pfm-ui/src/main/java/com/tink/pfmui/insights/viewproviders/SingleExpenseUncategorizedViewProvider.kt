@@ -26,7 +26,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
         listOf(
-          //TODO: Missing insight type  InsightType.SINGLE_UNCATEGORIZED_TRANSACTION
+          InsightType.SINGLE_EXPENSE_UNCATEGORIZED
         )
 
     override val viewType: InsightViewType = getViewType()
