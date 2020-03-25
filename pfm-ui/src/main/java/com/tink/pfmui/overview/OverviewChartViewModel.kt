@@ -20,7 +20,7 @@ import se.tink.android.categories.CategoryRepository
 import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import com.tink.model.time.Period
 import com.tink.model.statistic.StatisticTree
@@ -43,7 +43,11 @@ internal class OverviewChartViewModel @Inject constructor(
     private val categories = categoryRepository.categories
 
     private val data = MediatorLiveData<OverviewData>().apply {
-        fun update() = whenNonNull(statistics.value, period.value, categories.value) { stat, period, categories ->
+        fun update() = whenNonNull(
+            statistics.value,
+            period.value,
+            categories.value
+        ) { stat, period, categories ->
             value = OverviewData(stat, period, categories)
         }
 
@@ -106,7 +110,11 @@ internal class OverviewChartViewModel @Inject constructor(
     }
 
     val leftToSpend: LiveData<OverviewChartModel> = mapDistinct(MediatorLiveData<OverviewChartModel>().apply {
-        fun update() = whenNonNull(expenses.value?.amountRaw, income.value?.amountRaw, period.value) { expenses, income, period ->
+        fun update() = whenNonNull(
+            expenses.value?.amountRaw,
+            income.value?.amountRaw,
+            period.value
+        ) { expenses, income, period ->
             val leftToSpend = income - expenses
             val data = ArrayList(listOf(expenses, maxOf(leftToSpend, 0f)))
             //val color = ContextCompat.getColor(context, R.color.leftToSpend)

@@ -1,4 +1,4 @@
-package se.tink.core.extensions
+package se.tink.commons.extensions
 
 import com.tink.model.account.Account
 import com.tink.model.transaction.Transaction

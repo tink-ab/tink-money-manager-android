@@ -21,7 +21,7 @@ import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkError
 import javax.inject.Inject

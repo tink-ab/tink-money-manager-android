@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-//    implementation project(':core')
 //    implementation project(':commons')
 //    implementation project(':data')
 //    implementation project(':data-commons')

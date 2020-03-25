@@ -27,7 +27,6 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
     implementation project(':annotations')
 
     implementation libraries.tink_models

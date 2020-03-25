@@ -13,7 +13,7 @@ import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.transactions.Marked
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import se.tink.commons.transactions.TransactionItemFactory
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import se.tink.commons.extensions.findCategoryByCode
 import com.tink.model.transaction.Transaction
@@ -73,7 +73,10 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
                             .mapNotNull { transaction ->
                                 categoryTree.findCategoryByCode(categoryCode)?.let { category ->
                                     transactionItemFactory
-                                        .similarTransactionItemFromTransaction(transaction, category)
+                                        .similarTransactionItemFromTransaction(
+                                            transaction,
+                                            category
+                                        )
                                         ?.apply {
                                             selected =
                                                 markedTransactionsIds.value?.contains(id) ?: true

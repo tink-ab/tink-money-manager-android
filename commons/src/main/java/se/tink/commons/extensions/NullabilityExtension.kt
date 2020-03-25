@@ -1,4 +1,4 @@
-package se.tink.core.extensions
+package se.tink.commons.extensions
 
 inline fun <P1 : Any, P2 : Any, R> whenNonNull(p1: P1?, p2: P2?, function: (p1: P1, p2: P2) -> R): R? {
     if (p1 != null && p2 != null) {

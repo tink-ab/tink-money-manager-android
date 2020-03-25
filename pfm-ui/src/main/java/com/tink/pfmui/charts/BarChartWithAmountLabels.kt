@@ -18,7 +18,7 @@ import com.tink.pfmui.charts.extensions.drawBarChartWithAmountLabels
 import com.tink.pfmui.util.ScreenUtils
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 
 internal class BarChartWithAmountLabels : View {

@@ -6,9 +6,8 @@ import com.tink.pfmui.TimezoneManager
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.configuration.SuitableLocaleFinder
-import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import se.tink.commons.extensions.doubleValue
@@ -86,7 +85,10 @@ internal object ModelMapperManager : ModelConverter {
                 paddToYear = true
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
-            whenNonNull(t1.period, t2.period) { period1, period2 ->
+            whenNonNull(
+                t1.period,
+                t2.period
+            ) { period1, period2 ->
                 period1.start.toEpochMilli().compareTo(period2.start.toEpochMilli())
             } ?: 0
         })

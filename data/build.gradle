@@ -64,7 +64,6 @@ configurations {
 
 dependencies {
     implementation project(':rpc')
-    implementation project(':core')
     implementation project(':annotations')
 
     implementation libraries.tink_core

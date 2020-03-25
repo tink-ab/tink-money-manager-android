@@ -12,7 +12,7 @@ import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.plus
 import se.tink.commons.extensions.sum
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
 
@@ -104,7 +104,10 @@ internal class BudgetSummaryEnricher @Inject constructor(
             ?.takeIf { it.isNotEmpty() }
             ?.sum()
 
-        return whenNonNull(items, targetAmountSum) { budgetItems, targetAmount ->
+        return whenNonNull(
+            items,
+            targetAmountSum
+        ) { budgetItems, targetAmount ->
 
             val progress = if (overspent) {
                 1.0

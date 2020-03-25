@@ -21,7 +21,7 @@ import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.parent
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import com.tink.model.statistic.StatisticTree
 import com.tink.model.transaction.Transaction
 import se.tink.utils.DateUtils
@@ -76,7 +76,10 @@ internal class PieChartDetailsViewModel @Inject constructor(
         { dateUtils.getMonthNameAndMaybeYearOfPeriod(it).capitalize() }
 
     private val sourceData = MediatorLiveData<SourceData>().apply {
-        fun update() = whenNonNull(period.value, category.value) { period, category ->
+        fun update() = whenNonNull(
+            period.value,
+            category.value
+        ) { period, category ->
             value = SourceData(period, category)
         }
 

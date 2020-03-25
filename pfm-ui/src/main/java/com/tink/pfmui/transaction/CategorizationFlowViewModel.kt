@@ -10,7 +10,7 @@ import se.tink.android.repository.transaction.TransactionError
 import se.tink.android.repository.transaction.TransactionReceived
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.livedata.Event
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.Category
 import se.tink.commons.extensions.findCategoryByCode
 import com.tink.model.transaction.Transaction
@@ -56,7 +56,10 @@ internal class CategorizationFlowViewModel @Inject constructor(
 
     val transactionCategory: LiveData<Category> = MediatorLiveData<Category>().apply {
         fun update() =
-            whenNonNull(categories.value, transaction.value?.categoryCode) { tree, code ->
+            whenNonNull(
+                categories.value,
+                transaction.value?.categoryCode
+            ) { tree, code ->
                 tree.findCategoryByCode(code)?.let { value = it }
             }
         addSource(transaction) { update() }
