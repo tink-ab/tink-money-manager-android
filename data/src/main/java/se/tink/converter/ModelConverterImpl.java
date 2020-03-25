@@ -24,9 +24,6 @@ import se.tink.converter.statistic.StatisticDTOToStatisticConverter;
 import se.tink.converter.statistic.StatisticToStatisticDTOConverter;
 import se.tink.converter.statistic.StatisticTreeDTOStatisticTreeConverter;
 import se.tink.converter.streaming.StringToStreamingResponseTypeConverter;
-import se.tink.converter.transaction.QueryTransactionResponseDTOToSearchResultMetadataConverter;
-import se.tink.converter.transaction.TagDTOToTagConverter;
-import se.tink.converter.transaction.TagToTagDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 import se.tink.repository.cache.CacheConverterFactory;
 
@@ -82,7 +79,6 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void addConverters() {
         setupStatisticConverters();
-        setupTransactionConverters();
         setupSupportModelConverters();
         setupStreamingResponseConverter();
         setupCacheEntityConverters();
@@ -104,13 +100,6 @@ public class ModelConverterImpl implements ModelConverter {
 
     private void setupStreamingResponseConverter() {
         addConverter(new StringToStreamingResponseTypeConverter(this));
-    }
-
-    private void setupTransactionConverters() {
-        addConverter(new TagToTagDTOConverter(this));
-        addConverter(new TagDTOToTagConverter(this));
-
-        addConverter(new QueryTransactionResponseDTOToSearchResultMetadataConverter(this));
     }
 
     private void setupStatisticConverters() {
