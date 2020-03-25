@@ -3,7 +3,7 @@ package se.tink.repository.service;
 import com.tink.model.user.UserProfile;
 import se.tink.repository.ObjectChangeObserver;
 
-public interface UserConfigurationService extends TinkService {
+public interface UserConfigurationService {
 
 	void subscribe(ObjectChangeObserver<UserProfile> listener);
 
