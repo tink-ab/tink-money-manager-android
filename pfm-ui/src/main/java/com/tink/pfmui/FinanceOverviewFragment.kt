@@ -28,7 +28,6 @@ import com.tink.service.category.CategoryService
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import se.tink.repository.cache.CacheHandle
 import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.HeaderClientInterceptor
 import se.tink.repository.service.UserConfigurationService
@@ -67,9 +66,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     internal lateinit var userConfigurationService: UserConfigurationService
-
-    @Inject
-    internal lateinit var cacheHandle: CacheHandle
 
     @Inject
     internal lateinit var dataRefreshHandler: DataRefreshHandler
@@ -197,7 +193,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     private fun removeListenersAndClearCache() {
         Categories.getSharedInstance().removeListener(categoryService)
         Periods.getSharedInstance().removeListener(statisticsRepository)
-        cacheHandle.clearCache()
     }
 
     private fun setupTimber() {

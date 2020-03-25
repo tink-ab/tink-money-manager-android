@@ -13,8 +13,6 @@ import se.tink.converter.ModelConverter;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.repository.ExceptionTracker;
-import se.tink.repository.cache.StasticCache;
-import se.tink.repository.manager.StatisticServiceCachedImpl;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
@@ -22,7 +20,7 @@ import se.tink.repository.service.StreamingServiceImpl;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.repository.service.UserConfigurationServiceCachedImpl;
 
-@Module(includes = {ConverterModule.class, CacheModule.class})
+@Module(includes = {ConverterModule.class})
 class ServiceModule {
 
 	public ServiceModule() {
@@ -44,8 +42,7 @@ class ServiceModule {
 	@Provides
 	@PfmScope
 	UserConfigurationService userConfigurationService(
-		UserProfileService userService,
-		ModelConverter modelConverter
+		UserProfileService userService
 	) {
 		return new UserConfigurationServiceCachedImpl(userService);
 	}
@@ -56,11 +53,9 @@ class ServiceModule {
 		StreamingService streaming,
 		ModelConverter converter,
 		StatisticServiceGrpc.StatisticServiceStub serviceStub,
-		TransactionService transactionService,
-		StasticCache cache
+		TransactionService transactionService
 	) {
-    return new StatisticServiceCachedImpl(
-        new StatisticServiceImpl(streaming, converter, serviceStub, transactionService), cache);
+		return new StatisticServiceImpl(streaming, converter, serviceStub, transactionService);
 	}
 
 	@Provides

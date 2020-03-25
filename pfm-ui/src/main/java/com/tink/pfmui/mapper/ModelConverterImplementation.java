@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import se.tink.converter.ModelConverter;
-import se.tink.converter.misc.ExactNumberDTOToExactNumberConverter;
-import se.tink.converter.misc.ExactNumberToExactNumberDTOConverter;
 import se.tink.modelConverter.AbstractConverter;
 
+//TODO: Core setup - What is this class even?
 class ModelConverterImplementation implements ModelConverter {
 
 	private final Map<Integer, AbstractConverter> converterMap = new HashMap<Integer, AbstractConverter>();
@@ -56,9 +55,6 @@ class ModelConverterImplementation implements ModelConverter {
 	}
 
 	private void addConverters() {
-		addConverter(new ExactNumberToExactNumberDTOConverter(this));
-		addConverter(new ExactNumberDTOToExactNumberConverter());
-
 		setupChartConverters();
 		setupCalendarConverters();
 		setupStreamingResponseConverter();
