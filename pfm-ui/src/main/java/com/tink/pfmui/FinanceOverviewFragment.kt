@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.tink.core.Tink
-import com.tink.core.TinkComponent
 import com.tink.pfmui.buildConfig.BuildConfigurations
 import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.collections.Currencies
@@ -24,12 +23,12 @@ import com.tink.pfmui.security.DefaultRecoveryHandler
 import com.tink.pfmui.security.SecuredClientDataStorage
 import com.tink.pfmui.tracking.AnalyticsSingleton
 import com.tink.pfmui.tracking.Tracker
+import com.tink.service.authentication.user.User
 import com.tink.service.category.CategoryService
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import se.tink.repository.service.DataRefreshHandler
-import se.tink.repository.service.HeaderClientInterceptor
 import se.tink.repository.service.UserConfigurationService
 import timber.log.Timber
 import java.io.IOException
@@ -57,9 +56,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     internal lateinit var fragmentCoordinator: FragmentCoordinator
-
-    @Inject
-    internal lateinit var interceptor: HeaderClientInterceptor
 
     @Inject
     internal lateinit var categoryService: CategoryService
@@ -102,8 +98,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         DaggerFragmentComponent
             .factory()
             .create(Tink.requireComponent(), this)
-            .inject(this)
-        interceptor.setAccessToken(accessToken)
+        Tink.setUser(User.fromAccessToken(accessToken))
         attachListeners()
         i18nConfiguration.initialize()
         refreshData()
@@ -179,9 +174,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
         arguments!!.putString(ARG_ACCESS_TOKEN, accessToken)
 
-        if (::interceptor.isInitialized) {
-            interceptor.setAccessToken(accessToken)
-        }
+        Tink.setUser(User.fromAccessToken(accessToken));
     }
 
     private fun attachListeners() {

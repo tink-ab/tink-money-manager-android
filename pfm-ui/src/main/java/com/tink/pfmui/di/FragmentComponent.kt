@@ -16,7 +16,6 @@ import dagger.android.AndroidInjector
         ConfigurationModule::class,
         CurrencyModule::class,
         FragmentModule::class,
-        NetworkModule::class,
         ServiceModule::class,
         ThemingModule::class,
         TrackingModule::class,
