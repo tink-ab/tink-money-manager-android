@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 import se.tink.commons.extensions.PeriodUtil;
-import se.tink.privacy.Clearable;
-import se.tink.privacy.DataWipeManager;
+import se.tink.android.privacy.Clearable;
+import se.tink.android.privacy.DataWipeManager;
 
 /**
  * For @deprecated methods - use StatisticRepository for getting periods

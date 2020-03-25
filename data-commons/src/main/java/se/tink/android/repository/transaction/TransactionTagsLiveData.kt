@@ -8,7 +8,7 @@ import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.createChangeObserver
 import com.tink.model.transaction.Transaction
-import se.tink.repository.SimpleChangeObserver
+import se.tink.android.repository.SimpleChangeObserver
 import com.tink.service.transaction.TransactionService
 
 class TransactionTagsLiveData(

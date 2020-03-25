@@ -10,9 +10,9 @@ import se.tink.android.livedata.map
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
-import se.tink.repository.ExceptionTracker
-import se.tink.repository.service.DataRefreshHandler
-import se.tink.repository.service.Refreshable
+import se.tink.android.repository.ExceptionTracker
+import se.tink.android.repository.service.DataRefreshHandler
+import se.tink.android.repository.service.Refreshable
 import com.tink.service.transaction.TransactionService
 import javax.inject.Inject
 

@@ -28,8 +28,8 @@ import com.tink.service.category.CategoryService
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.UserConfigurationService
+import se.tink.android.repository.service.DataRefreshHandler
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException

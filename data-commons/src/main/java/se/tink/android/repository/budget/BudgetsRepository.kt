@@ -21,7 +21,7 @@ import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
 import com.tink.model.transaction.Transaction
-import se.tink.repository.SimpleChangeObserver
+import se.tink.android.repository.SimpleChangeObserver
 import com.tink.service.transaction.TransactionService
 import javax.inject.Inject
 

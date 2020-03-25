@@ -5,7 +5,7 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.handler.ResultHandler
 import com.tink.service.observer.ListChangeObserver
 import com.tink.service.transaction.TransactionService
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.TinkNetworkError
 
 class SingleTransactionLiveData(
     private val transactionId: String,

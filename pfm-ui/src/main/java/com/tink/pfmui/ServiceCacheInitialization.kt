@@ -1,6 +1,6 @@
 package com.tink.pfmui
 
-import se.tink.repository.service.UserConfigurationService
+import se.tink.android.repository.service.UserConfigurationService
 import javax.inject.Inject
 
 

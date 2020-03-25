@@ -11,7 +11,7 @@ import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
-import se.tink.repository.SimpleChangeObserver
+import se.tink.android.repository.SimpleChangeObserver
 
 
 class BudgetTransactionsLiveData(

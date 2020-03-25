@@ -1,4 +1,4 @@
-package se.tink.privacy;
+package se.tink.android.privacy;
 
 
 import java.util.LinkedList;

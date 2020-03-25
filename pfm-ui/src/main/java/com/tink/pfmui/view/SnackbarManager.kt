@@ -11,8 +11,8 @@ import com.tink.annotations.PfmScope
 import com.tink.pfmui.R
 import com.tink.pfmui.theme.TinkDefaultSnackbarTheme
 import com.tink.pfmui.theme.TinkErrorSnackbarTheme
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.TinkNetworkError.ErrorCode
+import se.tink.android.repository.TinkNetworkError
+import se.tink.android.repository.TinkNetworkError.ErrorCode
 import javax.inject.Inject
 
 

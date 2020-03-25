@@ -22,8 +22,8 @@ import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.commons.extensions.whenNonNull
-import se.tink.repository.ExceptionTracker
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.ExceptionTracker
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 

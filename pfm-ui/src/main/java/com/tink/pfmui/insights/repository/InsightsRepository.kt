@@ -10,7 +10,7 @@ import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
 import se.tink.android.livedata.map
 import se.tink.commons.livedata.Event
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 @PfmScope

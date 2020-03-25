@@ -18,8 +18,8 @@ import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createChangeObserver
 import se.tink.android.livedata.createResultHandler
 import se.tink.android.livedata.map
-import se.tink.repository.ExceptionTracker
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.ExceptionTracker
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 @PfmScope

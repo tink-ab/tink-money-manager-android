@@ -5,8 +5,8 @@ import com.tink.model.category.CategoryTree;
 import com.tink.service.category.CategoryService;
 import com.tink.service.observer.ChangeObserver;
 import javax.annotation.Nullable;
-import se.tink.privacy.Clearable;
-import se.tink.privacy.DataWipeManager;
+import se.tink.android.privacy.Clearable;
+import se.tink.android.privacy.DataWipeManager;
 
 @Deprecated
 public class Categories implements ChangeObserver<CategoryTree>, Clearable {

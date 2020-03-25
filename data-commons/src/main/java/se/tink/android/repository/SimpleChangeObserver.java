@@ -1,4 +1,4 @@
-package se.tink.repository;
+package se.tink.android.repository;
 
 
 import com.tink.service.observer.ListChangeObserver;

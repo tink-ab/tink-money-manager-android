@@ -2,8 +2,8 @@ package com.tink.pfmui
 
 import android.content.Context
 import android.content.SharedPreferences
-import se.tink.privacy.Clearable
-import se.tink.privacy.DataWipeManager
+import se.tink.android.privacy.Clearable
+import se.tink.android.privacy.DataWipeManager
 import java.util.UUID
 
 internal class ClientDataStorage private constructor(context: Context) : Clearable {

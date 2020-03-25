@@ -9,7 +9,7 @@ import com.tink.pfmui.insights.enrichment.EnrichmentDirectorFactory
 import com.tink.pfmui.insights.repository.InsightsRepository
 import org.threeten.bp.Instant
 import se.tink.commons.livedata.Event
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 private typealias InsightsListProcessor = List<Insight>.() -> List<Insight>

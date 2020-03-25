@@ -3,9 +3,9 @@ package com.tink.pfmui.collections;
 import androidx.annotation.NonNull;
 import com.tink.model.user.UserProfile;
 import com.tink.service.observer.ChangeObserver;
-import se.tink.privacy.Clearable;
-import se.tink.privacy.DataWipeManager;
-import se.tink.repository.service.UserConfigurationService;
+import se.tink.android.privacy.Clearable;
+import se.tink.android.privacy.DataWipeManager;
+import se.tink.android.repository.service.UserConfigurationService;
 
 @Deprecated
 public class Currencies implements ChangeObserver<UserProfile>, Clearable {

@@ -1,4 +1,4 @@
-package se.tink.repository;
+package se.tink.android.repository;
 
 public interface ExceptionTracker {
 

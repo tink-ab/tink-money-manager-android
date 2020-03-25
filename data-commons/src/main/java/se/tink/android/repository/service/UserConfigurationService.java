@@ -1,4 +1,4 @@
-package se.tink.repository.service;
+package se.tink.android.repository.service;
 
 import com.tink.model.user.UserProfile;
 import com.tink.service.observer.ChangeObserver;
