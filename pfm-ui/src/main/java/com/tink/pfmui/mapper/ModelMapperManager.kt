@@ -2,68 +2,26 @@ package com.tink.pfmui.mapper
 
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
+import com.tink.model.category.Category
+import com.tink.model.misc.Amount
+import com.tink.model.statistic.Statistic
+import com.tink.model.time.Period
 import com.tink.pfmui.TimezoneManager
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.configuration.SuitableLocaleFinder
-import se.tink.converter.ModelConverter
-import se.tink.commons.extensions.whenNonNull
-import com.tink.model.category.Category
-import com.tink.model.misc.Amount
-import se.tink.commons.extensions.doubleValue
-import se.tink.commons.extensions.toExactNumber
-import com.tink.model.time.Period
 import org.threeten.bp.Instant
 import org.threeten.bp.temporal.ChronoUnit
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.toExactNumber
 import se.tink.commons.extensions.toMonthString
-import com.tink.model.statistic.Statistic
+import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import java.math.BigDecimal
 import java.util.ArrayList
 import kotlin.math.abs
 
-internal object ModelMapperManager : ModelConverter {
-    private val mapper = ModelConverterImplementation()
-
-    override fun <KR, VR, KI, VI> map(
-        source: Map<KI, VI>, destinationKeyType: Class<KR>,
-        destinationValueType: Class<VR>
-    ): Map<KR, VR> {
-        val returnMap: MutableMap<KR, VR> =
-            Maps.newHashMap()
-        val keySet = source.keys
-        for (key in keySet) {
-            val value = source[key]
-            returnMap[map(
-                key,
-                destinationKeyType
-            )] = map(
-                value,
-                destinationValueType
-            )
-        }
-        return returnMap
-    }
-
-    override fun <S, D> map(
-        source: Collection<S>,
-        destinationType: Class<D>
-    ): List<D> {
-        val destinationList = ArrayList<D>()
-        for (sourceObject in source) {
-            destinationList.add(
-                map(
-                    sourceObject,
-                    destinationType
-                )
-            )
-        }
-        return destinationList
-    }
-
-    override fun <S, D> map(source: S, destinationType: Class<D>): D {
-        return mapper.map(source, destinationType)
-    }
+internal object ModelMapperManager {
 
     @JvmStatic
     fun mapLeftToSpendToPeriodBalanceForCurrentMonth(
@@ -268,10 +226,7 @@ internal object ModelMapperManager : ModelConverter {
                 for (key in monthly.children.keys) {
                     val daily =
                         monthly.children[key]
-                    val total = mapper.map(
-                        daily!!.value,
-                        Double::class.java
-                    )
+                    val total = daily!!.value.value.doubleValue()
                     val p = daily.period
                     val pb = PeriodBalance(p, total)
                     items.add(pb)

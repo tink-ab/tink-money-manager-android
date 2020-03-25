@@ -6,11 +6,10 @@ import dagger.Module;
 import dagger.Provides;
 import java.security.Security;
 import org.conscrypt.Conscrypt;
-import se.tink.converter.ConverterModule;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.repository.service.UserConfigurationServiceCachedImpl;
 
-@Module(includes = {ConverterModule.class})
+@Module
 class ServiceModule {
 
 	public ServiceModule() {
