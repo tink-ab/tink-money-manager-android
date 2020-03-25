@@ -14,14 +14,15 @@ public class DefaultErrorHandler implements TinkNetworkErrorHandler {
 
 	@Override
 	public void handleError(TinkNetworkError error) throws UnknownErrorTypeException {
-		switch (error.getStatusCode()) {
-			case UNAUTHENTICATED:
-				onUnauthenticatedAction.invoke();
-				break;
-			default:
-				throw new UnknownErrorTypeException(
-					String.format("Could not handle error of type %s", error.getStatusCode()));
-		}
+		//TODO: Core setup - do we need this
+//		switch (error.getStatusCode()) {
+//			case UNAUTHENTICATED:
+//				onUnauthenticatedAction.invoke();
+//				break;
+//			default:
+//				throw new UnknownErrorTypeException(
+//					String.format("Could not handle error of type %s", error.getStatusCode()));
+//		}
 	}
 
 	@Override
