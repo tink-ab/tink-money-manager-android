@@ -14,6 +14,7 @@ import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.Date
 import java.util.HashMap
 import kotlin.math.absoluteValue
 
@@ -146,6 +147,9 @@ object PeriodUtil {
 
     @JvmStatic
     fun isInPeriod(dateTime: DateTime, period: Period) = period.isInPeriod(dateTime)
+
+    @JvmStatic
+    fun getLatestStreamingDate(): Date = DateTime.now().toDate()
 }
 
 fun StatisticTree.extractPeriods(): Map<String, Period> {

@@ -22,13 +22,11 @@ import se.tink.android.livedata.map
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.TinkNetworkErrorHandler
-import se.tink.repository.service.StreamingService
 import javax.inject.Inject
 
 @PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
-    private val streamingService: StreamingService,
     private val appExecutors: AppExecutors,
     private val exceptionTracker: ExceptionTracker,
     private val errorHandler: TinkNetworkErrorHandler
@@ -72,10 +70,10 @@ class TransactionRepository @Inject constructor(
 
 
     fun fetchById(id: String): SingleTransactionLiveData =
-        SingleTransactionLiveData(id, streamingService, transactionService)
+        SingleTransactionLiveData(id, transactionService)
 
     fun subscribeForTransaction(transaction: Transaction): SingleTransactionLiveData =
-        SingleTransactionLiveData(transaction, streamingService, transactionService)
+        SingleTransactionLiveData(transaction, transactionService)
 
     fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>?> {
 

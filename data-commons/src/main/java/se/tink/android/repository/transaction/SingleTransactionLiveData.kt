@@ -7,11 +7,9 @@ import com.tink.service.transaction.TransactionService
 import se.tink.android.extensions.toListChangeObserver
 import se.tink.repository.ChangeObserver
 import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.StreamingService
 
 class SingleTransactionLiveData(
     private val transactionId: String,
-    val streamingService: StreamingService,
     val transactionService: TransactionService
 ) : MutableLiveData<TransactionResult>() {
 
@@ -19,9 +17,8 @@ class SingleTransactionLiveData(
 
     constructor(
         transaction: Transaction,
-        streamingService: StreamingService,
         transactionService: TransactionService
-    ) : this(transaction.id, streamingService, transactionService) {
+    ) : this(transaction.id, transactionService) {
         fetchOnInit = false
         postValue(TransactionReceived(transaction))
     }
@@ -55,7 +52,7 @@ class SingleTransactionLiveData(
         override fun onDelete(items: List<Transaction>) {
             if (items.any { it.id == transactionId }) postValue(TransactionDeleted)
         }
-    }
+    }.toListChangeObserver()
 
     init {
         if (fetchOnInit) {
@@ -67,11 +64,11 @@ class SingleTransactionLiveData(
             )
         }
 
-        transactionService.subscribe(changeObserver.toListChangeObserver())
+        transactionService.subscribe(changeObserver)
     }
 
     fun dispose() {
-        streamingService.unsubscribe(changeObserver)
+        transactionService.unsubscribe(changeObserver)
     }
 
 }

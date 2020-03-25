@@ -52,7 +52,6 @@ import org.threeten.bp.Instant;
 import org.threeten.bp.temporal.ChronoUnit;
 import se.tink.commons.extensions.PeriodUtil;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.utils.DateUtils;
 import timber.log.Timber;
@@ -63,9 +62,6 @@ public class TabLeftToSpendFragment extends BaseFragment implements ChangeObserv
 
 	@Inject
 	Theme theme;
-
-	@Inject
-	StreamingService streamingService;
 
 	@Inject
 	StatisticsService statisticService;
@@ -668,7 +664,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ChangeObserv
 
 	private void updatePeriods() {
 		chosenPeriod = Periods
-			.getPeriod(streamingService.getLatestStreamingDate(), periods);
+			.getPeriod(PeriodUtil.getLatestStreamingDate(), periods);
 		if (chosenPeriod == null && leftToSpend != null && !leftToSpend.isEmpty()) {
 			chosenPeriod = findLatestPeriodFallback(leftToSpend);
 		}
