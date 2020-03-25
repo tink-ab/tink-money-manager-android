@@ -4,20 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
+import com.tink.model.statistic.StatisticTree
 import com.tink.model.time.MonthPeriod
+import com.tink.model.time.Period
+import com.tink.service.observer.ChangeObserver
+import com.tink.service.statistics.StatisticsService
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
-import com.tink.model.time.Period
-import se.tink.commons.extensions.isInPeriod
-import com.tink.model.statistic.StatisticTree
 import se.tink.commons.extensions.extractPeriods
-import se.tink.repository.ObjectChangeObserver
-import se.tink.repository.service.StatisticService
+import se.tink.commons.extensions.isInPeriod
 import javax.inject.Inject
 
 @PfmScope
 internal class StatisticsRepository @Inject constructor(
-    private val statisticService: StatisticService
+    private val statisticService: StatisticsService
 ) {
 
     val periodMap = getStatistics().map {
@@ -45,7 +45,7 @@ internal class StatisticsRepository @Inject constructor(
 }
 
 private class StatisticObserver(private val data: MutableLiveData<StatisticTree>) :
-    ObjectChangeObserver<StatisticTree> {
+    ChangeObserver<StatisticTree> {
 
     //TODO: Core setup - double check, but we should always get the full tree
 //    override fun onCreate(items: StatisticTree) = post(StatisticTree.addOrUpdate(currentValue, items))

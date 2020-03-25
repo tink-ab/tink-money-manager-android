@@ -1,7 +1,6 @@
 package com.tink.pfmui.di;
 
 import com.tink.annotations.PfmScope;
-import com.tink.service.transaction.TransactionService;
 import com.tink.service.user.UserProfileService;
 import dagger.Module;
 import dagger.Provides;
@@ -10,11 +9,8 @@ import java.security.Security;
 import org.conscrypt.Conscrypt;
 import se.tink.converter.ConverterModule;
 import se.tink.converter.ModelConverter;
-import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.grpc.v1.services.StreamingServiceGrpc;
 import se.tink.repository.ExceptionTracker;
-import se.tink.repository.service.StatisticService;
-import se.tink.repository.service.StatisticServiceImpl;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.StreamingServiceImpl;
 import se.tink.repository.service.UserConfigurationService;
@@ -35,27 +31,10 @@ class ServiceModule {
 
 	@Provides
 	@PfmScope
-	StatisticServiceGrpc.StatisticServiceStub statisticServiceStub(Channel channel) {
-		return StatisticServiceGrpc.newStub(channel);
-	}
-
-	@Provides
-	@PfmScope
 	UserConfigurationService userConfigurationService(
 		UserProfileService userService
 	) {
 		return new UserConfigurationServiceCachedImpl(userService);
-	}
-
-	@Provides
-	@PfmScope
-	StatisticService provideStatisticService(
-		StreamingService streaming,
-		ModelConverter converter,
-		StatisticServiceGrpc.StatisticServiceStub serviceStub,
-		TransactionService transactionService
-	) {
-		return new StatisticServiceImpl(streaming, converter, serviceStub, transactionService);
 	}
 
 	@Provides

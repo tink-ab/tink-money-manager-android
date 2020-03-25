@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import com.google.common.collect.Lists;
+import com.tink.model.statistic.Statistic;
+import com.tink.model.statistic.StatisticTree;
 import com.tink.model.time.Period;
 import com.tink.model.user.UserProfile;
 import com.tink.pfmui.BaseFragment;
@@ -33,6 +35,8 @@ import com.tink.pfmui.util.ScreenUtils;
 import com.tink.pfmui.util.extensions.PeriodBalances;
 import com.tink.pfmui.view.PeriodPicker;
 import com.tink.pfmui.view.TinkTextView;
+import com.tink.service.observer.ChangeObserver;
+import com.tink.service.statistics.StatisticsService;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -47,16 +51,13 @@ import com.tink.model.time.Period;
 import org.threeten.bp.Instant;
 import org.threeten.bp.temporal.ChronoUnit;
 import se.tink.commons.extensions.PeriodUtil;
-import com.tink.model.statistic.Statistic;
-import com.tink.model.statistic.StatisticTree;
 import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.utils.DateUtils;
 import timber.log.Timber;
 
-public class TabLeftToSpendFragment extends BaseFragment implements ObjectChangeObserver<StatisticTree>, PeriodProvider {
+public class TabLeftToSpendFragment extends BaseFragment implements ChangeObserver<StatisticTree>, PeriodProvider {
 	public static final String LEFT_TO_SPEND_ACTUAL = "actual";
 	public static final String LEFT_TO_SPEND_AVERAGE = "average";
 
@@ -67,7 +68,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 	StreamingService streamingService;
 
 	@Inject
-	StatisticService statisticService;
+	StatisticsService statisticService;
 
 	@Inject
 	UserConfigurationService userConfigurationService;

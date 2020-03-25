@@ -3,11 +3,12 @@ package se.tink.repository.service
 import com.tink.annotations.PfmScope
 import javax.inject.Inject
 import com.tink.service.category.CategoryService
+import com.tink.service.statistics.StatisticsService
 
 @PfmScope
 class DataRefreshHandler @Inject constructor(
     private val categoryService: CategoryService,
-    private val statisticService: StatisticService,
+    private val statisticService: StatisticsService,
     private val userConfigurationService: UserConfigurationService
 ) {
     private val refreshables = mutableListOf<Refreshable>()
