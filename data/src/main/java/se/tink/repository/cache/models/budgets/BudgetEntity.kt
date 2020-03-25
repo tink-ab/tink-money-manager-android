@@ -34,17 +34,6 @@ class BudgetEntity(
     )
 
     @Entity
-    class BudgetTransactionEntity(
-        val id: String,
-        val accountId: String,
-        @Embedded(prefix = "amount_") val amount: AmountEntity,
-        @Embedded(prefix = "dispensable_amount_") val dispensableAmount: AmountEntity,
-        val categoryCode: String,
-        val description: String,
-        val date: DateTime
-    )
-
-    @Entity
     class BudgetSpecificationEntity(
         var id: String,
         var name: String,

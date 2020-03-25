@@ -1,6 +1,5 @@
 package se.tink.repository.cache
 
-import se.tink.repository.ChangeObserver
 import se.tink.repository.DataSource
 import se.tink.repository.LiveDataSource
 
@@ -13,11 +12,4 @@ interface WritableCache<T> {
     fun update(item: T)
     fun delete(item: T)
     fun clear()
-}
-
-fun <T> WritableCache<List<T>>.createChangeObserver() = object : ChangeObserver<T> {
-    override fun onCreate(items: List<T>) = insert(items)
-    override fun onRead(items: List<T>) = clearAndInsert(items)
-    override fun onUpdate(items: List<T>) = update(items)
-    override fun onDelete(items: List<T>) = delete(items)
 }
