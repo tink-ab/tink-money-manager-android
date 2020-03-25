@@ -22,7 +22,7 @@ import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.parent
 import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.statistic.StatisticTree
+import com.tink.model.statistic.StatisticTree
 import com.tink.model.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -138,13 +138,13 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 val src = data.source
                 when (type) {
                     ChartType.EXPENSES -> calculateStatistic(
-                        data.statistic.expensesByCategoryCode,
+                        data.statistic.expensesByCategoryCode.children,
                         src.category.children,
                         src.period
                     )
 
                     ChartType.INCOME -> calculateStatistic(
-                        data.statistic.incomeByCategoryCode,
+                        data.statistic.incomeByCategoryCode.children,
                         src.category.children,
                         src.period
                     )

@@ -1,7 +1,8 @@
 package se.tink.repository.service;
 
 import com.google.common.collect.Lists;
-import com.tink.model.transaction.Transaction;
+import com.tink.service.observer.ListChangeObserver;
+import com.tink.service.transaction.TransactionService;
 import io.grpc.stub.StreamObserver;
 import io.reactivex.Observable;
 import io.reactivex.subjects.PublishSubject;
@@ -10,9 +11,10 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 import se.tink.converter.ModelConverter;
-import se.tink.core.models.statistic.StatisticTree;
 import se.tink.grpc.v1.rpc.QueryStatisticsRequest;
 import se.tink.grpc.v1.rpc.QueryStatisticsResponse;
+import com.tink.model.statistic.StatisticTree;
+import com.tink.model.transaction.Transaction;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.repository.ObjectChangeObserver;
 

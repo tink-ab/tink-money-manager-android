@@ -9,7 +9,8 @@ import org.joda.time.DateTime
 import se.tink.android.livedata.map
 import com.tink.model.time.Period
 import se.tink.commons.extensions.isInPeriod
-import se.tink.core.models.statistic.StatisticTree
+import com.tink.model.statistic.StatisticTree
+import se.tink.commons.extensions.extractPeriods
 import se.tink.repository.ObjectChangeObserver
 import se.tink.repository.service.StatisticService
 import javax.inject.Inject
@@ -45,12 +46,17 @@ internal class StatisticsRepository @Inject constructor(
 
 private class StatisticObserver(private val data: MutableLiveData<StatisticTree>) :
     ObjectChangeObserver<StatisticTree> {
-    private val currentValue get() = data.value ?: StatisticTree()
 
-    override fun onCreate(items: StatisticTree) = post(StatisticTree.addOrUpdate(currentValue, items))
+    //TODO: Core setup - double check, but we should always get the full tree
+//    override fun onCreate(items: StatisticTree) = post(StatisticTree.addOrUpdate(currentValue, items))
+//    override fun onRead(items: StatisticTree) = post(items)
+//    override fun onUpdate(items: StatisticTree) = post(StatisticTree.addOrUpdate(currentValue, items))
+//    override fun onDelete(items: StatisticTree) = post(StatisticTree.delete(currentValue, items))
+    override fun onCreate(items: StatisticTree) = post(items)
     override fun onRead(items: StatisticTree) = post(items)
-    override fun onUpdate(items: StatisticTree) = post(StatisticTree.addOrUpdate(currentValue, items))
-    override fun onDelete(items: StatisticTree) = post(StatisticTree.delete(currentValue, items))
+    override fun onUpdate(items: StatisticTree) = post(items)
+    override fun onDelete(items: StatisticTree) = post(items)
+
 
     private fun post(item: StatisticTree) = data.postValue(item)
 }

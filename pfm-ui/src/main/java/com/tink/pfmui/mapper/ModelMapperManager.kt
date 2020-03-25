@@ -17,7 +17,7 @@ import com.tink.model.time.Period
 import org.threeten.bp.Instant
 import org.threeten.bp.temporal.ChronoUnit
 import se.tink.commons.extensions.toMonthString
-import se.tink.core.models.statistic.Statistic
+import com.tink.model.statistic.Statistic
 import se.tink.utils.DateUtils
 import java.math.BigDecimal
 import java.util.ArrayList
@@ -242,7 +242,7 @@ internal object ModelMapperManager : ModelConverter {
             for (period in currentYearChildren.keys) {
                 val statisticPeriod =
                     currentYearChildren[period]
-                totalForAllPeriods += statisticPeriod!!.amount.value.doubleValue()
+                totalForAllPeriods += statisticPeriod!!.value.value.doubleValue()
             }
             val nrOfPeriods = currentYearChildren.size.toDouble()
             val averageForCategory = totalForAllPeriods / nrOfPeriods
@@ -262,12 +262,12 @@ internal object ModelMapperManager : ModelConverter {
         if (source.isLeftToSpendData && source.isCurrentMonth) { // Daily for a period
             val monthly =
                 source.statistics[source.period.toString()]
-            if (monthly != null && monthly.hasChildren()) {
+            if (monthly != null && monthly.children.isNotEmpty()) {
                 for (key in monthly.children.keys) {
                     val daily =
                         monthly.children[key]
                     val total = mapper.map(
-                        daily!!.amount,
+                        daily!!.value,
                         Double::class.java
                     )
                     val p = daily.period
@@ -298,7 +298,7 @@ internal object ModelMapperManager : ModelConverter {
                         val monthly =
                             statistic!!.children[item.period.toString()]
                                 ?: continue
-                        val total = monthly.amount.value.doubleValue()
+                        val total = monthly.value.value.doubleValue()
                         val value = item.amount + total
                         item.amount = value
                     }
@@ -312,7 +312,7 @@ internal object ModelMapperManager : ModelConverter {
         if (monthly == null) {
             return
         }
-        item.amount = monthly.amount.value.doubleValue()
+        item.amount = monthly.value.value.doubleValue()
     }
 
     private fun addPeriodsToItems(periods: ArrayList<Period>): ArrayList<PeriodBalance> {

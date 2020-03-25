@@ -4,6 +4,8 @@ import com.tink.model.category.Category
 import com.tink.model.category.CategoryTree
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
+import com.tink.model.statistic.Statistic
+import com.tink.model.statistic.StatisticTree
 import com.tink.model.time.DayPeriod
 import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
@@ -12,6 +14,7 @@ import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.util.HashMap
 import kotlin.math.absoluteValue
 
 // Put all extensions on classes from the new core here
@@ -143,4 +146,31 @@ object PeriodUtil {
 
     @JvmStatic
     fun isInPeriod(dateTime: DateTime, period: Period) = period.isInPeriod(dateTime)
+}
+
+fun StatisticTree.extractPeriods(): Map<String, Period> {
+    val output: MutableMap<String, Period> = HashMap()
+    extractPeriodsFromMap(balancesByAccountGroupType.children, output)
+    extractPeriodsFromMap(balancesByAccountId.children, output)
+    extractPeriodsFromMap(expensesByCategoryCode.children, output)
+    extractPeriodsFromMap(incomeByCategoryCode.children, output)
+    extractPeriodsFromMap(leftToSpendAverage.children, output)
+    extractPeriodsFromMap(leftToSpend.children, output)
+    return output
+}
+
+private fun extractPeriodsFromMap(
+    input: Map<String, Statistic>?,
+    output: MutableMap<String, Period>
+) {
+    if (input == null) {
+        return
+    }
+    for ((_, value) in input) {
+        val period = value.period
+        output[period.toString()] = period
+        if (value.children.isNotEmpty()) {
+            extractPeriodsFromMap(value.children, output)
+        }
+    }
 }

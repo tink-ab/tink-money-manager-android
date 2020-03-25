@@ -1,6 +1,6 @@
 package se.tink.repository.service;
 
-import se.tink.core.models.statistic.StatisticTree;
+import com.tink.model.statistic.StatisticTree;
 import se.tink.repository.ObjectChangeObserver;
 
 public interface StatisticService extends TinkService {

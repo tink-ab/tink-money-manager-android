@@ -9,7 +9,7 @@ import com.tink.model.category.Category
 import com.tink.model.time.Period
 import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.toDateTime
-import se.tink.core.models.statistic.Statistic
+import com.tink.model.statistic.Statistic
 import se.tink.utils.DateUtils
 
 internal sealed class ChartItem {
@@ -48,17 +48,17 @@ internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Cont
 }
 
 internal fun calculateStatistic(
-    stats: MutableMap<String, Statistic>,
+    stats: Map<String, Statistic>,
     categories: List<Category>,
     period: Period
 ): StatisticItemsList {
     val dataMap = mutableMapOf<Category, Float>()
     for ((key, st) in stats) {
         getCategory(categories, key)?.let { category ->
-            st.children?.values
-                ?.filter { it.period == period }
-                ?.forEach {
-                    it?.amount?.value?.let {
+            st.children.values
+                .filter { it.period == period }
+                .forEach {
+                    it.value.value.let {
                         dataMap.mergeValue(category, Math.abs(it.floatValue()), Float::plus)
                     }
                 }

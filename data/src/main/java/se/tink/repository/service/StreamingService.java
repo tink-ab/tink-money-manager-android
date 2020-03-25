@@ -5,7 +5,7 @@ import com.tink.model.category.CategoryTree;
 import com.tink.model.time.Period;
 import java.util.Date;
 import java.util.Map;
-import se.tink.core.models.statistic.StatisticTree;
+import com.tink.model.statistic.StatisticTree;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.MapChangeObserver;
 import se.tink.repository.ObjectChangeObserver;

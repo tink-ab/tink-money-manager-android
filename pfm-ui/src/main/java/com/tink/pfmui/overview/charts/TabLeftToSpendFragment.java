@@ -47,8 +47,8 @@ import com.tink.model.time.Period;
 import org.threeten.bp.Instant;
 import org.threeten.bp.temporal.ChronoUnit;
 import se.tink.commons.extensions.PeriodUtil;
-import se.tink.core.models.statistic.Statistic;
-import se.tink.core.models.statistic.StatisticTree;
+import com.tink.model.statistic.Statistic;
+import com.tink.model.statistic.StatisticTree;
 import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
@@ -611,27 +611,28 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		runUiDependant(this::setupViews);
 	}
 
+	//TODO: Core setup - check how we handle statistic updates
 	@Override
 	public void onCreate(StatisticTree items) {
-		leftToSpend = StatisticTree.addOrUpdate(leftToSpend, items.getLeftToSpend());
+//		leftToSpend = StatisticTree.addOrUpdate(leftToSpend, items.getLeftToSpend());
 		updateLeftToSpend();
 	}
 
 	@Override
 	public void onRead(final StatisticTree items) {
-		leftToSpend = items.getLeftToSpend();
+//		leftToSpend = items.getLeftToSpend();
 		updateLeftToSpend();
 	}
 
 	@Override
 	public void onUpdate(StatisticTree items) {
-		StatisticTree.mergeMapUpdate(leftToSpend, items.getLeftToSpend());
+//		StatisticTree.mergeMapUpdate(leftToSpend, items.getLeftToSpend());
 		updateLeftToSpend();
 	}
 
 	@Override
 	public void onDelete(StatisticTree items) {
-		leftToSpend = StatisticTree.delete(leftToSpend, items.getLeftToSpend());
+//		leftToSpend = StatisticTree.delete(leftToSpend, items.getLeftToSpend());
 		updateLeftToSpend();
 	}
 
@@ -682,7 +683,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		Collection<Statistic> firstLevelStatistics = expensesByCategoryId.values();
 		Period latestPeriod = null;
 		for (Statistic statistic : firstLevelStatistics) {
-			if (!statistic.hasChildren()) {
+			if (statistic.getChildren().isEmpty()) {
 				continue;
 			}
 			for (Statistic secondLevelStatistic : statistic.getChildren().values()) {

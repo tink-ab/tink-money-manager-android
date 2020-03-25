@@ -23,7 +23,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import com.tink.model.time.Period
-import se.tink.core.models.statistic.StatisticTree
+import com.tink.model.statistic.StatisticTree
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -62,13 +62,13 @@ internal class OverviewChartViewModel @Inject constructor(
 
     val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
         val data = calculateStatistic(
-            it.statistic.expensesByCategoryCode,
+            it.statistic.expensesByCategoryCode.children,
             it.categories.expenses.children,
             it.period
         ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.expenses)
         //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
-        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false);
+        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false)
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(
             context,
@@ -84,12 +84,12 @@ internal class OverviewChartViewModel @Inject constructor(
 
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
         val data = calculateStatistic(
-            it.statistic.incomeByCategoryCode,
+            it.statistic.incomeByCategoryCode.children,
             it.categories.income.children,
             it.period
         ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.income)
-        val color = context.getColorFromAttr(R.attr.tink_incomeColor);
+        val color = context.getColorFromAttr(R.attr.tink_incomeColor)
 
         val periodString =
             getPeriodString(dateUtils, it.period, context)
@@ -110,7 +110,7 @@ internal class OverviewChartViewModel @Inject constructor(
             val leftToSpend = income - expenses
             val data = ArrayList(listOf(expenses, maxOf(leftToSpend, 0f)))
             //val color = ContextCompat.getColor(context, R.color.leftToSpend)
-            val color = context.getColorFromAttr(R.attr.tink_leftToSpendColor);
+            val color = context.getColorFromAttr(R.attr.tink_leftToSpendColor)
 
             val periodStr =
                 getPeriodString(dateUtils, period, context, false)
