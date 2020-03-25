@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
     implementation project(':annotations')
     implementation project(':commons')
 

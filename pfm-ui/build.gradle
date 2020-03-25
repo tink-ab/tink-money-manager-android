@@ -38,7 +38,6 @@ android {
 
 dependencies {
     implementation project(':commons')
-    implementation project(':data')
     implementation project(':data-commons')
 
     implementation libraries.tink_core
