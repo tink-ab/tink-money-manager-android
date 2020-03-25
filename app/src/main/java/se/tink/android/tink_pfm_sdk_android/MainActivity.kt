@@ -2,6 +2,7 @@ package se.tink.android.tink_pfm_sdk_android
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.tink.core.Tink
 import com.tink.pfmui.FinanceOverviewFragment
 import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
@@ -13,14 +14,14 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Tink.init(Configuration.sampleClientConfiguration, applicationContext)
+
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkStyle_Default,
-                clientConfiguration = Configuration.sampleClientConfiguration,
-                tracker = LogTracker(),
-                overviewFeatures = Configuration.sampleOverviewFeatures
+                tracker = LogTracker()
             ).also {
                 currentFinanceOverviewFragment = it
             }

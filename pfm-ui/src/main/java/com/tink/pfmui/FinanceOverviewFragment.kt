@@ -98,6 +98,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         DaggerFragmentComponent
             .factory()
             .create(Tink.requireComponent(), this)
+            .inject(this)
         Tink.setUser(User.fromAccessToken(accessToken))
         attachListeners()
         i18nConfiguration.initialize()
@@ -203,7 +204,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          *
          * @param accessToken A valid access token for the user
          * @param styleResId The resource ID of your style that extends [R.style.TinkFinanceOverviewStyle]
-         * @param clientConfiguration The [ClientConfiguration] object
          * @param tracker An optional [Tracker] implementation
          * @param overviewFeatures The [OverviewFeatures] object with the list of overview features to be included
          * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
@@ -213,7 +213,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         fun newInstance(
             accessToken: String,
             styleResId: Int,
-            clientConfiguration: ClientConfiguration,
             tracker: Tracker? = null,
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
             insightActionHandler: InsightActionHandler? = null
