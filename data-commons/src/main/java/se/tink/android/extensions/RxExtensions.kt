@@ -1,5 +1,6 @@
 package se.tink.android.extensions
 
+import com.tink.service.handler.ResultHandler
 import io.reactivex.subjects.Subject
 import se.tink.repository.ChangeObserver
 import se.tink.repository.MutationHandler
@@ -91,3 +92,4 @@ fun <T> Subject<List<T>>.toChangeObserver(): ChangeObserver<T> {
     }
 }
 
+fun <T> Subject<T>.toResultHandler(): ResultHandler<T> = ResultHandler(::onNext, ::onError)

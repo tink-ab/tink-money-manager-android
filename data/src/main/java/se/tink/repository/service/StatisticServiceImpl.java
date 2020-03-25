@@ -8,12 +8,12 @@ import io.reactivex.subjects.PublishSubject;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
+import org.jetbrains.annotations.NotNull;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.grpc.v1.rpc.QueryStatisticsRequest;
 import se.tink.grpc.v1.rpc.QueryStatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
-import se.tink.repository.ChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
 
 public class StatisticServiceImpl implements StatisticService {
@@ -69,24 +69,24 @@ public class StatisticServiceImpl implements StatisticService {
 			}
 		});
 
-		transactionService.subscribe(new ChangeObserver<Transaction>() {
+		transactionService.subscribe(new ListChangeObserver<Transaction>() {
 			@Override
-			public void onCreate(List<Transaction> items) {
+			public void onCreate(@NotNull List<? extends Transaction> items) {
 
 			}
 
 			@Override
-			public void onRead(List<Transaction> items) {
+			public void onRead(@NotNull List<? extends Transaction> items) {
 
 			}
 
 			@Override
-			public void onUpdate(List<Transaction> items) {
-				transactionUpdateStream.onNext(items);
+			public void onUpdate(@NotNull List<? extends Transaction> items) {
+				transactionUpdateStream.onNext((List<Transaction>) items);
 			}
 
 			@Override
-			public void onDelete(List<Transaction> items) {
+			public void onDelete(@NotNull List<? extends Transaction> items) {
 
 			}
 		});

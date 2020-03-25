@@ -23,7 +23,8 @@ import se.tink.android.livedata.createResultHandler
 import com.tink.model.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
 import se.tink.repository.cache.LiveDataCache
-import se.tink.repository.service.TransactionService
+import com.tink.service.transaction.TransactionService
+import se.tink.android.extensions.toListChangeObserver
 import javax.inject.Inject
 
 @PfmScope
@@ -48,7 +49,7 @@ class BudgetsRepository @Inject constructor(
         }
         transactionService.subscribe(object : SimpleChangeObserver<Transaction>() {
             override fun onUpdate(items: MutableList<Transaction>?) = _budgets.update()
-        })
+        }.toListChangeObserver())
     }
 
     val budgets: LiveData<List<BudgetSummary>> =

@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.transaction.Transaction
+import com.tink.service.transaction.TransactionService
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import se.tink.android.AppExecutors
@@ -23,7 +24,6 @@ import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.core.extensions.whenNonNull
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
 
@@ -83,7 +83,7 @@ internal open class TransactionListViewModel @Inject constructor(
             ) { transactions, categories ->
 
                 fun Transaction.toItem(): ListItem.TransactionItem? {
-                    val category = categories.findCategoryByCode(categoryCode) ?: return null
+                    val category = categories.findCategoryByCode(categoryCode)
                     return transactionItemFactory.fromTransaction(this, category)
                 }
 

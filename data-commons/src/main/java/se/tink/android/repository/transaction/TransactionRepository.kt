@@ -4,25 +4,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
+import com.tink.model.category.Category
+import com.tink.model.time.Period
+import com.tink.model.transaction.Transaction
+import com.tink.service.handler.ResultHandler
+import com.tink.service.transaction.TransactionService
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import se.tink.android.AppExecutors
-import se.tink.android.extensions.toMutationHandler
+import se.tink.android.extensions.toListChangeObserver
+import se.tink.android.extensions.toResultHandler
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createChangeObserver
-import se.tink.android.livedata.createMutationHandler
+import se.tink.android.livedata.createResultHandler
 import se.tink.android.livedata.map
-import com.tink.model.category.Category
-import com.tink.model.time.Period
-import com.tink.model.transaction.Transaction
-import se.tink.repository.ErrorUtils
 import se.tink.repository.ExceptionTracker
-import se.tink.repository.SimpleMutationHandler
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.TinkNetworkErrorHandler
 import se.tink.repository.service.StreamingService
-import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
 @PfmScope
@@ -37,7 +37,7 @@ class TransactionRepository @Inject constructor(
     fun fromIdList(ids: List<String>): Single<List<Transaction>> {
         return Observable.fromIterable(ids).flatMap { id ->
             PublishSubject.create<Transaction>().also {
-                transactionService.getTransaction(id, it.toMutationHandler())
+                transactionService.getTransaction(id, it.toResultHandler())
             }.onErrorResumeNext { error: Throwable ->
                 exceptionTracker.exceptionThrown(Exception(error))
                 Observable.empty<Transaction>()
@@ -53,7 +53,7 @@ class TransactionRepository @Inject constructor(
         category: Category,
         period: Period
     ): LiveData<List<Transaction>> = object : MutableLiveData<List<Transaction>>() {
-        private val listener = createChangeObserver(appExecutors)
+        private val listener = createChangeObserver(appExecutors).toListChangeObserver()
 
         override fun onActive() = transactionService.listAllAndSubscribeForCategoryCodeAndPeriod(
             category.code,
@@ -64,7 +64,7 @@ class TransactionRepository @Inject constructor(
         override fun onInactive() = transactionService.unsubscribe(listener)
     }
 
-    val tags = TransactionTagsLiveData(streamingService, transactionService, appExecutors)
+    val tags = TransactionTagsLiveData(transactionService, appExecutors)
 
 
     fun forAccountId(accountId: String): TransactionPagesLiveData =
@@ -83,7 +83,7 @@ class TransactionRepository @Inject constructor(
 
         transactionService.getSimilarTransactions(
             transactionId,
-            liveData.createMutationHandler()
+            liveData.createResultHandler()
         )
 
         return liveData.map {
@@ -92,16 +92,18 @@ class TransactionRepository @Inject constructor(
         }
     }
 
-    fun updateTransaction(transaction: Transaction, onError: (TinkNetworkError) -> Unit) {
-        transactionService.updateTransaction(
-            transaction,
-            ErrorUtils.withErrorHandler(
-                errorHandler,
-                object : SimpleMutationHandler<Transaction>() {
-                    override fun onError(error: TinkNetworkError) = onError(error)
-                })
-        )
-    }
+// TODO: Core setup
+//
+//    fun updateTransaction(transaction: Transaction, onError: (TinkNetworkError) -> Unit) {
+//        transactionService.updateTransaction(
+//            transaction,
+//            ErrorUtils.withErrorHandler(
+//                errorHandler,
+//                object : SimpleMutationHandler<Transaction>() {
+//                    override fun onError(error: TinkNetworkError) = onError(error)
+//                })
+//        )
+//    }
 
     fun categorizeTransactions(
         transactionIds: List<String>,
@@ -111,8 +113,7 @@ class TransactionRepository @Inject constructor(
         transactionService.categorizeTransactions(
             transactionIds,
             newCategoryCode,
-            object : SimpleMutationHandler<List<Transaction>>() {
-                override fun onError(error: TinkNetworkError) = onError(error)
-            })
+            ResultHandler(onSuccess = {}, onError = { onError(TinkNetworkError(it)) })
+        )
     }
 }

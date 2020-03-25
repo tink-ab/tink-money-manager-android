@@ -4,14 +4,15 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Observer
 import com.tink.model.budget.BudgetTransaction
+import com.tink.model.transaction.Transaction
 import com.tink.service.budget.BudgetService
+import com.tink.service.transaction.TransactionService
 import org.threeten.bp.Instant
+import se.tink.android.extensions.toListChangeObserver
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
-import com.tink.model.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
-import se.tink.repository.service.TransactionService
 
 
 class BudgetTransactionsLiveData(
@@ -33,7 +34,7 @@ class BudgetTransactionsLiveData(
 
     private val changeObserver = object : SimpleChangeObserver<Transaction>() {
         override fun onUpdate(items: List<Transaction>?) = applyUpdate(items)
-    }
+    }.toListChangeObserver()
 
     init {
         addSource(liveData) { value = it }

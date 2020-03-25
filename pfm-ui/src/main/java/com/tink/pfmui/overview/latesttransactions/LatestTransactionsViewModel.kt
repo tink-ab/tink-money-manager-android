@@ -13,7 +13,7 @@ import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.Refreshable
-import se.tink.repository.service.TransactionService
+import com.tink.service.transaction.TransactionService
 import javax.inject.Inject
 
 internal class LatestTransactionsViewModel @Inject constructor(

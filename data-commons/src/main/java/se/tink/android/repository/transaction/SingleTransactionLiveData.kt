@@ -2,11 +2,12 @@ package se.tink.android.repository.transaction
 
 import androidx.lifecycle.MutableLiveData
 import com.tink.model.transaction.Transaction
+import com.tink.service.handler.ResultHandler
+import com.tink.service.transaction.TransactionService
+import se.tink.android.extensions.toListChangeObserver
 import se.tink.repository.ChangeObserver
-import se.tink.repository.MutationHandler
 import se.tink.repository.TinkNetworkError
 import se.tink.repository.service.StreamingService
-import se.tink.repository.service.TransactionService
 
 class SingleTransactionLiveData(
     private val transactionId: String,
@@ -58,22 +59,15 @@ class SingleTransactionLiveData(
 
     init {
         if (fetchOnInit) {
-            transactionService.getTransaction(transactionId, object : MutationHandler<Transaction> {
-                override fun onNext(item: Transaction) = postValue(
-                    TransactionReceived(
-                        item
-                    )
+            transactionService.getTransaction(transactionId,
+                ResultHandler(
+                    onSuccess = { postValue(TransactionReceived(it)) },
+                    onError = { postValue(TransactionError(TinkNetworkError(it))) }
                 )
-                override fun onError(error: TinkNetworkError) = postValue(
-                    TransactionError(
-                        error
-                    )
-                )
-                override fun onCompleted() {}
-            })
+            )
         }
 
-        transactionService.subscribe(changeObserver)
+        transactionService.subscribe(changeObserver.toListChangeObserver())
     }
 
     fun dispose() {

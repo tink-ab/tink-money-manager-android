@@ -6,12 +6,10 @@ import se.tink.android.livedata.createChangeObserver
 import com.tink.model.time.Period
 import se.tink.core.models.transaction.SearchResultMetadata
 import com.tink.model.transaction.Transaction
-import se.tink.repository.MutationHandler
-import se.tink.repository.PagingResult
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.Pageable
-import se.tink.repository.service.PagingHandler
-import se.tink.repository.service.TransactionService
+import com.tink.service.handler.ResultHandler
+import com.tink.service.transaction.Pageable
+import com.tink.service.transaction.TransactionService
+import se.tink.android.extensions.toListChangeObserver
 
 abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
     abstract fun dispose()
@@ -25,25 +23,16 @@ abstract class AbstractTransactionPagesLiveData(
 
     private var isLoading: Boolean = false
 
-    protected abstract val pageable: Pageable<Transaction>
-    protected val listener = createChangeObserver(appExecutors)
+    protected abstract val pageable: Pageable
+    protected val listener = createChangeObserver(appExecutors).toListChangeObserver()
 
 
     override fun dispose() = transactionService.unsubscribe(listener)
 
     override fun loadMoreItems() {
-        if (!isLoading && pageable.hasMore) {
+        if (!isLoading && pageable.hasMore()) {
             isLoading = true
-            pageable.next(
-                object : PagingHandler {
-                    override fun onError(error: TinkNetworkError) {
-                        isLoading = false
-                    }
-
-                    override fun onCompleted(result: PagingResult) {
-                        isLoading = false
-                    }
-                })
+            pageable.next(ResultHandler({ isLoading = false }, { isLoading = false }))
         }
     }
 }
@@ -54,22 +43,23 @@ class AccountTransactionPagesLiveData(
     transactionService: TransactionService
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
 
-    override val pageable: Pageable<Transaction> =
+    override val pageable: Pageable =
         transactionService.listAndSubscribeForAccountId(accountId, listener)
 
 }
 
-class SearchTransactionPagesLiveData(
-    val query: String,
-    appExecutors: AppExecutors,
-    transactionService: TransactionService,
-    metadataMutationHandler: MutationHandler<SearchResultMetadata>
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
-
-    override val pageable: Pageable<Transaction> =
-        transactionService.search(query, listener, metadataMutationHandler)
-
-}
+// TODO: Core setup - do we need it?
+//class SearchTransactionPagesLiveData(
+//    val query: String,
+//    appExecutors: AppExecutors,
+//    transactionService: TransactionService,
+//    metadataMutationHandler: MutationHandler<SearchResultMetadata>
+//) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+//
+//    override val pageable: Pageable =
+//        transactionService.search(query, listener, metadataMutationHandler)
+//
+//}
 
 class LeftToSpendTransactionPagesLiveData(
     appExecutors: AppExecutors,
@@ -77,7 +67,7 @@ class LeftToSpendTransactionPagesLiveData(
     val period: Period?
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
 
-    override val pageable: Pageable<Transaction> =
+    override val pageable: Pageable =
         if (period != null) {
             transactionService.listAndSubscribeForLeftToSpendAndPeriod(period, listener)
         } else {
@@ -91,7 +81,7 @@ class AllTransactionPagesLiveData(
     transactionService: TransactionService
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
 
-    override val pageable: Pageable<Transaction> =
+    override val pageable: Pageable =
         transactionService.listAndSubscribeForLatestTransactions(true, listener)
 }
 
@@ -102,7 +92,7 @@ class CategoryTransactionPagesLiveData(
     val period: Period?
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
 
-    override val pageable: Pageable<Transaction> =
+    override val pageable: Pageable =
         if (period != null) {
             transactionService.listAndSubscribeForCategoryCodeAndPeriod(
                 categoryCode,
