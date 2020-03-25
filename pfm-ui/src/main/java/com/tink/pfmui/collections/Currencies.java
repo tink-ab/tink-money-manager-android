@@ -2,13 +2,13 @@ package com.tink.pfmui.collections;
 
 import androidx.annotation.NonNull;
 import com.tink.model.user.UserProfile;
+import com.tink.service.observer.ChangeObserver;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
-import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.UserConfigurationService;
 
 @Deprecated
-public class Currencies implements ObjectChangeObserver<UserProfile>, Clearable {
+public class Currencies implements ChangeObserver<UserProfile>, Clearable {
 
 	private static Currencies instance;
 	private static final String DEFAULT_CURRENCY_CODE = "EUR";

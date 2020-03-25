@@ -51,7 +51,6 @@ import com.tink.model.time.Period;
 import org.threeten.bp.Instant;
 import org.threeten.bp.temporal.ChronoUnit;
 import se.tink.commons.extensions.PeriodUtil;
-import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.UserConfigurationService;
 import se.tink.utils.DateUtils;
 import timber.log.Timber;
@@ -634,7 +633,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ChangeObserv
 	}
 
 
-	private ObjectChangeObserver<UserProfile> userProfileSubscription = new ObjectChangeObserver<UserProfile>() {
+	private ChangeObserver<UserProfile> userProfileSubscription = new ChangeObserver<UserProfile>() {
 
 		@Override
 		public void onCreate(UserProfile item) {

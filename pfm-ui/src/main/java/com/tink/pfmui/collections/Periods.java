@@ -3,22 +3,22 @@ package com.tink.pfmui.collections;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import com.google.common.collect.Maps;
+import com.tink.model.time.Period;
 import com.tink.pfmui.repository.StatisticsRepository;
+import com.tink.service.observer.ChangeObserver;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
-import com.tink.model.time.Period;
 import se.tink.commons.extensions.PeriodUtil;
 import se.tink.privacy.Clearable;
 import se.tink.privacy.DataWipeManager;
-import se.tink.repository.ObjectChangeObserver;
 
 /**
  * For @deprecated methods - use StatisticRepository for getting periods
  * Just static methods here still can be used (and moved to appropriate place later)
  */
-public class Periods implements ObjectChangeObserver<Map<String, Period>>, Clearable {
+public class Periods implements ChangeObserver<Map<String, Period>>, Clearable {
 
 	private static Periods instance;
 

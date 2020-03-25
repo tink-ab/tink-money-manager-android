@@ -10,7 +10,6 @@ import se.tink.android.livedata.createChangeObserver
 import com.tink.model.transaction.Transaction
 import se.tink.repository.SimpleChangeObserver
 import com.tink.service.transaction.TransactionService
-import se.tink.android.extensions.toListChangeObserver
 
 class TransactionTagsLiveData(
     private val transactionService: TransactionService,
@@ -21,15 +20,15 @@ class TransactionTagsLiveData(
         transactionService.listAndSubscribeForLatestTransactions(
             false,
             200,
-            it.createChangeObserver(appExecutors).toListChangeObserver()
+            it.createChangeObserver(appExecutors)
         )
     }
 
     private var subscribed = false
 
     private val changeObserver = object : SimpleChangeObserver<Transaction>() {
-        override fun onUpdate(items: List<Transaction>?) = updateTags(items)
-    }.toListChangeObserver()
+        override fun onUpdate(items: List<Transaction>) = updateTags(items)
+    }
 
     init {
         addSource(liveData) { updateTags(liveData.value) }

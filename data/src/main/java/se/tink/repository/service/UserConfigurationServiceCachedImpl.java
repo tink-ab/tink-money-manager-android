@@ -3,15 +3,15 @@ package se.tink.repository.service;
 import com.google.common.collect.Lists;
 import com.tink.model.user.UserProfile;
 import com.tink.service.handler.ResultHandler;
+import com.tink.service.observer.ChangeObserver;
 import com.tink.service.user.UserProfileService;
 import java.util.List;
 import javax.inject.Inject;
-import se.tink.repository.ObjectChangeObserver;
 
 //TODO: Core setup - Reevaluate
 public class UserConfigurationServiceCachedImpl implements UserConfigurationService {
 
-	private List<ObjectChangeObserver<UserProfile>> changeObservers;
+	private List<ChangeObserver<UserProfile>> changeObservers;
 	private UserProfileService userService;
 
 	@Inject
@@ -22,12 +22,12 @@ public class UserConfigurationServiceCachedImpl implements UserConfigurationServ
 	}
 
 	@Override
-	public void subscribe(ObjectChangeObserver<UserProfile> listener) {
+	public void subscribe(ChangeObserver<UserProfile> listener) {
 		changeObservers.add(listener);
 	}
 
 	@Override
-	public void unsubscribe(ObjectChangeObserver<UserProfile> listener) {
+	public void unsubscribe(ChangeObserver<UserProfile> listener) {
 		changeObservers.remove(listener);
 	}
 
@@ -43,7 +43,7 @@ public class UserConfigurationServiceCachedImpl implements UserConfigurationServ
 	}
 
 	private void notifyOnRead(UserProfile userProfile) {
-		for (ObjectChangeObserver<UserProfile> observer : changeObservers) {
+		for (ChangeObserver<UserProfile> observer : changeObservers) {
 			observer.onRead(userProfile);
 		}
 	}

@@ -3,9 +3,8 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.MutableLiveData
 import com.tink.model.transaction.Transaction
 import com.tink.service.handler.ResultHandler
+import com.tink.service.observer.ListChangeObserver
 import com.tink.service.transaction.TransactionService
-import se.tink.android.extensions.toListChangeObserver
-import se.tink.repository.ChangeObserver
 import se.tink.repository.TinkNetworkError
 
 class SingleTransactionLiveData(
@@ -23,7 +22,7 @@ class SingleTransactionLiveData(
         postValue(TransactionReceived(transaction))
     }
 
-    private val changeObserver = object : ChangeObserver<Transaction> {
+    private val changeObserver = object : ListChangeObserver<Transaction> {
 
         override fun onRead(items: List<Transaction>) {
             items.find { it.id == transactionId }?.let { postValue(
@@ -52,7 +51,7 @@ class SingleTransactionLiveData(
         override fun onDelete(items: List<Transaction>) {
             if (items.any { it.id == transactionId }) postValue(TransactionDeleted)
         }
-    }.toListChangeObserver()
+    }
 
     init {
         if (fetchOnInit) {

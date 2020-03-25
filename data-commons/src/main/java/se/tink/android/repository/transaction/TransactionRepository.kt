@@ -13,7 +13,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import se.tink.android.AppExecutors
-import se.tink.android.extensions.toListChangeObserver
 import se.tink.android.extensions.toResultHandler
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createChangeObserver
@@ -21,15 +20,13 @@ import se.tink.android.livedata.createResultHandler
 import se.tink.android.livedata.map
 import se.tink.repository.ExceptionTracker
 import se.tink.repository.TinkNetworkError
-import se.tink.repository.TinkNetworkErrorHandler
 import javax.inject.Inject
 
 @PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
     private val appExecutors: AppExecutors,
-    private val exceptionTracker: ExceptionTracker,
-    private val errorHandler: TinkNetworkErrorHandler
+    private val exceptionTracker: ExceptionTracker
 ) {
 
     fun fromIdList(ids: List<String>): Single<List<Transaction>> {
@@ -51,7 +48,7 @@ class TransactionRepository @Inject constructor(
         category: Category,
         period: Period
     ): LiveData<List<Transaction>> = object : MutableLiveData<List<Transaction>>() {
-        private val listener = createChangeObserver(appExecutors).toListChangeObserver()
+        private val listener = createChangeObserver(appExecutors)
 
         override fun onActive() = transactionService.listAllAndSubscribeForCategoryCodeAndPeriod(
             category.code,

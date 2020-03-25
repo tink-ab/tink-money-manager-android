@@ -2,28 +2,27 @@ package se.tink.android.livedata
 
 import androidx.lifecycle.MutableLiveData
 import com.tink.service.handler.ResultHandler
+import com.tink.service.observer.ListChangeObserver
 import se.tink.android.AppExecutors
-import se.tink.repository.ChangeObserver
-import se.tink.repository.MutationHandler
 import se.tink.repository.TinkNetworkError
 
 // T must provide equals method which is not based on objects identity
-fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): ChangeObserver<T> {
-    return object : ChangeObserver<T> {
-        override fun onCreate(items: MutableList<T>?) = doUpdate(items) { value, created ->
+fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): ListChangeObserver<T> {
+    return object : ListChangeObserver<T> {
+        override fun onCreate(items: List<T>) = doUpdate(items) { value, created ->
             value.addAll(created)
         }
 
-        override fun onRead(items: MutableList<T>?) = postValue(items)
+        override fun onRead(items: List<T>) = postValue(items)
 
-        override fun onUpdate(items: MutableList<T>?) = doUpdate(items) { value, updated ->
+        override fun onUpdate(items: List<T>) = doUpdate(items) { value, updated ->
             value.run {
                 removeAll(updated)
                 addAll(updated)
             }
         }
 
-        override fun onDelete(items: MutableList<T>?) = doUpdate(items) { value, deleted ->
+        override fun onDelete(items: List<T>) = doUpdate(items) { value, deleted ->
             value.removeAll(deleted)
         }
 
@@ -40,22 +39,6 @@ fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): 
             }
         }
     }
-}
-
-fun <T> MutableLiveData<ErrorOrValue<T>>.createMutationHandler() = object : MutationHandler<T> {
-
-    override fun onError(error: TinkNetworkError?) {
-        error?.let { postValue(ErrorOrValue(it)) }
-    }
-
-    override fun onCompleted() {
-        //implement if necessary
-    }
-
-    override fun onNext(item: T) {
-        postValue(ErrorOrValue(item))
-    }
-
 }
 
 fun <T> MutableLiveData<ErrorOrValue<T>>.createResultHandler() = ResultHandler<T>(

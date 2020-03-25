@@ -8,7 +8,6 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.handler.ResultHandler
 import com.tink.service.transaction.Pageable
 import com.tink.service.transaction.TransactionService
-import se.tink.android.extensions.toListChangeObserver
 
 abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
     abstract fun dispose()
@@ -23,7 +22,7 @@ abstract class AbstractTransactionPagesLiveData(
     private var isLoading: Boolean = false
 
     protected abstract val pageable: Pageable
-    protected val listener = createChangeObserver(appExecutors).toListChangeObserver()
+    protected val listener = createChangeObserver(appExecutors)
 
 
     override fun dispose() = transactionService.unsubscribe(listener)

@@ -3,7 +3,7 @@ package se.tink.android.repository.user
 import androidx.lifecycle.LiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.user.UserProfile
-import se.tink.repository.SimpleObjectChangeObserver
+import com.tink.service.observer.ChangeObserver
 import se.tink.repository.service.UserConfigurationService
 import javax.inject.Inject
 
@@ -12,11 +12,11 @@ class UserRepository @Inject constructor(private val userConfigurationService: U
 
     val userProfile = object : LiveData<UserProfile?>() {
 
-        private val observer = object : SimpleObjectChangeObserver<UserProfile>() {
+        private val observer = object : ChangeObserver<UserProfile> {
             override fun onCreate(item: UserProfile) = update(item)
             override fun onRead(item: UserProfile) = update(item)
             override fun onUpdate(item: UserProfile) = update(item)
-            override fun onDelete(item: UserProfile?) = update(null)
+            override fun onDelete(item: UserProfile) = update(null)
         }
 
         fun update(config: UserProfile?) = postValue(config)

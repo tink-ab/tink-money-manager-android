@@ -8,7 +8,6 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.budget.BudgetService
 import com.tink.service.transaction.TransactionService
 import org.threeten.bp.Instant
-import se.tink.android.extensions.toListChangeObserver
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.createResultHandler
@@ -33,8 +32,8 @@ class BudgetTransactionsLiveData(
     private var subscribed = false
 
     private val changeObserver = object : SimpleChangeObserver<Transaction>() {
-        override fun onUpdate(items: List<Transaction>?) = applyUpdate(items)
-    }.toListChangeObserver()
+        override fun onUpdate(items: List<Transaction>) = applyUpdate(items)
+    }
 
     init {
         addSource(liveData) { value = it }
