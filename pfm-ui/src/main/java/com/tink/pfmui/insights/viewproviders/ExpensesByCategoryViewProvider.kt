@@ -52,17 +52,17 @@ class ExpensesByCategoryViewProvider @Inject constructor(
     override val viewType = getViewType()
 
     override val supportedInsightTypes = listOf(
-        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY
-        //TODO: Missing insight type InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
+        InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
     )
-}
 
-private fun InsightData.expenses() =
-    when (this) {
-        is InsightData.WeeklyExpensesByCategoryData -> expenses
-//  TODO: Missing insight type      is InsightData.MonthlySummaryExpensesByCategoryData -> expenses
-        else -> emptyList() // This wouldn't happen and is prevented by the supportedInsightTypes property
-    }
+    private fun InsightData.expenses() =
+        when (this) {
+            is InsightData.WeeklyExpensesByCategoryData -> expenses
+            is InsightData.MonthlySummaryExpensesByCategoryData -> expenses
+            else -> emptyList() // This wouldn't happen and is prevented by the supportedInsightTypes property
+        }
+}
 
 class ExpensesByCategoryViewHolder(
     parent: ViewGroup,
