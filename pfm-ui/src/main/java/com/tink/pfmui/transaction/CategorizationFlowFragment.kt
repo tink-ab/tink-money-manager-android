@@ -5,15 +5,14 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.category.Category
+import com.tink.model.misc.ExactNumber
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.CategorySelectionListener
-import com.tink.model.category.Category
-import com.tink.model.misc.ExactNumber
-import se.tink.commons.extensions.ExactNumberZERO
 import se.tink.commons.extensions.isBiggerThan
-import com.tink.model.transaction.Transaction
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
@@ -56,8 +55,10 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
 
     private fun showCategoryPickerView(transaction: Transaction) {
 
+        val zero = ExactNumber(0, 0)
+
         val categoryType =
-            if (transaction.amount.value.isBiggerThan(ExactNumberZERO)) {
+            if (transaction.amount.value.isBiggerThan(zero)) {
                 Category.Type.INCOME
             } else {
                 Category.Type.EXPENSE

@@ -29,5 +29,3 @@ fun ExactNumber.round() = round(0)
 
 fun ExactNumber.round(decimals: Int) =
     toBigDecimal().setScale(decimals, RoundingMode.HALF_UP).toExactNumber()
-
-val ExactNumberZERO = ExactNumber(0,0)

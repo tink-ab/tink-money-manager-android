@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableList
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.pfmui.collections.Currencies
-import se.tink.commons.extensions.ExactNumberZERO
 import se.tink.commons.extensions.absValue
 import se.tink.commons.extensions.divide
 import se.tink.commons.extensions.doubleValue
@@ -27,7 +26,7 @@ object CurrencyUtils {
     // else exact format is applied.
     private val DYNAMIC_ROUNDING_THRESHOLDS = DynamicRoundingThresholds
     private const val NON_BREAKING_WHITESPACE = 160.toChar()
-    private val ZERO = ExactNumberZERO //TODO: Core setup
+    private val ZERO = ExactNumber(0, 0)
     private val THOUSAND = ExactNumber(1000, 0)
     private val MILLION =
         ExactNumber(1000000, 0)
