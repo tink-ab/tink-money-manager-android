@@ -87,19 +87,6 @@ class TransactionRepository @Inject constructor(
         }
     }
 
-// TODO: Core setup
-//
-//    fun updateTransaction(transaction: Transaction, onError: (TinkNetworkError) -> Unit) {
-//        transactionService.updateTransaction(
-//            transaction,
-//            ErrorUtils.withErrorHandler(
-//                errorHandler,
-//                object : SimpleMutationHandler<Transaction>() {
-//                    override fun onError(error: TinkNetworkError) = onError(error)
-//                })
-//        )
-//    }
-
     fun categorizeTransactions(
         transactionIds: List<String>,
         newCategoryCode: String,
