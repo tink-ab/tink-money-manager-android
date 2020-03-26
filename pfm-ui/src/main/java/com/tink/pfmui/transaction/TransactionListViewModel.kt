@@ -83,7 +83,7 @@ internal open class TransactionListViewModel @Inject constructor(
             ) { transactions, categories ->
 
                 fun Transaction.toItem(): ListItem.TransactionItem? {
-                    val category = categories.findCategoryByCode(categoryCode)
+                    val category = categories.findCategoryByCode(categoryCode) ?: return null
                     return transactionItemFactory.fromTransaction(this, category)
                 }
 

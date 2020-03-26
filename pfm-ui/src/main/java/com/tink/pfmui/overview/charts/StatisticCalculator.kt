@@ -31,7 +31,7 @@ internal sealed class ChartList {
 internal data class StatisticItemsList(override val items: ArrayList<StatisticItem>) : ChartList()
 internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) : ChartList()
 
-//TODO: Core setup
+//TODO: Core setup - Remove `toDateTime`
 internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Context, toToday: Boolean = true): String {
     return if (toToday && period.isInPeriod(DateTime.now())) {
         context.getString(

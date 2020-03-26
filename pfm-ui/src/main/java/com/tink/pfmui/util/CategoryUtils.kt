@@ -15,7 +15,6 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isUncategorized
 
 import se.tink.commons.extensions.parent
-import se.tink.commons.extensions.type
 
 private const val REIMBURSEMENT_CODE = "income:refund.other"
 
@@ -40,7 +39,7 @@ internal fun String.isReimbursement(): Boolean {
 internal fun Category.findChildByCode(code: String): Category? {
     return when {
         this.code == code -> this
-        children?.isEmpty() == false -> {
+        !children?.isEmpty() -> {
             children.mapNotNull { it.findChildByCode(code) }.firstOrNull()
         }
         else -> null

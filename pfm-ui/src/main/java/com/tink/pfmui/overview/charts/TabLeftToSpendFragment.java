@@ -550,7 +550,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ChangeObserv
 //		period.setStart(earliest.withDayOfMonth(1));
 //		period.setStop(latest.withDayOfMonth(latest.dayOfMonth().getMaximumValue()));
 //		return period;
-		throw new RuntimeException("TODO: Core setup");
+		throw new RuntimeException("TODO: Core setup"); // How are we going to handle multi-month periods
 	}
 
 	public interface Theme extends BaseFragment.Theme {

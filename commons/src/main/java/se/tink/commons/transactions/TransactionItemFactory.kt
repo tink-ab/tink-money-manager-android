@@ -38,7 +38,7 @@ class TransactionItemFactory @Inject constructor(
                 label = description,
                 amount = amount,
                 dispensableAmount = dispensableAmount,
-                upcomingTransactionData = null //TODO: Core setup
+                upcomingTransactionData = null
             )
         }
 
