@@ -1,6 +1,10 @@
 package se.tink.commons.transactions
 
 import android.content.Context
+import com.tink.model.category.Category
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
+import com.tink.model.transaction.Transaction
 import org.joda.time.DateTime
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.R
@@ -10,11 +14,7 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isExcluded
 import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
-import com.tink.model.category.Category
-import com.tink.model.misc.Amount
-import com.tink.model.misc.ExactNumber
 import se.tink.commons.extensions.isValid
-import com.tink.model.transaction.Transaction
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 import javax.inject.Inject

@@ -2,26 +2,21 @@ package se.tink.utils;
 
 import android.icu.text.MessageFormat;
 import androidx.annotation.NonNull;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.tink.model.time.DayPeriod;
 import com.tink.model.time.MonthPeriod;
-import com.tink.model.time.YearPeriod;
+import com.tink.model.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import com.tink.model.time.Period;
 import org.threeten.bp.Instant;
-import se.tink.commons.extensions.NewCoreExtensionsKt;
+import se.tink.commons.extensions.TimeExtensionsKt;
 
 public class DateUtils {
 	public static final String KEY_TODAY = "today";
@@ -237,7 +232,7 @@ public class DateUtils {
 
 	private DateTime getDateTimeFromPeriod(Period period) {
 		//TODO: Core setup
-		return NewCoreExtensionsKt.toDateTime(period.getEnd());
+		return TimeExtensionsKt.toDateTime(period.getEnd());
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent) {

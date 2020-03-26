@@ -8,10 +8,10 @@ import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSignAndSymbol
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSymbol
 import com.tink.annotations.PfmScope
+import com.tink.model.misc.Amount
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
-import com.tink.model.misc.Amount
 
 @Module
 internal class CurrencyModule {
