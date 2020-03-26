@@ -10,7 +10,6 @@ import com.tink.pfmui.insights.enrichment.TransactionViewDetails
 import kotlinx.android.synthetic.main.item_insight_single_expense_uncategorized.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.currency.NewAmountFormatter
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.toDateTime
@@ -22,7 +21,7 @@ import javax.inject.Inject
 @ContributesInsightViewProvider
 class SingleExpenseUncategorizedViewProvider @Inject constructor(
     val dateUtils: DateUtils,
-    private val amountFormatter: NewAmountFormatter
+    private val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
         listOf(

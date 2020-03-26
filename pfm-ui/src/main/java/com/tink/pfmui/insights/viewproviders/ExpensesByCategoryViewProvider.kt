@@ -11,7 +11,7 @@ import com.tink.pfmui.insights.enrichment.CategoryTreeViewDetails
 import kotlinx.android.synthetic.main.item_insight_expenses_by_category.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
-import se.tink.commons.currency.NewAmountFormatter
+import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.abs
 import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.extensions.inflate
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @ContributesInsightViewProvider
 class ExpensesByCategoryViewProvider @Inject constructor(
-    private val amountFormatter: NewAmountFormatter
+    private val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
         ExpensesByCategoryViewHolder(parent, actionHandler)

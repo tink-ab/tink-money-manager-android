@@ -7,7 +7,7 @@ import com.tink.model.insights.InsightData
 import com.tink.model.misc.Amount
 import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
-import se.tink.commons.currency.NewAmountFormatter
+import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.plus
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 internal class BudgetSummaryEnricher @Inject constructor(
     budgetsRepository: BudgetsRepository,
-    private val amountFormatter: NewAmountFormatter
+    private val amountFormatter: AmountFormatter
 ) : InsightsEnricher {
 
     private val budgets = budgetsRepository.budgets.map {
