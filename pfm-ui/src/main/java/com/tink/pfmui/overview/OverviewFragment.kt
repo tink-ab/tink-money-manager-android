@@ -47,7 +47,7 @@ internal class OverviewFragment : BaseFragment() {
 
             is OverviewFeature.Accounts -> {
                 childFragmentManager.transaction {
-                    add(
+                    replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
                         AccountsListFragment()
                     )
