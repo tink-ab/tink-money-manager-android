@@ -118,6 +118,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fragmentCoordinator.clear()
         fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures), false, FragmentAnimationFlags.NONE)
     }
 
