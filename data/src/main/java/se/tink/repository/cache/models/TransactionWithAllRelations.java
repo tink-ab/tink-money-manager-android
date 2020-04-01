@@ -1,7 +1,9 @@
 package se.tink.repository.cache.models;
 
 
+import androidx.annotation.NonNull;
 import androidx.room.Relation;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionWithAllRelations extends TransactionEntity {
@@ -24,8 +26,13 @@ public class TransactionWithAllRelations extends TransactionEntity {
 		this.tagEntities = tagEntities;
 	}
 
+	@NonNull
 	public List<CounterpartEntity> getCounterpartEntities() {
-		return counterpartEntities;
+		if (counterpartEntities != null) {
+			return counterpartEntities;
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	public void setCounterpartEntities(
