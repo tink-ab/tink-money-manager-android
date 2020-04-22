@@ -1,6 +1,8 @@
 package com.tink.pfmui.di
 
 import com.tink.pfmui.FinanceOverviewFragment
+import com.tink.pfmui.buildConfig.NetworkConfiguration
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -27,6 +29,14 @@ import javax.inject.Singleton
 )
 internal interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
 
-    @Component.Factory
-    interface Factory : AndroidInjector.Factory<FinanceOverviewFragment>
+    @Component.Builder
+    interface Factory {
+        @BindsInstance
+        fun networkConfiguration(networkConfiguration: NetworkConfiguration): Factory
+
+        @BindsInstance
+        fun fragment(financeOverviewFragment: FinanceOverviewFragment): Factory
+
+        fun create(): FragmentComponent
+    }
 }
