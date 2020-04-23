@@ -336,7 +336,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
         texts.add(
                 getString(
-                        R.string.income_header_description_average,
+                        R.string.tink_income_header_description_average,
                         CurrencyUtils.formatAmountRoundWithCurrencySymbol(
                                 PeriodBalances.getAverageIgnoreLast(items))));
 

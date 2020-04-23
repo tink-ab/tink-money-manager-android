@@ -32,7 +32,7 @@ private const val PAGE_MONTH = 0
 private const val PAGE_6_MONTH = 1
 private const val PAGE_YEAR = 2
 
-private val PAGE_TITLES = listOf(R.string.selector_1_months, R.string.selector_6_months, R.string.selector_12_months)
+private val PAGE_TITLES = listOf(R.string.tink_selector_1_months, R.string.tink_selector_6_months, R.string.tink_selector_12_months)
 private const val TYPE_ARG = "type"
 
 internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
@@ -136,7 +136,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 isLeftToSpend = type == ChartType.LEFT_TO_SPEND,
                 period = adapter.currentPagePeriod,
                 categoryCode = viewModel.category.value?.code,
-                title = viewModel.category.value?.name ?: getString(R.string.transactions_list_toolbar_title)
+                title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
         )
         val fragment = TransactionsListFragment.newInstance(metaData)
         fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.SLIDE_UP)

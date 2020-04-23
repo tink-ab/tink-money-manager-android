@@ -336,7 +336,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
         texts.add(
                 getString(
-                        R.string.expenses_header_description_average,
+                        R.string.tink_expenses_header_description_average,
                         CurrencyUtils.formatAmountRoundWithCurrencySymbol(
                                 PeriodBalances.getAverageIgnoreLast(items))));
 

@@ -49,8 +49,8 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
             it?.let { marked ->
                 when (marked) {
                     Marked.PARTIALLY,
-                    Marked.ALL -> context.getString(R.string.transaction_similar_marker_button_unmark_text)
-                    Marked.NONE -> context.getString(R.string.transaction_similar_marker_button_mark_text)
+                    Marked.ALL -> context.getString(R.string.tink_transaction_similar_marker_button_unmark_text)
+                    Marked.NONE -> context.getString(R.string.tink_transaction_similar_marker_button_mark_text)
                 }
             }
         }

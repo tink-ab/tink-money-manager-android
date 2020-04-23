@@ -175,6 +175,6 @@ internal class HalfChartItemTheme(@ColorInt val textColor: Int)
 
 private fun StatisticItem.getName(context: Context) =
     category.getNameWithDefaultChildFormat(
-        context.getString(R.string.category_default_child_format)
+        context.getString(R.string.tink_category_default_child_format)
     )
 

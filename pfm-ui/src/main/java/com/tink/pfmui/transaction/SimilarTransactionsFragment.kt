@@ -40,7 +40,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.transaction_similar_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun hasToolbar(): Boolean = true
-    override fun getTitle(): String? = getString(R.string.transaction_similar_title)
+    override fun getTitle(): String? = getString(R.string.tink_transaction_similar_title)
     override fun getTheme(): Theme? = ownTheme
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.SIMILAR_TRANSACTIONS
     override fun doNotRecreateView(): Boolean = false

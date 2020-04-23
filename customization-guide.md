@@ -19,6 +19,7 @@ You can customize colors by extending the existing `TinkFinanceOverviewStyle` fr
 Add your extended style in your application's `styles.xml`.
 ```xml
 <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+    <item name="tink_backgroundColor">@color/custom_backgroundColor</item>
     <item name="tink_expensesColor">@color/custom_expenses</item>
     <item name="tink_expensesLightColor">@color/custom_expenses_light</item>
     <item name="tink_expensesDarkColor">@color/custom_expenses_dark</item>
@@ -46,9 +47,23 @@ Add your extended style in your application's `styles.xml`.
     <item name="tink_colorPrimaryLight">@color/colorPrimaryLight</item>
     <item name="tink_colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="tink_colorOnPrimary">@color/colorOnPrimary</item>
+    <item name="tink_warningColor">@color/custom_warningColor</item>
+    <item name="tink_warningLightColor">@color/custom_warningLightColor</item>
+    <item name="tink_criticalColor">@color/custom_criticalColor</item>
     <item name="tink_textColorAction">@color/textColorAction</item>
+    <item name="tink_dividerColor">@color/custom_dividerColor</item>
+    <item name="tink_textColorPrimary">@color/textColorPrimary</item>
+    <item name="tink_textColorSecondary">@color/textColorSecondary</item>
+    <item name="tink_textColorTertiary">@color/textColorTertiary</item>
+    <item name="tink_textColorPrimaryDisabled">@color/textColorPrimaryDisabled</item>
+    <item name="tink_textColorSecondaryDisabled">@color/textColorSecondaryDisabled</item>
+    <item name="tink_cardBackgroundColor">@color/custom_cardBackgroundColor</item>
 </style>
 ```
+
+# Customize strings
+You can customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the Tink PFM UI.
+Follow the [string customization guide](/string-customization-guide.md) to set this up.
 
 # Customize Overview Features
 You can customize the various sections shown in the Overview screen by creating an `OverviewFeatures` instance and setting a list of features you want to show.

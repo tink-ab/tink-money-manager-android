@@ -71,44 +71,44 @@ internal class I18nConfiguration @Inject constructor(
 
     private fun getMapWithHumanDateStrings(): Map<String, String> {
         return mapOf(
-            KEY_TODAY to getString(R.string.date_format_human_today),
-            KEY_TOMORROW to getString(R.string.date_format_human_tomorrow),
-            KEY_YESTERDAY to getString(R.string.date_format_human_yesterday)
+            KEY_TODAY to getString(R.string.tink_date_format_human_today),
+            KEY_TOMORROW to getString(R.string.tink_date_format_human_tomorrow),
+            KEY_YESTERDAY to getString(R.string.tink_date_format_human_yesterday)
         )
     }
 
     private fun getDateFormatsMap(): Map<String, String> {
         return mapOf(
-            FORMATTER_YEARLY to getString(R.string.date_formatter_yearly),
-            FORMATTER_WEEK_YEARLY to getString(R.string.date_formatter_week_yearly),
-            FORMATTER_MONTHLY to getString(R.string.date_formatter_monthly),
-            FORMATTER_INTEGER_DATE to getString(R.string.date_formatter_integer_date),
-            FORMATTER_INTEGER_DATE_COMPACT to getString(R.string.date_formatter_integer_date_compact),
-            FORMATTER_MONTHLY_ONLY to getString(R.string.date_formatter_monthly_only),
-            FORMATTER_MONTHLY_COMPACT to getString(R.string.date_formatter_monthly_compact),
-            FORMATTER_MONTH_NAME to getString(R.string.date_formatter_month_name),
-            FORMATTER_WEEKLY to getString(R.string.date_formatter_weekly),
-            FORMATTER_DAILY to getString(R.string.date_formatter_daily),
-            FORMATTER_DAILY_COMPACT to getString(R.string.date_formatter_daily_compact),
-            FORMATTER_DAILY_PRETTY to getString(R.string.date_formatter_daily_pretty),
-            FORMATTER_DAILY_MONTHLY to getString(R.string.date_formatter_daily_monthly),
-            FORMATTER_DAILY_MONTHLY_YEARLY to getString(R.string.date_formatter_daily_monthly_yearly),
-            FORMATTER_MINUTES to getString(R.string.date_formatter_minutes),
-            FORMATTER_SECONDS to getString(R.string.date_formatter_seconds),
-            FORMATTER_SECONDS_DASHES to getString(R.string.date_formatter_seconds_dashes),
-            FORMATTER_SECONDS_T to getString(R.string.date_formatter_seconds_t),
-            FORMATTER_SECONDS_WITH_TIMEZONE to getString(R.string.date_formatter_seconds_with_timezone),
-            FORMATTER_MILLISECONDS_WITH_TIMEZONE to getString(R.string.date_formatter_milliseconds_with_timezone),
-            FORMATTER_TIME_MILLIS to getString(R.string.date_formatter_time_millis),
-            FORMATTER_FILENAME_SAFE to getString(R.string.date_formatter_filename_safe),
-            FORMATTER_LOGGING to getString(R.string.date_formatter_logging),
-            FORMATTER_DAY_OF_WEEK to getString(R.string.date_formatter_day_of_week),
-            FORMATTER_DAY_OF_WEEK_COMPACT to getString(R.string.date_formatter_day_of_week_compact),
-            FORMATTER_MONTH_AND_DAY_OF_WEEK to getString(R.string.date_formatter_month_and_day_of_week),
-            FORMATTER_MONTH_AND_DAY to getString(R.string.date_formatter_month_and_day),
-            FORMATTER_MONTH_AND_DAY_AND_YEAR to getString(R.string.date_formatter_month_and_day_and_year),
-            FORMATTER_MONTH_AND_YEAR to getString(R.string.date_formatter_month_and_year),
-            FORMATTER_MONTH_AND_YEAR_COMPACT to getString(R.string.date_formatter_month_and_year_compact)
+            FORMATTER_YEARLY to getString(R.string.tink_date_formatter_yearly),
+            FORMATTER_WEEK_YEARLY to getString(R.string.tink_date_formatter_week_yearly),
+            FORMATTER_MONTHLY to getString(R.string.tink_date_formatter_monthly),
+            FORMATTER_INTEGER_DATE to getString(R.string.tink_date_formatter_integer_date),
+            FORMATTER_INTEGER_DATE_COMPACT to getString(R.string.tink_date_formatter_integer_date_compact),
+            FORMATTER_MONTHLY_ONLY to getString(R.string.tink_date_formatter_monthly_only),
+            FORMATTER_MONTHLY_COMPACT to getString(R.string.tink_date_formatter_monthly_compact),
+            FORMATTER_MONTH_NAME to getString(R.string.tink_date_formatter_month_name),
+            FORMATTER_WEEKLY to getString(R.string.tink_date_formatter_weekly),
+            FORMATTER_DAILY to getString(R.string.tink_date_formatter_daily),
+            FORMATTER_DAILY_COMPACT to getString(R.string.tink_date_formatter_daily_compact),
+            FORMATTER_DAILY_PRETTY to getString(R.string.tink_date_formatter_daily_pretty),
+            FORMATTER_DAILY_MONTHLY to getString(R.string.tink_date_formatter_daily_monthly),
+            FORMATTER_DAILY_MONTHLY_YEARLY to getString(R.string.tink_date_formatter_daily_monthly_yearly),
+            FORMATTER_MINUTES to getString(R.string.tink_date_formatter_minutes),
+            FORMATTER_SECONDS to getString(R.string.tink_date_formatter_seconds),
+            FORMATTER_SECONDS_DASHES to getString(R.string.tink_date_formatter_seconds_dashes),
+            FORMATTER_SECONDS_T to getString(R.string.tink_date_formatter_seconds_t),
+            FORMATTER_SECONDS_WITH_TIMEZONE to getString(R.string.tink_date_formatter_seconds_with_timezone),
+            FORMATTER_MILLISECONDS_WITH_TIMEZONE to getString(R.string.tink_date_formatter_milliseconds_with_timezone),
+            FORMATTER_TIME_MILLIS to getString(R.string.tink_date_formatter_time_millis),
+            FORMATTER_FILENAME_SAFE to getString(R.string.tink_date_formatter_filename_safe),
+            FORMATTER_LOGGING to getString(R.string.tink_date_formatter_logging),
+            FORMATTER_DAY_OF_WEEK to getString(R.string.tink_date_formatter_day_of_week),
+            FORMATTER_DAY_OF_WEEK_COMPACT to getString(R.string.tink_date_formatter_day_of_week_compact),
+            FORMATTER_MONTH_AND_DAY_OF_WEEK to getString(R.string.tink_date_formatter_month_and_day_of_week),
+            FORMATTER_MONTH_AND_DAY to getString(R.string.tink_date_formatter_month_and_day),
+            FORMATTER_MONTH_AND_DAY_AND_YEAR to getString(R.string.tink_date_formatter_month_and_day_and_year),
+            FORMATTER_MONTH_AND_YEAR to getString(R.string.tink_date_formatter_month_and_year),
+            FORMATTER_MONTH_AND_YEAR_COMPACT to getString(R.string.tink_date_formatter_month_and_year_compact)
         )
     }
 

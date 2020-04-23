@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <public name="tink_snackbar_utils_error_default" type="string"/>
+  <public name="tink_snackbar_utils_error_status_code_408" type="string"/>
+
+  <public name="tink_date_format_human_today" type="string"/>
+  <public name="tink_date_format_human_yesterday" type="string"/>
+  <public name="tink_date_format_human_tomorrow" type="string"/>
+
+  <public name="tink_all_categories" type="string"/>
+
+  <public name="tink_overview_latest_transactions_title" type="string"/>
+  <public name="tink_overview_latest_transactions_view_all_link" type="string"/>
+
+  <public name="tink_transaction_similar_title" type="string"/>
+  <public name="tink_transaction_similar_description" type="string"/>
+  <public name="tink_transaction_similar_button_skip_text" type="string"/>
+  <public name="tink_transaction_similar_button_accept_text" type="string"/>
+  <public name="tink_transaction_similar_marker_button_mark_text" type="string"/>
+  <public name="tink_transaction_similar_marker_button_unmark_text" type="string"/>
+
+  <public name="tink_choose_category_text" type="string"/>
+
+  <public name="tink_category_list_fragment_button_text" type="string"/>
+
+  <public name="tink_selector_1_months" type="string"/>
+  <public name="tink_selector_6_months" type="string"/>
+  <public name="tink_selector_12_months" type="string"/>
+  <public name="tink_expenses_title" type="string"/>
+  <public name="tink_expenses_header_description_average" type="string"/>
+  <public name="tink_income_title" type="string"/>
+  <public name="tink_income_header_description_average" type="string"/>
+  <public name="tink_until_next_date" type="string"/>
+
+  <public name="tink_transactions_list_toolbar_title" type="string"/>
+  <public name="tink_expenses_menu_settings_title" type="string"/>
+  <public name="tink_other" type="string"/>
+  <public name="tink_category_default_child_format" type="string"/>
+
+  <public name="tink_insights_tab_title" type="string"/>
+  <public name="tink_insights_archive_title" type="string"/>
+  <public name="tink_insights_empty_state_title" type="string"/>
+  <public name="tink_insights_empty_state_subtitle" type="string"/>
+  <public name="tink_insights_overview_card_new_events_title" type="string"/>
+  <public name="tink_insights_overview_card_archived_events_title" type="string"/>
+  <public name="tink_insights_overview_card_action_text" type="string"/>
+
+  <public name="tink_insights_expenses_by_day_average_text" type="string"/>
+
+</resources>
