@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  /* Sketch color palette */
+  <color name="tink_lax">#F89572</color>
+  <color name="tink_lax_10">#1AF89572</color>
+  <color name="tink_lax_25">#40F89572</color>
+  <color name="tink_lax_dark">#DF8666</color>
+  <color name="tink_lax_light">#FFE8E5</color>
+  <color name="tink_blue">#427783</color>
+  <color name="tink_blue_10">#1A427783</color>
+  <color name="tink_blue_20">#32427783</color>
+  <color name="tink_blue_dark">#3B6A75</color>
+  <color name="tink_blue_light">#F2F5F6</color>
+  <color name="expensive_blue">#0E9EC2</color>
+  <color name="expensive_blue_04">#0A0E9EC2</color>
+  <color name="expensive_blue_dark">#0C8EAE</color>
+  <color name="expensive_blue_light">#E6F5F8</color>
+  <color name="salary_green">@color/green</color>
+  <color name="salary_green_dark">#30A266</color>
+  <color name="salary_green_light">#EAF7F0</color>
+  <color name="orange">#FEAE22</color>
+  <color name="orange_light">#FFF3DE</color>
+  <color name="red">#EA544A</color>
+  <color name="red_dark">#D24B42</color>
+  <color name="transparent">#00000000</color>
+  <color name="green">#36B472</color>
+
+  <!-- Backgrounds -->
+  <color name="tink_background_grey">#FBFCFC</color>
+  <color name="tink_background_blue">@color/expensive_blue_04</color>
+
+  <!-- Blacks -->
+  <color name="black">#262626</color>
+  <color name="black_50">#80262626</color>
+  <color name="plain_black">#000000</color>
+  <color name="plain_black_60">#99000000</color> <!-- Plain black with 60% opacity -->
+
+  <!-- Greys -->
+  <color name="transfer_grey">#494949</color>
+  <color name="greyblack">#808080</color>
+  <color name="disabled_greyblack">#7f808080</color>
+  <color name="grey_light">#A7A7A7</color>
+  <color name="grey_very_light">#F4F4F4</color>
+  <color name="grey_inactive">#D5D5D5</color>
+  <color name="divider_grey">#EEEEEE</color>
+
+  <!-- Whites -->
+  <color name="white">#FFFFFF</color>
+  <color name="white_40">#66ffffff</color>
+  <color name="white_53">#87FFFFFF</color>
+  <color name="white_68">#ADFFFFFF</color>
+  <color name="white_70">#B3FFFFFF</color>
+  <color name="white_90">#E6FFFFFF</color>
+
+  <color name="ripple_on_light_background">#20444444</color>
+  <color name="ripple_on_dark_background">#20ffffff</color>
+
+  /* App colors */
+<!--  <color name="colorPrimary">?tink_colorPrimary</color>-->
+<!--  <color name="colorPrimaryDark">?tink_colorPrimaryDark</color>-->
+<!--  <color name="colorPrimaryLight">?tink_colorPrimaryLight</color>-->
+<!--  <color name="colorOnPrimary">?tink_colorOnPrimary</color>-->
+
+<!--  <color name="colorAccent">?tink_colorAccent</color>-->
+<!--  <color name="colorAccentDark">?tink_colorAccentDark</color>-->
+<!--  <color name="colorAccentLight">?tink_colorAccentLight</color>-->
+<!--  <color name="colorOnAccent">?tink_colorOnAccent</color>-->
+
+  <color name="colorWarning">@color/orange</color>
+  <color name="colorOnWarning">@color/white</color>
+  <color name="colorError">@color/red</color>
+  <color name="colorOnError">@color/white</color>
+  <color name="colorSuccess">@color/green</color>
+  <color name="colorOnSuccess">@color/white</color>
+
+  <color name="colorBackground">@color/white</color>
+  <color name="colorOnBackground">@color/black</color>
+
+  <color name="colorSurface">@color/white</color>
+  <color name="colorOnSurface">@color/black</color>
+
+  /* Text colors */
+<!--  <color name="textColorPrimary">@color/black</color>-->
+<!--  <color name="textColorPrimaryDisabled">@color/black_50</color>-->
+<!--  <color name="textColorPrimaryInverse">@color/white</color>-->
+<!--  <color name="textColorSecondary">@color/greyblack</color>-->
+<!--  <color name="textColorSecondaryDisabled">@color/disabled_greyblack</color>-->
+<!--  <color name="textColorTertiary">@color/grey_light</color>-->
+<!--  <color name="textColorLink">@color/colorAccent</color>-->
+<!--  <color name="textColorAction">@color/colorAccent</color>-->
+
+  /* Semantic colors */
+<!--  <color name="expenses">?tink_expensesColor</color>-->
+<!--  <color name="expensesDark">?tink_expensesDarkColor</color>-->
+<!--  <color name="expensesLight">?tink_expensesLightColor</color>-->
+<!--  <color name="colorOnExpenses">?tink_colorOnExpenses</color>-->
+
+<!--  <color name="leftToSpend">?tink_leftToSpendColor</color>-->
+<!--  <color name="leftToSpendDark">?tink_leftToSpendDarkColor</color>-->
+<!--  <color name="leftToSpendLight">?tink_leftToSpendLightColor</color>-->
+<!--  <color name="colorOnLeftToSpend">?tink_colorOnLeftToSpend</color>-->
+
+<!--  <color name="income">?tink_incomeColor</color>-->
+<!--  <color name="incomeDark">?tink_incomeDarkColor</color>-->
+<!--  <color name="incomeLight">?tink_incomeLightColor</color>-->
+<!--  <color name="colorOnIncome">?tink_colorOnIncome</color>-->
+
+<!--  <color name="transfer">?tink_transferColor</color>-->
+<!--  <color name="transferDark">?tink_transferDarkColor</color>-->
+<!--  <color name="colorOnTransfer">?tink_colorOnTransfer</color>-->
+
+  <color name="period_disabled_arrow">@color/grey_inactive</color>
+  <color name="divider_color">@color/divider_grey</color>
+  <color name="disabled">@color/grey_light</color>
+
+<!--  <color name="uncategorized_transaction">?tink_uncategorizedColor</color>-->
+<!--  <color name="uncategorizedLight">?tink_uncategorizedLightColor</color>-->
+<!--  <color name="upcoming_transaction">@color/greyblack</color>-->
+<!--  <color name="upcomingLight">@color/divider_color</color>-->
+
+<!--  <color name="snackbar_background">?tink_snackbarColor</color>-->
+<!--  <color name="color_on_snackbar_background">?tink_colorOnSnackBar</color>-->
+</resources>

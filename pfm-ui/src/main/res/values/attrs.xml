@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="TinkWidgetStyle">
+    <attr format="dimension" name="lineHeight"/>
+    <attr format="boolean" name="ignore_baseLine"/>
+    <attr format="string" name="inputType"/>
+    <attr format="boolean" name="isHandlingTagSymbol"/>
+    <attr name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="ViewPagerIndicator">
+    <attr name="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="ScreenPercentLayout">
+    <attr format="float" name="height_percent"/>
+    <attr format="float" name="width_percent"/>
+  </declare-styleable>
+
+  <declare-styleable name="PieChartView">
+    <attr format="float" name="thickness_percent"/>
+    <attr format="float" name="max_radius_percent"/>
+  </declare-styleable>
+
+  <declare-styleable name="PieChartPartLayout">
+    <attr format="float" name="chart_visible_part"/>
+  </declare-styleable>
+
+  <declare-styleable name="CircularProgressChart">
+    <attr format="dimension" name="progressArcStrokeWidth"/>
+    <attr format="dimension" name="backgroundRingStrokeWidth"/>
+    <attr format="color" name="progressArcColor"/>
+    <attr format="color" name="backgroundRingColor"/>
+    <attr format="float" name="progress"/>
+    <attr format="boolean" name="invertedProgress"/>
+  </declare-styleable>
+
+  <declare-styleable name="BarChartWithThreshold">
+    <attr format="dimension" name="bar_width"/>
+    <attr format="color" name="bar_color_below_threshold"/>
+    <attr format="color" name="bar_color_above_threshold"/>
+    <attr format="color" name="threshold_badge_color"/>
+    <attr format="color" name="threshold_line_color"/>
+    <attr format="dimension" name="threshold_line_thickness"/>
+    <attr format="color" name="average_line_color"/>
+    <attr format="reference|integer" name="bar_label_style"/>
+    <attr format="reference|integer" name="threshold_label_style"/>
+    <attr format="dimension" name="horizontal_margin"/>
+  </declare-styleable>
+
+  <declare-styleable name="InsightBubbleView">
+    <attr format="color" name="bubbleBackgroundTint"/>
+    <attr format="reference" name="icon"/>
+    <attr format="color" name="iconTint"/>
+    <attr format="string" name="primaryText"/>
+    <attr format="string" name="secondaryText"/>
+    <attr format="reference|integer" name="primaryTextStyle"/>
+    <attr format="reference|integer" name="secondaryTextStyle"/>
+    <attr format="color" name="textColor"/>
+  </declare-styleable>
+
+</resources>

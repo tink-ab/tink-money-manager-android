@@ -1,0 +1,81 @@
+apply plugin: 'java-library'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.11")
+    }
+}
+
+def grpcVersion = "1.27.0"
+def protoVersion = "3.11.0"
+
+dependencies {
+    api("io.grpc:grpc-okhttp:$grpcVersion")
+    api("io.grpc:grpc-protobuf:$grpcVersion")
+    api("io.grpc:grpc-stub:$grpcVersion")
+
+    api("com.google.api.grpc:proto-google-common-protos:1.17.0")
+}
+
+protobuf {
+    generatedFilesBaseDir = "$projectDir/generated"
+
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protoVersion"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:$grpcVersion"
+        }
+    }
+    generateProtoTasks {
+//        all().each { task ->
+//            task.builtins {
+//                java { option 'lite' }
+//            }
+//            task.plugins {
+//                grpc {
+//                    // Options added to --grpc_out
+//                    option 'lite'
+//                }
+//            }
+//        }
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['generated/main/java', 'generated/main/grpc']
+        }
+        proto {
+            exclude "usage_reports/*"
+            exclude "oauth_service/*"
+            exclude "auth_service/*"
+            exclude "budget_service/*"
+            exclude "common_repository_service/*"
+            exclude "payment_compliance_service/*"
+            exclude "console_admin_service/*"
+            exclude "event_producer_service/*"
+            exclude "statistics_service/*"
+            exclude "third_party/*"
+            exclude "tink/*"
+        }
+    }
+}
+
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
+clean {
+    delete "$projectDir/generated"
+}

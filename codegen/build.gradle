@@ -1,0 +1,10 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
+
+dependencies {
+    implementation project(':annotations')
+    implementation libraries.kotlin_stdlib
+    implementation libraries.auto_service
+    kapt libraries.auto_service
+}

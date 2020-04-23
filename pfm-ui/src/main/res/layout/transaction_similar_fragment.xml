@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/transaction_similar_fragment_main"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor">
+
+  <include layout="@layout/toolbar_default"/>
+
+  <TextView
+    android:id="@+id/description"
+    style="@style/hecto"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/horizontal_margin"
+    android:layout_marginTop="@dimen/similar_transactions_header_padding"
+    android:text="@string/tink_transaction_similar_description"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
+
+  <Button
+    android:id="@+id/markerButton"
+    style="@style/Button.Default"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="32dp"
+    android:text="@string/tink_transaction_similar_marker_button_unmark_text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/description"
+    app:layout_constraintBottom_toTopOf="@id/recyclerView"/>
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="16dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintBottom_toTopOf="@id/skipBtn"
+    app:layout_constraintTop_toBottomOf="@id/description"/>
+
+  <Button
+    android:id="@+id/skipBtn"
+    style="@style/Button.Default"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:text="@string/tink_transaction_similar_button_skip_text"
+    app:layout_constraintBottom_toTopOf="@id/doneBtn"/>
+
+  <Button
+    android:id="@+id/doneBtn"
+    style="@style/button"
+    android:layout_height="@dimen/button_height"
+    android:layout_width="match_parent"
+    android:elevation="@dimen/button_elevation"
+    android:text="@string/tink_transaction_similar_button_accept_text"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

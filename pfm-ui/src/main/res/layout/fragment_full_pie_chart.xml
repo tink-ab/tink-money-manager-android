@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <data>
+    <variable
+      name="model"
+      type="com.tink.pfmui.overview.charts.DetailsChartModel"/>
+
+    <variable
+      name="totalAmount"
+      type="String"/>
+  </data>
+
+  <FrameLayout
+    android:id="@+id/root"
+    android:background="?tink_backgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tink.pfmui.charts.PieChartView
+      android:id="@+id/pieChart"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:clipChildren="false"
+      android:transitionGroup="false"
+      android:transitionName="@{@string/pie_chart_transition(model.title)}"
+      app:max_radius_percent="0.5"/>
+
+    <LinearLayout
+      android:id="@+id/fadingGroup"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:orientation="vertical">
+
+      <com.tink.pfmui.view.TinkTextView
+        android:id="@+id/title"
+        style="@style/micro.primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@{model.title}"
+        android:transitionName="@{@string/amount_title_transition(model.title)}"/>
+
+      <!-- Do not use wrap_content for width for animation performance reasons-->
+      <com.tink.pfmui.view.TinkTextView
+        android:id="@+id/amount"
+        style="@style/tera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@{totalAmount}"
+        android:transitionName="@{@string/amount_transition(model.title)}"/>
+
+      <com.tink.pfmui.view.TinkTextView
+        android:id="@+id/period"
+        style="@style/micro.primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@{model.period}"
+        android:transitionName="@{@string/amount_period_transition(model.title)}"/>
+    </LinearLayout>
+
+  </FrameLayout>
+</layout>

@@ -1,0 +1,99 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    sourceSets {
+        main {
+            java {
+                exclude 'test/**'
+                exclude 'androidTest/**'
+            }
+        }
+        test {
+            java {
+                exclude '**'
+            }
+        }
+        androidTest {
+            java {
+                exclude '**'
+            }
+        }
+    }
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode TinkPfmVersion.code
+        versionName TinkPfmVersion.name
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    lintOptions {
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+configurations {
+    // it clashes with annotations module that comes from kotlin-std-lib dependencies
+    compile.exclude group: 'org.jetbrains', module: 'annotations-java5'
+}
+
+dependencies {
+    implementation project(':rpc')
+    implementation project(':core')
+
+    implementation libraries.timber
+
+    implementation libraries.arch_lifecycle_livedata
+    implementation libraries.arch_lifecycle_extensions
+
+    implementation libraries.kotlin_stdlib
+
+    implementation libraries.dagger
+    kapt libraries.dagger_compiler
+    testImplementation libraries.dagger
+
+    implementation libraries.room_runtime
+    implementation libraries.room_rxjava
+    kapt libraries.room_compiler
+
+    implementation libraries.rxjava
+
+    implementation libraries.guava
+    implementation libraries.gson
+    implementation libraries.joda_time
+    implementation libraries.conscrypt
+
+    api libraries.spongycastle
+
+    testImplementation libraries.test_mockk
+    testImplementation libraries.test_assertj
+    testImplementation libraries.test_junit_api
+    testRuntimeOnly libraries.test_junit_engine
+    testImplementation libraries.test_junit_params // (Optional) If you need "Parameterized Tests"
+}
+

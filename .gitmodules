@@ -1,0 +1,3 @@
+[submodule "rpc/src/main/proto"]
+	path = rpc/src/main/proto
+	url = git@github.com:tink-ab/tink-grpc.git

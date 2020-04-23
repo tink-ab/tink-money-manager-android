@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  /* Semantic colors */
+
+  <color name="status_bar_no_toolbar">@color/black</color>
+
+  <color name="vertical_bar_chart_default_color">@color/white_40</color>
+  <color name="chart_area_label">@color/plain_black</color>
+
+</resources>

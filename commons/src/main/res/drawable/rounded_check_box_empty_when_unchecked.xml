@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@drawable/circle_checkmark" android:state_checked="true"/>
+  <item>
+    <shape android:shape="oval">
+      <size android:height="24dp" android:width="24dp"/>
+      <solid android:color="@color/transparent"/>
+      <stroke android:color="?tink_colorAccent" android:width="2dp"/>
+    </shape>
+  </item>
+</selector>

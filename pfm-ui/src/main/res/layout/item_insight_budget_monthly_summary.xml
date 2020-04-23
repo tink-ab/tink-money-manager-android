@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:custom="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="16dp"
+  app:cardBackgroundColor="?tink_cardBackgroundColor"
+  app:cardCornerRadius="@dimen/card_corner_radius">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_gravity="center">
+
+      <View
+        android:id="@+id/topContainerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"/>
+
+      <com.tink.pfmui.charts.CircularProgressChart
+        android:id="@+id/progress"
+        android:layout_width="132dp"
+        android:layout_height="132dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/categoryOneBackground"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        custom:backgroundRingStrokeWidth="16dp"
+        custom:invertedProgress="true"
+        custom:progress="0.75"
+        custom:progressArcStrokeWidth="8dp"
+        tools:backgroundRingColor="@color/within_budget_light"
+        tools:progressArcColor="@color/within_budget"/>
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/currentSpending"
+        style="@style/giga.autoSize"
+        android:layout_width="80dp"
+        android:layout_height="21dp"
+        android:fontFamily="@font/tink_font_semi_bold"
+        android:gravity="center"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@id/totalBudget"
+        app:layout_constraintEnd_toEndOf="@id/progress"
+        app:layout_constraintStart_toStartOf="@id/progress"
+        app:layout_constraintTop_toTopOf="@id/progress"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="4 800 kr"/>
+
+      <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/totalBudget"
+        style="@style/giga.autoSize"
+        android:layout_width="80dp"
+        android:layout_height="13dp"
+        android:fontFamily="@font/tink_font_regular"
+        android:gravity="center"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/progress"
+        app:layout_constraintEnd_toEndOf="@id/progress"
+        app:layout_constraintStart_toStartOf="@id/progress"
+        app:layout_constraintTop_toBottomOf="@id/currentSpending"
+        tools:text="/ 6 000 kr"/>
+
+      <ImageView
+        android:id="@+id/categoryOneBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="?tink_expensesLightColor"
+        app:layout_constraintBottom_toTopOf="@id/categoryThreeBackground"
+        app:layout_constraintEnd_toStartOf="@id/categoryTwoBackground"
+        app:layout_constraintStart_toEndOf="@id/progress"
+        app:layout_constraintTop_toTopOf="@id/progress"
+        app:layout_constraintVertical_chainStyle="packed"/>
+
+      <ImageView
+        android:id="@+id/categoryOneIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_foodanddrinks"
+        android:tint="?tink_expensesColor"
+        app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
+        app:layout_constraintEnd_toEndOf="@id/categoryOneBackground"
+        app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryOneBackground"/>
+
+      <ImageView
+        android:id="@+id/categoryTwoBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="?tink_expensesLightColor"
+        app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/categoryOneBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryOneBackground"/>
+
+      <ImageView
+        android:id="@+id/categoryTwoIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/categoryTwoBackground"
+        app:layout_constraintEnd_toEndOf="@id/categoryTwoBackground"
+        app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryTwoBackground"
+        tools:src="@drawable/ic_financial"
+        tools:tint="?tink_expensesColor"/>
+
+      <ImageView
+        android:id="@+id/categoryThreeBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="?tink_expensesLightColor"
+        app:layout_constraintBottom_toBottomOf="@id/progress"
+        app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
+        app:layout_constraintTop_toBottomOf="@id/categoryOneBackground"/>
+
+      <ImageView
+        android:id="@+id/categoryThreeIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_benefits"
+        android:tint="?tink_expensesColor"
+        app:layout_constraintBottom_toBottomOf="@id/categoryThreeBackground"
+        app:layout_constraintEnd_toEndOf="@id/categoryThreeBackground"
+        app:layout_constraintStart_toStartOf="@id/categoryThreeBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryThreeBackground"/>
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/categoryThreeGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="categoryThreeBackground, categoryThreeIcon"/>
+
+      <ImageView
+        android:id="@+id/categoryFourBackground"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle"
+        android:backgroundTint="?tink_expensesLightColor"
+        app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryThreeBackground"/>
+
+      <ImageView
+        android:id="@+id/categoryFourIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_healthandbeauty"
+        android:tint="?tink_expensesColor"
+        app:layout_constraintBottom_toBottomOf="@id/categoryFourBackground"
+        app:layout_constraintEnd_toEndOf="@id/categoryFourBackground"
+        app:layout_constraintStart_toStartOf="@id/categoryFourBackground"
+        app:layout_constraintTop_toTopOf="@id/categoryFourBackground"/>
+
+      <androidx.constraintlayout.widget.Group
+        android:id="@+id/categoryFourGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="categoryFourBackground, categoryFourIcon"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/insight_title_description_actions"/>
+
+  </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
