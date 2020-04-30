@@ -11,4 +11,5 @@
   <item name="accounts_container" type="id"/>
   <item name="overview_insights_container" type="id"/>
   <item name="clipping_info" type="id"/>
+  <item name="menu_close" type="id" />
 </resources>

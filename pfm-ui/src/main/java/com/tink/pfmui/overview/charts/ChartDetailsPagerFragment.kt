@@ -16,8 +16,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.R
-import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.theme.getChartDetailsThemeForType
+import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.util.FontUtils
@@ -93,6 +93,10 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         return when (item.itemId) {
             R.id.action_transactions -> {
                 showTransactions()
+                true
+            }
+            R.id.menu_close -> {
+                fragmentCoordinator.popBackStack()
                 true
             }
             else -> super.onToolbarMenuItemSelected(item)
