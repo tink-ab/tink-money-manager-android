@@ -90,3 +90,8 @@ val financeOverviewFragment =
         clientConfiguration = config, // Your client configuration object
         overviewFeatures = yourOverviewFeatures // Your OverviewFeatures instance
     )
+
+```
+# Customize category icons
+You can customize category icons shown in the finance overview UI by overriding the icon attributes that are publicly available in the Tink PFM UI.
+Follow the [icon customization guide](/icon-customization-guide.md) to set this up.
