@@ -1,34 +1,31 @@
 package com.tink.pfmui.overview.charts.piechart
 
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import android.content.res.ColorStateList
-import androidx.databinding.DataBindingUtil
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.os.Bundle
-import androidx.annotation.ColorInt
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.databinding.FragmentFullPieChartBinding
-import com.tink.pfmui.databinding.PieChartLabelBinding
-import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
 import com.tink.pfmui.charts.PieChartLabelView
+import com.tink.pfmui.charts.extensions.childOrNull
 import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
 import com.tink.pfmui.charts.transitions.PieChartTransition
 import com.tink.pfmui.charts.transitions.TextAmountTransition
 import com.tink.pfmui.charts.transitions.TranslationTransition
-import com.tink.pfmui.charts.extensions.childOrNull
+import com.tink.pfmui.databinding.FragmentFullPieChartBinding
+import com.tink.pfmui.databinding.PieChartLabelBinding
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.DetailsChartModel
@@ -36,9 +33,15 @@ import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmui.overview.charts.StatisticItem
 import com.tink.pfmui.overview.charts.StatisticItemsList
 import com.tink.pfmui.theme.getTabPieChartThemeForType
+import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.util.CurrencyUtils
-import com.tink.pfmui.view.TinkIcon
+import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
+import se.tink.commons.categories.getIcon
+import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
+import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.tint
 import kotlin.properties.Delegates
 
 private const val TYPE_ARG = "type"
@@ -87,15 +90,16 @@ internal class FullPieChartFragment : BaseFragment() {
     private fun createLabel(item: StatisticItem, startAngle: Float, sweep: Float): PieChartLabelView {
         val anchor = startAngle + sweep / 2f
         val lineWidth = resources.getDimension(R.dimen.pie_chart_label_line_width)
-        val iconColor = context!!.getColorFromAttr(ownTheme.iconTheme.iconColorAttr)
-        val circleColor = context!!.getColorFromAttr(ownTheme.iconTheme.iconCircleColorAttr)
+        val iconColor = ownTheme.iconTheme.iconColorAttr
+        val circleColorRes = ownTheme.iconTheme.iconCircleColorAttr
+        val circleColor = requireContext().getColorFromAttr(circleColorRes)
         return PieChartLabelView(context!!, anchor).also { label ->
             DataBindingUtil.inflate<PieChartLabelBinding>(LayoutInflater.from(context), R.layout.pie_chart_label, label, true).apply {
                 title.text = CurrencyUtils.formatAmountRoundWithCurrencySymbol(item.amount.toDouble())
                 type = item.category.code
-                icon.text = TinkIcon.fromCategoryCode(item.category.code)
-                icon.setTextColor(iconColor)
-                icon.backgroundTintList = ColorStateList.valueOf(circleColor)
+                icon.setImageResFromAttr(item.category.getIcon())
+                icon.tint(iconColor)
+                icon.backgroundTint(circleColorRes)
                 icon.setOnClickListener { onItemClick(item) }
                 label.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> placeLabelTitle(label, this) }
             }

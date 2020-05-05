@@ -53,6 +53,29 @@
     <attr name="tink_textColorTertiary" format="color|reference" />
     <attr name="tink_dividerColor" format="color|reference" />
     <attr name="tink_cardBackgroundColor" format="color|reference" />
+
+    <!--    Icons-->
+    <attr name="tink_icon_category_all_expenses" format="integer|reference" />
+    <attr name="tink_icon_category_all_income" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_transport" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_foodanddrinks" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_home" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_healthandbeauty" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_leisure" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_houseandgarden" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_shopping" format="integer|reference" />
+    <attr name="tink_icon_category_expenses_other" format="integer|reference" />
+    <attr name="tink_icon_category_income_benefits" format="integer|reference" />
+    <attr name="tink_icon_category_income_financial" format="integer|reference" />
+    <attr name="tink_icon_category_income_pension" format="integer|reference" />
+    <attr name="tink_icon_category_income_salary" format="integer|reference" />
+    <attr name="tink_icon_category_income_reimbursements" format="integer|reference" />
+    <attr name="tink_icon_category_income_other" format="integer|reference" />
+    <attr name="tink_icon_category_transfers_exclude" format="integer|reference" />
+    <attr name="tink_icon_category_transfers_savings" format="integer|reference" />
+    <attr name="tink_icon_category_transfers_other" format="integer|reference" />
+    <attr name="tink_icon_category_uncategorized" format="integer|reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

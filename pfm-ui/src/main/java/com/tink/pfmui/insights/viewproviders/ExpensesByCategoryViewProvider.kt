@@ -10,6 +10,7 @@ import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightData
 import se.tink.core.models.insights.InsightType
@@ -77,7 +78,7 @@ class ExpensesByCategoryViewHolder(
 
             first.visibility =
                 data.first?.let {
-                    icon0.setImageResource(it.categoryIcon)
+                    icon0.setImageResFromAttr(it.categoryIcon)
                     categoryName0.text = it.categoryName
                     amount0.text = it.amount
                     View.VISIBLE
@@ -86,7 +87,7 @@ class ExpensesByCategoryViewHolder(
 
             second.visibility =
                 data.second?.let {
-                    icon1.setImageResource(it.categoryIcon)
+                    icon1.setImageResFromAttr(it.categoryIcon)
                     categoryName1.text = it.categoryName
                     amount1.text = it.amount
                     View.VISIBLE
@@ -94,7 +95,7 @@ class ExpensesByCategoryViewHolder(
 
             third.visibility =
                 data.third?.let {
-                    icon2.setImageResource(it.categoryIcon)
+                    icon2.setImageResFromAttr(it.categoryIcon)
                     categoryName2.text = it.categoryName
                     amount2.text = it.amount
                     View.VISIBLE

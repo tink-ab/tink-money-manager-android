@@ -2,7 +2,6 @@ package com.tink.pfmui.di
 
 import android.content.Context
 import com.tink.pfmui.ClientDataStorage
-import com.tink.pfmui.NetworkConfigSingleton
 import com.tink.pfmui.buildConfig.NetworkConfiguration
 import dagger.Module
 import dagger.Provides
@@ -19,17 +18,6 @@ import javax.inject.Singleton
 
 @Module
 internal class NetworkModule {
-
-    @Provides
-    @Singleton
-    fun provideNetworkConfig(): NetworkConfiguration =
-        NetworkConfiguration(
-            serverAddress = NetworkConfigSingleton.endpoint,
-            clientKey = "",
-            sslKey = NetworkConfigSingleton.sslCertificate,
-            port = NetworkConfigSingleton.port,
-            useSsl = !NetworkConfigSingleton.sslCertificate.isBlank()
-        )
 
     @Provides
     @Singleton
