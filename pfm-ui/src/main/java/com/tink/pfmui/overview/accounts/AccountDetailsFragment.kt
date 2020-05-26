@@ -104,7 +104,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         viewModel.account.observe(viewLifecycle, Observer {
             it?.let { account ->
                 title = account.name
-                accountBalance.text = CurrencyUtils.formatCurrency(account.balance)
+                accountBalance.text = CurrencyUtils.formatCurrencyExact(account.balance)
                 accountNumber.text = account.accountNumber
             }
         })
