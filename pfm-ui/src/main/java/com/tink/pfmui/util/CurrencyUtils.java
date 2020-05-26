@@ -48,6 +48,8 @@ public class CurrencyUtils {
 
 	private static final char NON_BREAKING_WHITESPACE = (char) 160;
 
+	private static final int EXACT_DECIMALS = 2;
+
 
 	private static final ExactNumber ZERO = ExactNumber.ZERO;
 	private static final ExactNumber THOUSAND = new ExactNumber(1000, 0);
@@ -175,7 +177,7 @@ public class CurrencyUtils {
 		} else { // CurrencyFormat.DYNAMIC
 			if (absValue.isSmallerThan(DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode)) && absValue
 				.isBiggerThan(ExactNumber.ZERO)) {
-				formatted = formatAmount(absValue, 2, currencyCode);
+				formatted = formatAmount(absValue, EXACT_DECIMALS, currencyCode);
 			} else {
 				formatted = formatAmountRound(absValue, currencyCode);
 			}
@@ -268,11 +270,11 @@ public class CurrencyUtils {
 	}
 
 	public static String formatAmountExact(ExactNumber amount) {
-		return formatAmount(amount, (int) amount.getScale(), null);
+		return formatAmount(amount, EXACT_DECIMALS, null);
 	}
 
 	private static String formatAmountExact(ExactNumber amount, String currencyCode) {
-		return formatAmount(amount, (int) amount.getScale(), currencyCode);
+		return formatAmount(amount, EXACT_DECIMALS, currencyCode);
 	}
 
 	public static String formatShort(ExactNumber value, String currencyCode) {
@@ -317,7 +319,7 @@ public class CurrencyUtils {
 		if (valueInUnit.isInteger()) {
 			decimalFormat = getDecimalFormat(currencyCode, 0);
 		} else {
-			decimalFormat = getDecimalFormat(currencyCode, 1);
+			decimalFormat = getDecimalFormat(currencyCode, EXACT_DECIMALS);
 		}
 
 		String symbol = ((DecimalFormat) decimalFormat).getDecimalFormatSymbols()
