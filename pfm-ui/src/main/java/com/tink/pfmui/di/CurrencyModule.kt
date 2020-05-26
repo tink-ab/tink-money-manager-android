@@ -1,10 +1,10 @@
 package com.tink.pfmui.di
 
-import com.tink.pfmui.util.extensions.formatCurrencyExplicitlyPositive
-import com.tink.pfmui.util.extensions.formatCurrencyRound
-import com.tink.pfmui.util.extensions.formatCurrencyRoundWithoutSign
-import com.tink.pfmui.util.extensions.formatCurrencyRoundWithoutSignAndSymbol
-import com.tink.pfmui.util.extensions.formatCurrencyRoundWithoutSymbol
+import com.tink.pfmui.util.extensions.formatCurrencyExact
+import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
+import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
+import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSignAndSymbol
+import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSymbol
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
@@ -25,15 +25,15 @@ internal class CurrencyModule {
                 explicitlyPositive: Boolean
             ): String {
                 return if (!useSymbol && !useSign) {
-                    amount.formatCurrencyRoundWithoutSignAndSymbol() ?: ""
+                    amount.formatCurrencyExactWithoutSignAndSymbol() ?: ""
                 } else if (!useSign) {
-                    amount.formatCurrencyRoundWithoutSign() ?: ""
+                    amount.formatCurrencyExactWithoutSign() ?: ""
                 } else if (!useSymbol) {
-                    amount.formatCurrencyRoundWithoutSymbol() ?: ""
+                    amount.formatCurrencyExactWithoutSymbol() ?: ""
                 } else if (explicitlyPositive) {
-                    amount.formatCurrencyExplicitlyPositive() ?: ""
+                    amount.formatCurrencyExactExplicitlyPositive() ?: ""
                 } else {
-                    amount.formatCurrencyRound() ?: ""
+                    amount.formatCurrencyExact() ?: ""
                 }
             }
         }
