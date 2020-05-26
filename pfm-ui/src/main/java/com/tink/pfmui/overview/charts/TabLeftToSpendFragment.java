@@ -407,7 +407,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			}
 
 			texts
-				.add(CurrencyUtils.formatAmountRoundWithCurrencySymbol(currentlyLeftToSpendAmount));
+				.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(currentlyLeftToSpendAmount));
 
 			double averageLeftToSpendAmount = 0;
 
@@ -433,7 +433,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 			int result = (int) Math
 				.round(Math.abs(currentlyLeftToSpendAmount - averageLeftToSpendAmount));
-			String r = CurrencyUtils.formatAmountRoundWithCurrencySymbol(result);
+			String r = CurrencyUtils.formatAmountExactWithCurrencySymbol(result);
 
 			String text;
 			if (currentlyLeftToSpendAmount > averageLeftToSpendAmount) {
@@ -450,11 +450,11 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 				total += item.getAmount();
 			}
 
-            texts.add(CurrencyUtils.formatAmountRoundWithCurrencySymbol(total));
+            texts.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(total));
             texts.add(
                     String.format(
                             getString(R.string.left_to_spend_header_description_average),
-                            CurrencyUtils.formatAmountRoundWithCurrencySymbol(
+                            CurrencyUtils.formatAmountExactWithCurrencySymbol(
                                     PeriodBalances.getAverageIgnoreLast(items))));
 		}
 
