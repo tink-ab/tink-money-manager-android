@@ -115,12 +115,29 @@ public class CurrencyUtils {
 		return formatAmountRoundWithoutCurrencySymbol(amountWithoutSign);
 	}
 
+	public static String formatCurrencyExactWithoutSignAndSymbol(Amount amount) {
+		NumberFormat format = getDecimalFormat(null, EXACT_DECIMALS);
+		String symbol = ((DecimalFormat) format).getDecimalFormatSymbols().getCurrencySymbol();
+		String formatted = format.format(amount.getValue().absValue().doubleValue());
+		formatted = removeCurrencySymbol(symbol, formatted);
+		return formatted;
+	}
+
 	public static String formatCurrencyRoundWithoutSign(Amount amount) {
 		return formatCurrency(amount, CurrencyFormat.ROUND | CurrencyFormat.SYMBOL);
 	}
 
+	public static String formatCurrencyExactWithoutSign(Amount amount) {
+		return formatCurrency(amount, CurrencyFormat.EXACT | CurrencyFormat.SYMBOL);
+	}
+
 	public static String formatCurrencyRoundWithoutSymbol(Amount amount) {
 		return formatAmountRoundWithoutCurrencySymbol(amount.getValue().doubleValue());
+	}
+
+	public static String formatCurrencyExactWithoutSymbol(Amount amount) {
+		return formatCurrency(amount,
+			CurrencyFormat.EXACT | CurrencyFormat.AMOUNT_SIGN);
 	}
 
 	public static String formatCurrencyExact(Amount amount) {
@@ -151,6 +168,13 @@ public class CurrencyUtils {
 		return formatCurrency(
 			amount,
 			CurrencyFormat.DYNAMIC | CurrencyFormat.SYMBOL | CurrencyFormat.AMOUNT_SIGN,
+			true);
+	}
+
+	public static String formatCurrencyExactWithExplicitPositive(Amount amount) {
+		return formatCurrency(
+			amount,
+			CurrencyFormat.EXACT | CurrencyFormat.SYMBOL | CurrencyFormat.AMOUNT_SIGN,
 			true);
 	}
 
@@ -216,15 +240,21 @@ public class CurrencyUtils {
 
 		if (!useCurrencySymbol) {
 			String symbol = ((DecimalFormat) format).getDecimalFormatSymbols().getCurrencySymbol();
-			if (formatted.contains(symbol)) {
-				//Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
-				formatted = formatted.replaceAll(symbol + "\\s", "");
-				formatted = formatted.replaceAll("\\s" + symbol, "");
-				formatted = formatted.replaceAll(symbol, "");
-			}
+			formatted = removeCurrencySymbol(symbol, formatted);
 		}
 
 		return formatted;
+	}
+
+	private static String removeCurrencySymbol(String symbol, String inputString) {
+		if (inputString.contains(symbol)) {
+			//Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
+			inputString = inputString.replaceAll(symbol + "\\s", "");
+			inputString = inputString.replaceAll("\\s" + symbol, "");
+			inputString = inputString.replaceAll(symbol, "");
+
+		}
+		return inputString;
 	}
 
 	public static char getMinusSign() {
