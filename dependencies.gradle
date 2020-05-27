@@ -11,7 +11,6 @@ ext {
     rxJavaVersion = "2.1.9"
     butterknifeVersion = "10.0.0"
     timberVersion = "4.7.1"
-    firebaseVersion = "16.0.1"
     kotlin_coroutines_version = "1.2.1"
 
     libraries = [
@@ -78,9 +77,6 @@ ext {
             test_assertj                        : "org.assertj:assertj-core:3.11.1",
             test_architectural_comp             : "android.arch.core:core-testing:$lifecycleVersion",
 
-            timber                              : "com.jakewharton.timber:timber:$timberVersion",
-
-            firebase_core                       : "com.google.firebase:firebase-core:$firebaseVersion",
-            firebase_messaging                  : "com.google.firebase:firebase-messaging:17.5.0"
+            timber                              : "com.jakewharton.timber:timber:$timberVersion"
     ]
 }
