@@ -48,6 +48,8 @@ public class CurrencyUtils {
 
 	private static final char NON_BREAKING_WHITESPACE = (char) 160;
 
+	private static final int EXACT_DECIMALS = 2;
+
 
 	private static final ExactNumber ZERO = ExactNumber.ZERO;
 	private static final ExactNumber THOUSAND = new ExactNumber(1000, 0);
@@ -113,12 +115,25 @@ public class CurrencyUtils {
 		return formatAmountRoundWithoutCurrencySymbol(amountWithoutSign);
 	}
 
+	public static String formatCurrencyExactWithoutSignAndSymbol(Amount amount) {
+		return formatAmount(amount.getValue().absValue().doubleValue(), EXACT_DECIMALS, false);
+	}
+
 	public static String formatCurrencyRoundWithoutSign(Amount amount) {
 		return formatCurrency(amount, CurrencyFormat.ROUND | CurrencyFormat.SYMBOL);
 	}
 
+	public static String formatCurrencyExactWithoutSign(Amount amount) {
+		return formatCurrency(amount, CurrencyFormat.EXACT | CurrencyFormat.SYMBOL);
+	}
+
 	public static String formatCurrencyRoundWithoutSymbol(Amount amount) {
 		return formatAmountRoundWithoutCurrencySymbol(amount.getValue().doubleValue());
+	}
+
+	public static String formatCurrencyExactWithoutSymbol(Amount amount) {
+		return formatCurrency(amount,
+			CurrencyFormat.EXACT | CurrencyFormat.AMOUNT_SIGN);
 	}
 
 	public static String formatCurrencyExact(Amount amount) {
@@ -152,6 +167,13 @@ public class CurrencyUtils {
 			true);
 	}
 
+	public static String formatCurrencyExactWithExplicitPositive(Amount amount) {
+		return formatCurrency(
+			amount,
+			CurrencyFormat.EXACT | CurrencyFormat.SYMBOL | CurrencyFormat.AMOUNT_SIGN,
+			true);
+	}
+
 	@VisibleForTesting
 	static String formatCurrency(
 		Amount amount,
@@ -175,7 +197,7 @@ public class CurrencyUtils {
 		} else { // CurrencyFormat.DYNAMIC
 			if (absValue.isSmallerThan(DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode)) && absValue
 				.isBiggerThan(ExactNumber.ZERO)) {
-				formatted = formatAmount(absValue, 2, currencyCode);
+				formatted = formatAmount(absValue, EXACT_DECIMALS, currencyCode);
 			} else {
 				formatted = formatAmountRound(absValue, currencyCode);
 			}
@@ -201,15 +223,23 @@ public class CurrencyUtils {
 	}
 
 	public static String formatAmountRoundWithoutCurrencySymbol(double amount) {
-		return formatAmountRound(amount, false);
+		return formatAmount(amount, 0, false);
 	}
 
 	public static String formatAmountRoundWithCurrencySymbol(double amount) {
-		return formatAmountRound(amount, true);
+		return formatAmount(amount, 0, true);
 	}
 
-	private static String formatAmountRound(double amount, boolean useCurrencySymbol) {
-		NumberFormat format = getDecimalFormat(null, 0);
+	public static String formatAmountExactWithoutCurrencySymbol(double amount) {
+		return formatAmount(amount, EXACT_DECIMALS, false);
+	}
+
+	public static String formatAmountExactWithCurrencySymbol(double amount) {
+		return formatAmount(amount, EXACT_DECIMALS, true);
+	}
+
+	private static String formatAmount(double amount, int decimals, boolean useCurrencySymbol) {
+		NumberFormat format = getDecimalFormat(null, decimals);
 		String formatted = format.format(Math.round(amount));
 
 		if (!useCurrencySymbol) {
@@ -219,9 +249,9 @@ public class CurrencyUtils {
 				formatted = formatted.replaceAll(symbol + "\\s", "");
 				formatted = formatted.replaceAll("\\s" + symbol, "");
 				formatted = formatted.replaceAll(symbol, "");
+
 			}
 		}
-
 		return formatted;
 	}
 
@@ -268,11 +298,11 @@ public class CurrencyUtils {
 	}
 
 	public static String formatAmountExact(ExactNumber amount) {
-		return formatAmount(amount, (int) amount.getScale(), null);
+		return formatAmount(amount, EXACT_DECIMALS, null);
 	}
 
 	private static String formatAmountExact(ExactNumber amount, String currencyCode) {
-		return formatAmount(amount, (int) amount.getScale(), currencyCode);
+		return formatAmount(amount, EXACT_DECIMALS, currencyCode);
 	}
 
 	public static String formatShort(ExactNumber value, String currencyCode) {
@@ -317,7 +347,7 @@ public class CurrencyUtils {
 		if (valueInUnit.isInteger()) {
 			decimalFormat = getDecimalFormat(currencyCode, 0);
 		} else {
-			decimalFormat = getDecimalFormat(currencyCode, 1);
+			decimalFormat = getDecimalFormat(currencyCode, EXACT_DECIMALS);
 		}
 
 		String symbol = ((DecimalFormat) decimalFormat).getDecimalFormatSymbols()
