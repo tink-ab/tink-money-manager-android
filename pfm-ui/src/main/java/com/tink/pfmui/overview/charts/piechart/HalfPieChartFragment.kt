@@ -107,11 +107,11 @@ internal class HalfPieChartFragment : BaseFragment() {
         binding.items = model.data.items.map { item ->
             HalfChartItem(
                 (item as? StatisticItem)?.getName(requireContext()) ?: item.name,
-                CurrencyUtils.formatAmountRoundWithCurrencySymbol(item.amount.toDouble()),
+                CurrencyUtils.formatAmountExactWithCurrencySymbol(item.amount.toDouble()),
                 View.OnClickListener { onItemClicked(item) })
         }
         binding.totalAmount =
-            CurrencyUtils.formatAmountRoundWithCurrencySymbol(model.amount.toDouble())
+            CurrencyUtils.formatAmountExactWithCurrencySymbol(model.amount.toDouble())
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
@@ -148,7 +148,7 @@ internal class HalfPieChartFragment : BaseFragment() {
             addTransition(PieChartSegmentTransition(R.id.transition_group_main))
             addTransition(Fade().apply { addTarget(R.id.back_segment) })
             addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                CurrencyUtils.formatAmountRoundWithCurrencySymbol(it.toDouble()).apply { }
+                CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble()).apply { }
             }.apply {
                 addTarget(R.id.amount)
             })

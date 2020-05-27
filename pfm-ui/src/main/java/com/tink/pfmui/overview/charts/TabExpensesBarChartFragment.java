@@ -332,12 +332,12 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 			theme.getPageInformation().getSpacing());
 
 		List<String> texts = Lists.newArrayList();
-		texts.add(CurrencyUtils.formatAmountRoundWithCurrencySymbol(total));
+		texts.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(total));
 
         texts.add(
                 getString(
                         R.string.tink_expenses_header_description_average,
-                        CurrencyUtils.formatAmountRoundWithCurrencySymbol(
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(
                                 PeriodBalances.getAverageIgnoreLast(items))));
 
 		labels.setTexts(texts);

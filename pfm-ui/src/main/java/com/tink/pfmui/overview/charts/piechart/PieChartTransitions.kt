@@ -75,7 +75,7 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
                 addTransition(TransitionSet().apply {
                     addTransition(PieChartSegmentTransition(R.id.transition_group_main))
                     addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                        CurrencyUtils.formatAmountRoundWithCurrencySymbol(it.toDouble())
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble())
                     }.apply {
                         addTarget(R.id.amount)
                     })

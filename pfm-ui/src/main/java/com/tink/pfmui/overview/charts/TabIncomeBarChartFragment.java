@@ -332,12 +332,12 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 			theme.getPageInformation().getSpacing());
 
 		List<String> texts = Lists.newArrayList();
-		texts.add(CurrencyUtils.formatAmountRoundWithCurrencySymbol(total));
+		texts.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(total));
 
         texts.add(
                 getString(
                         R.string.tink_income_header_description_average,
-                        CurrencyUtils.formatAmountRoundWithCurrencySymbol(
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(
                                 PeriodBalances.getAverageIgnoreLast(items))));
 
 		labels.setTexts(texts);
