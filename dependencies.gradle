@@ -19,8 +19,6 @@ ext {
             android_lifecycle_viewmodel_ktx     : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
             android_lifecycle_rx_ktx            : "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion",
 
-            apmem_tools_layouts                 : 'org.apmem.tools:layouts:1.10@aar',
-
             arch_lifecycle_extensions           : "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion", //Both LiveData and ViewModel
             arch_lifecycle_livedata             : "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion", // Only LiveData
             arch_lifecycle_common_java8         : "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion",
@@ -45,8 +43,6 @@ ext {
             kotlin_stdlib                       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
             kotlin_coroutines                   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version",
             kotlin_coroutines_android           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version",
-            material_date_time_picker           : 'co.infinum:materialdatetimepicker-support:3.5.1',
-            noadapter                           : 'vn.tiki.noadapter2:noadapter:2.0.2',
 
             room_compiler                       : "androidx.room:room-compiler:$roomVersion",
             room_runtime                        : "androidx.room:room-runtime:$roomVersion",
@@ -65,7 +61,6 @@ ext {
             test_junit_params                   : "org.junit.jupiter:junit-jupiter-params:5.2.0",
             test_mockk                          : "io.mockk:mockk:1.8.7",
             test_assertj                        : "org.assertj:assertj-core:3.11.1",
-            test_architectural_comp             : "android.arch.core:core-testing:$lifecycleVersion",
 
             timber                              : "com.jakewharton.timber:timber:$timberVersion"
     ]
