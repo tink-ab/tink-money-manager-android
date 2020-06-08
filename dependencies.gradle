@@ -2,7 +2,6 @@
 ext {
     daggerVersion = '2.24'
     supportLibVersion = '1.0.0'
-    analyticsVersion = '16.0.1'
     roomVersion = '2.0.0'
     lifecycleVersion = '2.0.0'
     gsonVersion = "2.8.0"
@@ -53,8 +52,6 @@ ext {
             kotlin_coroutines_android           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version",
             material_date_time_picker           : 'co.infinum:materialdatetimepicker-support:3.5.1',
             noadapter                           : 'vn.tiki.noadapter2:noadapter:2.0.2',
-
-            play_services_analytics             : "com.google.android.gms:play-services-analytics:$analyticsVersion",
 
             room_compiler                       : "androidx.room:room-compiler:$roomVersion",
             room_runtime                        : "androidx.room:room-runtime:$roomVersion",

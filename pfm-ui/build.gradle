@@ -61,8 +61,6 @@ dependencies {
     implementation libraries.arch_lifecycle_common_java8
     kapt libraries.arch_lifecycle_compiler
 
-    implementation libraries.play_services_analytics
-
     implementation libraries.rxandroid
 
     implementation libraries.dagger
