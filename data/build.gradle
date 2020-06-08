@@ -88,8 +88,6 @@ dependencies {
     implementation libraries.joda_time
     implementation libraries.conscrypt
 
-    api libraries.spongycastle
-
     testImplementation libraries.test_mockk
     testImplementation libraries.test_assertj
     testImplementation libraries.test_junit_api

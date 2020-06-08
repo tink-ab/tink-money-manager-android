@@ -20,7 +20,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-import butterknife.ButterKnife;
 import com.tink.pfmui.tracking.AnalyticsSingleton;
 import com.tink.pfmui.theme.DefaultFragmentTheme;
 import com.tink.pfmui.theme.NoToolbarFragmentTheme;
@@ -147,7 +146,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
 			toolbar = view.findViewById(R.id.tink_toolbar);
-			ButterKnife.bind(this, view);
 			ViewCompat.setTranslationZ(view, translationZ);
 
 			if (hasToolbar()) {
