@@ -73,10 +73,6 @@ dependencies {
     implementation libraries.room_rxjava
     kapt libraries.room_compiler
 
-    implementation libraries.butterknife
-    kapt libraries.butterknife_compiler
-    implementation libraries.butterknife_annotations
-
     implementation libraries.facebook_fresco
 
     kapt libraries.dagger_android_processor

@@ -8,7 +8,6 @@ ext {
     guavaVersion = "19.0"
     jodaVersion = "2.9.6"
     rxJavaVersion = "2.1.9"
-    butterknifeVersion = "10.0.0"
     timberVersion = "4.7.1"
     kotlin_coroutines_version = "1.2.1"
 
@@ -28,10 +27,6 @@ ext {
             arch_lifecycle_compiler             : "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
 
             auto_service                        : "com.google.auto.service:auto-service:1.0-rc4",
-
-            butterknife                         : "com.jakewharton:butterknife:$butterknifeVersion",
-            butterknife_compiler                : "com.jakewharton:butterknife-compiler:$butterknifeVersion",
-            butterknife_annotations             : "com.jakewharton:butterknife-annotations:$butterknifeVersion",
 
             commonmark                          : 'com.atlassian.commonmark:commonmark:0.10.0',
             conscrypt                           : 'org.conscrypt:conscrypt-android:2.2.1',
