@@ -39,11 +39,12 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
 
                 addTransition(TransitionSet().apply {
                     addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-                    addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
-                    }.apply {
-                        addTarget(R.id.amount)
-                    })
+                    // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//                    addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
+//                    }.apply {
+//                        addTarget(R.id.amount)
+//                    })
                 })
             }
             setDecoratorsVisibility(fragment.view, false)
@@ -74,11 +75,12 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
 
                 addTransition(TransitionSet().apply {
                     addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-                    addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                        CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble())
-                    }.apply {
-                        addTarget(R.id.amount)
-                    })
+                    // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//                    addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//                        CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble())
+//                    }.apply {
+//                        addTarget(R.id.amount)
+//                    })
                 })
             }
             enterTransition = Fade()
