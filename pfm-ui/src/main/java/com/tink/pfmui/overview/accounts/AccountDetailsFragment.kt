@@ -80,7 +80,7 @@ internal class AccountDetailsFragment : BaseFragment() {
             "",
             false,
             null, null,
-            true,
+            false,
             StatusSubtitleMode.SHOW_REDUCED_AMOUNT, null,
             accountId
         )
