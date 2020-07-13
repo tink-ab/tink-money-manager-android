@@ -95,7 +95,7 @@ class TransactionItemListAdapter(
 
         transactionItems
             .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
-            .groupBy { it.date }
+            .groupBy { it.date.withMillisOfDay(0) }
             .forEach { entry ->
                 if (groupByDates && dateUtils != null) {
                     list += ListItem.DateGroupItem(dateUtils.formatDateHuman(entry.key))
