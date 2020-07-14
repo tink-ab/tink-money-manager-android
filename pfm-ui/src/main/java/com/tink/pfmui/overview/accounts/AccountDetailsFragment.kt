@@ -13,7 +13,6 @@ import com.tink.pfmui.R
 import com.tink.pfmui.databinding.FragmentAccountDetailsBinding
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.CategorizationFlowFragment
-import com.tink.pfmui.transaction.StatusSubtitleMode
 import com.tink.pfmui.transaction.TransactionListViewModel
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
@@ -75,14 +74,10 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         viewModel.setAccountId(accountId)
         metadata = TransactionsListMetaData(
-            requireContext().getColorFromAttr(R.attr.tink_colorPrimaryDark),
-            requireContext().getColorFromAttr(R.attr.tink_colorPrimary),
-            "",
-            false,
-            null, null,
-            false,
-            StatusSubtitleMode.SHOW_REDUCED_AMOUNT, null,
-            accountId
+            statusBarColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimaryDark),
+            backgroundColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimary),
+            title = "",
+            accountId = accountId
         )
         transactionListViewModel.setListMode(metadata.toListMode())
     }
