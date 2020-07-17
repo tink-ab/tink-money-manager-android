@@ -2,7 +2,7 @@ object TinkPfmVersion {
 
     private const val major = 0
     private const val minor = 9
-    private const val patch = 5
+    private const val patch = 6
 
     const val name = "$major.$minor.$patch"
 
