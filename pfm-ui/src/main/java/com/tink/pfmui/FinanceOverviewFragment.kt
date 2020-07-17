@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.tink.core.Tink
+import com.tink.model.user.User
 import com.tink.pfmui.buildConfig.BuildConfigurations
 import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.collections.Currencies

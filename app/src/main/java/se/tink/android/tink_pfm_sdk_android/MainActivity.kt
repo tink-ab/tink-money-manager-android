@@ -1,9 +1,11 @@
 package se.tink.android.tink_pfm_sdk_android
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.tink.core.Tink
 import com.tink.pfmui.FinanceOverviewFragment
+import com.tink.service.network.TinkConfiguration
 import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
 class MainActivity : FragmentActivity() {
@@ -14,7 +16,13 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Tink.init(Configuration.sampleClientConfiguration, applicationContext)
+        val config = TinkConfiguration(
+            Configuration.sampleEnvironment,
+            Configuration.sampleOAuthClientId,
+            Uri.parse("https://localhost:3000/callback")
+        )
+
+        Tink.init(config, applicationContext)
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
