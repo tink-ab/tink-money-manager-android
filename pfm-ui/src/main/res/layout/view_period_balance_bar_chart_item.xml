@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="match_parent">
+
+  <View
+    android:id="@+id/spacer"
+    android:layout_marginTop="20dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_weight="1"
+    app:layout_constraintBottom_toTopOf="@+id/bar" />
+
+  <View
+    android:id="@+id/bar"
+    android:layout_width="28dp"
+    android:layout_height="0dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/bar_chart_bar"
+    app:layout_constraintBottom_toTopOf="@id/periodLabel"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintVertical_weight="1"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/spacer"
+    />
+
+  <TextView
+    android:id="@+id/amountLabel"
+    style="@style/micro.primary"
+    android:text="400€"
+    android:gravity="center"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/bar" />
+
+  <TextView
+    android:id="@+id/periodLabel"
+    style="@style/chart_label"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="Dec 19"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
