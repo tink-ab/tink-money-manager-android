@@ -20,5 +20,15 @@ class StatisticsOverTimeFragment : BaseFragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, true)
+
+        periodSelectionButton.setOnClickListener {
+            PeriodSelectionDialog()
+                .apply {
+                    onPeriodSelected = {
+//                        viewModel.selectPeriod(it) TODO
+                    }
+                }
+                .show(requireFragmentManager(), "dialog_tag")
+        }
     }
 }
