@@ -38,6 +38,14 @@ class StatisticsOverTimeFragment : BaseFragment() {
             adapter.notifyDataSetChanged()
         })
 
+        viewModel.average.observe(viewLifecycleOwner, Observer {
+            average.text = it
+        })
+
+        viewModel.sum.observe(viewLifecycleOwner, Observer {
+            sum.text = it
+        })
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, true)

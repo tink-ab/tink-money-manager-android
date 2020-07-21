@@ -2,13 +2,16 @@ package com.tink.pfmui.overview.charts
 
 //import se.tink.extensions.averageExcludingCurrent
 import android.content.Context
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.pfmui.R
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.mapper.ModelMapperManager
 import com.tink.pfmui.repository.StatisticsRepository
+import com.tink.pfmui.util.CurrencyUtils
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.commons.currency.AmountFormatter
@@ -70,6 +73,17 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         }
         addSource(allPeriodBalances) { update() }
         addSource(periodSelection) { update() }
+    }
+
+    val average = periodBalances.map { balances ->
+        val averageAmount = balances.map { it.amount }.average()
+        val averageString = CurrencyUtils.formatAmountExactWithCurrencySymbol(averageAmount)
+        context.resources.getString(R.string.tink_expenses_header_description_average, averageString)
+    }
+
+    val sum = periodBalances.map { balances ->
+        val sumAmount = balances.map { it.amount }.sum()
+        CurrencyUtils.formatAmountExactWithCurrencySymbol(sumAmount)
     }
 
 //    val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
