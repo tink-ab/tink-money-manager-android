@@ -2,7 +2,6 @@ package com.tink.pfmui.overview.charts
 
 //import se.tink.extensions.averageExcludingCurrent
 import android.content.Context
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,6 +30,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         value = PeriodSelection.SixMonths()
     }
 
+    private val categoryCode = MutableLiveData<String>()
+
     private val statistics = statisticsRepository.getStatistics()
 
     private val allPeriodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
@@ -39,19 +40,21 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
             whenNonNull(
                 statistics.value,
                 statisticsRepository.periodMap.value,
-                statisticsRepository.currentPeriod.value
-            ) { statisticsTree, periodMap, currentPeriod ->
+                statisticsRepository.currentPeriod.value,
+                categoryCode.value
+            ) { statisticsTree, periodMap, currentPeriod, categoryCode ->
                 val balances =
                     ModelMapperManager.mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
                         statisticsTree.expensesByCategoryCode,
                         currentPeriod,
                         periodMap,
-                        "expenses"
+                        categoryCode
                     ).sortedByDescending { it.period?.stop }
                 postValue(balances)
             }
         }
 
+        addSource(categoryCode) { update() }
         addSource(statistics) { update() }
         addSource(statisticsRepository.periodMap) { update() }
         addSource(statisticsRepository.currentPeriod) { update() }
@@ -78,7 +81,10 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
     val average = periodBalances.map { balances ->
         val averageAmount = balances.map { it.amount }.average()
         val averageString = CurrencyUtils.formatAmountExactWithCurrencySymbol(averageAmount)
-        context.resources.getString(R.string.tink_expenses_header_description_average, averageString)
+        context.resources.getString(
+            R.string.tink_expenses_header_description_average,
+            averageString
+        )
     }
 
     val sum = periodBalances.map { balances ->
@@ -105,5 +111,9 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     fun selectPeriod(periodSelection: PeriodSelection) {
         this.periodSelection.value = periodSelection
+    }
+
+    fun selectCategory(categoryCode: String) {
+        this.categoryCode.value = categoryCode
     }
 }

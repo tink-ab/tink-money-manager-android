@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import kotlinx.android.synthetic.main.fragment_statistics_over_time.*
+import se.tink.core.models.Category
 
 class StatisticsOverTimeFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
@@ -18,12 +19,18 @@ class StatisticsOverTimeFragment : BaseFragment() {
 
     private lateinit var viewModel: StatisticsOverTimeViewModel
 
+    private lateinit var categoryViewModel: ChartDetailsViewModel
+
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory
         )[StatisticsOverTimeViewModel::class.java]
+
+        categoryViewModel = ViewModelProviders.of(
+            rootFragment, viewModelFactory
+        )[ChartDetailsViewModel::class.java]
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +52,13 @@ class StatisticsOverTimeFragment : BaseFragment() {
         viewModel.sum.observe(viewLifecycleOwner, Observer {
             sum.text = it
         })
+
+        categoryViewModel.category.observe(
+            viewLifecycle,
+            Observer { category: Category? ->
+                category?.code?.let(viewModel::selectCategory)
+            }
+        )
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
