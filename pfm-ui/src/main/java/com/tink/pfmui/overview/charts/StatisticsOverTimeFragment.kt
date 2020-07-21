@@ -2,14 +2,12 @@ package com.tink.pfmui.overview.charts
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import com.tink.pfmui.util.getColor
 import kotlinx.android.synthetic.main.fragment_statistics_over_time.*
 import se.tink.commons.categories.iconColor
 import se.tink.commons.extensions.getColorFromAttr
@@ -19,7 +17,7 @@ class StatisticsOverTimeFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getLayoutId(): Int = R.layout.fragment_statistics_over_time
 
-    val adapter = PeriodBalanceBarChartAdapter()
+    val adapter = BarChartItemAdapter()
 
     private lateinit var viewModel: StatisticsOverTimeViewModel
 
@@ -44,7 +42,7 @@ class StatisticsOverTimeFragment : BaseFragment() {
             periodSelectionButton.text = it
         })
 
-        viewModel.periodBalances.observe(viewLifecycleOwner, Observer {
+        viewModel.barChartItems.observe(viewLifecycleOwner, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
         })

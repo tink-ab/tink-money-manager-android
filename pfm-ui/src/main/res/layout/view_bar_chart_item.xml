@@ -33,7 +33,6 @@
   <TextView
     android:id="@+id/amountLabel"
     style="@style/micro.primary"
-    android:text="400€"
     android:gravity="center"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -48,7 +47,6 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:text="Dec 19"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
