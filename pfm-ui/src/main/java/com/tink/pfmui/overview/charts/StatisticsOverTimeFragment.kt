@@ -2,6 +2,8 @@ package com.tink.pfmui.overview.charts
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
@@ -14,8 +16,27 @@ class StatisticsOverTimeFragment : BaseFragment() {
 
     val adapter = PeriodBalanceBarChartAdapter()
 
+    private lateinit var viewModel: StatisticsOverTimeViewModel
+
+    override fun authorizedOnCreate(savedInstanceState: Bundle?) {
+        super.authorizedOnCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(
+            this,
+            viewModelFactory
+        )[StatisticsOverTimeViewModel::class.java]
+    }
+
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
+
+        viewModel.periodSelectionButtonText.observe(viewLifecycleOwner, Observer {
+            periodSelectionButton.text = it
+        })
+
+        viewModel.periodBalances.observe(viewLifecycleOwner, Observer {
+            adapter.items = it
+            adapter.notifyDataSetChanged()
+        })
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
@@ -25,7 +46,7 @@ class StatisticsOverTimeFragment : BaseFragment() {
             PeriodSelectionDialog()
                 .apply {
                     onPeriodSelected = {
-//                        viewModel.selectPeriod(it) TODO
+                        viewModel.selectPeriod(it)
                     }
                 }
                 .show(requireFragmentManager(), "dialog_tag")

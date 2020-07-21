@@ -17,17 +17,10 @@ import kotlin.random.Random
 class PeriodBalanceBarChartAdapter : RecyclerView.Adapter<BarChartItemViewHolder>() {
 
     //TODO: Fill with real data
-    var items: List<PeriodBalance> = run {
-        val now = DateTime.now()
-        (0..24).map {
-            PeriodBalance(
-                Period.createMonthPeriod(now.minusMonths(it)),
-                Random.nextDouble(0.0, 100.0)
-            )
-        }
-    }
+    var items: List<PeriodBalance> = listOf()
 
-    var max = items.map { it.amount }.max() ?: 0.0
+    private val max: Double
+        get() = items.map { it.amount }.max() ?: 0.0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarChartItemViewHolder =
         BarChartItemViewHolder(parent)
