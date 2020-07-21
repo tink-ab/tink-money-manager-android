@@ -15,6 +15,7 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.extensions.whenNonNull
+import se.tink.core.models.Category
 import se.tink.core.models.misc.Amount
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -30,7 +31,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         value = PeriodSelection.SixMonths()
     }
 
-    private val categoryCode = MutableLiveData<String>()
+    private val category = MutableLiveData<Category>()
 
     private val statistics = statisticsRepository.getStatistics()
 
@@ -41,20 +42,28 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 statistics.value,
                 statisticsRepository.periodMap.value,
                 statisticsRepository.currentPeriod.value,
-                categoryCode.value
-            ) { statisticsTree, periodMap, currentPeriod, categoryCode ->
+                category.value
+            ) { statisticsTree, periodMap, currentPeriod, category ->
+
+
+                val statistics = when(category.type) {
+                    Category.Type.TYPE_INCOME -> statisticsTree.incomeByCategoryCode
+                    Category.Type.TYPE_EXPENSES -> statisticsTree.expensesByCategoryCode
+                    else -> return
+                }
+
                 val balances =
                     ModelMapperManager.mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
-                        statisticsTree.expensesByCategoryCode,
+                        statistics,
                         currentPeriod,
                         periodMap,
-                        categoryCode
+                        category.code
                     ).sortedByDescending { it.period?.stop }
                 postValue(balances)
             }
         }
 
-        addSource(categoryCode) { update() }
+        addSource(category) { update() }
         addSource(statistics) { update() }
         addSource(statisticsRepository.periodMap) { update() }
         addSource(statisticsRepository.currentPeriod) { update() }
@@ -113,7 +122,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         this.periodSelection.value = periodSelection
     }
 
-    fun selectCategory(categoryCode: String) {
-        this.categoryCode.value = categoryCode
+    fun selectCategory(category: Category) {
+        this.category.value = category
     }
 }

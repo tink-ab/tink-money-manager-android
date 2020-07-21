@@ -2,6 +2,8 @@ package com.tink.pfmui.overview.charts
 
 import android.content.res.ColorStateList
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +16,11 @@ import se.tink.commons.extensions.inflate
 import se.tink.core.models.misc.Period
 import kotlin.random.Random
 
-class PeriodBalanceBarChartAdapter : RecyclerView.Adapter<BarChartItemViewHolder>() {
+class PeriodBalanceBarChartAdapter(
+) : RecyclerView.Adapter<BarChartItemViewHolder>() {
+
+    @ColorInt
+    var barColor: Int = 0
 
     //TODO: Fill with real data
     var items: List<PeriodBalance> = listOf()
@@ -28,14 +34,14 @@ class PeriodBalanceBarChartAdapter : RecyclerView.Adapter<BarChartItemViewHolder
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: BarChartItemViewHolder, position: Int) {
-        holder.bind(items[position], max)
+        holder.bind(items[position], max, barColor)
     }
 }
 
 class BarChartItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     parent.inflate(R.layout.view_period_balance_bar_chart_item)
 ) {
-    fun bind(periodBalance: PeriodBalance, maxAmount: Double) {
+    fun bind(periodBalance: PeriodBalance, maxAmount: Double, @ColorInt barColor: Int) {
 
         val factor = (periodBalance.amount / maxAmount).toFloat()
 
@@ -50,9 +56,7 @@ class BarChartItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
                 spacer.layoutParams = it
             }
 
-            bar.backgroundTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(context, R.color.expensive_blue) // TODO: Color configuration
-            )
+            bar.backgroundTintList = ColorStateList.valueOf(barColor)
 
             periodLabel.text = periodBalance.period?.toMonthString() //TODO: Period formatting
             amountLabel.text =

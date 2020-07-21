@@ -2,13 +2,17 @@ package com.tink.pfmui.overview.charts
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
+import com.tink.pfmui.util.getColor
 import kotlinx.android.synthetic.main.fragment_statistics_over_time.*
+import se.tink.commons.categories.iconColor
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.models.Category
 
 class StatisticsOverTimeFragment : BaseFragment() {
@@ -55,8 +59,10 @@ class StatisticsOverTimeFragment : BaseFragment() {
 
         categoryViewModel.category.observe(
             viewLifecycle,
-            Observer { category: Category? ->
-                category?.code?.let(viewModel::selectCategory)
+            Observer { category: Category ->
+                viewModel.selectCategory(category)
+                adapter.barColor = requireContext().getColorFromAttr(category.iconColor())
+                adapter.notifyDataSetChanged()
             }
         )
 
