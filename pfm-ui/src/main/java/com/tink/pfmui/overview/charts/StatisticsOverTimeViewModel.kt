@@ -30,7 +30,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     private val statistics = statisticsRepository.getStatistics()
 
-    val periodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
+    private val allPeriodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
 
         fun update() {
             whenNonNull(
@@ -54,6 +54,24 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         addSource(statistics) { update() }
         addSource(statisticsRepository.periodMap) { update() }
         addSource(statisticsRepository.currentPeriod) { update() }
+    }
+
+    val periodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
+
+        fun update() {
+
+            val allBalances = allPeriodBalances.value ?: return
+            val periodSelection = periodSelection.value ?: return
+
+            val filteredBalances = allBalances.filter {
+                it.period?.start?.isBefore(periodSelection.end) == true
+                        && it.period?.start?.isAfter(periodSelection.start) == true
+            }
+
+            postValue(filteredBalances)
+        }
+        addSource(allPeriodBalances) { update() }
+        addSource(periodSelection) { update() }
     }
 
 //    val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
