@@ -38,10 +38,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 statisticsRepository.periodMap.value,
                 statisticsRepository.currentPeriod.value
             ) { statisticsTree, periodMap, currentPeriod ->
-
                 val balances =
-                    //TODO: More than one year & respect period selection
-                    ModelMapperManager.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
+                    ModelMapperManager.mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
                         statisticsTree.expensesByCategoryCode,
                         currentPeriod,
                         periodMap,
