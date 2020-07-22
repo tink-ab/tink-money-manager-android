@@ -90,7 +90,9 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
             if (computedMax <= 0) 1.0 else computedMax
         }
 
-        list.map {
+        val average = list.map { it.amount }.average() / maxValue
+
+        val items = list.map {
             val periodLabel = it.period?.let { period ->
                 dateUtils.getMonthFromDateTime(period.stop, true)
             }
@@ -101,6 +103,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
             BarChartItem(amountLabel, periodLabel, factor.toFloat(), color)
         }
+
+        BarChartItems(items, average.toFloat())
     }
 
     val average = periodBalances.map { balances ->

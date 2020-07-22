@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import kotlinx.android.synthetic.main.fragment_statistics_over_time.*
-import se.tink.commons.categories.iconColor
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.models.Category
 
 class StatisticsOverTimeFragment : BaseFragment() {
@@ -44,6 +42,7 @@ class StatisticsOverTimeFragment : BaseFragment() {
 
         viewModel.barChartItems.observe(viewLifecycleOwner, Observer {
             adapter.items = it
+            adapter.averageHeightFactor = it.averageFactor
             adapter.notifyDataSetChanged()
         })
 
@@ -59,7 +58,6 @@ class StatisticsOverTimeFragment : BaseFragment() {
             viewLifecycle,
             Observer { category: Category ->
                 viewModel.selectCategory(category)
-                adapter.barColor = requireContext().getColorFromAttr(category.iconColor())
                 adapter.notifyDataSetChanged()
             }
         )
