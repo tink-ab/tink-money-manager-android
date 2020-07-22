@@ -62,7 +62,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 tabs.setupWithViewPager(pager)
             }
             tabs.setTheme(ownTheme.tabsTheme)
-            category.setOnClickListener { showCategorySelector() }
             category.setTextColor(ownTheme.toolbarTheme.titleColor)
             category.visible = type.showCategoryPicker
         }
