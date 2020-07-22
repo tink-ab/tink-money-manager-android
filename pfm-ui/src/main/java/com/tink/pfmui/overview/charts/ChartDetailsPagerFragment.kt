@@ -121,7 +121,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         }
     }
 
-    private fun showCategorySelector() {
+    fun showCategorySelector() {
         val fragment = CategorySelectionFragment.newInstance(type.type, viewModel.category.value?.code)
         fragment.setTargetFragment(this, 0)
         fragmentCoordinator.replace(

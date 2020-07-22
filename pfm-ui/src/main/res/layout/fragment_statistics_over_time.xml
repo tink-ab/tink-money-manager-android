@@ -35,10 +35,10 @@
     android:layout_height="0dp"
     android:layout_marginTop="24dp"
     android:layout_marginBottom="24dp"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     app:layout_constraintBottom_toTopOf="@+id/periodSelectionButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -47,10 +47,23 @@
   <Button
     android:id="@+id/periodSelectionButton"
     style="@style/primaryButton"
-    android:layout_width="match_parent"
+    android:layout_width="0dp"
+    android:layout_height="@dimen/button_height"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@+id/categorySelectionButton"
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:text="6 months" />
+
+  <Button
+    android:id="@+id/categorySelectionButton"
+    style="@style/primaryButton"
+    android:layout_width="0dp"
     android:layout_height="@dimen/button_height"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintStart_toEndOf="@id/periodSelectionButton"
+    tools:text="All categories" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
