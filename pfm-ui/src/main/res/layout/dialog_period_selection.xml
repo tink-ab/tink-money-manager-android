@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="24dp"
+  android:orientation="vertical">
+
+  <TextView
+    style="@style/hecto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:text="@string/tink_period_selection_title"/>
+
+  <TextView
+    android:id="@+id/sixMonthsButton"
+    style="@style/btnLinkCta"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:gravity="center_vertical"
+    android:text="@string/tink_selector_6_months"/>
+
+  <TextView
+    android:id="@+id/twelveMonthsButton"
+    style="@style/btnLinkCta"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:gravity="center_vertical"
+    android:text="@string/tink_selector_12_months"/>
+
+  <TextView
+    android:id="@+id/allTimeButton"
+    style="@style/btnLinkCta"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/button_height"
+    android:gravity="center_vertical"
+    android:text="@string/tink_selector_all_time"/>
+
+</LinearLayout>

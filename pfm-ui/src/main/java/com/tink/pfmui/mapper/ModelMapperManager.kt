@@ -76,7 +76,8 @@ internal object ModelMapperManager : ModelConverter {
                     periodMap,
                     true,
                     true
-                )
+                ),
+                paddToYear = true
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
             whenNonNull(t1.period, t2.period) { period1, period2 ->
@@ -98,14 +99,16 @@ internal object ModelMapperManager : ModelConverter {
                 endPeriod,
                 periodMap,
                 true
-            )
+            ),
+            paddToYear = true
         )
     }
 
-    private fun mapStatisticsToPeriodBalanceFor1Year(
+    private fun mapStatisticsToPeriodBalances(
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        paddToYear: Boolean
     ): List<PeriodBalance> {
         val items =
             convertToPeriodBalances(
@@ -113,7 +116,8 @@ internal object ModelMapperManager : ModelConverter {
                     statistics,
                     endPeriod,
                     periodMap
-                )
+                ),
+                paddToYear
             )
         for (item in items) {
             item.amount = abs(item.amount)
@@ -121,12 +125,12 @@ internal object ModelMapperManager : ModelConverter {
         return items
     }
 
-    @JvmStatic
-    fun mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
+    private fun mapStatisticsToPeriodBalancesByCategoryCode(
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
-        categoryCode: String?
+        categoryCode: String?,
+        paddToYear: Boolean
     ): List<PeriodBalance> {
         val codesToRemove: MutableList<String> =
             Lists.newArrayList()
@@ -142,10 +146,43 @@ internal object ModelMapperManager : ModelConverter {
         for (key in codesToRemove) {
             statisticsCopy.remove(key)
         }
-        return mapStatisticsToPeriodBalanceFor1Year(
+        return mapStatisticsToPeriodBalances(
             statisticsCopy,
             endPeriod,
-            periodMap
+            periodMap,
+            paddToYear = paddToYear
+        )
+    }
+
+    @JvmStatic
+    fun mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
+        statistics: Map<String, Statistic>,
+        endPeriod: Period?,
+        periodMap: Map<String, Period>,
+        categoryCode: String?
+    ): List<PeriodBalance> {
+        return mapStatisticsToPeriodBalancesByCategoryCode(
+            statistics,
+            endPeriod,
+            periodMap,
+            categoryCode,
+            true
+        )
+    }
+
+    @JvmStatic
+    fun mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
+        statistics: Map<String, Statistic>,
+        endPeriod: Period?,
+        periodMap: Map<String, Period>,
+        categoryCode: String?
+    ): List<PeriodBalance> {
+        return mapStatisticsToPeriodBalancesByCategoryCode(
+            statistics,
+            endPeriod,
+            periodMap,
+            categoryCode,
+            false
         )
     }
 
@@ -203,7 +240,10 @@ internal object ModelMapperManager : ModelConverter {
         return average
     }
 
-    private fun convertToPeriodBalances(source: StatisticsToMap): ArrayList<PeriodBalance> {
+    private fun convertToPeriodBalances(
+        source: StatisticsToMap,
+        paddToYear: Boolean
+    ): ArrayList<PeriodBalance> {
         var items =
             Lists.newArrayList<PeriodBalance>()
         if (source.isLeftToSpendData && source.isCurrentMonth) { // Daily for a period
@@ -230,7 +270,7 @@ internal object ModelMapperManager : ModelConverter {
                         TimezoneManager.defaultTimezone
                     )
                     .getYearMonthStringFor1YearByEndYearMonth(
-                        source.period, source.periods, true
+                        source.period, source.periods, paddToYear
                     )
             items = addPeriodsToItems(
                 periods

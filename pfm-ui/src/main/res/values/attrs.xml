@@ -59,4 +59,9 @@
     <attr format="color" name="textColor"/>
   </declare-styleable>
 
+  <declare-styleable name="BarChartBarView">
+    <attr format="color" name="color" />
+    <attr format="dimension" name="cornerRadius" />
+  </declare-styleable>
+
 </resources>

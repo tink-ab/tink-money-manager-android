@@ -10,6 +10,7 @@ import com.tink.pfmui.overview.accounts.AccountDetailsFragment
 import com.tink.pfmui.overview.accounts.AccountsListFragment
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.ChartDetailsPagerFragment
+import com.tink.pfmui.overview.charts.StatisticsOverTimeFragment
 import com.tink.pfmui.overview.charts.TabExpensesBarChartFragment
 import com.tink.pfmui.overview.charts.TabIncomeBarChartFragment
 import com.tink.pfmui.overview.charts.TabLeftToSpendFragment
@@ -75,4 +76,7 @@ internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector(modules = [InsightsModule::class])
     fun archivedInsightsFragment(): ArchivedInsightsFragment
+
+    @ContributesAndroidInjector
+    fun statisticsOverTimeFragment(): StatisticsOverTimeFragment
 }
