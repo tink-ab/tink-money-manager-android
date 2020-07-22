@@ -11,7 +11,6 @@
     android:id="@+id/tink_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
-    android:transitionName="@string/toolbar_transition"
     app:navigationIcon="?android:homeAsUpIndicator">
 
     <com.tink.pfmui.view.TinkTextView

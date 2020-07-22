@@ -121,11 +121,14 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
     }
 
     fun showCategorySelector() {
-        val fragment = CategorySelectionFragment.newInstance(type.type, viewModel.category.value?.code)
+        val fragment = CategorySelectionFragment.newInstance(
+            type.type,
+            viewModel.category.value?.code,
+            CategorySelectionFragment.Options(dropdownToolbarAppearance = false)
+        )
         fragment.setTargetFragment(this, 0)
         fragmentCoordinator.replace(
-            fragment, true, FragmentAnimationFlags.NONE,
-            sharedViews = listOf(view.tink_toolbar)
+            fragment, true, FragmentAnimationFlags.SLIDE_UP
         )
     }
 
