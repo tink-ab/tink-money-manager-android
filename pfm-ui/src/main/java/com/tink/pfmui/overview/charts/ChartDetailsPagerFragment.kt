@@ -62,7 +62,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 tabs.setupWithViewPager(pager)
             }
             tabs.setTheme(ownTheme.tabsTheme)
-            category.setOnClickListener { showCategorySelector() }
             category.setTextColor(ownTheme.toolbarTheme.titleColor)
             category.visible = type.showCategoryPicker
         }
@@ -121,12 +120,15 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         }
     }
 
-    private fun showCategorySelector() {
-        val fragment = CategorySelectionFragment.newInstance(type.type, viewModel.category.value?.code)
+    fun showCategorySelector() {
+        val fragment = CategorySelectionFragment.newInstance(
+            type.type,
+            viewModel.category.value?.code,
+            CategorySelectionFragment.Options(dropdownToolbarAppearance = false)
+        )
         fragment.setTargetFragment(this, 0)
         fragmentCoordinator.replace(
-            fragment, true, FragmentAnimationFlags.NONE,
-            sharedViews = listOf(view.tink_toolbar)
+            fragment, true, FragmentAnimationFlags.SLIDE_UP
         )
     }
 

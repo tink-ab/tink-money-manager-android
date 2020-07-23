@@ -18,8 +18,4 @@ internal interface TransitionModule {
     @Binds
     @IntoSet
     fun fullChartToHalfChartTransition(model: FullToHalfChartTransition): TransitionDescription
-
-    @Binds
-    @IntoSet
-    fun chartToCategoriesTransition(model: ChartToCategoryTransition): TransitionDescription
 }

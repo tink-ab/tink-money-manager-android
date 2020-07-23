@@ -59,6 +59,13 @@ class StatisticsOverTimeFragment : BaseFragment() {
             Observer { category: Category ->
                 viewModel.selectCategory(category)
                 adapter.notifyDataSetChanged()
+                categorySelectionButton.text =
+                    if (category.parent == null) {
+                        getString(R.string.tink_all_categories)
+                    } else {
+                        category.name
+                    }
+
             }
         )
 
@@ -75,5 +82,13 @@ class StatisticsOverTimeFragment : BaseFragment() {
                 }
                 .show(requireFragmentManager(), "dialog_tag")
         }
+
+        categorySelectionButton.setOnClickListener {
+            showCategorySelector()
+        }
+    }
+
+    private fun showCategorySelector() {
+        (parentFragment as? ChartDetailsPagerFragment)?.showCategorySelector()
     }
 }
