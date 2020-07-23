@@ -11,8 +11,6 @@ import com.tink.pfmui.overview.accounts.AccountsListFragment
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmui.overview.charts.StatisticsOverTimeFragment
-import com.tink.pfmui.overview.charts.TabExpensesBarChartFragment
-import com.tink.pfmui.overview.charts.TabIncomeBarChartFragment
 import com.tink.pfmui.overview.charts.TabLeftToSpendFragment
 import com.tink.pfmui.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmui.overview.latesttransactions.LatestTransactionsFragment
@@ -36,16 +34,10 @@ internal interface FragmentBindingModule {
     fun tabPieChartFragment(): TabPieChartFragment
 
     @ContributesAndroidInjector
-    fun tabExpensesBarChartFragment(): TabExpensesBarChartFragment
-
-    @ContributesAndroidInjector
     fun latestTransactionsFragment(): LatestTransactionsFragment
 
     @ContributesAndroidInjector
     fun tabLeftToSpendFragment(): TabLeftToSpendFragment
-
-    @ContributesAndroidInjector
-    fun tabIncomeBarChartFragment(): TabIncomeBarChartFragment
 
     @ContributesAndroidInjector
     fun categoryListFragment(): CategorySelectionFragment
