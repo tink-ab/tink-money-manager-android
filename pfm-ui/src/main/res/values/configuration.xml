@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <item name="tink_config_show_currency_symbol_in_overview_chart" type="bool">false</item>
+  <item name="tink_config_overview_show_currency_symbol_in_chart" type="bool">false</item>
 </resources>

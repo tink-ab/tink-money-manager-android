@@ -141,7 +141,7 @@ internal data class OverviewChartModel(
 }
 
 internal fun getAmountStringForOverviewPieChart(amount: Double, context: Context): String {
-    return if (context.resources.getBoolean(R.bool.tink_config_show_currency_symbol_in_overview_chart)) {
+    return if (context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)) {
         CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
     } else {
         CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
