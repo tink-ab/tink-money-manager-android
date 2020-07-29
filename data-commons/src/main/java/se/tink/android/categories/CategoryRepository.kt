@@ -1,24 +1,38 @@
 package se.tink.android.categories
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.category.CategoryTree
 import com.tink.service.category.CategoryService
-import com.tink.service.observer.ChangeObserver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @PfmScope
 class CategoryRepository @Inject constructor(service: CategoryService) {
 
-    val categories: MutableLiveData<CategoryTree> = object : MutableLiveData<CategoryTree>() {
-        override fun onActive() = service.subscribe(categoryTreeObserver)
-        override fun onInactive() = service.unsubscribe(categoryTreeObserver)
-    }
+    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    private val categoryTreeObserver = object : ChangeObserver<CategoryTree> {
-        override fun onCreate(items: CategoryTree) = categories.postValue(items)
-        override fun onRead(items: CategoryTree) = categories.postValue(items)
-        override fun onUpdate(items: CategoryTree) = categories.postValue(items)
-        override fun onDelete(items: CategoryTree) {}
+    // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
+    // Perhaps use a StateFlow instead (or wait until it's out of experimental).
+    val categories: LiveData<CategoryTree> = object : MutableLiveData<CategoryTree>() {
+        override fun onActive() {
+            scope.launch {
+                try {
+                    postValue(service.getCategoryTree())
+                } catch (e: IllegalStateException) {
+                    // Fail silently if category tree didn't manage to update.
+                }
+            }
+        }
+
+        override fun onInactive() {
+            // Not sure if this is really needed since we do a [postValue] in [onActive] anyway...
+            scope.coroutineContext.cancelChildren()
+        }
     }
 }
