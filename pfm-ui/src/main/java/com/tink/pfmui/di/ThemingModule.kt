@@ -1,10 +1,8 @@
 package com.tink.pfmui.di
 
 import android.content.Context
-import com.tink.pfmui.overview.charts.TabLeftToSpendFragment
 import com.tink.pfmui.theme.TinkDefaultSnackbarTheme
 import com.tink.pfmui.theme.TinkErrorSnackbarTheme
-import com.tink.pfmui.theme.TinkLeftToSpendTabPageTheme
 import com.tink.pfmui.theme.TinkTransactionSimilarTheme
 import com.tink.pfmui.theme.TinkTransactionsListTheme
 import com.tink.pfmui.transaction.SimilarTransactionsFragment
@@ -17,11 +15,6 @@ import javax.inject.Named
 
 @Module
 internal class ThemingModule {
-
-    @Provides
-    fun provideTabLeftToSpendPageTheme(@ApplicationScoped context: Context): TabLeftToSpendFragment.Theme {
-        return TinkLeftToSpendTabPageTheme(context)
-    }
 
     @Provides
     fun provideSimilarTransactionsTheme(@ApplicationScoped context: Context): SimilarTransactionsFragment.Theme {

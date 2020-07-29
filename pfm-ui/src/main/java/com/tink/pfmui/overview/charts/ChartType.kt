@@ -20,16 +20,6 @@ internal enum class ChartType {
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
 
     },
-    LEFT_TO_SPEND {
-        override val screenEvent = ScreenEvent.TRACKING_ERROR // To be added when UI is not hidden
-        override val title: Int get() = R.string.left_to_spend_title
-        override val color: Int get() = R.attr.tink_leftToSpendColor
-        override val showCategoryPicker = false
-        override val type: Category.Type get() = Category.Type.TYPE_UNKNOWN
-
-        override fun create1MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(0)
-        override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
-    },
     INCOME {
         override val screenEvent = ScreenEvent.INCOME
         override val title: Int get() = R.string.tink_income_title
