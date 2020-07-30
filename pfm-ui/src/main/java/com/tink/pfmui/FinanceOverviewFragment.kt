@@ -12,7 +12,6 @@ import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.pfmui.buildConfig.BuildConfigurations
 import com.tink.pfmui.collections.Categories
-import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.collections.Periods
 import com.tink.pfmui.configuration.I18nConfiguration
 import com.tink.pfmui.di.DaggerFragmentComponent
@@ -156,11 +155,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        removeListenersAndClearCache()
-    }
-
     fun refreshData() {
         dataRefreshHandler.refreshCategories()
         dataRefreshHandler.refreshStatistics()
@@ -176,16 +170,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         arguments!!.putString(ARG_ACCESS_TOKEN, accessToken)
 
         Tink.setUser(User.fromAccessToken(accessToken));
-    }
-
-    private fun attachListeners() {
-        Currencies.getSharedInstance().attatchListener(userConfigurationService)
-        Periods.getSharedInstance().attatchListener(statisticsRepository)
-    }
-
-    private fun removeListenersAndClearCache() {
-        Currencies.getSharedInstance().removeListener(userConfigurationService)
-        Periods.getSharedInstance().removeListener(statisticsRepository)
     }
 
     private fun setupTimber() {
