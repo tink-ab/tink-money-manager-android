@@ -74,7 +74,7 @@ internal class PieChartNavigation(private val coordinator: FragmentCoordinator) 
     fun onCategoryChanged(root: View, category: Category, type: ChartType) {
         val tag: String
         val createFunc: () -> BaseFragment
-        if (category.parent == null) {
+        if (category.parentId == null) {
             tag = FULL_CHART_TAG
             createFunc = { FullPieChartFragment.newInstance(type) }
         } else {

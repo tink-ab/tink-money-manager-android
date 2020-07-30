@@ -22,7 +22,7 @@ import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.parent
 import se.tink.commons.extensions.whenNonNull
-import com.tink.model.statistic.StatisticTree
+import com.tink.model.statistics.Statistics
 import com.tink.model.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -31,7 +31,7 @@ import kotlin.math.absoluteValue
 private data class SourceData(val period: Period, val category: Category)
 
 private sealed class ChartData(val source: SourceData)
-private class StatisticalData(source: SourceData, val statistic: StatisticTree) : ChartData(source)
+private class StatisticalData(source: SourceData, val statistic: List<Statistics>) : ChartData(source)
 
 private const val MAX_TRANSACTIONS_TO_SHOW = 6
 
@@ -48,7 +48,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
     transactionRepository: TransactionRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatistics()
+    private val statistics = statisticRepository.statistics
     private val period = MediatorLiveData<Period>().apply {
         addSource(statisticRepository.currentPeriod) {
             if (value == null) value = it
@@ -118,7 +118,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
             val src = it.source
             val periodStr =
                 getPeriodString(dateUtils, src.period, context)
-            val topLevel = src.category.parent == null
+            val topLevel = src.category.parentId == null
             DetailsChartModel(
                 context,
                 type.title,
@@ -141,13 +141,13 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 val src = data.source
                 when (type) {
                     ChartType.EXPENSES -> calculateStatistic(
-                        data.statistic.expensesByCategoryCode.children,
+                        data.statistic.filter { it.type == "expenses-by-category" },
                         src.category.children,
                         src.period
                     )
 
                     ChartType.INCOME -> calculateStatistic(
-                        data.statistic.incomeByCategoryCode.children,
+                        data.statistic.filter { it.type == "income-by-category" },
                         src.category.children,
                         src.period
                     )

@@ -22,12 +22,12 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
+import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
-import com.tink.model.statistic.StatisticTree
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-private class OverviewData(val statistic: StatisticTree, val period: Period, val categories: CategoryTree)
+private class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree)
 
 internal class OverviewChartViewModel @Inject constructor(
     private val dataStorage: ClientDataStorage,
@@ -38,7 +38,7 @@ internal class OverviewChartViewModel @Inject constructor(
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatistics()
+    private val statistics = statisticRepository.statistics
     private val period = statisticRepository.currentPeriod
     private val categories = categoryRepository.categories
 
@@ -65,11 +65,12 @@ internal class OverviewChartViewModel @Inject constructor(
         }
 
     val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
-        val data = calculateStatistic(
-            it.statistic.expensesByCategoryCode.children,
-            it.categories.expenses.children,
-            it.period
-        ).items.map { it.amount }
+        val data: List<Float> =
+            calculateStatistic(
+                it.statistics.filter { s -> s.type == "expenses-by-category" },
+                it.categories.expenses.children,
+                it.period
+            ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.expenses)
         //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
         val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false)
@@ -87,11 +88,12 @@ internal class OverviewChartViewModel @Inject constructor(
     }
 
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
-        val data = calculateStatistic(
-            it.statistic.incomeByCategoryCode.children,
-            it.categories.income.children,
-            it.period
-        ).items.map { it.amount }
+        val data: List<Float> =
+            calculateStatistic(
+                it.statistics.filter { s -> s.type == "income-by-category" },
+                it.categories.income.children,
+                it.period
+            ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.income)
         val color = context.getColorFromAttr(R.attr.tink_incomeColor)
 

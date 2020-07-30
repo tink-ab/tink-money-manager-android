@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.model.category.Category
 import com.tink.pfmui.R
 import com.tink.pfmui.charts.models.PeriodBalance
-import com.tink.pfmui.mapper.ModelMapperManager
 import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
@@ -15,8 +15,13 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
+import se.tink.commons.extensions.toDateTime
+import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import javax.inject.Inject
+import kotlin.math.abs
+
+//TODO: Remove `toDateTime()` extension calls
 
 internal class StatisticsOverTimeViewModel @Inject constructor(
     private val statisticsRepository: StatisticsRepository,
@@ -31,40 +36,37 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     private val category = MutableLiveData<Category>()
 
-    private val statistics = statisticsRepository.getStatistics()
+    private val statistics = statisticsRepository.statistics
 
     private val allPeriodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
 
         fun update() {
             whenNonNull(
                 statistics.value,
-                statisticsRepository.periodMap.value,
-                statisticsRepository.currentPeriod.value,
                 category.value
-            ) { statisticsTree, periodMap, currentPeriod, category ->
+            ) { statisticsList, category ->
 
                 val statistics = when (category.type) {
-                    Category.Type.TYPE_INCOME -> statisticsTree.incomeByCategoryCode
-                    Category.Type.TYPE_EXPENSES -> statisticsTree.expensesByCategoryCode
+                    Category.Type.INCOME -> statisticsList.filter { it.type == "income-by-category" }
+                    Category.Type.EXPENSE -> statisticsList.filter { it.type == "expenses-by-category" }
                     else -> return
                 }
 
-                val balances =
-                    ModelMapperManager.mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
-                        statistics,
-                        currentPeriod,
-                        periodMap,
-                        category.code,
-                        dateUtils
-                    ).sortedByDescending { it.period?.stop }
+                val balances = statistics
+                    .filter { category.allSubIds().contains(it.identifier) }
+                    .groupBy { it.period }
+                    .map { (period, values) ->
+                        PeriodBalance(
+                            period,
+                            values.sumByDouble { abs(it.value.value.doubleValue()) })
+                    }
+                    .sortedByDescending { it.period?.end }
                 postValue(balances)
             }
         }
 
         addSource(category) { update() }
         addSource(statistics) { update() }
-        addSource(statisticsRepository.periodMap) { update() }
-        addSource(statisticsRepository.currentPeriod) { update() }
     }
 
     private val periodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
@@ -75,8 +77,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
             val periodSelection = periodSelection.value ?: return
 
             val filteredBalances = allBalances.filter {
-                it.period?.start?.isBefore(periodSelection.end) == true
-                        && it.period?.start?.isAfter(periodSelection.start) == true
+                it.period?.start?.toDateTime()?.isBefore(periodSelection.end) == true
+                        && it.period?.start?.toDateTime()?.isAfter(periodSelection.start) == true
             }
 
             postValue(filteredBalances)
@@ -96,7 +98,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
         val items = list.map {
             val periodLabel = it.period?.let { period ->
-                dateUtils.getMonthFromDateTime(period.stop, true)
+                dateUtils.getMonthFromDateTime(period.end.toDateTime(), true)
             }
 
             val amountLabel = amountFormatter.format(it.amount, useSymbol = true)
@@ -110,7 +112,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
     }
 
     val average = periodBalances.map { balances ->
-        val averageAmount = balances.map { it.amount }.average()
+        val averageAmount = balances.ifEmpty { null }?.map { it.amount }?.average() ?: 0.0
         val averageString = amountFormatter.format(averageAmount, useSymbol = true)
         context.resources.getString(
             R.string.tink_expenses_header_description_average,
@@ -132,5 +134,9 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     fun selectCategory(category: Category) {
         this.category.value = category
+    }
+
+    private fun Category.allSubIds(): List<String> {
+        return listOf(id) + children.flatMap { it.allSubIds() }
     }
 }

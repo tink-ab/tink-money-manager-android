@@ -3,25 +3,31 @@ package com.tink.pfmui.overview.charts
 import android.content.Context
 import com.tink.pfmui.R
 import org.joda.time.DateTime
-import com.tink.pfmui.charts.extensions.mergeValue
 import se.tink.commons.extensions.floatValue
 import com.tink.model.category.Category
 import com.tink.model.time.Period
 import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.toDateTime
-import com.tink.model.statistic.Statistic
+import com.tink.model.statistics.Statistics
+import com.tink.pfmui.charts.extensions.sumByFloat
 import se.tink.utils.DateUtils
+import kotlin.math.abs
 
 internal sealed class ChartItem {
     abstract val amount: Float
     abstract val name: String
 }
 
-internal data class StatisticItem(val category: Category, override val amount: Float) : ChartItem() {
+internal data class StatisticItem(val category: Category, override val amount: Float) :
+    ChartItem() {
     override val name: String get() = category.name
 }
 
-internal data class TransactionsItem(override val name: String, override val amount: Float, val ids: List<String>) : ChartItem()
+internal data class TransactionsItem(
+    override val name: String,
+    override val amount: Float,
+    val ids: List<String>
+) : ChartItem()
 
 internal sealed class ChartList {
     // List with structural equals
@@ -29,10 +35,16 @@ internal sealed class ChartList {
 }
 
 internal data class StatisticItemsList(override val items: ArrayList<StatisticItem>) : ChartList()
-internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) : ChartList()
+internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) :
+    ChartList()
 
 //TODO: Core setup - Remove `toDateTime`
-internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Context, toToday: Boolean = true): String {
+internal fun getPeriodString(
+    dateUtils: DateUtils,
+    period: Period,
+    context: Context,
+    toToday: Boolean = true
+): String {
     return if (toToday && period.isInPeriod(DateTime.now())) {
         context.getString(
             R.string.tink_date_span_string,
@@ -48,22 +60,19 @@ internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Cont
 }
 
 internal fun calculateStatistic(
-    stats: Map<String, Statistic>,
+    stats: List<Statistics>,
     categories: List<Category>,
     period: Period
 ): StatisticItemsList {
-    val dataMap = mutableMapOf<Category, Float>()
-    for ((key, st) in stats) {
-        getCategory(categories, key)?.let { category ->
-            st.children.values
-                .filter { it.period == period }
-                .forEach {
-                    it.value.value.let {
-                        dataMap.mergeValue(category, Math.abs(it.floatValue()), Float::plus)
-                    }
-                }
-        }
-    }
+    val dataMap = stats
+        .filter { it.period == period }
+        .groupBy { it.identifier }
+        .mapNotNull { (categoryId, valueList) ->
+            val category = categories.findCategoryById(categoryId) ?: return@mapNotNull null
+            val amount = valueList.sumByFloat { abs(it.value.value.floatValue()) }
+            category to amount
+        }.toMap()
+
     return StatisticItemsList(
         ArrayList(
             dataMap
@@ -74,5 +83,21 @@ internal fun calculateStatistic(
     )
 }
 
-private fun getCategory(categories: List<Category>, key: String): Category? =
-    categories.firstOrNull { it.code == key || key.startsWith("${it.code}.") }
+
+// TODO: Improve search
+private fun List<Category>.findCategoryById(id: String): Category? {
+
+    var result: Category? = null
+
+    for (category in this) {
+        if (category.id == id) {
+            return category
+        } else {
+            result = category.children.findCategoryById(id)
+            if (result != null) {
+                return result
+            }
+        }
+    }
+    return result
+}
