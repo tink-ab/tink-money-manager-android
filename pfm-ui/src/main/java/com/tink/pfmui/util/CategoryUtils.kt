@@ -122,3 +122,10 @@ private fun getColorId(type: Category.Type): Int =
         Category.Type.TRANSFER -> R.attr.tink_transferColor
         else -> R.attr.tink_transferColor
     }
+
+fun getColorId(categoryCode: String): Int =
+    when {
+        categoryCode.isExpense() ->  R.attr.tink_expensesColor
+        categoryCode.isIncome() ->  R.attr.tink_incomeColor
+        else -> R.attr.tink_transferColor
+    }

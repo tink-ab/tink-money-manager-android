@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.transaction_similar_fragment.*
 import kotlinx.android.synthetic.main.transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
-import com.tink.model.category.Category
-import com.tink.model.transaction.Transaction
-import se.tink.commons.transactions.ListItem
 import javax.inject.Inject
 
 internal class SimilarTransactionsFragment : BaseFragment() {
@@ -50,7 +47,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
-        ownTheme.setCategory(Categories.getSharedInstance().getCategory(newCategoryCode))
+        ownTheme.setCategory(newCategoryCode)
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory
@@ -112,7 +109,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
         val snackbarErrorTheme: TinkSnackbar.Theme
 
-        fun setCategory(category: Category)
+        fun setCategory(categoryCode: String)
     }
 
     companion object {

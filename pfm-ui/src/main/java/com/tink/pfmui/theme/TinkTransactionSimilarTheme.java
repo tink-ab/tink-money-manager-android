@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 import com.tink.model.category.Category;
 import com.tink.pfmui.R;
 import com.tink.pfmui.transaction.SimilarTransactionsFragment;
+import com.tink.pfmui.util.CategoryUtils;
 import com.tink.pfmui.view.TinkSnackbar;
 import com.tink.pfmui.view.TinkToolbar.Theme;
 import se.tink.commons.extensions.ContextUtils;
@@ -12,14 +13,14 @@ import se.tink.commons.extensions.ContextUtils;
 public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.Theme {
 
 	private final Context context;
-	private Category category;
+	private String categoryCode;
 
 	public TinkTransactionSimilarTheme(Context context) {
 		this.context = context;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategory(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	@Override
@@ -36,19 +37,7 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 		return new TinkDefaultStatusBarTheme(context) {
 			@Override
 			public int getStatusBarColor() {
-				int id;
-				switch (category.getType()) {
-					case EXPENSE:
-						id = R.attr.tink_expensesDarkColor;
-						break;
-					case INCOME:
-						id = R.attr.tink_incomeDarkColor;
-						break;
-					case TRANSFER:
-					default:
-						id = R.attr.tink_transferColor;
-				}
-				return ContextCompat.getColor(context, id);
+				return getColor();
 			}
 		};
 	}
@@ -59,18 +48,7 @@ public class TinkTransactionSimilarTheme implements SimilarTransactionsFragment.
 	}
 
 	private int getColor() {
-		int id;
-		switch (category.getType()) {
-			case EXPENSE:
-				id = R.attr.tink_expensesColor;
-				break;
-			case INCOME:
-				id = R.attr.tink_incomeColor;
-				break;
-			case TRANSFER:
-			default:
-				id = R.attr.tink_transferColor;
-		}
+		int id = CategoryUtils.getColorId(categoryCode);
 		return ContextUtils.getColorFromAttr(context, id);
 	}
 }

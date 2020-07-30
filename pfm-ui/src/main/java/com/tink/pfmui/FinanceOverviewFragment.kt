@@ -24,7 +24,7 @@ import com.tink.pfmui.security.DefaultRecoveryHandler
 import com.tink.pfmui.security.SecuredClientDataStorage
 import com.tink.pfmui.tracking.AnalyticsSingleton
 import com.tink.pfmui.tracking.Tracker
-import com.tink.service.category.CategoryService
+import com.tink.service.authentication.user.User
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -179,13 +179,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     }
 
     private fun attachListeners() {
-        Categories.getSharedInstance().attatchListener(categoryService)
         Currencies.getSharedInstance().attatchListener(userConfigurationService)
         Periods.getSharedInstance().attatchListener(statisticsRepository)
     }
 
     private fun removeListenersAndClearCache() {
-        Categories.getSharedInstance().removeListener(categoryService)
+        Currencies.getSharedInstance().removeListener(userConfigurationService)
         Periods.getSharedInstance().removeListener(statisticsRepository)
     }
 
