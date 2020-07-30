@@ -9,7 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.model.category.Category
+import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.R
 import com.tink.pfmui.charts.ColorGenerator
 import com.tink.pfmui.charts.DefaultColorGenerator
@@ -20,10 +22,7 @@ import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.commons.extensions.parent
 import se.tink.commons.extensions.whenNonNull
-import com.tink.model.statistics.Statistics
-import com.tink.model.transaction.Transaction
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.absoluteValue
@@ -151,8 +150,6 @@ internal class PieChartDetailsViewModel @Inject constructor(
                         src.category.children,
                         src.period
                     )
-
-                    else -> throw IllegalArgumentException("Illegal type $type")
                 }
             }
         }

@@ -13,26 +13,33 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @PfmScope
-class CategoryRepository @Inject constructor(service: CategoryService) {
+class CategoryRepository @Inject constructor(private val service: CategoryService) {
 
     val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     // Perhaps use a StateFlow instead (or wait until it's out of experimental).
-    val categories: LiveData<CategoryTree> = object : MutableLiveData<CategoryTree>() {
+
+
+    private val _categories = object : MutableLiveData<CategoryTree>() {
         override fun onActive() {
-            scope.launch {
-                try {
-                    postValue(service.getCategoryTree())
-                } catch (e: IllegalStateException) {
-                    // Fail silently if category tree didn't manage to update.
-                }
-            }
+            refresh()
         }
 
         override fun onInactive() {
             // Not sure if this is really needed since we do a [postValue] in [onActive] anyway...
             scope.coroutineContext.cancelChildren()
+        }
+    }
+    val categories: LiveData<CategoryTree> = _categories
+
+    fun refresh() {
+        scope.launch {
+            try {
+                _categories.postValue(service.getCategoryTree())
+            } catch (e: IllegalStateException) {
+                // Fail silently if category tree didn't manage to update.
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.toDateTime
 import com.tink.model.statistics.Statistics
 import com.tink.pfmui.charts.extensions.sumByFloat
+import se.tink.commons.extensions.recursiveIdList
 import se.tink.utils.DateUtils
 import kotlin.math.abs
 
@@ -66,12 +67,13 @@ internal fun calculateStatistic(
 ): StatisticItemsList {
     val dataMap = stats
         .filter { it.period == period }
-        .groupBy { it.identifier }
-        .mapNotNull { (categoryId, valueList) ->
-            val category = categories.findCategoryById(categoryId) ?: return@mapNotNull null
+        .groupBy { categories.findCategoryById(it.identifier) }
+        .mapNotNull { (category, valueList) ->
+            if(category == null) return@mapNotNull null
             val amount = valueList.sumByFloat { abs(it.value.value.floatValue()) }
             category to amount
-        }.toMap()
+        }
+        .toMap()
 
     return StatisticItemsList(
         ArrayList(
@@ -83,21 +85,6 @@ internal fun calculateStatistic(
     )
 }
 
+private fun List<Category>.findCategoryById(id: String): Category? =
+    find { it.recursiveIdList.contains(id) }
 
-// TODO: Improve search
-private fun List<Category>.findCategoryById(id: String): Category? {
-
-    var result: Category? = null
-
-    for (category in this) {
-        if (category.id == id) {
-            return category
-        } else {
-            result = category.children.findCategoryById(id)
-            if (result != null) {
-                return result
-            }
-        }
-    }
-    return result
-}

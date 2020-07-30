@@ -15,6 +15,8 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.currency.AmountFormatter
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.recursiveIdList
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
@@ -53,7 +55,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 }
 
                 val balances = statistics
-                    .filter { category.allSubIds().contains(it.identifier) }
+                    .filter { category.recursiveIdList.contains(it.identifier) }
                     .groupBy { it.period }
                     .map { (period, values) ->
                         PeriodBalance(
@@ -134,9 +136,5 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     fun selectCategory(category: Category) {
         this.category.value = category
-    }
-
-    private fun Category.allSubIds(): List<String> {
-        return listOf(id) + children.flatMap { it.allSubIds() }
     }
 }
