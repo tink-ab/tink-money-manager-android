@@ -50,6 +50,8 @@ dependencies {
 
     implementation libraries.arch_lifecycle_extensions
     implementation libraries.arch_lifecycle_common_java8
+    implementation libraries.arch_lifecycle_livedata_ktx
+
     kapt libraries.arch_lifecycle_compiler
 }
 
