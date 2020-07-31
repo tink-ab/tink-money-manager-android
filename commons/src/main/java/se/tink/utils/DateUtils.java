@@ -307,7 +307,16 @@ public class DateUtils {
 		DateTime date = new DateTime(year, month, 1, 0, 0, 0, 0);
 		DateTime start = getSalaryDateFromDate(date);
 		DateTime stop = getSalaryDateFromDate(date.plusMonths(1));
-		return new MonthPeriod(month, year, Instant.ofEpochMilli(start.getMillis()),
+
+		String monthString;
+		if (month > 9)
+			monthString = "" + month;
+		else
+			monthString = "0" + month;
+
+		String identifier = year + "-" + monthString;
+
+		return new MonthPeriod(month, year, identifier, Instant.ofEpochMilli(start.getMillis()),
 			Instant.ofEpochMilli(stop.getMillis()));
 	}
 
