@@ -7,14 +7,11 @@ import androidx.core.content.ContextCompat
 import com.tink.model.category.Category
 import com.tink.pfmui.R
 import com.tink.pfmui.view.TreeListSelectionItem
-import se.tink.commons.categories.enums.CategoryExpenseType
 import se.tink.commons.categories.enums.CategoryType
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
 import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isUncategorized
-
-import se.tink.commons.extensions.parent
 
 private const val REIMBURSEMENT_CODE = "income:refund.other"
 
@@ -46,18 +43,23 @@ internal fun Category.findChildByCode(code: String): Category? {
     }
 }
 
-private fun Category.nameWithDefaultChildFormat(context: Context): String {
-    return if (
-        isDefaultChild &&
-        parent.children.size > 1 &&
-        !this.code.startsWith(CategoryExpenseType.EXPENSES_MISC.code) // to avoid "Other Other"
-    ) {
-        String.format(context.getString(R.string.tink_category_default_child_format), name)
-    } else {
-        name
-    }
-}
+fun Category.nameWithDefaultChildFormat(context: Context): String {
 
+    // TODO: Why do we need this.
+    //  Current name is for example "Food & Drinks Other". This will
+    //  convert it to "Food & Drinks Other - Other"
+//    return if (
+//        isDefaultChild &&
+//        parent.children.size > 1
+//        !this.code.startsWith(CategoryExpenseType.EXPENSES_MISC.code) // to avoid "Other Other"
+//    ) {
+//        String.format(context.getString(R.string.tink_category_default_child_format), name)
+//    } else {
+//        name
+//    }
+
+    return name
+}
 
 internal fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
     return if (children.isEmpty()) {
@@ -99,7 +101,7 @@ internal fun getTextColor(context: Context, category: Category?): Int {
     return ContextCompat.getColor(context, id)
 }
 
-private fun getType(category: Category?): Category.Type = category?.type ?: TODO("Core setup")
+private fun getType(category: Category?): Category.Type = category?.type ?: Category.Type.EXPENSE
 
 private fun getDarkColorId(type: Category.Type): Int =
     when (type) {

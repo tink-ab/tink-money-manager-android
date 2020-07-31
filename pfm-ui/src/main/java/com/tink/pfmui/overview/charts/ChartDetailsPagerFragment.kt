@@ -24,7 +24,6 @@ import com.tink.pfmui.util.FontUtils
 import com.tink.pfmui.view.CustomTypefaceSpan
 import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
-import se.tink.commons.extensions.parent
 import se.tink.commons.extensions.visible
 import com.tink.model.time.Period
 
@@ -106,9 +105,9 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         if (adapter.onBackPressed()) {
             return true
         }
-        val category = viewModel.category.value?.parent
-        if (type.showCategoryPicker && category != null) {
-            viewModel.setCategoryId(category.code)
+        val parentId = viewModel.category.value?.parentId
+        if (type.showCategoryPicker && parentId != null) {
+            viewModel.setCategoryId(parentId)
             return true
         }
         adapter.prepareToExit(this)

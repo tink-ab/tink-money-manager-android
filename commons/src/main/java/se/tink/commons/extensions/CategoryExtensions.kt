@@ -50,18 +50,3 @@ fun CategoryTree.getCategoryByType(type: Category.Type): Category =
 
 val Category.recursiveIdList: List<String>
     get() = listOf(id) + children.flatMap { it.recursiveIdList }
-
-val Category.parent: Category?
-    get() {
-        return null
-//    TODO("Core setup - how should we implement this?")
-    }
-
-
-//fun Category.getNameWithDefaultChildFormat(defaultChildFormat: String?): String? {
-//    return if (isDefaultChild && parent.children.size > 1) {
-//        String.format(defaultChildFormat!!, name)
-//    } else {
-//        name
-//    }
-//}

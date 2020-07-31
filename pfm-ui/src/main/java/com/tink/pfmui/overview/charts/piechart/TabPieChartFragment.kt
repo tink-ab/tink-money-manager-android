@@ -19,7 +19,6 @@ import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.model.category.Category
-import se.tink.commons.extensions.parent
 import com.tink.model.time.Period
 import javax.inject.Inject
 

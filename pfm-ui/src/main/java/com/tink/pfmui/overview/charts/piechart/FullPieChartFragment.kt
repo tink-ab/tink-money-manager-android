@@ -112,7 +112,7 @@ internal class FullPieChartFragment : BaseFragment() {
         }
     }
 
-    private fun onItemClick(item: StatisticItem) = pageViewModel.setCategoryId(item.category.code)
+    private fun onItemClick(item: StatisticItem) = pageViewModel.setCategoryId(item.category.id)
 
     private fun placeLabelTitle(label: PieChartLabelView, binding: PieChartLabelBinding) {
         val iconOnTop = (label.centerAngle - 90f + 360f) % 360 < 180

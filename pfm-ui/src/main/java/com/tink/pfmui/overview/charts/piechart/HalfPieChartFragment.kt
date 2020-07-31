@@ -31,10 +31,10 @@ import com.tink.pfmui.overview.charts.TransactionsItem
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
+import com.tink.pfmui.util.nameWithDefaultChildFormat
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
-import se.tink.commons.extensions.getNameWithDefaultChildFormat
 
 private const val TYPE_ARG = "type"
 
@@ -123,7 +123,7 @@ internal class HalfPieChartFragment : BaseFragment() {
 
     private fun onItemClicked(item: ChartItem) {
         when (item) {
-            is StatisticItem -> chartViewModel.setCategoryId(item.category.code)
+            is StatisticItem -> chartViewModel.setCategoryId(item.category.id)
             is TransactionsItem -> showTransactions(item)
         }
     }
@@ -179,7 +179,4 @@ internal data class HalfChartItem(val title: String, val amount: String, val onC
 internal class HalfChartItemTheme(@ColorInt val textColor: Int)
 
 private fun StatisticItem.getName(context: Context) =
-    category.getNameWithDefaultChildFormat(
-        context.getString(R.string.tink_category_default_child_format)
-    )
-
+    category.nameWithDefaultChildFormat(context)

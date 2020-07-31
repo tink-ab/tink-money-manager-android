@@ -10,7 +10,6 @@ import com.tink.model.category.Category
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import kotlinx.android.synthetic.main.fragment_statistics_over_time.*
-import se.tink.commons.extensions.parent
 
 class StatisticsOverTimeFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
