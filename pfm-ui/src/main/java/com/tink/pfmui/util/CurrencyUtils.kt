@@ -1,6 +1,5 @@
 package com.tink.pfmui.util
 
-import androidx.annotation.VisibleForTesting
 import com.google.common.collect.ImmutableList
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
@@ -34,6 +33,8 @@ object CurrencyUtils {
         ExactNumber(1000000000, 0)
     private val UNITS: MutableMap<String, ImmutableList<StringExactNumberPair>> =
         HashMap()
+
+    private const val EXACT_DIGITS = 2
 
     fun getAmountLabel(amount: Amount): String {
         return formatCurrency(amount)
@@ -101,7 +102,6 @@ object CurrencyUtils {
         )
     }
 
-    @VisibleForTesting
     fun formatCurrency(
         amount: Amount,
         currencyFormat: Int,
@@ -256,7 +256,7 @@ object CurrencyUtils {
         amount: ExactNumber,
         currencyCode: String
     ): String {
-        return formatAmount(amount, amount.scale.toInt(), currencyCode)
+        return formatAmount(amount, EXACT_DIGITS, currencyCode)
     }
 
     private fun formatAmount(amount: Double, decimals: Int, useCurrencySymbol: Boolean): String {
