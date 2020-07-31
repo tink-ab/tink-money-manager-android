@@ -2,9 +2,11 @@ package se.tink.android.repository.transaction
 
 import androidx.lifecycle.MutableLiveData
 import com.tink.model.transaction.Transaction
-import com.tink.service.handler.ResultHandler
-import com.tink.service.observer.ListChangeObserver
 import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import se.tink.android.repository.TinkNetworkError
 
 class SingleTransactionLiveData(
@@ -22,52 +24,25 @@ class SingleTransactionLiveData(
         postValue(TransactionReceived(transaction))
     }
 
-    private val changeObserver = object : ListChangeObserver<Transaction> {
-
-        override fun onRead(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onCreate(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onUpdate(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onDelete(items: List<Transaction>) {
-            if (items.any { it.id == transactionId }) postValue(TransactionDeleted)
-        }
-    }
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
         if (fetchOnInit) {
-            transactionService.getTransaction(transactionId,
-                ResultHandler(
-                    onSuccess = { postValue(TransactionReceived(it)) },
-                    onError = { postValue(TransactionError(TinkNetworkError(it))) }
-                )
-            )
+            scope.launch {
+                try {
+                    val transaction = transactionService.getTransaction(transactionId)
+                    postValue(TransactionReceived(transaction))
+                } catch (error: Throwable) {
+                    postValue(TransactionError(TinkNetworkError(error)))
+                }
+            }
         }
-
-        transactionService.subscribe(changeObserver)
+        // TODO: How to do subscription
+//        transactionService.subscribe(changeObserver)
     }
 
     fun dispose() {
-        transactionService.unsubscribe(changeObserver)
+//        transactionService.unsubscribe(changeObserver)
     }
 
 }
