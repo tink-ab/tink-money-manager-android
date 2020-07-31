@@ -12,9 +12,9 @@ import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.commons.livedata.Event
 import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.Category
-import se.tink.commons.extensions.findCategoryByCode
 import com.tink.model.transaction.Transaction
 import se.tink.android.repository.TinkNetworkError
+import se.tink.commons.extensions.findCategoryById
 import javax.inject.Inject
 
 internal class CategorizationFlowViewModel @Inject constructor(
@@ -58,24 +58,24 @@ internal class CategorizationFlowViewModel @Inject constructor(
         fun update() =
             whenNonNull(
                 categories.value,
-                transaction.value?.categoryCode
-            ) { tree, code ->
-                tree.findCategoryByCode(code)?.let { value = it }
+                transaction.value?.categoryId
+            ) { tree, categoryId ->
+                tree.findCategoryById(categoryId)?.let { value = it }
             }
         addSource(transaction) { update() }
         addSource(categories) { update() }
     }
 
 
-    val similarTransactions: LiveData<List<Transaction>?> = transaction.switchMap {
+    val similarTransactions: LiveData<List<Transaction>> = transaction.switchMap {
         transactionRepository.fetchSimilarTransactions(it.id)
     }
 
-    fun categorizeTransactions(
+    private fun categorizeTransactions(
         transactionIds: List<String>,
-        newCategoryCode: String
+        newCategoryId: String
     ) {
-        transactionRepository.categorizeTransactions(transactionIds, newCategoryCode) {
+        transactionRepository.categorizeTransactions(transactionIds, newCategoryId) {
             _errors.postValue(Event(it))
         }
     }
@@ -92,13 +92,13 @@ internal class CategorizationFlowViewModel @Inject constructor(
     val state: LiveData<State> = _state
 
 
-    fun categorySelected(categoryCode: String) {
+    fun categorySelected(categoryId: String) {
 
         val transaction = transaction.value ?: return
 
-        if (categoryCode != transaction.categoryCode) {
-            _state.value = State.SimilarTransactions(categoryCode)
-            categorizeTransactions(listOf(transaction.id), categoryCode)
+        if (categoryId != transaction.categoryId) { //TODO
+            _state.value = State.SimilarTransactions(categoryId)
+            categorizeTransactions(listOf(transaction.id), categoryId)
         } else {
            setStatusToDone()
         }
@@ -119,7 +119,7 @@ internal class CategorizationFlowViewModel @Inject constructor(
     sealed class State {
         object LoadingTransaction : State()
         class CategorySelection(val transaction: Transaction) : State()
-        class SimilarTransactions(val updatedCategoryCode: String) : State()
+        class SimilarTransactions(val updatedCategoryId: String) : State()
         object Done : State()
     }
 }

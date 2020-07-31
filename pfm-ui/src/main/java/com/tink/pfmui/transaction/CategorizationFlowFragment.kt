@@ -46,7 +46,7 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
                 is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
 
                 is CategorizationFlowViewModel.State.SimilarTransactions ->
-                    showSimilarTransactionsOnReturn(it.updatedCategoryCode)
+                    showSimilarTransactionsOnReturn(it.updatedCategoryId)
 
                 is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
             }
@@ -67,7 +67,7 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
         CategorySelectionFragment
             .newInstance(
                 categoryType,
-                transaction.categoryCode,
+                transaction.categoryId,
                 CategorySelectionFragment.Options(
                     dropdownToolbarAppearance = false,
                     includeTransferTypes = true,
@@ -95,8 +95,8 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
         })
     }
 
-    override fun onCategorySelected(updatedCategoryCode: String) =
-        viewModel.categorySelected(updatedCategoryCode)
+    override fun onCategorySelected(updatedCategoryId: String) =
+        viewModel.categorySelected(updatedCategoryId)
 
     override fun onCategorySelectionCancelled() = viewModel.categorySelectionCancelled()
 

@@ -62,12 +62,12 @@ private fun Category.nameWithDefaultChildFormat(context: Context): String {
 internal fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
     return if (children.isEmpty()) {
         TreeListSelectionItem.ChildItem(
-            id = code,
+            id = id,
             label = nameWithDefaultChildFormat(context)
         )
     } else {
         TreeListSelectionItem.TopLevelItem(
-            id = code,
+            id = id,
             label = name,
             iconRes = getIcon(),
             iconColor = iconColor(),

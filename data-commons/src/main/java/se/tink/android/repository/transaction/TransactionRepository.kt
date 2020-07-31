@@ -1,66 +1,50 @@
 package se.tink.android.repository.transaction
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.tink.annotations.PfmScope
 import com.tink.model.category.Category
 import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
-import com.tink.service.handler.ResultHandler
 import com.tink.service.transaction.TransactionService
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.subjects.PublishSubject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import se.tink.android.AppExecutors
-import se.tink.android.extensions.toResultHandler
-import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createChangeObserver
-import se.tink.android.livedata.createResultHandler
-import se.tink.android.livedata.map
-import se.tink.android.repository.ExceptionTracker
 import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 @PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
-    private val appExecutors: AppExecutors,
-    private val exceptionTracker: ExceptionTracker
+    private val appExecutors: AppExecutors
 ) {
 
-    fun fromIdList(ids: List<String>): Single<List<Transaction>> {
-        return Observable.fromIterable(ids).flatMap { id ->
-            PublishSubject.create<Transaction>().also {
-                transactionService.getTransaction(id, it.toResultHandler())
-            }.onErrorResumeNext { error: Throwable ->
-                exceptionTracker.exceptionThrown(Exception(error))
-                Observable.empty<Transaction>()
-            }
-        }.toList()
-    }
+    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+    suspend fun fromIdList(ids: List<String>): List<Transaction> =
+        coroutineScope { ids.map { async { transactionService.getTransaction(it) } } }.awaitAll()
+
 
     fun fromIdsAsLiveData(ids: List<String>): LiveData<List<Transaction>> {
-        return LiveDataReactiveStreams.fromPublisher(fromIdList(ids).toFlowable())
+        return liveData { emit(fromIdList(ids)) }
     }
 
     fun allTransactionsForCategoryAndPeriod(
         category: Category,
         period: Period
-    ): LiveData<List<Transaction>> = object : MutableLiveData<List<Transaction>>() {
-        private val listener = createChangeObserver(appExecutors)
-
-        override fun onActive() = transactionService.listAllAndSubscribeForCategoryCodeAndPeriod(
-            category.code,
-            period,
-            listener
-        )
-
-        override fun onInactive() = transactionService.unsubscribe(listener)
+    ): LiveData<List<Transaction>> = liveData {
+        val transactions = try {
+            transactionService.fetchAllTransactions(period, category.id)
+        } catch (error: Throwable) {
+            emptyList<Transaction>()
+        }
+        emit(transactions)
     }
-
-    val tags = TransactionTagsLiveData(transactionService, appExecutors)
-
 
     fun forAccountId(accountId: String): TransactionPagesLiveData =
         AccountTransactionPagesLiveData(accountId, appExecutors, transactionService)
@@ -72,30 +56,27 @@ class TransactionRepository @Inject constructor(
     fun subscribeForTransaction(transaction: Transaction): SingleTransactionLiveData =
         SingleTransactionLiveData(transaction, transactionService)
 
-    fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>?> {
-
-        val liveData = MutableLiveData<ErrorOrValue<List<Transaction>>>()
-
-        transactionService.getSimilarTransactions(
-            transactionId,
-            liveData.createResultHandler()
-        )
-
-        return liveData.map {
-            if (it.error != null) emptyList()
-            else it.value
+    fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>> =
+        liveData {
+            val transactions = try {
+                transactionService.getSimilarTransactions(transactionId)
+            } catch (error: Throwable) {
+                emptyList<Transaction>()
+            }
+            emit(transactions)
         }
-    }
 
     fun categorizeTransactions(
         transactionIds: List<String>,
-        newCategoryCode: String,
+        newCategoryId: String,
         onError: (TinkNetworkError) -> Unit
     ) {
-        transactionService.categorizeTransactions(
-            transactionIds,
-            newCategoryCode,
-            ResultHandler(onSuccess = {}, onError = { onError(TinkNetworkError(it)) })
-        )
+        scope.launch {
+            try {
+                transactionService.categorizeTransactions(transactionIds, newCategoryId)
+            } catch (error: Throwable) {
+                onError(TinkNetworkError(error))
+            }
+        }
     }
 }

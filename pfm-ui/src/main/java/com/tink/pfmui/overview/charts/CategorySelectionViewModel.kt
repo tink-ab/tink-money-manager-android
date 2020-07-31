@@ -36,7 +36,7 @@ internal class CategorySelectionViewModel @Inject constructor(
                     if (includeTopLevel) {
                         add(
                             TreeListSelectionItem.TopLevelItem(
-                                id = category.code,
+                                id = category.id,
                                 label = context.getString(R.string.tink_all_categories),
                                 iconRes = category.getIcon(),
                                 iconColor = category.iconColor(),

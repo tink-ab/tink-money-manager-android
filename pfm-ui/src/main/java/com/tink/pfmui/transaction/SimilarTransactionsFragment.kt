@@ -32,7 +32,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     }
 
     private val newCategoryCode by lazy {
-        requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_CODE))
+        requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_ID))
     }
 
     private val adapter = SimilarTransactionsAdapter()
@@ -47,7 +47,6 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
-        ownTheme.setCategory(newCategoryCode)
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory
@@ -92,6 +91,10 @@ internal class SimilarTransactionsFragment : BaseFragment() {
             markButtonText.observe(viewLifecycleOwner, Observer { buttonText ->
                 buttonText?.let { markerButton.text = it }
             })
+            category.observe(viewLifecycleOwner, Observer { category ->
+                theme?.setCategory(category.code)
+                updateToolbar()
+            })
         }
     }
 
@@ -114,18 +117,18 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     companion object {
 
-        private const val TRANSACTION_SIMILAR_CATEGORY_CODE = "transaction_similar_category_code"
+        private const val TRANSACTION_SIMILAR_CATEGORY_ID = "transaction_similar_category_id"
         private const val TRANSACTION_SIMILAR_TRANSACTIONS = "transaction_similar_transactions"
 
         @JvmStatic
         fun newInstance(
             transactions: List<Transaction>,
-            newCategoryCode: String
+            newCategoryId: String
         ): SimilarTransactionsFragment {
             val transactionsArray = ArrayList(transactions)
             return SimilarTransactionsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(TRANSACTION_SIMILAR_CATEGORY_CODE, newCategoryCode)
+                    putString(TRANSACTION_SIMILAR_CATEGORY_ID, newCategoryId)
                     putParcelableArrayList(TRANSACTION_SIMILAR_TRANSACTIONS, transactionsArray)
                 }
             }

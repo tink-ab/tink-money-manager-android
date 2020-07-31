@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.model.category.Category
 import com.tink.pfmui.R
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
@@ -18,6 +19,7 @@ import com.tink.model.category.CategoryTree
 import se.tink.commons.extensions.findCategoryByCode
 import com.tink.model.transaction.Transaction
 import se.tink.android.repository.TinkNetworkError
+import se.tink.commons.extensions.findCategoryById
 import javax.inject.Inject
 
 internal class SimilarTransactionsViewModel  @Inject constructor(
@@ -31,11 +33,11 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
 
     private val transactions = MutableLiveData<List<Transaction>>()
 
-    private val categoryCode = MutableLiveData<String>()
+    private val categoryId = MutableLiveData<String>()
 
-    fun initialize(transactionList: List<Transaction>, code: String) {
+    fun initialize(transactionList: List<Transaction>, categoryId: String) {
         transactions.value = transactionList
-        categoryCode.value = code
+        this.categoryId.value = categoryId
     }
 
     private val markedTransactionsIds = MutableLiveData<List<String>>()
@@ -66,12 +68,12 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
                 whenNonNull(
                     transactions.value,
                     categoryTree.value,
-                    categoryCode.value
-                ) { transactions, categoryTree, categoryCode ->
+                    categoryId.value
+                ) { transactions, categoryTree, categoryId ->
                     val transactionItems =
                         transactions
                             .mapNotNull { transaction ->
-                                categoryTree.findCategoryByCode(categoryCode)?.let { category ->
+                                categoryTree.findCategoryById(categoryId)?.let { category ->
                                     transactionItemFactory
                                         .similarTransactionItemFromTransaction(
                                             transaction,
@@ -86,7 +88,7 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
                     postValue(transactionItems)
                 }
             }
-            addSource(categoryCode) { update() }
+            addSource(categoryId) { update() }
             addSource(transactions) { update() }
             addSource(categoryTree) { update() }
             addSource(markedTransactionsIds) { update() }
@@ -94,10 +96,18 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
 
     val similarTransactionItems: LiveData<List<SimilarTransactionsAdapter.SimilarTransactionItem>> = _similarTransactionItems
 
+    val category: LiveData<Category> = MediatorLiveData<Category>().apply {
+        fun update() = whenNonNull(categoryTree.value, categoryId.value) { tree, id ->
+            tree.findCategoryById(id)?.let(::postValue)
+        }
+        addSource(categoryId) {update()}
+        addSource(categoryTree) {update()}
+    }
+
     fun updateTransactions(transactionIDs: List<String>, categoryCode: String, onError: (TinkNetworkError) -> Unit) {
         transactionRepository.categorizeTransactions(
             transactionIds = transactionIDs,
-            newCategoryCode = categoryCode,
+            newCategoryId = categoryCode,
             onError = onError
         )
     }
