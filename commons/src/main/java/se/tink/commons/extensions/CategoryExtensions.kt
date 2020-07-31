@@ -12,9 +12,6 @@ fun findRecursive(category: Category, categoryCode: String): Category? {
     if (category.code == categoryCode) {
         return category
     }
-    if (category.children.isEmpty()) {
-        return null
-    }
     for (childCategory in category.children) {
         val returnCategory = findRecursive(childCategory, categoryCode)
         if (returnCategory != null) {
@@ -23,6 +20,26 @@ fun findRecursive(category: Category, categoryCode: String): Category? {
     }
     return null
 }
+
+fun CategoryTree.findCategoryById(id: String): Category? =
+    findRecursiveById(expenses, id)
+        ?: findRecursiveById(income, id)
+        ?: findRecursiveById(transfers, id)
+
+
+fun findRecursiveById(category: Category, categoryId: String): Category? {
+    if (category.id == categoryId) {
+        return category
+    }
+    for (childCategory in category.children) {
+        val returnCategory = findRecursiveById(childCategory, categoryId)
+        if (returnCategory != null) {
+            return returnCategory
+        }
+    }
+    return null
+}
+
 
 fun CategoryTree.getCategoryByType(type: Category.Type): Category =
     when (type) {

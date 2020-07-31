@@ -67,7 +67,7 @@ internal fun calculateStatistic(
 ): StatisticItemsList {
     val dataMap = stats
         .filter { it.period == period }
-        .groupBy { categories.findCategoryById(it.identifier) }
+        .groupBy { categories.findParentOfCategoryWithId(it.identifier) }
         .mapNotNull { (category, valueList) ->
             if(category == null) return@mapNotNull null
             val amount = valueList.sumByFloat { abs(it.value.value.floatValue()) }
@@ -85,6 +85,6 @@ internal fun calculateStatistic(
     )
 }
 
-private fun List<Category>.findCategoryById(id: String): Category? =
+private fun List<Category>.findParentOfCategoryWithId(id: String): Category? =
     find { it.recursiveIdList.contains(id) }
 

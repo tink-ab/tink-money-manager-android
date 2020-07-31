@@ -141,7 +141,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 backgroundColor = theme.toolbarTheme.backgroundColor,
                 isLeftToSpend = false, //TODO
                 period = adapter.currentPagePeriod,
-                categoryCode = viewModel.category.value?.code,
+                categoryId = viewModel.category.value?.id,
                 title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
         )
         val fragment = TransactionsListFragment.newInstance(metaData)

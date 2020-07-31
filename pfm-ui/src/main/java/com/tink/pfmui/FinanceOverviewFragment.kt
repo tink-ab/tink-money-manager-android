@@ -99,7 +99,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             .create(Tink.requireComponent(), this)
             .inject(this)
         Tink.setUser(User.fromAccessToken(accessToken))
-        attachListeners()
         i18nConfiguration.initialize()
         refreshData()
 
