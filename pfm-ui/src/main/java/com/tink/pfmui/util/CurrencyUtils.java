@@ -240,7 +240,7 @@ public class CurrencyUtils {
 
 	private static String formatAmount(double amount, int decimals, boolean useCurrencySymbol) {
 		NumberFormat format = getDecimalFormat(null, decimals);
-		String formatted = format.format(Math.round(amount));
+		String formatted = format.format(amount);
 
 		if (!useCurrencySymbol) {
 			String symbol = ((DecimalFormat) format).getDecimalFormatSymbols().getCurrencySymbol();
