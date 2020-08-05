@@ -21,6 +21,11 @@ internal class ConfigurationModule {
         ClientDataStorage.sharedInstance(context)
 
     @Provides
+    @Singleton
+    fun provideSuitableLocaleFinder(@ApplicationScoped context: Context): SuitableLocaleFinder =
+        SuitableLocaleFinder(context)
+
+    @Provides
     fun provideLocale(localeFinder: SuitableLocaleFinder): Locale {
         return localeFinder.findLocale()
     }

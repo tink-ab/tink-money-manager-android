@@ -41,6 +41,7 @@ import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
+import se.tink.utils.DateUtils;
 
 public class TabIncomeBarChartFragment extends BaseFragment implements
 	TransitionAwareFragment {
@@ -62,6 +63,12 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 	@Inject
 	UserConfigurationService userConfigurationService;
+
+	@Inject
+	SuitableLocaleFinder suitableLocaleFinder;
+
+	@Inject
+	DateUtils dateUtils;
 
 	RelativeLayout headerContainer;
 
@@ -193,7 +200,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		incomeItemsFor1Year = ModelMapperManager
 			.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
-				income, endPeriod, periods, categoryCode);
+				income, endPeriod, periods, categoryCode, dateUtils);
 
 		setup6MonthsChart();
 	}
@@ -217,7 +224,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 
 		incomeItemsFor1Year = ModelMapperManager
 			.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
-				income, endPeriod, periodMap, categoryCode);
+				income, endPeriod, periodMap, categoryCode, dateUtils);
 
 		setup1YearChart();
 	}
@@ -266,7 +273,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 
@@ -307,7 +314,7 @@ public class TabIncomeBarChartFragment extends BaseFragment implements
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 
