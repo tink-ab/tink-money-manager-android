@@ -4,13 +4,14 @@ import android.content.Context
 import android.content.res.Resources
 import androidx.core.os.ConfigurationCompat
 import com.tink.pfmui.buildConfig.BuildConfigurations.instance
+import com.tink.pfmui.di.FragmentScoped
 import se.tink.android.di.application.ApplicationScoped
 import java.util.ArrayList
 import java.util.Locale
 import javax.inject.Inject
 
 internal class SuitableLocaleFinder @Inject constructor(
-    @ApplicationScoped private val context: Context
+    @FragmentScoped private val context: Context
 ) {
 
     private val resources: Resources = context.resources

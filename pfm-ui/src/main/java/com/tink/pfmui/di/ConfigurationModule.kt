@@ -22,7 +22,7 @@ internal class ConfigurationModule {
 
     @Provides
     @Singleton
-    fun provideSuitableLocaleFinder(@ApplicationScoped context: Context): SuitableLocaleFinder =
+    fun provideSuitableLocaleFinder(@FragmentScoped context: Context): SuitableLocaleFinder =
         SuitableLocaleFinder(context)
 
     @Provides
