@@ -66,7 +66,8 @@ internal object ModelMapperManager : ModelConverter {
     fun mapLeftToSpendToPeriodBalanceForCurrentMonth(
         statistics: Map<String, Statistic>,
         period: Period,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         val mappedItems =
             convertToPeriodBalances(
@@ -77,6 +78,7 @@ internal object ModelMapperManager : ModelConverter {
                     true,
                     true
                 ),
+                dateUtils,
                 paddToYear = true
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
@@ -91,7 +93,8 @@ internal object ModelMapperManager : ModelConverter {
     fun mapLeftToSpendStatisticsToPeriodBalanceFor1Year(
         statistics: Map<String, Statistic>,
         endPeriod: Period,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         return convertToPeriodBalances(
             StatisticsToMap(
@@ -100,6 +103,7 @@ internal object ModelMapperManager : ModelConverter {
                 periodMap,
                 true
             ),
+            dateUtils,
             paddToYear = true
         )
     }
@@ -108,6 +112,7 @@ internal object ModelMapperManager : ModelConverter {
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
+        dateUtils: DateUtils,
         paddToYear: Boolean
     ): List<PeriodBalance> {
         val items =
@@ -117,6 +122,7 @@ internal object ModelMapperManager : ModelConverter {
                     endPeriod,
                     periodMap
                 ),
+                dateUtils,
                 paddToYear
             )
         for (item in items) {
@@ -130,6 +136,7 @@ internal object ModelMapperManager : ModelConverter {
         endPeriod: Period?,
         periodMap: Map<String, Period>,
         categoryCode: String?,
+        dateUtils: DateUtils,
         paddToYear: Boolean
     ): List<PeriodBalance> {
         val codesToRemove: MutableList<String> =
@@ -150,6 +157,7 @@ internal object ModelMapperManager : ModelConverter {
             statisticsCopy,
             endPeriod,
             periodMap,
+            dateUtils,
             paddToYear = paddToYear
         )
     }
@@ -159,13 +167,15 @@ internal object ModelMapperManager : ModelConverter {
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
-        categoryCode: String?
+        categoryCode: String?,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         return mapStatisticsToPeriodBalancesByCategoryCode(
             statistics,
             endPeriod,
             periodMap,
             categoryCode,
+            dateUtils,
             true
         )
     }
@@ -175,13 +185,15 @@ internal object ModelMapperManager : ModelConverter {
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
-        categoryCode: String?
+        categoryCode: String?,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         return mapStatisticsToPeriodBalancesByCategoryCode(
             statistics,
             endPeriod,
             periodMap,
             categoryCode,
+            dateUtils,
             false
         )
     }
@@ -242,6 +254,7 @@ internal object ModelMapperManager : ModelConverter {
 
     private fun convertToPeriodBalances(
         source: StatisticsToMap,
+        dateUtils: DateUtils,
         paddToYear: Boolean
     ): ArrayList<PeriodBalance> {
         var items =
@@ -264,11 +277,7 @@ internal object ModelMapperManager : ModelConverter {
             }
         } else {
             val periods =
-                DateUtils
-                    .getInstance(
-                        SuitableLocaleFinder().findLocale(),
-                        TimezoneManager.defaultTimezone
-                    )
+                dateUtils
                     .getYearMonthStringFor1YearByEndYearMonth(
                         source.period, source.periods, paddToYear
                     )

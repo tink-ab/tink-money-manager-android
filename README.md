@@ -23,7 +23,7 @@ _Note: The `mavenLocal()` repository needs to be on top of the other repositorie
 
 ```groovy
 dependencies {
-    implementation("com.tink:pfm-ui:0.9.5")
+    implementation("com.tink:pfm-ui:0.9.7")
 }
 ```
 

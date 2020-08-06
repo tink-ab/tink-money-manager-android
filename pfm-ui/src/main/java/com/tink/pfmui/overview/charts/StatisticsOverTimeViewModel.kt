@@ -53,7 +53,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                         statistics,
                         currentPeriod,
                         periodMap,
-                        category.code
+                        category.code,
+                        dateUtils
                     ).sortedByDescending { it.period?.stop }
                 postValue(balances)
             }
