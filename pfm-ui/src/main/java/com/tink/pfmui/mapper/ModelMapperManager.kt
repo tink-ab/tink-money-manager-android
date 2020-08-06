@@ -2,10 +2,8 @@ package com.tink.pfmui.mapper
 
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
-import com.tink.pfmui.TimezoneManager
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.collections.Currencies
-import com.tink.pfmui.configuration.SuitableLocaleFinder
 import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
 import se.tink.core.extensions.whenNonNull
@@ -66,7 +64,8 @@ internal object ModelMapperManager : ModelConverter {
     fun mapLeftToSpendToPeriodBalanceForCurrentMonth(
         statistics: Map<String, Statistic>,
         period: Period,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         val mappedItems =
             convertToPeriodBalances(
@@ -76,7 +75,8 @@ internal object ModelMapperManager : ModelConverter {
                     periodMap,
                     true,
                     true
-                )
+                ),
+                dateUtils
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
             whenNonNull(t1.period, t2.period) { period1, period2 ->
@@ -90,7 +90,8 @@ internal object ModelMapperManager : ModelConverter {
     fun mapLeftToSpendStatisticsToPeriodBalanceFor1Year(
         statistics: Map<String, Statistic>,
         endPeriod: Period,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         return convertToPeriodBalances(
             StatisticsToMap(
@@ -98,14 +99,16 @@ internal object ModelMapperManager : ModelConverter {
                 endPeriod,
                 periodMap,
                 true
-            )
+            ),
+            dateUtils
         )
     }
 
     private fun mapStatisticsToPeriodBalanceFor1Year(
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
-        periodMap: Map<String, Period>
+        periodMap: Map<String, Period>,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         val items =
             convertToPeriodBalances(
@@ -113,7 +116,8 @@ internal object ModelMapperManager : ModelConverter {
                     statistics,
                     endPeriod,
                     periodMap
-                )
+                ),
+                dateUtils
             )
         for (item in items) {
             item.amount = abs(item.amount)
@@ -126,7 +130,8 @@ internal object ModelMapperManager : ModelConverter {
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
-        categoryCode: String?
+        categoryCode: String?,
+        dateUtils: DateUtils
     ): List<PeriodBalance> {
         val codesToRemove: MutableList<String> =
             Lists.newArrayList()
@@ -145,7 +150,8 @@ internal object ModelMapperManager : ModelConverter {
         return mapStatisticsToPeriodBalanceFor1Year(
             statisticsCopy,
             endPeriod,
-            periodMap
+            periodMap,
+            dateUtils
         )
     }
 
@@ -203,7 +209,7 @@ internal object ModelMapperManager : ModelConverter {
         return average
     }
 
-    private fun convertToPeriodBalances(source: StatisticsToMap): ArrayList<PeriodBalance> {
+    private fun convertToPeriodBalances(source: StatisticsToMap, dateUtils: DateUtils): ArrayList<PeriodBalance> {
         var items =
             Lists.newArrayList<PeriodBalance>()
         if (source.isLeftToSpendData && source.isCurrentMonth) { // Daily for a period
@@ -224,14 +230,9 @@ internal object ModelMapperManager : ModelConverter {
             }
         } else {
             val periods =
-                DateUtils
-                    .getInstance(
-                        SuitableLocaleFinder().findLocale(),
-                        TimezoneManager.defaultTimezone
-                    )
-                    .getYearMonthStringFor1YearByEndYearMonth(
-                        source.period, source.periods, true
-                    )
+                dateUtils.getYearMonthStringFor1YearByEndYearMonth(
+                    source.period, source.periods, true
+                )
             items = addPeriodsToItems(
                 periods
             )

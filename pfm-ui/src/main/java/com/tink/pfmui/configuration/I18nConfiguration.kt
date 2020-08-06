@@ -48,6 +48,7 @@ import javax.inject.Inject
 
 internal class I18nConfiguration @Inject constructor(
     @ApplicationScoped private val context: Context,
+    private val suitableLocaleFinder: SuitableLocaleFinder,
     private val userRepository: UserRepository
 ) {
 
@@ -56,7 +57,7 @@ internal class I18nConfiguration @Inject constructor(
             it?.let(::setupI18nConfigurationDependentSingletons)
         })
 
-        val locale = SuitableLocaleFinder().findLocale()
+        val locale = suitableLocaleFinder.findLocale()
         val timezone = TimezoneManager.defaultTimezone
         getInstance(locale, timezone).formatHumanStrings = getMapWithHumanDateStrings()
         setDateFormatsMap(getDateFormatsMap())
@@ -66,7 +67,7 @@ internal class I18nConfiguration @Inject constructor(
         item.i18nConfiguration?.timezoneCode?.let {
             TimezoneManager.defaultTimezone = it
         }
-        getInstance(SuitableLocaleFinder().findLocale(), item.i18nConfiguration?.timezoneCode)
+        getInstance(suitableLocaleFinder.findLocale(), item.i18nConfiguration?.timezoneCode)
     }
 
     private fun getMapWithHumanDateStrings(): Map<String, String> {
