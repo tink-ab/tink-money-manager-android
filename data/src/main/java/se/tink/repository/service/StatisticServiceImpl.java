@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import se.tink.converter.ModelConverter;
 import se.tink.core.models.statistic.StatisticTree;
 import se.tink.core.models.transaction.Transaction;
-import se.tink.grpc.v1.rpc.GetStatisticsRequest;
-import se.tink.grpc.v1.rpc.StatisticsResponse;
+import se.tink.grpc.v1.rpc.QueryStatisticsRequest;
+import se.tink.grpc.v1.rpc.QueryStatisticsResponse;
 import se.tink.grpc.v1.services.StatisticServiceGrpc;
 import se.tink.repository.ChangeObserver;
 import se.tink.repository.ObjectChangeObserver;
@@ -111,11 +111,11 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Override
 	public void refreshStatistics() {
-		GetStatisticsRequest request = GetStatisticsRequest.getDefaultInstance();
+		QueryStatisticsRequest request = QueryStatisticsRequest.getDefaultInstance();
 		service
-			.getStatistics(request, new StreamObserver<StatisticsResponse>() {
+			.queryStatistics(request, new StreamObserver<QueryStatisticsResponse>() {
 				@Override
-				public void onNext(StatisticsResponse value) {
+				public void onNext(QueryStatisticsResponse value) {
 					StatisticTree statisticTree = converter.map(value.getStatistics(), StatisticTree.class);
 					for (ObjectChangeObserver<StatisticTree> changeObserver : changeObserverers) {
 						changeObserver.onRead(statisticTree);

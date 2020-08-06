@@ -45,6 +45,7 @@ import se.tink.repository.ObjectChangeObserver;
 import se.tink.repository.service.StatisticService;
 import se.tink.repository.service.StreamingService;
 import se.tink.repository.service.UserConfigurationService;
+import se.tink.utils.DateUtils;
 
 public class TabExpensesBarChartFragment extends BaseFragment implements TransitionAwareFragment,
 	PeriodProvider {
@@ -66,6 +67,12 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 
 	@Inject
 	StatisticsRepository statisticsRepository;
+
+	@Inject
+	SuitableLocaleFinder suitableLocaleFinder;
+
+	@Inject
+	DateUtils dateUtils;
 
 	@Inject
 	ExceptionTracker exceptionTracker;
@@ -187,7 +194,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		if (endPeriod != null || BuildConfig.DEBUG) {
 			expensesItemsFor1Year = ModelMapperManager
 				.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
-					expenses, endPeriod, periods, categoryCode);
+					expenses, endPeriod, periods, categoryCode, dateUtils);
 
 			setup6MonthsChart();
 		} else {
@@ -217,7 +224,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		if (endPeriod != null) {
 			expensesItemsFor1Year = ModelMapperManager
 				.mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
-					expenses, endPeriod, periodMap, categoryCode);
+					expenses, endPeriod, periodMap, categoryCode, dateUtils);
 
 			setup1YearChart();
 		}
@@ -267,7 +274,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 
@@ -307,7 +314,7 @@ public class TabExpensesBarChartFragment extends BaseFragment implements Transit
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 

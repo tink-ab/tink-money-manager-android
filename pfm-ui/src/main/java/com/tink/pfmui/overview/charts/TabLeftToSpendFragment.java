@@ -192,7 +192,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		itemsFor1Year = ModelMapperManager
 			.mapLeftToSpendStatisticsToPeriodBalanceFor1Year(
 				leftToSpend.get(LEFT_TO_SPEND_ACTUAL).getChildren(),
-				chosenPeriod, periods);
+				chosenPeriod, periods, dateUtils);
 
 		switch (index) {
 
@@ -229,7 +229,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		Charts.setupLineChart(
 			lineChartContainer,
 			userConfiguration.getI18nConfiguration().getCurrencyCode(),
-			new SuitableLocaleFinder().findLocale(),
+			suitableLocaleFinder.findLocale(),
 			TimezoneManager.defaultTimezone,
 			true,
 			true,
@@ -333,7 +333,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 
@@ -374,7 +374,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		Charts
 			.setupBarChart(getContext(),
 				getCurrencyCode(),
-				new SuitableLocaleFinder().findLocale(),
+				suitableLocaleFinder.findLocale(),
 				TimezoneManager.defaultTimezone, barChart);
 	}
 
@@ -418,7 +418,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 					.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 						leftToSpend.get(LEFT_TO_SPEND_AVERAGE)
 							.getChildren(),
-						chosenPeriod, periodMap);
+						chosenPeriod, periodMap, dateUtils);
 
 				for (PeriodBalance periodBalance : averageDataForAMonth) {
 					if (periodBalance.getPeriod() != null && periodBalance.getPeriod()
@@ -484,12 +484,12 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 		List<PeriodBalance> items = ModelMapperManager
 			.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 				leftToSpend.get(LEFT_TO_SPEND_ACTUAL).getChildren(),
-				chosenPeriod, periodMap);
+				chosenPeriod, periodMap, dateUtils);
 
 		List<PeriodBalance> averageDataForAMonth = ModelMapperManager
 			.mapLeftToSpendToPeriodBalanceForCurrentMonth(
 				leftToSpend.get(LEFT_TO_SPEND_AVERAGE).getChildren(),
-				chosenPeriod, periodMap);
+				chosenPeriod, periodMap, dateUtils);
 
 		Charts.updateStatisticsForLineChart(lineChartContainer, items, averageDataForAMonth);
 
