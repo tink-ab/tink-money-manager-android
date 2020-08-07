@@ -96,7 +96,7 @@ internal class CategorizationFlowViewModel @Inject constructor(
 
         val transaction = transaction.value ?: return
 
-        if (categoryId != transaction.categoryId) { //TODO
+        if (categoryId != transaction.categoryId) {
             _state.value = State.SimilarTransactions(categoryId)
             categorizeTransactions(listOf(transaction.id), categoryId)
         } else {

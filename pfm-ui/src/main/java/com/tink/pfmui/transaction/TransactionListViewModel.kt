@@ -21,6 +21,7 @@ import se.tink.android.repository.transaction.CategoryTransactionPagesLiveData
 import se.tink.android.repository.transaction.LeftToSpendTransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.findCategoryById
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
@@ -34,7 +35,8 @@ internal open class TransactionListViewModel @Inject constructor(
     categoryRepository: CategoryRepository,
     private val transactionService: TransactionService,
     private val appExecutors: AppExecutors,
-    private val transactionItemFactory: TransactionItemFactory
+    private val transactionItemFactory: TransactionItemFactory,
+    private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : ViewModel() {
 
 
@@ -112,13 +114,15 @@ internal open class TransactionListViewModel @Inject constructor(
 
             is TransactionListMode.All -> AllTransactionPagesLiveData(
                 appExecutors,
-                transactionService
+                transactionService,
+                transactionUpdateEventBus
             )
 
             is TransactionListMode.Category -> CategoryTransactionPagesLiveData(
                 mode.categoryId,
                 appExecutors,
                 transactionService,
+                transactionUpdateEventBus,
                 mode.period
             )
 

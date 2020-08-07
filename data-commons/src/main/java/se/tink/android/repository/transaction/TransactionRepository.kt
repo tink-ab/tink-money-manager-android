@@ -9,6 +9,7 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -18,10 +19,12 @@ import se.tink.android.AppExecutors
 import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
-    private val appExecutors: AppExecutors
+    private val appExecutors: AppExecutors,
+    private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) {
 
     val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -47,7 +50,7 @@ class TransactionRepository @Inject constructor(
     }
 
     fun forAccountId(accountId: String): TransactionPagesLiveData =
-        AccountTransactionPagesLiveData(accountId, appExecutors, transactionService)
+        AccountTransactionPagesLiveData(accountId, appExecutors, transactionService, transactionUpdateEventBus)
 
 
     fun fetchById(id: String): SingleTransactionLiveData =
@@ -74,8 +77,21 @@ class TransactionRepository @Inject constructor(
         scope.launch {
             try {
                 transactionService.categorizeTransactions(transactionIds, newCategoryId)
+                fetchAndPostUpdates(transactionIds)
             } catch (error: Throwable) {
                 onError(TinkNetworkError(error))
+            }
+        }
+    }
+
+    private fun fetchAndPostUpdates(transactionIds: List<String>) {
+        for (id in transactionIds) {
+            scope.launch {
+                try {
+                    transactionUpdateEventBus.postUpdate(transactionService.getTransaction(id))
+                } catch (error: Throwable) {
+                    // Fail silently
+                }
             }
         }
     }
