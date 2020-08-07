@@ -67,8 +67,6 @@ internal class CategorySelectionFragment : BaseFragment() {
             override fun onChanged(it: List<TreeListSelectionItem>?) {
                 it?.let { items ->
 
-                    Log.d("Jan", "Got category items: $items");
-
                     categories.removeObserver(this)
                     view.list.adapter = adapter
                     val selectedItem = checkedCategoryId?.let { id ->

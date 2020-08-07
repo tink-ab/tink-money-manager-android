@@ -41,6 +41,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
+        viewModel.refresh()
         viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
             view.insightsCount.text = insightsList.size.toString()
         })

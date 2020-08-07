@@ -12,10 +12,13 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.threeten.bp.Instant;
+import org.threeten.bp.LocalDate;
 import se.tink.commons.extensions.TimeExtensionsKt;
 
 public class DateUtils {
@@ -252,6 +255,10 @@ public class DateUtils {
 			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT, defaultLocale, timezoneCode).format(dateTime);
 	}
 
+	public String getDayOfWeek(@NotNull LocalDate date) {
+		return getDayOfWeek(DateTime.parse(date.toString()));
+	}
+
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent, String timezoneCode) {
 		if (date.getYear() == DateTime.now().getYear() || !includeYearIfNotCurrent) {
 			return ThreadSafeDateFormat
@@ -383,5 +390,6 @@ public class DateUtils {
 		}
 		return day.toString(); //TODO
 	}
+
 
 }

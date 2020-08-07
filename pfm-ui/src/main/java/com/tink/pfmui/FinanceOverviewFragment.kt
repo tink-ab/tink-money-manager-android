@@ -17,6 +17,7 @@ import com.tink.pfmui.configuration.I18nConfiguration
 import com.tink.pfmui.di.DaggerFragmentComponent
 import com.tink.pfmui.insights.actionhandling.CustomInsightActionHandler
 import com.tink.pfmui.insights.actionhandling.InsightActionHandler
+import com.tink.pfmui.insights.actionhandling.PerformedActionNotifier
 import com.tink.pfmui.overview.OverviewFragment
 import com.tink.pfmui.repository.StatisticsRepository
 import com.tink.pfmui.security.DefaultRecoveryHandler
@@ -64,6 +65,9 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     internal lateinit var dataRefreshHandler: DataRefreshHandler
+
+    @Inject
+    internal lateinit var performedActionNotifier: PerformedActionNotifier
 
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming

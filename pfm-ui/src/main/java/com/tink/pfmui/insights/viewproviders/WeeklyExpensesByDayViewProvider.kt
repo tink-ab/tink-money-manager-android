@@ -69,7 +69,7 @@ private fun List<ExpensesByDay>.toChartData(
     dateUtils: DateUtils,
     amountFormatter: AmountFormatter
 ) = ExpensesByDayChartData(
-    map { dateUtils.getDayOfWeek(it.date.toDateTime()) },
+    map { dateUtils.getDayOfWeek(it.date) },
     map { it.totalAmount.value.floatValue() },
     map {
         amountFormatter.format(
