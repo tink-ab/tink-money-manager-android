@@ -70,5 +70,6 @@
 
     <!-- Button styles -->
     <item name="tink_containerButtonStyle">@style/TinkContainerButtonStyle</item>
+    <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
   </style>
 </resources>
