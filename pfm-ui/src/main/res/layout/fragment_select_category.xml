@@ -14,7 +14,8 @@
     android:transitionName="@string/toolbar_transition"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="?android:homeAsUpIndicator">
 
     <com.tink.pfmui.view.TinkTextView
       android:id="@+id/category"
