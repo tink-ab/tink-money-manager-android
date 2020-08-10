@@ -71,5 +71,7 @@
     <!-- Button styles -->
     <item name="tink_containerButtonStyle">@style/TinkContainerButtonStyle</item>
     <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
+    <item name="tink_insightPrimaryActionButtonStyle">@style/TinkInsightPrimaryActionButtonStyle</item>
+    <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
   </style>
 </resources>

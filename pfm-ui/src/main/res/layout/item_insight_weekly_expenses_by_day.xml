@@ -116,9 +116,9 @@
       app:layout_constraintTop_toBottomOf="@+id/title"
       tools:text="Expenses by day" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/primaryButton"
-      style="@style/TinkInsightPrimaryActionButtonStyle"
+      style="?attr/tink_insightPrimaryActionButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="8dp"
@@ -127,9 +127,9 @@
       app:layout_constraintBottom_toBottomOf="parent"
       tools:text="Yes, sounds good!" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/secondaryButton"
-      style="@style/TinkInsightSecondaryActionButtonStyle"
+      style="?attr/tink_insightSecondaryActionButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintEnd_toStartOf="@+id/primaryButton"
