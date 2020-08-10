@@ -36,7 +36,7 @@
 
   <Button
     android:id="@+id/primaryButton"
-    style="@style/primaryButton"
+    style="@style/TinkInsightPrimaryActionButtonStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
@@ -48,7 +48,7 @@
 
   <Button
     android:id="@+id/secondaryButton"
-    style="@style/secondaryButton"
+    style="@style/TinkInsightSecondaryActionButtonStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@null"
