@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- TODO: Use material button style as parent -->
   <style name="button" parent="Widget.AppCompat.Button.Borderless.Colored">
     <item name="android:textColor">?tink_colorOnAccent</item>
     <item name="android:textAllCaps">false</item>

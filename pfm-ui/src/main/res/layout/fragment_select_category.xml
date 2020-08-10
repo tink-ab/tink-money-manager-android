@@ -57,7 +57,7 @@
 
     <Button
       android:id="@+id/button"
-      style="@style/button"
+      style="?attr/tink_containerButtonStyle"
       android:layout_width="0dp"
       android:layout_height="@dimen/button_height"
       android:text="@string/tink_category_list_fragment_button_text"

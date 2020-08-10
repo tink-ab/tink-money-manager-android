@@ -52,7 +52,7 @@
 
   <Button
     android:id="@+id/doneBtn"
-    style="@style/button"
+    style="?attr/tink_containerButtonStyle"
     android:layout_height="@dimen/button_height"
     android:layout_width="match_parent"
     android:elevation="@dimen/button_elevation"

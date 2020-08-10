@@ -67,5 +67,8 @@
     <item name="tink_icon_category_transfers_savings">@drawable/ic_category_savings</item>
     <item name="tink_icon_category_transfers_other">@drawable/ic_category_other</item>
     <item name="tink_icon_category_uncategorized">@drawable/ic_uncategorized</item>
+
+    <!-- Button styles -->
+    <item name="tink_containerButtonStyle">@style/button</item>
   </style>
 </resources>
