@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="TinkFinanceOverviewStyle">
+  <style name="TinkFinanceOverviewStyle" parent="Theme.MaterialComponents">
     <item name="tink_backgroundColor">@color/white</item>
     <item name="tink_expensesColor">@color/expensive_blue</item>
     <item name="tink_expensesLightColor">@color/expensive_blue_light</item>
@@ -67,5 +67,11 @@
     <item name="tink_icon_category_transfers_savings">@drawable/ic_category_savings</item>
     <item name="tink_icon_category_transfers_other">@drawable/ic_category_other</item>
     <item name="tink_icon_category_uncategorized">@drawable/ic_uncategorized</item>
+
+    <!-- Button styles -->
+    <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
+    <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
+    <item name="tink_insightPrimaryActionButtonStyle">@style/TinkInsightPrimaryActionButtonStyle</item>
+    <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
   </style>
 </resources>

@@ -94,12 +94,12 @@
           app:layout_constraintEnd_toStartOf="@+id/insightsCardButton"
           app:layout_constraintStart_toEndOf="@+id/spacer"/>
 
-        <TextView
+        <com.google.android.material.button.MaterialButton
           android:id="@+id/insightsCardButton"
-          style="@style/deci.action.bold"
+          style="?attr/tink_textButtonStyle"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginEnd="16dp"
+          android:layout_marginEnd="8dp"
           android:text="@string/tink_insights_overview_card_action_text"
           android:textColor="?tink_colorOnAccent"
           android:gravity="center_vertical"
