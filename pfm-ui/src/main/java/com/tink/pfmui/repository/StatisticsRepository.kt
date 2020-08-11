@@ -6,26 +6,37 @@ import androidx.lifecycle.liveData
 import com.tink.annotations.PfmScope
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
+import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
 import org.joda.time.DateTime
 import se.tink.android.livedata.map
+import se.tink.android.livedata.switchMap
+import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
 import javax.inject.Inject
 
 @PfmScope
 internal class StatisticsRepository @Inject constructor(
-    private val statisticsService: StatisticsService
+    private val statisticsService: StatisticsService,
+    userRepository: UserRepository
 ) {
-    val statistics = liveData {
-        val statistics = try {
-            statisticsService.query()
-        } catch (error: Throwable) {
-            listOf<Statistics>()
+    val statistics = userRepository.userProfile.switchMap { userProfile ->
+        liveData {
+            val statistics = try {
+                statisticsService.query(
+                    StatisticsQueryDescriptor(
+                        periodMode = userProfile!!.periodMode,
+                        currencyCode = userProfile.currency
+                    )
+                )
+            } catch (error: Throwable) {
+                listOf<Statistics>()
+            }
+            emit(statistics)
         }
-        emit(statistics)
     }
 
-    val periodMap: LiveData<Map<String, Period>> = statistics.map {statistics ->
+    private val periodMap: LiveData<Map<String, Period>> = statistics.map { statistics ->
         statistics.associate { it.period.identifier to it.period  }
     }
 
