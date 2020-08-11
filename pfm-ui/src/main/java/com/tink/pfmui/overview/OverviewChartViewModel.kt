@@ -67,7 +67,7 @@ internal class OverviewChartViewModel @Inject constructor(
     val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
         val data: List<Float> =
             calculateStatistic(
-                it.statistics.filter { s -> s.type == "expenses-by-category" },
+                it.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
                 it.categories.expenses.children,
                 it.period
             ).items.map { it.amount }
@@ -90,7 +90,7 @@ internal class OverviewChartViewModel @Inject constructor(
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
         val data: List<Float> =
             calculateStatistic(
-                it.statistics.filter { s -> s.type == "income-by-category" },
+                it.statistics.filter { s -> s.type == Statistics.Type.INCOME_BY_CATEGORY },
                 it.categories.income.children,
                 it.period
             ).items.map { it.amount }

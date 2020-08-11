@@ -140,13 +140,13 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 val src = data.source
                 when (type) {
                     ChartType.EXPENSES -> calculateStatistic(
-                        data.statistic.filter { it.type == "expenses-by-category" },
+                        data.statistic.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY },
                         src.category.children,
                         src.period
                     )
 
                     ChartType.INCOME -> calculateStatistic(
-                        data.statistic.filter { it.type == "income-by-category" },
+                        data.statistic.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY },
                         src.category.children,
                         src.period
                     )

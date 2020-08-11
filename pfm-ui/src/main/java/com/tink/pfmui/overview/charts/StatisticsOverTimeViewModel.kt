@@ -6,6 +6,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.category.Category
+import com.tink.model.statistics.Statistics
 import com.tink.pfmui.R
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.repository.StatisticsRepository
@@ -49,8 +50,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
             ) { statisticsList, category ->
 
                 val statistics = when (category.type) {
-                    Category.Type.INCOME -> statisticsList.filter { it.type == "income-by-category" }
-                    Category.Type.EXPENSE -> statisticsList.filter { it.type == "expenses-by-category" }
+                    Category.Type.INCOME -> statisticsList.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY }
+                    Category.Type.EXPENSE -> statisticsList.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
                     else -> return
                 }
 
