@@ -31,7 +31,6 @@ class InsightsRepository @Inject constructor(
             } catch (error: Throwable) {
                 ErrorOrValue(error = TinkNetworkError(error))
             }
-            result.error?.let { throw it }
             it.postValue(result)
         }
     }
@@ -47,14 +46,11 @@ class InsightsRepository @Inject constructor(
                     val insights = insightService.listArchived()
                     ErrorOrValue(value = insights)
                 } catch (error: Throwable) {
-                    throw error
                     ErrorOrValue(error = TinkNetworkError(error))
                 }
-                result.error?.let { throw it }
                 it.postValue(result)
             }
         }
-
 
     val archivedInsights: LiveData<List<Insight>> = Transformations.map(_archivedInsights) {
         it?.value ?: emptyList()
