@@ -2,7 +2,7 @@
 
 Tink PFM UI allows you to customize the buttons shown in the finance overview UI by customizing their styles.
 
-## Customize icons
+## Customize buttons
 You can customize the buttons by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the button style resource attributes that are available.
 Add your extended style in your application's `styles.xml`.
 ```xml
@@ -32,7 +32,7 @@ You can also override from the default Tink button styles:
 </resources>
 ```
 
-Here's a list of all the icon resource attributes in the Tink PFM UI that can be overridden:
+Here's a list of all the button style resource attributes in the Tink PFM UI that can be overridden:
 
 | Custom Style Resource ID | Description | Default value |
 |------|-----|-----|
