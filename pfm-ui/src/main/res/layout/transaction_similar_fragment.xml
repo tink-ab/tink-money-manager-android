@@ -52,7 +52,7 @@
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/doneBtn"
-    style="?attr/tink_containerButtonStyle"
+    style="?attr/tink_containedButtonStyle"
     android:layout_height="@dimen/button_height"
     android:layout_width="match_parent"
     android:text="@string/tink_transaction_similar_button_accept_text"

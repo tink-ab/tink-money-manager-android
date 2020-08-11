@@ -36,7 +36,7 @@ Here's a list of all the button style resource attributes in the Tink PFM UI tha
 
 | Custom Style Resource ID | Description | Default value |
 |------|-----|-----|
-| `tink_containerButtonStyle` | Style for all container buttons used in PFM UI | `TinkContainerButtonStyle` |
+| `tink_containedButtonStyle` | Style for all contained buttons used in PFM UI | `TinkContainedButtonStyle` |
 | `tink_textButtonStyle` | Style for all text buttons used in PFM UI | `TinkTextButtonStyle` |
 | `tink_insightPrimaryActionButtonStyle` | Style for the primary action buttons in insight cards | `TinkInsightPrimaryActionButtonStyle` |
 | `tink_insightSecondaryActionButtonStyle` | Style for the secondary action buttons in insight cards | `TinkInsightSecondaryActionButtonStyle` |
