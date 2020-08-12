@@ -160,7 +160,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     fun refreshData() {
         dataRefreshHandler.refreshCategories()
-        dataRefreshHandler.refreshStatistics()
         dataRefreshHandler.refreshUserConfiguration()
         dataRefreshHandler.refreshRegistered()
     }
