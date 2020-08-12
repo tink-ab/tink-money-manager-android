@@ -5,26 +5,32 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import se.tink.android.repository.TinkNetworkError
 
+@ExperimentalCoroutinesApi
 class SingleTransactionLiveData(
     private val transactionId: String,
-    val transactionService: TransactionService
+    val transactionService: TransactionService,
+    val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : MutableLiveData<TransactionResult>() {
 
     private var fetchOnInit = true
 
     constructor(
         transaction: Transaction,
-        transactionService: TransactionService
-    ) : this(transaction.id, transactionService) {
+        transactionService: TransactionService,
+        transactionUpdateEventBus: TransactionUpdateEventBus
+    ) : this(transaction.id, transactionService, transactionUpdateEventBus) {
         fetchOnInit = false
         postValue(TransactionReceived(transaction))
     }
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val updateSubscription: Job
 
     init {
         if (fetchOnInit) {
@@ -37,14 +43,14 @@ class SingleTransactionLiveData(
                 }
             }
         }
-        // TODO: How to do subscription
-//        transactionService.subscribe(changeObserver)
+        updateSubscription = transactionUpdateEventBus.subscribe {
+            if (it.id == transactionId) postValue(TransactionReceived(it))
+        }
     }
 
     fun dispose() {
-//        transactionService.unsubscribe(changeObserver)
+        updateSubscription.cancel()
     }
-
 }
 
 sealed class TransactionResult

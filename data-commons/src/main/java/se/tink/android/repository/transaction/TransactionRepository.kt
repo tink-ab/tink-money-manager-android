@@ -54,10 +54,10 @@ class TransactionRepository @Inject constructor(
 
 
     fun fetchById(id: String): SingleTransactionLiveData =
-        SingleTransactionLiveData(id, transactionService)
+        SingleTransactionLiveData(id, transactionService, transactionUpdateEventBus)
 
     fun subscribeForTransaction(transaction: Transaction): SingleTransactionLiveData =
-        SingleTransactionLiveData(transaction, transactionService)
+        SingleTransactionLiveData(transaction, transactionService, transactionUpdateEventBus)
 
     fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>> =
         liveData {
