@@ -2,9 +2,11 @@ package se.tink.android.livedata
 
 import androidx.lifecycle.MutableLiveData
 import com.tink.service.handler.ResultHandler
-import com.tink.service.observer.ListChangeObserver
+import com.tink.service.observer.ChangeObserver
 import se.tink.android.AppExecutors
 import se.tink.android.repository.TinkNetworkError
+
+interface ListChangeObserver<T>: ChangeObserver<List<T>>
 
 // T must provide equals method which is not based on objects identity
 fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): ListChangeObserver<T> {

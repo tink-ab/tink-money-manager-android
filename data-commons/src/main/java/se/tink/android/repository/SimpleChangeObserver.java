@@ -1,8 +1,7 @@
 package se.tink.android.repository;
 
-
-import com.tink.service.observer.ListChangeObserver;
 import java.util.List;
+import se.tink.android.livedata.ListChangeObserver;
 
 public class SimpleChangeObserver<T> implements ListChangeObserver<T> {
 
