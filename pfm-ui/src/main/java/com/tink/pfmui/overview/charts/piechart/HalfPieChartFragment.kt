@@ -2,7 +2,6 @@ package com.tink.pfmui.overview.charts.piechart
 
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import android.content.Context
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionManager
@@ -31,7 +30,6 @@ import com.tink.pfmui.overview.charts.TransactionsItem
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
-import com.tink.pfmui.util.nameWithDefaultChildFormat
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
@@ -110,7 +108,7 @@ internal class HalfPieChartFragment : BaseFragment() {
         binding.itemTheme = HalfChartItemTheme(context!!.getColorFromAttr(ownTheme.chartItemColor))
         binding.items = model.data.items.map { item ->
             HalfChartItem(
-                (item as? StatisticItem)?.getName(requireContext()) ?: item.name,
+                item.name,
                 amountFormatter.format(item.amount.toDouble(), useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
@@ -177,6 +175,3 @@ internal class HalfPieChartFragment : BaseFragment() {
 internal data class HalfChartItem(val title: String, val amount: String, val onClick: View.OnClickListener)
 
 internal class HalfChartItemTheme(@ColorInt val textColor: Int)
-
-private fun StatisticItem.getName(context: Context) =
-    category.nameWithDefaultChildFormat(context)

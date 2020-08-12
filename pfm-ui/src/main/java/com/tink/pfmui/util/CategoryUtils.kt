@@ -43,29 +43,11 @@ internal fun Category.findChildByCode(code: String): Category? {
     }
 }
 
-fun Category.nameWithDefaultChildFormat(context: Context): String {
-
-    // TODO: Why do we need this.
-    //  Current name is for example "Food & Drinks Other". This will
-    //  convert it to "Food & Drinks Other - Other"
-//    return if (
-//        isDefaultChild &&
-//        parent.children.size > 1
-//        !this.code.startsWith(CategoryExpenseType.EXPENSES_MISC.code) // to avoid "Other Other"
-//    ) {
-//        String.format(context.getString(R.string.tink_category_default_child_format), name)
-//    } else {
-//        name
-//    }
-
-    return name
-}
-
 internal fun Category.toTreeListSelectionItem(context: Context): TreeListSelectionItem {
     return if (children.isEmpty()) {
         TreeListSelectionItem.ChildItem(
             id = id,
-            label = nameWithDefaultChildFormat(context)
+            label = name
         )
     } else {
         TreeListSelectionItem.TopLevelItem(
