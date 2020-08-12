@@ -10,9 +10,7 @@ import java.util.Date
 
 fun Instant.toDateTime(): DateTime = DateTime(this.toEpochMilli())
 
-
-//TODO: Naming to reflect what this actually does
-fun Period.isAfter(other: Period) = start.isAfter(other.end)
+fun Period.startsAfterEndOf(other: Period) = start.isAfter(other.end)
 
 fun Period.isInPeriod(dateTime: DateTime): Boolean {
 
@@ -38,7 +36,7 @@ fun Period.toMonthString(): String? {
 
 object PeriodUtil {
     @JvmStatic
-    fun isAfter(one: Period, other: Period) = one.isAfter(other)
+    fun isAfter(one: Period, other: Period) = one.startsAfterEndOf(other)
 
     @JvmStatic
     fun isInPeriod(dateTime: DateTime, period: Period) = period.isInPeriod(dateTime)
