@@ -2,8 +2,10 @@ package com.tink.pfmui.mapper
 
 import com.google.common.collect.Lists
 import com.google.common.collect.Maps
+import com.tink.pfmui.TimezoneManager
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.collections.Currencies
+import com.tink.pfmui.configuration.SuitableLocaleFinder
 import org.joda.time.DateTime
 import se.tink.converter.ModelConverter
 import se.tink.core.extensions.whenNonNull
@@ -76,7 +78,8 @@ internal object ModelMapperManager : ModelConverter {
                     true,
                     true
                 ),
-                dateUtils
+                dateUtils,
+                paddToYear = true
             )
         mappedItems.sortWith(Comparator { t1: PeriodBalance, t2: PeriodBalance ->
             whenNonNull(t1.period, t2.period) { period1, period2 ->
@@ -100,15 +103,17 @@ internal object ModelMapperManager : ModelConverter {
                 periodMap,
                 true
             ),
-            dateUtils
+            dateUtils,
+            paddToYear = true
         )
     }
 
-    private fun mapStatisticsToPeriodBalanceFor1Year(
+    private fun mapStatisticsToPeriodBalances(
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
-        dateUtils: DateUtils
+        dateUtils: DateUtils,
+        paddToYear: Boolean
     ): List<PeriodBalance> {
         val items =
             convertToPeriodBalances(
@@ -117,7 +122,8 @@ internal object ModelMapperManager : ModelConverter {
                     endPeriod,
                     periodMap
                 ),
-                dateUtils
+                dateUtils,
+                paddToYear
             )
         for (item in items) {
             item.amount = abs(item.amount)
@@ -125,13 +131,13 @@ internal object ModelMapperManager : ModelConverter {
         return items
     }
 
-    @JvmStatic
-    fun mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
+    private fun mapStatisticsToPeriodBalancesByCategoryCode(
         statistics: Map<String, Statistic>,
         endPeriod: Period?,
         periodMap: Map<String, Period>,
         categoryCode: String?,
-        dateUtils: DateUtils
+        dateUtils: DateUtils,
+        paddToYear: Boolean
     ): List<PeriodBalance> {
         val codesToRemove: MutableList<String> =
             Lists.newArrayList()
@@ -147,11 +153,48 @@ internal object ModelMapperManager : ModelConverter {
         for (key in codesToRemove) {
             statisticsCopy.remove(key)
         }
-        return mapStatisticsToPeriodBalanceFor1Year(
+        return mapStatisticsToPeriodBalances(
             statisticsCopy,
             endPeriod,
             periodMap,
-            dateUtils
+            dateUtils,
+            paddToYear = paddToYear
+        )
+    }
+
+    @JvmStatic
+    fun mapStatisticsToPeriodBalanceFor1YearByCategoryCode(
+        statistics: Map<String, Statistic>,
+        endPeriod: Period?,
+        periodMap: Map<String, Period>,
+        categoryCode: String?,
+        dateUtils: DateUtils
+    ): List<PeriodBalance> {
+        return mapStatisticsToPeriodBalancesByCategoryCode(
+            statistics,
+            endPeriod,
+            periodMap,
+            categoryCode,
+            dateUtils,
+            true
+        )
+    }
+
+    @JvmStatic
+    fun mapStatisticsToPeriodBalanceForAllTimeByCategoryCode(
+        statistics: Map<String, Statistic>,
+        endPeriod: Period?,
+        periodMap: Map<String, Period>,
+        categoryCode: String?,
+        dateUtils: DateUtils
+    ): List<PeriodBalance> {
+        return mapStatisticsToPeriodBalancesByCategoryCode(
+            statistics,
+            endPeriod,
+            periodMap,
+            categoryCode,
+            dateUtils,
+            false
         )
     }
 
@@ -209,7 +252,11 @@ internal object ModelMapperManager : ModelConverter {
         return average
     }
 
-    private fun convertToPeriodBalances(source: StatisticsToMap, dateUtils: DateUtils): ArrayList<PeriodBalance> {
+    private fun convertToPeriodBalances(
+        source: StatisticsToMap,
+        dateUtils: DateUtils,
+        paddToYear: Boolean
+    ): ArrayList<PeriodBalance> {
         var items =
             Lists.newArrayList<PeriodBalance>()
         if (source.isLeftToSpendData && source.isCurrentMonth) { // Daily for a period
@@ -230,9 +277,10 @@ internal object ModelMapperManager : ModelConverter {
             }
         } else {
             val periods =
-                dateUtils.getYearMonthStringFor1YearByEndYearMonth(
-                    source.period, source.periods, true
-                )
+                dateUtils
+                    .getYearMonthStringFor1YearByEndYearMonth(
+                        source.period, source.periods, paddToYear
+                    )
             items = addPeriodsToItems(
                 periods
             )

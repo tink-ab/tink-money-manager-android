@@ -7,6 +7,7 @@ import com.tink.pfmui.overview.accounts.AccountsViewModel
 import com.tink.pfmui.overview.charts.CategorySelectionViewModel
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
+import com.tink.pfmui.overview.charts.StatisticsOverTimeViewModel
 import com.tink.pfmui.overview.latesttransactions.LatestTransactionsViewModel
 import com.tink.pfmui.transaction.CategorizationFlowViewModel
 import com.tink.pfmui.transaction.SimilarTransactionsViewModel
@@ -259,4 +260,9 @@ internal interface ViewModelModule {
     @IntoMap
     @ViewModelKey(AccountDetailsViewModel::class)
     fun bindAccountDetailsViewModel(model: AccountDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(StatisticsOverTimeViewModel::class)
+    fun bindStatisticsOverTimeViewModel(model: StatisticsOverTimeViewModel): ViewModel
 }

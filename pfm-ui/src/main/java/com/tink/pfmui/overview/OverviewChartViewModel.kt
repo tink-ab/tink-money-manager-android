@@ -132,10 +132,18 @@ internal data class OverviewChartModel(
     ) : this(
         context.getString(title),
         amount,
-        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount.toDouble()),
+        getAmountStringForOverviewPieChart(amount.toDouble(), context),
         period,
         color,
         colorGenerator,
         data
     )
+}
+
+internal fun getAmountStringForOverviewPieChart(amount: Double, context: Context): String {
+    return if (context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)) {
+        CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
+    } else {
+        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
+    }
 }
