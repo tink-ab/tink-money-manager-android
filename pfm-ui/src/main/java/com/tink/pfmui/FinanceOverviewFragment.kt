@@ -11,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.tink.pfmui.buildConfig.BuildConfigurations
 import com.tink.pfmui.buildConfig.NetworkConfiguration
 import com.tink.pfmui.collections.Categories
+import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.collections.Periods
 import com.tink.pfmui.configuration.I18nConfiguration
 import com.tink.pfmui.di.DaggerFragmentComponent
@@ -29,6 +30,7 @@ import se.tink.repository.cache.CacheHandle
 import se.tink.repository.service.CategoryService
 import se.tink.repository.service.DataRefreshHandler
 import se.tink.repository.service.HeaderClientInterceptor
+import se.tink.repository.service.UserConfigurationService
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -61,6 +63,9 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     internal lateinit var categoryService: CategoryService
+
+    @Inject
+    internal lateinit var userConfigurationService: UserConfigurationService
 
     @Inject
     internal lateinit var cacheHandle: CacheHandle
@@ -189,6 +194,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     private fun attachListeners() {
         Categories.getSharedInstance().attatchListener(categoryService)
+        Currencies.getSharedInstance().attatchListener(userConfigurationService)
         Periods.getSharedInstance().attatchListener(statisticsRepository)
     }
 
