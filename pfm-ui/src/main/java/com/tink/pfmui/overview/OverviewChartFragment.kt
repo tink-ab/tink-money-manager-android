@@ -31,12 +31,16 @@ import com.tink.pfmui.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.piechart.addBackSegment
 import com.tink.pfmui.overview.charts.piechart.addSegments
-import com.tink.pfmui.util.CurrencyUtils
+import se.tink.commons.currency.AmountFormatter
+import javax.inject.Inject
 import kotlin.math.abs
 
 internal class OverviewChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[OverviewChartViewModel::class.java] }
     private val pageTransformer by lazy { PageTransformer(resources) }
+
+    @Inject
+    lateinit var amountFormatter: AmountFormatter
 
     override fun getLayoutId() = R.layout.fragment_overview_chart
     override fun needsLoginToBeAuthorized() = true
@@ -109,11 +113,12 @@ internal class OverviewChartFragment : BaseFragment() {
             addTransition(PieChartLabelTransition())
             addTransition(PieChartSegmentTransition(R.id.transition_group_main))
             addTransition(Fade().apply { addTarget(R.id.back_segment) })
-            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble()).apply { }
-            }.apply {
-                addTarget(R.id.amount)
-            })
+            // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//                amountFormatter.format(it.toDouble(), useSymbol = false)
+//            }.apply {
+//                addTarget(R.id.amount)
+//            })
             duration = 1000
         }
 

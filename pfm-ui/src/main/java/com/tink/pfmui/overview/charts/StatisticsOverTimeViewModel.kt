@@ -9,10 +9,10 @@ import com.tink.pfmui.R
 import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.mapper.ModelMapperManager
 import com.tink.pfmui.repository.StatisticsRepository
-import com.tink.pfmui.util.CurrencyUtils
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.commons.categories.iconColor
+import se.tink.commons.currency.AmountFormatter
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.Category
 import se.tink.utils.DateUtils
@@ -21,6 +21,7 @@ import javax.inject.Inject
 internal class StatisticsOverTimeViewModel @Inject constructor(
     private val statisticsRepository: StatisticsRepository,
     private val dateUtils: DateUtils,
+    private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
@@ -98,7 +99,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 dateUtils.getMonthFromDateTime(period.stop, true)
             }
 
-            val amountLabel = CurrencyUtils.formatAmountRoundWithCurrencySymbol(it.amount)
+            val amountLabel = amountFormatter.format(it.amount, useSymbol = true)
             val factor = it.amount / maxValue
             val color = category.value?.iconColor() ?: 0
 
@@ -110,7 +111,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     val average = periodBalances.map { balances ->
         val averageAmount = balances.map { it.amount }.average()
-        val averageString = CurrencyUtils.formatAmountExactWithCurrencySymbol(averageAmount)
+        val averageString = amountFormatter.format(averageAmount, useSymbol = true)
         context.resources.getString(
             R.string.tink_expenses_header_description_average,
             averageString
@@ -119,7 +120,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
     val sum = periodBalances.map { balances ->
         val sumAmount = balances.map { it.amount }.sum()
-        CurrencyUtils.formatAmountExactWithCurrencySymbol(sumAmount)
+        amountFormatter.format(sumAmount, useSymbol = true)
     }
 
     val periodSelectionButtonText: LiveData<String> =

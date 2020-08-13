@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_half_pie_chart.view.*
 import com.tink.pfmui.charts.transitions.ChangePositionTransition
 import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
-import com.tink.pfmui.charts.transitions.TextAmountTransition
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartItem
 import com.tink.pfmui.overview.charts.ChartType
@@ -32,8 +31,9 @@ import com.tink.pfmui.overview.charts.TransactionsItem
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
-import com.tink.pfmui.util.CurrencyUtils
+import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
+import javax.inject.Inject
 
 private const val TYPE_ARG = "type"
 
@@ -55,6 +55,9 @@ internal class HalfPieChartFragment : BaseFragment() {
         arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES
     }
     private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
+
+    @Inject
+    lateinit var amountFormatter: AmountFormatter
 
     override fun getLayoutId() = R.layout.fragment_half_pie_chart
     override fun needsLoginToBeAuthorized() = true
@@ -107,11 +110,11 @@ internal class HalfPieChartFragment : BaseFragment() {
         binding.items = model.data.items.map { item ->
             HalfChartItem(
                 (item as? StatisticItem)?.getName(requireContext()) ?: item.name,
-                CurrencyUtils.formatAmountExactWithCurrencySymbol(item.amount.toDouble()),
+                amountFormatter.format(item.amount.toDouble(), useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
         binding.totalAmount =
-            CurrencyUtils.formatAmountExactWithCurrencySymbol(model.amount.toDouble())
+            amountFormatter.format(model.amount.toDouble(), useSymbol = true)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }

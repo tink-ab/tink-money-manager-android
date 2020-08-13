@@ -1,5 +1,6 @@
 package com.tink.pfmui.di
 
+import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.util.extensions.formatCurrencyExact
 import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
@@ -36,5 +37,12 @@ internal class CurrencyModule {
                     amount.formatCurrencyExact() ?: ""
                 }
             }
+
+            override fun format(amount: Double, useSymbol: Boolean): String =
+                if (useSymbol) {
+                    CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
+                } else {
+                    CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+                }
         }
 }
