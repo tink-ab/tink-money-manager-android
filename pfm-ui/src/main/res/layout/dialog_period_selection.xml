@@ -14,25 +14,25 @@
     android:paddingEnd="8dp"
     android:text="@string/tink_period_selection_title"/>
 
-  <TextView
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/sixMonthsButton"
-    style="@style/btnLinkCta"
+    style="?attr/tink_textButtonStyle"
     android:layout_width="match_parent"
     android:layout_height="@dimen/button_height"
     android:gravity="center_vertical"
     android:text="@string/tink_selector_6_months"/>
 
-  <TextView
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/twelveMonthsButton"
-    style="@style/btnLinkCta"
+    style="?attr/tink_textButtonStyle"
     android:layout_width="match_parent"
     android:layout_height="@dimen/button_height"
     android:gravity="center_vertical"
     android:text="@string/tink_selector_12_months"/>
 
-  <TextView
+  <com.google.android.material.button.MaterialButton
     android:id="@+id/allTimeButton"
-    style="@style/btnLinkCta"
+    style="?attr/tink_textButtonStyle"
     android:layout_width="match_parent"
     android:layout_height="@dimen/button_height"
     android:gravity="center_vertical"
