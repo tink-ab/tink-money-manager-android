@@ -17,8 +17,8 @@ internal enum class ChartType {
         override val type: Category.Type get() = Category.Type.TYPE_EXPENSES
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
-        override fun create6MonthFragment(): BaseFragment = TabExpensesBarChartFragment.newInstance(1)
-        override fun create12MonthFragment(): BaseFragment = TabExpensesBarChartFragment.newInstance(2)
+        override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
+
     },
     LEFT_TO_SPEND {
         override val screenEvent = ScreenEvent.TRACKING_ERROR // To be added when UI is not hidden
@@ -28,8 +28,7 @@ internal enum class ChartType {
         override val type: Category.Type get() = Category.Type.TYPE_UNKKNOWN
 
         override fun create1MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(0)
-        override fun create6MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(1)
-        override fun create12MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(2)
+        override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
     },
     INCOME {
         override val screenEvent = ScreenEvent.INCOME
@@ -39,8 +38,7 @@ internal enum class ChartType {
         override val type: Category.Type get() = Category.Type.TYPE_INCOME
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
-        override fun create6MonthFragment(): BaseFragment = TabIncomeBarChartFragment.newInstance(1)
-        override fun create12MonthFragment(): BaseFragment = TabIncomeBarChartFragment.newInstance(2)
+        override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
     };
     abstract val screenEvent: ScreenEvent
     @get:AttrRes
@@ -54,8 +52,7 @@ internal enum class ChartType {
     abstract val type: Category.Type
 
     abstract fun create1MonthFragment(): BaseFragment
-    abstract fun create6MonthFragment(): BaseFragment
-    abstract fun create12MonthFragment(): BaseFragment
+    abstract fun createOverTimeFragment(): BaseFragment
 }
 
 

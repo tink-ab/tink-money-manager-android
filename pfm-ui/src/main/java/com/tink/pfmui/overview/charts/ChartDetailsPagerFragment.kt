@@ -27,12 +27,11 @@ import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import se.tink.core.models.misc.Period
 
-private const val PAGE_COUNT = 3
+private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0
-private const val PAGE_6_MONTH = 1
-private const val PAGE_YEAR = 2
+private const val PAGE_OVER_TIME = 1
 
-private val PAGE_TITLES = listOf(R.string.tink_selector_1_months, R.string.tink_selector_6_months, R.string.tink_selector_12_months)
+private val PAGE_TITLES = listOf(R.string.tink_selector_monthly, R.string.tink_selector_over_time)
 private const val TYPE_ARG = "type"
 
 internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
@@ -63,7 +62,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 tabs.setupWithViewPager(pager)
             }
             tabs.setTheme(ownTheme.tabsTheme)
-            category.setOnClickListener { showCategorySelector() }
             category.setTextColor(ownTheme.toolbarTheme.titleColor)
             category.visible = type.showCategoryPicker
         }
@@ -122,12 +120,15 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         }
     }
 
-    private fun showCategorySelector() {
-        val fragment = CategorySelectionFragment.newInstance(type.type, viewModel.category.value?.code)
+    fun showCategorySelector() {
+        val fragment = CategorySelectionFragment.newInstance(
+            type.type,
+            viewModel.category.value?.code,
+            CategorySelectionFragment.Options(dropdownToolbarAppearance = false)
+        )
         fragment.setTargetFragment(this, 0)
         fragmentCoordinator.replace(
-            fragment, true, FragmentAnimationFlags.NONE,
-            sharedViews = listOf(view.tink_toolbar)
+            fragment, true, FragmentAnimationFlags.SLIDE_UP
         )
     }
 
@@ -161,8 +162,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 PAGE_MONTH -> type.create1MonthFragment()
-                PAGE_6_MONTH -> type.create6MonthFragment()
-                PAGE_YEAR -> type.create12MonthFragment()
+                PAGE_OVER_TIME -> type.createOverTimeFragment()
                 else -> throw IllegalArgumentException("Position is out of bound $position")
             }
         }

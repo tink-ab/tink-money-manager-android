@@ -1,13 +1,9 @@
 package com.tink.pfmui.di
 
 import android.content.Context
-import com.tink.pfmui.overview.charts.TabExpensesBarChartFragment
-import com.tink.pfmui.overview.charts.TabIncomeBarChartFragment
 import com.tink.pfmui.overview.charts.TabLeftToSpendFragment
 import com.tink.pfmui.theme.TinkDefaultSnackbarTheme
 import com.tink.pfmui.theme.TinkErrorSnackbarTheme
-import com.tink.pfmui.theme.TinkExpenseBarChartTabPageTheme
-import com.tink.pfmui.theme.TinkIncomeBarChartTabPageTheme
 import com.tink.pfmui.theme.TinkLeftToSpendTabPageTheme
 import com.tink.pfmui.theme.TinkTransactionSimilarTheme
 import com.tink.pfmui.theme.TinkTransactionsListTheme
@@ -23,18 +19,8 @@ import javax.inject.Named
 internal class ThemingModule {
 
     @Provides
-    fun provideTabExpensesBarChartTheme(@ApplicationScoped context: Context): TabExpensesBarChartFragment.Theme {
-        return TinkExpenseBarChartTabPageTheme(context)
-    }
-
-    @Provides
     fun provideTabLeftToSpendPageTheme(@ApplicationScoped context: Context): TabLeftToSpendFragment.Theme {
         return TinkLeftToSpendTabPageTheme(context)
-    }
-
-    @Provides
-    fun provideTabeIncomeBarChartPageTheme(@ApplicationScoped context: Context): TabIncomeBarChartFragment.Theme {
-        return TinkIncomeBarChartTabPageTheme(context)
     }
 
     @Provides
