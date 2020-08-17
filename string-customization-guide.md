@@ -31,7 +31,6 @@ Here's a list of all the public string resources in the Tink PFM UI that can be 
 | `tink_category_default_child_format` | %s - Other |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
-| `tink_selector_1_months` | 1 month |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
