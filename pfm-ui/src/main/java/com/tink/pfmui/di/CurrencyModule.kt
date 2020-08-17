@@ -41,14 +41,17 @@ internal class CurrencyModule {
 
             override fun format(amount: Double, useSymbol: Boolean): String {
                 val currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
-                return if (useSymbol && useRounding(currencyCode)) {
-                    CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
-                } else if (!useSymbol) {
-                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
-                } else if (!useRounding(currencyCode)) {
-                    CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
-                } else {
-                    CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+                return when {
+                    !useSymbol && !useRounding(currencyCode) ->
+                        CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+
+                    useSymbol && !useRounding(currencyCode) ->
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
+
+                    !useSymbol && useRounding(currencyCode) ->
+                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
+
+                    else -> CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
                 }
             }
 
