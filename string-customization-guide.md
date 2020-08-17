@@ -32,8 +32,8 @@ Here's a list of all the public string resources in the Tink PFM UI that can be 
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
 | `tink_selector_1_months` | 1 month |
-| `tink_selector_12_months` | 12 months |
-| `tink_selector_6_months` | 6 months |
+| `tink_selector_12_months` | Last 12 months |
+| `tink_selector_6_months` | Last 6 months |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
 | `tink_transaction_similar_button_accept_text` | Yes, change selected |
