@@ -1,5 +1,7 @@
 package com.tink.pfmui.di
 
+import com.tink.pfmui.collections.Currencies
+import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.util.extensions.formatCurrencyExact
 import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
@@ -36,5 +38,21 @@ internal class CurrencyModule {
                     amount.formatCurrencyExact() ?: ""
                 }
             }
+
+            override fun format(amount: Double, useSymbol: Boolean): String {
+                val currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
+                return if (useSymbol && useRounding(currencyCode)) {
+                    CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
+                } else if (!useSymbol) {
+                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
+                } else if (!useRounding(currencyCode)) {
+                    CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
+                } else {
+                    CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+                }
+            }
+
+            private fun useRounding(currencyCode: String): Boolean =
+                currencyCode == "SEK" || currencyCode == "NOK"
         }
 }

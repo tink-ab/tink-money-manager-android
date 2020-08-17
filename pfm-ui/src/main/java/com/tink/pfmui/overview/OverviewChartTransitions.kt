@@ -15,7 +15,6 @@ import com.tink.pfmui.charts.transitions.TextAmountTransition
 import com.tink.pfmui.charts.transitions.TextScaleTransition
 import com.tink.pfmui.charts.extensions.doOnEnd
 import com.tink.pfmui.overview.charts.piechart.FullPieChartFragment
-import com.tink.pfmui.util.CurrencyUtils
 import javax.inject.Inject
 
 
@@ -53,11 +52,12 @@ internal class OverviewChartTransition @Inject constructor() : TransitionDescrip
                 })
                 addTransition(PieChartTransition())
                 addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-                addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
-                }.apply {
-                    addTarget(R.id.amount)
-                })
+                // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//                addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
+//                }.apply {
+//                    addTarget(R.id.amount)
+//                })
             }
             sharedElementReturnTransition = sharedElementEnterTransition
 

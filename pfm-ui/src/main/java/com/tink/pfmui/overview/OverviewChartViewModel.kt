@@ -18,7 +18,7 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.categories.CategoryRepository
 import com.tink.pfmui.repository.StatisticsRepository
-import com.tink.pfmui.util.CurrencyUtils
+import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.core.extensions.whenNonNull
 import se.tink.core.models.category.CategoryTree
@@ -34,6 +34,7 @@ internal class OverviewChartViewModel @Inject constructor(
     private val dateUtils: DateUtils,
     statisticRepository: StatisticsRepository,
     categoryRepository: CategoryRepository,
+    private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
@@ -69,7 +70,16 @@ internal class OverviewChartViewModel @Inject constructor(
         //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
         val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false);
         val period = getPeriodString(dateUtils, it.period, context)
-        OverviewChartModel(context, R.string.tink_expenses_title, data.sum(), period, color, DefaultColorGenerator, ArrayList(data))
+        OverviewChartModel(
+            context,
+            R.string.tink_expenses_title,
+            data.sum(),
+            amountFormatter,
+            period,
+            color,
+            DefaultColorGenerator,
+            ArrayList(data)
+        )
     }
 
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
@@ -83,7 +93,16 @@ internal class OverviewChartViewModel @Inject constructor(
 
         val periodString =
             getPeriodString(dateUtils, it.period, context)
-        OverviewChartModel(context, R.string.tink_income_title, data.sum(), periodString, color, DefaultColorGenerator, ArrayList(data))
+        OverviewChartModel(
+            context,
+            R.string.tink_income_title,
+            data.sum(),
+            amountFormatter,
+            periodString,
+            color,
+            DefaultColorGenerator,
+            ArrayList(data)
+        )
     }
 
     val leftToSpend: LiveData<OverviewChartModel> = mapDistinct(MediatorLiveData<OverviewChartModel>().apply {
@@ -95,7 +114,16 @@ internal class OverviewChartViewModel @Inject constructor(
 
             val periodStr =
                 getPeriodString(dateUtils, period, context, false)
-            value = OverviewChartModel(context, R.string.left_to_spend_title, leftToSpend, periodStr, color, LeftToSpendColorGenerator, data)
+            value = OverviewChartModel(
+                context,
+                R.string.left_to_spend_title,
+                leftToSpend,
+                amountFormatter,
+                periodStr,
+                color,
+                LeftToSpendColorGenerator,
+                data
+            )
         }
         addSource(expenses) { update() }
         addSource(income) { update() }
@@ -125,6 +153,7 @@ internal data class OverviewChartModel(
         context: Context,
         @StringRes title: Int,
         amount: Float,
+        amountFormatter: AmountFormatter,
         period: String,
         @ColorInt color: Int,
         colorGenerator: ColorGenerator,
@@ -132,7 +161,7 @@ internal data class OverviewChartModel(
     ) : this(
         context.getString(title),
         amount,
-        getAmountStringForOverviewPieChart(amount.toDouble(), context),
+        getAmountStringForOverviewPieChart(amountFormatter, amount.toDouble(), context),
         period,
         color,
         colorGenerator,
@@ -140,10 +169,12 @@ internal data class OverviewChartModel(
     )
 }
 
-internal fun getAmountStringForOverviewPieChart(amount: Double, context: Context): String {
-    return if (context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)) {
-        CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
-    } else {
-        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
-    }
-}
+internal fun getAmountStringForOverviewPieChart(
+    amountFormatter: AmountFormatter,
+    amount: Double,
+    context: Context
+): String =
+    amountFormatter.format(
+        amount,
+        useSymbol = context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)
+    )
