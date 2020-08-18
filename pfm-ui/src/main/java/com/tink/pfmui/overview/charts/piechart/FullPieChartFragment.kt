@@ -85,7 +85,7 @@ internal class FullPieChartFragment : BaseFragment() {
             addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, ::createLabel, onClick = ::onItemClick)
         }
         binding.model = model
-        binding.totalAmount = amountFormatter.format(model.amount.toDouble(), useSymbol = false)
+        binding.totalAmount = amountFormatter.format(model.amount.toDouble(), useSymbol = true)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
