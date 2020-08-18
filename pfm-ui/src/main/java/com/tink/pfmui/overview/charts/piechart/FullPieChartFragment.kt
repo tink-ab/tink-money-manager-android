@@ -85,7 +85,7 @@ internal class FullPieChartFragment : BaseFragment() {
             addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, ::createLabel, onClick = ::onItemClick)
         }
         binding.model = model
-        binding.totalAmount = amountFormatter.format(model.amount.toDouble(), useSymbol = false)
+        binding.totalAmount = amountFormatter.format(model.amount.toDouble(), useSymbol = true)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
@@ -129,11 +129,12 @@ internal class FullPieChartFragment : BaseFragment() {
         addTransition(PieChartTransition())
         addTransition(PieChartSegmentTransition(R.id.transition_group_main))
         addTransition(Fade().apply { addTarget(R.id.back_segment) })
-        addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-            amountFormatter.format(it.toDouble(), useSymbol = false)
-        }.apply {
-            addTarget(R.id.amount)
-        })
+        // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//        addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//            amountFormatter.format(it.toDouble(), useSymbol = false)
+//        }.apply {
+//            addTarget(R.id.amount)
+//        })
 
         val labelCategories = data.items.map { it.category.code }
         if (labelCategories.isNotEmpty()) {
