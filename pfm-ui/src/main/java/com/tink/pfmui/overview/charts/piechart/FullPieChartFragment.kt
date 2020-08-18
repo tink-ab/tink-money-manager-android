@@ -32,6 +32,7 @@ import com.tink.pfmui.overview.charts.DetailsChartModel
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmui.overview.charts.StatisticItem
 import com.tink.pfmui.overview.charts.StatisticItemsList
+import com.tink.pfmui.overview.getAmountStringForOverviewPieChart
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.util.CurrencyUtils
@@ -85,7 +86,7 @@ internal class FullPieChartFragment : BaseFragment() {
             addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, ::createLabel, onClick = ::onItemClick)
         }
         binding.model = model
-        binding.totalAmount = amountFormatter.format(model.amount.toDouble(), useSymbol = true)
+        binding.totalAmount = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), context!!)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
