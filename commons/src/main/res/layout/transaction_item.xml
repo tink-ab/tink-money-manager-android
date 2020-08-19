@@ -10,8 +10,8 @@
 
   <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/icon"
-    android:layout_width="@dimen/category_icon_background_size"
-    android:layout_height="@dimen/category_icon_background_size"
+    android:layout_width="@dimen/category_icon_size"
+    android:layout_height="@dimen/category_icon_size"
     android:layout_margin="16dp"
     android:scaleType="center"
     app:layout_constraintBottom_toBottomOf="parent"
