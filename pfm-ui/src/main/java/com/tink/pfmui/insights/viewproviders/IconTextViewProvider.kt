@@ -86,7 +86,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     }
 
     private fun Insight.getIcon() = when (type) {
-        InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.ic_doubletransaction)
+        InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.ic_double_charge)
         InsightType.LARGE_EXPENSE -> IconResource.DrawableId(R.drawable.ic_category_all_expenses)
         InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.ic_alert)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
