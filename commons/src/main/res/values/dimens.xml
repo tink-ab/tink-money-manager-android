@@ -31,7 +31,6 @@
 
   <!-- Category icon dimensions -->
   <dimen name="category_icon_background_size">44dp</dimen>
-  <dimen name="category_icon_size">20dp</dimen>
 
   <!-- Period picker dimensions-->
   <dimen name="period_picker_height">@dimen/button_height</dimen>
