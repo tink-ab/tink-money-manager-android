@@ -22,7 +22,6 @@ import com.tink.pfmui.charts.extensions.childOrNull
 import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
 import com.tink.pfmui.charts.transitions.PieChartTransition
-import com.tink.pfmui.charts.transitions.TextAmountTransition
 import com.tink.pfmui.charts.transitions.TranslationTransition
 import com.tink.pfmui.databinding.FragmentFullPieChartBinding
 import com.tink.pfmui.databinding.PieChartLabelBinding
@@ -35,11 +34,9 @@ import com.tink.pfmui.overview.charts.StatisticItemsList
 import com.tink.pfmui.overview.getAmountStringForOverviewPieChart
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
@@ -104,7 +101,7 @@ internal class FullPieChartFragment : BaseFragment() {
                 type = item.category.code
                 icon.setImageResFromAttr(item.category.getIcon())
                 icon.tint(iconColor)
-                icon.backgroundTint(circleColorRes)
+                icon.setBackgroundColor(context!!.getColorFromAttr(circleColorRes))
                 icon.setOnClickListener { onItemClick(item) }
                 label.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> placeLabelTitle(label, this) }
             }

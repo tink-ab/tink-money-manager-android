@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
   <data>
     <variable
       name="type"
@@ -16,7 +17,7 @@
     <com.tink.pfmui.view.TinkTextView
       android:id="@+id/title"
       style="@style/nano.primary"
-      android:layout_width="48dp"
+      android:layout_width="@dimen/category_icon_background_size"
       android:layout_height="wrap_content"
       android:paddingTop="2dp"
       android:paddingBottom="2dp"
@@ -24,13 +25,13 @@
       android:maxLines="1"
       android:transitionName="@{@string/label_title_transition(type)}"/>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
       android:id="@+id/icon"
-      android:layout_width="48dp"
-      android:layout_height="48dp"
-      android:padding="14dp"
-      android:background="@drawable/ripple_circle"
-      android:gravity="center"
-      android:transitionName="@{@string/label_icon_transition(type)}"/>
+      android:layout_width="@dimen/category_icon_background_size"
+      android:layout_height="@dimen/category_icon_background_size"
+      android:scaleType="center"
+      android:transitionName="@{@string/label_icon_transition(type)}"
+      app:shapeAppearance="@style/TinkCategoryIconShape" />
+
   </LinearLayout>
 </layout>
