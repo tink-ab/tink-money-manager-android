@@ -18,8 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:shapeAppearance="@style/TinkCategoryIconShape"
-    tools:srcCompat="@drawable/ic_category_healthandbeauty"
-    tools:tint="?tink_textColorSecondary" />
+    tools:srcCompat="@drawable/ic_category_healthandbeauty" />
 
     <TextView
       android:id="@+id/label"
