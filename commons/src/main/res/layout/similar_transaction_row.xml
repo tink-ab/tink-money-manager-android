@@ -8,27 +8,17 @@
   android:layout_height="wrap_content"
   android:background="?selectableItemBackground">
 
-  <ImageView
-    android:id="@+id/iconBackground"
+  <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/icon"
     android:layout_width="@dimen/category_icon_background_size"
     android:layout_height="@dimen/category_icon_background_size"
     android:layout_margin="16dp"
-    android:background="@drawable/circle"
-    android:backgroundTint="?tink_expensesLightColor"
-    android:gravity="center"
+    android:scaleType="center"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
-
-  <ImageView
-    android:id="@+id/icon"
-    android:layout_width="@dimen/category_icon_size"
-    android:layout_height="@dimen/category_icon_size"
-    android:tint="?tink_expensesColor"
-    app:layout_constraintBottom_toBottomOf="@id/iconBackground"
-    app:layout_constraintEnd_toEndOf="@id/iconBackground"
-    app:layout_constraintStart_toStartOf="@id/iconBackground"
-    app:layout_constraintTop_toTopOf="@id/iconBackground"/>
+    app:layout_constraintTop_toTopOf="parent"
+    app:shapeAppearance="@style/TinkCategoryIconShape"
+    tools:srcCompat="@drawable/ic_category_healthandbeauty" />
 
   <Space
     android:id="@+id/spacer"
