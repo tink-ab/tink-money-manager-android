@@ -82,6 +82,9 @@
     <attr name="tink_insightPrimaryActionButtonStyle" format="reference" />
     <attr name="tink_insightSecondaryActionButtonStyle" format="reference" />
 
+    <!-- Icon shape styles -->
+    <attr name="tink_category_icon_shape_style" format="reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>
