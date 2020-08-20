@@ -31,7 +31,7 @@
       android:layout_height="@dimen/category_icon_size"
       android:scaleType="center"
       android:transitionName="@{@string/label_icon_transition(type)}"
-      app:shapeAppearance="@style/TinkCategoryIconShape" />
+      app:shapeAppearance="@style/TinkCategoryIconShapeStyle" />
 
   </LinearLayout>
 </layout>
