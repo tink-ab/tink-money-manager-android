@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <declare-styleable name="PeriodPicker">
-    <attr name="showButtons" format="boolean"/>
-    <attr name="nextButtonEnabled" format="boolean"/>
-    <attr name="previousButtonEnabled" format="boolean"/>
-    <attr name="android:text"/>
-  </declare-styleable>
 
   <declare-styleable name="TinkFinanceOverviewStyle">
     <attr name="tink_backgroundColor" format="color|reference"/>
