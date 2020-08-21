@@ -75,6 +75,6 @@
     <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
 
     <!-- Icon shape styles -->
-    <item name="tink_category_icon_shape_style">@style/TinkCategoryIconShapeStyle</item>
+    <item name="tink_categoryIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
   </style>
 </resources>

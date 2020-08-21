@@ -17,7 +17,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:shapeAppearance="?attr/tink_category_icon_shape_style"
+    app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
     tools:srcCompat="@drawable/ic_category_healthandbeauty" />
 
     <TextView
