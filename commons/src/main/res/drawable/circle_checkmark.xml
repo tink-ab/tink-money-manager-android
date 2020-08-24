@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item>
-    <shape android:shape="oval">
+    <shape android:shape="rectangle">
       <size
         android:height="24dp"
         android:width="24dp"/>
       <solid android:color="?attr/tink_colorAccent"/>
-      <corners android:radius="12dp"/>
+      <corners android:radius="?attr/tink_checkbox_corner_radius_in_dp"/>
     </shape>
   </item>
  <item
