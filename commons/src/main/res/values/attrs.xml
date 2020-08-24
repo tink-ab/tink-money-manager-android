@@ -82,4 +82,9 @@
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>
+
+  <declare-styleable name="TinkPeriodPickerStyle">
+    <attr name="tink_period_picker_active_color" format="color|reference" />
+    <attr name="tink_period_picker_disabled_alpha" format="float" />
+  </declare-styleable>
 </resources>
