@@ -42,13 +42,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:paddingBottom="4dp"
         android:text="@{model.title}"
         android:transitionName="@{@string/amount_title_transition(model.title)}"/>
 
       <!-- Do not use wrap_content for width for animation performance reasons-->
       <com.tink.pfmui.view.TinkTextView
         android:id="@+id/amount"
-        style="@style/tera"
+        style="@style/giga"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

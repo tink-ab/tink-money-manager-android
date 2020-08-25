@@ -64,9 +64,15 @@
 
   <string name="tink_category_list_fragment_button_text">Select</string>
 
-  <string name="tink_selector_1_months">1 month</string>
-  <string name="tink_selector_6_months">6 months</string>
-  <string name="tink_selector_12_months">12 months</string>
+  <string name="tink_selector_6_months">Last 6 months</string>
+  <string name="tink_selector_12_months">Last 12 months</string>
+  <string name="tink_selector_all_time">All time</string>
+
+  <string name="tink_selector_monthly">Monthly</string>
+  <string name="tink_selector_over_time">Over time</string>
+
+  <string name="tink_period_selection_title">Choose time period</string>
+
   <string name="tink_expenses_title">Expenses</string>
   <string name="tink_expenses_header_description_average">%s on average per month</string>
   <!-- We can make this public when we enable Left to Spend feature -->

@@ -76,6 +76,12 @@
     <attr name="tink_icon_category_transfers_other" format="integer|reference" />
     <attr name="tink_icon_category_uncategorized" format="integer|reference" />
 
+    <!-- Button styles -->
+    <attr name="tink_containedButtonStyle" format="reference" />
+    <attr name="tink_textButtonStyle" format="reference" />
+    <attr name="tink_insightPrimaryActionButtonStyle" format="reference" />
+    <attr name="tink_insightSecondaryActionButtonStyle" format="reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

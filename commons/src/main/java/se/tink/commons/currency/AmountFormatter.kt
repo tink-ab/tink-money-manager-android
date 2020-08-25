@@ -9,4 +9,9 @@ interface AmountFormatter {
         useSign: Boolean = true,
         explicitlyPositive: Boolean = false
     ): String
+
+    fun format(
+        amount: Double,
+        useSymbol: Boolean = true
+    ): String
 }
