@@ -32,16 +32,18 @@ import com.tink.pfmui.overview.charts.DetailsChartModel
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
 import com.tink.pfmui.overview.charts.StatisticItem
 import com.tink.pfmui.overview.charts.StatisticItemsList
+import com.tink.pfmui.overview.getAmountStringForOverviewPieChart
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
+import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.commons.extensions.getDrawableResIdFromAttr
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 private const val TYPE_ARG = "type"
@@ -51,6 +53,9 @@ internal class FullPieChartFragment : BaseFragment() {
     private val pageViewModel by lazy { ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java] }
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
     private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
+
+    @Inject
+    lateinit var amountFormatter: AmountFormatter
 
     override fun getLayoutId() = R.layout.fragment_full_pie_chart
     override fun needsLoginToBeAuthorized() = true
@@ -81,7 +86,7 @@ internal class FullPieChartFragment : BaseFragment() {
             addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, ::createLabel, onClick = ::onItemClick)
         }
         binding.model = model
-        binding.totalAmount = CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(model.amount.toDouble())
+        binding.totalAmount = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), context!!)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
@@ -95,7 +100,7 @@ internal class FullPieChartFragment : BaseFragment() {
         val circleColor = requireContext().getColorFromAttr(circleColorRes)
         return PieChartLabelView(context!!, anchor).also { label ->
             DataBindingUtil.inflate<PieChartLabelBinding>(LayoutInflater.from(context), R.layout.pie_chart_label, label, true).apply {
-                title.text = CurrencyUtils.formatAmountRoundWithCurrencySymbol(item.amount.toDouble())
+                title.text = amountFormatter.format(item.amount.toDouble(), useSymbol = true)
                 type = item.category.code
                 icon.setImageResFromAttr(item.category.getIcon())
                 icon.tint(iconColor)
@@ -125,11 +130,12 @@ internal class FullPieChartFragment : BaseFragment() {
         addTransition(PieChartTransition())
         addTransition(PieChartSegmentTransition(R.id.transition_group_main))
         addTransition(Fade().apply { addTarget(R.id.back_segment) })
-        addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-            CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
-        }.apply {
-            addTarget(R.id.amount)
-        })
+        // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+//        addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//            amountFormatter.format(it.toDouble(), useSymbol = false)
+//        }.apply {
+//            addTarget(R.id.amount)
+//        })
 
         val labelCategories = data.items.map { it.category.code }
         if (labelCategories.isNotEmpty()) {

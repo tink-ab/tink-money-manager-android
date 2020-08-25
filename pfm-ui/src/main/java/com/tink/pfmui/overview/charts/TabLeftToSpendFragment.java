@@ -24,7 +24,6 @@ import com.tink.pfmui.tracking.ScreenEvent;
 import com.tink.pfmui.collections.Periods;
 import com.tink.pfmui.configuration.SuitableLocaleFinder;
 import com.tink.pfmui.repository.StatisticsRepository;
-import com.tink.pfmui.util.CurrencyUtils;
 import com.tink.pfmui.mapper.ModelMapperManager;
 import com.tink.pfmui.util.ScreenUtils;
 import com.tink.pfmui.util.extensions.PeriodBalances;
@@ -38,6 +37,7 @@ import javax.inject.Inject;
 import kotlin.Unit;
 import kotlin.text.StringsKt;
 import org.jetbrains.annotations.Nullable;
+import se.tink.commons.currency.AmountFormatter;
 import se.tink.core.models.misc.Period;
 import se.tink.core.models.statistic.Statistic;
 import se.tink.core.models.statistic.StatisticTree;
@@ -71,6 +71,9 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 	@Inject
 	StatisticsRepository statisticsRepository;
+
+	@Inject
+	AmountFormatter amountFormatter;
 
 	RelativeLayout headerContainer;
 
@@ -407,7 +410,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 			}
 
 			texts
-				.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(currentlyLeftToSpendAmount));
+				.add(amountFormatter.format(currentlyLeftToSpendAmount, true));
 
 			double averageLeftToSpendAmount = 0;
 
@@ -433,7 +436,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 			int result = (int) Math
 				.round(Math.abs(currentlyLeftToSpendAmount - averageLeftToSpendAmount));
-			String r = CurrencyUtils.formatAmountExactWithCurrencySymbol(result);
+			String r = amountFormatter.format(result, true);
 
 			String text;
 			if (currentlyLeftToSpendAmount > averageLeftToSpendAmount) {
@@ -450,12 +453,12 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 				total += item.getAmount();
 			}
 
-            texts.add(CurrencyUtils.formatAmountExactWithCurrencySymbol(total));
+            texts.add(amountFormatter.format(total, true));
             texts.add(
                     String.format(
                             getString(R.string.left_to_spend_header_description_average),
-                            CurrencyUtils.formatAmountExactWithCurrencySymbol(
-                                    PeriodBalances.getAverageIgnoreLast(items))));
+						amountFormatter.format(
+                                    PeriodBalances.getAverageIgnoreLast(items), true)));
 		}
 
 		labels.setTexts(texts);

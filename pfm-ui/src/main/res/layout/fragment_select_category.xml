@@ -14,7 +14,8 @@
     android:transitionName="@string/toolbar_transition"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="?android:homeAsUpIndicator">
 
     <com.tink.pfmui.view.TinkTextView
       android:id="@+id/category"
@@ -54,9 +55,9 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/button"
-      style="@style/button"
+      style="?attr/tink_containedButtonStyle"
       android:layout_width="0dp"
       android:layout_height="@dimen/button_height"
       android:text="@string/tink_category_list_fragment_button_text"

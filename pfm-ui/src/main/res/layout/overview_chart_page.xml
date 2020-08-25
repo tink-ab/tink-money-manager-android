@@ -46,7 +46,7 @@
         <!-- Do not use wrap_content for width for animation performance reasons-->
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/amount"
-          style="@style/peta"
+          style="@style/tera"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"

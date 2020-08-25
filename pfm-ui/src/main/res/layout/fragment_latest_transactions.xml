@@ -34,14 +34,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
+      <com.google.android.material.button.MaterialButton
         android:id="@+id/action"
-        style="@style/deci.action.bold"
+        style="?attr/tink_textButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/ripple_button_background"
-        android:padding="8dp"
         android:text="@string/tink_overview_latest_transactions_view_all_link"
         app:layout_constraintBaseline_toBaselineOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
