@@ -7,8 +7,7 @@ import kotlinx.android.synthetic.main.similar_transaction_row.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
-import se.tink.commons.extensions.backgroundTint
-import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
@@ -177,8 +176,7 @@ class SimilarTransactionsAdapter :
                 val (iconRes, iconColor, iconBackgroundColor) = item.icon
                 icon.setImageResFromAttr(iconRes)
                 icon.tint(iconColor)
-                iconBackground.setImageResource(0)
-                iconBackground.backgroundTint(iconBackgroundColor)
+                icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
 
                 label.text = item.label
                 description.text = item.description
