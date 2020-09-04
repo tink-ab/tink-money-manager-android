@@ -6,6 +6,16 @@
   <public name="tink_date_format_human_today" type="string"/>
   <public name="tink_date_format_human_yesterday" type="string"/>
   <public name="tink_date_format_human_tomorrow" type="string"/>
+  <public name="tink_date_formatter_monthly_compact" type="string"/>
+  <public name="tink_date_formatter_month_name" type="string"/>
+  <public name="tink_date_formatter_daily_monthly" type="string"/>
+  <public name="tink_date_formatter_daily_monthly_yearly" type="string"/>
+  <public name="tink_date_formatter_day_of_week_compact" type="string"/>
+  <public name="tink_date_formatter_month_and_day_of_week" type="string"/>
+  <public name="tink_date_formatter_month_and_day" type="string"/>
+  <public name="tink_date_formatter_month_and_day_and_year" type="string"/>
+  <public name="tink_date_formatter_month_and_year" type="string"/>
+  <public name="tink_date_formatter_month_and_year_compact" type="string"/>
 
   <public name="tink_all_categories" type="string"/>
 

@@ -95,3 +95,7 @@ val financeOverviewFragment =
 # Customize category icons
 You can customize category icons shown in the finance overview UI by overriding the icon attributes that are publicly available in the Tink PFM UI.
 Follow the [icon customization guide](/icon-customization-guide.md) to set this up.
+
+# Customize date formats
+You can customize the format of dates shown in the finance overview UI by overriding the date formatter string resources that are publicly available in the Tink PFM UI.
+Follow the [date format customization guide](/date-format-customization-guide.md) to set this up.

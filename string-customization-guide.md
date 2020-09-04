@@ -43,9 +43,6 @@ Here's a list of all the public string resources in the Tink PFM UI that can be 
 | `tink_transaction_similar_title` | Similar transactions |
 | `tink_transactions_list_toolbar_title` | Transactions |
 | `tink_until_next_date` | Until %s |
-| `tink_date_format_human_today` | Today |
-| `tink_date_format_human_yesterday` | Yesterday |
-| `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_insights_tab_title` | Events |
 | `tink_insights_archive_title` | Archive |
 | `tink_insights_empty_state_title` | You handled all events! |
