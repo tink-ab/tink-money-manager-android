@@ -32,7 +32,4 @@
   <!-- Category icon dimensions -->
   <dimen name="category_icon_size">40dp</dimen>
 
-  <!-- Period picker dimensions-->
-  <dimen name="period_picker_height">@dimen/button_height</dimen>
-
 </resources>

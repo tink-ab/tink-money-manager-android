@@ -21,12 +21,13 @@
   <!-- TODO: Use picker from the commons module -->
   <com.tink.pfmui.view.PeriodPicker
     android:id="@+id/period_picker"
+    style="?attr/tink_periodPickerButtonStyle"
     android:layout_width="match_parent"
     android:layout_height="@dimen/period_selector_height"
-    android:layout_marginBottom="16dp"
     android:layout_alignParentBottom="true"
+    android:layout_marginBottom="16dp"
     android:visibility="gone"
-    tools:visibility="visible"/>
+    tools:visibility="visible" />
 
   <com.tink.pfmui.charts.VerticalBarChartArea
     android:id="@+id/vertical_bar_chart_6_months"

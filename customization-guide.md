@@ -99,3 +99,19 @@ Follow the [icon customization guide](/icon-customization-guide.md) to set this 
 # Customize date formats
 You can customize the format of dates shown in the finance overview UI by overriding the date formatter string resources that are publicly available in the Tink PFM UI.
 Follow the [date format customization guide](/date-format-customization-guide.md) to set this up.
+
+# Customize period picker
+You can customize the color and alpha value (for disabled state) of the period picker arrow icons shown in the finance overview UI by overriding the style resource attributes that are available.
+Add your extended `TinkPeriodPickerButtonStyle` style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_periodPickerButtonStyle">@style/CustomPeriodPickerButtonStyle</item>
+    </style>
+    
+    <style name="CustomPeriodPickerButtonStyle" parent="TinkPeriodPickerButtonStyle">
+        <item name="tink_period_picker_active_color">@color/custom_activeColor</item>
+        <item name="tink_period_picker_disabled_alpha">0.2</item>
+    </style>
+</resources>
+```
