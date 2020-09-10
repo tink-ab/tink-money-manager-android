@@ -117,7 +117,7 @@ Add your extended `TinkPeriodPickerButtonStyle` style in your application's `sty
 ```
 
 # Customize checkbox corner radius
-You can modify the appearance of checkboxes shown in the finance overview UI by setting a custom corner radius value.  
+You can modify the appearance of checkboxes shown in the finance overview UI by setting a custom corner radius value.
 This can be done by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the checkbox corner radius dimension resource attribute that is available.
 Add your extended style in your application's `styles.xml`.
 ```xml
@@ -128,3 +128,20 @@ Add your extended style in your application's `styles.xml`.
 </resources>
 ```
 Recommended values are in the range from `0dp` to `12dp` where `0dp` will draw a square and `12dp` will draw a circle.
+
+# Customize transaction date group text appearance
+You can customize the appearance of transaction date group text in the finance overview UI by overriding the text appearance attribute that is publicly available in the Tink PFM UI.
+Add your extended `TinkDateGroupTextAppearance` style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_dateGroupTextAppearance">@style/CustomDateGroupTextAppearance</item>
+    </style>
+    
+    <style name="CustomDateGroupTextAppearance" parent="TinkDateGroupTextAppearance">
+        <item name="android:textColor">@color/custom_textColor</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">@dimen/custom_textSize</item>
+    </style>
+</resources>
+```

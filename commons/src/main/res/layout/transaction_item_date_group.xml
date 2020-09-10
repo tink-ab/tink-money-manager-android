@@ -9,7 +9,7 @@
 
   <TextView
     android:id="@+id/date"
-    style="@style/hecto.secondary"
+    android:textAppearance="?attr/tink_dateGroupTextAppearance"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
