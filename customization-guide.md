@@ -108,10 +108,23 @@ Add your extended `TinkPeriodPickerButtonStyle` style in your application's `sty
     <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
         <item name="tink_periodPickerButtonStyle">@style/CustomPeriodPickerButtonStyle</item>
     </style>
-    
+
     <style name="CustomPeriodPickerButtonStyle" parent="TinkPeriodPickerButtonStyle">
         <item name="tink_period_picker_active_color">@color/custom_activeColor</item>
         <item name="tink_period_picker_disabled_alpha">0.2</item>
     </style>
 </resources>
 ```
+
+# Customize checkbox corner radius
+You can modify the appearance of checkboxes shown in the finance overview UI by setting a custom corner radius value.  
+This can be done by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the checkbox corner radius dimension resource attribute that is available.
+Add your extended style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_checkbox_corner_radius_in_dp">4dp</item>
+    </style>
+</resources>
+```
+Recommended values are in the range from `0dp` to `12dp` where `0dp` will draw a square and `12dp` will draw a circle.

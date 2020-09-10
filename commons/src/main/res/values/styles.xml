@@ -77,5 +77,7 @@
 
     <!-- Icon shape styles -->
     <item name="tink_categoryIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
+
+    <item name="tink_checkbox_corner_radius_in_dp">12dp</item>
   </style>
 </resources>
