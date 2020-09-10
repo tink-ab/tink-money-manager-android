@@ -81,6 +81,6 @@
     <item name="tink_checkbox_corner_radius_in_dp">12dp</item>
 
     <!-- Text styles -->
-    <item name="tink_dateGroupTextStyle">@style/TinkDateGroupTextStyle</item>
+    <item name="tink_dateGroupTextAppearance">@style/TinkDateGroupTextAppearance</item>
   </style>
 </resources>

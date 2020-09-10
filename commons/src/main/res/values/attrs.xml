@@ -83,8 +83,8 @@
     <!-- Recommended values are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a circle -->
     <attr name="tink_checkbox_corner_radius_in_dp" format="dimension">4dp</attr>
 
-    <!-- Text styles -->
-    <attr name="tink_dateGroupTextStyle" format="reference" />
+    <!-- Text appearance -->
+    <attr name="tink_dateGroupTextAppearance" format="reference" />
 
   </declare-styleable>
 
