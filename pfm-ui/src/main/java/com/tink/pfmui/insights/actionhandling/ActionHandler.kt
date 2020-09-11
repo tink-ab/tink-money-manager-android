@@ -26,7 +26,8 @@ abstract class AbstractActionHandler(
         actionEventBus.postActionPerformed(
             PerformedInsightAction(
                 insightId = insight.id,
-                userId = userId
+                userId = userId,
+                actionType = action.actionType
             )
         )
 
