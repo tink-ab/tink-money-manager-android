@@ -1,122 +1,87 @@
 package se.tink.android.repository.budget
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import com.tink.annotations.PfmScope
-import com.tink.model.budget.Budget.Periodicity.Recurring.PeriodUnit
-import com.tink.model.budget.Budget.Specification.Filter
 import com.tink.model.budget.BudgetCreateOrUpdateDescriptor
-import com.tink.model.budget.BudgetPeriod
-import com.tink.model.budget.BudgetSpecification
 import com.tink.model.budget.BudgetSummary
-import com.tink.model.budget.BudgetTransaction
-import com.tink.model.budget.RecurringPeriodicity
-import com.tink.model.misc.Amount
-import com.tink.model.misc.ExactNumber
 import com.tink.service.budget.BudgetService
-import com.tink.service.handler.ResultHandler
 import org.threeten.bp.Instant
-import se.tink.android.AppExecutors
 import se.tink.android.livedata.AutoFetchLiveData
-import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createResultHandler
-import com.tink.model.transaction.Transaction
-import se.tink.android.repository.SimpleChangeObserver
-import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import se.tink.android.repository.service.DataRefreshHandler
+import se.tink.android.repository.service.Refreshable
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
 @PfmScope
 class BudgetsRepository @Inject constructor(
     private val budgetService: BudgetService,
-    private val transactionService: TransactionService,
-    private val appExecutors: AppExecutors
-//TODO: CoreSetup    private val cache: LiveDataCache<List<BudgetSummary>>
-) {
+    private val transactionUpdateEventBus: TransactionUpdateEventBus,
+    dataRefreshHandler: DataRefreshHandler
+) : Refreshable {
 
-    private val _budgets = AutoFetchLiveData<ErrorOrValue<List<BudgetSummary>>> {
-        budgetService.listBudgets(it.createResultHandler())
-    }
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    init {
-        _budgets.observeForever { result ->
-            result?.value?.let { list ->
-                appExecutors.backgroundExecutor.execute {
-//               TODO     cache.clearAndInsert(list)
+    private val _budgets: AutoFetchLiveData<List<BudgetSummary>> =
+        AutoFetchLiveData {
+            scope.launch {
+                val budgetSummaries = try {
+                    budgetService.listBudgets()
+                } catch (t: Throwable) {
+                    emptyList<BudgetSummary>()
                 }
+                it.postValue(budgetSummaries)
             }
         }
-        transactionService.subscribe(object : SimpleChangeObserver<Transaction>() {
-            override fun onUpdate(items: List<Transaction>) = _budgets.update()
-        })
+
+    init {
+        dataRefreshHandler.registerRefreshable(this)
     }
 
-    val budgets: LiveData<List<BudgetSummary>> =
-        MediatorLiveData<List<BudgetSummary>>().apply {
-//     TODO       addSource(cache.read()) { result ->
-//                result.let { value = it }
-//            }
-        }
-
-    private val mockBudgetSpecification = BudgetSpecification(
-        //id = "Mock ID",
-        id = "0f174f4ec07b44b1bb946e238f8859e8",
-        name = "Mock Name",
-        description = "Mock Description",
-        amount = Amount(ExactNumber(500L, 0), "SEK"),
-        archived = false,
-        filter = Filter(listOf(), listOf(), listOf(), ""),
-        periodicity = RecurringPeriodicity(
-            unit = PeriodUnit.WEEK,
-            quantity = 1
-        )
-    )
-
-    fun getBudgetSpecification(id: String): BudgetSpecification {
-        return mockBudgetSpecification
+    override fun refresh() {
+        _budgets.update()
     }
 
-    fun createOrUpdateBudget(
-        descriptor: BudgetCreateOrUpdateDescriptor,
-        resulthandler: ResultHandler<BudgetSpecification>
-    ) {
-        if (descriptor.id == null) {
-            budgetService.createBudget(descriptor, resulthandler.alsoDo { _budgets.update() })
-        } else {
-            budgetService.updateBudget(descriptor, resulthandler.alsoDo { _budgets.update() })
+    val budgets: LiveData<List<BudgetSummary>> = _budgets
+
+    fun createOrUpdateBudget(descriptor: BudgetCreateOrUpdateDescriptor) {
+        scope.launch {
+            if (descriptor.id == null) {
+                budgetService.createBudget(descriptor)
+            } else {
+                budgetService.updateBudget(descriptor)
+            }
+            _budgets.update()
         }
     }
 
-    fun deleteBudget(id: String, resulthandler: ResultHandler<Unit>) =
-        budgetService.deleteBudget(id, resulthandler.alsoDo {
-            budgets.value
-                ?.find { budget -> budget.budgetSpecification.id == id }
-//       TODO         ?.also { budget -> cache.delete(listOf(budget)) }
-                ?: _budgets.update()
-        })
+    fun deleteBudget(id: String) {
+        scope.launch {
+            budgetService.deleteBudget(id)
+            _budgets.update()
+        }
+    }
 
     fun transactions(
         budgetId: String,
         start: Instant,
         end: Instant
-    ): LiveData<ErrorOrValue<List<BudgetTransaction>>> {
-        return BudgetTransactionsLiveData(transactionService, budgetService, budgetId, start, end)
-    }
+    ) =
+        BudgetTransactionsLiveData(budgetService, budgetId, start, end, transactionUpdateEventBus)
 
     fun budgetPeriodDetails(
         budgetId: String,
         start: Instant,
-        end: Instant,
-        resultHandler: ResultHandler<Pair<BudgetSpecification, List<BudgetPeriod>>>
-    ) = budgetService.budgetPeriodDetails(budgetId, start, end, resultHandler)
-
-    fun <T : Any?> ResultHandler<T>.alsoDo(action: (T?) -> Unit) =
-        ResultHandler<T>(
-            onSuccess = {
-                this.onSuccess(it)
-                action(it)
-            },
-            onError = onError
-        )
-
+        end: Instant
+    ) {
+        scope.launch {
+            budgetService.budgetPeriodDetails(budgetId, start, end)
+        }
+    }
 }
 
