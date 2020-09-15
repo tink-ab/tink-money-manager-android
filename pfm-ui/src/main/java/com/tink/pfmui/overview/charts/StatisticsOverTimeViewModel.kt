@@ -14,8 +14,6 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.commons.categories.iconColor
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.Category
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.recursiveIdList
 import se.tink.commons.extensions.toDateTime
