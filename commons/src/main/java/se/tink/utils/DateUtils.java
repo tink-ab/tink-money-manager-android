@@ -198,6 +198,14 @@ public class DateUtils {
 		return date.toString(dtf);
 	}
 
+	public String getDailyMonthlyYearly(DateTime dateTime) {
+		return ThreadSafeDateFormat.threadSafeDateFormat(
+			ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY,
+			defaultLocale,
+			timezoneCode)
+			.format(dateTime);
+	}
+
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}
