@@ -11,8 +11,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.pfmui.buildConfig.BuildConfigurations
-import com.tink.pfmui.collections.Categories
-import com.tink.pfmui.collections.Periods
 import com.tink.pfmui.configuration.I18nConfiguration
 import com.tink.pfmui.di.DaggerFragmentComponent
 import com.tink.pfmui.insights.actionhandling.CustomInsightActionHandler
@@ -24,11 +22,9 @@ import com.tink.pfmui.security.DefaultRecoveryHandler
 import com.tink.pfmui.security.SecuredClientDataStorage
 import com.tink.pfmui.tracking.AnalyticsSingleton
 import com.tink.pfmui.tracking.Tracker
-import com.tink.service.authentication.user.User
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import se.tink.repository.service.UserConfigurationService
 import se.tink.android.repository.service.DataRefreshHandler
 import timber.log.Timber
 import java.io.IOException
@@ -56,12 +52,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     @Inject
     internal lateinit var fragmentCoordinator: FragmentCoordinator
-
-    @Inject
-    internal lateinit var categoryService: CategoryService
-
-    @Inject
-    internal lateinit var userConfigurationService: UserConfigurationService
 
     @Inject
     internal lateinit var dataRefreshHandler: DataRefreshHandler
