@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="TinkContainedButtonStyle" parent="Widget.MaterialComponents.Button">
+    <item name="android:layout_height">@dimen/tink_button_height</item>
     <item name="android:textColor">?tink_colorOnAccent</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
@@ -15,6 +16,7 @@
     <item name="android:insetBottom">0dp</item>
   </style>
   <style name="TinkTextButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+    <item name="android:layout_height">@dimen/tink_button_height</item>
     <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
     <item name="android:textSize">@dimen/deci_text_size</item>

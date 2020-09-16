@@ -59,7 +59,6 @@
       android:id="@+id/button"
       style="?attr/tink_containedButtonStyle"
       android:layout_width="0dp"
-      android:layout_height="@dimen/button_height"
       android:text="@string/tink_category_list_fragment_button_text"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

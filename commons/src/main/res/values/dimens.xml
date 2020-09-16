@@ -22,7 +22,7 @@
   <dimen name="peta_line_height">48.0dip</dimen>
 
   <!-- Button style dimensions -->
-  <dimen name="button_height">52dp</dimen>
+  <dimen name="tink_button_height">52dp</dimen>
 
   <!-- CardView style dimensions -->
   <dimen name="card_elevation">2dp</dimen>
