@@ -85,7 +85,7 @@ internal class AccountDetailsFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        DataBindingUtil.bind<FragmentAccountDetailsBinding>(inflatedView)?.also {
+        DataBindingUtil.bind<FragmentAccountDetailsBinding>(view)?.also {
             it.viewModel = viewModel
             it.transactionListModel = transactionListViewModel
             it.lifecycleOwner = viewLifecycleOwner

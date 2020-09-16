@@ -37,7 +37,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
-        DataBindingUtil.bind<FragmentOverviewInsightsBinding>(inflatedView)?.also {
+        DataBindingUtil.bind<FragmentOverviewInsightsBinding>(view)?.also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }

@@ -58,7 +58,7 @@ class ArchivedInsightsFragment : BaseFragment() {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
         }
 
-        DataBindingUtil.bind<FragmentInsightsBinding>(inflatedView)?.also {
+        DataBindingUtil.bind<FragmentInsightsBinding>(view)?.also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
