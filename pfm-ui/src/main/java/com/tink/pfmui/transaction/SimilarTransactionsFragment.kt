@@ -1,7 +1,9 @@
 package com.tink.pfmui.transaction
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
@@ -83,16 +85,30 @@ internal class SimilarTransactionsFragment : BaseFragment() {
             }
 
 
-            markerButton.setOnClickListener { adapter.toggleMarked() }
         }
         viewModel.apply {
             similarTransactionItems.observe(viewLifecycleOwner, Observer { items ->
                 adapter.setData(items)
             })
-            markButtonText.observe(viewLifecycleOwner, Observer { buttonText ->
-                buttonText?.let { markerButton.text = it }
+            markButtonText.observe(viewLifecycleOwner, Observer {
+                invalidateToolbarMenu()
             })
         }
+    }
+
+    override fun onCreateToolbarMenu(toolbar: Toolbar) {
+        toolbar.inflateMenu(R.menu.menu_similar_transactions)
+        viewModel.markButtonText.value?.let {
+            toolbar.menu.findItem(R.id.menu_item_marker_button).setTitle(it)
+        }
+    }
+
+    override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_item_marker_button) {
+            adapter.toggleMarked()
+            return true
+        }
+        return false
     }
 
     override fun onBackPressed(): Boolean {

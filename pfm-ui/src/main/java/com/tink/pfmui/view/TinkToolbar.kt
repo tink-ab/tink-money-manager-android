@@ -18,6 +18,9 @@ import com.tink.pfmui.R
 import com.tink.pfmui.util.DimensionUtils
 import com.tink.pfmui.view.TinkToolbar.Theme.ToolbarTextTheme
 
+// Copied from Base.TextAppearance.MaterialComponents.Button
+private const val BUTTON_LETTERSPACING = 0.0892857143f
+
 internal class TinkToolbar : Toolbar {
     private var theme: Theme? = null
 
@@ -71,6 +74,12 @@ internal class TinkToolbar : Toolbar {
         super.setNavigationIcon(icon)
     }
 
+    override fun inflateMenu(resId: Int) {
+        super.inflateMenu(resId)
+        // Re-apply styling after inflating a new menu.
+        theme?.actionButtonTheme?.let { findAndStyleMenu(it) }
+    }
+
     fun setTheme(theme: Theme) {
         this.theme = theme
         setTitleTextAppearance(context, R.style.mega)
@@ -96,6 +105,10 @@ internal class TinkToolbar : Toolbar {
                 item.icon = itemIcon
             }
         }
+        findAndStyleMenu(actionButtonTheme)
+    }
+
+    private fun findAndStyleMenu(actionButtonTheme: ToolbarTextTheme) {
         var menu: ActionMenuView? = null
         for (i in 0 until childCount) {
             val child = getChildAt(i)
@@ -118,9 +131,7 @@ internal class TinkToolbar : Toolbar {
         for (i in 0 until menu.childCount) {
             val child = menu.getChildAt(i)
             if (child is ActionMenuItemView) {
-                val itemView = child
-                itemView.isAllCaps = false
-                styleTextView(itemView, theme)
+                styleTextView(child, theme)
             }
         }
     }
@@ -131,8 +142,7 @@ internal class TinkToolbar : Toolbar {
     ) {
         textView.setTextColor(theme.textColor)
         textView.typeface = theme.font
-        textView.letterSpacing = theme.letterSpacing
-        textView.isAllCaps = false
+        textView.letterSpacing = BUTTON_LETTERSPACING
         if (theme.shouldChangeTextSize()) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, theme.textSizeInPx)
         }
