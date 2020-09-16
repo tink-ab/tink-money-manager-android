@@ -32,7 +32,6 @@
   <dimen name="left_to_spend_tutorial_first_list_item_margin">20dp</dimen>
   <dimen name="left_to_spend_tutorial_description_guide">48dp</dimen>
 
-  <dimen name="period_selector_height">40dp</dimen>
   <dimen name="card_divider_left_margin">76dp</dimen>
 
   <dimen name="overview_chart_container_height">375dp</dimen>

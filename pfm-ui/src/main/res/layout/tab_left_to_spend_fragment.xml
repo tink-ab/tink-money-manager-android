@@ -23,7 +23,7 @@
     android:id="@+id/period_picker"
     style="?attr/tink_periodPickerButtonStyle"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/period_selector_height"
+    android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="16dp"
     android:visibility="gone"
