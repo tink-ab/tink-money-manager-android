@@ -11,49 +11,49 @@
   <color name="tink_blue_20">#32427783</color>
   <color name="tink_blue_dark">#3B6A75</color>
   <color name="tink_blue_light">#F2F5F6</color>
-  <color name="expensive_blue">#0E9EC2</color>
-  <color name="expensive_blue_04">#0A0E9EC2</color>
-  <color name="expensive_blue_dark">#0C8EAE</color>
-  <color name="expensive_blue_light">#E6F5F8</color>
-  <color name="salary_green">@color/green</color>
-  <color name="salary_green_dark">#30A266</color>
-  <color name="salary_green_light">#EAF7F0</color>
-  <color name="orange">#FEAE22</color>
-  <color name="orange_light">#FFF3DE</color>
-  <color name="red">#EA544A</color>
-  <color name="red_dark">#D24B42</color>
-  <color name="transparent">#00000000</color>
-  <color name="green">#36B472</color>
+  <color name="tink_expensive_blue">#0E9EC2</color>
+  <color name="tink_expensive_blue_04">#0A0E9EC2</color>
+  <color name="tink_expensive_blue_dark">#0C8EAE</color>
+  <color name="tink_expensive_blue_light">#E6F5F8</color>
+  <color name="tink_salary_green">@color/tink_green</color>
+  <color name="tink_salary_green_dark">#30A266</color>
+  <color name="tink_salary_green_light">#EAF7F0</color>
+  <color name="tink_orange">#FEAE22</color>
+  <color name="tink_orange_light">#FFF3DE</color>
+  <color name="tink_red">#EA544A</color>
+  <color name="tink_red_dark">#D24B42</color>
+  <color name="tink_transparent">#00000000</color>
+  <color name="tink_green">#36B472</color>
 
   <!-- Backgrounds -->
   <color name="tink_background_grey">#FBFCFC</color>
-  <color name="tink_background_blue">@color/expensive_blue_04</color>
+  <color name="tink_background_blue">@color/tink_expensive_blue_04</color>
 
   <!-- Blacks -->
-  <color name="black">#262626</color>
-  <color name="black_50">#80262626</color>
-  <color name="plain_black">#000000</color>
-  <color name="plain_black_60">#99000000</color> <!-- Plain black with 60% opacity -->
+  <color name="tink_black">#262626</color>
+  <color name="tink_black_50">#80262626</color>
+  <color name="tink_plain_black">#000000</color>
+  <color name="tink_plain_black_60">#99000000</color> <!-- Plain black with 60% opacity -->
 
   <!-- Greys -->
-  <color name="transfer_grey">#494949</color>
-  <color name="greyblack">#808080</color>
-  <color name="disabled_greyblack">#7f808080</color>
-  <color name="grey_light">#A7A7A7</color>
-  <color name="grey_very_light">#F4F4F4</color>
-  <color name="grey_inactive">#D5D5D5</color>
-  <color name="divider_grey">#EEEEEE</color>
+  <color name="tink_transfer_grey">#494949</color>
+  <color name="tink_greyblack">#808080</color>
+  <color name="tink_disabled_greyblack">#7f808080</color>
+  <color name="tink_grey_light">#A7A7A7</color>
+  <color name="tink_grey_very_light">#F4F4F4</color>
+  <color name="tink_grey_inactive">#D5D5D5</color>
+  <color name="tink_divider_grey">#EEEEEE</color>
 
   <!-- Whites -->
-  <color name="white">#FFFFFF</color>
-  <color name="white_40">#66ffffff</color>
-  <color name="white_53">#87FFFFFF</color>
-  <color name="white_68">#ADFFFFFF</color>
-  <color name="white_70">#B3FFFFFF</color>
-  <color name="white_90">#E6FFFFFF</color>
+  <color name="tink_white">#FFFFFF</color>
+  <color name="tink_white_40">#66ffffff</color>
+  <color name="tink_white_53">#87FFFFFF</color>
+  <color name="tink_white_68">#ADFFFFFF</color>
+  <color name="tink_white_70">#B3FFFFFF</color>
+  <color name="tink_white_90">#E6FFFFFF</color>
 
-  <color name="ripple_on_light_background">#20444444</color>
-  <color name="ripple_on_dark_background">#20ffffff</color>
+  <color name="tink_ripple_on_light_background">#20444444</color>
+  <color name="tink_ripple_on_dark_background">#20ffffff</color>
 
   /* App colors */
 <!--  <color name="colorPrimary">?tink_colorPrimary</color>-->
@@ -66,18 +66,18 @@
 <!--  <color name="colorAccentLight">?tink_colorAccentLight</color>-->
 <!--  <color name="colorOnAccent">?tink_colorOnAccent</color>-->
 
-  <color name="colorWarning">@color/orange</color>
-  <color name="colorOnWarning">@color/white</color>
-  <color name="colorError">@color/red</color>
-  <color name="colorOnError">@color/white</color>
-  <color name="colorSuccess">@color/green</color>
-  <color name="colorOnSuccess">@color/white</color>
+  <color name="tink_color_warning">@color/tink_orange</color>
+  <color name="tink_color_on_warning">@color/tink_white</color>
+  <color name="tink_color_error">@color/tink_red</color>
+  <color name="tink_color_on_error">@color/tink_white</color>
+  <color name="tink_color_success">@color/tink_green</color>
+  <color name="tink_color_on_success">@color/tink_white</color>
 
-  <color name="colorBackground">@color/white</color>
-  <color name="colorOnBackground">@color/black</color>
+  <color name="tink_color_background">@color/tink_white</color>
+  <color name="tink_color_on_background">@color/tink_black</color>
 
-  <color name="colorSurface">@color/white</color>
-  <color name="colorOnSurface">@color/black</color>
+  <color name="tink_color_surface">@color/tink_white</color>
+  <color name="tink_color_on_surface">@color/tink_black</color>
 
   /* Text colors */
 <!--  <color name="textColorPrimary">@color/black</color>-->
@@ -109,9 +109,9 @@
 <!--  <color name="transferDark">?tink_transferDarkColor</color>-->
 <!--  <color name="colorOnTransfer">?tink_colorOnTransfer</color>-->
 
-  <color name="period_disabled_arrow">@color/grey_inactive</color>
-  <color name="divider_color">@color/divider_grey</color>
-  <color name="disabled">@color/grey_light</color>
+  <color name="tink_period_disabled_arrow">@color/tink_grey_inactive</color>
+  <color name="tink_divider_color">@color/tink_divider_grey</color>
+  <color name="tink_disabled">@color/tink_grey_light</color>
 
 <!--  <color name="uncategorized_transaction">?tink_uncategorizedColor</color>-->
 <!--  <color name="uncategorizedLight">?tink_uncategorizedLightColor</color>-->

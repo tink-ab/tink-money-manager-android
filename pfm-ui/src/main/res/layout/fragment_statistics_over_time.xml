@@ -7,7 +7,7 @@
 
   <TextView
     android:id="@+id/sum"
-    style="@style/tera"
+    style="@style/tink_tera"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="24dp"
@@ -19,7 +19,7 @@
 
   <TextView
     android:id="@+id/average"
-    style="@style/deci.primary"
+    style="@style/tink_deci.primary"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="12dp"

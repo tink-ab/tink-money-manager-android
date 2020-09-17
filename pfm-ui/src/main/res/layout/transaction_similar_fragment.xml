@@ -10,7 +10,7 @@
 
   <TextView
     android:id="@+id/description"
-    style="@style/hecto"
+    style="@style/tink_hecto"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/horizontal_margin"

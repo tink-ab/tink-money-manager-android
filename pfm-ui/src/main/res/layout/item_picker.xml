@@ -13,12 +13,12 @@
     style="@style/Base.Widget.AppCompat.Button.Borderless"
     android:layout_width="48dp"
     android:layout_height="48dp"
-    android:src="@drawable/ic_arrow_left"
-    android:tint="@color/period_selector_button_color"/>
+    android:src="@drawable/tink_arrow_left"
+    android:tint="@color/tink_period_selector_button_color"/>
 
   <TextView
     android:id="@+id/title"
-    style="@style/hecto"
+    style="@style/tink_hecto"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
@@ -32,7 +32,7 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:rotation="180"
-    android:src="@drawable/ic_arrow_left"
-    android:tint="@color/period_selector_button_color"/>
+    android:src="@drawable/tink_arrow_left"
+    android:tint="@color/tink_period_selector_button_color"/>
 
 </LinearLayout>

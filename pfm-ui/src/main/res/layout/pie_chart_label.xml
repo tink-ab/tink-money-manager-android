@@ -16,8 +16,8 @@
 
     <com.tink.pfmui.view.TinkTextView
       android:id="@+id/title"
-      style="@style/nano.primary"
-      android:layout_width="@dimen/category_icon_size"
+      style="@style/tink_nano.primary"
+      android:layout_width="@dimen/tink_category_icon_size"
       android:layout_height="wrap_content"
       android:paddingTop="2dp"
       android:paddingBottom="2dp"
@@ -27,8 +27,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
       android:id="@+id/icon"
-      android:layout_width="@dimen/category_icon_size"
-      android:layout_height="@dimen/category_icon_size"
+      android:layout_width="@dimen/tink_category_icon_size"
+      android:layout_height="@dimen/tink_category_icon_size"
       android:scaleType="center"
       android:transitionName="@{@string/label_icon_transition(type)}"
       app:shapeAppearance="?attr/tink_categoryIconShapeStyle" />

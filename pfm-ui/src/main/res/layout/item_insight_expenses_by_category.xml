@@ -6,7 +6,7 @@
   android:layout_height="wrap_content"
   android:layout_margin="16dp"
   app:cardBackgroundColor="?tink_cardBackgroundColor"
-  app:cardCornerRadius="@dimen/card_corner_radius">
+  app:cardCornerRadius="@dimen/tink_card_corner_radius">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -27,7 +27,7 @@
       android:layout_width="72dp"
       android:layout_height="72dp"
       android:layout_marginTop="32dp"
-      android:background="@drawable/circle"
+      android:background="@drawable/tink_circle"
       android:backgroundTint="?tink_colorOnExpenses"
       app:layout_constraintEnd_toEndOf="@+id/categoryName0"
       app:layout_constraintStart_toStartOf="@+id/categoryName0"
@@ -47,7 +47,7 @@
       android:id="@+id/iconBackground1"
       android:layout_width="64dp"
       android:layout_height="64dp"
-      android:background="@drawable/circle"
+      android:background="@drawable/tink_circle"
       android:backgroundTint="?tink_colorOnExpenses"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/categoryName1"
@@ -68,7 +68,7 @@
       android:id="@+id/iconBackground2"
       android:layout_width="54dp"
       android:layout_height="54dp"
-      android:background="@drawable/circle"
+      android:background="@drawable/tink_circle"
       android:backgroundTint="?tink_colorOnExpenses"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/categoryName2"
@@ -87,7 +87,7 @@
 
     <TextView
       android:id="@+id/categoryName0"
-      style="@style/micro.semibold"
+      style="@style/tink_micro.semibold"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="24dp"
@@ -102,7 +102,7 @@
 
     <TextView
       android:id="@+id/categoryName1"
-      style="@style/micro.semibold"
+      style="@style/tink_micro.semibold"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
@@ -116,7 +116,7 @@
 
     <TextView
       android:id="@+id/categoryName2"
-      style="@style/micro.semibold"
+      style="@style/tink_micro.semibold"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
@@ -130,7 +130,7 @@
 
     <TextView
       android:id="@+id/amount0"
-      style="@style/micro"
+      style="@style/tink_micro"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
@@ -143,7 +143,7 @@
 
     <TextView
       android:id="@+id/amount1"
-      style="@style/micro"
+      style="@style/tink_micro"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
@@ -156,7 +156,7 @@
 
     <TextView
       android:id="@+id/amount2"
-      style="@style/micro"
+      style="@style/tink_micro"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
@@ -182,7 +182,7 @@
 
     <TextView
       android:id="@+id/title"
-      style="@style/hecto.bold"
+      style="@style/tink_hecto.bold"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="24dp"
@@ -195,7 +195,7 @@
 
     <TextView
       android:id="@+id/description"
-      style="@style/deci.primary"
+      style="@style/tink_deci.primary"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"

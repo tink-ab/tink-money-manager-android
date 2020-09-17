@@ -54,7 +54,7 @@
 
   <TextView
     android:id="@+id/amountLabel"
-    style="@style/micro.primary"
+    style="@style/tink_micro.primary"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -65,7 +65,7 @@
 
   <TextView
     android:id="@+id/periodLabel"
-    style="@style/nano"
+    style="@style/tink_nano"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:gravity="center"

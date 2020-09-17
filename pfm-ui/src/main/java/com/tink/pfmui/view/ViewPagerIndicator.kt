@@ -29,7 +29,7 @@ internal class ViewPagerIndicator @JvmOverloads constructor(context: Context,
 
     init {
         baseAlpha = resources.getFraction(R.fraction.pager_indicator_base_alpha, 1, 1)
-        circle = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.circle)!!.mutate()).apply {
+        circle = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.tink_circle)!!.mutate()).apply {
             setTint(readColor(attrs))
         }
         diameterMin = resources.getDimensionPixelSize(R.dimen.page_indicator_circle_size_min)

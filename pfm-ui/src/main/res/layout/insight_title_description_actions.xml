@@ -10,7 +10,7 @@
 
   <TextView
     android:id="@+id/title"
-    style="@style/hecto.semibold"
+    style="@style/tink_hecto.semibold"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
@@ -23,7 +23,7 @@
 
   <TextView
     android:id="@+id/description"
-    style="@style/deci.primary"
+    style="@style/tink_deci.primary"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="6dp"

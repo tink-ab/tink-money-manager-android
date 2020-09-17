@@ -10,7 +10,7 @@
 
   <TextView
     android:id="@+id/label"
-    style="@style/deci.primary"
+    style="@style/tink_deci.primary"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="76dp"
@@ -26,7 +26,7 @@
 
   <TextView
     android:id="@+id/amount"
-    style="@style/deci"
+    style="@style/tink_deci"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/double_base_line_step"
@@ -41,7 +41,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="16dp"
-    android:button="@drawable/rounded_check_box_hidden_when_unchecked"
+    android:button="@drawable/tink_rounded_check_box_hidden_when_unchecked"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent"

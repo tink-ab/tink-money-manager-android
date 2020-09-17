@@ -82,7 +82,7 @@ internal class TinkToolbar : Toolbar {
 
     fun setTheme(theme: Theme) {
         this.theme = theme
-        setTitleTextAppearance(context, R.style.mega)
+        setTitleTextAppearance(context, R.style.tink_mega)
         val actionButtonTheme = theme.actionButtonTheme
         navigationIcon = navigationIcon
         setBackgroundColor(theme.backgroundColor)

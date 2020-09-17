@@ -6,19 +6,19 @@
   android:id="@+id/root"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="?selectableItemBackground">
+  android:background="@drawable/tink_standard_row_background">
 
   <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/icon"
-    android:layout_width="@dimen/category_icon_size"
-    android:layout_height="@dimen/category_icon_size"
+    android:layout_width="@dimen/tink_category_icon_size"
+    android:layout_height="@dimen/tink_category_icon_size"
     android:layout_margin="16dp"
     android:scaleType="center"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
-    tools:srcCompat="@drawable/ic_category_healthandbeauty" />
+    tools:srcCompat="@drawable/tink_category_healthandbeauty" />
 
   <Space
     android:id="@+id/spacer"
@@ -29,7 +29,7 @@
 
   <TextView
     android:id="@+id/label"
-    style="@style/hecto"
+    style="@style/tink_hecto"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
@@ -42,11 +42,11 @@
     app:layout_constraintEnd_toStartOf="@+id/amount"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:text="Riche"/>
+    tools:text="Taxi Kurir"/>
 
   <TextView
     android:id="@+id/description"
-    style="@style/deci"
+    style="@style/tink_deci"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="0dp"
@@ -60,44 +60,32 @@
     app:layout_constraintEnd_toStartOf="@+id/amount"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/label"
-    tools:text="Restaurang"/>
+    tools:text="Lordag 3 mar"/>
 
   <TextView
     android:id="@+id/amount"
-    style="@style/hecto"
+    style="@style/tink_hecto"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginEnd="16dp"
     android:textAlignment="viewEnd"
-    app:layout_constraintBottom_toTopOf="@id/date"
-    app:layout_constraintEnd_toStartOf="@id/checkbox"
+    app:layout_constraintBottom_toTopOf="@id/dispensableAmount"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/label"
     tools:text="-599 kr"/>
 
   <TextView
-    android:id="@+id/date"
-    style="@style/deci"
+    android:id="@+id/dispensableAmount"
+    style="@style/tink_deci"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginEnd="16dp"
     android:textAlignment="viewEnd"
     android:visibility="visible"
     app:layout_constraintBottom_toBottomOf="@id/description"
-    app:layout_constraintEnd_toStartOf="@id/checkbox"
-    app:layout_constraintTop_toBottomOf="@id/amount"
-    tools:text="22 oct 2019"/>
-
-  <CheckBox
-    android:id="@+id/checkbox"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="16dp"
-    android:button="@drawable/rounded_check_box_empty_when_unchecked"
-    android:clickable="false"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    tools:checked="false"/>
+    app:layout_constraintTop_toBottomOf="@id/amount"
+    tools:text="-199 kr"/>
 
   <View
     android:id="@+id/divider"

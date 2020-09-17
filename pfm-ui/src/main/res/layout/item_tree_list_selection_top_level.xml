@@ -10,19 +10,19 @@
 
   <com.google.android.material.imageview.ShapeableImageView
     android:id="@+id/icon"
-    android:layout_width="@dimen/category_icon_size"
-    android:layout_height="@dimen/category_icon_size"
+    android:layout_width="@dimen/tink_category_icon_size"
+    android:layout_height="@dimen/tink_category_icon_size"
     android:layout_margin="16dp"
     android:scaleType="center"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
-    tools:srcCompat="@drawable/ic_category_healthandbeauty" />
+    tools:srcCompat="@drawable/tink_category_healthandbeauty" />
 
     <TextView
       android:id="@+id/label"
-      style="@style/hecto"
+      style="@style/tink_hecto"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="76dp"
@@ -38,7 +38,7 @@
 
     <TextView
       android:id="@+id/amount"
-      style="@style/hecto.secondary"
+      style="@style/tink_hecto.secondary"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="@dimen/double_base_line_step"
@@ -53,7 +53,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="16dp"
-      android:button="@drawable/rounded_check_box_hidden_when_unchecked"
+      android:button="@drawable/tink_rounded_check_box_hidden_when_unchecked"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"

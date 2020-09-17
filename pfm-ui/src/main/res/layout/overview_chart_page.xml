@@ -36,7 +36,7 @@
 
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/title"
-          style="@style/deci.primary"
+          style="@style/tink_deci.primary"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
@@ -46,7 +46,7 @@
         <!-- Do not use wrap_content for width for animation performance reasons-->
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/amount"
-          style="@style/tera"
+          style="@style/tink_tera"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
@@ -55,7 +55,7 @@
 
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/period"
-          style="@style/deci.primary"
+          style="@style/tink_deci.primary"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"

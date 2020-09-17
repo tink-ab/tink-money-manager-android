@@ -3,6 +3,6 @@
   android:color="?android:attr/colorControlHighlight">
   <item
     android:id="@android:id/mask"
-    android:drawable="@drawable/rounded_button"/>
-  <item android:drawable="@drawable/rounded_button"/>
+    android:drawable="@drawable/tink_rounded_button"/>
+  <item android:drawable="@drawable/tink_rounded_button"/>
 </ripple>

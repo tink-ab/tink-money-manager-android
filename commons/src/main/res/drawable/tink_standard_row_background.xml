@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
   android:color="@color/tink_ripple_on_light_background">
-  <item android:drawable="@drawable/group_row_selector_bottom_selector_card_content"/>
+  <item android:drawable="@drawable/tink_standard_row_inner_background"/>
 </ripple>

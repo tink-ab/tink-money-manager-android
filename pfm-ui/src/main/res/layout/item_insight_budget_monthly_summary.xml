@@ -8,7 +8,7 @@
   android:layout_height="wrap_content"
   android:layout_margin="16dp"
   app:cardBackgroundColor="?tink_cardBackgroundColor"
-  app:cardCornerRadius="@dimen/card_corner_radius">
+  app:cardCornerRadius="@dimen/tink_card_corner_radius">
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
 
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/currentSpending"
-        style="@style/giga.autoSize"
+        style="@style/tink_giga.autoSize"
         android:layout_width="80dp"
         android:layout_height="21dp"
         android:fontFamily="@font/tink_font_semi_bold"
@@ -58,7 +58,7 @@
 
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/totalBudget"
-        style="@style/giga.autoSize"
+        style="@style/tink_giga.autoSize"
         android:layout_width="80dp"
         android:layout_height="13dp"
         android:fontFamily="@font/tink_font_regular"
@@ -75,7 +75,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="40dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/tink_circle"
         android:backgroundTint="?tink_expensesLightColor"
         app:layout_constraintBottom_toTopOf="@id/categoryThreeBackground"
         app:layout_constraintEnd_toStartOf="@id/categoryTwoBackground"
@@ -98,7 +98,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/tink_circle"
         android:backgroundTint="?tink_expensesLightColor"
         app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +120,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/tink_circle"
         android:backgroundTint="?tink_expensesLightColor"
         app:layout_constraintBottom_toBottomOf="@id/progress"
         app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
@@ -146,7 +146,7 @@
         android:id="@+id/categoryFourBackground"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/circle"
+        android:background="@drawable/tink_circle"
         android:backgroundTint="?tink_expensesLightColor"
         app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
         app:layout_constraintTop_toTopOf="@id/categoryThreeBackground"/>

@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Singleton
 internal open class H2(context: Context) : TextViewXmlTheme(context,
-    R.style.h2
+    R.style.tink_h2
 )
 
 internal open class H2Action(context: Context) : TextViewXmlTheme(context,
@@ -22,7 +22,7 @@ internal open class H2Action(context: Context) : TextViewXmlTheme(context,
 )
 
 internal open class Deci(context: Context) : TextViewXmlTheme(context,
-    R.style.deci
+    R.style.tink_deci
 )
 internal open class DeciBold(context: Context) : TextViewXmlTheme(context,
     R.style.deci_bold
@@ -38,14 +38,14 @@ internal open class DeciDisabled(context: Context) : TextViewXmlTheme(context,
 )
 
 internal open class Giga(context: Context) : TextViewXmlTheme(context,
-    R.style.giga
+    R.style.tink_giga
 )
 internal open class GigaRegular(context: Context) : TextViewXmlTheme(context,
     R.style.giga_regular
 )
 
 internal open class Hecto(context: Context) : TextViewXmlTheme(context,
-    R.style.hecto
+    R.style.tink_hecto
 )
 internal open class HectoSecondary(context: Context) : TextViewXmlTheme(context,
     R.style.hecto_secondary
@@ -58,21 +58,21 @@ internal open class HectoDisabled(context: Context) : TextViewXmlTheme(context,
 )
 
 internal open class Mega(context: Context) : TextViewXmlTheme(context,
-    R.style.mega
+    R.style.tink_mega
 )
 internal open class MegaBold(context: Context) : TextViewXmlTheme(context,
     R.style.mega_bold
 )
 
 internal open class Micro(context: Context) : TextViewXmlTheme(context,
-    R.style.micro
+    R.style.tink_micro
 )
 internal open class MicroPrimary(context: Context) : TextViewXmlTheme(context,
     R.style.micro_primary
 )
 
 internal open class Nano(context: Context) : TextViewXmlTheme(context,
-    R.style.nano
+    R.style.tink_nano
 )
 internal open class NanoPrimary(context: Context) : TextViewXmlTheme(context,
     R.style.nano_primary
@@ -85,11 +85,11 @@ internal open class NanoTitle(context: Context) : TextViewXmlTheme(context,
 )
 
 internal open class Peta(context: Context) : TextViewXmlTheme(context,
-    R.style.peta
+    R.style.tink_peta
 )
 
 internal open class Tera(context: Context) : TextViewXmlTheme(context,
-    R.style.tera
+    R.style.tink_tera
 )
 
 

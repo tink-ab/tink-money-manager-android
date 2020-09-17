@@ -7,8 +7,8 @@
   android:layout_height="wrap_content"
   android:layout_margin="16dp"
   app:cardBackgroundColor="?tink_cardBackgroundColor"
-  app:cardCornerRadius="@dimen/card_corner_radius"
-  app:cardElevation="@dimen/card_elevation">
+  app:cardCornerRadius="@dimen/tink_card_corner_radius"
+  app:cardElevation="@dimen/tink_card_elevation">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -30,8 +30,8 @@
         android:layout_height="156dp"
         app:bubbleBackgroundTint="?tink_cardBackgroundColor"
         app:iconTint="?tink_expensesColor"
-        app:primaryTextStyle="@style/giga"
-        app:secondaryTextStyle="@style/nano"
+        app:primaryTextStyle="@style/tink_giga"
+        app:secondaryTextStyle="@style/tink_nano"
         app:textColor="?tink_expensesColor"
         tools:primaryText="3 200 kr"
         tools:secondaryText="Ditt snitt per manad"/>
@@ -45,8 +45,8 @@
         android:layout_toEndOf="@id/insightBubbleCurrentSpending"
         app:bubbleBackgroundTint="?tink_expensesColor"
         app:iconTint="?tink_colorOnExpenses"
-        app:primaryTextStyle="@style/hecto.bold"
-        app:secondaryTextStyle="@style/nano.semibold"
+        app:primaryTextStyle="@style/tink_hecto.bold"
+        app:secondaryTextStyle="@style/tink_nano.semibold"
         app:textColor="?tink_colorOnExpenses"
         tools:primaryText="2 880 kr"
         tools:secondaryText="Ny budget"/>
@@ -60,7 +60,7 @@
         android:layout_alignTop="@id/insightBubbleNewCategory"
         android:layout_toEndOf="@id/insightBubbleNewCategory"
         app:bubbleBackgroundTint="?tink_colorOnExpenses"
-        app:primaryTextStyle="@style/micro.semibold"
+        app:primaryTextStyle="@style/tink_micro.semibold"
         app:textColor="?tink_expensesColor"
         tools:primaryText="-10%"/>
 

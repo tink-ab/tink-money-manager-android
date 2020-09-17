@@ -44,7 +44,7 @@ class ImageTextViewHolder(
 private val Insight.image
     get() =
         when (type) {
-            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.drawable.items_on_shelf_illustration
+            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.drawable.tink_items_on_shelf_illustration
             else -> 0
         }
 

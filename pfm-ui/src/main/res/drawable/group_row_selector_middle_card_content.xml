@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item>
     <shape>
-      <solid android:color="@color/colorSurface"/>
+      <solid android:color="@color/tink_color_surface"/>
     </shape>
   </item>
 
@@ -16,7 +16,7 @@
       <stroke
         android:width="1px"
         android:color="#FFDDDDDD"/>
-      <solid android:color="@color/transparent"/>
+      <solid android:color="@color/tink_transparent"/>
     </shape>
   </item>
 
@@ -29,7 +29,7 @@
       android:shape="rectangle">
       <stroke
         android:width="1px"
-        android:color="@color/colorSurface"/>
+        android:color="@color/tink_color_surface"/>
     </shape>
   </item>
 

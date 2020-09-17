@@ -10,16 +10,16 @@
     android:id="@+id/circle"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    android:background="@drawable/circle"
+    android:background="@drawable/tink_circle"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:backgroundTint="@color/expensive_blue_light"/>
+    tools:backgroundTint="@color/tink_expensive_blue_light"/>
 
   <TextView
     android:id="@+id/primaryText"
-    style="@style/hecto.bold"
+    style="@style/tink_hecto.bold"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="2dp"
@@ -30,7 +30,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="3 200 kr"
-    tools:textColor="@color/expensive_blue"/>
+    tools:textColor="@color/tink_expensive_blue"/>
 
   <ImageView
     android:id="@+id/icon"
@@ -41,11 +41,11 @@
     app:layout_constraintBottom_toTopOf="@+id/primaryText"
     app:layout_constraintEnd_toEndOf="@id/circle"
     app:layout_constraintStart_toStartOf="@id/circle"
-    tools:tint="@color/expensive_blue"/>
+    tools:tint="@color/tink_expensive_blue"/>
 
   <TextView
     android:id="@+id/secondaryText"
-    style="@style/hecto"
+    style="@style/tink_hecto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -54,6 +54,6 @@
     app:layout_constraintStart_toStartOf="@id/circle"
     app:layout_constraintTop_toBottomOf="@+id/primaryText"
     tools:text="/man"
-    tools:textColor="@color/expensive_blue"/>
+    tools:textColor="@color/tink_expensive_blue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
