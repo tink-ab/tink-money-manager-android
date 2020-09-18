@@ -291,7 +291,7 @@ private class TopLevelViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_top_level),
+    parent.inflate(R.layout.tink_item_tree_list_selection_top_level),
     onViewHolderClickedListener
 ) {
     val icon: ShapeableImageView = itemView.findViewById(R.id.icon)
@@ -317,7 +317,7 @@ private class ChildItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_child),
+    parent.inflate(R.layout.tink_item_tree_list_selection_child),
     onViewHolderClickedListener
 )
 
@@ -325,7 +325,7 @@ private class ActionItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_top_level),
+    parent.inflate(R.layout.tink_item_tree_list_selection_top_level),
     onViewHolderClickedListener
 ) {
     val icon: ShapeableImageView = itemView.findViewById(R.id.icon)

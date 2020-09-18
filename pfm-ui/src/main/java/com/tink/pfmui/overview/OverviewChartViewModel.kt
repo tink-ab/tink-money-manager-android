@@ -116,7 +116,7 @@ internal class OverviewChartViewModel @Inject constructor(
                 getPeriodString(dateUtils, period, context, false)
             value = OverviewChartModel(
                 context,
-                R.string.left_to_spend_title,
+                R.string.tink_left_to_spend_title,
                 leftToSpend,
                 amountFormatter,
                 periodStr,

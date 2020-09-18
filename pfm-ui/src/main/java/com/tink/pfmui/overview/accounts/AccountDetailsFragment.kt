@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.R
-import com.tink.pfmui.databinding.FragmentAccountDetailsBinding
+import com.tink.pfmui.databinding.TinkFragmentAccountDetailsBinding
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.TransactionListViewModel
@@ -19,8 +19,8 @@ import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.transaction.toListMode
 import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.view.ParallaxHeaderScrollListener
-import kotlinx.android.synthetic.main.fragment_account_details.*
-import kotlinx.android.synthetic.main.transactions_list_fragment.recyclerView
+import kotlinx.android.synthetic.main.tink_fragment_account_details.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.core.models.account.Account
@@ -44,7 +44,7 @@ internal class AccountDetailsFragment : BaseFragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
-    override fun getLayoutId(): Int = R.layout.fragment_account_details
+    override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): TransactionsListFragment.Theme = ownTheme
     override fun getScreenEvent(): ScreenEvent? = ScreenEvent.ACCOUNT_DETAILS
@@ -85,7 +85,7 @@ internal class AccountDetailsFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        DataBindingUtil.bind<FragmentAccountDetailsBinding>(view)?.also {
+        DataBindingUtil.bind<TinkFragmentAccountDetailsBinding>(view)?.also {
             it.viewModel = viewModel
             it.transactionListModel = transactionListViewModel
             it.lifecycleOwner = viewLifecycleOwner
@@ -126,7 +126,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        val headerHeight = resources.getDimension(R.dimen.account_details_header_height)
+        val headerHeight = resources.getDimension(R.dimen.tink_account_details_header_height)
         val headers = listOf(accountBalance, accountNumber, divider, extraText)
         recyclerView.addOnScrollListener(ParallaxHeaderScrollListener(headers, headerHeight))
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)

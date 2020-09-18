@@ -42,7 +42,7 @@ internal class VerticalBarChartArea : ChartArea {
             ContextCompat
                 .getColor(
                     context!!,
-                    R.color.vertical_bar_chart_default_color
+                    R.color.tink_vertical_bar_chart_default_color
                 ) // TODO should have default values?
         } else field
     var negativeBarColor = -1

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.item_insight_image_text.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_image_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
@@ -30,7 +30,7 @@ class ImageTextViewProvider @Inject constructor() : InsightViewProvider {
 class ImageTextViewHolder(
     parent: ViewGroup,
     actionHandler: ActionHandler
-) : InsightViewHolder(parent.inflate(R.layout.item_insight_image_text), actionHandler),
+) : InsightViewHolder(parent.inflate(R.layout.tink_item_insight_image_text), actionHandler),
     InsightCommonBottomPart {
     override val view: View = itemView
 

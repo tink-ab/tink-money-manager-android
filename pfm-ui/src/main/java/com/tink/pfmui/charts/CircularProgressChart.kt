@@ -58,29 +58,29 @@ internal class CircularProgressChart : View {
 
     private fun applyAttributes(attrs: AttributeSet?) {
         context.theme.obtainStyledAttributes(
-            attrs, R.styleable.CircularProgressChart, 0, 0
+            attrs, R.styleable.TinkCircularProgressChart, 0, 0
         ).apply {
             try {
                 val arcWidth = getDimensionPixelSize(
-                    R.styleable.CircularProgressChart_progressArcStrokeWidth,
+                    R.styleable.TinkCircularProgressChart_tink_circularProgressChart_progressArcStrokeWidth,
                     0
                 )
                 val backgroundRingWidth = getDimensionPixelSize(
-                    R.styleable.CircularProgressChart_backgroundRingStrokeWidth,
+                    R.styleable.TinkCircularProgressChart_tink_circularProgressChart_backgroundRingStrokeWidth,
                     0
                 )
                 setStrokeWidth(arcWidth, backgroundRingWidth)
 
                 progressArcPaint.color =
-                        getColor(R.styleable.CircularProgressChart_progressArcColor, 0)
+                        getColor(R.styleable.TinkCircularProgressChart_tink_circularProgressChart_progressArcColor, 0)
                 backgroundRingPaint.color =
-                    getColor(R.styleable.CircularProgressChart_backgroundRingColor, 0)
+                    getColor(R.styleable.TinkCircularProgressChart_tink_circularProgressChart_backgroundRingColor, 0)
 
                 progress =
-                    getFloat(R.styleable.CircularProgressChart_progress, 0F).toDouble()
+                    getFloat(R.styleable.TinkCircularProgressChart_tink_circularProgressChart_progress, 0F).toDouble()
 
                 invertedProgress =
-                    getBoolean(R.styleable.CircularProgressChart_invertedProgress, false)
+                    getBoolean(R.styleable.TinkCircularProgressChart_tink_circularProgressChart_invertedProgress, false)
             } finally {
                 recycle()
             }

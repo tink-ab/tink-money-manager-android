@@ -11,8 +11,7 @@ import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.view.TinkSnackbar
-import kotlinx.android.synthetic.main.transaction_similar_fragment.*
-import kotlinx.android.synthetic.main.transaction_similar_fragment.view.*
+import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import se.tink.core.models.Category
 import se.tink.core.models.transaction.Transaction
@@ -39,7 +38,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     private val adapter = SimilarTransactionsAdapter()
 
-    override fun getLayoutId(): Int = R.layout.transaction_similar_fragment
+    override fun getLayoutId(): Int = R.layout.tink_transaction_similar_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun hasToolbar(): Boolean = true
     override fun getTitle(): String? = getString(R.string.tink_transaction_similar_title)
@@ -97,7 +96,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
-        toolbar.inflateMenu(R.menu.menu_similar_transactions)
+        toolbar.inflateMenu(R.menu.tink_menu_similar_transactions)
         viewModel.markButtonText.value?.let {
             toolbar.menu.findItem(R.id.menu_item_marker_button).setTitle(it)
         }

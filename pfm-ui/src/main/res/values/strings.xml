@@ -30,16 +30,16 @@
   <string name="tink_transaction_similar_marker_button_mark_text">Select all</string>
   <string name="tink_transaction_similar_marker_button_unmark_text">Unselect all</string>
 
-  <string name="pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
-  <string name="amount_transition" translatable="false">%1$s-amount-transition</string>
-  <string name="amount_title_transition" translatable="false">%1$s-amount-title-transition</string>
-  <string name="amount_period_transition" translatable="false">%1$s-amount-period-transition</string>
-  <string name="label_transition" translatable="false">%1$s-label-transition</string>
-  <string name="label_title_transition" translatable="false">%1$s-label-title-transition</string>
-  <string name="label_icon_transition" translatable="false">%1$s-label-icon-transition</string>
-  <string name="toolbar_transition" translatable="false">toolbar-transition</string>
-  <string name="transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
-  <string name="transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
+  <string name="tink_pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
+  <string name="tink_amount_transition" translatable="false">%1$s-amount-transition</string>
+  <string name="tink_amount_title_transition" translatable="false">%1$s-amount-title-transition</string>
+  <string name="tink_amount_period_transition" translatable="false">%1$s-amount-period-transition</string>
+  <string name="tink_label_transition" translatable="false">%1$s-label-transition</string>
+  <string name="tink_label_title_transition" translatable="false">%1$s-label-title-transition</string>
+  <string name="tink_label_icon_transition" translatable="false">%1$s-label-icon-transition</string>
+  <string name="tink_toolbar_transition" translatable="false">toolbar-transition</string>
+  <string name="tink_transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
+  <string name="tink_transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
 
   <string name="tink_choose_category_text">Choose category</string>
 
@@ -57,10 +57,10 @@
   <string name="tink_expenses_title">Expenses</string>
   <string name="tink_expenses_header_description_average">%s on average per month</string>
   <!-- We can make this public when we enable Left to Spend feature -->
-  <string name="left_to_spend_title">Left to spend</string>
-  <string name="left_to_spend_header_description_more">%s more than usual</string>
-  <string name="left_to_spend_header_description_less">%s less than usual</string>
-  <string name="left_to_spend_header_description_average">%s on average per month</string>
+  <string name="tink_left_to_spend_title">Left to spend</string>
+  <string name="tink_left_to_spend_header_description_more">%s more than usual</string>
+  <string name="tink_left_to_spend_header_description_less">%s less than usual</string>
+  <string name="tink_left_to_spend_header_description_average">%s on average per month</string>
   <string name="tink_income_title">Income</string>
   <string name="tink_income_header_description_average">%s on average per month</string>
   <string name="tink_date_span_string">%1$s - %2$s</string>

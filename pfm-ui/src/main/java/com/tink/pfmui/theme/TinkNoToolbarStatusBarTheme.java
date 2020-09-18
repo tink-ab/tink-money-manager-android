@@ -12,6 +12,6 @@ public class TinkNoToolbarStatusBarTheme extends TinkDefaultStatusBarTheme {
 
 	@Override
 	public int getStatusBarColor() {
-		return ContextCompat.getColor(context, R.color.status_bar_no_toolbar);
+		return ContextCompat.getColor(context, R.color.tink_status_bar_no_toolbar);
 	}
 }

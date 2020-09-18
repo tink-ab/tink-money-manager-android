@@ -40,14 +40,14 @@ class BarChartBarView : View {
 
     private fun applyAttributes(attrs: AttributeSet?) {
         context.theme.obtainStyledAttributes(
-            attrs, R.styleable.BarChartBarView, 0, 0
+            attrs, R.styleable.TinkBarChartBarView, 0, 0
         ).apply {
             try {
                 paint.color =
-                    getColor(R.styleable.BarChartBarView_color, 0)
+                    getColor(R.styleable.TinkBarChartBarView_tink_barchartBarView_viewpager_indicator_color, 0)
 
                 cornerRadius =
-                    getDimensionPixelSize(R.styleable.BarChartBarView_cornerRadius, 0).toFloat()
+                    getDimensionPixelSize(R.styleable.TinkBarChartBarView_tink_barchartBarView_cornerRadius, 0).toFloat()
             } finally {
                 recycle()
             }

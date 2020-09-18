@@ -172,7 +172,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 		);
 
-		getLayoutInflater().inflate(R.layout.toolbar_default, parent);
+		getLayoutInflater().inflate(R.layout.tink_toolbar_default, parent);
 		parent.addView(content);
 		return parent;
 	}

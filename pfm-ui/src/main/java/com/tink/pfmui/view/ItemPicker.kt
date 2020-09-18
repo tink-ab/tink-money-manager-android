@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.tink.pfmui.R
-import kotlinx.android.synthetic.main.item_picker.view.*
+import kotlinx.android.synthetic.main.tink_item_picker.view.*
 import se.tink.commons.extensions.getColorFromAttr
 import kotlin.properties.Delegates
 
@@ -43,7 +43,7 @@ internal abstract class ItemPicker<T : Any> : FrameLayout {
     init {
         // It's safe to use `this` in this case
         @Suppress("LeakingThis")
-        View.inflate(context, R.layout.item_picker, this)
+        View.inflate(context, R.layout.tink_item_picker, this)
         iconLeft.setOnClickListener { nextPeriod(-1) }
         iconRight.setOnClickListener { nextPeriod(1) }
     }

@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.insight_title_description_actions.view.*
+import kotlinx.android.synthetic.main.tink_insight_title_description_actions.view.*
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightState
 import se.tink.core.models.insights.InsightType

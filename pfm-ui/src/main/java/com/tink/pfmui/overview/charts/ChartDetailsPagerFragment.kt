@@ -22,7 +22,7 @@ import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.util.FontUtils
 import com.tink.pfmui.view.CustomTypefaceSpan
-import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
+import kotlinx.android.synthetic.main.tink_fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import se.tink.core.models.misc.Period
@@ -44,7 +44,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         }
     }
 
-    override fun getLayoutId() = R.layout.fragment_chart_details_pager
+    override fun getLayoutId() = R.layout.tink_fragment_chart_details_pager
     override fun needsLoginToBeAuthorized() = true
     override fun getScreenEvent(): ScreenEvent = type.screenEvent
     override fun doNotRecreateView(): Boolean = false
@@ -74,7 +74,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
-        toolbar.inflateMenu(R.menu.details_options_menu)
+        toolbar.inflateMenu(R.menu.tink_details_options_menu)
         toolbar.menu?.getItem(0)?.let {  menuItem ->
             val spannableTitle = SpannableString(menuItem.title)
             spannableTitle.setSpan(
@@ -89,11 +89,11 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_transactions -> {
+            R.id.tink_action_transactions -> {
                 showTransactions()
                 true
             }
-            R.id.menu_close -> {
+            R.id.tink_menu_close -> {
                 fragmentCoordinator.popBackStack()
                 true
             }

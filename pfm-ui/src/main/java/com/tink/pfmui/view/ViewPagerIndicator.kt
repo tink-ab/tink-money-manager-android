@@ -28,19 +28,19 @@ internal class ViewPagerIndicator @JvmOverloads constructor(context: Context,
     private var margin: Int
 
     init {
-        baseAlpha = resources.getFraction(R.fraction.pager_indicator_base_alpha, 1, 1)
+        baseAlpha = resources.getFraction(R.fraction.tink_pager_indicator_base_alpha, 1, 1)
         circle = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.tink_circle)!!.mutate()).apply {
             setTint(readColor(attrs))
         }
-        diameterMin = resources.getDimensionPixelSize(R.dimen.page_indicator_circle_size_min)
-        diameterMax = resources.getDimensionPixelSize(R.dimen.page_indicator_circle_size_max)
-        margin = resources.getDimension(R.dimen.page_indicator_margin).toInt()
+        diameterMin = resources.getDimensionPixelSize(R.dimen.tink_page_indicator_circle_size_min)
+        diameterMax = resources.getDimensionPixelSize(R.dimen.tink_page_indicator_circle_size_max)
+        margin = resources.getDimension(R.dimen.tink_page_indicator_margin).toInt()
     }
 
     private fun readColor(attrs: AttributeSet?): Int {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerIndicator)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.TinkViewPagerIndicator)
         try {
-            return a.getColor(R.styleable.ViewPagerIndicator_color, Color.BLACK)
+            return a.getColor(R.styleable.TinkViewPagerIndicator_tink_barchartBarView_viewpager_indicator_color, Color.BLACK)
         } finally {
             a.recycle()
         }

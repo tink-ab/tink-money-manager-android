@@ -3,9 +3,9 @@
 
   /* Semantic colors */
 
-  <color name="status_bar_no_toolbar">@color/tink_black</color>
+  <color name="tink_status_bar_no_toolbar">@color/tink_black</color>
 
-  <color name="vertical_bar_chart_default_color">@color/tink_white_40</color>
-  <color name="chart_area_label">@color/tink_plain_black</color>
+  <color name="tink_vertical_bar_chart_default_color">@color/tink_white_40</color>
+  <color name="tink_chart_area_label">@color/tink_plain_black</color>
 
 </resources>

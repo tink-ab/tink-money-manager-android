@@ -63,14 +63,14 @@ internal class TinkTabs @JvmOverloads constructor(
 
     fun hide() {
         postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_top)
+            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_from_top)
             startAnimation(anim)
         }, 0)
     }
 
     fun show() {
         postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.slide_in_to_top)
+            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_to_top)
             startAnimation(anim)
         }, 0)
     }
