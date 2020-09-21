@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:transitionName="@{@string/tink_pie_chart_transition(model.title)}"
-        app:tink_piechartview_thickness_percent="0.3"/>
+        app:tink_thickness_percent="0.3"/>
 
       <LinearLayout
         android:id="@+id/fadingGroup"

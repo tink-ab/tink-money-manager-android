@@ -47,7 +47,7 @@
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:tink_piechartPartLayout_chart_visible_part="0.25"
+      app:tink_chart_visible_part="0.25"
       app:layout_constraintEnd_toStartOf="@id/list"
       app:layout_constraintHorizontal_weight="1"
       app:layout_constraintTop_toBottomOf="@id/amount">

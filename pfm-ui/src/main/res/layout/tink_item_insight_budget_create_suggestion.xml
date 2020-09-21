@@ -28,13 +28,13 @@
         android:id="@+id/insightBubbleCurrentSpending"
         android:layout_width="156dp"
         android:layout_height="156dp"
-        app:tink_insightBubbleView_bubbleBackgroundTint="?tink_cardBackgroundColor"
-        app:tink_insightBubbleView_icon="?tink_expensesColor"
-        app:tink_insightBubbleView_primaryTextStyle="@style/tink_giga"
-        app:tink_insightBubbleView_secondaryTextStyle="@style/tink_nano"
-        app:tink_insightBubbleView_textColor="?tink_expensesColor"
-        tools:tink_insightBubbleView_primaryText="3 200 kr"
-        tools:tink_insightBubbleView_secondaryText="Ditt snitt per manad"/>
+        app:tink_bubbleBackgroundTint="?tink_cardBackgroundColor"
+        app:tink_icon="?tink_expensesColor"
+        app:tink_primaryTextStyle="@style/tink_giga"
+        app:tink_secondaryTextStyle="@style/tink_nano"
+        app:tink_textColor="?tink_expensesColor"
+        tools:tink_primaryText="3 200 kr"
+        tools:tink_secondaryText="Ditt snitt per manad"/>
 
       <com.tink.pfmui.insights.views.InsightBubbleView
         android:id="@+id/insightBubbleNewCategory"
@@ -43,13 +43,13 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="-16dp"
         android:layout_toEndOf="@id/insightBubbleCurrentSpending"
-        app:tink_insightBubbleView_bubbleBackgroundTint="?tink_expensesColor"
-        app:tink_insightBubbleView_iconTint="?tink_colorOnExpenses"
-        app:tink_insightBubbleView_primaryTextStyle="@style/tink_hecto.bold"
-        app:tink_insightBubbleView_secondaryTextStyle="@style/tink_nano.semibold"
-        app:tink_insightBubbleView_textColor="?tink_colorOnExpenses"
-        tools:tink_insightBubbleView_primaryText="2 880 kr"
-        tools:tink_insightBubbleView_secondaryText="Ny budget"/>
+        app:tink_bubbleBackgroundTint="?tink_expensesColor"
+        app:tink_iconTint="?tink_colorOnExpenses"
+        app:tink_primaryTextStyle="@style/tink_hecto.bold"
+        app:tink_secondaryTextStyle="@style/tink_nano.semibold"
+        app:tink_textColor="?tink_colorOnExpenses"
+        tools:tink_primaryText="2 880 kr"
+        tools:tink_secondaryText="Ny budget"/>
 
       <com.tink.pfmui.insights.views.InsightBubbleView
         android:id="@+id/insightBubbleSavePercentage"
@@ -59,10 +59,10 @@
         android:layout_marginStart="-32dp"
         android:layout_alignTop="@id/insightBubbleNewCategory"
         android:layout_toEndOf="@id/insightBubbleNewCategory"
-        app:tink_insightBubbleView_bubbleBackgroundTint="?tink_colorOnExpenses"
-        app:tink_insightBubbleView_primaryTextStyle="@style/tink_micro.semibold"
-        app:tink_insightBubbleView_textColor="?tink_expensesColor"
-        tools:tink_insightBubbleView_primaryText="-10%"/>
+        app:tink_bubbleBackgroundTint="?tink_colorOnExpenses"
+        app:tink_primaryTextStyle="@style/tink_micro.semibold"
+        app:tink_textColor="?tink_expensesColor"
+        tools:tink_primaryText="-10%"/>
 
     </RelativeLayout>
 

@@ -44,10 +44,10 @@ class BarChartBarView : View {
         ).apply {
             try {
                 paint.color =
-                    getColor(R.styleable.TinkBarChartBarView_tink_barchartBarView_viewpager_indicator_color, 0)
+                    getColor(R.styleable.TinkBarChartBarView_tink_viewpager_indicator_color, 0)
 
                 cornerRadius =
-                    getDimensionPixelSize(R.styleable.TinkBarChartBarView_tink_barchartBarView_cornerRadius, 0).toFloat()
+                    getDimensionPixelSize(R.styleable.TinkBarChartBarView_tink_cornerRadius, 0).toFloat()
             } finally {
                 recycle()
             }

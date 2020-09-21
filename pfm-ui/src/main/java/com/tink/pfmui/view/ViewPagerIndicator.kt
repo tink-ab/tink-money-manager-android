@@ -40,7 +40,7 @@ internal class ViewPagerIndicator @JvmOverloads constructor(context: Context,
     private fun readColor(attrs: AttributeSet?): Int {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TinkViewPagerIndicator)
         try {
-            return a.getColor(R.styleable.TinkViewPagerIndicator_tink_barchartBarView_viewpager_indicator_color, Color.BLACK)
+            return a.getColor(R.styleable.TinkViewPagerIndicator_tink_viewpager_indicator_color, Color.BLACK)
         } finally {
             a.recycle()
         }

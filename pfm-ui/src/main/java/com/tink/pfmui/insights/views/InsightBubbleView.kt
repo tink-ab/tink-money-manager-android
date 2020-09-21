@@ -39,28 +39,28 @@ class InsightBubbleView : ConstraintLayout {
             try {
                 setTextStyle(
                     primaryText,
-                    getResourceId(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_primaryTextStyle, 0)
+                    getResourceId(R.styleable.TinkInsightBubbleView_tink_primaryTextStyle, 0)
                 )
                 setTextStyle(
                     secondaryText,
-                    getResourceId(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_secondaryTextStyle, 0)
+                    getResourceId(R.styleable.TinkInsightBubbleView_tink_secondaryTextStyle, 0)
                 )
                 circle.backgroundTintList =
                     ColorStateList.valueOf(
-                        getColor(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_bubbleBackgroundTint, 0)
+                        getColor(R.styleable.TinkInsightBubbleView_tink_bubbleBackgroundTint, 0)
                     )
-                val textColor = getColor(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_textColor, 0)
+                val textColor = getColor(R.styleable.TinkInsightBubbleView_tink_textColor, 0)
                 primaryText.setTextColor(textColor)
                 secondaryText.setTextColor(textColor)
-                setPrimaryText(getString(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_primaryText))
-                setSecondaryText(getString(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_secondaryText))
+                setPrimaryText(getString(R.styleable.TinkInsightBubbleView_tink_primaryText))
+                setSecondaryText(getString(R.styleable.TinkInsightBubbleView_tink_secondaryText))
                 icon.imageTintList =
                     ColorStateList.valueOf(
-                        getColor(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_iconTint, 0)
+                        getColor(R.styleable.TinkInsightBubbleView_tink_iconTint, 0)
                     )
-                val iconDrawable = getDrawable(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_icon)
+                val iconDrawable = getDrawable(R.styleable.TinkInsightBubbleView_tink_icon)
                 if (iconDrawable != null) {
-                    icon.setImageDrawable(getDrawable(R.styleable.TinkInsightBubbleView_tink_insightBubbleView_icon))
+                    icon.setImageDrawable(getDrawable(R.styleable.TinkInsightBubbleView_tink_icon))
                 } else {
                     icon.visibility = View.GONE
                 }

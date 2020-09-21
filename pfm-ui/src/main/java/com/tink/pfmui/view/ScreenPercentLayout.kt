@@ -14,8 +14,8 @@ internal class ScreenPercentLayout @JvmOverloads constructor(context: Context, a
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TinkScreenPercentLayout, defStyleAttr, 0)
         try {
-            widthPercent = a.getFloat(R.styleable.TinkScreenPercentLayout_tink_screenPercentLayout_width_percent, -1f)
-            heightPercent = a.getFloat(R.styleable.TinkScreenPercentLayout_tink_screenPercentLayout_height_percent, -1f)
+            widthPercent = a.getFloat(R.styleable.TinkScreenPercentLayout_tink_width_percent, -1f)
+            heightPercent = a.getFloat(R.styleable.TinkScreenPercentLayout_tink_height_percent, -1f)
         } finally {
             a.recycle()
         }

@@ -39,8 +39,8 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
 
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TinkPieChartView)
-        maxRadiusPercent = a.getFloat(R.styleable.TinkPieChartView_tink_piechartview_max_radius_percent, 1f)
-        thicknessRatio = a.getFloat(R.styleable.TinkPieChartView_tink_piechartview_thickness_percent, 0.25f)
+        maxRadiusPercent = a.getFloat(R.styleable.TinkPieChartView_tink_max_radius_percent, 1f)
+        thicknessRatio = a.getFloat(R.styleable.TinkPieChartView_tink_thickness_percent, 0.25f)
         a.recycle()
     }
 

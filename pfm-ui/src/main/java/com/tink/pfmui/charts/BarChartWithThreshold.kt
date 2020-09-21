@@ -92,24 +92,24 @@ internal class BarChartWithThreshold : View {
             attrs, R.styleable.TinkBarChartWithThreshold, 0, 0
         ).apply {
             try {
-                barWidth = getDimension(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_bar_width, 1f)
+                barWidth = getDimension(R.styleable.TinkBarChartWithThreshold_tink_bar_width, 1f)
                 barPaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_bar_color_below_threshold, 0)
+                        getColor(R.styleable.TinkBarChartWithThreshold_tink_bar_color_below_threshold, 0)
                 overlayPaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_bar_color_above_threshold, 0)
+                        getColor(R.styleable.TinkBarChartWithThreshold_tink_bar_color_above_threshold, 0)
                 thresholdLinePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_threshold_line_color, 0)
+                        getColor(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_color, 0)
                 thresholdLinePaint.strokeWidth =
-                        getDimension(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_threshold_line_thickness, 0f)
+                        getDimension(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_thickness, 0f)
                 thresholdBadgePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_threshold_badge_color, 0)
+                        getColor(R.styleable.TinkBarChartWithThreshold_tink_threshold_badge_color, 0)
                 averageLinePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_average_line_color, 0)
+                        getColor(R.styleable.TinkBarChartWithThreshold_tink_average_line_color, 0)
 
                 val barLabelTextStyle =
-                    getResourceId(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_bar_label_style, -1)
+                    getResourceId(R.styleable.TinkBarChartWithThreshold_tink_bar_label_style, -1)
                 val thresholdLabelTextStyle =
-                    getResourceId(R.styleable.TinkBarChartWithThreshold_tink_barchartWithThreshold_threshold_label_style, -1)
+                    getResourceId(R.styleable.TinkBarChartWithThreshold_tink_threshold_label_style, -1)
                 setTextStyles(barLabelTextStyle, barLabelPaint)
                 setTextStyles(thresholdLabelTextStyle, thresholdLabelPaint)
             } finally {

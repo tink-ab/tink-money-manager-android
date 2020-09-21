@@ -114,7 +114,7 @@ internal open class TextViewXmlTheme(val context: Context, @StyleRes themeId: In
             DimensionAttribute(android.R.attr.textSize) {
                 textSize = it
             },
-            DimensionAttribute(R.attr.tink_widgetStyle_lineHeight) {
+            DimensionAttribute(R.attr.tink_lineHeight) {
                 lineHeight = it
             },
             FloatAttribute(android.R.attr.letterSpacing) {

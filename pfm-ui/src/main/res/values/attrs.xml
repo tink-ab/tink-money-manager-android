@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="TinkWidgetStyle">
-    <attr format="dimension" name="tink_widgetStyle_lineHeight"/>
-    <attr format="boolean" name="tink_widgetStyle_ignore_baseLine"/>
-    <attr format="string" name="tink_widgetStyle_inputType"/>
-    <attr format="boolean" name="tink_widgetStyle_isHandlingTagSymbol"/>
-    <attr format="color" name="tink_widgetStyle_color"/>
+    <attr format="dimension" name="tink_lineHeight"/>
+    <attr format="boolean" name="tink_ignore_baseLine"/>
+    <attr format="string" name="tink_inputType"/>
+    <attr format="boolean" name="tink_isHandlingTagSymbol"/>
+    <attr format="color" name="tink_color"/>
   </declare-styleable>
 
   <declare-styleable name="TinkViewPagerIndicator">
-    <attr name="tink_barchartBarView_viewpager_indicator_color"/>
+    <attr name="tink_viewpager_indicator_color"/>
   </declare-styleable>
 
   <declare-styleable name="TinkScreenPercentLayout">
-    <attr format="float" name="tink_screenPercentLayout_height_percent"/>
-    <attr format="float" name="tink_screenPercentLayout_width_percent"/>
+    <attr format="float" name="tink_height_percent"/>
+    <attr format="float" name="tink_width_percent"/>
   </declare-styleable>
 
   <declare-styleable name="TinkPieChartView">
-    <attr format="float" name="tink_piechartview_thickness_percent"/>
-    <attr format="float" name="tink_piechartview_max_radius_percent"/>
+    <attr format="float" name="tink_thickness_percent"/>
+    <attr format="float" name="tink_max_radius_percent"/>
   </declare-styleable>
 
   <declare-styleable name="TinkPieChartPartLayout">
-    <attr format="float" name="tink_piechartPartLayout_chart_visible_part"/>
+    <attr format="float" name="tink_chart_visible_part"/>
   </declare-styleable>
 
   <declare-styleable name="TinkCircularProgressChart">
-    <attr format="dimension" name="tink_circularProgressChart_progressArcStrokeWidth"/>
-    <attr format="dimension" name="tink_circularProgressChart_backgroundRingStrokeWidth"/>
-    <attr format="color" name="tink_circularProgressChart_progressArcColor"/>
-    <attr format="color" name="tink_circularProgressChart_backgroundRingColor"/>
-    <attr format="float" name="tink_circularProgressChart_progress"/>
-    <attr format="boolean" name="tink_circularProgressChart_invertedProgress"/>
+    <attr format="dimension" name="tink_progressArcStrokeWidth"/>
+    <attr format="dimension" name="tink_backgroundRingStrokeWidth"/>
+    <attr format="color" name="tink_progressArcColor"/>
+    <attr format="color" name="tink_backgroundRingColor"/>
+    <attr format="float" name="tink_progress"/>
+    <attr format="boolean" name="tink_invertedProgress"/>
   </declare-styleable>
 
   <declare-styleable name="TinkBarChartWithThreshold">
-    <attr format="dimension" name="tink_barchartWithThreshold_bar_width"/>
-    <attr format="color" name="tink_barchartWithThreshold_bar_color_below_threshold"/>
-    <attr format="color" name="tink_barchartWithThreshold_bar_color_above_threshold"/>
-    <attr format="color" name="tink_barchartWithThreshold_threshold_badge_color"/>
-    <attr format="color" name="tink_barchartWithThreshold_threshold_line_color"/>
-    <attr format="dimension" name="tink_barchartWithThreshold_threshold_line_thickness"/>
-    <attr format="color" name="tink_barchartWithThreshold_average_line_color"/>
-    <attr format="reference|integer" name="tink_barchartWithThreshold_bar_label_style"/>
-    <attr format="reference|integer" name="tink_barchartWithThreshold_threshold_label_style"/>
-    <attr format="dimension" name="tink_barchartWithThreshold_horizontal_margin"/>
+    <attr format="dimension" name="tink_bar_width"/>
+    <attr format="color" name="tink_bar_color_below_threshold"/>
+    <attr format="color" name="tink_bar_color_above_threshold"/>
+    <attr format="color" name="tink_threshold_badge_color"/>
+    <attr format="color" name="tink_threshold_line_color"/>
+    <attr format="dimension" name="tink_threshold_line_thickness"/>
+    <attr format="color" name="tink_average_line_color"/>
+    <attr format="reference|integer" name="tink_bar_label_style"/>
+    <attr format="reference|integer" name="tink_threshold_label_style"/>
+    <attr format="dimension" name="tink_horizontal_margin"/>
   </declare-styleable>
 
   <declare-styleable name="TinkInsightBubbleView">
-    <attr format="color" name="tink_insightBubbleView_bubbleBackgroundTint"/>
-    <attr format="reference" name="tink_insightBubbleView_icon"/>
-    <attr format="color" name="tink_insightBubbleView_iconTint"/>
-    <attr format="string" name="tink_insightBubbleView_primaryText"/>
-    <attr format="string" name="tink_insightBubbleView_secondaryText"/>
-    <attr format="reference|integer" name="tink_insightBubbleView_primaryTextStyle"/>
-    <attr format="reference|integer" name="tink_insightBubbleView_secondaryTextStyle"/>
-    <attr format="color" name="tink_insightBubbleView_textColor"/>
+    <attr format="color" name="tink_bubbleBackgroundTint"/>
+    <attr format="reference" name="tink_icon"/>
+    <attr format="color" name="tink_iconTint"/>
+    <attr format="string" name="tink_primaryText"/>
+    <attr format="string" name="tink_secondaryText"/>
+    <attr format="reference|integer" name="tink_primaryTextStyle"/>
+    <attr format="reference|integer" name="tink_secondaryTextStyle"/>
+    <attr format="color" name="tink_textColor"/>
   </declare-styleable>
 
   <declare-styleable name="TinkBarChartBarView">
-    <attr format="color" name="tink_barchartBarView_viewpager_indicator_color" />
-    <attr format="dimension" name="tink_barchartBarView_cornerRadius" />
+    <attr format="color" name="tink_viewpager_indicator_color" />
+    <attr format="dimension" name="tink_cornerRadius" />
   </declare-styleable>
 
 </resources>

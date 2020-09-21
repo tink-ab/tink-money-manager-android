@@ -27,7 +27,7 @@
       android:clipChildren="false"
       android:transitionGroup="false"
       android:transitionName="@{@string/tink_pie_chart_transition(model.title)}"
-      app:tink_piechartview_max_radius_percent="0.5"/>
+      app:tink_max_radius_percent="0.5"/>
 
     <LinearLayout
       android:id="@+id/fadingGroup"

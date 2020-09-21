@@ -34,12 +34,12 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        custom:tink_circularProgressChart_backgroundRingStrokeWidth="16dp"
-        custom:tink_circularProgressChart_invertedProgress="true"
-        custom:tink_circularProgressChart_progress="0.75"
-        custom:tink_circularProgressChart_progressArcStrokeWidth="8dp"
-        tools:tink_circularProgressChart_backgroundRingColor="@color/within_budget_light"
-        tools:tink_circularProgressChart_progressArcColor="@color/within_budget"/>
+        custom:tink_backgroundRingStrokeWidth="16dp"
+        custom:tink_invertedProgress="true"
+        custom:tink_progress="0.75"
+        custom:tink_progressArcStrokeWidth="8dp"
+        tools:tink_backgroundRingColor="@color/within_budget_light"
+        tools:tink_progressArcColor="@color/within_budget"/>
 
       <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/currentSpending"
