@@ -14,7 +14,7 @@ import com.tink.pfmui.theme.getCategorySelectionThemeForType
 import com.tink.pfmui.view.TreeListSelectionAdapter
 import com.tink.pfmui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.synthetic.main.fragment_select_category.view.*
+import kotlinx.android.synthetic.main.tink_fragment_select_category.view.*
 import se.tink.core.models.Category
 
 private const val ARG_TYPE = "arg_type"
@@ -36,7 +36,7 @@ internal class CategorySelectionFragment : BaseFragment() {
     private val ownTheme by lazy { getCategorySelectionThemeForType(context!!, type) }
     private val adapter: TreeListSelectionAdapter = TreeListSelectionAdapter()
 
-    override fun getLayoutId(): Int = R.layout.fragment_select_category
+    override fun getLayoutId(): Int = R.layout.tink_fragment_select_category
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_SELECTION
     override fun hasToolbar(): Boolean = true

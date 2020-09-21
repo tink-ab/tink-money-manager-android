@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+  android:color="@color/tink_ripple_on_light_background">
+  <item android:drawable="@drawable/tink_standalone_button_white_selector_dotted_content"/>
+</ripple>

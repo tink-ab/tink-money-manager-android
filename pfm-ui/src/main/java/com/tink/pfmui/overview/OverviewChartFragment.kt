@@ -19,14 +19,13 @@ import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.OverviewFeature
 import com.tink.pfmui.R
 import com.tink.pfmui.StatisticType
-import com.tink.pfmui.databinding.FragmentOverviewChartBinding
-import com.tink.pfmui.databinding.OverviewChartPageBinding
 import com.tink.pfmui.extensions.onPageSelected
-import kotlinx.android.synthetic.main.fragment_overview_chart.view.*
-import kotlinx.android.synthetic.main.overview_chart_page.view.*
+import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
+import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
 import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
-import com.tink.pfmui.charts.transitions.TextAmountTransition
+import com.tink.pfmui.databinding.TinkFragmentOverviewChartBinding
+import com.tink.pfmui.databinding.TinkOverviewChartPageBinding
 import com.tink.pfmui.overview.charts.ChartDetailsPagerFragment
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.piechart.addBackSegment
@@ -42,7 +41,7 @@ internal class OverviewChartFragment : BaseFragment() {
     @Inject
     lateinit var amountFormatter: AmountFormatter
 
-    override fun getLayoutId() = R.layout.fragment_overview_chart
+    override fun getLayoutId() = R.layout.tink_fragment_overview_chart
     override fun needsLoginToBeAuthorized() = true
     override fun doNotRecreateView(): Boolean = false
     override fun viewReadyAfterLayout(): Boolean  = false
@@ -53,7 +52,7 @@ internal class OverviewChartFragment : BaseFragment() {
     }
 
     override fun authorizedOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
-        DataBindingUtil.bind<FragmentOverviewChartBinding>(view.chartRoot)?.also {
+        DataBindingUtil.bind<TinkFragmentOverviewChartBinding>(view.chartRoot)?.also {
             it.loaded = viewModel.loaded
             it.setLifecycleOwner(viewLifecycle)
         }
@@ -79,7 +78,7 @@ internal class OverviewChartFragment : BaseFragment() {
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) = container.removeView(obj as View)
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            val binding = DataBindingUtil.inflate<OverviewChartPageBinding>(layoutInflater, R.layout.overview_chart_page, container, true)
+            val binding = DataBindingUtil.inflate<TinkOverviewChartPageBinding>(layoutInflater, R.layout.tink_overview_chart_page, container, true)
             return binding.root.also {
                 // Start observing after initial layout is done to support transitions
                 it.post { doObserverModel(binding, position, it as ViewGroup) }
@@ -89,7 +88,7 @@ internal class OverviewChartFragment : BaseFragment() {
             }
         }
 
-        private fun doObserverModel(binding: OverviewChartPageBinding, position: Int, root: ViewGroup) {
+        private fun doObserverModel(binding: TinkOverviewChartPageBinding, position: Int, root: ViewGroup) {
             val data = getPageData(position)
             data.observe(viewLifecycle, Observer {
                 it?.let {
@@ -111,8 +110,8 @@ internal class OverviewChartFragment : BaseFragment() {
 
         private fun changeTransition() = TransitionSet().apply {
             addTransition(PieChartLabelTransition())
-            addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-            addTransition(Fade().apply { addTarget(R.id.back_segment) })
+            addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+            addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
             // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
 //                amountFormatter.format(it.toDouble(), useSymbol = false)
@@ -122,7 +121,7 @@ internal class OverviewChartFragment : BaseFragment() {
             duration = 1000
         }
 
-        private fun updateData(root: ViewGroup, binding: OverviewChartPageBinding, model: OverviewChartModel) {
+        private fun updateData(root: ViewGroup, binding: TinkOverviewChartPageBinding, model: OverviewChartModel) {
             binding.model = model
             root.pieChart.apply {
                 removeAllViews()
@@ -155,7 +154,7 @@ internal class OverviewChartFragment : BaseFragment() {
 
         private fun replaceWithDetailsFragment(fragment: BaseFragment, page: View) = fragmentCoordinator.replace(
             fragment, true, FragmentAnimationFlags.NONE,
-            sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.back_segment))
+            sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.tink_back_segment))
         )
     }
 
@@ -173,7 +172,7 @@ internal class OverviewChartFragment : BaseFragment() {
 }
 
 private class PageTransformer(resources: Resources) : ViewPager.PageTransformer {
-    private val minRadius = resources.getDimensionPixelSize(R.dimen.overview_chart_preview_radius)
+    private val minRadius = resources.getDimensionPixelSize(R.dimen.tink_overview_chart_preview_radius)
 
     override fun transformPage(page: View, wrongPos: Float) {
         val position = calculatePosition(page)
@@ -183,7 +182,7 @@ private class PageTransformer(resources: Resources) : ViewPager.PageTransformer 
             transitionThickness = (minRadius - thickness) * absPosition
         }
         page.pieChart.segments
-            .filter { it.transitionGroup == R.id.transition_group_main }
+            .filter { it.transitionGroup == R.id.tink_transition_group_main }
             .forEach { it.alpha = 1 - absPosition }
 
         with(page.content) {

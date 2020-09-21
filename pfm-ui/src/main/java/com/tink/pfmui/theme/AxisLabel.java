@@ -27,12 +27,12 @@ class AxisLabel implements Theme {
 
 	@Override
 	public float getTextSize() {
-		return context.getResources().getDimension(R.dimen.chart_label_text_size);
+		return context.getResources().getDimension(R.dimen.tink_chart_label_text_size);
 	}
 
 	@Override
 	public float getLineHeight() {
-		return context.getResources().getDimension(R.dimen.chart_label_line_height);
+		return context.getResources().getDimension(R.dimen.tink_chart_label_line_height);
 	}
 
 	@Override

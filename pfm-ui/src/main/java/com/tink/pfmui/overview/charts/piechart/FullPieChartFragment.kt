@@ -23,8 +23,8 @@ import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
 import com.tink.pfmui.charts.transitions.PieChartTransition
 import com.tink.pfmui.charts.transitions.TranslationTransition
-import com.tink.pfmui.databinding.FragmentFullPieChartBinding
-import com.tink.pfmui.databinding.PieChartLabelBinding
+import com.tink.pfmui.databinding.TinkFragmentFullPieChartBinding
+import com.tink.pfmui.databinding.TinkPieChartLabelBinding
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.DetailsChartModel
@@ -34,7 +34,7 @@ import com.tink.pfmui.overview.charts.StatisticItemsList
 import com.tink.pfmui.overview.getAmountStringForOverviewPieChart
 import com.tink.pfmui.theme.getTabPieChartThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
-import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
+import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
@@ -54,7 +54,7 @@ internal class FullPieChartFragment : BaseFragment() {
     @Inject
     lateinit var amountFormatter: AmountFormatter
 
-    override fun getLayoutId() = R.layout.fragment_full_pie_chart
+    override fun getLayoutId() = R.layout.tink_fragment_full_pie_chart
     override fun needsLoginToBeAuthorized() = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
@@ -63,14 +63,14 @@ internal class FullPieChartFragment : BaseFragment() {
     override fun viewReadyAfterLayout(): Boolean = false
 
     override fun authorizedOnCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) {
-        val binding = DataBindingUtil.bind<FragmentFullPieChartBinding>(view.root) ?: throw IllegalStateException("Binding is null")
+        val binding = DataBindingUtil.bind<TinkFragmentFullPieChartBinding>(view.root) ?: throw IllegalStateException("Binding is null")
 
         viewModel.apply {
             getStatistic(context!!, type).observe(viewLifecycle, Observer { it?.let { updateModel(binding, it) } })
         }
     }
 
-    private fun updateModel(binding: FragmentFullPieChartBinding, model: DetailsChartModel) {
+    private fun updateModel(binding: TinkFragmentFullPieChartBinding, model: DetailsChartModel) {
         if (!model.topLevel || model.data !is StatisticItemsList) return
 
         if (!transitionCoordinator.hasTransitionInProgress()) {
@@ -91,12 +91,12 @@ internal class FullPieChartFragment : BaseFragment() {
 
     private fun createLabel(item: StatisticItem, startAngle: Float, sweep: Float): PieChartLabelView {
         val anchor = startAngle + sweep / 2f
-        val lineWidth = resources.getDimension(R.dimen.pie_chart_label_line_width)
+        val lineWidth = resources.getDimension(R.dimen.tink_pie_chart_label_line_width)
         val iconColor = ownTheme.iconTheme.iconColorAttr
         val circleColorRes = ownTheme.iconTheme.iconCircleColorAttr
         val circleColor = requireContext().getColorFromAttr(circleColorRes)
         return PieChartLabelView(context!!, anchor).also { label ->
-            DataBindingUtil.inflate<PieChartLabelBinding>(LayoutInflater.from(context), R.layout.pie_chart_label, label, true).apply {
+            DataBindingUtil.inflate<TinkPieChartLabelBinding>(LayoutInflater.from(context), R.layout.tink_pie_chart_label, label, true).apply {
                 title.text = amountFormatter.format(item.amount.toDouble(), useSymbol = true)
                 type = item.category.code
                 icon.setImageResFromAttr(item.category.getIcon())
@@ -107,14 +107,14 @@ internal class FullPieChartFragment : BaseFragment() {
             }
             label.transitionName = item.category.code
             label.isTransitionGroup = false
-            label.radialPadding = resources.getDimension(R.dimen.pie_chart_label_radial_padding)
+            label.radialPadding = resources.getDimension(R.dimen.tink_pie_chart_label_radial_padding)
             label.decorator = LabelDecorator(label, circleColor, lineWidth)
         }
     }
 
     private fun onItemClick(item: StatisticItem) = pageViewModel.setCategoryId(item.category.code)
 
-    private fun placeLabelTitle(label: PieChartLabelView, binding: PieChartLabelBinding) {
+    private fun placeLabelTitle(label: PieChartLabelView, binding: TinkPieChartLabelBinding) {
         val iconOnTop = (label.centerAngle - 90f + 360f) % 360 < 180
         with(binding) {
             icon.translationY = if (iconOnTop) -title.height.toFloat() else 0f
@@ -125,8 +125,8 @@ internal class FullPieChartFragment : BaseFragment() {
     private fun changeTransition(data: StatisticItemsList) = TransitionSet().apply {
         addTransition(PieChartLabelTransition())
         addTransition(PieChartTransition())
-        addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-        addTransition(Fade().apply { addTarget(R.id.back_segment) })
+        addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+        addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
         // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //        addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
 //            amountFormatter.format(it.toDouble(), useSymbol = false)
@@ -138,8 +138,8 @@ internal class FullPieChartFragment : BaseFragment() {
         if (labelCategories.isNotEmpty()) {
             addTransition(TranslationTransition().apply {
                 labelCategories.forEach {
-                    addTarget(getString(R.string.label_title_transition, it))
-                    addTarget(getString(R.string.label_icon_transition, it))
+                    addTarget(getString(R.string.tink_label_title_transition, it))
+                    addTarget(getString(R.string.tink_label_icon_transition, it))
                 }
             })
         }

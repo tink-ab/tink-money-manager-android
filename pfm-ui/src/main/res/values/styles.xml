@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="leftToSpendTutorialDescription" parent="hecto"/>
-  <style name="leftToSpendTutorialStepDescription" parent="deci.primary"/>
-  <style name="leftToSpendTutorialStepNumber" parent="leftToSpendTutorialStepDescription">
+  <style name="tink_leftToSpendTutorialDescription" parent="tink_hecto"/>
+  <style name="tink_leftToSpendTutorialStepDescription" parent="tink_deci.primary"/>
+  <style name="tink_leftToSpendTutorialStepNumber" parent="tink_leftToSpendTutorialStepDescription">
     <item name="android:fontFamily">@font/tink_font_bold</item>
   </style>
 </resources>

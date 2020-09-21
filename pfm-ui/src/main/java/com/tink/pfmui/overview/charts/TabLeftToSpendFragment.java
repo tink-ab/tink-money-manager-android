@@ -100,7 +100,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 	@Override
 	public int getLayoutId() {
-		return R.layout.tab_left_to_spend_fragment;
+		return R.layout.tink_tab_left_to_spend_fragment;
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 	@Override
 	protected String getTitle() {
-		return getString(R.string.left_to_spend_title);
+		return getString(R.string.tink_left_to_spend_title);
 	}
 
 	@Override
@@ -440,9 +440,9 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
 
 			String text;
 			if (currentlyLeftToSpendAmount > averageLeftToSpendAmount) {
-				text = getString(R.string.left_to_spend_header_description_more, r);
+				text = getString(R.string.tink_left_to_spend_header_description_more, r);
 			} else {
-				text = getString(R.string.left_to_spend_header_description_less, r);
+				text = getString(R.string.tink_left_to_spend_header_description_less, r);
 			}
 			texts.add(text);
 
@@ -456,7 +456,7 @@ public class TabLeftToSpendFragment extends BaseFragment implements ObjectChange
             texts.add(amountFormatter.format(total, true));
             texts.add(
                     String.format(
-                            getString(R.string.left_to_spend_header_description_average),
+                            getString(R.string.tink_left_to_spend_header_description_average),
 						amountFormatter.format(
                                     PeriodBalances.getAverageIgnoreLast(items), true)));
 		}

@@ -34,6 +34,8 @@ android {
         enabled = true
     }
 
+    resourcePrefix("tink_")
+
 }
 
 dependencies {

@@ -3,9 +3,9 @@ package se.tink.commons.transactions
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.transaction_item.view.*
-import kotlinx.android.synthetic.main.transaction_item_date_group.view.*
-import kotlinx.android.synthetic.main.transaction_item_date_group_upcoming.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item_date_group.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item_date_group_upcoming.view.*
 import org.joda.time.DateTime
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
@@ -197,7 +197,7 @@ sealed class ListItem {
 class DateGroupViewHolder(
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(
-    parent.inflate(R.layout.transaction_item_date_group)
+    parent.inflate(R.layout.tink_transaction_item_date_group)
 ) {
     fun bind(item: ListItem.DateGroupItem) {
         itemView.date.text = item.date
@@ -208,7 +208,7 @@ class UpcomingHeaderViewHolder(
     val parent: ViewGroup,
     private val onToggleUpcomingTransactions: (() -> Unit)?
 ) : RecyclerView.ViewHolder(
-    parent.inflate(R.layout.transaction_item_date_group_upcoming)
+    parent.inflate(R.layout.tink_transaction_item_date_group_upcoming)
 ) {
     fun bind(item: ListItem.UpcomingGroupHeaderItem) {
         itemView.upcomingGroupTitle.text = item.title
@@ -230,7 +230,7 @@ class TransactionItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : ClickableViewHolder(
-    parent.inflate(R.layout.transaction_item),
+    parent.inflate(R.layout.tink_transaction_item),
     onViewHolderClickedListener
 ) {
     fun bind(item: ListItem.TransactionItem) {

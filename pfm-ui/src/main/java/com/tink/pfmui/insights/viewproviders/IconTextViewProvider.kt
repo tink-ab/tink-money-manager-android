@@ -6,13 +6,12 @@ import androidx.annotation.AttrRes
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import se.tink.commons.icons.IconResource
-import kotlinx.android.synthetic.main.item_insight_icon_text.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setIconRes
-import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.core.models.insights.Insight
 import se.tink.core.models.insights.InsightAction
@@ -63,7 +62,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     class IconTextViewHolder(
         parent: ViewGroup,
         actionHandler: ActionHandler
-    ) : InsightViewHolder(parent.inflate(R.layout.item_insight_icon_text), actionHandler),
+    ) : InsightViewHolder(parent.inflate(R.layout.tink_item_insight_icon_text), actionHandler),
         InsightCommonBottomPart {
         override val view: View = itemView
 
@@ -86,9 +85,9 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     }
 
     private fun Insight.getIcon() = when (type) {
-        InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.ic_double_charge)
-        InsightType.LARGE_EXPENSE -> IconResource.DrawableId(R.drawable.ic_category_all_expenses)
-        InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.ic_alert)
+        InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.tink_double_charge)
+        InsightType.LARGE_EXPENSE -> IconResource.DrawableId(R.drawable.tink_category_all_expenses)
+        InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.tink_alert)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 

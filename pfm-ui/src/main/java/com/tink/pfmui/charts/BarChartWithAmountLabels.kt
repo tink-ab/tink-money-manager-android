@@ -61,7 +61,7 @@ internal class BarChartWithAmountLabels : View {
     }
 
     private val amountLabelPaint = TextPaint().apply {
-        textSize = resources.getDimension(R.dimen.nano_text_size)
+        textSize = resources.getDimension(R.dimen.tink_nano_text_size)
         color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
@@ -87,20 +87,20 @@ internal class BarChartWithAmountLabels : View {
 
     private fun applyAttributes(attrs: AttributeSet?) {
         context.theme.obtainStyledAttributes(
-            attrs, R.styleable.BarChartWithThreshold, 0, 0
+            attrs, R.styleable.TinkBarChartWithThreshold, 0, 0
         ).apply {
             try {
-                barWidth = getDimension(R.styleable.BarChartWithThreshold_bar_width, 1f)
+                barWidth = getDimension(R.styleable.TinkBarChartWithThreshold_tink_bar_width, 1f)
                 barPaint.color =
-                    getColor(R.styleable.BarChartWithThreshold_bar_color_below_threshold, 0)
+                    getColor(R.styleable.TinkBarChartWithThreshold_tink_bar_color_below_threshold, 0)
                 averageLinePaint.color =
-                    getColor(R.styleable.BarChartWithThreshold_average_line_color, 0)
+                    getColor(R.styleable.TinkBarChartWithThreshold_tink_average_line_color, 0)
 
                 val barLabelTextStyle =
-                    getResourceId(R.styleable.BarChartWithThreshold_bar_label_style, -1)
+                    getResourceId(R.styleable.TinkBarChartWithThreshold_tink_bar_label_style, -1)
                 setTextStyles(barLabelTextStyle, barLabelPaint)
 
-                getDimensionPixelSize(R.styleable.BarChartWithThreshold_horizontal_margin, 0).also {
+                getDimensionPixelSize(R.styleable.TinkBarChartWithThreshold_tink_horizontal_margin, 0).also {
                     barChartMarginLeft = it
                     barChartMarginRight = it
                 }

@@ -136,7 +136,7 @@ internal class TinkSnackbar private constructor(
                 findRecursive(snackbar.view)
             if (snackbarView != null) {
                 snackbarView.minimumHeight =
-                    view.resources.getDimension(R.dimen.snackbar_height).toInt()
+                    view.resources.getDimension(R.dimen.tink_snackbar_height).toInt()
             }
             return instance
         }

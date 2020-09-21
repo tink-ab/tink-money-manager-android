@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/root_view"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor"
+  android:transitionGroup="false">
+
+  <com.tink.pfmui.view.TinkToolbar
+    android:id="@+id/tink_toolbar"
+    android:layout_width="0dp"
+    android:layout_height="?actionBarSize"
+    android:transitionName="@string/tink_toolbar_transition"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationIcon="?android:homeAsUpIndicator">
+
+    <com.tink.pfmui.view.TinkTextView
+      android:id="@+id/category"
+      style="@style/tink_mega"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:paddingStart="8dp"
+      android:paddingEnd="4dp"
+      android:background="?selectableItemBackground"
+      android:drawableEnd="@drawable/tink_arrow_down_white"
+      android:drawablePadding="8dp"
+      android:gravity="center"
+      android:maxLines="1"
+      android:text="@string/tink_choose_category_text"
+      android:textColor="?tink_colorOnPrimary"/>
+
+  </com.tink.pfmui.view.TinkToolbar>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="?tink_backgroundColor"
+    android:transitionGroup="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tink_toolbar">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/list"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:transitionGroup="true"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintBottom_toTopOf="@id/button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/button"
+      style="?attr/tink_containedButtonStyle"
+      android:layout_width="0dp"
+      android:text="@string/tink_category_list_fragment_button_text"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

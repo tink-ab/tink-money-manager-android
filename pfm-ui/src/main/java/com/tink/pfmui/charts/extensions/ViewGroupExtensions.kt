@@ -17,16 +17,16 @@ internal fun ViewGroup.childOrNull(idx: Int) = if (childCount > idx) getChildAt(
 private data class ClippingInfo(val clipChildren: Boolean, val clipToPadding: Boolean, var count: Int)
 
 internal fun ViewGroup.disableClipping() {
-    val info = getTag(R.id.clipping_info) as? ClippingInfo ?: ClippingInfo(clipChildren, clipToPadding, 0)
+    val info = getTag(R.id.tink_clipping_info) as? ClippingInfo ?: ClippingInfo(clipChildren, clipToPadding, 0)
     info.count++
-    setTag(R.id.clipping_info, info)
+    setTag(R.id.tink_clipping_info, info)
     clipChildren = false
     clipToPadding = false
     (parent as? ViewGroup)?.disableClipping()
 }
 
 internal fun ViewGroup.restoreClipping() {
-    val info = getTag(R.id.clipping_info) as? ClippingInfo ?: return
+    val info = getTag(R.id.tink_clipping_info) as? ClippingInfo ?: return
     if (--info.count == 0) {
         clipChildren = info.clipChildren
         clipToPadding = info.clipToPadding

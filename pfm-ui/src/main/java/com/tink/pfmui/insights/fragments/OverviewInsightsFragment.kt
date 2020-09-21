@@ -8,11 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import com.tink.pfmui.databinding.FragmentOverviewInsightsBinding
+import com.tink.pfmui.databinding.TinkFragmentOverviewInsightsBinding
 import com.tink.pfmui.insights.CurrentInsightsViewModel
 import com.tink.pfmui.insights.InsightsViewModel
 import com.tink.pfmui.insights.di.InsightsViewModelFactory
-import kotlinx.android.synthetic.main.fragment_overview_insights.view.*
+import kotlinx.android.synthetic.main.tink_fragment_overview_insights.view.*
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
 
     lateinit var viewModel: InsightsViewModel
 
-    override fun getLayoutId() = R.layout.fragment_overview_insights
+    override fun getLayoutId() = R.layout.tink_fragment_overview_insights
     override fun needsLoginToBeAuthorized() = true
     override fun doNotRecreateView(): Boolean = false
     override fun viewReadyAfterLayout(): Boolean  = false
@@ -37,7 +37,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
-        DataBindingUtil.bind<FragmentOverviewInsightsBinding>(view)?.also {
+        DataBindingUtil.bind<TinkFragmentOverviewInsightsBinding>(view)?.also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }

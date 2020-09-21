@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="toolbar_elevation">4dp</dimen>
-  <dimen name="snackbar_height">60dp</dimen>
-  <dimen name="double_base_line_step">8dp</dimen>
-  <dimen name="horizontal_margin">16dp</dimen>
+  <dimen name="tink_toolbar_elevation">4dp</dimen>
+  <dimen name="tink_snackbar_height">60dp</dimen>
+  <dimen name="tink_double_base_line_step">8dp</dimen>
+  <dimen name="tink_horizontal_margin">16dp</dimen>
 
-  <dimen name="overview_chart_preview_radius">32dp</dimen>
-  <dimen name="chart_label_category_icon_size">32dp</dimen>
-  <dimen name="chart_label_category_icon_padding">16dp</dimen>
+  <dimen name="tink_overview_chart_preview_radius">32dp</dimen>
+  <dimen name="tink_chart_label_category_icon_size">32dp</dimen>
+  <dimen name="tink_chart_label_category_icon_padding">16dp</dimen>
 
-  <dimen name="pie_chart_label_line_width">1dp</dimen>
-  <dimen name="pie_chart_label_radial_padding">8dp</dimen>
-  <dimen name="pie_chart_label_text_padding">4dp</dimen>
+  <dimen name="tink_pie_chart_label_line_width">1dp</dimen>
+  <dimen name="tink_pie_chart_label_radial_padding">8dp</dimen>
+  <dimen name="tink_pie_chart_label_text_padding">4dp</dimen>
 
-  <dimen name="page_indicator_margin">4dp</dimen>
-  <dimen name="page_indicator_circle_size_min">6dp</dimen>
-  <dimen name="page_indicator_circle_size_max">12dp</dimen>
-  <item name="pager_indicator_base_alpha" type="fraction">20%</item>
+  <dimen name="tink_page_indicator_margin">4dp</dimen>
+  <dimen name="tink_page_indicator_circle_size_min">6dp</dimen>
+  <dimen name="tink_page_indicator_circle_size_max">12dp</dimen>
+  <item name="tink_pager_indicator_base_alpha" type="fraction">20%</item>
 
-  <dimen name="icon_size">28dp</dimen>
-  <dimen name="icon_size_small">20dp</dimen>
-  <dimen name="chart_label_text_size">9dp</dimen>
-  <dimen name="chart_label_line_height">12dp</dimen>
+  <dimen name="tink_icon_size">28dp</dimen>
+  <dimen name="tink_icon_size_small">20dp</dimen>
+  <dimen name="tink_chart_label_text_size">9dp</dimen>
+  <dimen name="tink_chart_label_line_height">12dp</dimen>
 
-  <dimen name="similar_transaction_row_background_left_padding">76dp</dimen>
-  <dimen name="similar_transactions_header_padding">24dp</dimen>
+  <dimen name="tink_similar_transaction_row_background_left_padding">76dp</dimen>
+  <dimen name="tink_similar_transactions_header_padding">24dp</dimen>
 
-  <dimen name="button_elevation">12dp</dimen>
+  <dimen name="tink_button_elevation">12dp</dimen>
 
-  <dimen name="left_to_spend_tutorial_list_item_margin">12dp</dimen>
-  <dimen name="left_to_spend_tutorial_first_list_item_margin">20dp</dimen>
-  <dimen name="left_to_spend_tutorial_description_guide">48dp</dimen>
+  <dimen name="tink_left_to_spend_tutorial_list_item_margin">12dp</dimen>
+  <dimen name="tink_left_to_spend_tutorial_first_list_item_margin">20dp</dimen>
+  <dimen name="tink_left_to_spend_tutorial_description_guide">48dp</dimen>
 
-  <dimen name="card_divider_left_margin">76dp</dimen>
+  <dimen name="tink_card_divider_left_margin">76dp</dimen>
 
-  <dimen name="overview_chart_container_height">375dp</dimen>
+  <dimen name="tink_tink_overview_chart_container_height">375dp</dimen>
 
-  <dimen name="account_details_header_height">176dp</dimen>
-  <dimen name="account_details_header_height_plus_spacing">192dp</dimen>
+  <dimen name="tink_account_details_header_height">176dp</dimen>
+  <dimen name="tink_account_details_header_height_plus_spacing">192dp</dimen>
 
 </resources>

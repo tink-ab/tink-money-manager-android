@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tink.pfmui.R
-import kotlinx.android.synthetic.main.dialog_period_selection.*
+import kotlinx.android.synthetic.main.tink_dialog_period_selection.*
 
 class PeriodSelectionDialog : BottomSheetDialogFragment() {
 
@@ -17,7 +17,7 @@ class PeriodSelectionDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_period_selection, container)
+        return inflater.inflate(R.layout.tink_dialog_period_selection, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

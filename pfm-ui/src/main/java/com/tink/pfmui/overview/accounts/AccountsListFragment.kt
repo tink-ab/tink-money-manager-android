@@ -8,10 +8,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import kotlinx.android.synthetic.main.fragment_accounts_list.*
+import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
 
 internal class AccountsListFragment : BaseFragment() {
-    override fun getLayoutId(): Int = R.layout.fragment_accounts_list
+    override fun getLayoutId(): Int = R.layout.tink_fragment_accounts_list
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     private lateinit var viewModel: AccountsViewModel

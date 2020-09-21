@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <item name="tink_toolbar" type="id"/>
-  <item name="nav_insights" type="id"/>
-  <item name="transition_group_back" type="id"/>
-  <item name="transition_group_main" type="id"/>
-  <item name="back_segment" type="id"/>
+  <item name="tink_transition_group_back" type="id"/>
+  <item name="tink_transition_group_main" type="id"/>
+  <item name="tink_back_segment" type="id"/>
   <item name="tink_toolbar_custom_view_container" type="id"/>
-  <item name="overview_chart_container" type="id"/>
-  <item name="latest_transactions_container" type="id"/>
-  <item name="accounts_container" type="id"/>
-  <item name="overview_insights_container" type="id"/>
-  <item name="clipping_info" type="id"/>
-  <item name="menu_close" type="id" />
-  <item name="action_transactions" type="id" />
+  <item name="tink_overview_chart_container" type="id"/>
+  <item name="tink_latest_transactions_container" type="id"/>
+  <item name="tink_accounts_container" type="id"/>
+  <item name="tink_overview_insights_container" type="id"/>
+  <item name="tink_clipping_info" type="id"/>
+  <item name="tink_menu_close" type="id" />
+  <item name="tink_action_transactions" type="id" />
 </resources>

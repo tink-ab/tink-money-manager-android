@@ -18,8 +18,8 @@ internal class PieChartPartLayout @JvmOverloads constructor(context: Context, at
     val visibleAngle: Float
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.PieChartPartLayout)
-        visiblePart = a.getFloat(R.styleable.PieChartPartLayout_chart_visible_part, 0.5f)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.TinkPieChartPartLayout)
+        visiblePart = a.getFloat(R.styleable.TinkPieChartPartLayout_tink_chart_visible_part, 0.5f)
         visibleAngle = Math.toDegrees(atan(1f - 2f * visiblePart).toDouble()).toFloat()
         a.recycle()
     }

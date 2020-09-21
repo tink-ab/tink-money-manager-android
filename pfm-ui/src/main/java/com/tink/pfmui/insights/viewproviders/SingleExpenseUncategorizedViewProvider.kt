@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.TransactionViewDetails
-import kotlinx.android.synthetic.main.item_insight_single_expense_uncategorized.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_single_expense_uncategorized.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.getDrawableResIdFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.core.models.insights.Insight
@@ -45,7 +44,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
 class SingleExpenseUncategorizedViewHolder(
     parent: ViewGroup, actionHandler: ActionHandler
 ) : InsightViewHolder(
-    parent.inflate(R.layout.item_insight_single_expense_uncategorized),
+    parent.inflate(R.layout.tink_item_insight_single_expense_uncategorized),
     actionHandler
 ), InsightCommonBottomPart {
     override val view: View = itemView
