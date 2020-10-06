@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:bind="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+      name="model"
+      type="com.tink.pfmui.overview.charts.DetailsChartModel"/>
+
+    <variable
+      name="totalAmount"
+      type="String"/>
+
+    <variable
+      name="items"
+      type="java.util.List&lt;com.tink.pfmui.overview.charts.piechart.HalfChartItem&gt;"/>
+
+    <variable
+      name="itemTheme"
+      type="com.tink.pfmui.overview.charts.piechart.HalfChartItemTheme"/>
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    android:background="?tink_backgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Do not use wrap_content for width for animation performance reasons-->
+    <com.tink.pfmui.view.TinkTextView
+      android:id="@+id/amount"
+      style="@style/tink_tera"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      android:gravity="center"
+      android:text="@{totalAmount}"
+      android:transitionName="@{@string/tink_amount_transition(model.title)}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.tink.pfmui.charts.PieChartPartLayout
+      android:id="@+id/chartLayout"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:tink_chart_visible_part="0.25"
+      app:layout_constraintEnd_toStartOf="@id/list"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintTop_toBottomOf="@id/amount">
+
+      <com.tink.pfmui.charts.PieChartView
+        android:id="@+id/pieChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionGroup="true"
+        android:transitionName="@{@string/tink_pie_chart_transition(model.title)}"/>
+    </com.tink.pfmui.charts.PieChartPartLayout>
+
+    <ScrollView
+      android:id="@+id/list"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:paddingStart="24dp"
+      android:paddingEnd="16dp"
+      android:clipChildren="false"
+      android:clipToPadding="false"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_weight="2"
+      app:layout_constraintStart_toEndOf="@+id/chartLayout"
+      app:layout_constraintTop_toBottomOf="@id/amount">
+
+      <LinearLayout
+        android:id="@+id/itemsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:orientation="vertical"
+        bind:items="@{items}"
+        bind:layout="@{@layout/tink_half_pie_chart_item}"
+        bind:theme="@{itemTheme}"/>
+
+    </ScrollView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

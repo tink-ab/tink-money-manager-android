@@ -17,7 +17,7 @@ private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
 internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
 
-    override fun getLayoutId(): Int = R.layout.fragment_category_selection_flow
+    override fun getLayoutId(): Int = R.layout.tink_fragment_category_selection_flow
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     private val transactionId: String by lazy {

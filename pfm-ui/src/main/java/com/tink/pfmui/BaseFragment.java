@@ -59,7 +59,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	private LifecycleRegistry viewLifecycle;
 
 	protected View view;
-	protected View inflatedView;
 	private boolean firstCreation = true;
 	private boolean shouldTrackScreen;
 	private UICallbackRunner callbacksExecutor;
@@ -142,7 +141,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 		if (view == null) {
 			getActivity().getTheme().applyStyle(R.style.TinkFinanceOverviewStyle, false);
-			inflatedView = inflater.inflate(getLayoutId(), container, false);
+			View inflatedView = inflater.inflate(getLayoutId(), container, false);
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
 			toolbar = view.findViewById(R.id.tink_toolbar);
@@ -173,7 +172,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 		);
 
-		getLayoutInflater().inflate(R.layout.toolbar_default, parent);
+		getLayoutInflater().inflate(R.layout.tink_toolbar_default, parent);
 		parent.addView(content);
 		return parent;
 	}

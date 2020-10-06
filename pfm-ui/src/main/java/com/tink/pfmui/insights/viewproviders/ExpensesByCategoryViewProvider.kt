@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.CategoryTreeViewDetails
-import kotlinx.android.synthetic.main.item_insight_expenses_by_category.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_expenses_by_category.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.currency.AmountFormatter
@@ -65,7 +65,7 @@ private fun InsightData.expenses() =
 class ExpensesByCategoryViewHolder(
     parent: ViewGroup,
     actionHandler: ActionHandler
-) : InsightViewHolder(parent.inflate(R.layout.item_insight_expenses_by_category), actionHandler),
+) : InsightViewHolder(parent.inflate(R.layout.tink_item_insight_expenses_by_category), actionHandler),
     InsightCommonBottomPart {
     override val view: View = itemView
 

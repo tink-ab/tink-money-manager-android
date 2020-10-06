@@ -1,77 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="TinkFinanceOverviewStyle" parent="Theme.MaterialComponents">
-    <item name="tink_backgroundColor">@color/white</item>
-    <item name="tink_expensesColor">@color/expensive_blue</item>
-    <item name="tink_expensesLightColor">@color/expensive_blue_light</item>
-    <item name="tink_expensesDarkColor">@color/expensive_blue_dark</item>
-    <item name="tink_colorOnExpenses">@color/white</item>
+    <item name="tink_backgroundColor">@color/tink_white</item>
+    <item name="tink_expensesColor">@color/tink_expensive_blue</item>
+    <item name="tink_expensesLightColor">@color/tink_expensive_blue_light</item>
+    <item name="tink_expensesDarkColor">@color/tink_expensive_blue_dark</item>
+    <item name="tink_colorOnExpenses">@color/tink_white</item>
     <item name="tink_leftToSpendColor">@color/tink_lax</item>
     <item name="tink_leftToSpendLightColor">@color/tink_lax_light</item>
     <item name="tink_leftToSpendDarkColor">@color/tink_lax_dark</item>
-    <item name="tink_colorOnLeftToSpend">@color/white</item>
-    <item name="tink_incomeColor">@color/salary_green</item>
-    <item name="tink_incomeLightColor">@color/salary_green_light</item>
-    <item name="tink_incomeDarkColor">@color/salary_green_dark</item>
-    <item name="tink_colorOnIncome">@color/white</item>
-    <item name="tink_transferColor">@color/transfer_grey</item>
-    <item name="tink_transferLightColor">@color/divider_grey</item>
-    <item name="tink_colorOnTransfer">@color/white</item>
-    <item name="tink_uncategorizedColor">@color/orange</item>
-    <item name="tink_uncategorizedLightColor">@color/orange_light</item>
-    <item name="tink_snackbarColor">@color/greyblack</item>
-    <item name="tink_colorOnSnackBar">@color/white</item>
-    <item name="tink_chartContainerBackgroundColor">@color/white</item>
-    <item name="tink_chartMeanValueColor">@color/grey_light</item>
-    <item name="tink_tabNormalColor">@color/white_70</item>
-    <item name="tink_tabSelectedColor">@color/white</item>
+    <item name="tink_colorOnLeftToSpend">@color/tink_white</item>
+    <item name="tink_incomeColor">@color/tink_salary_green</item>
+    <item name="tink_incomeLightColor">@color/tink_salary_green_light</item>
+    <item name="tink_incomeDarkColor">@color/tink_salary_green_dark</item>
+    <item name="tink_colorOnIncome">@color/tink_white</item>
+    <item name="tink_transferColor">@color/tink_transfer_grey</item>
+    <item name="tink_transferLightColor">@color/tink_divider_grey</item>
+    <item name="tink_colorOnTransfer">@color/tink_white</item>
+    <item name="tink_uncategorizedColor">@color/tink_orange</item>
+    <item name="tink_uncategorizedLightColor">@color/tink_orange_light</item>
+    <item name="tink_snackbarColor">@color/tink_greyblack</item>
+    <item name="tink_colorOnSnackBar">@color/tink_white</item>
+    <item name="tink_chartContainerBackgroundColor">@color/tink_white</item>
+    <item name="tink_chartMeanValueColor">@color/tink_grey_light</item>
+    <item name="tink_tabNormalColor">@color/tink_white_70</item>
+    <item name="tink_tabSelectedColor">@color/tink_white</item>
     <item name="tink_colorAccent">@color/tink_blue</item>
     <item name="tink_colorAccentLight">@color/tink_blue_light</item>
     <item name="tink_colorAccentDark">@color/tink_blue_dark</item>
-    <item name="tink_colorOnAccent">@color/white</item>
+    <item name="tink_colorOnAccent">@color/tink_white</item>
     <item name="tink_colorPrimary">@color/tink_lax</item>
     <item name="tink_colorPrimaryLight">@color/tink_lax_light</item>
     <item name="tink_colorPrimaryDark">@color/tink_lax_dark</item>
-    <item name="tink_colorOnPrimary">@color/white</item>
-    <item name="tink_warningColor">@color/orange</item>
-    <item name="tink_warningLightColor">@color/orange_light</item>
-    <item name="tink_criticalColor">@color/red</item>
+    <item name="tink_colorOnPrimary">@color/tink_white</item>
+    <item name="tink_warningColor">@color/tink_orange</item>
+    <item name="tink_warningLightColor">@color/tink_orange_light</item>
+    <item name="tink_criticalColor">@color/tink_red</item>
     <item name="tink_textColorAction">@color/tink_blue</item>
-    <item name="tink_dividerColor">@color/divider_color</item>
-    <item name="tink_textColorPrimary">@color/black</item>
-    <item name="tink_textColorSecondary">@color/greyblack</item>
-    <item name="tink_textColorTertiary">@color/grey_light</item>
-    <item name="tink_textColorPrimaryDisabled">@color/black_50</item>
-    <item name="tink_textColorSecondaryDisabled">@color/disabled_greyblack</item>
-    <item name="tink_textColorPrimaryInverse">@color/white</item>
-    <item name="tink_cardBackgroundColor">@color/white</item>
+    <item name="tink_dividerColor">@color/tink_divider_color</item>
+    <item name="tink_textColorPrimary">@color/tink_black</item>
+    <item name="tink_textColorSecondary">@color/tink_greyblack</item>
+    <item name="tink_textColorTertiary">@color/tink_grey_light</item>
+    <item name="tink_textColorPrimaryDisabled">@color/tink_black_50</item>
+    <item name="tink_textColorSecondaryDisabled">@color/tink_disabled_greyblack</item>
+    <item name="tink_textColorPrimaryInverse">@color/tink_white</item>
+    <item name="tink_cardBackgroundColor">@color/tink_white</item>
 
     <!--    Icons-->
-    <item name="tink_icon_category_all_expenses">@drawable/ic_category_all_expenses</item>
-    <item name="tink_icon_category_all_income">@drawable/ic_category_all_income</item>
-    <item name="tink_icon_category_expenses_transport">@drawable/ic_category_transport</item>
-    <item name="tink_icon_category_expenses_foodanddrinks">@drawable/ic_category_foodanddrinks</item>
-    <item name="tink_icon_category_expenses_home">@drawable/ic_category_home</item>
-    <item name="tink_icon_category_expenses_healthandbeauty">@drawable/ic_category_healthandbeauty</item>
-    <item name="tink_icon_category_expenses_leisure">@drawable/ic_category_leisure</item>
-    <item name="tink_icon_category_expenses_houseandgarden">@drawable/ic_category_houseandgarden</item>
-    <item name="tink_icon_category_expenses_shopping">@drawable/ic_category_shopping</item>
-    <item name="tink_icon_category_expenses_other">@drawable/ic_category_other</item>
-    <item name="tink_icon_category_income_benefits">@drawable/ic_category_benefits</item>
-    <item name="tink_icon_category_income_financial">@drawable/ic_category_financial</item>
-    <item name="tink_icon_category_income_pension">@drawable/ic_category_pension</item>
-    <item name="tink_icon_category_income_salary">@drawable/ic_category_salary</item>
-    <item name="tink_icon_category_income_reimbursements">@drawable/ic_category_reimbursement</item>
-    <item name="tink_icon_category_income_other">@drawable/ic_category_other</item>
-    <item name="tink_icon_category_transfers_exclude">@drawable/ic_category_excluded</item>
-    <item name="tink_icon_category_transfers_savings">@drawable/ic_category_savings</item>
-    <item name="tink_icon_category_transfers_other">@drawable/ic_category_other</item>
-    <item name="tink_icon_category_uncategorized">@drawable/ic_uncategorized</item>
+    <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
+    <item name="tink_icon_category_all_income">@drawable/tink_category_all_income</item>
+    <item name="tink_icon_category_expenses_transport">@drawable/tink_category_transport</item>
+    <item name="tink_icon_category_expenses_foodanddrinks">@drawable/tink_category_foodanddrinks</item>
+    <item name="tink_icon_category_expenses_home">@drawable/tink_category_home</item>
+    <item name="tink_icon_category_expenses_healthandbeauty">@drawable/tink_category_healthandbeauty</item>
+    <item name="tink_icon_category_expenses_leisure">@drawable/tink_category_leisure</item>
+    <item name="tink_icon_category_expenses_houseandgarden">@drawable/tink_category_houseandgarden</item>
+    <item name="tink_icon_category_expenses_shopping">@drawable/tink_category_shopping</item>
+    <item name="tink_icon_category_expenses_other">@drawable/tink_category_other</item>
+    <item name="tink_icon_category_income_benefits">@drawable/tink_category_benefits</item>
+    <item name="tink_icon_category_income_financial">@drawable/tink_category_financial</item>
+    <item name="tink_icon_category_income_pension">@drawable/tink_category_pension</item>
+    <item name="tink_icon_category_income_salary">@drawable/tink_category_salary</item>
+    <item name="tink_icon_category_income_reimbursements">@drawable/tink_category_reimbursement</item>
+    <item name="tink_icon_category_income_other">@drawable/tink_category_other</item>
+    <item name="tink_icon_category_transfers_exclude">@drawable/tink_category_excluded</item>
+    <item name="tink_icon_category_transfers_savings">@drawable/tink_category_savings</item>
+    <item name="tink_icon_category_transfers_other">@drawable/tink_category_other</item>
+    <item name="tink_icon_category_uncategorized">@drawable/tink_uncategorized</item>
 
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
     <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
     <item name="tink_insightPrimaryActionButtonStyle">@style/TinkInsightPrimaryActionButtonStyle</item>
     <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
+    <item name="tink_periodPickerButtonStyle">@style/TinkPeriodPickerButtonStyle</item>
+
+    <!-- Icon shape styles -->
+    <item name="tink_categoryIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
+
+    <item name="tink_checkbox_corner_radius_in_dp">12dp</item>
+
+    <!-- Text styles -->
+    <item name="tink_dateGroupTextAppearance">@style/TinkDateGroupTextAppearance</item>
   </style>
 </resources>

@@ -239,16 +239,6 @@ public class DateUtils {
 				.format(dateTime);
 	}
 
-	public String formatYearly(DateTime date, String timezoneCode) {
-		return ThreadSafeDateFormat
-			.threadSafeDateFormat(
-				ThreadSafeDateFormat.FORMATTER_YEARLY,
-				defaultLocale,
-				timezoneCode
-			)
-			.format(date);
-	}
-
 	private DateTime getDateTimeFromPeriod(Period period) {
 		return period.getStop() == null
 			? new DateTime(period.toString())

@@ -102,7 +102,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         Fresco.initialize(context)
         setupTimber()
@@ -116,7 +116,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         i18nConfiguration.initialize()
         refreshData()
 
-        context?.let(::initSecuredDataStorage)
+        context.let(::initSecuredDataStorage)
         //TODO:PFMSDK: Do we need Fresco and Timber?
     }
 
@@ -127,7 +127,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     ): View? {
         activity?.theme?.applyStyle(tinkStyle, false)
         activity?.applicationContext?.theme?.applyStyle(tinkStyle, false)
-        return inflater.inflate(R.layout.fragment_tink, container, false)
+        return inflater.inflate(R.layout.tink_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

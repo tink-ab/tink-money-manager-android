@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.R
-import kotlinx.android.synthetic.main.view_bar_chart_item.view.*
+import kotlinx.android.synthetic.main.tink_view_bar_chart_item.view.*
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 
@@ -27,7 +27,7 @@ class BarChartItemAdapter : RecyclerView.Adapter<BarChartItemViewHolder>() {
 }
 
 class BarChartItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-    parent.inflate(R.layout.view_bar_chart_item)
+    parent.inflate(R.layout.tink_view_bar_chart_item)
 ) {
     fun bind(item: BarChartItem, averageHeightFactor: Float) {
         with(itemView) {

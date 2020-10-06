@@ -24,6 +24,8 @@ android {
         }
     }
 
+    resourcePrefix("tink_")
+
 }
 
 dependencies {
@@ -33,7 +35,7 @@ dependencies {
     implementation libraries.support_appcompat
     implementation libraries.android_core_ktx
 
-    implementation libraries.support_design
+    implementation libraries.material_components
     implementation libraries.support_constraint_layout
 
     implementation libraries.dagger

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <declare-styleable name="PeriodPicker">
-    <attr name="showButtons" format="boolean"/>
-    <attr name="nextButtonEnabled" format="boolean"/>
-    <attr name="previousButtonEnabled" format="boolean"/>
-    <attr name="android:text"/>
-  </declare-styleable>
 
   <declare-styleable name="TinkFinanceOverviewStyle">
     <attr name="tink_backgroundColor" format="color|reference"/>
@@ -81,8 +75,23 @@
     <attr name="tink_textButtonStyle" format="reference" />
     <attr name="tink_insightPrimaryActionButtonStyle" format="reference" />
     <attr name="tink_insightSecondaryActionButtonStyle" format="reference" />
+    <attr name="tink_periodPickerButtonStyle" format="reference" />
+
+    <!-- Icon shape styles -->
+    <attr name="tink_categoryIconShapeStyle" format="reference" />
+
+    <!-- Recommended values are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a tink_circle -->
+    <attr name="tink_checkbox_corner_radius_in_dp" format="dimension">4dp</attr>
+
+    <!-- Text appearance -->
+    <attr name="tink_dateGroupTextAppearance" format="reference" />
 
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>
+
+  <declare-styleable name="TinkPeriodPickerStyle">
+    <attr name="tink_period_picker_active_color" format="color|reference" />
+    <attr name="tink_period_picker_disabled_alpha" format="float" />
+  </declare-styleable>
 </resources>

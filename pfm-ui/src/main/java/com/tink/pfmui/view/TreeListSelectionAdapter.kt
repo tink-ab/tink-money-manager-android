@@ -3,19 +3,18 @@ package com.tink.pfmui.view
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import com.tink.pfmui.R
-import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.tint
 import se.tink.commons.extensions.visible
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
-import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.setImageResFromAttr
 
 internal class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolder>(),
@@ -292,11 +291,10 @@ private class TopLevelViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_top_level),
+    parent.inflate(R.layout.tink_item_tree_list_selection_top_level),
     onViewHolderClickedListener
 ) {
-    val icon: ImageView = itemView.findViewById(R.id.icon)
-    val iconBackground: ImageView = itemView.findViewById(R.id.iconBackground)
+    val icon: ShapeableImageView = itemView.findViewById(R.id.icon)
     val divider: View = itemView.findViewById(R.id.divider)
 
     override fun bind(item: TreeListSelectionItem) {
@@ -306,7 +304,7 @@ private class TopLevelViewHolder(
 
         icon.setImageResFromAttr(categoryItem.iconRes)
         icon.tint(categoryItem.iconColor)
-        iconBackground.backgroundTint(categoryItem.iconBackgroundColor)
+        icon.setBackgroundColor(itemView.context.getColorFromAttr(categoryItem.iconBackgroundColor))
         setIsExpanded(categoryItem.isExpanded)
     }
 
@@ -319,7 +317,7 @@ private class ChildItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_child),
+    parent.inflate(R.layout.tink_item_tree_list_selection_child),
     onViewHolderClickedListener
 )
 
@@ -327,11 +325,10 @@ private class ActionItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : TreeListSelectionViewHolder(
-    parent.inflate(R.layout.item_tree_list_selection_top_level),
+    parent.inflate(R.layout.tink_item_tree_list_selection_top_level),
     onViewHolderClickedListener
 ) {
-    val icon: ImageView = itemView.findViewById(R.id.icon)
-    val iconBackground: ImageView = itemView.findViewById(R.id.iconBackground)
+    val icon: ShapeableImageView = itemView.findViewById(R.id.icon)
 
     override fun bind(item: TreeListSelectionItem) {
         super.bind(item)

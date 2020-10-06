@@ -3,15 +3,14 @@ package se.tink.commons.transactions
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.transaction_item.view.*
-import kotlinx.android.synthetic.main.transaction_item_date_group.view.*
-import kotlinx.android.synthetic.main.transaction_item_date_group_upcoming.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item_date_group.view.*
+import kotlinx.android.synthetic.main.tink_transaction_item_date_group_upcoming.view.*
 import org.joda.time.DateTime
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
-import se.tink.commons.extensions.backgroundTint
-import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
@@ -198,7 +197,7 @@ sealed class ListItem {
 class DateGroupViewHolder(
     parent: ViewGroup
 ) : RecyclerView.ViewHolder(
-    parent.inflate(R.layout.transaction_item_date_group)
+    parent.inflate(R.layout.tink_transaction_item_date_group)
 ) {
     fun bind(item: ListItem.DateGroupItem) {
         itemView.date.text = item.date
@@ -209,7 +208,7 @@ class UpcomingHeaderViewHolder(
     val parent: ViewGroup,
     private val onToggleUpcomingTransactions: (() -> Unit)?
 ) : RecyclerView.ViewHolder(
-    parent.inflate(R.layout.transaction_item_date_group_upcoming)
+    parent.inflate(R.layout.tink_transaction_item_date_group_upcoming)
 ) {
     fun bind(item: ListItem.UpcomingGroupHeaderItem) {
         itemView.upcomingGroupTitle.text = item.title
@@ -231,7 +230,7 @@ class TransactionItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : ClickableViewHolder(
-    parent.inflate(R.layout.transaction_item),
+    parent.inflate(R.layout.tink_transaction_item),
     onViewHolderClickedListener
 ) {
     fun bind(item: ListItem.TransactionItem) {
@@ -240,8 +239,7 @@ class TransactionItemViewHolder(
             val (iconRes, iconColor, iconBackgroundColor) = item.icon
             icon.setImageResFromAttr(iconRes)
             icon.tint(iconColor)
-            iconBackground.setImageResource(0)
-            iconBackground.backgroundTint(iconBackgroundColor)
+            icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
 
             label.text = item.label
             description.text = item.description

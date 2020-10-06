@@ -1,24 +1,71 @@
 package com.tink.pfmui.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.tink.pfmui.R
-import kotlinx.android.synthetic.main.item_picker.view.*
+import kotlinx.android.synthetic.main.tink_item_picker.view.*
+import se.tink.commons.extensions.getColorFromAttr
 import kotlin.properties.Delegates
 
 internal typealias ItemSelectListener<T> = (T) -> Unit
 
-internal abstract class ItemPicker<T : Any> @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr, defStyleRes) {
+internal abstract class ItemPicker<T : Any> : FrameLayout {
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        applyAttributes(attrs)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        applyAttributes(attrs)
+    }
+
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        defStyleRes
+    ) {
+        applyAttributes(attrs)
+    }
 
     init {
         // It's safe to use `this` in this case
         @Suppress("LeakingThis")
-        View.inflate(context, R.layout.item_picker, this)
+        View.inflate(context, R.layout.tink_item_picker, this)
         iconLeft.setOnClickListener { nextPeriod(-1) }
         iconRight.setOnClickListener { nextPeriod(1) }
+    }
+
+    private fun applyAttributes(attrs: AttributeSet?) {
+        context.theme.obtainStyledAttributes(
+            attrs, R.styleable.TinkPeriodPickerStyle, 0, 0
+        ).apply {
+            try {
+                val activePickerColor =
+                    getColor(
+                        R.styleable.TinkPeriodPickerStyle_tink_period_picker_active_color,
+                        context.getColorFromAttr(R.attr.tink_colorAccent)
+                    )
+                iconLeft.imageTintList = ColorStateList.valueOf(activePickerColor)
+                iconRight.imageTintList = ColorStateList.valueOf(activePickerColor)
+
+                disabledAlpha = getFloat(R.styleable.TinkPeriodPickerStyle_tink_period_picker_disabled_alpha, 0.2f)
+            } finally {
+                recycle()
+            }
+        }
     }
 
     var currentItem: T? by Delegates.observable<T?>(null) { _, _, _ -> onItemChanged() }
@@ -26,6 +73,8 @@ internal abstract class ItemPicker<T : Any> @JvmOverloads constructor(context: C
     lateinit var formatter: (T) -> String
     var items: List<T> by Delegates.observable(emptyList()) { _, _, _ -> updateArrows() }
     var onItemSelected: ItemSelectListener<T>? = null
+
+    private var disabledAlpha: Float = 0.2f
 
     private fun onItemChanged() {
         title.text = currentItem?.let { formatter(it) } ?: ""
@@ -45,6 +94,8 @@ internal abstract class ItemPicker<T : Any> @JvmOverloads constructor(context: C
     private fun updateArrows() {
         val idx = items.indexOf(currentItem)
         iconLeft.isEnabled = idx > 0
+        iconLeft.alpha = if (iconLeft.isEnabled) 1.0f else disabledAlpha
         iconRight.isEnabled = idx < items.size - 1
+        iconRight.alpha = if (iconRight.isEnabled) 1.0f else disabledAlpha
     }
 }

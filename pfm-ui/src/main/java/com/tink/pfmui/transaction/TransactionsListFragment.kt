@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
-import kotlinx.android.synthetic.main.transactions_list_fragment.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -24,7 +24,7 @@ internal class TransactionsListFragment : BaseFragment() {
     @Inject
     lateinit var dateUtils: DateUtils
 
-    override fun getLayoutId(): Int = R.layout.transactions_list_fragment
+    override fun getLayoutId(): Int = R.layout.tink_transactions_list_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTheme(): Theme = ownTheme
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS

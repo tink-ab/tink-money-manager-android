@@ -95,3 +95,53 @@ val financeOverviewFragment =
 # Customize category icons
 You can customize category icons shown in the finance overview UI by overriding the icon attributes that are publicly available in the Tink PFM UI.
 Follow the [icon customization guide](/icon-customization-guide.md) to set this up.
+
+# Customize date formats
+You can customize the format of dates shown in the finance overview UI by overriding the date formatter string resources that are publicly available in the Tink PFM UI.
+Follow the [date format customization guide](/date-format-customization-guide.md) to set this up.
+
+# Customize period picker
+You can customize the color and alpha value (for disabled state) of the period picker arrow icons shown in the finance overview UI by overriding the style resource attributes that are available.
+Add your extended `TinkPeriodPickerButtonStyle` style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_periodPickerButtonStyle">@style/CustomPeriodPickerButtonStyle</item>
+    </style>
+
+    <style name="CustomPeriodPickerButtonStyle" parent="TinkPeriodPickerButtonStyle">
+        <item name="tink_period_picker_active_color">@color/custom_activeColor</item>
+        <item name="tink_period_picker_disabled_alpha">0.2</item>
+    </style>
+</resources>
+```
+
+# Customize checkbox corner radius
+You can modify the appearance of checkboxes shown in the finance overview UI by setting a custom corner radius value.
+This can be done by extending the existing `TinkFinanceOverviewStyle` from the SDK and overriding the checkbox corner radius dimension resource attribute that is available.
+Add your extended style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_checkbox_corner_radius_in_dp">4dp</item>
+    </style>
+</resources>
+```
+Recommended values are in the range from `0dp` to `12dp` where `0dp` will draw a square and `12dp` will draw a circle.
+
+# Customize transaction date group text appearance
+You can customize the appearance of transaction date group text in the finance overview UI by overriding the text appearance attribute that is publicly available in the Tink PFM UI.
+Add your extended `TinkDateGroupTextAppearance` style in your application's `styles.xml`.
+```xml
+<resources>
+    <style name="YourCustomTinkFinanceOverviewStyle" parent="TinkFinanceOverviewStyle">
+        <item name="tink_dateGroupTextAppearance">@style/CustomDateGroupTextAppearance</item>
+    </style>
+    
+    <style name="CustomDateGroupTextAppearance" parent="TinkDateGroupTextAppearance">
+        <item name="android:textColor">@color/custom_textColor</item>
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">@dimen/custom_textSize</item>
+    </style>
+</resources>
+```

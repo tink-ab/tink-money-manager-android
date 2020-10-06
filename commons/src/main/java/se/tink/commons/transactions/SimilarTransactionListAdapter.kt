@@ -3,12 +3,11 @@ package se.tink.commons.transactions
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.similar_transaction_row.view.*
+import kotlinx.android.synthetic.main.tink_similar_transaction_row.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
-import se.tink.commons.extensions.backgroundTint
-import se.tink.commons.extensions.getDrawableResIdFromAttr
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
@@ -167,7 +166,7 @@ class SimilarTransactionsAdapter :
         parent: ViewGroup,
         onViewHolderClickedListener: OnViewHolderClickedListener
     ) : ClickableViewHolder(
-        parent.inflate(R.layout.similar_transaction_row),
+        parent.inflate(R.layout.tink_similar_transaction_row),
         onViewHolderClickedListener
     ) {
 
@@ -177,8 +176,7 @@ class SimilarTransactionsAdapter :
                 val (iconRes, iconColor, iconBackgroundColor) = item.icon
                 icon.setImageResFromAttr(iconRes)
                 icon.tint(iconColor)
-                iconBackground.setImageResource(0)
-                iconBackground.backgroundTint(iconBackgroundColor)
+                icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
 
                 label.text = item.label
                 description.text = item.description

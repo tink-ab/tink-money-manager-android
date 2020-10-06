@@ -33,9 +33,9 @@ abstract class ChartArea extends View {
 	public ChartArea(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 
-		setupXLabelPaint(ContextCompat.getColor(context, R.color.chart_area_label),
+		setupXLabelPaint(ContextCompat.getColor(context, R.color.tink_chart_area_label),
 			ScreenUtils.dpToPixels(context, 12), Typeface.DEFAULT); // TODO typeface
-		setupYLabelPaint(ContextCompat.getColor(context, R.color.chart_area_label),
+		setupYLabelPaint(ContextCompat.getColor(context, R.color.tink_chart_area_label),
 			ScreenUtils.dpToPixels(context, 12), Typeface.DEFAULT); // TODO typeface
 	}
 

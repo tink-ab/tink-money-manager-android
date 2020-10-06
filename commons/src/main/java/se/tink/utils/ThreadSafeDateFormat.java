@@ -23,30 +23,11 @@ public class ThreadSafeDateFormat {
 
 	private static final CharMatcher TRIMMER = CharMatcher.whitespace();
 
-	public static final String FORMATTER_YEARLY = "FORMATTER_YEARLY";
-	public static final String FORMATTER_WEEK_YEARLY = "FORMATTER_WEEK_YEARLY";
-	public static final String FORMATTER_MONTHLY = "FORMATTER_MONTHLY";
-	public static final String FORMATTER_INTEGER_DATE = "FORMATTER_INTEGER_DATE";
-	public static final String FORMATTER_INTEGER_DATE_COMPACT = "FORMATTER_INTEGER_DATE_COMPACT";
-	public static final String FORMATTER_MONTHLY_ONLY = "FORMATTER_MONTHLY_ONLY";
 	public static final String FORMATTER_MONTHLY_COMPACT = "FORMATTER_MONTHLY_COMPACT";
 	public static final String FORMATTER_MONTH_NAME = "FORMATTER_MONTH_NAME";
-	public static final String FORMATTER_WEEKLY = "FORMATTER_WEEKLY"; // weekyear
 	public static final String FORMATTER_DAILY = "FORMATTER_DAILY";
-	public static final String FORMATTER_DAILY_COMPACT = "FORMATTER_DAILY_COMPACT";
-	public static final String FORMATTER_DAILY_PRETTY = "FORMATTER_DAILY_PRETTY";
 	public static final String FORMATTER_DAILY_MONTHLY = "FORMATTER_DAILY_MONTHLY";
 	public static final String FORMATTER_DAILY_MONTHLY_YEARLY = "FORMATTER_DAILY_MONTHLY_YEARLY";
-	public static final String FORMATTER_MINUTES = "FORMATTER_MINUTES";
-	public static final String FORMATTER_SECONDS = "FORMATTER_SECONDS";
-	public static final String FORMATTER_SECONDS_DASHES = "FORMATTER_SECONDS_DASHES";
-	public static final String FORMATTER_SECONDS_T = "FORMATTER_SECONDS_T";
-	public static final String FORMATTER_SECONDS_WITH_TIMEZONE = "FORMATTER_SECONDS_WITH_TIMEZONE";
-	public static final String FORMATTER_MILLISECONDS_WITH_TIMEZONE = "FORMATTER_MILLISECONDS_WITH_TIMEZONE";
-	public static final String FORMATTER_TIME_MILLIS = "FORMATTER_TIME_MILLIS";
-	public static final String FORMATTER_FILENAME_SAFE = "FORMATTER_FILENAME_SAFE";
-	public static final String FORMATTER_LOGGING = "FORMATTER_LOGGING";
-	public static final String FORMATTER_DAY_OF_WEEK = "FORMATTER_DAY_OF_WEEK";
 	public static final String FORMATTER_DAY_OF_WEEK_COMPACT = "FORMATTER_DAY_OF_WEEK_COMPACT";
 	public static final String FORMATTER_MONTH_AND_DAY_OF_WEEK = "FORMATTER_MONTH_AND_DAY_OF_WEEK";
 	public static final String FORMATTER_MONTH_AND_DAY = "FORMATTER_MONTH_AND_DAY";
