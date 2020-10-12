@@ -69,7 +69,7 @@ internal class TinkToolbar : Toolbar {
         var icon = icon
         if (icon != null && theme != null) {
             icon = icon.mutate()
-            icon.setColorFilter(theme!!.actionButtonTheme.textColor, PorterDuff.Mode.SRC_ATOP)
+            icon.setColorFilter(theme!!.titleColor, PorterDuff.Mode.SRC_ATOP)
         }
         super.setNavigationIcon(icon)
     }
