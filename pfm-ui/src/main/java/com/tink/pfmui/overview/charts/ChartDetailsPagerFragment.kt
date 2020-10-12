@@ -138,6 +138,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         val metaData = TransactionsListMetaData(
                 statusBarColor = theme.statusBarTheme.statusBarColor,
                 backgroundColor = theme.toolbarTheme.backgroundColor,
+                titleColor = theme.toolbarTheme.titleColor,
                 isLeftToSpend = type == ChartType.LEFT_TO_SPEND,
                 period = adapter.currentPagePeriod,
                 categoryCode = viewModel.category.value?.code,

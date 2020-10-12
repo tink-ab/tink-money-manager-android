@@ -134,6 +134,7 @@ internal class HalfPieChartFragment : BaseFragment() {
             val metaData = TransactionsListMetaData(
                 statusBarColor = theme.statusBarTheme.statusBarColor,
                 backgroundColor = theme.toolbarTheme.backgroundColor,
+                titleColor = theme.toolbarTheme.titleColor,
                 title = item.name,
                 transactionIds = item.ids
             )

@@ -9,6 +9,7 @@ public class TinkTransactionsListTheme implements TransactionsListFragment.Theme
 	private Context context;
 	private int statusbarColor;
 	private int backgroundColor;
+	private int titleColor;
 
 	public TinkTransactionsListTheme(Context context) {
 		this.context = context;
@@ -21,6 +22,11 @@ public class TinkTransactionsListTheme implements TransactionsListFragment.Theme
 			@Override
 			public int getBackgroundColor() {
 				return backgroundColor;
+			}
+
+			@Override
+			public int getTitleColor() {
+				return titleColor;
 			}
 		};
 	}
@@ -41,5 +47,9 @@ public class TinkTransactionsListTheme implements TransactionsListFragment.Theme
 
 	public void setToolbarBackgroundColor(int backgroundColor) {
 		this.backgroundColor = backgroundColor;
+	}
+
+	public void setTitleColor(int titleColor) {
+		this.titleColor = titleColor;
 	}
 }

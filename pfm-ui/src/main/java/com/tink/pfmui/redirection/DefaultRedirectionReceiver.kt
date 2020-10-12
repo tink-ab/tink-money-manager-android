@@ -33,6 +33,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
                 data = TransactionsListMetaData(
                     statusBarColor = context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
                     backgroundColor = context.getColorFromAttr(R.attr.tink_colorPrimary),
+                    titleColor = context.getColorFromAttr(R.attr.colorOnPrimary),
                     title = context.getString(R.string.tink_transactions_list_toolbar_title),
                     period = null,
                     categoryCode = null,

@@ -76,6 +76,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         metadata = TransactionsListMetaData(
             statusBarColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimaryDark),
             backgroundColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimary),
+            titleColor = requireContext().getColorFromAttr(R.attr.tink_colorOnPrimary),
             title = "",
             accountId = accountId
         )
@@ -93,6 +94,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         theme.setStatusbarColor(metadata.statusBarColor)
         theme.setToolbarBackgroundColor(metadata.backgroundColor)
+        theme.setTitleColor(metadata.titleColor)
 
         setupViews()
 
