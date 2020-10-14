@@ -21,6 +21,9 @@
   <dimen name="tink_peta_text_size">45.0dip</dimen>
   <dimen name="tink_peta_line_height">48.0dip</dimen>
 
+  <dimen name="tink_bar_chart_auto_max_size">@dimen/tink_micro_text_size</dimen>
+  <dimen name="tink_bar_chart_auto_min_size">8dp</dimen>
+
   <!-- Button style dimensions -->
   <dimen name="tink_button_height">52dp</dimen>
 
