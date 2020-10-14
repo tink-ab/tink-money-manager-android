@@ -9,6 +9,7 @@ import se.tink.core.models.misc.Period
 internal data class TransactionsListMetaData(
     @ColorInt val statusBarColor: Int,
     @ColorInt val backgroundColor: Int,
+    @ColorInt val titleColor: Int,
     val title: String,
     val isLeftToSpend: Boolean = false,
     val period: Period? = null,

@@ -70,6 +70,7 @@ internal class TransactionsListFragment : BaseFragment() {
         title = metaData.title
         theme.setStatusbarColor(metaData.statusBarColor)
         theme.setToolbarBackgroundColor(metaData.backgroundColor)
+        theme.setTitleColor(metaData.titleColor)
 
         setupTransactionAdapter()
 
@@ -123,6 +124,8 @@ internal class TransactionsListFragment : BaseFragment() {
         fun setStatusbarColor(color: Int)
 
         fun setToolbarBackgroundColor(backgroundColor: Int)
+
+        fun setTitleColor(titleColor: Int)
     }
 
     companion object {
