@@ -99,7 +99,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 dateUtils.getMonthFromDateTime(period.stop, true)
             }
 
-            val amountLabel = amountFormatter.format(it.amount, useSymbol = true)
+            val amountLabel = amountFormatter.format(it.amount, useSymbol = true, useRounding = true)
             val factor = it.amount / maxValue
             val color = category.value?.iconColor() ?: 0
 
