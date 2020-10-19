@@ -10,7 +10,8 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:transitionName="@string/tink_toolbar_transition"
-    app:navigationIcon="?android:homeAsUpIndicator"/>
+    app:buttonGravity="center_vertical"
+    app:navigationIcon="?android:homeAsUpIndicator" />
 
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/recyclerView"
