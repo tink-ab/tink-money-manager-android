@@ -5,9 +5,6 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import androidx.appcompat.view.menu.ActionMenuItemView
@@ -24,54 +21,26 @@ private const val BUTTON_LETTERSPACING = 0.0892857143f
 internal class TinkToolbar : Toolbar {
     private var theme: Theme? = null
 
-    constructor(context: Context?) : super(context) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(
-        context,
-        attrs
-    ) {
-    }
-
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(
         context: Context?,
         attrs: AttributeSet?,
         defStyleAttr: Int
-    ) : super(context, attrs, defStyleAttr) {
-    }
-
-    fun setCustomView(view: View?) {
-        var customViewContainer =
-            findViewById<ViewGroup>(R.id.tink_toolbar_custom_view_container)
-        if (customViewContainer == null) {
-            customViewContainer = FrameLayout(context)
-            customViewContainer.setId(R.id.tink_toolbar_custom_view_container)
-            customViewContainer.setLayoutParams(
-                FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            )
-            addView(customViewContainer)
-        }
-        customViewContainer.removeAllViews()
-        customViewContainer.addView(view)
-    }
-
-    fun clearCustomView() {
-        val customViewContainer =
-            findViewById<ViewGroup>(R.id.tink_toolbar_custom_view_container)
-        if (customViewContainer != null) {
-            customViewContainer.removeAllViews()
-            removeView(customViewContainer)
-        }
-    }
+    ) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun setNavigationIcon(icon: Drawable?) {
-        var icon = icon
-        if (icon != null && theme != null) {
-            icon = icon.mutate()
-            icon.setColorFilter(theme!!.titleColor, PorterDuff.Mode.SRC_ATOP)
+        var navIcon = icon
+        if (navIcon != null && theme != null) {
+            navIcon = navIcon.mutate()
+            navIcon.setTint(theme!!.titleColor)
+            navIcon.setTintMode(PorterDuff.Mode.SRC_ATOP)
         }
-        super.setNavigationIcon(icon)
+        super.setNavigationIcon(navIcon)
     }
 
     override fun inflateMenu(resId: Int) {
@@ -161,9 +130,5 @@ internal class TinkToolbar : Toolbar {
             val textSizeInPx: Float
             val letterSpacing: Float
         }
-    }
-
-    companion object {
-        const val TAG = "TinkToolbar"
     }
 }
