@@ -21,9 +21,6 @@ import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import com.tink.pfmui.tracking.AnalyticsSingleton;
-import com.tink.pfmui.theme.DefaultFragmentTheme;
-import com.tink.pfmui.theme.NoToolbarFragmentTheme;
-import com.tink.pfmui.theme.StatusBarTheme;
 import com.tink.pfmui.util.SoftKeyboardUtils;
 import com.tink.pfmui.view.SnackbarManager;
 import com.tink.pfmui.view.TinkToolbar;
@@ -66,22 +63,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	@Nullable
 	TinkToolbar toolbar;
 
-	private Theme defaultTheme;
-
 	public abstract int getLayoutId();
 
 	public abstract boolean needsLoginToBeAuthorized();
-
-	protected Theme getTheme() {
-		if (view == null) {
-			return null;
-		}
-		if (defaultTheme == null) {
-			defaultTheme =
-				toolbar == null ? new NoToolbarFragmentTheme(getContext()) : new DefaultFragmentTheme(getContext());
-		}
-		return defaultTheme;
-	}
 
 	@Nullable
 	protected ScreenEvent getScreenEvent() {
@@ -260,8 +244,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public final void onStart() {
 		super.onStart();
 
-		applyTheme(getTheme());
-
 		if (isVisible()) {
 			updateToolbar();
 		}
@@ -335,21 +317,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	protected void updateToolbar() {
-		Theme theme = getTheme();
-		if (theme == null) {
-			return;
-		}
 		if (getTitle() != null) {
 			setTitle(getTitle());
 		}
-		// TODO: To remove after the theme related logic and classes are removed
-//		if (theme.getToolbarTheme() != null && toolbar != null) {
-//			toolbar.setTheme(theme.getToolbarTheme());
-//		}
-//		if (theme.getStatusBarTheme() != null) {
-//			StatusbarUtils.updateStatusBar(getActivity(), theme.getStatusBarTheme().getStatusBarColor(),
-//					theme.getStatusBarTheme().isStatusBarLight());
-//		}
 	}
 
 	public void setTitle(String title) {
@@ -361,10 +331,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	protected boolean isFirstCreation() {
 		return firstCreation;
-	}
-
-	protected void applyTheme(Theme theme) {
-
 	}
 
 	/**
@@ -428,12 +394,5 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	public void runUiDependant(Runnable callback) {
 		callbacksExecutor.runUiDependant(callback);
-	}
-
-	public interface Theme {
-
-		TinkToolbar.Theme getToolbarTheme();
-
-		StatusBarTheme getStatusBarTheme();
 	}
 }

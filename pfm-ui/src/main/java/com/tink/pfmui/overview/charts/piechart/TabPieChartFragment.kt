@@ -17,7 +17,6 @@ import com.tink.pfmui.overview.charts.PeriodProvider
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
-import com.tink.pfmui.theme.getTabPieChartThemeForType
 import se.tink.core.models.Category
 import se.tink.core.models.misc.Period
 import javax.inject.Inject
@@ -28,7 +27,6 @@ internal class TabPieChartFragment : BaseFragment(), PeriodProvider {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[PieChartDetailsViewModel::class.java] }
     private val pageViewModel by lazy { ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java] }
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
-    private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
 
     @Inject
     lateinit var navigation: PieChartNavigation

@@ -20,7 +20,6 @@ import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.view.ParallaxHeaderScrollListener
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.core.models.account.Account
 import se.tink.utils.DateUtils
@@ -69,9 +68,6 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         viewModel.setAccountId(accountId)
         metadata = TransactionsListMetaData(
-            statusBarColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimaryDark),
-            backgroundColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimary),
-            titleColor = requireContext().getColorFromAttr(R.attr.tink_colorOnPrimary),
             title = "",
             accountId = accountId
         )
