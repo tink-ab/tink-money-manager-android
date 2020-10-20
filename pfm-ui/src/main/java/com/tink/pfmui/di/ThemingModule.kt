@@ -6,9 +6,7 @@ import com.tink.pfmui.theme.TinkDefaultSnackbarTheme
 import com.tink.pfmui.theme.TinkErrorSnackbarTheme
 import com.tink.pfmui.theme.TinkLeftToSpendTabPageTheme
 import com.tink.pfmui.theme.TinkTransactionSimilarTheme
-import com.tink.pfmui.theme.TinkTransactionsListTheme
 import com.tink.pfmui.transaction.SimilarTransactionsFragment
-import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.view.TinkSnackbar
 import dagger.Module
 import dagger.Provides
@@ -26,11 +24,6 @@ internal class ThemingModule {
     @Provides
     fun provideSimilarTransactionsTheme(@ApplicationScoped context: Context): SimilarTransactionsFragment.Theme {
         return TinkTransactionSimilarTheme(context)
-    }
-
-    @Provides
-    fun provideTransactionsListTheme(@ApplicationScoped context: Context): TransactionsListFragment.Theme {
-        return TinkTransactionsListTheme(context)
     }
 
     @Provides

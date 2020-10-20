@@ -14,7 +14,6 @@ import com.tink.pfmui.databinding.TinkFragmentAccountDetailsBinding
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.TransactionListViewModel
-import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.transaction.toListMode
 import com.tink.pfmui.util.CurrencyUtils
@@ -30,9 +29,6 @@ import javax.inject.Inject
 internal class AccountDetailsFragment : BaseFragment() {
 
     @Inject
-    lateinit var ownTheme: TransactionsListFragment.Theme
-
-    @Inject
     lateinit var dateUtils: DateUtils
 
     private val accountId: String by lazy { requireNotNull(arguments?.getString(ACCOUNT_ID_ARGS)) }
@@ -46,7 +42,6 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getTheme(): TransactionsListFragment.Theme = ownTheme
     override fun getScreenEvent(): ScreenEvent? = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true
 
@@ -91,10 +86,6 @@ internal class AccountDetailsFragment : BaseFragment() {
             it.transactionListModel = transactionListViewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
-
-        theme.setStatusbarColor(metadata.statusBarColor)
-        theme.setToolbarBackgroundColor(metadata.backgroundColor)
-        theme.setTitleColor(metadata.titleColor)
 
         setupViews()
 

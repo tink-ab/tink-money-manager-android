@@ -2,7 +2,6 @@ package com.tink.pfmui.transaction
 
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.view.TinkToolbar
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -19,14 +18,10 @@ import javax.inject.Inject
 internal class TransactionsListFragment : BaseFragment() {
 
     @Inject
-    lateinit var ownTheme: Theme
-
-    @Inject
     lateinit var dateUtils: DateUtils
 
     override fun getLayoutId(): Int = R.layout.tink_transactions_list_fragment
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getTheme(): Theme = ownTheme
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRANSACTIONS
     override fun hasToolbar(): Boolean = true
 
@@ -68,9 +63,6 @@ internal class TransactionsListFragment : BaseFragment() {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
         title = metaData.title
-        theme.setStatusbarColor(metaData.statusBarColor)
-        theme.setToolbarBackgroundColor(metaData.backgroundColor)
-        theme.setTitleColor(metaData.titleColor)
 
         setupTransactionAdapter()
 
@@ -113,19 +105,6 @@ internal class TransactionsListFragment : BaseFragment() {
                 }
         }
         recyclerView.adapter = adapter
-    }
-
-
-
-    interface Theme : BaseFragment.Theme {
-
-        override fun getToolbarTheme(): TinkToolbar.Theme
-
-        fun setStatusbarColor(color: Int)
-
-        fun setToolbarBackgroundColor(backgroundColor: Int)
-
-        fun setTitleColor(titleColor: Int)
     }
 
     companion object {
