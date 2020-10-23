@@ -18,7 +18,11 @@ import se.tink.commons.extensions.getColorFromAttr
 // Copied from Base.TextAppearance.MaterialComponents.Button
 private const val BUTTON_LETTERSPACING = 0.0892857143f
 
-internal class TinkToolbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0): Toolbar(context, attrs, defStyleAttr) {
+internal class TinkToolbar @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : Toolbar(context, attrs, defStyleAttr) {
 
     private val colorBackground = context.getColorFromAttr(R.attr.tink_colorPrimary)
     private val colorOnBackground = context.getColorFromAttr(R.attr.tink_colorOnPrimary)
@@ -107,6 +111,7 @@ internal class TinkToolbar @JvmOverloads constructor(context: Context, attrs: At
 
     interface Theme {
         val backgroundColor: Int
+
         @get:AttrRes
         val titleColor: Int
 
