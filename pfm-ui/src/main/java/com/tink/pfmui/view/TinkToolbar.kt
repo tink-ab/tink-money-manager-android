@@ -18,16 +18,28 @@ import se.tink.commons.extensions.getColorFromAttr
 // Copied from Base.TextAppearance.MaterialComponents.Button
 private const val BUTTON_LETTERSPACING = 0.0892857143f
 
-internal class TinkToolbar @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : Toolbar(context, attrs, defStyleAttr) {
+internal class TinkToolbar : Toolbar {
 
     private val colorBackground = context.getColorFromAttr(R.attr.tink_colorPrimary)
     private val colorOnBackground = context.getColorFromAttr(R.attr.tink_colorOnPrimary)
     private val typeface = FontUtils.getTypeface(FontUtils.BOLD_FONT, context)
     private val elevationInDp = 4.0f
+
+    constructor(context: Context?) : super(context)
+    constructor(context: Context?, attrs: AttributeSet?) : super(
+        context,
+        attrs
+    )
+
+    constructor(
+        context: Context?,
+        attrs: AttributeSet?,
+        defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr)
+
+    init {
+        applyCustomStyle()
+    }
 
     override fun setNavigationIcon(icon: Drawable?) {
         var navIcon = icon
@@ -37,10 +49,6 @@ internal class TinkToolbar @JvmOverloads constructor(
             navIcon.setTintMode(PorterDuff.Mode.SRC_ATOP)
         }
         super.setNavigationIcon(navIcon)
-    }
-
-    init {
-        applyCustomStyle()
     }
 
     override fun inflateMenu(resId: Int) {
