@@ -11,7 +11,6 @@ import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.redirection.RedirectionReceiver
-import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
 
 internal class DefaultRedirectionReceiver @Inject constructor(
@@ -31,9 +30,6 @@ internal class DefaultRedirectionReceiver @Inject constructor(
         fragmentCoordinator.replace(
             TransactionsListFragment.newInstance(
                 data = TransactionsListMetaData(
-                    statusBarColor = context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
-                    backgroundColor = context.getColorFromAttr(R.attr.tink_colorPrimary),
-                    titleColor = context.getColorFromAttr(R.attr.tink_colorOnPrimary),
                     title = context.getString(R.string.tink_transactions_list_toolbar_title),
                     period = null,
                     categoryCode = null,

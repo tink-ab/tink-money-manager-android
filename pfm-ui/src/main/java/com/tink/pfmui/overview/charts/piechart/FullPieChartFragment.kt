@@ -49,7 +49,7 @@ internal class FullPieChartFragment : BaseFragment() {
     private val viewModel by lazy { ViewModelProviders.of(parentFragment!!, viewModelFactory)[PieChartDetailsViewModel::class.java] }
     private val pageViewModel by lazy { ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java] }
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
-    private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
+    private val ownTheme by lazy { getTabPieChartThemeForType(type) }
 
     @Inject
     lateinit var amountFormatter: AmountFormatter
@@ -59,7 +59,6 @@ internal class FullPieChartFragment : BaseFragment() {
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
-    override fun getTheme(): Theme = ownTheme
     override fun viewReadyAfterLayout(): Boolean = false
 
     override fun authorizedOnCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) {
