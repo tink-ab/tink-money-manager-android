@@ -5,7 +5,10 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import com.tink.model.statistics.Statistics
+import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
@@ -15,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
+import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
@@ -52,6 +56,12 @@ internal class StatisticsRepository @Inject constructor(
                             userProfile.currency
                         )
                     )
+                    /**
+                     * If statistics is missing data for the current month,
+                     * add statistics with amount set to zero for that month as fallback for the UI.
+                     * This can happen at the start of a new monthly period.
+                     */
+                        .handleNoDataForCurrentPeriod()
                 } catch (error: Throwable) {
                     emptyList()
                 }
@@ -60,6 +70,54 @@ internal class StatisticsRepository @Inject constructor(
         }
         addSource(userRepository.userProfile) { update() }
         addSource(refreshTrigger) { update() }
+    }
+
+    private fun List<Statistics>.handleNoDataForCurrentPeriod(): List<Statistics> {
+        val missingExpensesForCurrentPeriod =
+            none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
+        val missingIncomeForCurrentPeriod =
+            none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.INCOME_BY_CATEGORY }
+        val currencyCode = first().value.currencyCode
+        val data = toMutableList()
+        if (missingExpensesForCurrentPeriod) {
+            data.add(
+                getZeroDataStatisticsForType(
+                    Statistics.Type.EXPENSES_BY_CATEGORY,
+                    currencyCode
+                )
+            )
+        }
+        if (missingIncomeForCurrentPeriod) {
+            data.add(
+                getZeroDataStatisticsForType(
+                    Statistics.Type.INCOME_BY_CATEGORY,
+                    currencyCode
+                )
+            )
+        }
+        return data
+    }
+
+    private fun getZeroDataStatisticsForType(
+        type: Statistics.Type,
+        currencyCode: String
+    ): Statistics {
+        val startOfCurrentMonth = DateTime.now().dayOfMonth().withMinimumValue()
+        val endOfCurrentMonth = DateTime.now().dayOfMonth().withMaximumValue()
+        val period =
+            MonthPeriod(
+                monthOfYear = DateTime.now().monthOfYear,
+                year = DateTime.now().year,
+                identifier = "",
+                start = Instant.ofEpochMilli(startOfCurrentMonth.millis),
+                end = Instant.ofEpochMilli(endOfCurrentMonth.millis)
+            )
+        return Statistics(
+            identifier = period.toString(),
+            type = type,
+            period = period,
+            value = Amount(ExactNumber(0), currencyCode)
+        )
     }
 
     val statistics: LiveData<List<Statistics>> = statisticsLiveData
