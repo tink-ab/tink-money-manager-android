@@ -56,11 +56,9 @@ internal class StatisticsRepository @Inject constructor(
                             userProfile.currency
                         )
                     )
-                    /**
-                     * If statistics is missing data for the current month,
-                     * add statistics with amount set to zero for that month as fallback for the UI.
-                     * This can happen at the start of a new monthly period.
-                     */
+                     // If statistics is missing data for the current month,
+                     // add statistics with amount set to zero for that month as fallback for the UI.
+                     // This can happen at the start of a new monthly period.
                         .handleNoDataForCurrentPeriod()
                 } catch (error: Throwable) {
                     emptyList()
