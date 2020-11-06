@@ -1,4 +1,8 @@
 apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+group GROUP   // Maven Group ID for the artifact
+version TinkPfmVersion.name
 
 def aarPath(projectName) {
     def fallback = "build/outputs/aar/" + projectName + "-release.aar"
@@ -6,20 +10,24 @@ def aarPath(projectName) {
 }
 
 def pfmArtifactId(projectName) {
-    def fallback = "pfm-ui-$projectName"
+    def fallback = projectName
     return hasProperty('ARTIFACT_ID') && project.name == projectName ? ARTIFACT_ID : fallback
+}
+
+def pfmBintrayName(projectName) {
+    def fallback = GROUP + "." + pfmArtifactId(projectName) // TODO: What should these names be?
+    return hasProperty('BINTRAY_NAME') ? BINTRAY_NAME : fallback
 }
 
 publishing {
     publications {
         tinkPfmSdk(MavenPublication) {
+            artifact aarPath(project.name)
 
-            groupId GROUP
+            groupId GROUP // TODO: Not set in Tink Link
+
             artifactId pfmArtifactId(project.name)
-
-            version TinkPfmVersion.name
-
-            artifact(aarPath(project.name))
+            version this.version
 
             pom {
                 name = "Tink PFM UI " + project.name
@@ -39,7 +47,7 @@ publishing {
                         if (it instanceof ProjectDependency) {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             // Internal modules. Use the names of the generated public aars.
-                            dependencyNode.appendNode('groupId', 'com.tink')
+                            dependencyNode.appendNode('groupId', GROUP)
                             dependencyNode.appendNode('artifactId', pfmArtifactId(it.name))
                             dependencyNode.appendNode('version', TinkPfmVersion.name)
                         } else if(it instanceof ExternalModuleDependency) {
@@ -51,6 +59,38 @@ publishing {
                     }
                 }
             }
+        }
+    }
+}
+
+// Bintray
+def bintray_username = hasProperty('BINTRAY_USER') ? BINTRAY_USER : ""
+def bintray_apikey = hasProperty('BINTRAY_APIKEY') ? BINTRAY_APIKEY : ""
+
+bintray {
+    user = bintray_username
+    key = bintray_apikey
+
+    setPublications('tinkPfmSdk')
+    setConfigurations('archives')
+    pkg {
+        userOrg = 'tink'
+        repo = BINTRAY_REPO
+        name = pfmBintrayName(project.name)
+        desc = POM_DESCRIPTION
+//        websiteUrl = POM_URL
+        vcsUrl = POM_GIT_URL
+        licenses = [POM_LICENSE]
+        publish = false
+        publicDownloadNumbers = true
+
+        version {
+            desc = POM_DESCRIPTION
+//            gpg {
+//                sign = true //Determines whether to GPG sign the files. The default is false
+//                passphrase = properties.getProperty("bintray.gpg.password")
+//                //Optional. The passphrase for GPG signing'
+//            }
         }
     }
 }
