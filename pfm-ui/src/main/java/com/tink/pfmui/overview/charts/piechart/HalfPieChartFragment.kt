@@ -54,7 +54,7 @@ internal class HalfPieChartFragment : BaseFragment() {
     private val type by lazy {
         arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES
     }
-    private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
+    private val ownTheme by lazy { getTabPieChartThemeForType(type) }
 
     @Inject
     lateinit var amountFormatter: AmountFormatter
@@ -64,7 +64,6 @@ internal class HalfPieChartFragment : BaseFragment() {
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
-    override fun getTheme(): Theme = ownTheme
     override fun viewReadyAfterLayout(): Boolean = false
 
     override fun authorizedOnCreateView(
@@ -132,8 +131,6 @@ internal class HalfPieChartFragment : BaseFragment() {
             throw NoSuchElementException("List of transactions is empty.")
         } else {
             val metaData = TransactionsListMetaData(
-                statusBarColor = theme.statusBarTheme.statusBarColor,
-                backgroundColor = theme.toolbarTheme.backgroundColor,
                 title = item.name,
                 transactionIds = item.ids
             )

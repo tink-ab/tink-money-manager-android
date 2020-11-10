@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.R
-import com.tink.pfmui.theme.getChartDetailsThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
@@ -36,7 +35,6 @@ private const val TYPE_ARG = "type"
 
 internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
-    private val ownTheme by lazy { getChartDetailsThemeForType(context!!, type) }
     private val adapter by lazy { ChartPagerAdapter(context!!, childFragmentManager, type) }
     private val viewModel by lazy {
         ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java].also {
@@ -49,7 +47,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
     override fun getScreenEvent(): ScreenEvent = type.screenEvent
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
-    override fun getTheme(): Theme = ownTheme
     override fun getTitle() = if (type.showCategoryPicker) "" else null
     override fun viewReadyAfterLayout(): Boolean = false
 
@@ -61,8 +58,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 pager.offscreenPageLimit = PAGE_COUNT
                 tabs.setupWithViewPager(pager)
             }
-            tabs.setTheme(ownTheme.tabsTheme)
-            category.setTextColor(ownTheme.toolbarTheme.titleColor)
             category.visible = type.showCategoryPicker
         }
         if (type.showCategoryPicker) {
@@ -136,8 +131,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     private fun showTransactions() {
         val metaData = TransactionsListMetaData(
-                statusBarColor = theme.statusBarTheme.statusBarColor,
-                backgroundColor = theme.toolbarTheme.backgroundColor,
                 isLeftToSpend = type == ChartType.LEFT_TO_SPEND,
                 period = adapter.currentPagePeriod,
                 categoryCode = viewModel.category.value?.code,

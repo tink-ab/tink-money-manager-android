@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="wrap_content"
   android:layout_height="match_parent">
 
@@ -52,16 +53,24 @@
     app:layout_constraintTop_toBottomOf="@+id/spacer"
     app:layout_constraintVertical_weight="1" />
 
-  <TextView
+  <com.google.android.material.textview.MaterialTextView
     android:id="@+id/amountLabel"
     style="@style/tink_micro.primary"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
+    android:layout_width="56dp"
+    android:layout_height="@dimen/tink_micro_line_height"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
     android:layout_marginBottom="4dp"
     android:gravity="center"
+    android:lines="1"
+    app:autoSizeMaxTextSize="@dimen/tink_bar_chart_auto_max_size"
+    app:autoSizeMinTextSize="@dimen/tink_bar_chart_auto_min_size"
+    app:autoSizeStepGranularity="1dp"
+    app:autoSizeTextType="uniform"
     app:layout_constraintBottom_toTopOf="@+id/bar"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    tools:text="123 kr" />
 
   <TextView
     android:id="@+id/periodLabel"

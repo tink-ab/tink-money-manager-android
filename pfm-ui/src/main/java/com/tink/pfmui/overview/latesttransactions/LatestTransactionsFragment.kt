@@ -78,8 +78,6 @@ internal class LatestTransactionsFragment : BaseFragment() {
         val context = context ?: return
 
         val metaData = TransactionsListMetaData(
-            context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
-            context.getColorFromAttr(R.attr.tink_colorPrimary),
             getString(R.string.tink_overview_latest_transactions_title),
             false,
             null, null,

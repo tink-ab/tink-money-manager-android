@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.theme.getCategorySelectionThemeForType
 import com.tink.pfmui.view.TreeListSelectionAdapter
 import com.tink.pfmui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
@@ -33,7 +32,6 @@ internal class CategorySelectionFragment : BaseFragment() {
             viewModelFactory
         )[CategorySelectionViewModel::class.java]
     }
-    private val ownTheme by lazy { getCategorySelectionThemeForType(context!!, type) }
     private val adapter: TreeListSelectionAdapter = TreeListSelectionAdapter()
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_select_category
@@ -41,7 +39,6 @@ internal class CategorySelectionFragment : BaseFragment() {
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_SELECTION
     override fun hasToolbar(): Boolean = true
     override fun doNotRecreateView(): Boolean = false
-    override fun getTheme(): Theme = ownTheme
     override fun getTitle(): String = ""
     override fun viewReadyAfterLayout(): Boolean = false
 
@@ -54,7 +51,6 @@ internal class CategorySelectionFragment : BaseFragment() {
         if (!options.dropdownToolbarAppearance) {
             view.category.setCompoundDrawables(null, null, null, null)
         }
-        view.category.setTextColor(ownTheme.toolbarTheme.titleColor)
 
         val categories = viewModel.getCategoryItems(
             type,

@@ -9,20 +9,20 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.collections.Categories
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
-import se.tink.core.models.Category
 import se.tink.core.models.transaction.Transaction
 import javax.inject.Inject
+import javax.inject.Named
 
 internal class SimilarTransactionsFragment : BaseFragment() {
 
-    var onSimilarTransactionsDone: (() -> Unit)? = null
-
     @Inject
-    lateinit var ownTheme: Theme
+    @field:Named(TinkSnackbar.Theme.ERROR_THEME)
+    lateinit var errorSnackbarTheme: TinkSnackbar.Theme
+
+    var onSimilarTransactionsDone: (() -> Unit)? = null
 
     private lateinit var viewModel: SimilarTransactionsViewModel
 
@@ -42,13 +42,11 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun hasToolbar(): Boolean = true
     override fun getTitle(): String? = getString(R.string.tink_transaction_similar_title)
-    override fun getTheme(): Theme? = ownTheme
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.SIMILAR_TRANSACTIONS
     override fun doNotRecreateView(): Boolean = false
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
-        ownTheme.setCategory(Categories.getSharedInstance().getCategory(newCategoryCode))
         viewModel = ViewModelProviders.of(
             this,
             viewModelFactory
@@ -71,7 +69,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
                     categoryCode = newCategoryCode,
                     onError = { error ->
                         context?.let {
-                            snackbarManager.displayError(error, it, ownTheme.snackbarErrorTheme)
+                            snackbarManager.displayError(error, it, errorSnackbarTheme)
                         }
                     }
                 )
@@ -118,13 +116,6 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     override fun onUpPressed() {
         onSimilarTransactionsDone?.invoke()
         super.onUpPressed()
-    }
-
-    interface Theme : BaseFragment.Theme {
-
-        val snackbarErrorTheme: TinkSnackbar.Theme
-
-        fun setCategory(category: Category)
     }
 
     companion object {

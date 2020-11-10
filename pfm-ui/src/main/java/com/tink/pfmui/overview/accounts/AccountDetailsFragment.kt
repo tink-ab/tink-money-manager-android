@@ -14,23 +14,18 @@ import com.tink.pfmui.databinding.TinkFragmentAccountDetailsBinding
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.TransactionListViewModel
-import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.transaction.toListMode
 import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.view.ParallaxHeaderScrollListener
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.core.models.account.Account
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
 internal class AccountDetailsFragment : BaseFragment() {
-
-    @Inject
-    lateinit var ownTheme: TransactionsListFragment.Theme
 
     @Inject
     lateinit var dateUtils: DateUtils
@@ -46,7 +41,6 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getTheme(): TransactionsListFragment.Theme = ownTheme
     override fun getScreenEvent(): ScreenEvent? = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true
 
@@ -74,8 +68,6 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         viewModel.setAccountId(accountId)
         metadata = TransactionsListMetaData(
-            statusBarColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimaryDark),
-            backgroundColor = requireContext().getColorFromAttr(R.attr.tink_colorPrimary),
             title = "",
             accountId = accountId
         )
@@ -90,9 +82,6 @@ internal class AccountDetailsFragment : BaseFragment() {
             it.transactionListModel = transactionListViewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
-
-        theme.setStatusbarColor(metadata.statusBarColor)
-        theme.setToolbarBackgroundColor(metadata.backgroundColor)
 
         setupViews()
 

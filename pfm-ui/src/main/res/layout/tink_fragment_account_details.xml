@@ -23,7 +23,8 @@
       android:layout_width="match_parent"
       android:layout_height="?actionBarSize"
       android:transitionName="@string/tink_toolbar_transition"
-      app:navigationIcon="?android:homeAsUpIndicator" />
+      app:buttonGravity="center_vertical"
+      app:navigationIcon="?homeAsUpIndicator" />
 
     <com.tink.pfmui.view.TinkTextView
       style="@style/tink_tera"

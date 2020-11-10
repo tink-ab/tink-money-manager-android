@@ -27,7 +27,7 @@ internal enum class ChartType {
         override val showCategoryPicker = false
         override val type: Category.Type get() = Category.Type.TYPE_UNKKNOWN
 
-        override fun create1MonthFragment(): BaseFragment = TabLeftToSpendFragment.newInstance(0)
+        override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
     },
     INCOME {
