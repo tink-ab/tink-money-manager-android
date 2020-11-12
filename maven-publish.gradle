@@ -6,6 +6,9 @@ version TinkPfmVersion.name
 
 def aarPath(projectName) {
     def fallback = "build/outputs/aar/" + projectName + "-release.aar"
+    if (POM_PACKAGING == 'jar') {
+        fallback = "build/libs/" + projectName + "-" + this.version + ".jar"
+    }
     return hasProperty('ARTIFACT_PATH') ? ARTIFACT_PATH : fallback
 }
 
