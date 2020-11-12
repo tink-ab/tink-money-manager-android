@@ -27,7 +27,7 @@ publishing {
         tinkPfmSdk(MavenPublication) {
             artifact aarPath(project.name)
 
-            groupId GROUP // TODO: Not set in Tink Link
+            groupId GROUP
 
             artifactId pfmArtifactId(project.name)
             version this.version
