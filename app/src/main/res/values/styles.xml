@@ -1,0 +1,134 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your application theme here. -->
+  </style>
+
+  <style name="TinkFinanceOverviewSampleStyle" parent="TinkFinanceOverviewStyle">
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_colorAccent">#ff461e7d</item>
+    <item name="tink_colorAccentDark">#ff461e7d</item>
+    <item name="tink_colorAccentLight">#ff461e7d</item>
+    <item name="tink_colorPrimary">#ff461e7d</item>
+    <item name="tink_colorPrimaryDark">#ff461e7d</item>
+    <item name="tink_colorPrimaryLight">#ff461e7d</item>
+    <item name="tink_expensesColor">#ff5638ff</item>
+    <item name="tink_expensesDarkColor">#ff5638ff</item>
+    <item name="tink_expensesLightColor">#ffe6e1ff</item>
+    <item name="tink_colorOnExpenses">#ffffff</item>
+    <item name="tink_incomeColor">#ff36b472</item>
+    <item name="tink_incomeDarkColor">#30A266</item>
+    <item name="tink_incomeLightColor">#ffdffbed</item>
+    <item name="tink_colorOnIncome">#ffffff</item>
+    <item name="tink_transferColor">#494949</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
+    <item name="tink_colorOnTransfer">#ffffff</item>
+    <item name="tink_uncategorizedColor">#FEAE22</item>
+    <item name="tink_uncategorizedLightColor">#FFF3DE</item>
+    <item name="tink_snackbarColor">#808080</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
+    <item name="tink_textColorAction">#ff461e7d</item>
+    <item name="tink_dividerColor">#EEEEEE</item>
+  </style>
+
+  <!-- TODO: Move these themes to a demo/test app package -->
+
+  <style name="TinkStyle_Default" parent="TinkFinanceOverviewStyle">
+    <item name="tink_backgroundColor">#FBFBFC</item>
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_colorAccent">#4E7681</item>
+    <item name="tink_colorAccentDark">#4E7681</item>
+    <item name="tink_colorAccentLight">#4E7681</item>
+    <item name="tink_colorPrimary">#4E7681</item>
+    <item name="tink_colorPrimaryDark">#4E7681</item>
+    <item name="tink_colorPrimaryLight">#4E7681</item>
+    <item name="tink_expensesColor">#4E7681</item>
+    <item name="tink_expensesDarkColor">#4E7681</item>
+    <item name="tink_expensesLightColor">#E4EBEC</item>
+    <item name="tink_colorOnExpenses">#ffffff</item>
+    <item name="tink_incomeColor">#ff36b472</item>
+    <item name="tink_incomeDarkColor">#30A266</item>
+    <item name="tink_incomeLightColor">#ffdffbed</item>
+    <item name="tink_colorOnIncome">#ffffff</item>
+    <item name="tink_transferColor">#494949</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
+    <item name="tink_colorOnTransfer">#ffffff</item>
+    <item name="tink_uncategorizedColor">#FEAE22</item>
+    <item name="tink_uncategorizedLightColor">#FFF3DE</item>
+    <item name="tink_snackbarColor">#808080</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
+    <item name="tink_textColorAction">#4E7681</item>
+    <item name="tink_dividerColor">#EEEEEE</item>
+  </style>
+
+  <style name="TinkStyle_Strict" parent="TinkFinanceOverviewStyle">
+    <item name="tink_backgroundColor">#F7F7F8</item>
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_colorAccent">#333439</item>
+    <item name="tink_colorAccentDark">#333439</item>
+    <item name="tink_colorAccentLight">#333439</item>
+    <item name="tink_colorPrimary">#333439</item>
+    <item name="tink_colorPrimaryDark">#333439</item>
+    <item name="tink_colorPrimaryLight">#333439</item>
+    <item name="tink_expensesColor">#717CB1</item>
+    <item name="tink_expensesDarkColor">#717CB1</item>
+    <item name="tink_expensesLightColor">#E3E4ED</item>
+    <item name="tink_colorOnExpenses">#ffffff</item>
+    <item name="tink_incomeColor">#9DBF93</item>
+    <item name="tink_incomeDarkColor">#9DBF93</item>
+    <item name="tink_incomeLightColor">#E5ECE4</item>
+    <item name="tink_colorOnIncome">#ffffff</item>
+    <item name="tink_transferColor">#494949</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
+    <item name="tink_colorOnTransfer">#ffffff</item>
+    <item name="tink_uncategorizedColor">#FEAE22</item>
+    <item name="tink_uncategorizedLightColor">#FFF3DE</item>
+    <item name="tink_snackbarColor">#808080</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
+    <item name="tink_textColorAction">#333439</item>
+    <item name="tink_dividerColor">#EEEEEE</item>
+  </style>
+
+  <style name="TinkStyle_ChewingGum" parent="TinkFinanceOverviewStyle">
+    <item name="tink_backgroundColor">#343035</item>
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_colorAccent">#e8a9e0</item>
+    <item name="tink_colorAccentDark">#e8a9e0</item>
+    <item name="tink_colorAccentLight">#463A45</item>
+    <item name="tink_colorOnAccent">#353035</item>
+    <item name="tink_colorPrimary">#e8a9e0</item>
+    <item name="tink_colorPrimaryDark">#e8a9e0</item>
+    <item name="tink_colorPrimaryLight">#463A45</item>
+    <item name="tink_colorOnPrimary">#353035</item>
+    <item name="tink_expensesColor">#e8a9e0</item>
+    <item name="tink_expensesDarkColor">#e8a9e0</item>
+    <item name="tink_expensesLightColor">#463A45</item>
+    <item name="tink_colorOnExpenses">#353035</item>
+    <item name="tink_incomeColor">#8DDC85</item>
+    <item name="tink_incomeDarkColor">#8DDC85</item>
+    <item name="tink_incomeLightColor">#3E4A3C</item>
+    <item name="tink_colorOnIncome">#353035</item>
+    <item name="tink_transferColor">#F0F1EA</item>
+    <item name="tink_transferLightColor">#3E3A3D</item>
+    <item name="tink_colorOnTransfer">#353035</item>
+    <item name="tink_uncategorizedColor">#85B9DC</item>
+    <item name="tink_uncategorizedLightColor">#3E3A3D</item>
+    <item name="tink_warningColor">#FEAE22</item>
+    <item name="tink_warningLightColor">#3F3A3B</item>
+    <item name="tink_snackbarColor">#2A262A</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
+    <item name="tink_textColorAction">#e8a9e0</item>
+    <item name="tink_chartContainerBackgroundColor">#2A262A</item>
+    <item name="tink_dividerColor">#2B2B2B</item>
+    <item name="tink_textColorPrimary">#FFFFFF</item>
+    <item name="tink_textColorSecondary">#FFFFFF</item>
+    <item name="tink_textColorTertiary">#FFFFFF</item>
+    <item name="tink_cardBackgroundColor">#29262A</item>
+  </style>
+
+<!--  Comment in for testing font overrides-->
+<!--  <item name="tink_font_bold" type="font">@font/lobster</item>-->
+<!--  <item name="tink_font_semi_bold" type="font">@font/lobster</item>-->
+<!--  <item name="tink_font_regular" type="font">@font/lobster</item>-->
+</resources>
