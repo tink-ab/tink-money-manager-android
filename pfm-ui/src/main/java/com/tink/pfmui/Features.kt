@@ -29,9 +29,22 @@ sealed class OverviewFeature : Parcelable {
     @Parcelize
     object Accounts : OverviewFeature()
 
+    /**
+     * Represents the actionable insights section in the overview screen.
+     */
     @Parcelize
     object ActionableInsights : OverviewFeature()
 
+    /**
+     * Represents a custom view container that can be added to the overview screen.
+     *
+     * This container view will be added as a FrameLayout in the overview screen which can be used
+     * by users to add their own custom views.
+     *
+     * @param containerViewId The custom view container id
+     * @param width The custom view container width
+     * @param height The custom view container height
+     */
     @Parcelize
     class CustomContainerView(
         val containerViewId: Int,
