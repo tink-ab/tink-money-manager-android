@@ -31,6 +31,13 @@ sealed class OverviewFeature : Parcelable {
 
     @Parcelize
     object ActionableInsights : OverviewFeature()
+
+    @Parcelize
+    class CustomContainerView(
+        val containerViewId: Int,
+        val width: Int,
+        val height: Int
+    ) : OverviewFeature()
 }
 
 /**
