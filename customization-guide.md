@@ -92,6 +92,66 @@ val financeOverviewFragment =
     )
 
 ```
+
+You can also add custom views to the Overview screen by adding a `OverviewFeature.CustomContainerView` to the `OverviewFeatures`. The container view will be added as a `FrameLayout`
+by the Tink PFM UI and placed in the Overview screen according to the order specified in the list of overview features.
+```kotlin
+val sampleOverviewFeatures =
+        OverviewFeatures(
+            listOf(
+                OverviewFeature.CustomContainerView(
+                    containerViewId = R.id.my_custom_view_container_one,
+                    width = FrameLayout.LayoutParams.MATCH_PARENT,
+                    height = FrameLayout.LayoutParams.WRAP_CONTENT
+                ),
+                OverviewFeature.ActionableInsights,
+                OverviewFeature.Statistics(listOf(StatisticType.EXPENSES, StatisticType.INCOME)),
+                OverviewFeature.CustomContainerView(
+                    containerViewId = R.id.my_custom_view_container_two,
+                    width = FrameLayout.LayoutParams.MATCH_PARENT,
+                    height = FrameLayout.LayoutParams.WRAP_CONTENT
+                ),
+                OverviewFeature.Accounts,
+                OverviewFeature.LatestTransactions,
+                OverviewFeature.CustomContainerView(
+                    containerViewId = R.id.my_custom_view_container_three,
+                    width = FrameLayout.LayoutParams.MATCH_PARENT,
+                    height = FrameLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+        )
+```
+
+You can add custom views to the container view once it has been added to the Overview screen. One way of doing this is through `FragmentLifecycleCallbacks`.
+By registering fragment lifecycle callbacks to the `childFragmentManager` of the `FinanceOverviewFragment`, it is possible to know when the fragment views are created
+and set up your custom views. Please make sure that the `FinanceOverviewFragment` instance is attached before registering the lifecycle callbacks to it.
+```kotlin
+financeOverviewFragment
+        ?.childFragmentManager
+        ?.registerFragmentLifecycleCallbacks(
+            object : FragmentManager.FragmentLifecycleCallbacks() {
+                override fun onFragmentViewCreated(
+                    fm: FragmentManager,
+                    f: Fragment,
+                    v: View,
+                    savedInstanceState: Bundle?
+                ) {
+                    super.onFragmentViewCreated(fm, f, v, savedInstanceState)
+                    setupCustomViews(v)
+                }
+            },
+            true
+        )
+...
+
+private fun setupCustomViews(view: View) {
+    val customViewContainerOne = view.findViewById<FrameLayout>(R.id.my_custom_view_container_one)
+    if (customViewContainerOne != null) {
+        // Add your custom views to the container
+    }
+}
+```
+
 # Customize category icons
 You can customize category icons shown in the finance overview UI by overriding the icon attributes that are publicly available in the Tink PFM UI.
 Follow the [icon customization guide](/icon-customization-guide.md) to set this up.
