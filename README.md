@@ -5,8 +5,9 @@
 
 ## Installation
 
-1. Take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
-2. Add `mavenLocal()` as repository in your root level build.gradle file.
+1. Download the [latest SDK release](https://github.com/tink-ab/tink-pfm-android/releases/latest) zip file.
+2. Unzip and take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
+3. Add `mavenLocal()` as repository in your root level build.gradle file.
 
 ```groovy
 allprojects {
@@ -19,7 +20,7 @@ allprojects {
 
 _Note: The `mavenLocal()` repository needs to be on top of the other repositories, as shown above._
 
-3. Add dependency on the Tink PFM UI:
+4. Add dependency on the Tink PFM UI:
 
 ```groovy
 dependencies {
@@ -27,14 +28,14 @@ dependencies {
 }
 ```
 
-4. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
+5. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 dataBinding {
    enabled = true
 }
 ```
 
-5. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block: 
+6. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 compileOptions {
    sourceCompatibility = JavaVersion.VERSION_1_8
