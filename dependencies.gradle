@@ -66,6 +66,6 @@ ext {
 
             timber                              : "com.jakewharton.timber:timber:$timberVersion",
 
-            pfm_ui                              : "com.tink:pfm-ui:0.9.10"
+            pfm_ui                              : "com.tink.pfm:pfm-ui:0.9.11"
     ]
 }
