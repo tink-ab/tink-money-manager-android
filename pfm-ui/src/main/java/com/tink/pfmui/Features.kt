@@ -42,8 +42,8 @@ sealed class OverviewFeature : Parcelable {
      * by users to add their own custom views.
      *
      * @param containerViewId The custom view container id
-     * @param width The custom view container width
-     * @param height The custom view container height
+     * @param width The width of the container view, either MATCH_PARENT, WRAP_CONTENT or a fixed size in pixels
+     * @param height The height of the container view, either MATCH_PARENT, WRAP_CONTENT or a fixed size in pixels
      */
     @Parcelize
     class CustomContainerView(
