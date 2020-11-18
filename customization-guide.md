@@ -124,7 +124,7 @@ val sampleOverviewFeatures =
 
 You can add custom views to the container view once it has been added to the Overview screen. One way of doing this is through `FragmentLifecycleCallbacks`.
 By registering fragment lifecycle callbacks to the `childFragmentManager` of the `FinanceOverviewFragment`, it is possible to know when the fragment views are created
-and set up your custom views. Please make sure that the `FinanceOverviewFragment` instance is attached before registering the lifecycle callbacks to it.
+and ready for you to set up your custom views. Please make sure that the `FinanceOverviewFragment` instance is attached before registering the lifecycle callbacks to it.
 ```kotlin
 financeOverviewFragment
         ?.childFragmentManager
