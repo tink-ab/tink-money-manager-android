@@ -71,6 +71,10 @@ internal class OverviewFragment : BaseFragment() {
                     )
                 }
             }
+
+            is OverviewFeature.CustomContainerView -> {
+                containerIdForFeature(feature, overviewContainer, requireContext())
+            }
         }
     }
 
@@ -109,6 +113,10 @@ internal class OverviewFragment : BaseFragment() {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
+                }
+                is OverviewFeature.CustomContainerView -> {
+                    id = feature.containerViewId
+                    layoutParams = FrameLayout.LayoutParams(feature.width, feature.height)
                 }
             }
         }
