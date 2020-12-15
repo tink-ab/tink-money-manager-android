@@ -59,7 +59,7 @@ val config =
 
 3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-event-tracking) to set this up.
 
-4. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-finance-overview) to set this up.
+4. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-finance-overview#displaying-the-finance-overview) to set this up.
 
 5. [Optional] Extend the `InsightActionHandler` class, if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-handling-insight-actions) to set this up.
 
