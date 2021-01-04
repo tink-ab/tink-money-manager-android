@@ -37,7 +37,6 @@ class TransactionItemFactory @Inject constructor(
                 date = this.date.toDateTime(), //TODO: Core setup
                 label = description,
                 amount = amount,
-                dispensableAmount = dispensableAmount,
                 upcomingTransactionData = null
             )
         }
