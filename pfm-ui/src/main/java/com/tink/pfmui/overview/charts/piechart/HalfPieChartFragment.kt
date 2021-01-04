@@ -15,11 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
-import com.tink.pfmui.databinding.FragmentHalfPieChartBinding
-import kotlinx.android.synthetic.main.fragment_half_pie_chart.view.*
+import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.view.*
 import com.tink.pfmui.charts.transitions.ChangePositionTransition
 import com.tink.pfmui.charts.transitions.PieChartLabelTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
+import com.tink.pfmui.databinding.TinkFragmentHalfPieChartBinding
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartItem
 import com.tink.pfmui.overview.charts.ChartType
@@ -53,17 +53,16 @@ internal class HalfPieChartFragment : BaseFragment() {
     private val type by lazy {
         arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES
     }
-    private val ownTheme by lazy { getTabPieChartThemeForType(context!!, type) }
+    private val ownTheme by lazy { getTabPieChartThemeForType(type) }
 
     @Inject
     lateinit var amountFormatter: AmountFormatter
 
-    override fun getLayoutId() = R.layout.fragment_half_pie_chart
+    override fun getLayoutId() = R.layout.tink_fragment_half_pie_chart
     override fun needsLoginToBeAuthorized() = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.TRACKING_ERROR
     override fun doNotRecreateView() = false
     override fun shouldTrackScreen() = false
-    override fun getTheme(): Theme = ownTheme
     override fun viewReadyAfterLayout(): Boolean = false
 
     override fun authorizedOnCreateView(
@@ -71,7 +70,7 @@ internal class HalfPieChartFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        val binding = DataBindingUtil.bind<FragmentHalfPieChartBinding>(view.root)
+        val binding = DataBindingUtil.bind<TinkFragmentHalfPieChartBinding>(view.root)
             ?: throw IllegalStateException("Binding is null")
 
         viewModel.apply {
@@ -81,7 +80,7 @@ internal class HalfPieChartFragment : BaseFragment() {
         }
     }
 
-    private fun updateModel(binding: FragmentHalfPieChartBinding, model: DetailsChartModel) {
+    private fun updateModel(binding: TinkFragmentHalfPieChartBinding, model: DetailsChartModel) {
         if (model.topLevel) return
 
         if (!transitionCoordinator.hasTransitionInProgress()) {
@@ -131,8 +130,6 @@ internal class HalfPieChartFragment : BaseFragment() {
             throw NoSuchElementException("List of transactions is empty.")
         } else {
             val metaData = TransactionsListMetaData(
-                statusBarColor = theme.statusBarTheme.statusBarColor,
-                backgroundColor = theme.toolbarTheme.backgroundColor,
                 title = item.name,
                 transactionIds = item.ids
             )
@@ -147,8 +144,8 @@ internal class HalfPieChartFragment : BaseFragment() {
     private fun changeTransition() = TransitionSet().apply {
         addTransition(TransitionSet().apply {
             addTransition(PieChartLabelTransition())
-            addTransition(PieChartSegmentTransition(R.id.transition_group_main))
-            addTransition(Fade().apply { addTarget(R.id.back_segment) })
+            addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+            addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
             // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //            addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble()).apply { }

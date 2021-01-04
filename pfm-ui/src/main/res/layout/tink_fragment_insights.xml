@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android" >
+
+  <data>
+    <variable
+      name="viewModel"
+      type="com.tink.pfmui.insights.InsightsViewModel"/>
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?tink_backgroundColor">
+
+    <com.tink.pfmui.view.TinkToolbar
+      android:id="@+id/tink_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:transitionName="@string/tink_toolbar_transition"
+      app:buttonGravity="center_vertical"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="?android:homeAsUpIndicator" />
+
+    <ImageView
+      android:id="@+id/emptyStateIllustration"
+      android:layout_width="300dp"
+      android:layout_height="300dp"
+      android:src="@drawable/tink_cat_wizard_end"
+      app:layout_constraintBottom_toTopOf="@+id/emptyStateTitle"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.4"
+      app:layout_constraintVertical_chainStyle="packed"/>
+
+    <TextView
+      android:id="@+id/emptyStateTitle"
+      style="@style/tink_hecto"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_marginEnd="24dp"
+      android:gravity="center"
+      android:text="@string/tink_insights_empty_state_title"
+      app:layout_constraintBottom_toTopOf="@+id/emptyStateSubtitle"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/emptyStateIllustration"/>
+
+    <TextView
+      android:id="@+id/emptyStateSubtitle"
+      style="@style/tink_deci"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:layout_marginStart="80dp"
+      android:layout_marginEnd="80dp"
+      android:gravity="center"
+      android:text="@string/tink_insights_empty_state_subtitle"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/emptyStateTitle"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:visibility="@{viewModel.hasItems}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
+
+    <ProgressBar
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="@{viewModel.loading}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+      android:id="@+id/emptyState"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="@{viewModel.showEmptyState}"
+      app:constraint_referenced_ids="emptyStateSubtitle, emptyStateIllustration, emptyStateTitle"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

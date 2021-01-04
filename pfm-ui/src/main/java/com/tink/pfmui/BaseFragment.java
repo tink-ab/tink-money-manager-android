@@ -21,9 +21,6 @@ import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import com.tink.pfmui.tracking.AnalyticsSingleton;
-import com.tink.pfmui.theme.DefaultFragmentTheme;
-import com.tink.pfmui.theme.NoToolbarFragmentTheme;
-import com.tink.pfmui.theme.StatusBarTheme;
 import com.tink.pfmui.util.SoftKeyboardUtils;
 import com.tink.pfmui.view.SnackbarManager;
 import com.tink.pfmui.view.TinkToolbar;
@@ -59,7 +56,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	private LifecycleRegistry viewLifecycle;
 
 	protected View view;
-	protected View inflatedView;
 	private boolean firstCreation = true;
 	private boolean shouldTrackScreen;
 	private UICallbackRunner callbacksExecutor;
@@ -67,22 +63,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	@Nullable
 	TinkToolbar toolbar;
 
-	private Theme defaultTheme;
-
 	public abstract int getLayoutId();
 
 	public abstract boolean needsLoginToBeAuthorized();
-
-	protected Theme getTheme() {
-		if (view == null) {
-			return null;
-		}
-		if (defaultTheme == null) {
-			defaultTheme =
-				toolbar == null ? new NoToolbarFragmentTheme(getContext()) : new DefaultFragmentTheme(getContext());
-		}
-		return defaultTheme;
-	}
 
 	@Nullable
 	protected ScreenEvent getScreenEvent() {
@@ -142,7 +125,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 		if (view == null) {
 			getActivity().getTheme().applyStyle(R.style.TinkFinanceOverviewStyle, false);
-			inflatedView = inflater.inflate(getLayoutId(), container, false);
+			View inflatedView = inflater.inflate(getLayoutId(), container, false);
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
 			toolbar = view.findViewById(R.id.tink_toolbar);
@@ -173,7 +156,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
 		);
 
-		getLayoutInflater().inflate(R.layout.toolbar_default, parent);
+		getLayoutInflater().inflate(R.layout.tink_toolbar_default, parent);
 		parent.addView(content);
 		return parent;
 	}
@@ -261,8 +244,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public final void onStart() {
 		super.onStart();
 
-		applyTheme(getTheme());
-
 		if (isVisible()) {
 			updateToolbar();
 		}
@@ -336,20 +317,9 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	protected void updateToolbar() {
-		Theme theme = getTheme();
-		if (theme == null) {
-			return;
-		}
 		if (getTitle() != null) {
 			setTitle(getTitle());
 		}
-		if (theme.getToolbarTheme() != null && toolbar != null) {
-			toolbar.setTheme(theme.getToolbarTheme());
-		}
-//		if (theme.getStatusBarTheme() != null) {
-//			StatusbarUtils.updateStatusBar(getActivity(), theme.getStatusBarTheme().getStatusBarColor(),
-//					theme.getStatusBarTheme().isStatusBarLight());
-//		}
 	}
 
 	public void setTitle(String title) {
@@ -361,10 +331,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	protected boolean isFirstCreation() {
 		return firstCreation;
-	}
-
-	protected void applyTheme(Theme theme) {
-
 	}
 
 	/**
@@ -428,12 +394,5 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	public void runUiDependant(Runnable callback) {
 		callbacksExecutor.runUiDependant(callback);
-	}
-
-	public interface Theme {
-
-		TinkToolbar.Theme getToolbarTheme();
-
-		StatusBarTheme getStatusBarTheme();
 	}
 }

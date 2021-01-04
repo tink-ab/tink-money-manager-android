@@ -3,7 +3,7 @@ package se.tink.commons.transactions
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.similar_transaction_row.view.*
+import kotlinx.android.synthetic.main.tink_similar_transaction_row.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
@@ -166,7 +166,7 @@ class SimilarTransactionsAdapter :
         parent: ViewGroup,
         onViewHolderClickedListener: OnViewHolderClickedListener
     ) : ClickableViewHolder(
-        parent.inflate(R.layout.similar_transaction_row),
+        parent.inflate(R.layout.tink_similar_transaction_row),
         onViewHolderClickedListener
     ) {
 

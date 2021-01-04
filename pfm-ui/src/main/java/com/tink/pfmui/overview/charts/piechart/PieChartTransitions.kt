@@ -7,7 +7,7 @@ import android.view.View
 import com.tink.pfmui.R
 import com.tink.pfmui.TransitionDescription
 import com.tink.pfmui.util.CurrencyUtils
-import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
+import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import com.tink.pfmui.charts.PieChartView
 import com.tink.pfmui.charts.transitions.ChangePositionTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
@@ -38,7 +38,7 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
                 })
 
                 addTransition(TransitionSet().apply {
-                    addTransition(PieChartSegmentTransition(R.id.transition_group_main))
+                    addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
                     // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //                    addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
@@ -74,7 +74,7 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
                 })
 
                 addTransition(TransitionSet().apply {
-                    addTransition(PieChartSegmentTransition(R.id.transition_group_main))
+                    addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
                     // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //                    addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                        CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble())

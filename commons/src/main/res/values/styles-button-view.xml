@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="TinkContainedButtonStyle" parent="Widget.MaterialComponents.Button">
+    <item name="android:layout_height">@dimen/tink_button_height</item>
     <item name="android:textColor">?tink_colorOnAccent</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
-    <item name="android:backgroundTint">@color/button_default_background_color</item>
-    <item name="android:textSize">@dimen/deci_text_size</item>
-    <item name="lineHeight">@dimen/deci_line_height</item>
+    <item name="android:backgroundTint">@color/tink_button_default_background_color</item>
+    <item name="android:textSize">@dimen/tink_deci_text_size</item>
+    <item name="lineHeight">@dimen/tink_deci_line_height</item>
     <item name="android:paddingStart">16dp</item>
     <item name="android:paddingEnd">16dp</item>
-    <item name="rippleColor">@color/ripple_on_light_background</item>
+    <item name="rippleColor">@color/tink_ripple_on_light_background</item>
     <item name="cornerRadius">0dp</item>
     <item name="android:insetTop">0dp</item>
     <item name="android:insetBottom">0dp</item>
   </style>
   <style name="TinkTextButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+    <item name="android:layout_height">@dimen/tink_button_height</item>
     <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
-    <item name="android:textSize">@dimen/deci_text_size</item>
+    <item name="android:textSize">@dimen/tink_deci_text_size</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:textAlignment">center</item>
-    <item name="rippleColor">@color/ripple_on_light_background</item>
+    <item name="rippleColor">@color/tink_ripple_on_light_background</item>
   </style>
   <style name="TinkInsightPrimaryActionButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
     <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:fontFamily">@font/tink_font_bold</item>
-    <item name="android:textSize">@dimen/deci_text_size</item>
-    <item name="lineHeight">@dimen/deci_line_height</item>
-    <item name="rippleColor">@color/ripple_on_light_background</item>
+    <item name="android:textSize">@dimen/tink_deci_text_size</item>
+    <item name="lineHeight">@dimen/tink_deci_line_height</item>
+    <item name="rippleColor">@color/tink_ripple_on_light_background</item>
     <item name="android:paddingStart">16dp</item>
     <item name="android:paddingEnd">16dp</item>
   </style>
@@ -37,9 +39,9 @@
     <item name="android:textColor">?tink_colorAccent</item>
     <item name="android:textAllCaps">true</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
-    <item name="android:textSize">@dimen/deci_text_size</item>
-    <item name="lineHeight">@dimen/deci_line_height</item>
-    <item name="rippleColor">@color/ripple_on_light_background</item>
+    <item name="android:textSize">@dimen/tink_deci_text_size</item>
+    <item name="lineHeight">@dimen/tink_deci_line_height</item>
+    <item name="rippleColor">@color/tink_ripple_on_light_background</item>
     <item name="android:paddingStart">16dp</item>
     <item name="android:paddingEnd">16dp</item>
   </style>

@@ -2,7 +2,6 @@ package com.tink.pfmui.overview.charts
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -11,13 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.theme.getCategorySelectionThemeForType
 import com.tink.pfmui.view.TreeListSelectionAdapter
 import com.tink.pfmui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.synthetic.main.fragment_select_category.view.*
+import kotlinx.android.synthetic.main.tink_fragment_select_category.view.*
 import com.tink.model.category.Category
-
 
 private const val ARG_TYPE = "arg_type"
 private const val ARG_CATEGORY_ID = "arg_category"
@@ -35,15 +32,13 @@ internal class CategorySelectionFragment : BaseFragment() {
             viewModelFactory
         )[CategorySelectionViewModel::class.java]
     }
-    private val ownTheme by lazy { getCategorySelectionThemeForType(context!!, type) }
     private val adapter: TreeListSelectionAdapter = TreeListSelectionAdapter()
 
-    override fun getLayoutId(): Int = R.layout.fragment_select_category
+    override fun getLayoutId(): Int = R.layout.tink_fragment_select_category
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.CATEGORY_SELECTION
     override fun hasToolbar(): Boolean = true
     override fun doNotRecreateView(): Boolean = false
-    override fun getTheme(): Theme = ownTheme
     override fun getTitle(): String = ""
     override fun viewReadyAfterLayout(): Boolean = false
 
@@ -56,7 +51,6 @@ internal class CategorySelectionFragment : BaseFragment() {
         if (!options.dropdownToolbarAppearance) {
             view.category.setCompoundDrawables(null, null, null, null)
         }
-        view.category.setTextColor(ownTheme.toolbarTheme.titleColor)
 
         val categories = viewModel.getCategoryItems(
             type,

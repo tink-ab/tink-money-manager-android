@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.tink.pfmui.R
 import com.tink.pfmui.TransitionDescription
-import kotlinx.android.synthetic.main.fragment_full_pie_chart.view.*
+import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import com.tink.pfmui.charts.PieChartView
 import com.tink.pfmui.charts.transitions.ChangePositionTransition
 import com.tink.pfmui.charts.transitions.PieChartSegmentTransition
@@ -51,7 +51,7 @@ internal class OverviewChartTransition @Inject constructor() : TransitionDescrip
                     addTarget(R.id.period)
                 })
                 addTransition(PieChartTransition())
-                addTransition(PieChartSegmentTransition(R.id.transition_group_main))
+                addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
                 // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //                addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                    CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())

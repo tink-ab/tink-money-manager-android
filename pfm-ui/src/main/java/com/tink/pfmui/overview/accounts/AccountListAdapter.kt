@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.pfmui.R
 import com.tink.pfmui.util.CurrencyUtils
-import kotlinx.android.synthetic.main.item_overview_account.view.*
+import kotlinx.android.synthetic.main.tink_item_overview_account.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.inflate
@@ -60,7 +60,7 @@ internal class AccountItemViewHolder(
     parent: ViewGroup,
     onViewHolderClickedListener: OnViewHolderClickedListener
 ) : ClickableViewHolder(
-    parent.inflate(R.layout.item_overview_account),
+    parent.inflate(R.layout.tink_item_overview_account),
     onViewHolderClickedListener
 ) {
     fun bind(account: Account) {

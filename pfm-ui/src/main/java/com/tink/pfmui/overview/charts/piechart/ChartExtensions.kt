@@ -15,9 +15,9 @@ internal fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int)
     val color = ColorUtils.setAlphaComponent(baseColor, (0.4f * 255).toInt())
     val colorPressed = getPressedColor(color)
     addSegment(0f, 360f, color, colorPressed).apply {
-        id = R.id.back_segment
+        id = R.id.tink_back_segment
         transitionName = "$type-back-segment"
-        transitionGroup = R.id.transition_group_back
+        transitionGroup = R.id.tink_transition_group_back
     }
 }
 
@@ -38,7 +38,7 @@ internal fun <T> PieChartView.addSegments(
         val color = colorGenerator.color(baseColor, idx)
         val colorPressed = getPressedColor(color)
         addSegment(startAngle, sweep, color, colorPressed).apply {
-            transitionGroup = R.id.transition_group_main
+            transitionGroup = R.id.tink_transition_group_main
             onClick?.let { listener ->
                 setOnClickListener { listener(item) }
             }

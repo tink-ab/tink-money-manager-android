@@ -73,7 +73,7 @@ internal class OverviewChartViewModel @Inject constructor(
             ).items.map { it.amount }
         //val color = ContextCompat.getColor(context, R.color.expenses)
         //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
-        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor, resolveRefs = false)
+        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor)
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(
             context,
@@ -126,7 +126,7 @@ internal class OverviewChartViewModel @Inject constructor(
                 getPeriodString(dateUtils, period, context, false)
             value = OverviewChartModel(
                 context,
-                R.string.left_to_spend_title,
+                R.string.tink_left_to_spend_title,
                 leftToSpend,
                 amountFormatter,
                 periodStr,

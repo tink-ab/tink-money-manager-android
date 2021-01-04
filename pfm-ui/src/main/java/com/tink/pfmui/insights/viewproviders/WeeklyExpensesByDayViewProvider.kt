@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.item_insight_weekly_expenses_by_day.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
@@ -44,7 +44,7 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
 class WeeklyExpensesByDayInsightViewHolder(
     parent: ViewGroup,
     actionHandler: ActionHandler
-) : InsightViewHolder(parent.inflate(R.layout.item_insight_weekly_expenses_by_day), actionHandler),
+) : InsightViewHolder(parent.inflate(R.layout.tink_item_insight_weekly_expenses_by_day), actionHandler),
     InsightCommonBottomPart {
     override val view: View = itemView
 

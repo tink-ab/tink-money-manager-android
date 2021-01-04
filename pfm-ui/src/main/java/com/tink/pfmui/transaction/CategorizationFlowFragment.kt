@@ -18,7 +18,7 @@ private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
 internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionListener {
 
-    override fun getLayoutId(): Int = R.layout.fragment_category_selection_flow
+    override fun getLayoutId(): Int = R.layout.tink_fragment_category_selection_flow
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     private val transactionId: String by lazy {
@@ -80,13 +80,13 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
             }
     }
 
-    private fun showSimilarTransactionsOnReturn(updatedCategoryCode: String) {
+    private fun showSimilarTransactionsOnReturn(updatedCategoryId: String) {
         viewModel.similarTransactions.observe(this, object : Observer<List<Transaction>?> {
             override fun onChanged(list: List<Transaction>?) {
                 list?.let {
                     viewModel.similarTransactions.removeObserver(this)
                     if (list.isNotEmpty()) {
-                        showSimilarTransactionFragment(list, updatedCategoryCode)
+                        showSimilarTransactionFragment(list, updatedCategoryId)
                     } else {
                         viewModel.similarTransactionsDone()
                     }
@@ -100,8 +100,8 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
 
     override fun onCategorySelectionCancelled() = viewModel.categorySelectionCancelled()
 
-    private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
-        SimilarTransactionsFragment.newInstance(transactions, code).also {
+    private fun showSimilarTransactionFragment(transactions: List<Transaction>, categoryId: String) {
+        SimilarTransactionsFragment.newInstance(transactions, categoryId).also {
             it.onSimilarTransactionsDone = viewModel::similarTransactionsDone
             fragmentCoordinator.replace(it)
         }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+    android:id="@+id/menu_item_marker_button"
+    android:title="@string/tink_transaction_similar_marker_button_mark_text"
+    app:showAsAction="ifRoom" />
+</menu>

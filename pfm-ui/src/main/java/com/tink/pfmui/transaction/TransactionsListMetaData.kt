@@ -1,14 +1,11 @@
 package com.tink.pfmui.transaction
 
 import android.os.Parcelable
-import androidx.annotation.ColorInt
 import kotlinx.android.parcel.Parcelize
 import com.tink.model.time.Period
 
 @Parcelize
 internal data class TransactionsListMetaData(
-    @ColorInt val statusBarColor: Int,
-    @ColorInt val backgroundColor: Int,
     val title: String,
     val isLeftToSpend: Boolean = false,
     val period: Period? = null,

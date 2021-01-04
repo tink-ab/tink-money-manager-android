@@ -107,7 +107,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     ): View? {
         activity?.theme?.applyStyle(tinkStyle, false)
         activity?.applicationContext?.theme?.applyStyle(tinkStyle, false)
-        return inflater.inflate(R.layout.fragment_tink, container, false)
+        return inflater.inflate(R.layout.tink_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import com.tink.pfmui.databinding.FragmentInsightsBinding
+import com.tink.pfmui.databinding.TinkFragmentInsightsBinding
 import com.tink.pfmui.insights.ArchivedInsightsViewModel
 import com.tink.pfmui.insights.InsightsAdapter
 import com.tink.pfmui.insights.di.InsightsViewModelFactory
 import com.tink.pfmui.tracking.ScreenEvent
-import kotlinx.android.synthetic.main.fragment_insights.*
+import kotlinx.android.synthetic.main.tink_fragment_insights.*
 import javax.inject.Inject
 
 class ArchivedInsightsFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun doNotRecreateView(): Boolean = false
-    override fun getLayoutId(): Int = R.layout.fragment_insights
+    override fun getLayoutId(): Int = R.layout.tink_fragment_insights
     override fun hasToolbar(): Boolean = true
     override fun getTitle(): String = getString(R.string.tink_insights_archive_title)
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.EVENTS_ARCHIVE
@@ -60,7 +60,7 @@ class ArchivedInsightsFragment : BaseFragment() {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
         }
 
-        DataBindingUtil.bind<FragmentInsightsBinding>(inflatedView)?.also {
+        DataBindingUtil.bind<TinkFragmentInsightsBinding>(view)?.also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }

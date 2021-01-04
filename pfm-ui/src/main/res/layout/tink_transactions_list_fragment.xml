@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor">
+
+  <com.tink.pfmui.view.TinkToolbar
+    android:id="@+id/tink_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"
+    android:transitionName="@string/tink_toolbar_transition"
+    app:buttonGravity="center_vertical"
+    app:navigationIcon="?android:homeAsUpIndicator" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentStart="true"
+    android:layout_below="@id/tink_toolbar"
+    android:paddingBottom="8dp"
+    android:clipToPadding="false"/>
+
+  <include
+    android:id="@+id/loader"
+    layout="@layout/tink_loader_spinner"/>
+
+</RelativeLayout>

@@ -14,4 +14,10 @@ interface AmountFormatter {
         amount: Double,
         useSymbol: Boolean = true
     ): String
+
+    fun format(
+        amount: Double,
+        useSymbol: Boolean = true,
+        useRounding: Boolean = false
+    ): String
 }

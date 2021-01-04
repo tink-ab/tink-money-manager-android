@@ -9,7 +9,7 @@ import com.tink.model.insights.InsightState
 import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.item_insight_budget_create_suggestion.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_budget_create_suggestion.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.inflate
 import se.tink.insights.InsightViewType
@@ -59,7 +59,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
         parent: ViewGroup,
         actionHandler: ActionHandler
     ) : InsightViewHolder(
-        parent.inflate(R.layout.item_insight_budget_create_suggestion),
+        parent.inflate(R.layout.tink_item_insight_budget_create_suggestion),
         actionHandler
     ), InsightCommonBottomPart {
         override val view: View = itemView
@@ -84,5 +84,5 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
     }
 
     // TODO: Update once the data from backend
-    private fun Insight.getIcon() = R.drawable.ic_alert
+    private fun Insight.getIcon() = R.drawable.tink_alert
 }

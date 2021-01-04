@@ -16,13 +16,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.R
-import com.tink.pfmui.theme.getChartDetailsThemeForType
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.util.FontUtils
 import com.tink.pfmui.view.CustomTypefaceSpan
-import kotlinx.android.synthetic.main.fragment_chart_details_pager.view.*
+import kotlinx.android.synthetic.main.tink_fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import com.tink.model.time.Period
@@ -36,7 +35,6 @@ private const val TYPE_ARG = "type"
 
 internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
-    private val ownTheme by lazy { getChartDetailsThemeForType(context!!, type) }
     private val adapter by lazy { ChartPagerAdapter(context!!, childFragmentManager, type) }
     private val viewModel by lazy {
         ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java].also {
@@ -44,12 +42,11 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         }
     }
 
-    override fun getLayoutId() = R.layout.fragment_chart_details_pager
+    override fun getLayoutId() = R.layout.tink_fragment_chart_details_pager
     override fun needsLoginToBeAuthorized() = true
     override fun getScreenEvent(): ScreenEvent = type.screenEvent
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
-    override fun getTheme(): Theme = ownTheme
     override fun getTitle() = if (type.showCategoryPicker) "" else null
     override fun viewReadyAfterLayout(): Boolean = false
 
@@ -61,8 +58,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 pager.offscreenPageLimit = PAGE_COUNT
                 tabs.setupWithViewPager(pager)
             }
-            tabs.setTheme(ownTheme.tabsTheme)
-            category.setTextColor(ownTheme.toolbarTheme.titleColor)
             category.visible = type.showCategoryPicker
         }
         if (type.showCategoryPicker) {
@@ -74,7 +69,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
-        toolbar.inflateMenu(R.menu.details_options_menu)
+        toolbar.inflateMenu(R.menu.tink_details_options_menu)
         toolbar.menu?.getItem(0)?.let {  menuItem ->
             val spannableTitle = SpannableString(menuItem.title)
             spannableTitle.setSpan(
@@ -89,11 +84,11 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_transactions -> {
+            R.id.tink_action_transactions -> {
                 showTransactions()
                 true
             }
-            R.id.menu_close -> {
+            R.id.tink_menu_close -> {
                 fragmentCoordinator.popBackStack()
                 true
             }
@@ -136,9 +131,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     private fun showTransactions() {
         val metaData = TransactionsListMetaData(
-                statusBarColor = theme.statusBarTheme.statusBarColor,
-                backgroundColor = theme.toolbarTheme.backgroundColor,
-                isLeftToSpend = false, //TODO
+                isLeftToSpend = false,
                 period = adapter.currentPagePeriod,
                 categoryId = viewModel.category.value?.id,
                 title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)

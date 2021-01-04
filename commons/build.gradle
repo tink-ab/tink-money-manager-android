@@ -24,6 +24,8 @@ android {
         }
     }
 
+    resourcePrefix("tink_")
+
 }
 
 dependencies {

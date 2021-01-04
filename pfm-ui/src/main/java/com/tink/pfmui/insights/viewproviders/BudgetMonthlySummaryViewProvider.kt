@@ -12,7 +12,7 @@ import com.tink.pfmui.insights.enrichment.BudgetState
 import com.tink.pfmui.insights.enrichment.BudgetSummaryDetailItem
 import com.tink.pfmui.insights.enrichment.BudgetSummaryViewDetails
 import com.tink.pfmui.insights.extensions.getIcon
-import kotlinx.android.synthetic.main.item_insight_budget_monthly_summary.view.*
+import kotlinx.android.synthetic.main.tink_item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
@@ -76,7 +76,7 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
         parent: ViewGroup,
         actionHandler: ActionHandler
     ) : InsightViewHolder(
-        parent.inflate(R.layout.item_insight_budget_monthly_summary),
+        parent.inflate(R.layout.tink_item_insight_budget_monthly_summary),
         actionHandler
     ), InsightCommonBottomPart {
         override val view: View = itemView

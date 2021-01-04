@@ -10,6 +10,7 @@ import com.tink.pfmui.R
 import com.tink.pfmui.util.ColorsUtils
 import com.tink.pfmui.util.DimensionUtils
 import com.tink.pfmui.util.ScreenUtils
+import se.tink.commons.extensions.getColorFromAttr
 
 internal class TinkTabs @JvmOverloads constructor(
     context: Context,
@@ -17,14 +18,16 @@ internal class TinkTabs @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
-    private var theme: Theme? = null
+    private val colorBackground = context.getColorFromAttr(R.attr.tink_colorPrimary)
+    private val colorOnBackground = context.getColorFromAttr(R.attr.tink_colorOnPrimary)
 
-    fun setTheme(theme: Theme) {
-        this.theme = theme
-        setBackgroundColor(theme.backgroundColor)
-        setSelectedTabIndicatorColor(theme.markerColor)
-        val context = context
-        elevation = DimensionUtils.getPixelsFromDP(theme.elevation.toFloat(), context)
+    private fun normalTabColor(): Int = ColorsUtils.adjustAlpha(colorOnBackground, 0.4f)
+    private fun selectedTabColor(): Int = colorOnBackground
+
+    init {
+        setBackgroundColor(colorBackground)
+        setSelectedTabIndicatorColor(colorOnBackground)
+        elevation = DimensionUtils.getPixelsFromDP(4f, context)
         setSelectedTabIndicatorHeight(ScreenUtils.dpToPixels(context, 3))
     }
 
@@ -34,7 +37,13 @@ internal class TinkTabs @JvmOverloads constructor(
         setSelected: Boolean
     ) {
         val tinkTextView = TinkTextView(context)
-        tinkTextView.setTheme(theme!!.tabsTitle)
+        tinkTextView.setTheme(
+            object: NanoTitle(context) {
+                override var textColor = colorOnBackground
+                override val spacing = DimensionUtils.getEmFromDp(2f)
+                override fun toUpperCase() = true
+            }
+        )
         val colorStateList = ColorStateList(
             arrayOf(
                 intArrayOf(android.R.attr.state_selected),
@@ -52,9 +61,6 @@ internal class TinkTabs @JvmOverloads constructor(
         super.addTab(tab, position, setSelected)
     }
 
-    private fun normalTabColor(): Int = ColorsUtils.adjustAlpha(theme!!.markerColor, 0.4f)
-    private fun selectedTabColor(): Int = theme!!.markerColor
-
     fun updateNameOnFirstTab(name: String?) {
         val tinkTextView = getTabAt(0)!!.customView as TinkTextView?
         tinkTextView!!.text = name
@@ -63,22 +69,15 @@ internal class TinkTabs @JvmOverloads constructor(
 
     fun hide() {
         postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_top)
+            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_from_top)
             startAnimation(anim)
         }, 0)
     }
 
     fun show() {
         postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.slide_in_to_top)
+            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_to_top)
             startAnimation(anim)
         }, 0)
-    }
-
-    interface Theme {
-        val backgroundColor: Int
-        val markerColor: Int
-        val elevation: Int
-        val tabsTitle: TinkTextView.Theme
     }
 }

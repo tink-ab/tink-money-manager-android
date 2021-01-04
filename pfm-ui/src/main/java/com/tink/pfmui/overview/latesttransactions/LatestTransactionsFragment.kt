@@ -14,14 +14,14 @@ import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.StatusSubtitleMode
 import com.tink.pfmui.transaction.TransactionsListFragment
 import com.tink.pfmui.transaction.TransactionsListMetaData
-import kotlinx.android.synthetic.main.fragment_latest_transactions.*
+import kotlinx.android.synthetic.main.tink_fragment_latest_transactions.*
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
 internal class LatestTransactionsFragment : BaseFragment() {
-    override fun getLayoutId(): Int = R.layout.fragment_latest_transactions
+    override fun getLayoutId(): Int = R.layout.tink_fragment_latest_transactions
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     @Inject
@@ -78,8 +78,6 @@ internal class LatestTransactionsFragment : BaseFragment() {
         val context = context ?: return
 
         val metaData = TransactionsListMetaData(
-            context.getColorFromAttr(R.attr.tink_colorPrimaryDark),
-            context.getColorFromAttr(R.attr.tink_colorPrimary),
             getString(R.string.tink_overview_latest_transactions_title),
             false,
             null, null,

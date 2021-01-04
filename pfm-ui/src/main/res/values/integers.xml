@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <integer name="fragment_animation_time">300</integer>
+  <integer name="tink_fragment_animation_time">300</integer>
 
-  <integer name="activity_fade_away_anim_time">@integer/fragment_animation_time</integer>
-  <integer name="fragment_crossfade_time">@integer/fragment_animation_time</integer>
+  <integer name="tink_activity_fade_away_anim_time">@integer/tink_fragment_animation_time</integer>
+  <integer name="tink_fragment_crossfade_time">@integer/tink_fragment_animation_time</integer>
 
-  <integer name="expand_collapse_animation_time">375</integer>
-  <integer name="expand_alpha_animation_time">150</integer>
-  <integer name="expand_alpha_animation_delay">75</integer>
-  <integer name="collapse_alpha_animation_time">75</integer>
+  <integer name="tink_expand_collapse_animation_time">375</integer>
+  <integer name="tink_expand_alpha_animation_time">150</integer>
+  <integer name="tink_expand_alpha_animation_delay">75</integer>
+  <integer name="tink_collapse_alpha_animation_time">75</integer>
 </resources>
