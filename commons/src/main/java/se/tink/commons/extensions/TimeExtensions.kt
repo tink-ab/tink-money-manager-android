@@ -1,9 +1,6 @@
 package se.tink.commons.extensions
 
-import com.tink.model.time.DayPeriod
-import com.tink.model.time.MonthPeriod
-import com.tink.model.time.Period
-import com.tink.model.time.YearPeriod
+import com.tink.model.time.*
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import java.util.Date
@@ -29,6 +26,7 @@ fun Period.toMonthString(): String? {
 
     return when (this) {
         is YearPeriod -> null
+        is WeekPeriod -> null
         is DayPeriod -> monthString(year, monthOfYear)
         is MonthPeriod -> monthString(year, monthOfYear)
     }
