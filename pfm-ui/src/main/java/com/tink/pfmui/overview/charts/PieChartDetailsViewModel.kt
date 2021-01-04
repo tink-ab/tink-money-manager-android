@@ -25,7 +25,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import javax.inject.Inject
-import kotlin.math.absoluteValue
+import kotlin.math.abs
 
 private data class SourceData(val period: Period, val category: Category)
 
@@ -166,10 +166,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 TransactionsItem(
                     name,
                     transactions.sumByFloat { transaction ->
-                        transaction
-                            .dispensableAmount.value
-                            .floatValue()
-                            .absoluteValue
+                        abs(transaction.amount.value.floatValue())
                     },
                     transactions.map { it.id }
                 )
