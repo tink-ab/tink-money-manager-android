@@ -9,8 +9,6 @@ import com.tink.model.insights.InsightState
 import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.item_insight_icon_text.view.*
-import se.tink.commons.icons.IconResource
 import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
