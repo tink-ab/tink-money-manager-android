@@ -12,6 +12,7 @@ import com.tink.pfmui.charts.models.PeriodBalance
 import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
+import se.tink.android.repository.user.UserRepository
 import se.tink.commons.categories.iconColor
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.doubleValue
@@ -25,7 +26,8 @@ import kotlin.math.abs
 //TODO: Remove `toDateTime()` extension calls
 
 internal class StatisticsOverTimeViewModel @Inject constructor(
-    private val statisticsRepository: StatisticsRepository,
+    statisticsRepository: StatisticsRepository,
+    userRepository: UserRepository,
     private val dateUtils: DateUtils,
     private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
@@ -38,6 +40,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
     private val category = MutableLiveData<Category>()
 
     private val statistics = statisticsRepository.statistics
+
+    private val userProfile = userRepository.userProfile
 
     private val allPeriodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
 
@@ -59,7 +63,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                     .map { (period, values) ->
                         PeriodBalance(
                             period,
-                            values.sumByDouble { abs(it.value.value.doubleValue()) })
+                            values.sumByDouble { abs(it.value.value.doubleValue()) }
+                        )
                     }
                     .sortedByDescending { it.period?.end }
                 postValue(balances)
@@ -88,42 +93,70 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
         addSource(periodSelection) { update() }
     }
 
-    val barChartItems = periodBalances.map { list ->
+    val barChartItems = MediatorLiveData<BarChartItems>().apply {
+        fun update() {
+            whenNonNull(
+                periodBalances.value,
+                userProfile.value?.currency
+            ) { list, currency ->
+                val maxValue = run {
+                    val computedMax = list.map { it.amount }.max() ?: 0.0
+                    if (computedMax <= 0) 1.0 else computedMax
+                }
 
-        val maxValue = run {
-            val computedMax = list.map { it.amount }.max() ?: 0.0
-            if (computedMax <= 0) 1.0 else computedMax
-        }
+                val average = list.map { it.amount }.average() / maxValue
 
-        val average = list.map { it.amount }.average() / maxValue
+                val items = list.map {
+                    val periodLabel = it.period?.let { period ->
+                        dateUtils.getMonthFromDateTime(period.end.toDateTime(), true)
+                    }
 
-        val items = list.map {
-            val periodLabel = it.period?.let { period ->
-                dateUtils.getMonthFromDateTime(period.end.toDateTime(), true)
+                    val amountLabel = amountFormatter.format(it.amount, currency, useSymbol = true, useRounding = true)
+                    val factor = it.amount / maxValue
+                    val color = category.value?.iconColor() ?: 0
+
+                    BarChartItem(amountLabel, periodLabel, factor.toFloat(), color)
+                }
+
+                postValue(BarChartItems(items, average.toFloat()))
             }
-
-            val amountLabel = amountFormatter.format(it.amount, useSymbol = true, useRounding = true)
-            val factor = it.amount / maxValue
-            val color = category.value?.iconColor() ?: 0
-
-            BarChartItem(amountLabel, periodLabel, factor.toFloat(), color)
         }
-
-        BarChartItems(items, average.toFloat())
+        addSource(periodBalances) { update() }
+        addSource(userProfile) { update() }
     }
 
-    val average = periodBalances.map { balances ->
-        val averageAmount = balances.ifEmpty { null }?.map { it.amount }?.average() ?: 0.0
-        val averageString = amountFormatter.format(averageAmount, useSymbol = true)
-        context.resources.getString(
-            R.string.tink_expenses_header_description_average,
-            averageString
-        )
+    val average = MediatorLiveData<String>().apply {
+        fun update() {
+            whenNonNull(
+                periodBalances.value,
+                userProfile.value?.currency
+            ) { periodBalances, currency ->
+                val averageAmount = periodBalances.ifEmpty { null }?.map { it.amount }?.average() ?: 0.0
+                val averageString = amountFormatter.format(averageAmount, currency, useSymbol = true)
+                postValue(
+                    context.resources.getString(
+                        R.string.tink_expenses_header_description_average,
+                        averageString
+                    )
+                )
+            }
+        }
+        addSource(periodBalances) { update() }
+        addSource(userProfile) { update() }
     }
 
-    val sum = periodBalances.map { balances ->
-        val sumAmount = balances.map { it.amount }.sum()
-        amountFormatter.format(sumAmount, useSymbol = true)
+    val sum = MediatorLiveData<String>().apply {
+        fun update() {
+            whenNonNull(
+                periodBalances.value,
+                userProfile.value?.currency
+            ) { periodBalances, currency ->
+                val sumAmount = periodBalances.map { it.amount }.sum()
+                postValue(amountFormatter.format(sumAmount, currency, useSymbol = true))
+            }
+        }
+        addSource(periodBalances) { update() }
+        addSource(userProfile) { update() }
     }
 
     val periodSelectionButtonText: LiveData<String> =

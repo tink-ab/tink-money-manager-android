@@ -1,6 +1,5 @@
 package com.tink.pfmui.di
 
-import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.util.extensions.formatCurrencyExact
 import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
@@ -41,32 +40,34 @@ internal class CurrencyModule {
 
             override fun format(
                 amount: Double,
+                currency: String,
                 useSymbol: Boolean
             ): String {
-                val currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
                 return format(
                     amount,
+                    currency,
                     useSymbol,
-                    useRounding(currencyCode)
+                    useRounding(currency)
                 )
             }
 
             override fun format(
                 amount: Double,
+                currency: String,
                 useSymbol: Boolean,
                 useRounding: Boolean
             ): String {
                 return when {
                     !useSymbol && !useRounding ->
-                        CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount, currency)
 
                     useSymbol && !useRounding ->
-                        CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(amount, currency)
 
                     !useSymbol && useRounding ->
-                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount, currency)
 
-                    else -> CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
+                    else -> CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount, currency)
                 }
             }
 

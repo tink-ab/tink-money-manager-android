@@ -13,12 +13,9 @@ internal fun Amount.formatCurrencyExact(): String? {
     return CurrencyUtils.formatCurrencyExact(this)
 }
 
-internal fun Amount.formatCurrencyRoundWithoutSignAndSymbol(): String? {
-    return CurrencyUtils.formatCurrencyRoundWithoutSignAndSymbol(this)
-}
-
 internal fun Amount.formatCurrencyExactWithoutSignAndSymbol(): String? {
-    return CurrencyUtils.formatCurrency(this)
+    // Currently, we only support hiding the sign and showing the symbol
+    return CurrencyUtils.formatCurrency(this, CurrencyFormat.EXACT)
 }
 
 internal fun Amount.formatCurrencyRoundWithoutSign(): String? {

@@ -12,11 +12,13 @@ interface AmountFormatter {
 
     fun format(
         amount: Double,
+        currency: String,
         useSymbol: Boolean = true
     ): String
 
     fun format(
         amount: Double,
+        currency: String,
         useSymbol: Boolean = true,
         useRounding: Boolean = false
     ): String

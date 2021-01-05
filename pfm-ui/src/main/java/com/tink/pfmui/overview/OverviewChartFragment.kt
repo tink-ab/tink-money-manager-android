@@ -126,7 +126,7 @@ internal class OverviewChartFragment : BaseFragment() {
             root.pieChart.apply {
                 removeAllViews()
                 addBackSegment(model.title, model.color)
-                addSegments(model.data, { it }, model.colorGenerator, model.color)
+                addSegments(model.data, { it }, model.colorGenerator, model.color, model.currency)
             }
             binding.executePendingBindings()
         }

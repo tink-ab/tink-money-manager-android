@@ -97,6 +97,7 @@ internal class HalfPieChartFragment : BaseFragment() {
                 { it.amount },
                 model.colorGenerator,
                 model.color,
+                model.currency,
                 startFrom = startAngle,
                 fullSweep = fullSweep,
                 onClick = ::onItemClicked
@@ -108,11 +109,11 @@ internal class HalfPieChartFragment : BaseFragment() {
         binding.items = model.data.items.map { item ->
             HalfChartItem(
                 item.name,
-                amountFormatter.format(item.amount.toDouble(), useSymbol = true),
+                amountFormatter.format(item.amount.toDouble(), model.currency, useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
         binding.totalAmount =
-            amountFormatter.format(model.amount.toDouble(), useSymbol = true)
+            amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
