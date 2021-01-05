@@ -20,6 +20,7 @@ import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
@@ -27,7 +28,7 @@ import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.abs
 
-private data class SourceData(val period: Period, val category: Category)
+private data class SourceData(val period: Period, val category: Category, val currency: String)
 
 private sealed class ChartData(val source: SourceData)
 private class StatisticalData(source: SourceData, val statistic: List<Statistics>) : ChartData(source)
@@ -44,7 +45,8 @@ internal class PieChartDetailsViewModel @Inject constructor(
     private val dateUtils: DateUtils,
     @ApplicationScoped private val context: Context,
     statisticRepository: StatisticsRepository,
-    transactionRepository: TransactionRepository
+    transactionRepository: TransactionRepository,
+    userRepository: UserRepository
 ) : ViewModel() {
 
     private val statistics = statisticRepository.statistics
@@ -54,6 +56,8 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
     }
     val category = MutableLiveData<Category>()
+
+    val userProfile = userRepository.userProfile
 
 
     //TODO: Core setup - revisit
@@ -77,13 +81,15 @@ internal class PieChartDetailsViewModel @Inject constructor(
     private val sourceData = MediatorLiveData<SourceData>().apply {
         fun update() = whenNonNull(
             period.value,
-            category.value
-        ) { period, category ->
-            value = SourceData(period, category)
+            category.value,
+            userProfile.value?.currency
+        ) { period, category, currency ->
+            value = SourceData(period, category, currency)
         }
 
         addSource(period) { update() }
         addSource(category) { update() }
+        addSource(userProfile) { update() }
     }
 
     private val statisticData: LiveData<ChartData> =
@@ -122,6 +128,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 context,
                 type.title,
                 data.items.sumByFloat { it.amount },
+                it.source.currency,
                 periodStr,
                 color,
                 DefaultColorGenerator,
@@ -201,6 +208,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
 internal data class DetailsChartModel(
     val title: String,
     val amount: Float,
+    val currency: String,
     val period: String,
     @ColorInt val color: Int,
     val colorGenerator: ColorGenerator,
@@ -211,6 +219,7 @@ internal data class DetailsChartModel(
         context: Context,
         @StringRes title: Int,
         amount: Float,
+        currency: String,
         period: String,
         @ColorInt color: Int,
         colorGenerator: ColorGenerator,
@@ -219,6 +228,7 @@ internal data class DetailsChartModel(
     ) : this(
         context.getString(title),
         amount,
+        currency,
         period,
         color,
         colorGenerator,

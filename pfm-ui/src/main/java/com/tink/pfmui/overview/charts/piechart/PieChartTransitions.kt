@@ -6,7 +6,6 @@ import android.transition.TransitionSet
 import android.view.View
 import com.tink.pfmui.R
 import com.tink.pfmui.TransitionDescription
-import com.tink.pfmui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import com.tink.pfmui.charts.PieChartView
 import com.tink.pfmui.charts.transitions.ChangePositionTransition

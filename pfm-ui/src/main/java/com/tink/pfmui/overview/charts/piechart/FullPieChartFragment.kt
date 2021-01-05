@@ -79,16 +79,16 @@ internal class FullPieChartFragment : BaseFragment() {
         view.pieChart.apply {
             removeAllViews()
             addBackSegment(model.title, model.color)
-            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, ::createLabel, onClick = ::onItemClick)
+            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency, ::createLabel, onClick = ::onItemClick)
         }
         binding.model = model
-        binding.totalAmount = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), context!!)
+        binding.totalAmount = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), model.currency, context!!)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
     }
 
-    private fun createLabel(item: StatisticItem, startAngle: Float, sweep: Float): PieChartLabelView {
+    private fun createLabel(item: StatisticItem, currency: String, startAngle: Float, sweep: Float): PieChartLabelView {
         val anchor = startAngle + sweep / 2f
         val lineWidth = resources.getDimension(R.dimen.tink_pie_chart_label_line_width)
         val iconColor = ownTheme.iconTheme.iconColorAttr
@@ -96,7 +96,7 @@ internal class FullPieChartFragment : BaseFragment() {
         val circleColor = requireContext().getColorFromAttr(circleColorRes)
         return PieChartLabelView(context!!, anchor).also { label ->
             DataBindingUtil.inflate<TinkPieChartLabelBinding>(LayoutInflater.from(context), R.layout.tink_pie_chart_label, label, true).apply {
-                title.text = amountFormatter.format(item.amount.toDouble(), useSymbol = true)
+                title.text = amountFormatter.format(item.amount.toDouble(), currency, useSymbol = true)
                 type = item.category.code
                 icon.setImageResFromAttr(item.category.getIcon())
                 icon.tint(iconColor)

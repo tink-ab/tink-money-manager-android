@@ -5,12 +5,9 @@ import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.pfmui.collections.Currencies
 import se.tink.commons.extensions.absValue
-import se.tink.commons.extensions.divide
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.isBiggerThan
-import se.tink.commons.extensions.isInteger
 import se.tink.commons.extensions.isSmallerThan
-import se.tink.commons.extensions.longValue
 import se.tink.commons.extensions.round
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -18,6 +15,7 @@ import java.util.Currency
 import java.util.HashMap
 import java.util.Locale
 import kotlin.collections.set
+import kotlin.math.roundToLong
 
 object CurrencyUtils {
     // When using dynamic currency format:
@@ -36,13 +34,7 @@ object CurrencyUtils {
 
     private const val EXACT_DIGITS = 2
 
-    fun getAmountLabel(amount: Amount): String {
-        return formatCurrency(amount)
-    }
-
-    fun formatCurrency(amount: Amount): String {
-        return formatCurrencyWithAmountSign(amount)
-    }
+    private const val DEFAULT_CURRENCY_CODE = "EUR"
 
     fun formatCurrencyRound(amount: Amount): String {
         return formatCurrency(
@@ -51,17 +43,8 @@ object CurrencyUtils {
         )
     }
 
-    fun formatCurrencyRoundWithoutSignAndSymbol(amount: Amount): String {
-        val amountWithoutSign: Double = amount.value.doubleValue()
-        return formatAmountRoundWithoutCurrencySymbol(amountWithoutSign)
-    }
-
     fun formatCurrencyRoundWithoutSign(amount: Amount): String {
         return formatCurrency(amount, CurrencyFormat.ROUND or CurrencyFormat.SYMBOL)
-    }
-
-    fun formatCurrencyRoundWithoutSymbol(amount: Amount): String {
-        return formatAmountRoundWithoutCurrencySymbol(amount.value.doubleValue())
     }
 
     fun formatCurrencyExact(amount: Amount): String {
@@ -109,16 +92,16 @@ object CurrencyUtils {
     ): String {
         val absValue: ExactNumber = amount.value.absValue()
         var currencyCode = amount.currencyCode
-        if (currencyCode == null) {
-            currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
+        if (currencyCode.isBlank()) {
+            currencyCode = DEFAULT_CURRENCY_CODE
         }
         var formatted: String
         formatted = if (currencyFormat and CurrencyFormat.ROUND == CurrencyFormat.ROUND) {
             formatAmountRound(absValue, currencyCode)
         } else if (currencyFormat and CurrencyFormat.EXACT == CurrencyFormat.EXACT) {
             formatAmountExact(absValue, currencyCode)
-        } else if (currencyFormat and CurrencyFormat.SHORT == CurrencyFormat.SHORT) {
-            formatShort(absValue, currencyCode)
+//        } else if (currencyFormat and CurrencyFormat.SHORT == CurrencyFormat.SHORT) {
+//            formatShort(absValue, currencyCode)
         } else { // CurrencyFormat.DYNAMIC
             if (absValue.toBigDecimal().toInt() < DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode) &&
                 absValue.isBiggerThan(ZERO)
@@ -149,21 +132,22 @@ object CurrencyUtils {
         return formatAmount(amount, 0, currencyCode)
     }
 
-    fun formatAmountRoundWithoutCurrencySymbol(amount: Double): String {
-        return formatAmountRound(amount, false)
+    fun formatAmountRoundWithoutCurrencySymbol(amount: Double, currency: String?): String {
+        return formatAmountRound(amount, currency, false)
     }
 
     @JvmStatic
-    fun formatAmountRoundWithCurrencySymbol(amount: Double): String {
-        return formatAmountRound(amount, true)
+    fun formatAmountRoundWithCurrencySymbol(amount: Double, currency: String): String {
+        return formatAmountRound(amount, currency, true)
     }
 
     private fun formatAmountRound(
         amount: Double,
+        currency: String?,
         useCurrencySymbol: Boolean
     ): String {
-        val format = getDecimalFormat(null, 0)
-        var formatted = format.format(Math.round(amount))
+        val format = getDecimalFormat(currency, 0)
+        var formatted = format.format(amount.roundToLong())
         if (!useCurrencySymbol) {
             val symbol =
                 (format as DecimalFormat).decimalFormatSymbols.currencySymbol
@@ -177,11 +161,11 @@ object CurrencyUtils {
         return formatted
     }
 
-    val minusSign: Char
-        get() {
-            val format = getDecimalFormat(null, 0)
-            return (format as DecimalFormat).decimalFormatSymbols.minusSign
-        }
+//    val minusSign: Char
+//        get() {
+//            val format = getDecimalFormat(null, 0)
+//            return (format as DecimalFormat).decimalFormatSymbols.minusSign
+//        }
 
     private fun formatAmount(
         amount: ExactNumber,
@@ -192,6 +176,7 @@ object CurrencyUtils {
             .format(amount.round(decimals).toBigDecimal())
     }
 
+    // TODO: Remove deprecated Currencies usage
     private fun getDecimalFormat(
         currencyCode: String?,
         decimals: Int
@@ -232,24 +217,16 @@ object CurrencyUtils {
         )
     }
 
-    fun formatAmountExactWithoutCurrencySymbol(amount: Double): String {
-        return formatAmount(amount, 2, false);
+    fun formatAmountExactWithoutCurrencySymbol(amount: Double, currency: String?): String {
+        return formatAmount(amount, 2, currency, false);
     }
 
-    fun formatCurrencyExactWithoutSignAndSymbol(amount: Amount): String {
-        return formatAmount(amount.value.absValue().doubleValue(), 2, false)
+    fun formatCurrencyExactWithoutSignAndSymbol(amount: Amount, currency: String?): String {
+        return formatAmount(amount.value.absValue().doubleValue(), 2, currency, false)
     }
 
-    fun formatAmountExactWithCurrencySymbol(amount: Double): String {
-        return formatAmount(amount, 2, true);
-    }
-
-    fun formatCurrencyExactWithoutSign(amount: Amount): String {
-        return formatCurrency(amount, CurrencyFormat.EXACT or CurrencyFormat.SYMBOL)
-    }
-
-    fun formatAmountExact(amount: ExactNumber): String {
-        return formatAmount(amount, amount.scale.toInt(), null)
+    fun formatAmountExactWithCurrencySymbol(amount: Double, currency: String?): String {
+        return formatAmount(amount, 2, currency, true);
     }
 
     private fun formatAmountExact(
@@ -259,8 +236,8 @@ object CurrencyUtils {
         return formatAmount(amount, EXACT_DIGITS, currencyCode)
     }
 
-    private fun formatAmount(amount: Double, decimals: Int, useCurrencySymbol: Boolean): String {
-        val format = getDecimalFormat(null, decimals)
+    private fun formatAmount(amount: Double, decimals: Int, currency: String?, useCurrencySymbol: Boolean): String {
+        val format = getDecimalFormat(currency, decimals)
         var formatted = format.format(amount)
         if (!useCurrencySymbol) {
             val symbol = (format as DecimalFormat).decimalFormatSymbols.currencySymbol
@@ -272,63 +249,6 @@ object CurrencyUtils {
             }
         }
         return formatted
-    }
-
-
-    fun formatShort(
-        value: ExactNumber,
-        currencyCode: String?
-    ): String {
-        var unit: StringExactNumberPair? = null
-        var locale = Locale.getDefault()
-        val userProfile =
-            Currencies.getSharedInstance()
-                .userProfile
-        if (userProfile != null) {
-            locale = Locale(userProfile.locale)
-        }
-        val language = locale.language
-        val localeUnits = UNITS[language]!!
-        for (unitCandidate in localeUnits) {
-            unit = if (value.compareTo(unitCandidate.e) >= 0) {
-                unitCandidate
-            } else {
-                break
-            }
-        }
-        if (unit == null) {
-            return java.lang.String.format(locale, "%d", value.longValue())
-        }
-        val valueInUnit: ExactNumber = value.divide(unit.e)
-        var amount =
-            formatAmountRoundWithoutCurrencySymbol(valueInUnit.doubleValue())
-        amount = amount.replace("\\s".toRegex(), "")
-        val decimalFormat: NumberFormat
-        // Check if value in unit is an integer.
-        decimalFormat = if (valueInUnit.isInteger()) {
-            getDecimalFormat(currencyCode, 0)
-        } else {
-            getDecimalFormat(currencyCode, 1)
-        }
-        val symbol =
-            (decimalFormat as DecimalFormat).decimalFormatSymbols
-                .currencySymbol
-        return String.format("%s%s %s", amount, unit.s, symbol)
-    }
-
-    fun formatGetAmountSign(amount: Amount): String {
-        if (amount.value.isSmallerThan(ZERO)) {
-            return "-"
-        } else if (amount.value.isBiggerThan(ZERO)) {
-            return "+"
-        }
-        return ""
-    }
-
-    fun isAmountLessThanZero(amount: Amount): Boolean {
-        return if (amount.value.isSmallerThan(ZERO)) {
-            true
-        } else false
     }
 
     private class StringExactNumberPair(
