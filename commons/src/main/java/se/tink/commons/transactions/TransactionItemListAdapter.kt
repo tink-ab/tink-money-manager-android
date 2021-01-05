@@ -244,8 +244,8 @@ class TransactionItemViewHolder(
             label.text = item.label
             description.text = item.description
             amount.text = item.amount
-            dispensableAmount.text = item.dispensableAmount
-            dispensableAmount.visible = item.dispensableAmount != item.amount
+//            dispensableAmount.text = item.dispensableAmount
+//            dispensableAmount.visible = item.dispensableAmount != item.amount
         }
     }
 }
