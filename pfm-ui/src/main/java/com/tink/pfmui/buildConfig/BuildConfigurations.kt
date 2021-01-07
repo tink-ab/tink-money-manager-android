@@ -16,7 +16,6 @@ internal interface LoggingConfigurations {
 
 internal class BuildConfiguration(val featureConfigurations: FeatureConfigurations,
                          val loggingConfigurations: LoggingConfigurations,
-                         val supportedLangugaes: List<String>,
                          val googleAnalyticsKey: String)
 
 internal object BuildConfigurations {
@@ -26,13 +25,11 @@ internal object BuildConfigurations {
         BuildConfiguration(
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
-                supportedLangugaes = listOf("it_IT", "en_US"),
                 googleAnalyticsKey = "UA-34242137-6")
     } else {
         BuildConfiguration(
                 featureConfigurations = getFeatureConfigurations(),
                 loggingConfigurations = getLoggingConfigurations(),
-                supportedLangugaes = listOf("it_IT", "en_US"),
                 googleAnalyticsKey = "UA-34242137-3")
     }
 
