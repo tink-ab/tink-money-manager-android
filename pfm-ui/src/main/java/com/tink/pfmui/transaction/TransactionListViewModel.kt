@@ -83,15 +83,13 @@ internal open class TransactionListViewModel @Inject constructor(
             fun update() = whenNonNull(
                 _transactions.value, categories.value
             ) { transactions, categories ->
-
                 fun Transaction.toItem(): ListItem.TransactionItem? {
                     val category = categories.findCategoryById(categoryId) ?: return null
                     return transactionItemFactory.fromTransaction(this, category)
                 }
-
+                val transactionsList = mutableListOf<Transaction>().apply { addAll(transactions) }
                 value = TransactionItems(
-                    transactions = transactions
-                        .mapNotNull { it.toItem() }
+                    transactions = transactionsList.mapNotNull { it.toItem() }
                 )
             }
             addSource(_transactions) { update() }
