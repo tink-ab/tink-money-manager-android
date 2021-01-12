@@ -30,7 +30,7 @@ android {
 }
 
 dependencies {
-    implementation project(':annotations')
+    compileOnly project(':annotations')
     implementation project(':commons')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

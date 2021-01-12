@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation project(':annotations')
+    compileOnly project(':annotations')
 
     implementation libraries.tink_models
 
