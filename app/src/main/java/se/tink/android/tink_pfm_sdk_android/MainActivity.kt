@@ -40,7 +40,8 @@ class MainActivity : FragmentActivity() {
             FinanceOverviewFragment.newInstance(
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkStyle_Default,
-                tracker = LogTracker()
+                tracker = LogTracker(),
+                overviewFeatures = getOverviewFeatures()
             ).also {
                 currentFinanceOverviewFragment = it
             }
