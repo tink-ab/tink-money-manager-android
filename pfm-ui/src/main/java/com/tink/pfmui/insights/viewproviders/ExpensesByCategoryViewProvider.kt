@@ -2,6 +2,9 @@ package com.tink.pfmui.insights.viewproviders
 
 import android.view.View
 import android.view.ViewGroup
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.CategoryTreeViewDetails
@@ -9,11 +12,10 @@ import kotlinx.android.synthetic.main.tink_item_insight_expenses_by_category.vie
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.currency.AmountFormatter
+import se.tink.commons.extensions.abs
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
-import se.tink.core.models.insights.InsightType
 import se.tink.insights.getViewType
 import javax.inject.Inject
 
@@ -53,14 +55,14 @@ class ExpensesByCategoryViewProvider @Inject constructor(
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
         InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY
     )
-}
 
-private fun InsightData.expenses() =
-    when (this) {
-        is InsightData.WeeklyExpensesByCategoryData -> expenses
-        is InsightData.MonthlySummaryExpensesByCategoryData -> expenses
-        else -> emptyList() // This wouldn't happen and is prevented by the supportedInsightTypes property
-    }
+    private fun InsightData.expenses() =
+        when (this) {
+            is InsightData.WeeklyExpensesByCategoryData -> expenses
+            is InsightData.MonthlySummaryExpensesByCategoryData -> expenses
+            else -> emptyList() // This wouldn't happen and is prevented by the supportedInsightTypes property
+        }
+}
 
 class ExpensesByCategoryViewHolder(
     parent: ViewGroup,

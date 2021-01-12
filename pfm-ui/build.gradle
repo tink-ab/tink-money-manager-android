@@ -40,10 +40,12 @@ android {
 
 dependencies {
     implementation project(':commons')
-    implementation project(':data')
     implementation project(':data-commons')
-    implementation project(':core')
-    implementation project(':rpc')
+
+    api libraries.tink_core
+    implementation libraries.tink_service
+    implementation libraries.tink_models
+
     compileOnly project(':annotations')
     kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -53,6 +55,7 @@ dependencies {
     implementation libraries.android_collection_ktx
     implementation libraries.android_lifecycle_viewmodel_ktx
     implementation libraries.android_lifecycle_rx_ktx
+    implementation libraries.arch_lifecycle_livedata_ktx
 
     implementation libraries.support_appcompat
     implementation libraries.support_cardview

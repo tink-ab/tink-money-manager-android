@@ -1,23 +1,22 @@
 package com.tink.pfmui.di
 
-import com.tink.pfmui.collections.Currencies
 import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.util.extensions.formatCurrencyExact
 import com.tink.pfmui.util.extensions.formatCurrencyExactExplicitlyPositive
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSignAndSymbol
 import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSymbol
+import com.tink.annotations.PfmScope
+import com.tink.model.misc.Amount
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.models.misc.Amount
-import javax.inject.Singleton
 
 @Module
 internal class CurrencyModule {
 
     @Provides
-    @Singleton
+    @PfmScope
     fun provideAmountFormatter(): AmountFormatter =
         object : AmountFormatter {
             override fun format(
@@ -41,32 +40,34 @@ internal class CurrencyModule {
 
             override fun format(
                 amount: Double,
+                currency: String,
                 useSymbol: Boolean
             ): String {
-                val currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
                 return format(
                     amount,
+                    currency,
                     useSymbol,
-                    useRounding(currencyCode)
+                    useRounding(currency)
                 )
             }
 
             override fun format(
                 amount: Double,
+                currency: String,
                 useSymbol: Boolean,
                 useRounding: Boolean
             ): String {
                 return when {
                     !useSymbol && !useRounding ->
-                        CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountExactWithoutCurrencySymbol(amount, currency)
 
                     useSymbol && !useRounding ->
-                        CurrencyUtils.formatAmountExactWithCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountExactWithCurrencySymbol(amount, currency)
 
                     !useSymbol && useRounding ->
-                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount)
+                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(amount, currency)
 
-                    else -> CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount)
+                    else -> CurrencyUtils.formatAmountRoundWithCurrencySymbol(amount, currency)
                 }
             }
 

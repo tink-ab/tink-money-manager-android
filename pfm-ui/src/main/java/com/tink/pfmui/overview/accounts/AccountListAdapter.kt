@@ -3,13 +3,13 @@ package com.tink.pfmui.overview.accounts
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.account.Account
 import com.tink.pfmui.R
-import com.tink.pfmui.util.CurrencyUtils
+import com.tink.pfmui.util.extensions.formatCurrencyExactWithoutSign
 import kotlinx.android.synthetic.main.tink_item_overview_account.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.inflate
-import se.tink.core.models.account.Account
 
 internal class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
@@ -68,7 +68,7 @@ internal class AccountItemViewHolder(
             // Hiding the bank logo for now to align with iOS
 //            bankLogo.setImageURI(account.images.icon)
             accountName.text = account.name
-            accountBalance.text = CurrencyUtils.formatCurrency(account.balance)
+            accountBalance.text = account.balance.formatCurrencyExactWithoutSign()
         }
     }
 }

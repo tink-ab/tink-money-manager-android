@@ -5,7 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.content.res.Resources
 import se.tink.android.categories.CategoryRepository
-import se.tink.core.models.Category
+import com.tink.model.category.Category
+import se.tink.commons.extensions.findCategoryById
+import se.tink.commons.extensions.getCategoryByType
 import javax.inject.Inject
 
 internal class ChartDetailsViewModel @Inject constructor(private val categoryRepository: CategoryRepository) : ViewModel() {
@@ -18,11 +20,11 @@ internal class ChartDetailsViewModel @Inject constructor(private val categoryRep
             val type = categoryType.value
             val id = categoryId.value
             val categoryTree = categoryRepository.categories.value
-            value = when {
-                id != null -> categoryTree?.findCategoryByCode(id)
+            when {
+                id != null -> categoryTree?.findCategoryById(id)
                 type != null -> categoryTree?.getCategoryByType(type)
                 else -> null
-            }
+            }?.let { value = it }
         }
 
         addSource(categoryRepository.categories) { update() }

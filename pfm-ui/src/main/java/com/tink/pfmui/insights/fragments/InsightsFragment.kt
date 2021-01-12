@@ -56,6 +56,8 @@ class InsightsFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
+        viewModel.refresh()
+
         viewModel.insights.observe(viewLifecycleOwner, Observer {
             insightsAdapter.setData(it)
         })

@@ -2,14 +2,14 @@ package com.tink.pfmui.insights
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import org.joda.time.DateTime
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightState
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightState
 import com.tink.pfmui.insights.actionhandling.ActionEventBus
 import com.tink.pfmui.insights.enrichment.EnrichmentDirectorFactory
 import com.tink.pfmui.insights.repository.InsightsRepository
+import org.threeten.bp.Instant
 import se.tink.commons.livedata.Event
-import se.tink.repository.TinkNetworkError
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
 
 private typealias InsightsListProcessor = List<Insight>.() -> List<Insight>
@@ -55,7 +55,7 @@ private class ActionableInsightsLiveData(
 }
 
 private val sortByArchivedDescending: InsightsListProcessor = {
-    sortedByDescending { (it.state as? InsightState.Archived)?.archivedDate ?: DateTime(0) }
+    sortedByDescending { (it.state as? InsightState.Archived)?.archivedDate ?: Instant.MIN }
 }
 
 class ArchivedInsightsViewModel @Inject internal constructor(

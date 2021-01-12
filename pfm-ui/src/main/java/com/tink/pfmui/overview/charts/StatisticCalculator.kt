@@ -3,22 +3,32 @@ package com.tink.pfmui.overview.charts
 import android.content.Context
 import com.tink.pfmui.R
 import org.joda.time.DateTime
-import com.tink.pfmui.charts.extensions.mergeValue
-import se.tink.core.models.Category
-import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.Statistic
+import se.tink.commons.extensions.floatValue
+import com.tink.model.category.Category
+import com.tink.model.time.Period
+import se.tink.commons.extensions.isInPeriod
+import se.tink.commons.extensions.toDateTime
+import com.tink.model.statistics.Statistics
+import com.tink.pfmui.charts.extensions.sumByFloat
+import se.tink.commons.extensions.recursiveIdList
 import se.tink.utils.DateUtils
+import kotlin.math.abs
 
 internal sealed class ChartItem {
     abstract val amount: Float
     abstract val name: String
 }
 
-internal data class StatisticItem(val category: Category, override val amount: Float) : ChartItem() {
+internal data class StatisticItem(val category: Category, override val amount: Float) :
+    ChartItem() {
     override val name: String get() = category.name
 }
 
-internal data class TransactionsItem(override val name: String, override val amount: Float, val ids: List<String>) : ChartItem()
+internal data class TransactionsItem(
+    override val name: String,
+    override val amount: Float,
+    val ids: List<String>
+) : ChartItem()
 
 internal sealed class ChartList {
     // List with structural equals
@@ -26,40 +36,45 @@ internal sealed class ChartList {
 }
 
 internal data class StatisticItemsList(override val items: ArrayList<StatisticItem>) : ChartList()
-internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) : ChartList()
+internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) :
+    ChartList()
 
-internal fun getPeriodString(dateUtils: DateUtils, period: Period, context: Context, toToday: Boolean = true): String {
+//TODO: Core setup - Remove `toDateTime`
+internal fun getPeriodString(
+    dateUtils: DateUtils,
+    period: Period,
+    context: Context,
+    toToday: Boolean = true
+): String {
     return if (toToday && period.isInPeriod(DateTime.now())) {
         context.getString(
             R.string.tink_date_span_string,
-            dateUtils.formatDateHumanShort(period.start),
+            dateUtils.formatDateHumanShort(period.start.toDateTime()),
             context.getString(R.string.tink_date_format_human_today)
         )
     } else {
         context.getString(
             R.string.tink_until_next_date,
-            dateUtils.formatDateHumanShort(period.stop)
+            dateUtils.formatDateHumanShort(period.end.toDateTime())
         )
     }
 }
 
 internal fun calculateStatistic(
-    stats: MutableMap<String, Statistic>,
+    stats: List<Statistics>,
     categories: List<Category>,
     period: Period
 ): StatisticItemsList {
-    val dataMap = mutableMapOf<Category, Float>()
-    for ((key, st) in stats) {
-        getCategory(categories, key)?.let { category ->
-            st.children?.values
-                ?.filter { it.period == period }
-                ?.forEach {
-                    it?.amount?.value?.let {
-                        dataMap.mergeValue(category, Math.abs(it.floatValue()), Float::plus)
-                    }
-                }
+    val dataMap = stats
+        .filter { it.period == period }
+        .groupBy { categories.findParentOfCategoryWithId(it.identifier) }
+        .mapNotNull { (category, valueList) ->
+            if(category == null) return@mapNotNull null
+            val amount = valueList.sumByFloat { abs(it.value.value.floatValue()) }
+            category to amount
         }
-    }
+        .toMap()
+
     return StatisticItemsList(
         ArrayList(
             dataMap
@@ -70,5 +85,6 @@ internal fun calculateStatistic(
     )
 }
 
-private fun getCategory(categories: List<Category>, key: String): Category? =
-    categories.firstOrNull { it.code == key || key.startsWith("${it.code}.") }
+private fun List<Category>.findParentOfCategoryWithId(id: String): Category? =
+    find { it.recursiveIdList.contains(id) }
+

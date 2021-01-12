@@ -5,7 +5,6 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.tink.pfmui.ClientDataStorage
@@ -20,36 +19,46 @@ import se.tink.android.categories.CategoryRepository
 import com.tink.pfmui.repository.StatisticsRepository
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.category.CategoryTree
-import se.tink.core.models.misc.Period
-import se.tink.core.models.statistic.StatisticTree
+import se.tink.commons.extensions.whenNonNull
+import com.tink.model.category.CategoryTree
+import com.tink.model.statistics.Statistics
+import com.tink.model.time.Period
+import se.tink.android.repository.user.UserRepository
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-private class OverviewData(val statistic: StatisticTree, val period: Period, val categories: CategoryTree)
+private class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
 
 internal class OverviewChartViewModel @Inject constructor(
     private val dataStorage: ClientDataStorage,
     private val dateUtils: DateUtils,
     statisticRepository: StatisticsRepository,
     categoryRepository: CategoryRepository,
+    userRepository: UserRepository,
     private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.getStatistics()
+    private val statistics = statisticRepository.statistics
     private val period = statisticRepository.currentPeriod
     private val categories = categoryRepository.categories
 
+    private val userProfile = userRepository.userProfile
+
     private val data = MediatorLiveData<OverviewData>().apply {
-        fun update() = whenNonNull(statistics.value, period.value, categories.value) { stat, period, categories ->
-            value = OverviewData(stat, period, categories)
+        fun update() = whenNonNull(
+            statistics.value,
+            period.value,
+            categories.value,
+            userProfile.value?.currency
+        ) { stat, period, categories, currency ->
+            value = OverviewData(stat, period, categories, currency)
         }
 
         addSource(statistics) { update() }
         addSource(period) { update() }
         addSource(categories) { update() }
+        addSource(userProfile) { update() }
     }
 
     val loaded: LiveData<Boolean> = Transformations.map(data) { it != null }
@@ -61,19 +70,19 @@ internal class OverviewChartViewModel @Inject constructor(
         }
 
     val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
-        val data = calculateStatistic(
-            it.statistic.expensesByCategoryCode,
-            it.categories.expenses.children,
-            it.period
-        ).items.map { it.amount }
-        //val color = ContextCompat.getColor(context, R.color.expenses)
-        //val color = context.getColorFromAttr(R.attr.tink_expensesColor);
-        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor);
+        val data: List<Float> =
+            calculateStatistic(
+                it.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
+                it.categories.expenses.children,
+                it.period
+            ).items.map { it.amount }
+        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor)
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(
             context,
             R.string.tink_expenses_title,
             data.sum(),
+            it.currency,
             amountFormatter,
             period,
             color,
@@ -83,20 +92,20 @@ internal class OverviewChartViewModel @Inject constructor(
     }
 
     val income: LiveData<OverviewChartModel> = mapDistinct(data) {
-        val data = calculateStatistic(
-            it.statistic.incomeByCategoryCode,
-            it.categories.income.children,
-            it.period
-        ).items.map { it.amount }
-        //val color = ContextCompat.getColor(context, R.color.income)
-        val color = context.getColorFromAttr(R.attr.tink_incomeColor);
-
+        val data: List<Float> =
+            calculateStatistic(
+                it.statistics.filter { s -> s.type == Statistics.Type.INCOME_BY_CATEGORY },
+                it.categories.income.children,
+                it.period
+            ).items.map { it.amount }
+        val color = context.getColorFromAttr(R.attr.tink_incomeColor)
         val periodString =
             getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(
             context,
             R.string.tink_income_title,
             data.sum(),
+            it.currency,
             amountFormatter,
             periodString,
             color,
@@ -104,45 +113,13 @@ internal class OverviewChartViewModel @Inject constructor(
             ArrayList(data)
         )
     }
-
-    val leftToSpend: LiveData<OverviewChartModel> = mapDistinct(MediatorLiveData<OverviewChartModel>().apply {
-        fun update() = whenNonNull(expenses.value?.amountRaw, income.value?.amountRaw, period.value) { expenses, income, period ->
-            val leftToSpend = income - expenses
-            val data = ArrayList(listOf(expenses, maxOf(leftToSpend, 0f)))
-            //val color = ContextCompat.getColor(context, R.color.leftToSpend)
-            val color = context.getColorFromAttr(R.attr.tink_leftToSpendColor);
-
-            val periodStr =
-                getPeriodString(dateUtils, period, context, false)
-            value = OverviewChartModel(
-                context,
-                R.string.tink_left_to_spend_title,
-                leftToSpend,
-                amountFormatter,
-                periodStr,
-                color,
-                LeftToSpendColorGenerator,
-                data
-            )
-        }
-        addSource(expenses) { update() }
-        addSource(income) { update() }
-        addSource(period) { update() }
-    }) { it }
-}
-
-private object LeftToSpendColorGenerator : ColorGenerator {
-    @ColorInt
-    override fun color(@ColorInt baseColor: Int, idx: Int) = when (idx) {
-        0 -> Color.TRANSPARENT
-        else -> baseColor
-    }
 }
 
 internal data class OverviewChartModel(
     val title: String,
     val amountRaw: Float,
     val amount: String,
+    val currency: String,
     val period: String,
     @ColorInt val color: Int,
     val colorGenerator: ColorGenerator,
@@ -153,6 +130,7 @@ internal data class OverviewChartModel(
         context: Context,
         @StringRes title: Int,
         amount: Float,
+        currency: String,
         amountFormatter: AmountFormatter,
         period: String,
         @ColorInt color: Int,
@@ -161,7 +139,8 @@ internal data class OverviewChartModel(
     ) : this(
         context.getString(title),
         amount,
-        getAmountStringForOverviewPieChart(amountFormatter, amount.toDouble(), context),
+        getAmountStringForOverviewPieChart(amountFormatter, amount.toDouble(), currency, context),
+        currency,
         period,
         color,
         colorGenerator,
@@ -172,9 +151,11 @@ internal data class OverviewChartModel(
 internal fun getAmountStringForOverviewPieChart(
     amountFormatter: AmountFormatter,
     amount: Double,
+    currency: String,
     context: Context
 ): String =
     amountFormatter.format(
         amount,
+        currency,
         useSymbol = context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)
     )

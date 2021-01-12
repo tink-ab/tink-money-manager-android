@@ -2,6 +2,8 @@ package com.tink.pfmui.insights.viewproviders
 
 import android.view.View
 import android.view.ViewGroup
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.TransactionViewDetails
@@ -10,8 +12,7 @@ import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
+import se.tink.commons.extensions.toDateTime
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
@@ -20,10 +21,12 @@ import javax.inject.Inject
 @ContributesInsightViewProvider
 class SingleExpenseUncategorizedViewProvider @Inject constructor(
     val dateUtils: DateUtils,
-    val amountFormatter: AmountFormatter
+    private val amountFormatter: AmountFormatter
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
-        listOf(InsightType.SINGLE_UNCATEGORIZED_TRANSACTION)
+        listOf(
+          InsightType.SINGLE_EXPENSE_UNCATEGORIZED
+        )
 
     override val viewType: InsightViewType = getViewType()
 
@@ -34,7 +37,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
         return (insight.viewDetails as? TransactionViewDetails)?.let {
             SingleExpenseUncategorizedDataHolder(
                 it.description,
-                dateUtils.formatDateHuman(it.date),
+                dateUtils.formatDateHuman(it.date.toDateTime()), //TODO: Core setup
                 amountFormatter.format(it.amount)
             )
         } ?: SingleExpenseUncategorizedDataHolder("", "", "")

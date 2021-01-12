@@ -2,16 +2,17 @@ package com.tink.pfmui.insights.enrichment
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
+import com.tink.model.misc.Amount
 import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.extensions.minus
-import se.tink.core.extensions.plus
-import se.tink.core.extensions.sum
-import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
-import se.tink.core.models.misc.Amount
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.minus
+import se.tink.commons.extensions.plus
+import se.tink.commons.extensions.sum
+import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
 
@@ -68,8 +69,8 @@ internal class BudgetSummaryEnricher @Inject constructor(
         )
 
     private fun dataForBudgetSummary(
-        achievedBudgets: List<InsightData.BudgetSummary>,
-        overspentBudgets: List<InsightData.BudgetSummary>,
+        achievedBudgets: List<InsightData.BudgetIdToPeriod>,
+        overspentBudgets: List<InsightData.BudgetIdToPeriod>,
         differenceAmount: Amount,
         overspent: Boolean
     ): BudgetSummaryViewDetails? {
@@ -103,7 +104,10 @@ internal class BudgetSummaryEnricher @Inject constructor(
             ?.takeIf { it.isNotEmpty() }
             ?.sum()
 
-        return whenNonNull(items, targetAmountSum) { budgetItems, targetAmount ->
+        return whenNonNull(
+            items,
+            targetAmountSum
+        ) { budgetItems, targetAmount ->
 
             val progress = if (overspent) {
                 1.0

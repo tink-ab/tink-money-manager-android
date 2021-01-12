@@ -1,19 +1,19 @@
 package com.tink.pfmui.collections;
 
 import androidx.annotation.NonNull;
-import se.tink.core.models.user.UserConfiguration;
-import se.tink.privacy.Clearable;
-import se.tink.privacy.DataWipeManager;
-import se.tink.repository.ObjectChangeObserver;
-import se.tink.repository.service.UserConfigurationService;
+import com.tink.model.user.UserProfile;
+import com.tink.service.observer.ChangeObserver;
+import se.tink.android.privacy.Clearable;
+import se.tink.android.privacy.DataWipeManager;
+import se.tink.android.repository.service.UserConfigurationService;
 
 @Deprecated
-public class Currencies implements ObjectChangeObserver<UserConfiguration>, Clearable {
+public class Currencies implements ChangeObserver<UserProfile>, Clearable {
 
 	private static Currencies instance;
 	private static final String DEFAULT_CURRENCY_CODE = "EUR";
 
-	private UserConfiguration userConfiguration;
+	private UserProfile userProfile;
 
 	public static Currencies getSharedInstance() {
 		if (instance == null) {
@@ -31,40 +31,40 @@ public class Currencies implements ObjectChangeObserver<UserConfiguration>, Clea
 		service.unsubscribe(this);
 	}
 
-	public UserConfiguration getUserConfiguration() {
-		return userConfiguration;
+	public UserProfile getUserProfile() {
+		return userProfile;
 	}
 
 	@NonNull
 	public String getDefaultCurrencyCode() {
-		if (userConfiguration == null || userConfiguration.getI18nConfiguration() == null) {
+		if (userProfile == null) {
 			return DEFAULT_CURRENCY_CODE;
 		}
-		return userConfiguration.getI18nConfiguration().getCurrencyCode();
+		return userProfile.getCurrency();
 	}
 
 	@Override
-	public void onCreate(UserConfiguration item) {
-		userConfiguration = item;
+	public void onCreate(UserProfile item) {
+		userProfile = item;
 	}
 
 	@Override
-	public void onRead(UserConfiguration item) {
-		userConfiguration = item;
+	public void onRead(UserProfile item) {
+		userProfile = item;
 	}
 
 	@Override
-	public void onUpdate(UserConfiguration item) {
-		userConfiguration = item;
+	public void onUpdate(UserProfile item) {
+		userProfile = item;
 	}
 
 	@Override
-	public void onDelete(UserConfiguration item) {
-		userConfiguration = item;
+	public void onDelete(UserProfile item) {
+		userProfile = item;
 	}
 
 	@Override
 	public void clear() {
-		userConfiguration = new UserConfiguration();
+		userProfile = null;
 	}
 }

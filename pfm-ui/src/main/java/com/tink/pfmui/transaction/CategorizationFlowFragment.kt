@@ -5,13 +5,14 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.category.Category
+import com.tink.model.misc.ExactNumber
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.CategorySelectionFragment
 import com.tink.pfmui.overview.charts.CategorySelectionListener
-import se.tink.core.models.Category
-import se.tink.core.models.misc.ExactNumber
-import se.tink.core.models.transaction.Transaction
+import se.tink.commons.extensions.isBiggerThan
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"
 
@@ -45,7 +46,7 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
                 is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
 
                 is CategorizationFlowViewModel.State.SimilarTransactions ->
-                    showSimilarTransactionsOnReturn(it.updatedCategoryCode)
+                    showSimilarTransactionsOnReturn(it.updatedCategoryId)
 
                 is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
             }
@@ -54,17 +55,19 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
 
     private fun showCategoryPickerView(transaction: Transaction) {
 
+        val zero = ExactNumber(0, 0)
+
         val categoryType =
-            if (transaction.amount.value.isBiggerThan(ExactNumber.ZERO)) {
-                Category.Type.TYPE_INCOME
+            if (transaction.amount.value.isBiggerThan(zero)) {
+                Category.Type.INCOME
             } else {
-                Category.Type.TYPE_EXPENSES
+                Category.Type.EXPENSE
             }
 
         CategorySelectionFragment
             .newInstance(
                 categoryType,
-                transaction.categoryCode,
+                transaction.categoryId,
                 CategorySelectionFragment.Options(
                     dropdownToolbarAppearance = false,
                     includeTransferTypes = true,
@@ -77,13 +80,13 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
             }
     }
 
-    private fun showSimilarTransactionsOnReturn(updatedCategoryCode: String) {
+    private fun showSimilarTransactionsOnReturn(updatedCategoryId: String) {
         viewModel.similarTransactions.observe(this, object : Observer<List<Transaction>?> {
             override fun onChanged(list: List<Transaction>?) {
                 list?.let {
                     viewModel.similarTransactions.removeObserver(this)
                     if (list.isNotEmpty()) {
-                        showSimilarTransactionFragment(list, updatedCategoryCode)
+                        showSimilarTransactionFragment(list, updatedCategoryId)
                     } else {
                         viewModel.similarTransactionsDone()
                     }
@@ -92,13 +95,13 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
         })
     }
 
-    override fun onCategorySelected(updatedCategoryCode: String) =
-        viewModel.categorySelected(updatedCategoryCode)
+    override fun onCategorySelected(updatedCategoryId: String) =
+        viewModel.categorySelected(updatedCategoryId)
 
     override fun onCategorySelectionCancelled() = viewModel.categorySelectionCancelled()
 
-    private fun showSimilarTransactionFragment(transactions: List<Transaction>, code: String) {
-        SimilarTransactionsFragment.newInstance(transactions, code).also {
+    private fun showSimilarTransactionFragment(transactions: List<Transaction>, categoryId: String) {
+        SimilarTransactionsFragment.newInstance(transactions, categoryId).also {
             it.onSimilarTransactionsDone = viewModel::similarTransactionsDone
             fragmentCoordinator.replace(it)
         }

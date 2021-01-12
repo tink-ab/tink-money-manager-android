@@ -1,8 +1,8 @@
 package com.tink.pfmui.insights.actionhandling
 
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightAction
-import se.tink.core.models.insights.PerformedInsightAction
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
+import com.tink.model.insights.PerformedInsightAction
 import javax.inject.Inject
 
 interface ActionHandler {
@@ -26,7 +26,8 @@ abstract class AbstractActionHandler(
         actionEventBus.postActionPerformed(
             PerformedInsightAction(
                 insightId = insight.id,
-                userId = userId
+                userId = userId,
+                actionType = action.actionType
             )
         )
 

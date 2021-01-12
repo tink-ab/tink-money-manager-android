@@ -1,6 +1,10 @@
 package se.tink.commons.transactions
 
 import android.content.Context
+import com.tink.model.category.Category
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
+import com.tink.model.transaction.Transaction
 import org.joda.time.DateTime
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.R
@@ -10,10 +14,8 @@ import se.tink.commons.categories.iconColor
 import se.tink.commons.categories.isExcluded
 import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
-import se.tink.core.models.Category
-import se.tink.core.models.misc.Amount
-import se.tink.core.models.misc.ExactNumber
-import se.tink.core.models.transaction.Transaction
+import se.tink.commons.extensions.isValid
+import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -30,21 +32,12 @@ class TransactionItemFactory @Inject constructor(
         with(transaction) {
             createItem(
                 id = id,
-                isUpcoming = isUpcoming,
+                isUpcoming = false,
                 category = category,
-                date = timestamp,
+                date = this.date.toDateTime(), //TODO: Core setup
                 label = description,
                 amount = amount,
-                dispensableAmount = dispensableAmount,
-                upcomingTransactionData = if (isUpcoming) {
-                    ListItem.TransactionItem.UpcomingTransactionData(
-                        pending = isPending,
-                        editable = isEditable,
-                        transferId = details?.transferId ?: ""
-                    )
-                } else {
-                    null
-                }
+                upcomingTransactionData = null
             )
         }
 
@@ -64,8 +57,8 @@ class TransactionItemFactory @Inject constructor(
                     label = description,
                     amount = amountFormatter.format(amount = amount, explicitlyPositive = true),
                     description = category.name,
-                    date = dateUtils.getDailyMonthlyYearly(timestamp),
-                    merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
+                    date = dateUtils.getDailyMonthlyYearly(date.toDateTime()),
+                    merchantLogoAllowed = !category.code.isUncategorized() && !category.code.isExcluded(),
                     selected = isSelected
                 )
             } else {
@@ -80,7 +73,7 @@ class TransactionItemFactory @Inject constructor(
         date: DateTime,
         label: String,
         amount: Amount,
-        dispensableAmount: Amount = Amount(ExactNumber.ZERO, "SEK"), // TODO:PFMSDK: Remove dispensableAmount
+        dispensableAmount: Amount = Amount(ExactNumber(0,0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {

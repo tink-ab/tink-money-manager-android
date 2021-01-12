@@ -8,7 +8,7 @@ import android.transition.TransitionValues
 import android.view.ViewGroup
 import com.tink.pfmui.charts.CircularProgressChart
 import com.tink.pfmui.charts.extensions.get
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 
 private const val VALUE = "value"
@@ -24,11 +24,20 @@ class CircularProgressTransition : Transition() {
     }
 
     override fun createAnimator(sceneRoot: ViewGroup?, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
-        return whenNonNull(endValues?.view as? CircularProgressChart, startValues[VALUE], endValues[VALUE]) {
-            view: CircularProgressChart, start: Double, end: Double ->
-            ObjectAnimator.ofObject(view, "progress", TypeEvaluator<Double> { fraction, startValue, endValue ->
-                startValue * (1 - fraction) + endValue * fraction
-            }, start, end)
+        return whenNonNull(
+            endValues?.view as? CircularProgressChart,
+            startValues[VALUE],
+            endValues[VALUE]
+        ) { view: CircularProgressChart, start: Double, end: Double ->
+            ObjectAnimator.ofObject(
+                view,
+                "progress",
+                TypeEvaluator<Double> { fraction, startValue, endValue ->
+                    startValue * (1 - fraction) + endValue * fraction
+                },
+                start,
+                end
+            )
         }
     }
 }

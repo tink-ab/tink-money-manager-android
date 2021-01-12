@@ -16,7 +16,7 @@ import com.tink.pfmui.R
 import com.tink.pfmui.util.DimensionUtils
 import kotlin.math.roundToInt
 
-internal class TinkSnackbar private constructor(
+class TinkSnackbar private constructor(
     private val wrappedSnackbar: Snackbar,
     private val theme: Theme
 ) {

@@ -15,7 +15,7 @@ import com.tink.pfmui.R
 import com.tink.pfmui.charts.extensions.drawBarChart
 import com.tink.pfmui.util.ScreenUtils
 import se.tink.commons.utils.extractTextStyle
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 
 internal class BarChartWithThreshold : View {

@@ -29,7 +29,9 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
+    implementation project(':annotations')
+
+    implementation libraries.tink_models
 
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat

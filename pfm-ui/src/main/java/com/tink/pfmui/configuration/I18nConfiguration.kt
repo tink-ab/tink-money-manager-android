@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.tink.model.user.UserProfile
 import com.tink.pfmui.R
 import com.tink.pfmui.TimezoneManager
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.repository.user.UserRepository
-import se.tink.core.models.user.UserConfiguration
 import se.tink.utils.DateUtils.KEY_TODAY
 import se.tink.utils.DateUtils.KEY_TOMORROW
 import se.tink.utils.DateUtils.KEY_YESTERDAY
@@ -34,7 +34,7 @@ internal class I18nConfiguration @Inject constructor(
 ) {
 
     fun initialize() {
-        userRepository.userConfiguration.observe(ProcessLifecycleOwner.get(), Observer {
+        userRepository.userProfile.observe(ProcessLifecycleOwner.get(), Observer {
             it?.let(::setupI18nConfigurationDependentSingletons)
         })
 
@@ -44,11 +44,8 @@ internal class I18nConfiguration @Inject constructor(
         setDateFormatsMap(getDateFormatsMap())
     }
 
-    private fun setupI18nConfigurationDependentSingletons(item: UserConfiguration) {
-        item.i18nConfiguration?.timezoneCode?.let {
-            TimezoneManager.defaultTimezone = it
-        }
-        getInstance(suitableLocaleFinder.findLocale(), item.i18nConfiguration?.timezoneCode)
+    private fun setupI18nConfigurationDependentSingletons(item: UserProfile) {
+        getInstance(suitableLocaleFinder.findLocale(), item.timeZone)
     }
 
     private fun getMapWithHumanDateStrings(): Map<String, String> {

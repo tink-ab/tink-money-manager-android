@@ -16,12 +16,12 @@ import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.TransactionListViewModel
 import com.tink.pfmui.transaction.TransactionsListMetaData
 import com.tink.pfmui.transaction.toListMode
-import com.tink.pfmui.util.CurrencyUtils
 import com.tink.pfmui.view.ParallaxHeaderScrollListener
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
-import se.tink.core.models.account.Account
+import com.tink.model.account.Account
+import com.tink.pfmui.util.extensions.formatCurrencyExact
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -88,7 +88,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         viewModel.account.observe(viewLifecycle, Observer {
             it?.let { account ->
                 title = account.name
-                accountBalance.text = CurrencyUtils.formatCurrencyExact(account.balance)
+                accountBalance.text = account.balance.formatCurrencyExact()
                 accountNumber.text = account.accountNumber
             }
         })

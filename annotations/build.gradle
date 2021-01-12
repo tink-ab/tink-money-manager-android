@@ -3,4 +3,5 @@ apply from: '../dependencies.gradle'
 
 dependencies {
     implementation libraries.kotlin_stdlib
+    implementation libraries.dagger
 }

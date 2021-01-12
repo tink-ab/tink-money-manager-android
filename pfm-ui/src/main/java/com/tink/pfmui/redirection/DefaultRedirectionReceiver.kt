@@ -32,7 +32,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
                 data = TransactionsListMetaData(
                     title = context.getString(R.string.tink_transactions_list_toolbar_title),
                     period = null,
-                    categoryCode = null,
+                    categoryId = null,
                     isShowAll = false,
                     statusSubtitleMode = StatusSubtitleMode.SHOW_REDUCED_AMOUNT,
                     transactionIds = transactionIds,

@@ -8,10 +8,12 @@ import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.v
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightData
-import se.tink.core.models.insights.InsightType
-import se.tink.core.models.relations.ExpensesByDay
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightData
+import com.tink.model.insights.InsightType
+import com.tink.model.relations.ExpensesByDay
+import se.tink.commons.extensions.floatValue
+import se.tink.commons.extensions.toDateTime
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -34,7 +36,9 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
 
     override val viewType = getViewType()
 
-    override val supportedInsightTypes = listOf(InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY)
+    override val supportedInsightTypes = listOf(
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY
+    )
 }
 
 class WeeklyExpensesByDayInsightViewHolder(
