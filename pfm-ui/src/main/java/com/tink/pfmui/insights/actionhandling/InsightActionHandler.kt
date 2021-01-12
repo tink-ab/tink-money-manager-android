@@ -1,6 +1,7 @@
 package com.tink.pfmui.insights.actionhandling
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
+
 
 /**
  * This class contains a set of methods that you can implement to perform the necessary logic when

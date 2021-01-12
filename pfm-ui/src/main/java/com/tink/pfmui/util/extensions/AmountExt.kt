@@ -1,7 +1,9 @@
 package com.tink.pfmui.util.extensions
 
+import com.tink.model.misc.Amount
 import com.tink.pfmui.util.CurrencyUtils
-import se.tink.core.models.misc.Amount
+import com.tink.pfmui.util.CurrencyUtils.CurrencyFormat
+
 
 internal fun Amount.formatCurrencyRound(): String? {
     return CurrencyUtils.formatCurrencyRound(this)
@@ -11,12 +13,9 @@ internal fun Amount.formatCurrencyExact(): String? {
     return CurrencyUtils.formatCurrencyExact(this)
 }
 
-internal fun Amount.formatCurrencyRoundWithoutSignAndSymbol(): String? {
-    return CurrencyUtils.formatCurrencyRoundWithoutSignAndSymbol(this)
-}
-
 internal fun Amount.formatCurrencyExactWithoutSignAndSymbol(): String? {
-    return CurrencyUtils.formatCurrencyExactWithoutSignAndSymbol(this)
+    // Currently, we only support hiding the sign and showing the symbol
+    return CurrencyUtils.formatCurrency(this, CurrencyFormat.EXACT)
 }
 
 internal fun Amount.formatCurrencyRoundWithoutSign(): String? {
@@ -24,15 +23,22 @@ internal fun Amount.formatCurrencyRoundWithoutSign(): String? {
 }
 
 internal fun Amount.formatCurrencyExactWithoutSign(): String? {
-    return CurrencyUtils.formatCurrencyExactWithoutSign(this)
+    return CurrencyUtils.formatCurrency(this, CurrencyFormat.EXACT)
 }
 
 internal fun Amount.formatCurrencyRoundWithoutSymbol(): String? {
-    return CurrencyUtils.formatCurrencyExactWithoutSymbol(this)
+    return CurrencyUtils.formatCurrency(
+        this, CurrencyFormat.ROUND
+                or CurrencyFormat.AMOUNT_SIGN
+    )
 }
 
 internal fun Amount.formatCurrencyExactWithoutSymbol(): String? {
-    return CurrencyUtils.formatCurrencyExactWithoutSymbol(this)
+    return CurrencyUtils.formatCurrency(
+        this,
+        CurrencyFormat.EXACT
+                or CurrencyFormat.AMOUNT_SIGN
+    )
 }
 
 internal fun Amount.formatCurrencyExplicitlyPositive(): String? {
@@ -40,5 +46,11 @@ internal fun Amount.formatCurrencyExplicitlyPositive(): String? {
 }
 
 internal fun Amount.formatCurrencyExactExplicitlyPositive(): String? {
-    return CurrencyUtils.formatCurrencyExactWithExplicitPositive(this)
+    return CurrencyUtils.formatCurrency(
+        this,
+        CurrencyFormat.EXACT
+                or CurrencyFormat.AMOUNT_SIGN
+                or CurrencyFormat.SYMBOL,
+        true
+    )
 }

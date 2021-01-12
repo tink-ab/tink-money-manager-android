@@ -26,7 +26,8 @@ internal fun <T> PieChartView.addSegments(
     value: (T) -> Float,
     colorGenerator: ColorGenerator,
     @ColorInt baseColor: Int,
-    createLabel: ((item: T, startAngle: Float, sweep: Float) -> PieChartLabelView?)? = null,
+    currency: String,
+    createLabel: ((item: T, currency: String, startAngle: Float, sweep: Float) -> PieChartLabelView?)? = null,
     startFrom: Float = 0f,
     fullSweep: Float = 360f,
     onClick: ((T) -> Unit)? = null
@@ -43,7 +44,7 @@ internal fun <T> PieChartView.addSegments(
                 setOnClickListener { listener(item) }
             }
         }
-        createLabel?.invoke(item, startAngle, sweep)?.let { addView(it) }
+        createLabel?.invoke(item, currency, startAngle, sweep)?.let { addView(it) }
         startAngle += sweep
     }
 }

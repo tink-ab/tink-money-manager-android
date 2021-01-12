@@ -1,11 +1,11 @@
 package com.tink.pfmui.configuration
 
 import android.content.Context
+import com.tink.annotations.PfmScope
 import se.tink.android.di.application.ApplicationScoped
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@PfmScope
 internal class MarketProvider @Inject constructor(
     @ApplicationScoped private val context: Context
 ) {

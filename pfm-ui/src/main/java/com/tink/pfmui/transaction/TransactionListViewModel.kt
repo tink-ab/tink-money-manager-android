@@ -5,34 +5,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.tink.model.transaction.Transaction
+import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import se.tink.android.AppExecutors
 import se.tink.android.categories.CategoryRepository
+import se.tink.android.livedata.map
+import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.transaction.AllTransactionPagesLiveData
 import se.tink.android.repository.transaction.CategoryTransactionPagesLiveData
 import se.tink.android.repository.transaction.LeftToSpendTransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionRepository
-import se.tink.android.livedata.map
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
+import se.tink.commons.extensions.findCategoryById
+import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
-import se.tink.core.extensions.whenNonNull
-import se.tink.core.models.transaction.Transaction
-import se.tink.repository.ExceptionTracker
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.TransactionService
 import javax.inject.Inject
 
 
 internal open class TransactionListViewModel @Inject constructor(
     private val transactionRepository: TransactionRepository,
-    private val exceptionTracker: ExceptionTracker,
     categoryRepository: CategoryRepository,
     private val transactionService: TransactionService,
     private val appExecutors: AppExecutors,
-    private val transactionItemFactory: TransactionItemFactory
+    private val transactionItemFactory: TransactionItemFactory,
+    private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : ViewModel() {
 
 
@@ -44,23 +48,22 @@ internal open class TransactionListViewModel @Inject constructor(
 
         return object : TransactionPagesLiveData() {
 
-            val disposable: Disposable = transactionRepository.fromIdList(ids)
-                .subscribeOn(Schedulers.io())
-                .doFinally { _loading.postValue(false) }
-                .subscribe(
-                    { postValue(it) },
-                    {
-                        when (it) {
-                            is TinkNetworkError -> _errors.postValue(Event(it))
-                            is Exception -> exceptionTracker.exceptionThrown(it)
-                            else -> throw it
-                        }
-                    }
-                )
+            val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-            override fun dispose() = disposable.dispose()
+            override fun dispose() = scope.cancel()
 
             override fun loadMoreItems() {}
+
+            init {
+                scope.launch {
+                    val transactions = try {
+                        transactionRepository.fromIdList(ids)
+                    } catch (error: Throwable) {
+                        emptyList<Transaction>()
+                    }
+                    postValue(transactions)
+                }
+            }
         }
     }
 
@@ -82,13 +85,12 @@ internal open class TransactionListViewModel @Inject constructor(
             ) { transactions, categories ->
 
                 fun Transaction.toItem(): ListItem.TransactionItem? {
-                    val category = categories.findCategoryByCode(categoryCode) ?: return null
+                    val category = categories.findCategoryById(categoryId) ?: return null
                     return transactionItemFactory.fromTransaction(this, category)
                 }
 
                 value = TransactionItems(
                     transactions = transactions
-                        .filterNot { it.isUpcoming }
                         .mapNotNull { it.toItem() }
                 )
             }
@@ -112,13 +114,15 @@ internal open class TransactionListViewModel @Inject constructor(
 
             is TransactionListMode.All -> AllTransactionPagesLiveData(
                 appExecutors,
-                transactionService
+                transactionService,
+                transactionUpdateEventBus
             )
 
             is TransactionListMode.Category -> CategoryTransactionPagesLiveData(
-                mode.categoryCode,
+                mode.categoryId,
                 appExecutors,
                 transactionService,
+                transactionUpdateEventBus,
                 mode.period
             )
 
@@ -130,6 +134,8 @@ internal open class TransactionListViewModel @Inject constructor(
         rawTransactions?.let {
             _transactions.apply { addSource(it) { list -> value = list } }
         }
+
+        loadMoreItems()
     }
 
 

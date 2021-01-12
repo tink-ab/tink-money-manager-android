@@ -113,8 +113,8 @@ internal class OverviewChartFragment : BaseFragment() {
             addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
             addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
             // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
-//            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
-//                amountFormatter.format(it.toDouble(), useSymbol = false)
+//            addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
+//                CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble()).apply { }
 //            }.apply {
 //                addTarget(R.id.amount)
 //            })
@@ -126,7 +126,7 @@ internal class OverviewChartFragment : BaseFragment() {
             root.pieChart.apply {
                 removeAllViews()
                 addBackSegment(model.title, model.color)
-                addSegments(model.data, { it }, model.colorGenerator, model.color)
+                addSegments(model.data, { it }, model.colorGenerator, model.color, model.currency)
             }
             binding.executePendingBindings()
         }

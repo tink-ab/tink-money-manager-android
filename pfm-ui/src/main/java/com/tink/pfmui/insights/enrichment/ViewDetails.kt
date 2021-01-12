@@ -1,13 +1,22 @@
 package com.tink.pfmui.insights.enrichment
 
-import se.tink.core.models.insights.Insight
+import android.os.Parcelable
+import com.tink.model.insights.Insight
+import kotlinx.android.parcel.Parcelize
 
 sealed class IconTypeViewDetails : Insight.ViewDetails {
+
+    @Parcelize
     data class Category(val categoryCode: String) : IconTypeViewDetails()
+
+    @Parcelize
     object Search : IconTypeViewDetails()
+
+    @Parcelize
     object Tag : IconTypeViewDetails()
 }
 
+@Parcelize
 class BudgetSummaryViewDetails(
     val items: List<BudgetSummaryDetailItem>,
     val targetAmount: String,
@@ -15,6 +24,11 @@ class BudgetSummaryViewDetails(
     val progress: Double
 ) : Insight.ViewDetails
 
-class BudgetSummaryDetailItem(val budgetState: BudgetState, val iconTypeViewDetails: IconTypeViewDetails)
+@Parcelize
+class BudgetSummaryDetailItem(
+    val budgetState: BudgetState,
+    val iconTypeViewDetails: IconTypeViewDetails
+) : Parcelable
 
-enum class BudgetState { SUCCESS, OVERSPENT }
+@Parcelize
+enum class BudgetState : Parcelable { SUCCESS, OVERSPENT }

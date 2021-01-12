@@ -1,13 +1,13 @@
 package com.tink.pfmui.insights.viewproviders
 
 import android.view.ViewGroup
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.IconTypeViewDetails
 import com.tink.pfmui.insights.extensions.getIcon
 import se.tink.android.annotations.ContributesInsightViewProvider
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import javax.inject.Inject

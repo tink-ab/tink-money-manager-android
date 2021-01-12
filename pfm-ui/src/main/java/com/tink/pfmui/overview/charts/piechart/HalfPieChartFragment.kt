@@ -2,7 +2,6 @@ package com.tink.pfmui.overview.charts.piechart
 
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
-import android.content.Context
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionManager
@@ -98,6 +97,7 @@ internal class HalfPieChartFragment : BaseFragment() {
                 { it.amount },
                 model.colorGenerator,
                 model.color,
+                model.currency,
                 startFrom = startAngle,
                 fullSweep = fullSweep,
                 onClick = ::onItemClicked
@@ -108,12 +108,12 @@ internal class HalfPieChartFragment : BaseFragment() {
         binding.itemTheme = HalfChartItemTheme(context!!.getColorFromAttr(ownTheme.chartItemColor))
         binding.items = model.data.items.map { item ->
             HalfChartItem(
-                (item as? StatisticItem)?.getName(requireContext()) ?: item.name,
-                amountFormatter.format(item.amount.toDouble(), useSymbol = true),
+                item.name,
+                amountFormatter.format(item.amount.toDouble(), model.currency, useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
         binding.totalAmount =
-            amountFormatter.format(model.amount.toDouble(), useSymbol = true)
+            amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
         binding.executePendingBindings()
 
         binding.root.post { onViewReady() }
@@ -121,7 +121,7 @@ internal class HalfPieChartFragment : BaseFragment() {
 
     private fun onItemClicked(item: ChartItem) {
         when (item) {
-            is StatisticItem -> chartViewModel.setCategoryId(item.category.code)
+            is StatisticItem -> chartViewModel.setCategoryId(item.category.id)
             is TransactionsItem -> showTransactions(item)
         }
     }
@@ -148,7 +148,7 @@ internal class HalfPieChartFragment : BaseFragment() {
             addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
             addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
             // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
-//            addTransition(TextAmountTransition(CurrencyUtils.getMinusSign()) {
+//            addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble()).apply { }
 //            }.apply {
 //                addTarget(R.id.amount)
@@ -173,9 +173,3 @@ internal class HalfPieChartFragment : BaseFragment() {
 internal data class HalfChartItem(val title: String, val amount: String, val onClick: View.OnClickListener)
 
 internal class HalfChartItemTheme(@ColorInt val textColor: Int)
-
-private fun StatisticItem.getName(context: Context) =
-    category.getNameWithDefaultChildFormat(
-        context.getString(R.string.tink_category_default_child_format)
-    )
-

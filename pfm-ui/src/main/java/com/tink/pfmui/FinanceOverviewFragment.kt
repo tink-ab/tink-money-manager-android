@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.tink.core.Tink
+import com.tink.model.user.User
 import com.tink.pfmui.buildConfig.BuildConfigurations
-import com.tink.pfmui.buildConfig.NetworkConfiguration
-import com.tink.pfmui.collections.Categories
-import com.tink.pfmui.collections.Currencies
-import com.tink.pfmui.collections.Periods
 import com.tink.pfmui.configuration.I18nConfiguration
 import com.tink.pfmui.di.DaggerFragmentComponent
 import com.tink.pfmui.insights.actionhandling.CustomInsightActionHandler
 import com.tink.pfmui.insights.actionhandling.InsightActionHandler
+import com.tink.pfmui.insights.actionhandling.PerformedActionNotifier
 import com.tink.pfmui.overview.OverviewFragment
 import com.tink.pfmui.repository.StatisticsRepository
 import com.tink.pfmui.security.DefaultRecoveryHandler
@@ -26,11 +25,7 @@ import com.tink.pfmui.tracking.Tracker
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import se.tink.repository.cache.CacheHandle
-import se.tink.repository.service.CategoryService
-import se.tink.repository.service.DataRefreshHandler
-import se.tink.repository.service.HeaderClientInterceptor
-import se.tink.repository.service.UserConfigurationService
+import se.tink.android.repository.service.DataRefreshHandler
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -59,19 +54,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     internal lateinit var fragmentCoordinator: FragmentCoordinator
 
     @Inject
-    internal lateinit var interceptor: HeaderClientInterceptor
-
-    @Inject
-    internal lateinit var categoryService: CategoryService
-
-    @Inject
-    internal lateinit var userConfigurationService: UserConfigurationService
-
-    @Inject
-    internal lateinit var cacheHandle: CacheHandle
-
-    @Inject
     internal lateinit var dataRefreshHandler: DataRefreshHandler
+
+    @Inject
+    internal lateinit var performedActionNotifier: PerformedActionNotifier
 
     /*
 		Injects all singleton services that has a cached implementation. This needs to be done before the streaming
@@ -96,23 +82,17 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_OVERVIEW_FEATURES))
     }
 
-    private val networkConfiguration: NetworkConfiguration by lazy {
-        requireNotNull(arguments?.getParcelable<NetworkConfiguration>(ARG_NETWORK_CONFIG))
-    }
-
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         Fresco.initialize(context)
         setupTimber()
-        DaggerFragmentComponent.builder()
-            .networkConfiguration(networkConfiguration)
-            .fragment(this)
-            .create()
+        DaggerFragmentComponent
+            .factory()
+            .create(Tink.requireComponent(), this)
             .inject(this)
-        interceptor.setAccessToken(accessToken)
-        attachListeners()
+        Tink.setUser(User.fromAccessToken(accessToken))
         i18nConfiguration.initialize()
         refreshData()
 
@@ -168,14 +148,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        removeListenersAndClearCache()
-    }
-
     fun refreshData() {
         dataRefreshHandler.refreshCategories()
-        dataRefreshHandler.refreshStatistics()
         dataRefreshHandler.refreshUserConfiguration()
         dataRefreshHandler.refreshRegistered()
     }
@@ -187,21 +161,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
         arguments!!.putString(ARG_ACCESS_TOKEN, accessToken)
 
-        if (::interceptor.isInitialized) {
-            interceptor.setAccessToken(accessToken)
-        }
-    }
-
-    private fun attachListeners() {
-        Categories.getSharedInstance().attatchListener(categoryService)
-        Currencies.getSharedInstance().attatchListener(userConfigurationService)
-        Periods.getSharedInstance().attatchListener(statisticsRepository)
-    }
-
-    private fun removeListenersAndClearCache() {
-        Categories.getSharedInstance().removeListener(categoryService)
-        Periods.getSharedInstance().removeListener(statisticsRepository)
-        cacheHandle.clearCache()
+        Tink.setUser(User.fromAccessToken(accessToken));
     }
 
     private fun setupTimber() {
@@ -213,14 +173,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
-        private const val ARG_NETWORK_CONFIG = "networkConfig"
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
          *
          * @param accessToken A valid access token for the user
          * @param styleResId The resource ID of your style that extends [R.style.TinkFinanceOverviewStyle]
-         * @param clientConfiguration The [ClientConfiguration] object
          * @param tracker An optional [Tracker] implementation
          * @param overviewFeatures The [OverviewFeatures] object with the list of overview features to be included
          * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
@@ -230,26 +188,17 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         fun newInstance(
             accessToken: String,
             styleResId: Int,
-            clientConfiguration: ClientConfiguration,
             tracker: Tracker? = null,
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
             insightActionHandler: InsightActionHandler? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
-            val networkConfig = NetworkConfiguration(
-                serverAddress = clientConfiguration.environment.grpcUrl,
-                clientKey = "",
-                sslKey = clientConfiguration.sslCertificate,
-                port = clientConfiguration.environment.port,
-                useSsl = !clientConfiguration.sslCertificate.isBlank()
-            )
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
-                    ARG_OVERVIEW_FEATURES to overviewFeatures,
-                    ARG_NETWORK_CONFIG to networkConfig
+                    ARG_OVERVIEW_FEATURES to overviewFeatures
                 )
             }
         }

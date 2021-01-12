@@ -12,7 +12,7 @@ import com.tink.pfmui.charts.extensions.addNonNull
 import com.tink.pfmui.charts.extensions.disableClipping
 import com.tink.pfmui.charts.extensions.doOnEnd
 import com.tink.pfmui.charts.extensions.get
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 private data class SegmentInfo(val view: PieChartView.PieChartSegmentView?, val startAngle: Float, val angle: Float, val color: Int) {
     constructor(v: PieChartView.PieChartSegmentView) : this(v, v.startAngle, v.angle, v.color)
@@ -32,7 +32,12 @@ internal class PieChartSegmentTransition(private val group: Int? = null, private
 
     override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
         val view = endValues?.view as? PieChartView
-        return whenNonNull(startValues[SEGMENTS], endValues[SEGMENTS], view, ::createAnimators)?.also {
+        return whenNonNull(
+            startValues[SEGMENTS],
+            endValues[SEGMENTS],
+            view,
+            ::createAnimators
+        )?.also {
             it.doOnEnd { view?.clearOverlay() }
         }
     }

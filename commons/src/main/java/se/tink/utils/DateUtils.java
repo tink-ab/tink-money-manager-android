@@ -1,22 +1,17 @@
 package se.tink.utils;
 
-import android.icu.text.MessageFormat;
 import androidx.annotation.NonNull;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import com.tink.model.time.Period;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import se.tink.core.models.misc.Period;
+import org.threeten.bp.LocalDate;
+import se.tink.commons.extensions.TimeExtensionsKt;
 
 public class DateUtils {
 	public static final String KEY_TODAY = "today";
@@ -66,11 +61,6 @@ public class DateUtils {
 				.format(date);
 	}
 
-	public String getMonthAndYearFromDateTime(DateTime date) {
-		return ThreadSafeDateFormat
-			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR, defaultLocale, timezoneCode).format(date);
-	}
-
 	public String formatDateString(String date) {
 		return ThreadSafeDateFormat
 			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY, defaultLocale, timezoneCode).format(new DateTime(date));
@@ -86,58 +76,6 @@ public class DateUtils {
 		DateTime d1 = DateTime.parse(date);
 		DateTime d2 = DateTime.now();
 		return (d1.year().get() == d2.year().get() && d1.getDayOfYear() == d2.getDayOfYear());
-	}
-
-	public DateTime getSalaryDayFromDate(DateTime date) {
-		boolean keepFindSalaryDay = true;
-		while (keepFindSalaryDay) {
-			if (isBusinessDay(date)) {
-				keepFindSalaryDay = false;
-			} else {
-				date = date.minusDays(1);
-			}
-		}
-
-		return date;
-	}
-
-	public boolean isBusinessDay(DateTime date) {
-		int dayOfWeek = date.getDayOfWeek();
-		if (dayOfWeek <= 5) {
-			return true;
-		}
-		return false;
-	}
-
-	public Calendar getCalendar() {
-		return Calendar.getInstance(getDefaultTimezone(), getDefaultLocale());
-	}
-
-	public Period getPeriod(final Date date, List<Period> periods) {
-		return Iterables.find(periods, new Predicate<Period>() {
-			@Override
-			public boolean apply(Period period) {
-				return period.isDateWithin(date);
-			}
-		}, null);
-	}
-
-	public DateTime getToday() {
-		DateTime now = DateTime.now();
-		DateTime today = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), 0,
-			0, 0, 0);
-		return today;
-	}
-
-	public DateTime convertDate(long date) {
-		return new DateTime(date);
-	}
-
-	public String formatDateHuman(long value) {
-		if (value == 0) {
-			return "";
-		}
-		return formatDateHuman(convertDate(value));
 	}
 
 	public String formatDateHuman(String date) {
@@ -188,26 +126,6 @@ public class DateUtils {
 		return string.substring(0, 1).toUpperCase() + string.substring(1);
 	}
 
-	public DateTime getSalaryDateFromDate(DateTime input) {
-		int year;
-		int month;
-
-		int salaryDayOfMonth = 25; // TODO get this from UserProfile? MONTHLY or MONTHLY_ADJUSTED
-		int salarayDayMinusPossibleWeekendDays = salaryDayOfMonth - 2;
-
-		if (input.getDayOfMonth() < salarayDayMinusPossibleWeekendDays) {
-			input = input.minusMonths(1);
-		}
-
-		year = input.getYear();
-		month = input.getMonthOfYear();
-		String date = year + "-" + month + "-" + salaryDayOfMonth;
-
-		DateTime wholeDate = new DateTime(date);
-		wholeDate = getSalaryDayFromDate(wholeDate);
-		return wholeDate;
-	}
-
 	public String getMonthNameAndMaybeYearOfPeriod(Period period) {
 		return getMonthNameOfDate(getDateTimeFromPeriod(period), true);
 	}
@@ -240,26 +158,21 @@ public class DateUtils {
 	}
 
 	private DateTime getDateTimeFromPeriod(Period period) {
-		return period.getStop() == null
-			? new DateTime(period.toString())
-			: period.getStop();
+		//TODO: Core setup
+		return TimeExtensionsKt.toDateTime(period.getEnd());
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent) {
 		return getMonthNameOfDate(date, includeYearIfNotCurrent, timezoneCode);
 	}
 
-    public String getDailyMonthlyYearly(DateTime dateTime) {
-        return ThreadSafeDateFormat.threadSafeDateFormat(
-                        ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY,
-                        defaultLocale,
-                        timezoneCode)
-                .format(dateTime);
-    }
-
     public String getDayOfWeek(DateTime dateTime) {
 		return ThreadSafeDateFormat
 			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT, defaultLocale, timezoneCode).format(dateTime);
+	}
+
+	public String getDayOfWeek(@NotNull LocalDate date) {
+		return getDayOfWeek(DateTime.parse(date.toString()));
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent, String timezoneCode) {
@@ -273,80 +186,6 @@ public class DateUtils {
 		}
 	}
 
-	public ArrayList<Period> getYearMonthStringFor1YearByEndYearMonth(
-		Period endPeriod, Map<String, Period> periodMap, boolean paddToYear) {
-
-		ArrayList<Period> periods = Lists.newArrayList();
-
-		Integer year = endPeriod.getYear();
-		Integer month = endPeriod.getMonth();
-
-		int y = year;
-		Integer m = month;
-		for (int i = 0; i < (paddToYear ? 12 : periodMap.size()); i++) {
-			String key = createStringYearMonthDay(y, m, null);
-
-			if (!periodMap.containsKey(key)) {
-				periods.add(0, createMissingPeriod(y, m));
-			} else {
-				periods.add(0, periodMap.get(key));
-			}
-
-			m--;
-			if (m <= 0) {
-				y--;
-				m = 12;
-			}
-		}
-
-		return periods;
-	}
-
-	private Period createMissingPeriod(int year, int month) {
-		Period newPeriod = new Period();
-		newPeriod.setYear(year);
-		newPeriod.setMonth(month);
-
-		DateTime date = new DateTime(year, month, 1, 0, 0, 0, 0);
-
-		DateTime start = getSalaryDateFromDate(date);
-		newPeriod.setStart(start);
-
-		DateTime stop = getSalaryDateFromDate(date.plusMonths(1));
-		newPeriod.setStop(stop.minusDays(1));
-
-		return newPeriod;
-	}
-
-	public String createStringYearMonthDay(int year, Integer month, Integer day) {
-		StringBuilder sb = new StringBuilder();
-
-		// Year
-		sb.append(year);
-
-		// Month
-		if (month == null) {
-			return sb.toString();
-		}
-		sb.append("-");
-		if (month < 10) {
-			sb.append("0");
-		}
-		sb.append(month);
-
-		// Day
-		if (day == null) {
-			return sb.toString();
-		}
-		sb.append("-");
-		if (day < 10) {
-			sb.append("0");
-		}
-		sb.append(day);
-
-		return sb.toString();
-	}
-
 	public String formatDateHumanShort(DateTime date) {
 
 		String pattern = ThreadSafeDateFormat.getDateFormatsMap()
@@ -357,6 +196,14 @@ public class DateUtils {
 			.withLocale(getDefaultLocale());
 
 		return date.toString(dtf);
+	}
+
+	public String getDailyMonthlyYearly(DateTime dateTime) {
+		return ThreadSafeDateFormat.threadSafeDateFormat(
+			ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY,
+			defaultLocale,
+			timezoneCode)
+			.format(dateTime);
 	}
 
 	public Locale getDefaultLocale() {
@@ -374,12 +221,4 @@ public class DateUtils {
 	public Map<String, String> getFormatHumanStrings() {
 		return formatHumanStrings;
 	}
-	public String getOrdinalDayOfMonth(Integer day) {
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-			MessageFormat msgFmt = new MessageFormat("{0,ordinal}", getDefaultLocale());
-			return msgFmt.format(new Object[]{day});
-		}
-		return day.toString(); //TODO
-	}
-
 }

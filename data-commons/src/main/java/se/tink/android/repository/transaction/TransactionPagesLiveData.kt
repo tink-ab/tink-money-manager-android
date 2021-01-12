@@ -3,115 +3,146 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.MutableLiveData
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.createChangeObserver
-import se.tink.core.models.misc.Period
-import se.tink.core.models.transaction.SearchResultMetadata
-import se.tink.core.models.transaction.Transaction
-import se.tink.repository.MutationHandler
-import se.tink.repository.PagingResult
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.Pageable
-import se.tink.repository.service.PagingHandler
-import se.tink.repository.service.TransactionService
+import com.tink.model.time.Period
+import com.tink.model.transaction.Transaction
+import com.tink.service.handler.ResultHandler
+import com.tink.service.transaction.Pageable
+import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
     abstract fun dispose()
     abstract fun loadMoreItems()
 }
 
-abstract class AbstractTransactionPagesLiveData(
-    val appExecutors: AppExecutors,
-    val transactionService: TransactionService
-) : TransactionPagesLiveData() {
+class TransactionsPageable(
+    private val transactionService: TransactionService,
+    transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val liveData: MutableLiveData<List<Transaction>>,
+    private val accountId: String? = null,
+    private val categoryId: String? = null,
+    private val period: Period? = null
+) : Pageable {
 
-    private var isLoading: Boolean = false
+    private var currentOffset = 0
 
-    protected abstract val pageable: Pageable<Transaction>
-    protected val listener = createChangeObserver(appExecutors)
+    private val currentTransactions = mutableListOf<Transaction>()
 
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    override fun dispose() = transactionService.unsubscribe(listener)
+    private var hasMore: Boolean = true
 
-    override fun loadMoreItems() {
-        if (!isLoading && pageable.hasMore) {
-            isLoading = true
-            pageable.next(
-                object : PagingHandler {
-                    override fun onError(error: TinkNetworkError) {
-                        isLoading = false
-                    }
+    private val updateListenerJob = transactionUpdateEventBus.subscribe { updatedTransaction ->
+        updateWith(listOf(updatedTransaction))
+    }
 
-                    override fun onCompleted(result: PagingResult) {
-                        isLoading = false
-                    }
-                })
+    override fun hasMore(): Boolean {
+        return hasMore
+    }
+
+    override fun next(resultHandler: ResultHandler<Unit>) {
+        scope.launch {
+            try {
+                val transactions = transactionService.listTransactions(
+                    accountId, categoryId, period, currentOffset
+                )
+                currentOffset += transactions.size
+
+                updateWith(transactions)
+
+                if (transactions.isEmpty()) hasMore = false
+
+                resultHandler.onSuccess(Unit)
+            } catch (error: Throwable) {
+                resultHandler.onError(error)
+            }
         }
     }
-}
 
-class AccountTransactionPagesLiveData(
-    val accountId: String,
-    appExecutors: AppExecutors,
-    transactionService: TransactionService
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+    private fun updateWith(transactions: List<Transaction>) {
+        currentTransactions.removeAll { transactionToRemove ->
+            transactions.map { it.id }.contains(transactionToRemove.id)
+        }
+        currentTransactions += transactions
+        liveData.postValue(currentTransactions)
+    }
 
-    override val pageable: Pageable<Transaction> =
-        transactionService.listAndSubscribeForAccountId(accountId, listener)
+        fun dispose() = updateListenerJob.cancel()
+    }
 
-}
+    abstract class AbstractTransactionPagesLiveData(
+        val appExecutors: AppExecutors,
+        val transactionService: TransactionService
+    ) : TransactionPagesLiveData() {
 
-class SearchTransactionPagesLiveData(
-    val query: String,
-    appExecutors: AppExecutors,
-    transactionService: TransactionService,
-    metadataMutationHandler: MutationHandler<SearchResultMetadata>
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+        private var isLoading: Boolean = false
 
-    override val pageable: Pageable<Transaction> =
-        transactionService.search(query, listener, metadataMutationHandler)
+        protected abstract val pageable: TransactionsPageable
+        protected val listener = createChangeObserver(appExecutors)
 
-}
 
-class LeftToSpendTransactionPagesLiveData(
-    appExecutors: AppExecutors,
-    transactionService: TransactionService,
-    val period: Period?
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
-
-    override val pageable: Pageable<Transaction> =
-        if (period != null) {
-            transactionService.listAndSubscribeForLeftToSpendAndPeriod(period, listener)
-        } else {
-            transactionService.listAndSubscribeForLatestTransactions(false, listener)
+        override fun dispose() {
+            pageable.dispose()
         }
 
-}
+        override fun loadMoreItems() {
+            if (!isLoading && pageable.hasMore()) {
+                isLoading = true
+                pageable.next(ResultHandler({ isLoading = false }, { isLoading = false }))
+            }
+        }
+    }
 
-class AllTransactionPagesLiveData(
-    appExecutors: AppExecutors,
-    transactionService: TransactionService
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
-
-    override val pageable: Pageable<Transaction> =
-        transactionService.listAndSubscribeForLatestTransactions(true, listener)
-}
-
-class CategoryTransactionPagesLiveData(
-    val categoryCode: String,
-    appExecutors: AppExecutors,
-    transactionService: TransactionService,
-    val period: Period?
-) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
-
-    override val pageable: Pageable<Transaction> =
-        if (period != null) {
-            transactionService.listAndSubscribeForCategoryCodeAndPeriod(
-                categoryCode,
-                period,
-                listener
+    class AccountTransactionPagesLiveData(
+        accountId: String,
+        appExecutors: AppExecutors,
+        transactionService: TransactionService,
+        transactionUpdateEventBus: TransactionUpdateEventBus
+    ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+        override val pageable: TransactionsPageable =
+            TransactionsPageable(
+                transactionService,
+                transactionUpdateEventBus,
+                this,
+                accountId
             )
-        } else {
-            transactionService.listAndSubscribeForCategoryCode(categoryCode, listener)
-        }
+    }
 
-}
+    class LeftToSpendTransactionPagesLiveData(
+        appExecutors: AppExecutors,
+        transactionService: TransactionService,
+        val period: Period?
+    ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+
+        override val pageable: TransactionsPageable = TODO()
+    }
+
+    class AllTransactionPagesLiveData(
+        appExecutors: AppExecutors,
+        transactionService: TransactionService,
+        transactionUpdateEventBus: TransactionUpdateEventBus
+    ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+        override val pageable: TransactionsPageable =
+            TransactionsPageable(transactionService, transactionUpdateEventBus, this)
+    }
+
+    class CategoryTransactionPagesLiveData(
+        categoryId: String,
+        appExecutors: AppExecutors,
+        transactionService: TransactionService,
+        transactionUpdateEventBus: TransactionUpdateEventBus,
+        val period: Period?
+    ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
+
+        override val pageable: TransactionsPageable =
+            TransactionsPageable(
+                transactionService = transactionService,
+                transactionUpdateEventBus = transactionUpdateEventBus,
+                liveData = this,
+                categoryId = categoryId
+            )
+    }
 

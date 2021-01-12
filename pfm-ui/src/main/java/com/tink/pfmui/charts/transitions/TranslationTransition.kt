@@ -7,7 +7,7 @@ import android.transition.TransitionValues
 import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmui.charts.extensions.get
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 private const val TRANSLATION_Y = "translation_y_"
 
@@ -21,7 +21,12 @@ internal class TranslationTransition : Transition() {
     }
 
     override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
-        return whenNonNull(startValues[TRANSLATION_Y], endValues[TRANSLATION_Y], endValues?.view, ::createAnimators)
+        return whenNonNull(
+            startValues[TRANSLATION_Y],
+            endValues[TRANSLATION_Y],
+            endValues?.view,
+            ::createAnimators
+        )
     }
 
     private fun createAnimators(start: Float, end: Float, view: View): Animator? {

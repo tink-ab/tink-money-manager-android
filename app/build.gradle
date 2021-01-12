@@ -34,11 +34,8 @@ android {
 }
 
 dependencies {
-//    implementation project(':core')
 //    implementation project(':commons')
-//    implementation project(':data')
 //    implementation project(':data-commons')
-//    implementation project(':rpc')
     implementation project(':pfm-ui')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib

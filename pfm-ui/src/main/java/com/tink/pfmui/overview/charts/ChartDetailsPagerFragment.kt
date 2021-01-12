@@ -24,7 +24,7 @@ import com.tink.pfmui.view.CustomTypefaceSpan
 import kotlinx.android.synthetic.main.tink_fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 
 private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0
@@ -100,9 +100,9 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         if (adapter.onBackPressed()) {
             return true
         }
-        val category = viewModel.category.value?.parent
-        if (type.showCategoryPicker && category != null) {
-            viewModel.setCategoryId(category.code)
+        val parentId = viewModel.category.value?.parentId
+        if (type.showCategoryPicker && parentId != null) {
+            viewModel.setCategoryId(parentId)
             return true
         }
         adapter.prepareToExit(this)
@@ -131,9 +131,9 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     private fun showTransactions() {
         val metaData = TransactionsListMetaData(
-                isLeftToSpend = type == ChartType.LEFT_TO_SPEND,
+                isLeftToSpend = false,
                 period = adapter.currentPagePeriod,
-                categoryCode = viewModel.category.value?.code,
+                categoryId = viewModel.category.value?.id,
                 title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
         )
         val fragment = TransactionsListFragment.newInstance(metaData)

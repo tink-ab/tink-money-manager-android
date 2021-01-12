@@ -1,8 +1,8 @@
 package com.tink.pfmui.insights.actionhandling
 
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
 import se.tink.android.redirection.RedirectionReceiver
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightAction
 import javax.inject.Inject
 
 class ViewTransactionsActionHandler @Inject constructor(

@@ -6,13 +6,13 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
-import se.tink.core.models.transaction.Transaction
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -28,12 +28,14 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     private val transactions: List<Transaction> by lazy {
         requireNotNull(
-            arguments?.getParcelableArrayList<Transaction>(TRANSACTION_SIMILAR_TRANSACTIONS)
-        ).toList().sorted()
+            arguments?.getParcelableArrayList<Transaction>(
+                TRANSACTION_SIMILAR_TRANSACTIONS
+            )
+        ).toList().sortedWith(compareByDescending<Transaction> { it.date }.thenBy { it.id })
     }
 
     private val newCategoryCode by lazy {
-        requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_CODE))
+        requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_ID))
     }
 
     private val adapter = SimilarTransactionsAdapter()
@@ -120,18 +122,18 @@ internal class SimilarTransactionsFragment : BaseFragment() {
 
     companion object {
 
-        private const val TRANSACTION_SIMILAR_CATEGORY_CODE = "transaction_similar_category_code"
+        private const val TRANSACTION_SIMILAR_CATEGORY_ID = "transaction_similar_category_id"
         private const val TRANSACTION_SIMILAR_TRANSACTIONS = "transaction_similar_transactions"
 
         @JvmStatic
         fun newInstance(
             transactions: List<Transaction>,
-            newCategoryCode: String
+            newCategoryId: String
         ): SimilarTransactionsFragment {
             val transactionsArray = ArrayList(transactions)
             return SimilarTransactionsFragment().apply {
                 arguments = Bundle().apply {
-                    putString(TRANSACTION_SIMILAR_CATEGORY_CODE, newCategoryCode)
+                    putString(TRANSACTION_SIMILAR_CATEGORY_ID, newCategoryId)
                     putParcelableArrayList(TRANSACTION_SIMILAR_TRANSACTIONS, transactionsArray)
                 }
             }

@@ -14,17 +14,17 @@ import com.tink.pfmui.view.TreeListSelectionAdapter
 import com.tink.pfmui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.tink_fragment_select_category.view.*
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 
 private const val ARG_TYPE = "arg_type"
-private const val ARG_CATEGORY_CODE = "arg_category"
+private const val ARG_CATEGORY_ID = "arg_category"
 private const val ARG_OPTIONS = "arg_options"
 
 internal class CategorySelectionFragment : BaseFragment() {
     private val type by lazy {
-        arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.TYPE_EXPENSES
+        arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.EXPENSE
     }
-    private val checkedCategoryCode by lazy { arguments?.getString(ARG_CATEGORY_CODE) }
+    private val checkedCategoryId by lazy { arguments?.getString(ARG_CATEGORY_ID) }
     private val options: Options by lazy { requireNotNull(arguments?.getParcelable<Options>(ARG_OPTIONS) ) }
     private val viewModel by lazy {
         ViewModelProviders.of(
@@ -60,9 +60,10 @@ internal class CategorySelectionFragment : BaseFragment() {
         categories.observe(viewLifecycle, object : Observer<List<TreeListSelectionItem>> {
             override fun onChanged(it: List<TreeListSelectionItem>?) {
                 it?.let { items ->
+
                     categories.removeObserver(this)
                     view.list.adapter = adapter
-                    val selectedItem = checkedCategoryCode?.let { code ->
+                    val selectedItem = checkedCategoryId?.let { id ->
                         items
                             .flatMap {
                                 if (it is TreeListSelectionItem.TopLevelItem) {
@@ -71,7 +72,7 @@ internal class CategorySelectionFragment : BaseFragment() {
                                     listOf(it)
                                 }
                             }
-                            .find { it.id == code }
+                            .find { it.id == id }
                     }
                     adapter.setData(items, selectedItem)
                     view.list.post { onViewReady() }
@@ -104,13 +105,13 @@ internal class CategorySelectionFragment : BaseFragment() {
     companion object {
         fun newInstance(
             type: Category.Type,
-            categoryCode: String?,
+            categoryId: String?,
             options: Options = Options()
         ): CategorySelectionFragment {
             return CategorySelectionFragment().apply {
                 arguments = bundleOf(
                     ARG_TYPE to type,
-                    ARG_CATEGORY_CODE to categoryCode,
+                    ARG_CATEGORY_ID to categoryId,
                     ARG_OPTIONS to options
                 )
             }
@@ -126,7 +127,7 @@ internal class CategorySelectionFragment : BaseFragment() {
 }
 
 internal interface CategorySelectionListener {
-    fun onCategorySelected(updatedCategoryCode: String)
+    fun onCategorySelected(updatedCategoryId: String)
     fun onCategorySelectionCancelled() { }
 }
 

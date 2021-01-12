@@ -17,8 +17,9 @@ import com.tink.pfmui.overview.charts.PeriodProvider
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.ChartType
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
-import se.tink.core.models.Category
-import se.tink.core.models.misc.Period
+import com.tink.pfmui.theme.getTabPieChartThemeForType
+import com.tink.model.category.Category
+import com.tink.model.time.Period
 import javax.inject.Inject
 
 private const val TYPE_ARG = "type"
@@ -71,7 +72,7 @@ internal class PieChartNavigation(private val coordinator: FragmentCoordinator) 
     fun onCategoryChanged(root: View, category: Category, type: ChartType) {
         val tag: String
         val createFunc: () -> BaseFragment
-        if (category.parent == null) {
+        if (category.parentId == null) {
             tag = FULL_CHART_TAG
             createFunc = { FullPieChartFragment.newInstance(type) }
         } else {

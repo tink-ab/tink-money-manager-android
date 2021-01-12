@@ -4,12 +4,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.AttrRes
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import com.tink.pfmui.insights.enrichment.BudgetState
 import com.tink.pfmui.insights.enrichment.BudgetSummaryDetailItem
 import com.tink.pfmui.insights.enrichment.BudgetSummaryViewDetails
-import se.tink.commons.icons.IconResource
 import com.tink.pfmui.insights.extensions.getIcon
 import kotlinx.android.synthetic.main.tink_item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
@@ -18,8 +19,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setIconRes
 import se.tink.commons.extensions.tint
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightType
+import se.tink.commons.icons.IconResource
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import javax.inject.Inject

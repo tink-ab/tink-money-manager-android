@@ -13,7 +13,6 @@ internal interface TabPieChartFragmentTheme {
 internal fun getTabPieChartThemeForType(type: ChartType): TabPieChartFragmentTheme {
     return when (type) {
         ChartType.EXPENSES -> ExpensesTabPieChartFragmentTheme()
-        ChartType.LEFT_TO_SPEND -> throw IllegalArgumentException("Wrong type $type")
         ChartType.INCOME -> IncomeTabPieChartFragmentTheme()
     }
 }

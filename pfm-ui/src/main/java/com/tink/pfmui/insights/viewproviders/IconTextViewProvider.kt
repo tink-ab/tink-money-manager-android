@@ -3,9 +3,12 @@ package com.tink.pfmui.insights.viewproviders
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AttrRes
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
+import com.tink.model.insights.InsightState
+import com.tink.model.insights.InsightType
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
-import se.tink.commons.icons.IconResource
 import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
@@ -13,10 +16,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setIconRes
 import se.tink.commons.extensions.tint
-import se.tink.core.models.insights.Insight
-import se.tink.core.models.insights.InsightAction
-import se.tink.core.models.insights.InsightState
-import se.tink.core.models.insights.InsightType
+import se.tink.commons.icons.IconResource
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import javax.inject.Inject

@@ -1,5 +1,5 @@
 package com.tink.pfmui.charts.models
 
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 
 data class PeriodBalance(var period: Period?, var amount: Double)

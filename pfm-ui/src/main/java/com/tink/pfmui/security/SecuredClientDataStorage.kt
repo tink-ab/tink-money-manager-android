@@ -2,8 +2,8 @@ package com.tink.pfmui.security
 
 import android.content.Context
 import android.content.SharedPreferences
-import se.tink.privacy.Clearable
-import se.tink.privacy.DataWipeManager
+import se.tink.android.privacy.Clearable
+import se.tink.android.privacy.DataWipeManager
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException

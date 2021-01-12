@@ -1,118 +1,98 @@
 package se.tink.android.repository.transaction
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.MutableLiveData
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.subjects.PublishSubject
+import androidx.lifecycle.liveData
+import com.tink.annotations.PfmScope
+import com.tink.model.category.Category
+import com.tink.model.time.Period
+import com.tink.model.transaction.Transaction
+import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import se.tink.android.AppExecutors
-import se.tink.android.extensions.toMutationHandler
-import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createChangeObserver
-import se.tink.android.livedata.createMutationHandler
-import se.tink.android.livedata.map
-import se.tink.core.models.Category
-import se.tink.core.models.misc.Period
-import se.tink.core.models.transaction.Transaction
-import se.tink.repository.ErrorUtils
-import se.tink.repository.ExceptionTracker
-import se.tink.repository.SimpleMutationHandler
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.TinkNetworkErrorHandler
-import se.tink.repository.service.StreamingService
-import se.tink.repository.service.TransactionService
+import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@ExperimentalCoroutinesApi
+@PfmScope
 class TransactionRepository @Inject constructor(
     private val transactionService: TransactionService,
-    private val streamingService: StreamingService,
     private val appExecutors: AppExecutors,
-    private val exceptionTracker: ExceptionTracker,
-    private val errorHandler: TinkNetworkErrorHandler
+    private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) {
 
-    fun fromIdList(ids: List<String>): Single<List<Transaction>> {
-        return Observable.fromIterable(ids).flatMap { id ->
-            PublishSubject.create<Transaction>().also {
-                transactionService.getTransaction(id, it.toMutationHandler())
-            }.onErrorResumeNext { error: Throwable ->
-                exceptionTracker.exceptionThrown(Exception(error))
-                Observable.empty<Transaction>()
-            }
-        }.toList()
-    }
+    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+
+    suspend fun fromIdList(ids: List<String>): List<Transaction> =
+        coroutineScope { ids.map { async { transactionService.getTransaction(it) } } }.awaitAll()
+
 
     fun fromIdsAsLiveData(ids: List<String>): LiveData<List<Transaction>> {
-        return LiveDataReactiveStreams.fromPublisher(fromIdList(ids).toFlowable())
+        return liveData { emit(fromIdList(ids)) }
     }
 
     fun allTransactionsForCategoryAndPeriod(
         category: Category,
         period: Period
-    ): LiveData<List<Transaction>> = object : MutableLiveData<List<Transaction>>() {
-        private val listener = createChangeObserver(appExecutors)
-
-        override fun onActive() = transactionService.listAllAndSubscribeForCategoryCodeAndPeriod(
-            category.code,
-            period,
-            listener
-        )
-
-        override fun onInactive() = transactionService.unsubscribe(listener)
+    ): LiveData<List<Transaction>> = liveData {
+        val transactions = try {
+            transactionService.fetchAllTransactions(period, category.id)
+        } catch (error: Throwable) {
+            emptyList<Transaction>()
+        }
+        emit(transactions)
     }
 
-    val tags = TransactionTagsLiveData(streamingService, transactionService, appExecutors)
-
-
     fun forAccountId(accountId: String): TransactionPagesLiveData =
-        AccountTransactionPagesLiveData(accountId, appExecutors, transactionService)
+        AccountTransactionPagesLiveData(accountId, appExecutors, transactionService, transactionUpdateEventBus)
 
 
     fun fetchById(id: String): SingleTransactionLiveData =
-        SingleTransactionLiveData(id, streamingService, transactionService)
+        SingleTransactionLiveData(id, transactionService, transactionUpdateEventBus)
 
     fun subscribeForTransaction(transaction: Transaction): SingleTransactionLiveData =
-        SingleTransactionLiveData(transaction, streamingService, transactionService)
+        SingleTransactionLiveData(transaction, transactionService, transactionUpdateEventBus)
 
-    fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>?> {
-
-        val liveData = MutableLiveData<ErrorOrValue<List<Transaction>>>()
-
-        transactionService.getSimilarTransactions(
-            transactionId,
-            liveData.createMutationHandler()
-        )
-
-        return liveData.map {
-            if (it.error != null) emptyList()
-            else it.value
+    fun fetchSimilarTransactions(transactionId: String): LiveData<List<Transaction>> =
+        liveData {
+            val transactions = try {
+                transactionService.getSimilarTransactions(transactionId)
+            } catch (error: Throwable) {
+                emptyList<Transaction>()
+            }
+            emit(transactions)
         }
-    }
-
-    fun updateTransaction(transaction: Transaction, onError: (TinkNetworkError) -> Unit) {
-        transactionService.updateTransaction(
-            transaction,
-            ErrorUtils.withErrorHandler(
-                errorHandler,
-                object : SimpleMutationHandler<Transaction>() {
-                    override fun onError(error: TinkNetworkError) = onError(error)
-                })
-        )
-    }
 
     fun categorizeTransactions(
         transactionIds: List<String>,
-        newCategoryCode: String,
+        newCategoryId: String,
         onError: (TinkNetworkError) -> Unit
     ) {
-        transactionService.categorizeTransactions(
-            transactionIds,
-            newCategoryCode,
-            object : SimpleMutationHandler<List<Transaction>>() {
-                override fun onError(error: TinkNetworkError) = onError(error)
-            })
+        scope.launch {
+            try {
+                transactionService.categorizeTransactions(transactionIds, newCategoryId)
+                fetchAndPostUpdates(transactionIds)
+            } catch (error: Throwable) {
+                onError(TinkNetworkError(error))
+            }
+        }
+    }
+
+    private fun fetchAndPostUpdates(transactionIds: List<String>) {
+        for (id in transactionIds) {
+            scope.launch {
+                try {
+                    transactionUpdateEventBus.postUpdate(transactionService.getTransaction(id))
+                } catch (error: Throwable) {
+                    // Fail silently
+                }
+            }
+        }
     }
 }

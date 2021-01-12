@@ -11,7 +11,7 @@ import com.tink.pfmui.charts.extensions.disableClipping
 import com.tink.pfmui.charts.extensions.doOnEnd
 import com.tink.pfmui.charts.extensions.get
 import com.tink.pfmui.charts.extensions.restoreClipping
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 private data class PieChartInfo(val radius: Float, val thickness: Float) {
     constructor(v: PieChartView) : this(v.outerRadius, v.thickness)
@@ -30,7 +30,12 @@ internal class PieChartTransition : Transition() {
 
     override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
         val view = endValues?.view as? PieChartView
-        return whenNonNull(startValues[PIE_CHART], endValues[PIE_CHART], view, ::createChartAnimators)?.also {
+        return whenNonNull(
+            startValues[PIE_CHART],
+            endValues[PIE_CHART],
+            view,
+            ::createChartAnimators
+        )?.also {
             view?.disableClipping()
             it.doOnEnd { view?.restoreClipping() }
         }

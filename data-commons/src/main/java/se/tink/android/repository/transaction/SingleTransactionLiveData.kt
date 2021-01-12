@@ -1,85 +1,56 @@
 package se.tink.android.repository.transaction
 
 import androidx.lifecycle.MutableLiveData
-import se.tink.core.models.transaction.Transaction
-import se.tink.repository.ChangeObserver
-import se.tink.repository.MutationHandler
-import se.tink.repository.TinkNetworkError
-import se.tink.repository.service.StreamingService
-import se.tink.repository.service.TransactionService
+import com.tink.model.transaction.Transaction
+import com.tink.service.transaction.TransactionService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import se.tink.android.repository.TinkNetworkError
 
+@ExperimentalCoroutinesApi
 class SingleTransactionLiveData(
     private val transactionId: String,
-    val streamingService: StreamingService,
-    val transactionService: TransactionService
+    val transactionService: TransactionService,
+    val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : MutableLiveData<TransactionResult>() {
 
     private var fetchOnInit = true
 
     constructor(
         transaction: Transaction,
-        streamingService: StreamingService,
-        transactionService: TransactionService
-    ) : this(transaction.id, streamingService, transactionService) {
+        transactionService: TransactionService,
+        transactionUpdateEventBus: TransactionUpdateEventBus
+    ) : this(transaction.id, transactionService, transactionUpdateEventBus) {
         fetchOnInit = false
         postValue(TransactionReceived(transaction))
     }
 
-    private val changeObserver = object : ChangeObserver<Transaction> {
-
-        override fun onRead(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onCreate(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onUpdate(items: List<Transaction>) {
-            items.find { it.id == transactionId }?.let { postValue(
-                TransactionReceived(
-                    it
-                )
-            ) }
-        }
-
-        override fun onDelete(items: List<Transaction>) {
-            if (items.any { it.id == transactionId }) postValue(TransactionDeleted)
-        }
-    }
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val updateSubscription: Job
 
     init {
         if (fetchOnInit) {
-            transactionService.getTransaction(transactionId, object : MutationHandler<Transaction> {
-                override fun onNext(item: Transaction) = postValue(
-                    TransactionReceived(
-                        item
-                    )
-                )
-                override fun onError(error: TinkNetworkError) = postValue(
-                    TransactionError(
-                        error
-                    )
-                )
-                override fun onCompleted() {}
-            })
+            scope.launch {
+                try {
+                    val transaction = transactionService.getTransaction(transactionId)
+                    postValue(TransactionReceived(transaction))
+                } catch (error: Throwable) {
+                    postValue(TransactionError(TinkNetworkError(error)))
+                }
+            }
         }
-
-        transactionService.subscribe(changeObserver)
+        updateSubscription = transactionUpdateEventBus.subscribe {
+            if (it.id == transactionId) postValue(TransactionReceived(it))
+        }
     }
 
     fun dispose() {
-        streamingService.unsubscribe(changeObserver)
+        updateSubscription.cancel()
     }
-
 }
 
 sealed class TransactionResult

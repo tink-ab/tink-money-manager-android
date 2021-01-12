@@ -6,7 +6,7 @@ import se.tink.commons.categories.enums.CategoryExpenseType
 import se.tink.commons.categories.enums.CategoryIncomeType
 import se.tink.commons.categories.enums.CategoryTransferType
 import se.tink.commons.categories.enums.CategoryType
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 
 const val UNCATEGORIZED_CODE = "expenses:misc.uncategorized"
 

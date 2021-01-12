@@ -12,7 +12,7 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
 import se.tink.commons.categories.iconColor
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 import javax.inject.Inject
 
 internal class CategorySelectionViewModel @Inject constructor(
@@ -27,8 +27,8 @@ internal class CategorySelectionViewModel @Inject constructor(
     ): LiveData<List<TreeListSelectionItem>> {
         return Transformations.map(categoryRepository.categories) { categoryTree ->
             val parentCategory = when (type) {
-                Category.Type.TYPE_EXPENSES -> categoryTree?.expenses
-                Category.Type.TYPE_INCOME -> categoryTree?.income
+                Category.Type.EXPENSE -> categoryTree?.expenses
+                Category.Type.INCOME -> categoryTree?.income
                 else -> throw IllegalArgumentException("Unknown type $type")
             }
             mutableListOf<TreeListSelectionItem>().apply {
@@ -36,7 +36,7 @@ internal class CategorySelectionViewModel @Inject constructor(
                     if (includeTopLevel) {
                         add(
                             TreeListSelectionItem.TopLevelItem(
-                                id = category.code,
+                                id = category.id,
                                 label = context.getString(R.string.tink_all_categories),
                                 iconRes = category.getIcon(),
                                 iconColor = category.iconColor(),

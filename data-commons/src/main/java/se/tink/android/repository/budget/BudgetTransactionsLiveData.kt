@@ -1,92 +1,47 @@
 package se.tink.android.repository.budget
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
-import org.joda.time.DateTime
+import com.tink.model.budget.BudgetTransaction
+import com.tink.service.budget.BudgetService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
-import se.tink.android.livedata.ErrorOrValue
-import se.tink.android.livedata.createMutationHandler
-import se.tink.core.models.budgets.BudgetTransaction
-import se.tink.core.models.transaction.Transaction
-import se.tink.repository.SimpleChangeObserver
-import se.tink.repository.service.BudgetService
-import se.tink.repository.service.TransactionService
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 
-
+@ExperimentalCoroutinesApi
 class BudgetTransactionsLiveData(
-    private val transactionService: TransactionService,
     private val budgetService: BudgetService,
     private val budgetId: String,
-    private val start: DateTime,
-    private val end: DateTime
-) : MediatorLiveData<ErrorOrValue<List<BudgetTransaction>>>() {
+    private val start: Instant,
+    private val end: Instant,
+    transactionUpdateEventBus: TransactionUpdateEventBus
+) : MediatorLiveData<List<BudgetTransaction>>() {
 
-    private val liveData = AutoFetchLiveData<ErrorOrValue<List<BudgetTransaction>>> {
-        budgetService.listTransactionsForBudget(
-            budgetId, start, end,
-            it.createMutationHandler()
-        )
-    }
+    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    private var subscribed = false
+    private val liveData: AutoFetchLiveData<List<BudgetTransaction>> =
+        AutoFetchLiveData {
+            scope.launch {
+                val transactions = try {
+                    budgetService.listTransactionsForBudget(budgetId, start, end)
+                } catch (t: Throwable) {
+                    emptyList<BudgetTransaction>()
+                }
+                it.postValue(transactions)
+            }
+        }
 
-    private val changeObserver = object : SimpleChangeObserver<Transaction>() {
-        override fun onUpdate(items: List<Transaction>?) = applyUpdate(items)
+    private val updateListenerJob = transactionUpdateEventBus.subscribe { _ ->
+        liveData.update()
     }
 
     init {
         addSource(liveData) { value = it }
     }
 
-    override fun onActive() {
-        super.onActive()
-        if (!subscribed) {
-            transactionService.subscribe(changeObserver)
-            subscribed = true
-        }
-    }
-
-    override fun removeObserver(observer: Observer<in ErrorOrValue<List<BudgetTransaction>>>) {
-        super.removeObserver(observer)
-        unsubscribeIfNecessary()
-    }
-
-    override fun removeObservers(owner: LifecycleOwner) {
-        super.removeObservers(owner)
-        unsubscribeIfNecessary()
-    }
-
-    private fun unsubscribeIfNecessary() {
-        if (subscribed && !hasObservers()) {
-            transactionService.unsubscribe(changeObserver)
-            subscribed = false
-        }
-    }
-
-    fun applyUpdate(transactions: List<Transaction>?) {
-        val currentTransactions = value
-        transactions
-            ?.map {
-                BudgetTransaction(
-                    it.id,
-                    it.accountId,
-                    it.amount,
-                    it.dispensableAmount,
-                    it.categoryCode,
-                    it.description,
-                    it.timestamp
-                )
-            }
-            ?.filter { currentTransactions?.value?.contains(it) ?: false }
-            ?.takeIf { it.isNotEmpty() }
-            ?.let { updatedTransactions ->
-                currentTransactions?.value?.toMutableList()?.apply {
-                    removeAll(updatedTransactions)
-                    addAll(updatedTransactions)
-                }.also {
-                    postValue(ErrorOrValue(requireNotNull(it)))
-                }
-            }
-    }
+    fun dispose() = updateListenerJob.cancel()
 }

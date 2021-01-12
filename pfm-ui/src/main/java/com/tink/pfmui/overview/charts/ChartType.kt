@@ -6,7 +6,7 @@ import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.overview.charts.piechart.TabPieChartFragment
 import com.tink.pfmui.tracking.ScreenEvent
-import se.tink.core.models.Category
+import com.tink.model.category.Category
 
 internal enum class ChartType {
     EXPENSES {
@@ -14,28 +14,18 @@ internal enum class ChartType {
         override val title: Int get() = R.string.tink_expenses_title
         override val color: Int get() = R.attr.tink_expensesColor
         override val topCategoryName: Int get() = R.string.tink_all_categories
-        override val type: Category.Type get() = Category.Type.TYPE_EXPENSES
+        override val type: Category.Type get() = Category.Type.EXPENSE
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
 
-    },
-    LEFT_TO_SPEND {
-        override val screenEvent = ScreenEvent.TRACKING_ERROR // To be added when UI is not hidden
-        override val title: Int get() = R.string.tink_left_to_spend_title
-        override val color: Int get() = R.attr.tink_leftToSpendColor
-        override val showCategoryPicker = false
-        override val type: Category.Type get() = Category.Type.TYPE_UNKKNOWN
-
-        override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
-        override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
     },
     INCOME {
         override val screenEvent = ScreenEvent.INCOME
         override val title: Int get() = R.string.tink_income_title
         override val color: Int get() = R.attr.tink_incomeColor
         override val topCategoryName: Int get() = R.string.tink_all_categories
-        override val type: Category.Type get() = Category.Type.TYPE_INCOME
+        override val type: Category.Type get() = Category.Type.INCOME
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()

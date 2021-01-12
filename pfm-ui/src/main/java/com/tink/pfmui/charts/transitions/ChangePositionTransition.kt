@@ -9,7 +9,7 @@ import android.transition.TransitionValues
 import android.view.View
 import android.view.ViewGroup
 import com.tink.pfmui.charts.extensions.get
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 private const val PARAMS = "view_center"
 
@@ -29,7 +29,12 @@ internal class ChangePositionTransition : Transition() {
 
     override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
         val view = endValues?.view
-        return whenNonNull(startValues[PARAMS], endValues[PARAMS], view, ::createAnimators)
+        return whenNonNull(
+            startValues[PARAMS],
+            endValues[PARAMS],
+            view,
+            ::createAnimators
+        )
     }
 
     private fun createAnimators(start: Rect, end: Rect, view: View): Animator? {

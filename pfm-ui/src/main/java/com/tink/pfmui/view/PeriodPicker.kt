@@ -2,7 +2,7 @@ package com.tink.pfmui.view
 
 import android.content.Context
 import android.util.AttributeSet
-import se.tink.core.models.misc.Period
+import com.tink.model.time.Period
 
 internal class PeriodPicker @JvmOverloads constructor(
     context: Context,

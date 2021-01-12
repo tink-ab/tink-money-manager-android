@@ -3,7 +3,7 @@ package com.tink.pfmui.di
 import com.tink.pfmui.BuildConfig
 import dagger.Module
 import dagger.Provides
-import se.tink.repository.ExceptionTracker
+import se.tink.android.repository.ExceptionTracker
 
 @Module
 internal class TrackingModule {

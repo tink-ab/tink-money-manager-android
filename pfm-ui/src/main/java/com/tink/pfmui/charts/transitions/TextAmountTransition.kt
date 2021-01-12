@@ -9,7 +9,7 @@ import android.util.Property
 import android.view.ViewGroup
 import android.widget.TextView
 import com.tink.pfmui.charts.extensions.get
-import se.tink.core.extensions.whenNonNull
+import se.tink.commons.extensions.whenNonNull
 
 private const val VALUE = "value"
 private const val STEP_COUNT = 100
@@ -41,10 +41,17 @@ internal class TextAmountTransition(
 
     override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?, endValues: TransitionValues?): Animator? {
         val textView = endValues?.view as? TextView
-        return whenNonNull(startValues[VALUE], endValues[VALUE], textView) { start: CharSequence, end: CharSequence, view ->
-            whenNonNull(start.parseInt(), end.parseInt()) { startInt: Int, endInt: Int ->
+        return whenNonNull(
+            startValues[VALUE],
+            endValues[VALUE],
+            textView
+        ) { start: CharSequence, end: CharSequence, view ->
+            whenNonNull(
+                start.parseInt(),
+                end.parseInt()
+            ) { startInt: Int, endInt: Int ->
                 if (startInt == endInt) return null
-                    createAnimation(start, startInt.toFloat(), endInt.toFloat(), view)
+                createAnimation(start, startInt.toFloat(), endInt.toFloat(), view)
             }
         }
     }

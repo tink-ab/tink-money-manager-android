@@ -1,6 +1,6 @@
 package se.tink.commons.currency
 
-import se.tink.core.models.misc.Amount
+import com.tink.model.misc.Amount
 
 interface AmountFormatter {
     fun format(
@@ -12,11 +12,13 @@ interface AmountFormatter {
 
     fun format(
         amount: Double,
+        currency: String,
         useSymbol: Boolean = true
     ): String
 
     fun format(
         amount: Double,
+        currency: String,
         useSymbol: Boolean = true,
         useRounding: Boolean = false
     ): String

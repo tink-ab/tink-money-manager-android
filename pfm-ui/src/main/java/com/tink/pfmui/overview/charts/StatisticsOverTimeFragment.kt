@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.category.Category
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import kotlinx.android.synthetic.main.tink_fragment_statistics_over_time.*
-import se.tink.core.models.Category
 
 class StatisticsOverTimeFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
@@ -50,8 +50,8 @@ class StatisticsOverTimeFragment : BaseFragment() {
             average.text = it
         })
 
-        viewModel.sum.observe(viewLifecycleOwner, Observer {
-            sum.text = it
+        viewModel.sum.observe(viewLifecycleOwner, Observer { text: String ->
+            sum.text = text
         })
 
         categoryViewModel.category.observe(
@@ -60,7 +60,7 @@ class StatisticsOverTimeFragment : BaseFragment() {
                 viewModel.selectCategory(category)
                 adapter.notifyDataSetChanged()
                 categorySelectionButton.text =
-                    if (category.parent == null) {
+                    if (category.parentId == null) {
                         getString(R.string.tink_all_categories)
                     } else {
                         category.name
