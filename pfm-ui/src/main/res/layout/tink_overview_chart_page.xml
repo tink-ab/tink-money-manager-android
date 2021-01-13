@@ -36,7 +36,7 @@
 
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/title"
-          style="@style/tink_deci.primary"
+          style="@style/tink_deci"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"
@@ -55,7 +55,7 @@
 
         <com.tink.pfmui.view.TinkTextView
           android:id="@+id/period"
-          style="@style/tink_deci.primary"
+          style="@style/tink_deci"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:gravity="center"

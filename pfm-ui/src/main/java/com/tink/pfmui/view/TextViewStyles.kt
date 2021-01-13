@@ -84,10 +84,6 @@ internal open class NanoTitle(context: Context) : TextViewXmlTheme(context,
     R.style.tink_nano_title
 )
 
-internal open class Peta(context: Context) : TextViewXmlTheme(context,
-    R.style.tink_peta
-)
-
 internal open class Tera(context: Context) : TextViewXmlTheme(context,
     R.style.tink_tera
 )

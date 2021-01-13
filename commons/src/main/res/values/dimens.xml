@@ -2,27 +2,25 @@
 <resources>
 
   <!-- TextView styles dimensions -->
-  <dimen name="tink_h2_text_size">17.0dip</dimen>
-  <dimen name="tink_h2_line_height">24.0dip</dimen>
-  <dimen name="tink_deci_text_size">15.0dip</dimen>
-  <dimen name="tink_deci_line_height">20.0dip</dimen>
-  <dimen name="tink_giga_text_size">25.0dip</dimen>
-  <dimen name="tink_giga_line_height">32.0dip</dimen>
-  <dimen name="tink_hecto_text_size">17.0dip</dimen>
-  <dimen name="tink_hecto_line_height">24.0dip</dimen>
-  <dimen name="tink_mega_text_size">21.0dip</dimen>
-  <dimen name="tink_mega_line_height">28.0dip</dimen>
-  <dimen name="tink_micro_text_size">13.0dip</dimen>
-  <dimen name="tink_micro_line_height">18.0dip</dimen>
-  <dimen name="tink_nano_text_size">11.0dip</dimen>
-  <dimen name="tink_nano_line_height">16.0dip</dimen>
-  <dimen name="tink_tera_text_size">35.0dip</dimen>
-  <dimen name="tink_tera_line_height">40.0dip</dimen>
-  <dimen name="tink_peta_text_size">45.0dip</dimen>
-  <dimen name="tink_peta_line_height">48.0dip</dimen>
+  <dimen name="tink_h2_text_size">16sp</dimen>
+  <dimen name="tink_h2_line_height">20sp</dimen>
+  <dimen name="tink_deci_text_size">14sp</dimen>
+  <dimen name="tink_deci_line_height">20sp</dimen>
+  <dimen name="tink_giga_text_size">24sp</dimen>
+  <dimen name="tink_giga_line_height">32sp</dimen>
+  <dimen name="tink_hecto_text_size">16sp</dimen>
+  <dimen name="tink_hecto_line_height">20sp</dimen>
+  <dimen name="tink_mega_text_size">20sp</dimen>
+  <dimen name="tink_mega_line_height">28sp</dimen>
+  <dimen name="tink_micro_text_size">14sp</dimen>
+  <dimen name="tink_micro_line_height">20sp</dimen>
+  <dimen name="tink_nano_text_size">12sp</dimen>
+  <dimen name="tink_nano_line_height">16sp</dimen>
+  <dimen name="tink_tera_text_size">34sp</dimen>
+  <dimen name="tink_tera_line_height">40sp</dimen>
 
   <dimen name="tink_bar_chart_auto_max_size">@dimen/tink_micro_text_size</dimen>
-  <dimen name="tink_bar_chart_auto_min_size">8dp</dimen>
+  <dimen name="tink_bar_chart_auto_min_size">8sp</dimen>
 
   <!-- Button style dimensions -->
   <dimen name="tink_button_height">52dp</dimen>
