@@ -59,7 +59,7 @@ internal class StatisticsRepository @Inject constructor(
                      // If statistics is missing data for the current month,
                      // add statistics with amount set to zero for that month as fallback for the UI.
                      // This can happen at the start of a new monthly period.
-                        .handleNoDataForCurrentPeriod()
+                        .handleNoDataForCurrentPeriod(userProfile.currency)
                 } catch (error: Throwable) {
                     emptyList()
                 }
@@ -70,12 +70,11 @@ internal class StatisticsRepository @Inject constructor(
         addSource(refreshTrigger) { update() }
     }
 
-    private fun List<Statistics>.handleNoDataForCurrentPeriod(): List<Statistics> {
+    private fun List<Statistics>.handleNoDataForCurrentPeriod(currencyCode: String): List<Statistics> {
         val missingExpensesForCurrentPeriod =
             none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
         val missingIncomeForCurrentPeriod =
             none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.INCOME_BY_CATEGORY }
-        val currencyCode = first().value.currencyCode
         val data = toMutableList()
         if (missingExpensesForCurrentPeriod) {
             data.add(
