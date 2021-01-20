@@ -33,24 +33,24 @@
       style="@style/tink_tera"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="32dp"
       android:gravity="center"
       android:text="@{totalAmount}"
       android:transitionName="@{@string/tink_amount_transition(model.title)}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toTopOf="@id/chartLayout"/>
 
     <com.tink.pfmui.charts.PieChartPartLayout
       android:id="@+id/chartLayout"
       android:layout_width="0dp"
-      android:layout_height="0dp"
+      android:layout_height="220dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:tink_chart_visible_part="0.25"
+      app:tink_chart_visible_part="0.5"
       app:layout_constraintEnd_toStartOf="@id/list"
       app:layout_constraintHorizontal_weight="1"
-      app:layout_constraintTop_toBottomOf="@id/amount">
+      app:layout_constraintTop_toTopOf="parent">
 
       <com.tink.pfmui.charts.PieChartView
         android:id="@+id/pieChart"
@@ -72,13 +72,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_weight="2"
       app:layout_constraintStart_toEndOf="@+id/chartLayout"
-      app:layout_constraintTop_toBottomOf="@id/amount">
+      app:layout_constraintTop_toTopOf="@id/chartLayout">
 
       <LinearLayout
         android:id="@+id/itemsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:clipChildren="false"
         android:orientation="vertical"
         bind:items="@{items}"
