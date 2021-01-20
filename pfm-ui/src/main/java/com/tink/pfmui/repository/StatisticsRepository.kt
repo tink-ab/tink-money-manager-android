@@ -61,6 +61,7 @@ internal class StatisticsRepository @Inject constructor(
                      // This can happen at the start of a new monthly period.
                         .handleNoDataForCurrentPeriod(userProfile.currency)
                 } catch (error: Throwable) {
+                    Timber.e(error)
                     emptyList()
                 }
                 postValue(result)
