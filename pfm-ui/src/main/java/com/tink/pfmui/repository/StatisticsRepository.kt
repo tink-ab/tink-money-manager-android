@@ -25,6 +25,7 @@ import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
+import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
