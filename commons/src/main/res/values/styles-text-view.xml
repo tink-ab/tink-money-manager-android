@@ -193,6 +193,13 @@
     <item name="android:textColor">?tink_textColorPrimary</item>
   </style>
 
+  <style name="tink_nano.primary.autoSize">
+    <item name="autoSizeTextType">uniform</item>
+    <item name="autoSizeMaxTextSize">@dimen/tink_nano_text_size</item>
+    <item name="autoSizeMinTextSize">6sp</item>
+    <item name="autoSizeStepGranularity">1sp</item>
+  </style>
+
   <style name="tink_nano.tertiary">
     <item name="android:textColor">?tink_textColorTertiary</item>
   </style>
