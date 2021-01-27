@@ -1,5 +1,11 @@
 package com.tink.pfmui.di
 
+import com.tink.pfmui.budgets.creation.BudgetCreationFragment
+import com.tink.pfmui.budgets.creation.di.BudgetCreation
+import com.tink.pfmui.budgets.creation.di.BudgetCreationModule
+import com.tink.pfmui.budgets.details.BudgetDetailsFragment
+import com.tink.pfmui.budgets.details.di.BudgetDetails
+import com.tink.pfmui.budgets.details.di.BudgetDetailsModule
 import com.tink.pfmui.insights.di.InsightsModule
 import com.tink.pfmui.insights.fragments.ArchivedInsightsFragment
 import com.tink.pfmui.insights.fragments.InsightsFragment
@@ -67,4 +73,12 @@ internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun statisticsOverTimeFragment(): StatisticsOverTimeFragment
+
+    @BudgetCreation
+    @ContributesAndroidInjector(modules = [BudgetCreationModule::class])
+    fun budgetCreationFragment(): BudgetCreationFragment
+
+    @BudgetDetails
+    @ContributesAndroidInjector(modules = [BudgetDetailsModule::class])
+    fun budgetDetailsFragment(): BudgetDetailsFragment
 }

@@ -13,6 +13,7 @@ import se.tink.utils.DateUtils.KEY_TODAY
 import se.tink.utils.DateUtils.KEY_TOMORROW
 import se.tink.utils.DateUtils.KEY_YESTERDAY
 import se.tink.utils.DateUtils.getInstance
+import se.tink.utils.ThreadSafeDateFormat
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY
@@ -58,6 +59,7 @@ internal class I18nConfiguration @Inject constructor(
 
     private fun getDateFormatsMap(): Map<String, String> {
         return mapOf(
+            ThreadSafeDateFormat.FORMATTER_YEARLY to getString(R.string.tink_date_formatter_yearly),
             FORMATTER_MONTHLY_COMPACT to getString(R.string.tink_date_formatter_monthly_compact),
             FORMATTER_MONTH_NAME to getString(R.string.tink_date_formatter_month_name),
             FORMATTER_DAILY to getString(R.string.tink_date_formatter_daily),

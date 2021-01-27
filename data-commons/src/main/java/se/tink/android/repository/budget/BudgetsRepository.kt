@@ -3,8 +3,11 @@ package se.tink.android.repository.budget
 import androidx.lifecycle.LiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.budget.BudgetCreateOrUpdateDescriptor
+import com.tink.model.budget.BudgetPeriod
+import com.tink.model.budget.BudgetSpecification
 import com.tink.model.budget.BudgetSummary
 import com.tink.service.budget.BudgetService
+import com.tink.service.handler.ResultHandler
 import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import se.tink.android.extensions.launchForResult
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -49,19 +53,20 @@ class BudgetsRepository @Inject constructor(
 
     val budgets: LiveData<List<BudgetSummary>> = _budgets
 
-    fun createOrUpdateBudget(descriptor: BudgetCreateOrUpdateDescriptor) {
-        scope.launch {
-            if (descriptor.id == null) {
+    fun createOrUpdateBudget(descriptor: BudgetCreateOrUpdateDescriptor, resultHandler: ResultHandler<BudgetSpecification>) {
+        scope.launchForResult(resultHandler) {
+            val budgetSpecification = if (descriptor.id == null) {
                 budgetService.createBudget(descriptor)
             } else {
                 budgetService.updateBudget(descriptor)
             }
             _budgets.update()
+            return@launchForResult budgetSpecification
         }
     }
 
-    fun deleteBudget(id: String) {
-        scope.launch {
+    fun deleteBudget(id: String, resultHandler: ResultHandler<Unit>) {
+        scope.launchForResult(resultHandler) {
             budgetService.deleteBudget(id)
             _budgets.update()
         }
@@ -77,9 +82,10 @@ class BudgetsRepository @Inject constructor(
     fun budgetPeriodDetails(
         budgetId: String,
         start: Instant,
-        end: Instant
+        end: Instant,
+        resultHandler: ResultHandler<Pair<BudgetSpecification, List<BudgetPeriod>>>
     ) {
-        scope.launch {
+        scope.launchForResult(resultHandler) {
             budgetService.budgetPeriodDetails(budgetId, start, end)
         }
     }
