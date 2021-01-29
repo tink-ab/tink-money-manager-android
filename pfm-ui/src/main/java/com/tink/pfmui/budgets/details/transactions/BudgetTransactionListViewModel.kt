@@ -142,12 +142,12 @@ internal class BudgetTransactionListViewModel @Inject constructor(
 
     val amountSpent: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.spentAmount.value.toBigDecimal().intValueExact()
+            budgetPeriod.spentAmount.value.toBigDecimal().toInt()
         }
 
     val totalAmount: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.budgetAmount.value.toBigDecimal().intValueExact()
+            budgetPeriod.budgetAmount.value.toBigDecimal().toInt()
         }
 
     private val totalAmountStr: LiveData<String> =
