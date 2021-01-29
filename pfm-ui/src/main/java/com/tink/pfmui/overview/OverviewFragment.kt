@@ -129,7 +129,7 @@ internal class OverviewFragment : BaseFragment() {
                     layoutParams = FrameLayout.LayoutParams(feature.width, feature.height)
                 }
                 OverviewFeature.Budgets -> {
-                    id = R.id.tink_budgets_overview_Container
+                    id = R.id.tink_budgets_overview_container
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
