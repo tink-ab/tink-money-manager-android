@@ -13,6 +13,7 @@ import com.tink.pfmui.OverviewFeatures
 import com.tink.pfmui.R
 import com.tink.pfmui.insights.fragments.OverviewInsightsFragment
 import com.tink.pfmui.overview.accounts.AccountsListFragment
+import com.tink.pfmui.overview.budgets.BudgetsOverviewFragment
 import com.tink.pfmui.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.pfmui.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.tink_fragment_overview.*
@@ -24,7 +25,7 @@ internal class OverviewFragment : BaseFragment() {
     override fun viewReadyAfterLayout(): Boolean = false
 
     private val overviewFeatures: OverviewFeatures by lazy {
-        requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_FEATURES))
+        requireNotNull(arguments?.getParcelable(ARG_FEATURES))
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +76,15 @@ internal class OverviewFragment : BaseFragment() {
             is OverviewFeature.CustomContainerView -> {
                 containerIdForFeature(feature, overviewContainer, requireContext())
             }
+
+            OverviewFeature.Budgets -> {
+                childFragmentManager.transaction {
+                    replace(
+                        containerIdForFeature(feature, overviewContainer, requireContext()),
+                        BudgetsOverviewFragment()
+                    )
+                }
+            }
         }
     }
 
@@ -117,6 +127,13 @@ internal class OverviewFragment : BaseFragment() {
                 is OverviewFeature.CustomContainerView -> {
                     id = feature.containerViewId
                     layoutParams = FrameLayout.LayoutParams(feature.width, feature.height)
+                }
+                OverviewFeature.Budgets -> {
+                    id = R.id.tink_budgets_overview_Container
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
                 }
             }
         }
