@@ -98,6 +98,7 @@
           android:layout_height="wrap_content"
           android:indeterminateTintMode="src_atop"
           android:visibility="@{viewModel.loading}"
+          android:indeterminateTint="?tink_colorAccent"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
