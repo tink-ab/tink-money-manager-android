@@ -134,20 +134,20 @@ internal class BudgetTransactionListViewModel @Inject constructor(
     val amountLeftColor: LiveData<Int> =
         Transformations.map(amountLeft) {
             if (it > 0) {
-                R.attr.tink_expensesColor
+                context.getColorFromAttr(R.attr.tink_expensesColor)
             } else {
-                R.attr.tink_warningColor
+                context.getColorFromAttr(R.attr.tink_warningColor)
             }
         }
 
     val amountSpent: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.spentAmount.value.toBigDecimal().intValueExact()
+            budgetPeriod.spentAmount.value.toBigDecimal().toInt()
         }
 
     val totalAmount: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.budgetAmount.value.toBigDecimal().intValueExact()
+            budgetPeriod.budgetAmount.value.toBigDecimal().toInt()
         }
 
     private val totalAmountStr: LiveData<String> =

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.tink.pfmui.overview.OverviewChartViewModel
 import com.tink.pfmui.overview.accounts.AccountDetailsViewModel
 import com.tink.pfmui.overview.accounts.AccountsViewModel
+import com.tink.pfmui.overview.budgets.BudgetsOverviewViewModel
 import com.tink.pfmui.overview.charts.CategorySelectionViewModel
 import com.tink.pfmui.overview.charts.ChartDetailsViewModel
 import com.tink.pfmui.overview.charts.PieChartDetailsViewModel
@@ -265,4 +266,9 @@ internal interface ViewModelModule {
     @IntoMap
     @ViewModelKey(StatisticsOverTimeViewModel::class)
     fun bindStatisticsOverTimeViewModel(model: StatisticsOverTimeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(BudgetsOverviewViewModel::class)
+    fun bindOverviewBudgetsViewModel(model: BudgetsOverviewViewModel): ViewModel
 }

@@ -12,4 +12,5 @@
   <item name="tink_clipping_info" type="id"/>
   <item name="tink_menu_close" type="id" />
   <item name="tink_action_transactions" type="id" />
+  <item name="tink_budgets_overview_container" type="id"/>
 </resources>
