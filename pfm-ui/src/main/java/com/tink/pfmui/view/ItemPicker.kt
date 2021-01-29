@@ -105,10 +105,12 @@ internal abstract class ItemPicker<T : Any> : FrameLayout {
 
     fun setPreviousButtonEnabled(enabled: Boolean) {
         iconLeft.isEnabled = enabled
+        iconLeft.alpha = if (enabled) 1.0f else disabledAlpha
     }
 
     fun setNextButtonEnabled(enabled: Boolean) {
         iconRight.isEnabled = enabled
+        iconRight.alpha = if (enabled) 1.0f else disabledAlpha
     }
 
     private fun updateArrows() {
