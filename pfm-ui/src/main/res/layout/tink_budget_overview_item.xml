@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:background="@drawable/tink_standard_row_background">
+
+  <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/icon"
+    android:layout_width="@dimen/tink_category_icon_size"
+    android:layout_height="@dimen/tink_category_icon_size"
+    android:layout_margin="16dp"
+    android:scaleType="center"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
+    tools:srcCompat="@drawable/tink_category_healthandbeauty" />
+
+  <Space
+    android:id="@+id/spacer"
+    android:layout_width="2dp"
+    android:layout_height="2dp"
+    app:layout_constraintBottom_toTopOf="@+id/icon"
+    app:layout_constraintStart_toEndOf="@+id/icon" />
+
+  <TextView
+    android:id="@+id/name"
+    style="@style/tink_deci.primary"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginStart="76dp"
+    android:layout_marginEnd="16dp"
+    app:layout_constraintEnd_toStartOf="@+id/budgetDateInterval"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="Restaurang" />
+
+  <TextView
+    android:id="@+id/budgetDateInterval"
+    style="@style/tink_deci"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="16dp"
+    android:gravity="end"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/name"
+    tools:text="Jun-Aug" />
+
+  <ProgressBar
+    android:id="@+id/budgetProgress"
+    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    android:layout_width="0dp"
+    android:layout_height="6dp"
+    android:layout_marginTop="16dp"
+    android:progressDrawable="@drawable/tink_rounded_horizontal_progress"
+    app:layout_constraintEnd_toEndOf="@+id/budgetDateInterval"
+    app:layout_constraintStart_toStartOf="@+id/name"
+    app:layout_constraintTop_toBottomOf="@+id/name"
+    tools:progress="50"
+    tools:max="100" />
+
+  <TextView
+    android:id="@+id/budgetProgressText"
+    style="@style/tink_deci.semibold"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="20dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="@id/budgetProgress"
+    app:layout_constraintTop_toBottomOf="@id/budgetProgress"
+    tools:text="1297 kr kvar av 3 000 kr" />
+
+  <View
+    android:id="@+id/divider"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    android:layout_marginEnd="16dp"
+    android:background="?tink_dividerColor"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@id/name"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
