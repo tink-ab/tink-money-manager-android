@@ -34,7 +34,7 @@ internal class BudgetDetailsFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_budget_details
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getTitle(): String = "Budget details TEST" //TODO: Budgets
+    override fun getTitle(): String = getString(R.string.tink_budget_details_toolbar_title)
     override fun hasToolbar(): Boolean = false
     override fun doNotRecreateView(): Boolean = false
 
