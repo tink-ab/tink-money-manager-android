@@ -36,14 +36,15 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
         Transformations.map(treeListSelectionItems) { treeListSelectionItems ->
             mutableListOf<TreeListSelectionItem>().apply {
                 addAll(treeListSelectionItems)
-                add(
-                    TreeListSelectionItem.ActionItem(
-                        id = context.getString(R.string.tink_filter_search_item),
-                        label = context.getString(R.string.tink_budget_create_search_label),
-                        iconRes = R.drawable.tink_search,
-                        action = { _searchClicked.postValue(Event(true)) }
-                    )
-                )
+                // Hide create by keyword or tag option until implemented
+//                add(
+//                    TreeListSelectionItem.ActionItem(
+//                        id = context.getString(R.string.tink_filter_search_item),
+//                        label = context.getString(R.string.tink_budget_create_search_label),
+//                        iconRes = R.drawable.tink_search,
+//                        action = { _searchClicked.postValue(Event(true)) }
+//                    )
+//                )
             }
         }
 

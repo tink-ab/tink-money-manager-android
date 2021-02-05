@@ -101,7 +101,8 @@
   <string name="tink_budget_create_field_period_yearly">Yearly</string>
   <string name="tink_budget_create_field_period_custom">Custom</string>
   <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
-  <string name="tink_budget_create_search_label">Create with keyword or &#35;tag</string>
+<!--  <string name="tink_budget_create_search_label">Create with keyword or &#35;tag</string>-->
+
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
   <string name="tink_budget_edit_title">Edit budget</string>
   <string name="tink_budget_edit_button_category">Edit budget for %s</string>
@@ -117,6 +118,7 @@
   <string name="tink_budget_delete_dialog_message">Are you sure you want to remove the budget \"%s\"?</string>
   <string name="tink_budget_delete_dialog_confirm_button">Delete</string>
   <string name="tink_budget_title_category">Budget for %s</string>
+
   <string name="tink_budget_no_transactions">There are no transactions to show for this budget.</string>
   <string name="tink_budget_header_title_over">%s over budget</string>
   <string name="tink_budget_show_transaction_btn_title">See Transactions</string>
