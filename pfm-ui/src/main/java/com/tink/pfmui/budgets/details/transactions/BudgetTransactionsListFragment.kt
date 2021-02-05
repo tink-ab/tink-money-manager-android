@@ -6,11 +6,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.pfmui.BaseFragment
+import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.R
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.pfmui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.pfmui.databinding.TinkFragmentBudgetTransactionsListBinding
 import com.tink.pfmui.tracking.ScreenEvent
+import com.tink.pfmui.transaction.CategorizationFlowFragment
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.view.*
 import kotlinx.android.synthetic.main.tink_item_picker.view.iconLeft
@@ -51,7 +53,14 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
 
         adapter = TransactionItemListAdapter(dateUtils).also {
             it.onTransactionItemClickedListener = { transactionId ->
-                // TODO: Budgets - change category flow
+                CategorizationFlowFragment
+                    .newInstance(transactionId)
+                    .also { fragment ->
+                        fragmentCoordinator.replace(
+                            fragment,
+                            animation = FragmentAnimationFlags.FADE_IN_ONLY
+                        )
+                    }
             }
         }
 
@@ -65,7 +74,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         transactionsListViewModel.apply {
             transactionItems.observe(viewLifecycle, { transactionItems ->
                 transactionItems?.let {
-                        adapter.setTransactionItems(it)
+                    adapter.setTransactionItems(it)
                 }
             })
             budgetName.observe(viewLifecycle, { name ->
