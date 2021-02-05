@@ -89,14 +89,6 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             }
         })
 
-//        viewModel.amountTextWatcher.observe(viewLifecycle, {
-//            amountInputText.addTextChangedListener(it)
-//        })
-//
-//        viewModel.amountInputKeyListener.observe(viewLifecycle, {
-//            amountInputText.keyListener = it
-//        })
-
         viewModel.amount?.let {
             viewModel.amountTextWatcher.value?.getTextFromAmount(it)?.let { amountString ->
                 viewModel.amountString.postValue(amountString)
