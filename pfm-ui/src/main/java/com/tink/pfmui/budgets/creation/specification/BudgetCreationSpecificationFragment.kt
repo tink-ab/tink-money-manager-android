@@ -22,10 +22,12 @@ import com.tink.pfmui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.pfmui.extensions.closeKeyboard
 import com.tink.pfmui.extensions.openKeyboard
 import com.tink.pfmui.tracking.ScreenEvent
+import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.view.*
 import java.util.Calendar
 import javax.inject.Inject
+import javax.inject.Named
 
 internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
@@ -37,6 +39,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     internal lateinit var budgetCreationViewModelFactory: BudgetCreationViewModelFactory
 
     internal lateinit var viewModel: BudgetCreationSpecificationViewModel
+
+    @Inject
+    @field:Named(TinkSnackbar.Theme.ERROR_THEME)
+    lateinit var errorSnackbarTheme: TinkSnackbar.Theme
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_budget_creation_specification
     override fun needsLoginToBeAuthorized(): Boolean = true
@@ -77,8 +83,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             }
         })
 
-        viewModel.createdBudgetError.observe(viewLifecycleOwner, {
-            // TODO: Handle error
+        viewModel.createdBudgetError.observe(viewLifecycleOwner, { error ->
+            context?.let {
+                snackbarManager.displayError(error, it, errorSnackbarTheme)
+            }
         })
 
 //        viewModel.amountTextWatcher.observe(viewLifecycle, {
