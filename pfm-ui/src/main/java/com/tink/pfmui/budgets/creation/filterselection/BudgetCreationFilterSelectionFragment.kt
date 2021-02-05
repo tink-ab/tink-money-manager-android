@@ -35,7 +35,7 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.tink_fragment_budget_creation_filter_selection
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun doNotRecreateView(): Boolean = false
-    override fun getScreenEvent(): ScreenEvent? = null // TODO: Budgets
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.CREATE_BUDGET
     override fun hasToolbar(): Boolean = true
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {

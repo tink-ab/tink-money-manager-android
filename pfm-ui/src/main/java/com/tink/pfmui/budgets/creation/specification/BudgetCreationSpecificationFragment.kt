@@ -43,7 +43,12 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
 
-    override fun getScreenEvent(): ScreenEvent? = null //TODO: Budgets
+    override fun getScreenEvent(): ScreenEvent =
+        if (viewModel.isEditing) {
+            ScreenEvent.EDIT_BUDGET
+        } else {
+            ScreenEvent.CREATE_BUDGET
+        }
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)

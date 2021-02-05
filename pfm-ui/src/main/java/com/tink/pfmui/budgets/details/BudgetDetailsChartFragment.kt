@@ -42,7 +42,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getTitle(): String = getString(R.string.tink_budget_details_toolbar_title)
     override fun doNotRecreateView(): Boolean = false
-    override fun getScreenEvent(): ScreenEvent? = null //TODO: Budgets
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.BUDGET_DETAILS
     override fun hasToolbar(): Boolean = true
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {

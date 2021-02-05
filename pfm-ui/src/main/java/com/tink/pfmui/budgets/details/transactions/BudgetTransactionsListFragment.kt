@@ -37,7 +37,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
     override fun getTitle(): String = "Budget transactions TEST" //TODO: Budgets
     override fun doNotRecreateView(): Boolean = false
     override fun hasToolbar(): Boolean = true
-    override fun getScreenEvent(): ScreenEvent? = null //TODO: Budgets
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.BUDGET_TRANSACTIONS
 
     private lateinit var adapter: TransactionItemListAdapter
 
