@@ -86,6 +86,12 @@
     <!-- Text appearance -->
     <attr name="tink_dateGroupTextAppearance" format="reference" />
 
+    <!-- TextInputLayout style -->
+    <attr name="tink_textInputLayoutStyle" format="reference" />
+
+    <!-- Tink_TinkEditTextStyle -->
+    <attr name="tink_editTextStyle" format="reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

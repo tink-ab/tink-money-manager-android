@@ -24,9 +24,12 @@
       android:hint="@string/tink_budget_create_field_amount_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
+      app:layout_constraintTop_toTopOf="parent"
+      app:theme="?attr/tink_textInputLayoutStyle">
+
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/amountInputText"
+        style="?attr/tink_editTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@={viewModel.amountString}"
@@ -34,6 +37,7 @@
         app:addTextChangedListener="@{viewModel.amountTextWatcher}"
         app:keyListener="@{viewModel.amountInputKeyListener}"
         tools:text="3 000"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -60,9 +64,12 @@
       android:hint="@string/tink_budget_create_field_period_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/averageAmountText">
+      app:layout_constraintTop_toBottomOf="@id/averageAmountText"
+      app:theme="?attr/tink_textInputLayoutStyle">
+
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/periodText"
+        style="?attr/tink_editTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:editable="false"
@@ -70,6 +77,7 @@
         android:text="@{viewModel.periodValueText}"
         android:textAppearance="@style/tink_hecto"
         tools:text="Egen"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -83,9 +91,12 @@
       android:visibility="@{viewModel.showPeriodDateField}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/periodInputLayout">
+      app:layout_constraintTop_toBottomOf="@id/periodInputLayout"
+      app:theme="?attr/tink_textInputLayoutStyle">
+
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/periodStartText"
+        style="?attr/tink_editTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:editable="false"
@@ -106,9 +117,12 @@
       android:visibility="@{viewModel.showPeriodDateField}"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/periodStartInputLayout">
+      app:layout_constraintTop_toBottomOf="@id/periodStartInputLayout"
+      app:theme="?attr/tink_textInputLayoutStyle">
+
       <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/periodEndText"
+        style="?attr/tink_editTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:editable="false"
@@ -116,6 +130,7 @@
         android:textAppearance="@style/tink_hecto"
         android:text="@{viewModel.periodEndText}"
         tools:text="28 maj 2018"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton

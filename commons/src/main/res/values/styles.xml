@@ -82,5 +82,12 @@
 
     <!-- Text styles -->
     <item name="tink_dateGroupTextAppearance">@style/TinkDateGroupTextAppearance</item>
+
+    <!-- TextInputLayout style -->
+    <item name="tink_textInputLayoutStyle">@style/TinkTextInputLayoutStyle</item>
+
+    <!-- Tink_TinkEditTextStyle -->
+    <item name="tink_editTextStyle">@style/TinkEditTextStyle</item>
+
   </style>
 </resources>
