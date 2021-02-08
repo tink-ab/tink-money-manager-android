@@ -92,6 +92,9 @@
     <!-- Tink_TinkEditTextStyle -->
     <attr name="tink_editTextStyle" format="reference" />
 
+    <!-- Alert dialog style -->
+    <attr name="tink_alertDialogStyle" format="reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

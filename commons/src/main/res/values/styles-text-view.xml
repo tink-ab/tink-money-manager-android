@@ -256,4 +256,19 @@
     <item name="android:textColor">?tink_textColorPrimary</item>
   </style>
 
+  <style name="TinkMaterialAlertDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+    <item name="colorSurface">?tink_backgroundColor</item>
+    <item name="colorPrimary">?tink_colorPrimary</item>
+    <item name="colorOnSurface">?tink_textColorPrimary</item>
+    <item name="android:textAppearance">@style/tink_mega</item>
+    <item name="textColorAlertDialogListItem">?tink_textColorPrimary</item>
+    <item name="textAppearanceListItem">@style/tink_hecto</item>
+    <item name="materialAlertDialogBodyTextStyle">@style/TinkMaterialAlertDialogBodyTextStyle</item>
+  </style>
+
+  <style name="TinkMaterialAlertDialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+    <item name="android:textAppearance">@style/tink_hecto</item>
+    <item name="android:textColor">?tink_textColorPrimary</item>
+  </style>
+
 </resources>

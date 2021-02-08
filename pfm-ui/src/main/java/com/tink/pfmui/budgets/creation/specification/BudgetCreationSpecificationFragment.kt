@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import org.joda.time.DateTime
@@ -21,11 +21,11 @@ import com.tink.pfmui.budgets.creation.specification.PeriodValue.YEAR
 import com.tink.pfmui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.pfmui.extensions.closeKeyboard
 import com.tink.pfmui.extensions.openKeyboard
-import com.tink.pfmui.overview.OverviewFragment
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.view.*
+import se.tink.commons.extensions.getThemeResIdFromAttr
 import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
@@ -160,7 +160,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_item_delete_budget) {
             context?.let { context ->
-                AlertDialog.Builder(context)
+                MaterialAlertDialogBuilder(
+                    context,
+                    context.getThemeResIdFromAttr(R.attr.tink_alertDialogStyle)
+                )
                     .setMessage(
                         getString(
                             R.string.tink_budget_delete_dialog_message,
@@ -183,7 +186,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         val choiceItemTexts = choiceItems
             .map { it.toChoiceString(context) }
             .toTypedArray()
-        AlertDialog.Builder(context)
+        MaterialAlertDialogBuilder(
+            context,
+            context.getThemeResIdFromAttr(R.attr.tink_alertDialogStyle)
+        )
             .setItems(choiceItemTexts) { _, choiceIndex ->
                 viewModel.periodValue.value = choiceItems[choiceIndex]
             }

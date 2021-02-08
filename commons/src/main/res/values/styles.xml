@@ -89,5 +89,8 @@
     <!-- Tink_TinkEditTextStyle -->
     <item name="tink_editTextStyle">@style/TinkEditTextStyle</item>
 
+    <!-- Alert dialog style -->
+    <item name="tink_alertDialogStyle">@style/TinkMaterialAlertDialogStyle</item>
+
   </style>
 </resources>
