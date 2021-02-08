@@ -21,6 +21,7 @@ import com.tink.pfmui.budgets.creation.specification.PeriodValue.YEAR
 import com.tink.pfmui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.pfmui.extensions.closeKeyboard
 import com.tink.pfmui.extensions.openKeyboard
+import com.tink.pfmui.overview.OverviewFragment
 import com.tink.pfmui.tracking.ScreenEvent
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
@@ -142,7 +143,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                     context
                 )
             } else if (errorOrValue?.value != null) {
-                fragmentCoordinator.backToMainScreen()
+                // Exit budgets edit flow
+                fragmentCoordinator.popBackStack()
+                // Pop to overview
+                fragmentCoordinator.handleBackPress()
             }
         })
     }

@@ -76,6 +76,16 @@ internal class BudgetDetailsNavigation(
     fun openTransactionsList() =
         fragmentCoordinator.replace(BudgetTransactionsListFragment.newInstance())
 
-    fun handleBackPress() = fragmentCoordinator.handleBackPress()
+    fun handleBackPress(): Boolean {
+        return if (fragmentCoordinator.backStackEntryCount > 0) {
+            // Navigate back within the budgets details flow
+            fragmentCoordinator.popBackStack()
+            true
+        } else {
+            // Navigate back to overview
+            false
+        }
+    }
+
     fun handleUpPressed() = budgetDetailsFragment.onUpPressed()
 }

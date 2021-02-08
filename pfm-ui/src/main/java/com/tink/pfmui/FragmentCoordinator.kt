@@ -118,9 +118,8 @@ internal class FragmentCoordinator(
         if (!topActiveFragment?.onBackPressed().isTrue()) {
             // Temporary fix to use popBackStack() instead of popBackStackImmediate() since the latter doesn't seem to pop the fragment from the backstack in the current setup.
             popBackStack()
-            return true
         }
-        return false
+        return true
     }
 
     fun handleThirdPartyCallbackResult(state: String, parameters: Map<String, String>) =

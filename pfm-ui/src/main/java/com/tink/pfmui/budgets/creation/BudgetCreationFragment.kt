@@ -67,7 +67,7 @@ internal class BudgetCreationFragment : BaseFragment() {
         }
     }
 
-    override fun onBackPressed(): Boolean = navigation.handleBackPressed()
+    override fun onBackPressed(): Boolean = navigation.handleBackPress()
 
     fun goToDetailsFragment(budgetId: String) {
         popToOverview()
@@ -96,7 +96,16 @@ internal class BudgetCreationNavigation(private val fragmentCoordinator: Fragmen
         )
     }
 
-    fun handleBackPressed(): Boolean = fragmentCoordinator.handleBackPress()
+    fun handleBackPress(): Boolean {
+        return if (fragmentCoordinator.backStackEntryCount > 0) {
+            // Navigate back within the budgets creation flow
+            fragmentCoordinator.popBackStack()
+            true
+        } else {
+            // Navigate back to overview
+            false
+        }
+    }
 
     fun goToSearchFragment() {
         fragmentCoordinator.replace(fragment = BudgetCreationSearchFragment.newInstance())
