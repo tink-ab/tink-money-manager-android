@@ -4,17 +4,21 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
 import com.tink.model.budget.BudgetPeriod
 import com.tink.model.budget.BudgetSpecification
 import com.tink.model.time.Period
+import com.tink.model.transaction.Transaction
 import com.tink.pfmui.extensions.getInstant
 import com.tink.pfmui.extensions.minusMonths
 import com.tink.pfmui.repository.StatisticsRepository
 import com.tink.service.handler.ResultHandler
+import kotlinx.coroutines.Job
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.budget.BudgetsRepository
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
@@ -25,7 +29,8 @@ internal class BudgetSelectionController(
     private val budgetsRepository: BudgetsRepository,
     statisticsRepository: StatisticsRepository,
     lifecycle: Lifecycle,
-    private val periodStart: DateTime?
+    private val periodStart: DateTime?,
+    private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : LifecycleObserver {
     private val _budgetSpecification = MutableLiveData<BudgetSpecification>()
     val budgetSpecification: LiveData<BudgetSpecification> = _budgetSpecification
@@ -40,24 +45,32 @@ internal class BudgetSelectionController(
     private val _currentSelectedPeriod = MutableLiveData<BudgetPeriod>()
     val currentSelectedPeriod: LiveData<BudgetPeriod> = _currentSelectedPeriod
 
-    // TODO: Budgets subscribe to transaction updates
+    private var updateListenerJob: Job? = null
 
-//    private val transactionUpdateObserver: ChangeObserver<Transaction> =
-//        object : ListChangeObserver<Transaction>() {
-//            override fun onUpdate(items: MutableList<Transaction>?) {
-//                items?.map { it.timestamp }
-//                    ?.mapNotNull { timestamp ->
-//                        budgetPeriods.find {
-//                            it.start.isBefore(timestamp) && it.end.isAfter(
-//                                timestamp
-//                            )
-//                        }
-//                    }
-//                    ?.let { list -> currentSelectedPeriod.value?.let { list.toMutableList() + it } }
-//                    ?.distinct()
-//                    ?.forEach { updateBudgetPeriods(budgetId, it.start, it.end) }
-//            }
-//        }
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun startListeningForTransactionUpdates() {
+        updateListenerJob = transactionUpdateEventBus.subscribe { updatedTransaction ->
+            updateWith(listOf(updatedTransaction))
+        }
+    }
+
+    private fun updateWith(transactions: List<Transaction>) {
+        transactions
+            .map { it.date }
+            .mapNotNull { date ->
+                budgetPeriods.find {
+                    it.start.isBefore(date) && it.end.isAfter(date)
+                }
+            }
+            .let { list -> currentSelectedPeriod.value?.let { list.toMutableList() + it } }
+            ?.distinct()
+            ?.forEach { updateBudgetPeriods(budgetId, it.start, it.end) }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun stopListeningForTransactionUpdates() {
+        updateListenerJob?.cancel()
+    }
 
     init {
         updateBudgetPeriods(
@@ -67,18 +80,6 @@ internal class BudgetSelectionController(
         )
         lifecycle.addObserver(this)
     }
-
-// TODO: Budgets subscribe to transaction updates
-
-//    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-//    fun startListeningForTransactionUpdates() {
-//        streamingService.subscribeForTransactions(transactionUpdateObserver)
-//    }
-//
-//    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-//    fun stopListeningForTransactionUpdates() {
-//        streamingService.unsubscribe(transactionUpdateObserver)
-//    }
 
     private fun updateBudgetPeriods(budgetId: String, start: Instant, end: Instant) {
         budgetsRepository.budgetPeriodDetails(

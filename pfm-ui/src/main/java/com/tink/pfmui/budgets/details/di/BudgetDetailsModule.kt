@@ -24,6 +24,7 @@ import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
 import se.tink.android.repository.ExceptionTracker
 import se.tink.android.repository.budget.BudgetsRepository
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.utils.DateUtils
 import javax.inject.Named
 import javax.inject.Scope
@@ -67,7 +68,8 @@ internal class BudgetDetailsModule {
         fragment: BudgetDetailsFragment,
         budgetsRepository: BudgetsRepository,
         statisticsRepository: StatisticsRepository,
-        exceptionTracker: ExceptionTracker
+        exceptionTracker: ExceptionTracker,
+        transactionUpdateEventBus: TransactionUpdateEventBus
     ): BudgetSelectionController {
 
         val periodStart = try {
@@ -89,7 +91,8 @@ internal class BudgetDetailsModule {
             budgetsRepository,
             statisticsRepository,
             fragment.lifecycle,
-            periodStart
+            periodStart,
+            transactionUpdateEventBus
         )
     }
 
