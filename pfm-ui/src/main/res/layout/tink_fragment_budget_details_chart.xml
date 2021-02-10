@@ -93,7 +93,6 @@
       android:layout_width="match_parent"
       android:layout_height="@dimen/tink_button_height"
       android:layout_alignParentBottom="true"
-      android:background="?attr/tink_cardBackgroundColor"
       android:text="@{viewModel.budgetPeriodInterval}"
       android:visibility="@{!(viewModel.loading ?? false)}"
       app:showButtons="@{viewModel.showPickerButtons ?? false}"
