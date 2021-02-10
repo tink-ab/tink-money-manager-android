@@ -59,10 +59,10 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
                         ?.let { category -> Budget.Specification.Filter.Category(category.code) }
 
                     Budget.Specification.Filter(
-                        accounts = listOf(), // TODO probably needs actual accounts, just select all?
+                        accounts = listOf(),
                         categories = listOfNotNull(selectedCategory),
-                        tags = emptyList(), // TODO after MVP
-                        freeTextQuery = "" // TODO after MVP
+                        tags = emptyList(), // Send empty list of tags until feature is implemented
+                        freeTextQuery = "" // Send empty query until feature is implemented
                     )
                 }
             }
