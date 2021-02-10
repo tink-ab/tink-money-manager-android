@@ -88,7 +88,7 @@ internal abstract class ItemPicker<T : Any> : FrameLayout {
     }
 
     fun setShowButtons(visible: Boolean) {
-        val visibility = if (visible) View.VISIBLE else View.GONE
+        val visibility = if (visible) View.VISIBLE else View.INVISIBLE
         iconLeft.visibility = visibility
         iconRight.visibility = visibility
     }
