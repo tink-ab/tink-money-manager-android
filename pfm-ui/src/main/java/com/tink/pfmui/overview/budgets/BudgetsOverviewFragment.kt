@@ -1,9 +1,7 @@
 package com.tink.pfmui.overview.budgets
 
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.pfmui.BaseFragment
@@ -44,6 +42,10 @@ internal class BudgetsOverviewFragment : BaseFragment() {
         }
 
         newBudgetButton.setOnClickListener {
+            fragmentCoordinator.replace(BudgetCreationFragment.newInstance())
+        }
+
+        budgetsEmptyIcon.setOnClickListener {
             fragmentCoordinator.replace(BudgetCreationFragment.newInstance())
         }
 
