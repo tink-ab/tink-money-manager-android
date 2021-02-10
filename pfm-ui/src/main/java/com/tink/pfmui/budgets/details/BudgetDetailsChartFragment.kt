@@ -71,7 +71,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             barChartEnabled.observe(viewLifecycle, {
                 if (it == true) {
                     viewPager.adapter = ChartPagerAdapter(pageCount = 2)
-                    pagingIndicator.initialize(viewPager)
+                    tabs.setupWithViewPager(viewPager)
                 } else {
                     viewPager.adapter = ChartPagerAdapter(pageCount = 1)
                 }
@@ -142,6 +142,13 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                 return binding.root
             }
         }
+
+        override fun getPageTitle(position: Int) =
+            if (position == 0) {
+                context?.getString(R.string.tink_budget_details_selector_monthly) ?: ""
+            } else {
+                context?.getString(R.string.tink_budget_details_selector_over_time) ?: ""
+            }
 
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =
             container.removeView(obj as View)

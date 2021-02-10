@@ -28,32 +28,13 @@
         android:background="?attr/tink_backgroundColor"
         tools:context=".budgets.details.BudgetDetailsChartFragment">
 
-        <TextView
-          android:id="@+id/amountSpent"
-          style="@style/tink_deci.action.bold"
-          android:layout_width="wrap_content"
+        <com.tink.pfmui.view.TinkTabs
+          android:id="@+id/tabs"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
-          android:layout_marginBottom="8dp"
-          android:text="@{viewModel.amountSpent}"
-          android:textColor="@{viewModel.amountLeftColor}"
-          app:layout_constraintBottom_toTopOf="@+id/budgetProgress"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0.0"
-          tools:text="550 kr spenderat"/>
-
-        <com.tink.pfmui.view.ViewPagerIndicator
-          android:id="@+id/pagingIndicator"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="32dp"
-          android:visibility="@{viewModel.barChartEnabled}"
-          app:tink_viewpager_indicator_color="?attr/tink_colorAccent"
-          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/amountSpent"/>
+          app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.viewpager.widget.ViewPager
           android:id="@+id/viewPager"

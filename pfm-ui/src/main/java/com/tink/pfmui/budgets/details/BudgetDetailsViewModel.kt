@@ -13,7 +13,6 @@ import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.pfmui.R
 import com.tink.pfmui.budgets.creation.specification.EXACT_NUMBER_ZERO
-import com.tink.pfmui.extensions.periodUnitString
 import com.tink.pfmui.extensions.toHistoricIntervalLabel
 import com.tink.pfmui.extensions.toPeriodChartLabel
 import com.tink.pfmui.util.extensions.formatCurrencyRound
@@ -25,9 +24,7 @@ import org.joda.time.Years
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.extensions.*
 import se.tink.utils.DateUtils
-import java.math.BigDecimal
 import javax.inject.Inject
-import kotlin.math.abs
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -202,55 +199,6 @@ internal class BudgetDetailsViewModel @Inject constructor(
                 it.name
             )
         }
-
-    private val amountSpentInPeriod: LiveData<String> =
-        Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.spentAmount.formatCurrencyRound()?.let {
-                context.getString(R.string.tink_budget_details_amount_spent, it)
-            }
-        }
-
-    private val amountSpentOnAverage = MediatorLiveData<String>().apply {
-        fun update() {
-            if (barChartEnabled.value == true) {
-                whenNonNull(
-                    historicPeriodsList.value,
-                    budgetDetailsDataHolder.budget.value?.periodicity as? RecurringPeriodicity
-                ) { periodsList, periodicity ->
-                    val averageSpent = periodsList
-                        .dropLast(1)
-                        .map { it.spentAmount.value.doubleValue() }
-                        .average()
-                        .roundToInt()
-                    val averageSpentAmount = Amount(
-                        ExactNumber(BigDecimal(abs(averageSpent))),
-                        periodsList.first().spentAmount.currencyCode
-                    ).formatCurrencyRound()
-                    value = context.getString(
-                        R.string.tink_budget_details_spent_average,
-                        averageSpentAmount,
-                        periodicity.periodUnitString(context)
-                    )
-                }
-            }
-        }
-        addSource(budgetDetailsDataHolder.budget) { update() }
-        addSource(barChartEnabled) { update() }
-        addSource(historicPeriodsList) { update() }
-    }
-
-    val amountSpent: LiveData<String> = MediatorLiveData<String>().apply {
-        fun update() {
-            value = if (isBarChartShowing.value == true && amountSpentOnAverage.value != null) {
-                amountSpentOnAverage.value
-            } else {
-                amountSpentInPeriod.value
-            }
-        }
-        addSource(amountSpentInPeriod) { update() }
-        addSource(amountSpentOnAverage) { update() }
-        addSource(isBarChartShowing) { update() }
-    }
 
     private val historicPeriodInterval = MediatorLiveData<String>().apply {
         fun update() {
