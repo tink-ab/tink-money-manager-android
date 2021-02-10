@@ -75,14 +75,14 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             dataHolder.amount.addSource(
                 Transformations.map(liveData) { amountTextWatcher.getAmountFromText(it) }
             ) {
-                dataHolder.amount.postValue(it)
+                amount?.let { dataHolder.amount.postValue(it) }
             }
         }
         liveData.addSource(amountTextWatcher) { amountTextWatcher ->
             dataHolder.amount.addSource(
                 Transformations.map(liveData) { amountTextWatcher.getAmountFromText(it) }
-            ) {
-                dataHolder.amount.postValue(it)
+            ) { amount ->
+                amount?.let { dataHolder.amount.postValue(it) }
             }
         }
     }

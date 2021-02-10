@@ -90,11 +90,13 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             }
         })
 
-        viewModel.amount?.let {
-            viewModel.amountTextWatcher.value?.getTextFromAmount(it)?.let { amountString ->
-                viewModel.amountString.postValue(amountString)
+        viewModel.amountTextWatcher.observe(viewLifecycleOwner, { amountTextWatcher ->
+            viewModel.amount?.let {
+                amountTextWatcher.getTextFromAmount(it).let { amountString ->
+                    viewModel.amountString.postValue(amountString)
+                }
             }
-        }
+        })
 
         amountInputText.setOnFocusChangeListener { inputView, hasFocus ->
             val editText = inputView as EditText
