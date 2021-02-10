@@ -8,8 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
-import com.tink.pfmui.budgets.creation.BudgetCreationFragment
-import com.tink.pfmui.budgets.details.BudgetDetailsFragment
 import com.tink.pfmui.databinding.TinkFragmentOverviewInsightsBinding
 import com.tink.pfmui.insights.CurrentInsightsViewModel
 import com.tink.pfmui.insights.InsightsViewModel
@@ -61,9 +59,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setOnClickListener {
-//                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
-//                        fragmentCoordinator.replace(BudgetDetailsFragment.newInstance("7357d16ca5094544b7d08e6cded15824"))
-                        fragmentCoordinator.replace(BudgetCreationFragment.newInstance())
+                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
                     }
                 }
                 insightsCard.visibility = View.VISIBLE
