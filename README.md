@@ -20,7 +20,7 @@ allprojects {
 
 _Note: The `mavenLocal()` repository needs to be on top of the other repositories, as shown above._
 
-4. Add dependency on the Tink Money Manager package:
+4. Add dependency on the Tink Money Manager SDK:
 
 ```groovy
 dependencies {
