@@ -71,9 +71,11 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             barChartEnabled.observe(viewLifecycle, {
                 if (it == true) {
                     viewPager.adapter = ChartPagerAdapter(pageCount = 2)
+                    tabs.visibility = View.VISIBLE
                     tabs.setupWithViewPager(viewPager)
                 } else {
                     viewPager.adapter = ChartPagerAdapter(pageCount = 1)
+                    tabs.visibility = View.GONE
                 }
             })
         }
