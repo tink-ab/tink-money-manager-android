@@ -205,8 +205,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         context?.let { context ->
             DatePickerDialog(
                 context,
-                0, //TODO: Budgets
-//                R.style.MyDatePickerDialogTheme,
+                context.getThemeResIdFromAttr(R.attr.tink_datePickerStyle),
                 { _, year, month, dayOfMonth ->
                     val calendar = Calendar.getInstance()
                     calendar.set(Calendar.YEAR, year)

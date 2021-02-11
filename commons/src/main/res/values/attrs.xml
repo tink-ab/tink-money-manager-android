@@ -95,6 +95,9 @@
     <!-- Alert dialog style -->
     <attr name="tink_alertDialogStyle" format="reference" />
 
+    <!-- Date picker style -->
+    <attr name="tink_datePickerStyle" format="reference" />
+
   </declare-styleable>
 
   <attr name="tinkTheme" format="reference"/>

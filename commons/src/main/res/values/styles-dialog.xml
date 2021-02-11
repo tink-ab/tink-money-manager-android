@@ -15,4 +15,16 @@
     <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="android:fontFamily">@font/tink_font_regular</item>
   </style>
+
+  <style name="TinkDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">?tink_colorPrimary</item>
+    <item name="android:textColorPrimary">?tink_textColorPrimary</item>
+    <item name="android:textColorSecondary">?tink_textColorSecondary</item>
+    <item name="colorControlActivated">?tink_colorAccent</item>
+    <item name="colorControlHighlight">?tink_colorAccent</item>
+    <item name="buttonBarPositiveButtonStyle">?tink_textButtonStyle</item>
+    <item name="buttonBarNegativeButtonStyle">?tink_textButtonStyle</item>
+    <item name="android:windowBackground">?tink_cardBackgroundColor</item>
+    <item name="android:fontFamily">@font/tink_font_regular</item>
+  </style>
 </resources>
