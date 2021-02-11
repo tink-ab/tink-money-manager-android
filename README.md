@@ -1,4 +1,4 @@
-# Tink Money Manager Android
+# Tink Money Manager for Android
 
 ## Prerequisites
    Before you can use Tink's Money Manager SDK, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
