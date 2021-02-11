@@ -1,12 +1,12 @@
-# Tink PFM UI Android
+# Tink Money Manager Android
 
 ## Prerequisites
-   Before you can use Tink PFM UI, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
+   Before you can use Tink Money Manager, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
 
 ## Installation
 
 1. Download the [latest SDK release](https://github.com/tink-ab/tink-pfm-android/releases/latest) zip file.
-2. Unzip and take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
+2. Unzip and take the `com` folder (containing the Tink Money Manager local maven dependencies) and put it in `~/.m2/repository/`.
 3. Add `mavenLocal()` as repository in your root level build.gradle file.
 
 ```groovy
@@ -85,12 +85,12 @@ val financeOverviewFragment =
         insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass (optional)
     )
 ```
-`[1]` Tink PFM UI needs a valid access token for a specific user to function correctly. Since Tink PFM UI does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
+`[1]` Tink Money Manager needs a valid access token for a specific user to function correctly. Since Tink Money Manager does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
 
 _Note: All data and connections are scoped to the lifecycle of the `FinanceOverviewFragment`, i.e. after it is destroyed, all cached content will be garbage collected. That means it is important to not leak a reference to the fragment so no sensitive user data is retained in memory after usage._
 
 ## Refreshing access tokens
-User access tokens expire after a set amount of time. You can keep your user logged in by exchanging your a refresh token for a new access token [(see Tink docs)](https://docs.tink.com/api/#get-an-authorization-token) and passing it to the Tink PFM UI. This will overwrite the token that the fragment was initialzed with. If needed you can also refresh the statistics and latest transactions:
+User access tokens expire after a set amount of time. You can keep your user logged in by exchanging your a refresh token for a new access token [(see Tink docs)](https://docs.tink.com/api/#get-an-authorization-token) and passing it to the Tink Money Manager. This will overwrite the token that the fragment was initialzed with. If needed you can also refresh the statistics and latest transactions:
 
 ```kotlin
 financeOverviewFragment.setAccessToken(yourNewToken)
