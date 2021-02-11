@@ -13,5 +13,6 @@
   <style name="TinkMaterialAlertDialogBodyTextStyle" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
     <item name="android:textAppearance">@style/tink_hecto</item>
     <item name="android:textColor">?tink_textColorPrimary</item>
+    <item name="android:fontFamily">@font/tink_font_regular</item>
   </style>
 </resources>
