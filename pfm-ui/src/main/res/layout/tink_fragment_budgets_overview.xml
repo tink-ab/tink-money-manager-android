@@ -55,19 +55,22 @@
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:listitem="@layout/tink_budget_overview_item" />
 
-      <ImageView
+      <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/budgetsEmptyIcon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/tink_add_circle_outline_white"
-        android:tint="?attr/tink_colorAccent"
+        android:layout_width="@dimen/tink_category_icon_size"
+        android:layout_height="@dimen/tink_category_icon_size"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
         android:clickable="true"
         android:focusable="true"
+        android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tink_add_circle_outline_white"
+        app:tint="?attr/tink_expensesColor"
+        android:background="?attr/tink_expensesLightColor"
+        app:shapeAppearance="?attr/tink_categoryIconShapeStyle" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/emptyCreateNewButton"
