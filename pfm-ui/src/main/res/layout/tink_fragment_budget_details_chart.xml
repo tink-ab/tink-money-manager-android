@@ -67,7 +67,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="32dp"
-          android:text="@string/tink_budget_show_transaction_btn_title"
+          android:text="@string/tink_budget_details_show_transaction_btn_title"
           android:visibility="@{!(viewModel.loading ?? false) &amp;&amp; !(viewModel.errorState ?? false)}"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
