@@ -56,7 +56,7 @@ ext {
 
             support_appcompat                   : "androidx.appcompat:appcompat:$supportLibVersion",
             support_cardview                    : "androidx.cardview:cardview:$supportLibVersion",
-            support_constraint_layout           : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            support_constraint_layout           : 'androidx.constraintlayout:constraintlayout:2.0.4',
 
             material_components                 : "com.google.android.material:material:$materialVersion",
 
