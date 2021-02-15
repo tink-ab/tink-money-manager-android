@@ -83,14 +83,9 @@
   <string name="tink_insights_expenses_by_day_average_text">Average</string>
 
   <string name="tink_budget_create_title">Create budget</string>
-  <string name="tink_budget_create_title_category">Budget for %s</string>
   <string name="tink_budget_create_button">Create budget</string>
   <string name="tink_budget_create_button_category">Create budget for %s</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
-  <string name="tink_budget_create_category_missing_message">Choose a category</string>
-  <string name="tink_budget_create_success_message">Your new budget is now created!</string>
-  <string name="tink_budget_create_error_message">Could not create a budget right now, try again later!</string>
-  <string name="tink_budget_create_already_exists_error_message">You already have a budget for the selected category!</string>
   <string name="tink_budget_create_field_amount_hint">Monthly budget</string>
   <string name="tink_budget_create_field_amount_description">Average %s/month</string>
   <string name="tink_budget_create_field_period_hint">Budget Period</string>
@@ -105,23 +100,12 @@
 
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
   <string name="tink_budget_edit_title">Edit budget</string>
-  <string name="tink_budget_edit_button_category">Edit budget for %s</string>
   <string name="tink_budget_edit_button">Save changes</string>
-  <string name="tink_budget_edit_field_category_hint">Category</string>
-  <string name="tink_budget_edit_field_amount_hint">Monthly budget</string>
-  <string name="tink_budget_edit_field_amount_description">Average %s/month</string>
   <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s/%2$s</string>
-  <string name="tink_budget_update_success_message">Your budget was updated!</string>
-  <string name="tink_budget_update_error_message">We are not able to update your budget right now.</string>
-  <string name="tink_budget_delete_success_message">Your budget has been removed.</string>
   <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
   <string name="tink_budget_delete_dialog_message">Are you sure you want to remove the budget \"%s\"?</string>
   <string name="tink_budget_delete_dialog_confirm_button">Delete</string>
-  <string name="tink_budget_title_category">Budget for %s</string>
 
-  <string name="tink_budget_no_transactions">There are no transactions to show for this budget.</string>
-  <string name="tink_budget_header_title_over">%s over budget</string>
-  <string name="tink_budget_show_transaction_btn_title">See Transactions</string>
   <string name="tink_budget_details_show_transaction_btn_title">See Transactions</string>
   <string name="tink_budget_details_toolbar_title">Budget</string>
   <string name="tink_budget_details_menu_edit_budget_item">Edit Budget</string>
