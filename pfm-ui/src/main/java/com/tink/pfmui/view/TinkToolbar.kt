@@ -28,14 +28,14 @@ internal class TinkToolbar : Toolbar {
     private val typeface = FontUtils.getTypeface(FontUtils.BOLD_FONT, context)
     private val elevationInDp = 4.0f
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(
         context,
         attrs
     )
 
     constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr)
