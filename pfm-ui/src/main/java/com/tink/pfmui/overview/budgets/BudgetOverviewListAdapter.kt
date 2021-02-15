@@ -1,17 +1,19 @@
 package com.tink.pfmui.overview.budgets
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.misc.Amount
 import com.tink.pfmui.R
+import com.tink.pfmui.budgets.creation.specification.EXACT_NUMBER_ZERO
+import com.tink.pfmui.util.extensions.formatCurrencyRound
+import com.tink.pfmui.util.extensions.formatCurrencyRoundWithoutSign
 import kotlinx.android.synthetic.main.tink_budget_overview_item.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
-import se.tink.commons.extensions.getColorFromAttr
-import se.tink.commons.extensions.inflate
-import se.tink.commons.extensions.setImageResFromAttr
-import se.tink.commons.extensions.tint
+import se.tink.commons.extensions.*
 
 internal class BudgetOverviewListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
@@ -64,8 +66,8 @@ data class BudgetOverviewItem(
     val periodLabel: String,
     val progress: Int,
     val progressMax: Int,
-    val spentDescription: String,
-    val overspent: Boolean
+    val budgetAmount: Amount,
+    val spentAmount: Amount
 ) {
     fun isSameItem(other: BudgetOverviewItem): Boolean {
         return budgetId == (other as? BudgetOverviewItem)?.budgetId
@@ -75,6 +77,8 @@ data class BudgetOverviewItem(
 
     data class Icon(val resource: Int, val color: Int, val backgroundColor: Int)
 }
+
+private fun BudgetOverviewItem.isOverSpent(): Boolean = spentAmount > budgetAmount
 
 class BudgetOverviewItemViewHolder(
     parent: ViewGroup,
@@ -95,22 +99,33 @@ class BudgetOverviewItemViewHolder(
             budgetProgress.apply {
                 max = item.progressMax
                 progress = item.progress
-                progressTintList = if (item.overspent) {
+                progressTintList = if (item.isOverSpent()) {
                     ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_warningColor))
                 } else {
                     ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_expensesColor))
                 }
             }
             budgetProgressText.apply {
-                text = item.spentDescription
+                text = composeSpentString(context, item.spentAmount, item.budgetAmount)
                 setTextColor(
-                    if (item.overspent) {
+                    if (item.isOverSpent()) {
                         context.getColorFromAttr(R.attr.tink_warningColor)
                     } else {
                         context.getColorFromAttr(R.attr.tink_expensesColor)
                     }
                 )
             }
+        }
+    }
+
+    private fun composeSpentString(context: Context, spentAmount: Amount, budgetAmount: Amount): String {
+        val delta = budgetAmount - spentAmount
+        return if (delta.value.isSmallerThan(EXACT_NUMBER_ZERO)) {
+            context.getString(R.string.tink_overview_budget_over)
+                .format(delta.formatCurrencyRoundWithoutSign(), budgetAmount.formatCurrencyRound())
+        } else {
+            context.getString(R.string.tink_overview_budget_left_of)
+                .format(delta.formatCurrencyRound(), budgetAmount.formatCurrencyRound())
         }
     }
 }

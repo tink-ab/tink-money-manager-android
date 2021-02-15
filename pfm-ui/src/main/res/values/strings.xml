@@ -155,7 +155,7 @@
   <string name="tink_overview_budgets_title">Budgets</string>
   <string name="tink_overview_budgets_create_new">New Budget</string>
   <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>
-  <string name="tink_overview_budget_over">%1$s over budget</string>
+  <string name="tink_overview_budget_over">%1$s over spent of %2$s</string>
   <string name="tink_overview_budget_left_of">%1$s left of %2$s</string>
 
   <string name="tink_search_label">Search</string>
