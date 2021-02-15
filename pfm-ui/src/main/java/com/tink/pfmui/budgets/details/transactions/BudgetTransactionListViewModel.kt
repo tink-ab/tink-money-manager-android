@@ -10,8 +10,10 @@ import com.tink.model.budget.Budget
 import com.tink.model.budget.BudgetTransaction
 import com.tink.model.category.CategoryTree
 import com.tink.pfmui.R
+import com.tink.pfmui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.pfmui.budgets.details.BudgetDetailsDataHolder
 import com.tink.pfmui.util.extensions.formatCurrencyRound
+import com.tink.pfmui.util.extensions.formatCurrencyRoundWithoutSign
 import org.threeten.bp.Instant
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
@@ -150,26 +152,23 @@ internal class BudgetTransactionListViewModel @Inject constructor(
             budgetPeriod.budgetAmount.value.toBigDecimal().toInt()
         }
 
-    private val totalAmountStr: LiveData<String> =
+    val budgetProgressStr: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.budgetAmount.formatCurrencyRound()?.let {
-                context.getString(R.string.tink_budget_details_total_amount, it)
+            val delta = budgetPeriod.budgetAmount - budgetPeriod.spentAmount
+            if (delta.value.isSmallerThan(EXACT_NUMBER_ZERO)) {
+                context.getString(R.string.tink_budget_transactions_header_amount_over)
+                    .format(
+                        delta.formatCurrencyRoundWithoutSign(),
+                        budgetPeriod.budgetAmount.formatCurrencyRound()
+                    )
+            } else {
+                context.getString(R.string.tink_budget_transactions_header_amount_left_of)
+                    .format(
+                        delta.formatCurrencyRoundWithoutSign(),
+                        budgetPeriod.budgetAmount.formatCurrencyRound()
+                    )
             }
         }
-
-    val budgetProgressStr: MediatorLiveData<String> = MediatorLiveData<String>().apply {
-        fun updateText() {
-            whenNonNull(
-                totalAmountStr.value,
-                budgetDetailsDataHolder.budgetPeriod.value
-            ) { leftOfTotalAmountStr, budgetPeriod ->
-                value =
-                    "${(budgetPeriod.budgetAmount - budgetPeriod.spentAmount).formatCurrencyRound()} $leftOfTotalAmountStr"
-            }
-        }
-        addSource(totalAmountStr) { updateText() }
-        addSource(budgetDetailsDataHolder.budgetPeriod) { updateText() }
-    }
 }
 
 data class BudgetTransactionParams(
