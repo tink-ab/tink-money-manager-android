@@ -65,9 +65,9 @@ class BudgetsRepository @Inject constructor(
         }
     }
 
-    fun deleteBudget(id: String, resultHandler: ResultHandler<Unit>) {
+    fun archiveBudget(id: String, resultHandler: ResultHandler<Unit>) {
         scope.launchForResult(resultHandler) {
-            budgetService.deleteBudget(id)
+            budgetService.archiveBudget(id)
             _budgets.update()
         }
     }

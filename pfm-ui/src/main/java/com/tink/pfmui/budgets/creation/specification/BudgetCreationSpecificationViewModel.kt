@@ -351,7 +351,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
     fun deleteBudget() =
         dataHolder.id.value?.let {
             _loading.postValue(true)
-            budgetsRepository.deleteBudget(
+            budgetsRepository.archiveBudget(
                 it,
                 _budgetDeleteResult.createResultHandler()
             )
