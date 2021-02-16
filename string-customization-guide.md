@@ -1,6 +1,6 @@
 # String Customization
 
-Tink Money Manager allows you to customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the SDK.
+Money Manager SDK allows you to customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the SDK.
 
 Override the string resource values in your application's `res/values/strings.xml`
 ```xml
