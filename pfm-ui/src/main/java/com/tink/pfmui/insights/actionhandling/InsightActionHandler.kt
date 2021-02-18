@@ -1,5 +1,7 @@
 package com.tink.pfmui.insights.actionhandling
 
+import com.tink.model.budget.BudgetFilter
+import com.tink.model.budget.BudgetPeriodicity
 import com.tink.model.misc.Amount
 
 
@@ -15,6 +17,19 @@ open class InsightActionHandler {
      * @param periodStart The start period for the budget that should be shown
      */
     open fun viewBudget(budgetId: String, periodStart: String): Boolean = false
+
+    /**
+     * Handle action where the user wants to create a budget.
+     *
+     * @param amount An optional budget amount to be set
+     * @param filter An optional [BudgetFilter] to be set
+     * @param periodicity An optional [BudgetPeriodicity] to be set
+     */
+    open fun createBudget(
+        amount: Amount?,
+        filter: BudgetFilter?,
+        periodicity: BudgetPeriodicity?
+    ): Boolean = false
 
     /**
      * Handle action where the user wants to categorize a transaction matching the id.

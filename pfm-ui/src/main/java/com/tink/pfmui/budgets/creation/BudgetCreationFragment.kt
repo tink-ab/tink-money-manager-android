@@ -1,7 +1,11 @@
 package com.tink.pfmui.budgets.creation
 
 import android.os.Bundle
+import android.os.Parcelable
+import com.tink.model.budget.BudgetFilter
+import com.tink.model.budget.BudgetPeriodicity
 import com.tink.model.budget.BudgetSpecification
+import com.tink.model.misc.Amount
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.FragmentCoordinator
@@ -10,28 +14,43 @@ import com.tink.pfmui.budgets.creation.filterselection.BudgetCreationFilterSelec
 import com.tink.pfmui.budgets.creation.search.BudgetCreationSearchFragment
 import com.tink.pfmui.budgets.creation.specification.BudgetCreationSpecificationFragment
 import com.tink.pfmui.budgets.details.BudgetDetailsFragment
+import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
-private const val BUDGET_ID = "BUDGET_ID"
-private const val BUDGET_NAME = "BUDGET_NAME"
-private const val AMOUNT = "AMOUNT"
-private const val FILTER = "FILTER"
-private const val PERIODICITY = "PERIODICITY"
+private const val BUDGET_OPERATION = "BUDGET_OPERATION"
 
 internal class BudgetCreationFragment : BaseFragment() {
     companion object {
         @JvmStatic
-        @JvmOverloads
         fun newInstance(budgetSpecification: BudgetSpecification? = null): BudgetCreationFragment {
             val fragment = BudgetCreationFragment()
-            if (budgetSpecification != null) {
-                fragment.arguments = Bundle().apply {
-                    putString(BUDGET_ID, budgetSpecification.id)
-                    putString(BUDGET_NAME, budgetSpecification.name)
-                    putParcelable(AMOUNT, budgetSpecification.amount)
-                    putParcelable(FILTER, budgetSpecification.filter)
-                    putParcelable(PERIODICITY, budgetSpecification.periodicity)
-                }
+            val budgetOperation = if (budgetSpecification != null) {
+                BudgetEditOperation(
+                    budgetSpecification.id,
+                    budgetSpecification.name,
+                    budgetSpecification.amount,
+                    budgetSpecification.filter,
+                    budgetSpecification.periodicity
+                )
+            } else {
+                BudgetCreateOperation()
+            }
+            fragment.arguments = Bundle().apply { putParcelable(BUDGET_OPERATION, budgetOperation) }
+            return fragment
+        }
+
+        @JvmStatic
+        fun newInstance(
+            amount: Amount? = null,
+            budgetFilter: BudgetFilter? = null,
+            budgetPeriodicity: BudgetPeriodicity? = null
+        ): BudgetCreationFragment {
+            val fragment = BudgetCreationFragment()
+            fragment.arguments = Bundle().apply {
+                putParcelable(
+                    BUDGET_OPERATION,
+                    BudgetCreateOperation(amount, budgetFilter, budgetPeriodicity)
+                )
             }
             return fragment
         }
@@ -51,20 +70,35 @@ internal class BudgetCreationFragment : BaseFragment() {
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
         arguments?.run {
-            dataHolder.id.value = requireNotNull(getString(BUDGET_ID))
-            dataHolder.name.value = requireNotNull(getString(BUDGET_NAME))
-            dataHolder.amount.value = requireNotNull(getParcelable(AMOUNT))
-            dataHolder.selectedFilter.value = requireNotNull(getParcelable(FILTER))
-            dataHolder.periodicity.value = requireNotNull(getParcelable(PERIODICITY))
+            when (val operation = requireNotNull(getParcelable(BUDGET_OPERATION))) {
+                is BudgetCreateOperation -> operation.setDataForPrefill()
+                is BudgetEditOperation -> operation.setDataForEditing()
+            }
         }
 
         val isEditing = dataHolder.id.value != null
 
-        if (isEditing) {
+        val isCategorySelected = dataHolder.selectedFilter.value?.categories?.isNotEmpty() ?: false
+
+        if (isEditing || isCategorySelected) {
             navigation.goToSpecificationFragment(false)
         } else {
             navigation.goToFilterSelectionFragment()
         }
+    }
+
+    private fun BudgetCreateOperation.setDataForPrefill() {
+        amount?.let { dataHolder.amount.value = it }
+        filter?.let { dataHolder.selectedFilter.value = it }
+        periodicity?.let { dataHolder.periodicity.value = it }
+    }
+
+    private fun BudgetEditOperation.setDataForEditing() {
+        dataHolder.id.value = budgetId
+        dataHolder.name.value = budgetName
+        dataHolder.amount.value = amount
+        dataHolder.selectedFilter.value = filter
+        dataHolder.periodicity.value = periodicity
     }
 
     override fun onBackPressed(): Boolean = navigation.handleBackPress()
@@ -111,3 +145,19 @@ internal class BudgetCreationNavigation(private val fragmentCoordinator: Fragmen
         fragmentCoordinator.replace(fragment = BudgetCreationSearchFragment.newInstance())
     }
 }
+
+@Parcelize
+internal data class BudgetEditOperation(
+    val budgetId: String,
+    val budgetName: String,
+    val amount: Amount,
+    val filter: BudgetFilter,
+    val periodicity: BudgetPeriodicity
+) : Parcelable
+
+@Parcelize
+internal data class BudgetCreateOperation(
+    val amount: Amount? = null,
+    val filter: BudgetFilter? = null,
+    val periodicity: BudgetPeriodicity? = null
+) : Parcelable
