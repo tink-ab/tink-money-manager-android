@@ -4,6 +4,7 @@ import android.content.Context
 import com.tink.pfmui.FragmentAnimationFlags
 import com.tink.pfmui.FragmentCoordinator
 import com.tink.pfmui.R
+import com.tink.pfmui.budgets.details.BudgetDetailsFragment
 import com.tink.pfmui.overview.accounts.AccountDetailsFragment
 import com.tink.pfmui.transaction.CategorizationFlowFragment
 import com.tink.pfmui.transaction.StatusSubtitleMode
@@ -19,7 +20,7 @@ internal class DefaultRedirectionReceiver @Inject constructor(
 ) : RedirectionReceiver {
 
     override fun showBudget(id: String, periodStart: String) {
-        // TODO: PFMSDK: Implement this when budget feature is available
+        fragmentCoordinator.replace(BudgetDetailsFragment.newInstance(id, periodStart))
     }
 
     override fun showAccountDetails(accountId: String) {
