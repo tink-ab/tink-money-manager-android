@@ -81,6 +81,7 @@
   <string name="tink_insights_overview_card_archived_events_title">Archived Events</string>
   <string name="tink_insights_overview_card_action_text">View</string>
   <string name="tink_insights_expenses_by_day_average_text">Average</string>
+  <string name="tink_insights_budget_create_suggestion_save_per_year_text">Save up to %s per year</string>
 
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>

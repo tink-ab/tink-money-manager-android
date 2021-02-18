@@ -32,3 +32,9 @@ class BudgetSummaryDetailItem(
 
 @Parcelize
 enum class BudgetState : Parcelable { SUCCESS, OVERSPENT }
+
+@Parcelize
+class BudgetCreateSuggestionViewDetails(
+    val savePercentage: String,
+    val savePerYearAmount: Amount
+) : Insight.ViewDetails
