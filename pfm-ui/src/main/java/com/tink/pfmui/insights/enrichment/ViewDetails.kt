@@ -2,6 +2,7 @@ package com.tink.pfmui.insights.enrichment
 
 import android.os.Parcelable
 import com.tink.model.insights.Insight
+import com.tink.model.misc.Amount
 import kotlinx.android.parcel.Parcelize
 
 sealed class IconTypeViewDetails : Insight.ViewDetails {
@@ -14,6 +15,9 @@ sealed class IconTypeViewDetails : Insight.ViewDetails {
 
     @Parcelize
     object Tag : IconTypeViewDetails()
+
+    @Parcelize
+    object Expenses : IconTypeViewDetails()
 }
 
 @Parcelize

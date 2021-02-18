@@ -11,6 +11,8 @@ import com.tink.pfmui.R
 import com.tink.pfmui.insights.actionhandling.ActionHandler
 import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
+import se.tink.commons.categories.enums.CategoryType
+import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.extensions.backgroundTint
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
@@ -42,7 +44,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.EINVOICE,
         InsightType.RESIDENCE_DO_YOU_OWN_IT,
         InsightType.LARGE_EXPENSE,
-        InsightType.DOUBLE_CHARGE
+        InsightType.DOUBLE_CHARGE,
+        InsightType.BUDGET_SUGGEST_CREATE_FIRST
     )
 
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
@@ -88,6 +91,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.DOUBLE_CHARGE -> IconResource.DrawableId(R.drawable.tink_double_charge)
         InsightType.LARGE_EXPENSE -> IconResource.DrawableId(R.drawable.tink_category_all_expenses)
         InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.tink_alert)
+        InsightType.BUDGET_SUGGEST_CREATE_FIRST ->
+            IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 
@@ -95,6 +100,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
         InsightType.ACCOUNT_BALANCE_LOW -> R.attr.tink_criticalColor
+        InsightType.BUDGET_SUGGEST_CREATE_FIRST -> R.attr.tink_expensesColor
         else -> R.attr.tink_textColorSecondary
     }
 
