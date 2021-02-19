@@ -68,7 +68,8 @@ class MainActivity : FragmentActivity() {
                     height = FrameLayout.LayoutParams.WRAP_CONTENT
                 ),
                 OverviewFeature.Accounts,
-                OverviewFeature.LatestTransactions
+                OverviewFeature.LatestTransactions,
+                OverviewFeature.Budgets
             )
         )
 
