@@ -206,6 +206,21 @@ public class DateUtils {
 			.format(dateTime);
 	}
 
+	public String formatYearly(DateTime date, String timezoneCode) {
+		return ThreadSafeDateFormat
+				.threadSafeDateFormat(
+						ThreadSafeDateFormat.FORMATTER_YEARLY,
+						defaultLocale,
+						timezoneCode
+				)
+				.format(date);
+	}
+
+	public String getMonthAndYearFromDateTime(DateTime date) {
+		return ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR, defaultLocale, timezoneCode).format(date);
+	}
+
 	public Locale getDefaultLocale() {
 		return defaultLocale;
 	}

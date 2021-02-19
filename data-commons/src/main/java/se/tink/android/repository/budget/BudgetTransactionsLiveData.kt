@@ -10,6 +10,8 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
+import se.tink.android.livedata.ErrorOrValue
+import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 
 @ExperimentalCoroutinesApi
@@ -19,19 +21,20 @@ class BudgetTransactionsLiveData(
     private val start: Instant,
     private val end: Instant,
     transactionUpdateEventBus: TransactionUpdateEventBus
-) : MediatorLiveData<List<BudgetTransaction>>() {
+) : MediatorLiveData<ErrorOrValue<List<BudgetTransaction>>>() {
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
-    private val liveData: AutoFetchLiveData<List<BudgetTransaction>> =
+    private val liveData: AutoFetchLiveData<ErrorOrValue<List<BudgetTransaction>>> =
         AutoFetchLiveData {
             scope.launch {
-                val transactions = try {
-                    budgetService.listTransactionsForBudget(budgetId, start, end)
+                try {
+                    it.postValue(
+                        ErrorOrValue(budgetService.listTransactionsForBudget(budgetId, start, end))
+                    )
                 } catch (t: Throwable) {
-                    emptyList<BudgetTransaction>()
+                    it.postValue(ErrorOrValue(TinkNetworkError(t)))
                 }
-                it.postValue(transactions)
             }
         }
 

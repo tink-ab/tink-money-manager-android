@@ -46,7 +46,7 @@ dependencies {
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
 
-    implementation libraries.guava
+    api libraries.guava
     implementation libraries.joda_time
 
     testImplementation libraries.test_mockk

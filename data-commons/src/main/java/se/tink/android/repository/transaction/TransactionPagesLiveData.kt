@@ -120,7 +120,7 @@ class TransactionsPageable(
         override val pageable: TransactionsPageable = TODO()
     }
 
-    class AllTransactionPagesLiveData(
+    class AllTransactionPagesLiveData (
         appExecutors: AppExecutors,
         transactionService: TransactionService,
         transactionUpdateEventBus: TransactionUpdateEventBus

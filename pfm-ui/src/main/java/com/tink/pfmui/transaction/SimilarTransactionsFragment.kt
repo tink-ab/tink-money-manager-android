@@ -1,6 +1,8 @@
 package com.tink.pfmui.transaction
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
@@ -10,6 +12,8 @@ import com.tink.model.transaction.Transaction
 import com.tink.pfmui.BaseFragment
 import com.tink.pfmui.R
 import com.tink.pfmui.tracking.ScreenEvent
+import com.tink.pfmui.util.FontUtils
+import com.tink.pfmui.view.CustomTypefaceSpan
 import com.tink.pfmui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
@@ -98,7 +102,14 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.tink_menu_similar_transactions)
         viewModel.markButtonText.value?.let {
-            toolbar.menu.findItem(R.id.menu_item_marker_button).setTitle(it)
+            val spannableTitle = SpannableString(it)
+            spannableTitle.setSpan(
+                CustomTypefaceSpan(FontUtils.getTypeface(R.font.tink_font_bold, context)),
+                0,
+                spannableTitle.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            toolbar.menu.findItem(R.id.menu_item_marker_button).setTitle(spannableTitle)
         }
     }
 

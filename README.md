@@ -5,8 +5,9 @@
 
 ## Installation
 
-1. Take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
-2. Add `mavenLocal()` as repository in your root level build.gradle file.
+1. Download the [latest SDK release](https://github.com/tink-ab/tink-pfm-android/releases/latest) zip file.
+2. Unzip and take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
+3. Add `mavenLocal()` as repository in your root level build.gradle file.
 
 ```groovy
 allprojects {
@@ -19,22 +20,22 @@ allprojects {
 
 _Note: The `mavenLocal()` repository needs to be on top of the other repositories, as shown above._
 
-3. Add dependency on the Tink PFM UI:
+4. Add dependency on the Tink PFM UI:
 
 ```groovy
 dependencies {
-    implementation("com.tink.pfm:pfm-ui:0.10.0")
+    implementation("com.tink.pfm:pfm-ui:0.11.0")
 }
 ```
 
-4. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
+5. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 dataBinding {
    enabled = true
 }
 ```
 
-5. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block: 
+6. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 compileOptions {
    sourceCompatibility = JavaVersion.VERSION_1_8
@@ -44,33 +45,41 @@ compileOptions {
 
 ## Initialization
 
-1. Set up a client configuration object with your specifics:
+1. Set up a configuration object with your specifics:
 
 ```kotlin
-val config = 
-    ClientConfiguration(
+val config =
+    TinkConfiguration(
         environment = Environment.Production, // Or define your own environment
-        sslCertificate = "yourCertificate" // The SSL certificate used for certificate pinning.
+        oAuthClientId = "yourKey", // Your clientId. Retrieve it from console.tink.com,
+        redirectUri = "https://localhost:3000/callback" // [1]
     )
 ```
 
+`[1]` _Note: This is only required if you also use Tink Link in your application. Please follow the [third party authentication guide](https://docs.tink.com/resources/tutorials/tink-link-sdk-android-tutorial#third-party-authentication) to set this up.
+Otherwise, this can be just set to `https://localhost:3000/callback` as shown in the sample above. We will be working on improving this setup and making this field optional in the future._
 
-2. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-customization) to set this up.
-
-3. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-event-tracking) to set this up.
-
-4. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-finance-overview#displaying-the-finance-overview) to set this up.
-
-5. [Optional] Extend the `InsightActionHandler` class, if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-handling-insight-actions) to set this up.
-
-5. Create an instance of `FinanceOverviewFragment`
+2. Initialize Tink in your application:
 
 ```kotlin
-val financeOverviewFragment = 
+Tink.init(config, applicationContext)
+```
+
+3. Override the `TinkFinanceOverviewStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-customization) to set this up.
+
+4. Set up a `EventTracker` implementation. This is optional and you can add the implementation if you want to track screens and events in the finance overview UI. Follow the [tracking guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-event-tracking) to set this up.
+
+5. Create an instance of `OverviewFeatures`. This is optional and can be done if you want to customize the Overview screen. Follow the [customization guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-finance-overview#displaying-the-finance-overview) to set this up.
+
+6. [Optional] Extend the `InsightActionHandler` class, if you want to handle the actions for the insights in the Events UI. Follow the [insight actions guide](https://docs.tink.com/resources/pfm-sdk-android/pfm-sdk-android-handling-insight-actions) to set this up.
+
+7. Create an instance of `FinanceOverviewFragment`
+
+```kotlin
+val financeOverviewFragment =
     FinanceOverviewFragment.newInstance(
         accessToken = "yourAccessToken", // [1]
         styleResId = R.style.YourCustomTinkFinanceOverviewStyle, // Resource ID of your style that extends TinkFinanceOverviewStyle
-        clientConfiguration = config, // The client configuration object you created in step 1
         tracker = yourTracker, // Your EventTracker implementation (optional)
         overviewFeatures = yourOverviewFeatures, // Your OverviewFeatures instance (optional)
         insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass (optional)

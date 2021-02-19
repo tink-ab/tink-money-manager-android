@@ -36,6 +36,12 @@ sealed class OverviewFeature : Parcelable {
     object ActionableInsights : OverviewFeature()
 
     /**
+     * Represents the budgets section in the overview screen.
+     */
+    @Parcelize
+    object Budgets : OverviewFeature()
+
+    /**
      * Represents a custom view container that can be added to the overview screen.
      *
      * This container view will be added as a FrameLayout in the overview screen which can be used
@@ -61,6 +67,7 @@ enum class StatisticType {
      * Represents an end-user's expenses statistics data.
      */
     EXPENSES,
+
     /**
      * Represents an end-user's income statistics data.
      */
@@ -87,7 +94,8 @@ data class OverviewFeatures(val features: List<OverviewFeature>) : Parcelable {
                         )
                     ),
                     OverviewFeature.Accounts,
-                    OverviewFeature.LatestTransactions
+                    OverviewFeature.LatestTransactions,
+                    OverviewFeature.Budgets
                 )
             )
     }

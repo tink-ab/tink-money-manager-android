@@ -75,6 +75,7 @@ internal class CircularProgressChart : View {
                         getColor(R.styleable.TinkCircularProgressChart_tink_progressArcColor, 0)
                 backgroundRingPaint.color =
                     getColor(R.styleable.TinkCircularProgressChart_tink_backgroundRingColor, 0)
+                backgroundRingPaint.alpha = getInteger(R.styleable.TinkCircularProgressChart_tink_backgroundRingAlpha, 255)
 
                 progress =
                     getFloat(R.styleable.TinkCircularProgressChart_tink_progress, 0F).toDouble()

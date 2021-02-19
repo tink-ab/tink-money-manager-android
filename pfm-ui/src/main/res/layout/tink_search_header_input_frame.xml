@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:parentTag="android.widget.RelativeLayout">
+
+  <EditText
+    android:id="@+id/search_input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:hint="@string/tink_search_label"
+    style="@style/tink_mega"
+    android:textColorHint="?android:textColorPrimaryInverse"
+    android:textColor="?android:textColorPrimaryInverse"
+    android:layout_alignParentStart="true"
+    android:layout_centerVertical="true"
+    android:ellipsize="end"
+    android:layout_toStartOf="@id/close_icon"/>
+
+  <ImageView
+    android:id="@+id/close_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/tink_close"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:padding="12dp"
+    android:layout_marginEnd="12dp"/>
+
+</merge>

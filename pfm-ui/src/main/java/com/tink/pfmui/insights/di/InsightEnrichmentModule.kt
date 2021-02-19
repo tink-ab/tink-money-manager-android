@@ -1,15 +1,15 @@
 package com.tink.pfmui.insights.di
 
+import com.tink.pfmui.insights.enrichment.*
+import com.tink.pfmui.insights.enrichment.BudgetCreateSuggestionEnricher
 import com.tink.pfmui.insights.enrichment.BudgetStateEnricher
 import com.tink.pfmui.insights.enrichment.BudgetSummaryEnricher
-import com.tink.pfmui.insights.enrichment.CategoryTreeEnricher
+import com.tink.pfmui.insights.enrichment.EnrichmentType
+import com.tink.pfmui.insights.enrichment.InsightsEnricher
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.multibindings.IntoMap
-import com.tink.pfmui.insights.enrichment.EnrichmentType
-import com.tink.pfmui.insights.enrichment.InsightsEnricher
-import com.tink.pfmui.insights.enrichment.TransactionEnricher
 
 @Module
 abstract class InsightEnrichmentModule {
@@ -23,6 +23,11 @@ abstract class InsightEnrichmentModule {
     @IntoMap
     @EnrichmentTypeKey(EnrichmentType.BUDGET_SUMMARY)
     internal abstract fun budgetSummaryEnricher(budgetSummaryEnricher: BudgetSummaryEnricher): InsightsEnricher
+
+    @Binds
+    @IntoMap
+    @EnrichmentTypeKey(EnrichmentType.BUDGET_CREATE_SUGGESTION)
+    internal abstract fun budgetCreateSuggestionEnricher(budgetCreateSuggestionEnricher: BudgetCreateSuggestionEnricher): InsightsEnricher
 
     @Binds
     @IntoMap

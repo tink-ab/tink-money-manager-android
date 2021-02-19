@@ -25,6 +25,7 @@ import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
+import timber.log.Timber
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -59,8 +60,9 @@ internal class StatisticsRepository @Inject constructor(
                      // If statistics is missing data for the current month,
                      // add statistics with amount set to zero for that month as fallback for the UI.
                      // This can happen at the start of a new monthly period.
-                        .handleNoDataForCurrentPeriod()
+                        .handleNoDataForCurrentPeriod(userProfile.currency)
                 } catch (error: Throwable) {
+                    Timber.e(error)
                     emptyList()
                 }
                 postValue(result)
@@ -70,12 +72,11 @@ internal class StatisticsRepository @Inject constructor(
         addSource(refreshTrigger) { update() }
     }
 
-    private fun List<Statistics>.handleNoDataForCurrentPeriod(): List<Statistics> {
+    private fun List<Statistics>.handleNoDataForCurrentPeriod(currencyCode: String): List<Statistics> {
         val missingExpensesForCurrentPeriod =
             none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
         val missingIncomeForCurrentPeriod =
             none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.INCOME_BY_CATEGORY }
-        val currencyCode = first().value.currencyCode
         val data = toMutableList()
         if (missingExpensesForCurrentPeriod) {
             data.add(

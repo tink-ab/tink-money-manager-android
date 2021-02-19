@@ -16,7 +16,7 @@
 
     <com.tink.pfmui.view.TinkTextView
       android:id="@+id/title"
-      style="@style/tink_nano.primary"
+      style="@style/tink_nano.primary.autoSize"
       android:layout_width="@dimen/tink_category_icon_size"
       android:layout_height="wrap_content"
       android:paddingTop="2dp"

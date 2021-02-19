@@ -61,7 +61,7 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	private UICallbackRunner callbacksExecutor;
 
 	@Nullable
-	TinkToolbar toolbar;
+	protected TinkToolbar toolbar;
 
 	public abstract int getLayoutId();
 

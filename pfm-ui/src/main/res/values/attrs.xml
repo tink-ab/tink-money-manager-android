@@ -31,6 +31,7 @@
     <attr format="dimension" name="tink_backgroundRingStrokeWidth"/>
     <attr format="color" name="tink_progressArcColor"/>
     <attr format="color" name="tink_backgroundRingColor"/>
+    <attr format="integer" name="tink_backgroundRingAlpha"/>
     <attr format="float" name="tink_progress"/>
     <attr format="boolean" name="tink_invertedProgress"/>
   </declare-styleable>

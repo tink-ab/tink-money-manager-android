@@ -6,6 +6,7 @@
   <string name="tink_date_format_human_today">Today</string>
   <string name="tink_date_format_human_yesterday">Yesterday</string>
   <string name="tink_date_format_human_tomorrow">Tomorrow</string>
+  <string name="tink_date_formatter_yearly">yyyy</string>
   <string name="tink_date_formatter_monthly_compact">MMM</string>
   <string name="tink_date_formatter_month_name">MMMMM</string>
   <string name="tink_date_formatter_daily">yyyy-MM-dd</string> <!-- TODO Remove when BalanceLineChartArea is removed -->
@@ -40,6 +41,7 @@
   <string name="tink_toolbar_transition" translatable="false">toolbar-transition</string>
   <string name="tink_transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="tink_transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
+  <string name="tink_filter_search_item" translatable="false">FilterSearchItem</string>
 
   <string name="tink_choose_category_text">Choose category</string>
 
@@ -78,7 +80,73 @@
   <string name="tink_insights_overview_card_new_events_title">New Events</string>
   <string name="tink_insights_overview_card_archived_events_title">Archived Events</string>
   <string name="tink_insights_overview_card_action_text">View</string>
-
   <string name="tink_insights_expenses_by_day_average_text">Average</string>
+  <string name="tink_insights_budget_create_suggestion_save_per_year_text">Save up to %s per year</string>
+
+  <string name="tink_budget_create_title">Create budget</string>
+  <string name="tink_budget_create_button">Create budget</string>
+  <string name="tink_budget_create_button_category">Create budget for %s</string>
+  <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
+  <string name="tink_budget_create_field_amount_hint">Monthly budget</string>
+  <string name="tink_budget_create_field_amount_description">Average %s/month</string>
+  <string name="tink_budget_create_field_period_hint">Budget Period</string>
+  <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>
+  <string name="tink_budget_create_field_period_end_hint">Period End Date</string>
+  <string name="tink_budget_create_field_period_weekly">Weekly</string>
+  <string name="tink_budget_create_field_period_monthly">Monthly</string>
+  <string name="tink_budget_create_field_period_yearly">Yearly</string>
+  <string name="tink_budget_create_field_period_custom">Custom</string>
+  <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
+<!--  <string name="tink_budget_create_search_label">Create with keyword or &#35;tag</string>-->
+
+  <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
+  <string name="tink_budget_edit_title">Edit budget</string>
+  <string name="tink_budget_edit_button">Save changes</string>
+  <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s/%2$s</string>
+  <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
+  <string name="tink_budget_delete_dialog_message">Are you sure you want to remove the budget \"%s\"?</string>
+  <string name="tink_budget_delete_dialog_confirm_button">Delete</string>
+
+  <string name="tink_budget_details_show_transaction_btn_title">See Transactions</string>
+  <string name="tink_budget_details_toolbar_title">Budget</string>
+  <string name="tink_budget_details_menu_edit_budget_item">Edit Budget</string>
+  <string name="tink_budget_details_selector_monthly">Monthly</string>
+  <string name="tink_budget_details_selector_over_time">Over time</string>
+  <plurals name="tink_budget_details_days_left">
+    <item quantity="one">%s day left</item>
+    <item quantity="other">%s days left</item>
+  </plurals>
+  <plurals name="tink_budget_details_ended_days_ago">
+    <item quantity="one">Ended %s day ago</item>
+    <item quantity="other">Ended %s days ago</item>
+  </plurals>
+  <string name="tink_budget_details_amount_spent">%s spent</string>
+  <string name="tink_budget_details_amount_left_message">You can spend %1$s per %2$s and manage your budget</string>
+  <string name="tink_budget_details_amount_left_message_plain">You can spend %1$s and manage your budget</string>
+  <string name="tink_budget_details_over_budget_message">You have gone over your budget this period</string>
+  <string name="tink_budget_details_managed_budget_message">You managed your budget for this period</string>
+  <string name="tink_budget_details_not_started">Budget hasn\'t started yet</string>
+  <string name="tink_budget_details_total_amount">left of %s</string>
+  <string name="tink_budget_period_month">month</string>
+  <string name="tink_budget_period_week">week</string>
+  <string name="tink_budget_period_day">day</string>
+  <string name="tink_budget_period_year">year</string>
+  <string name="tink_budget_details_spent_average">%1$s/%2$s spent on average</string>
+  <string name="tink_budget_period_chart_week_label">w%d</string>
+  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But now you don\'t have any!</string>
+  <string name="tink_budget_details_chart_status_message_last_year">You made your budget %s of the time over the last year</string>
+  <string name="tink_budget_details_chart_status_message_since">You made your budget %1$s of the time since %2$s</string>
+  <string name="tink_budget_transactions_toolbar_title">Budget</string>
+  <string name="tink_budget_transactions_header_amount_left_of">%1$s left of %2$s</string>
+  <string name="tink_budget_transactions_header_amount_over">%1$s over budget of %2$s</string>
+  <string name="tink_budget_transactions_empty_message">There are no transactions to show for this period</string>
+
+  <string name="tink_overview_budgets_title">Budgets</string>
+  <string name="tink_overview_budgets_create_new">New Budget</string>
+  <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>
+  <string name="tink_overview_budget_over">%1$s over budget of %2$s</string>
+  <string name="tink_overview_budget_left_of">%1$s left of %2$s</string>
+
+  <string name="tink_search_label">Search</string>
 
 </resources>
