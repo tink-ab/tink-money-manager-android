@@ -51,3 +51,72 @@ Here's a list of all the public string resources in the Tink PFM UI that can be 
 | `tink_insights_overview_card_archived_events_title` | Archived Events |
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_expenses_by_day_average_text` | Average |
+| `tink_insights_budget_create_suggestion_save_per_year_text` | Save up to %s per year |
+| `tink_budget_create_title` | Create budget |
+| `tink_budget_create_button` | Create budget |
+| `tink_budget_create_button_category` | Create budget for %s |
+| `tink_budget_specification_toolbar_title` | Budget \"%s\" |
+| `tink_budget_create_field_amount_hint` | Monthly budget |
+| `tink_budget_create_field_amount_description` | Average %s/month |
+| `tink_budget_create_field_period_hint` | Budget Period |
+| `tink_budget_create_field_period_start_hint` | Period Start Date |
+| `tink_budget_create_field_period_end_hint` | Period End Date |
+| `tink_budget_create_field_period_weekly` | Weekly |
+| `tink_budget_create_field_period_monthly` | Monthly |
+| `tink_budget_create_field_period_yearly` | Yearly |
+| `tink_budget_create_field_period_custom` | Custom |
+| `tink_budget_create_period_end_invalid_message` | End date must be after start date. |
+| `tink_budget_edit_menu_delete_budget_item` | Delete Budget |
+| `tink_budget_edit_title` | Edit budget |
+| `tink_budget_edit_button` | Save changes |
+| `tink_budget_edit_field_amount_average_for_period` | Average %1$s/%2$s |
+| `tink_budget_delete_error_message` | We are not able to remove your budget right now. |
+| `tink_budget_delete_dialog_message` | Are you sure you want to remove the budget \"%s\"? |
+| `tink_budget_delete_dialog_confirm_button` | Delete |
+| `tink_budget_details_show_transaction_btn_title` | See Transactions |
+| `tink_budget_details_toolbar_title` | Budget |
+| `tink_budget_details_menu_edit_budget_item` | Edit Budget |
+| `tink_budget_details_selector_monthly` | Monthly |
+| `tink_budget_details_selector_over_time` | Over time |
+| `tink_budget_details_amount_spent` | %s spent |
+| `tink_budget_details_amount_left_message` | You can spend %1$s per %2$s and manage your budget |
+| `tink_budget_details_amount_left_message_plain` | You can spend %1$s and manage your budget |
+| `tink_budget_details_over_budget_message` | You have gone over your budget this period |
+| `tink_budget_details_managed_budget_message` | You managed your budget for this period |
+| `tink_budget_details_not_started` | Budget hasn\'t started yet |
+| `tink_budget_details_total_amount` | left of %s |
+| `tink_budget_period_month` | month |
+| `tink_budget_period_week` | week |
+| `tink_budget_period_day` | day |
+| `tink_budget_period_year` | year |
+| `tink_budget_details_spent_average` | %1$s/%2$s spent on average |
+| `tink_budget_period_chart_week_label` | w%d |
+| `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
+| `tink_budget_details_chart_status_message_last_year` | You made your budget %s of the time over the last year |
+| `tink_budget_details_chart_status_message_since` | You made your budget %1$s of the time since %2$s |
+| `tink_budget_transactions_toolbar_title` | Budget |
+| `tink_budget_transactions_header_amount_left_of` | %1$s left of %2$s |
+| `tink_budget_transactions_header_amount_over` | %1$s over budget of %2$s |
+| `tink_budget_transactions_empty_message` | There are no transactions to show for this period |
+| `tink_overview_budgets_title` | Budgets |
+| `tink_overview_budgets_create_new` | New Budget |
+| `tink_overview_budgets_empty_create_new` | Create New Budget |
+| `tink_overview_budget_over` | %1$s over budget of %2$s |
+| `tink_overview_budget_left_of` | %1$s left of %2$s |
+| `tink_budget_transactions_toolbar_title` | Budget |
+
+In addition to the above, here's a list of plurals used in the Tink PFM UI that can be overridden as well:
+```xml
+<resources>
+  <plurals name="tink_budget_details_days_left">
+    <item quantity="one">%s day left</item>
+    <item quantity="other">%s days left</item>
+  </plurals>
+  <plurals name="tink_budget_details_ended_days_ago">
+      <item quantity="one">Ended %s day ago</item>
+      <item quantity="other">Ended %s days ago</item>
+    </plurals>
+</resources>
+```
+
+
