@@ -10,4 +10,14 @@
     <item name="android:textColor">?tink_textColorPrimaryInverse</item>
   </style>
 
+  <style name="tink_chart_label.budgets">
+    <item name="android:textSize">12sp</item>
+    <item name="android:textColor">?tink_textColorSecondary</item>
+  </style>
+
+  <style name="tink_chart_label.budgets.white">
+    <item name="android:textColor">?tink_textColorPrimaryInverse</item>
+
+  </style>
+
 </resources>

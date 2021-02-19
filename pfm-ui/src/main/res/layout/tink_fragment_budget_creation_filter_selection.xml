@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <data>
+    <variable
+      name="viewModel"
+      type="com.tink.pfmui.budgets.creation.filterselection.BudgetCreationFilterSelectionViewModel"/>
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/tink_backgroundColor">
+
+    <com.tink.pfmui.view.TinkToolbar
+      android:id="@+id/tink_toolbar"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:elevation="@dimen/tink_toolbar_elevation"
+      android:minHeight="?attr/actionBarSize"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navigationIcon="?homeAsUpIndicator"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/filterSelectionList"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toTopOf="@+id/actionButton"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tink_toolbar"
+      tools:listitem="@layout/tink_item_tree_list_selection_top_level"/>
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/actionButton"
+      style="?attr/tink_containedButtonStyle"
+      android:layout_width="0dp"
+      android:layout_height="@dimen/tink_button_height"
+      android:text="@{viewModel.isEditing ? @string/tink_budget_edit_title : @string/tink_budget_create_button}"
+      android:transitionName="actionButton"
+      android:visibility="@{viewModel.selectedTreeListItem != null}"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/> <!--TODO: This should also take into account if we are just editing.-->
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

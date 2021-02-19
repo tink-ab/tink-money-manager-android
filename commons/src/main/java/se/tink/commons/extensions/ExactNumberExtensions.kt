@@ -2,6 +2,7 @@ package se.tink.commons.extensions
 
 import com.tink.model.misc.ExactNumber
 import java.math.BigDecimal
+import java.math.MathContext
 import java.math.RoundingMode
 
 fun BigDecimal.toExactNumber() = ExactNumber(unscaledValue().toLong(), scale().toLong())
@@ -11,7 +12,15 @@ fun ExactNumber.subtract(other: ExactNumber) =
     toBigDecimal().subtract(other.toBigDecimal()).toExactNumber()
 
 fun ExactNumber.divide(other: ExactNumber) =
-    toBigDecimal().divide(other.toBigDecimal()).toExactNumber()
+    toBigDecimal()
+        .divide(
+            other.toBigDecimal(),
+            MathContext(2, RoundingMode.HALF_UP)
+        )
+        .toExactNumber()
+
+fun ExactNumber.multiply(other: ExactNumber) =
+    toBigDecimal().multiply(other.toBigDecimal()).toExactNumber()
 
 fun ExactNumber.add(other: ExactNumber) = toBigDecimal().add(other.toBigDecimal()).toExactNumber()
 fun ExactNumber.doubleValue() = toBigDecimal().toDouble()

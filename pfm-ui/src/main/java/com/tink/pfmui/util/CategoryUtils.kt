@@ -36,8 +36,18 @@ internal fun String.isReimbursement(): Boolean {
 internal fun Category.findChildByCode(code: String): Category? {
     return when {
         this.code == code -> this
-        !children?.isEmpty() -> {
+        children.isNotEmpty() -> {
             children.mapNotNull { it.findChildByCode(code) }.firstOrNull()
+        }
+        else -> null
+    }
+}
+
+internal fun Category.findChildByCategoryId(categoryId: String): Category? {
+    return when {
+        this.id == categoryId -> this
+        children.isNotEmpty() -> {
+            children.mapNotNull { it.findChildByCategoryId(categoryId) }.firstOrNull()
         }
         else -> null
     }

@@ -4,15 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.tink.pfmui.ViewModelFactory
 import com.tink.pfmui.insights.ArchivedInsightsViewModel
 import com.tink.pfmui.insights.CurrentInsightsViewModel
-import com.tink.pfmui.insights.actionhandling.ActionHandler
-import com.tink.pfmui.insights.actionhandling.CategorizeExpenseActionHandler
-import com.tink.pfmui.insights.actionhandling.CreateTransferActionHandler
-import com.tink.pfmui.insights.actionhandling.GeneralActionHandler
-import com.tink.pfmui.insights.actionhandling.InsightsTracker
-import com.tink.pfmui.insights.actionhandling.PassiveActionHandler
-import com.tink.pfmui.insights.actionhandling.ViewBudgetActionHandler
-import com.tink.pfmui.insights.actionhandling.ViewTransactionsActionHandler
-import com.tink.pfmui.insights.actionhandling.ViewTransactionsByCategoryActionHandler
+import com.tink.pfmui.insights.actionhandling.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -39,6 +31,11 @@ class InsightsModule {
     @IntoSet
     fun viewBudgetActionHandler(viewBudgetActionHandler: ViewBudgetActionHandler): ActionHandler =
         viewBudgetActionHandler
+
+    @Provides
+    @IntoSet
+    fun createBudgetActionHandler(createBudgetActionHandler: CreateBudgetActionHandler): ActionHandler =
+        createBudgetActionHandler
 
     @Provides
     @IntoSet

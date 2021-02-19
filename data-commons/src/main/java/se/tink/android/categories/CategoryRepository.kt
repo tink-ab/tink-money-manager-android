@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @PfmScope
@@ -37,7 +38,7 @@ class CategoryRepository @Inject constructor(private val service: CategoryServic
         scope.launch {
             try {
                 _categories.postValue(service.getCategoryTree())
-            } catch (e: IllegalStateException) {
+            } catch (e: Exception) {
                 // Fail silently if category tree didn't manage to update.
             }
         }

@@ -23,6 +23,7 @@ public class ThreadSafeDateFormat {
 
 	private static final CharMatcher TRIMMER = CharMatcher.whitespace();
 
+	public static final String FORMATTER_YEARLY = "FORMATTER_YEARLY";
 	public static final String FORMATTER_MONTHLY_COMPACT = "FORMATTER_MONTHLY_COMPACT";
 	public static final String FORMATTER_MONTH_NAME = "FORMATTER_MONTH_NAME";
 	public static final String FORMATTER_DAILY = "FORMATTER_DAILY";

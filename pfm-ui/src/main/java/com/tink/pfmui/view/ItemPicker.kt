@@ -81,6 +81,18 @@ internal abstract class ItemPicker<T : Any> : FrameLayout {
         updateArrows()
     }
 
+    fun setText(text: CharSequence?) {
+        text?.let {
+            title.text = it.toString().capitalize()
+        }
+    }
+
+    fun setShowButtons(visible: Boolean) {
+        val visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        iconLeft.visibility = visibility
+        iconRight.visibility = visibility
+    }
+
     private fun nextPeriod(dir: Int) {
         if (items.isEmpty()) return
         val idx = items.indexOf(currentItem)
@@ -89,6 +101,16 @@ internal abstract class ItemPicker<T : Any> : FrameLayout {
         currentItem = items[nextIdx].also {
             onItemSelected?.invoke(it)
         }
+    }
+
+    fun setPreviousButtonEnabled(enabled: Boolean) {
+        iconLeft.isEnabled = enabled
+        iconLeft.alpha = if (enabled) 1.0f else disabledAlpha
+    }
+
+    fun setNextButtonEnabled(enabled: Boolean) {
+        iconRight.isEnabled = enabled
+        iconRight.alpha = if (enabled) 1.0f else disabledAlpha
     }
 
     private fun updateArrows() {

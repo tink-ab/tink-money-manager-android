@@ -24,6 +24,9 @@ internal class EnrichmentDirector(
             InsightType.BUDGET_SUCCESS,
             InsightType.BUDGET_OVERSPENT -> EnrichmentType.BUDGET_STATE
 
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY,
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> EnrichmentType.BUDGET_CREATE_SUGGESTION
+
             InsightType.SINGLE_EXPENSE_UNCATEGORIZED -> EnrichmentType.TRANSACTION
 
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE
@@ -68,5 +71,5 @@ internal class EnrichmentDirectorFactory @Inject constructor(
 }
 
 internal enum class EnrichmentType {
-    BUDGET_STATE, BUDGET_SUMMARY, TRANSACTION, CATEGORY_TREE, NONE
+    BUDGET_STATE, BUDGET_SUMMARY, BUDGET_CREATE_SUGGESTION, TRANSACTION, CATEGORY_TREE, NONE
 }
