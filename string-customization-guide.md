@@ -105,7 +105,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
 | `tink_budget_transactions_toolbar_title` | Budget |
 
-In addition to the above, here's a list of plurals used in the Tink PFM UI that can be overridden as well:
+In addition to the above, here's a list of plurals used in the Tink Money Manager UI that can be overridden as well:
 ```xml
 <resources>
   <plurals name="tink_budget_details_days_left">
