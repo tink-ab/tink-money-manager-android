@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:alpha="0.1"/>
 
-      <com.tink.pfmui.charts.CircularProgressChart
+      <com.tink.moneymanagerui.charts.CircularProgressChart
         android:id="@+id/progress"
         android:layout_width="132dp"
         android:layout_height="132dp"

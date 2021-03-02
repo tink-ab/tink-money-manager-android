@@ -6,7 +6,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.budgets.details.transactions.BudgetTransactionListViewModel"/>
+      type="com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionListViewModel"/>
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/root"
@@ -97,7 +97,7 @@
       app:layout_constraintTop_toTopOf="parent"
       tools:text="@string/tink_budget_transactions_empty_message"/>
 
-    <com.tink.pfmui.view.PeriodPicker
+    <com.tink.moneymanagerui.view.PeriodPicker
       android:id="@+id/periodPicker"
       style="?attr/tink_periodPickerButtonStyle"
       android:layout_width="0dp"

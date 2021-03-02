@@ -41,7 +41,7 @@
         android:layout_centerHorizontal="true"
         app:tint="?tink_expensesColor" />
 
-      <com.tink.pfmui.insights.views.InsightBubbleView
+      <com.tink.moneymanagerui.insights.views.InsightBubbleView
         android:id="@+id/insightBubbleSavePercentageOutline"
         android:layout_width="56dp"
         android:layout_height="32dp"
@@ -53,7 +53,7 @@
         app:tink_textColor="?tink_expensesColor"
         tools:tink_primaryText="-10%"/>
 
-      <com.tink.pfmui.insights.views.InsightBubbleView
+      <com.tink.moneymanagerui.insights.views.InsightBubbleView
         android:id="@+id/insightBubbleSavePercentage"
         android:layout_width="48dp"
         android:layout_height="24dp"

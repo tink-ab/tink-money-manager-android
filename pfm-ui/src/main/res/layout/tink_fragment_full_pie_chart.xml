@@ -5,7 +5,7 @@
   <data>
     <variable
       name="model"
-      type="com.tink.pfmui.overview.charts.DetailsChartModel"/>
+      type="com.tink.moneymanagerui.overview.charts.DetailsChartModel"/>
 
     <variable
       name="totalAmount"
@@ -18,7 +18,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tink.pfmui.charts.PieChartView
+    <com.tink.moneymanagerui.charts.PieChartView
       android:id="@+id/pieChart"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
@@ -36,7 +36,7 @@
       android:layout_gravity="center"
       android:orientation="vertical">
 
-      <com.tink.pfmui.view.TinkTextView
+      <com.tink.moneymanagerui.view.TinkTextView
         android:id="@+id/title"
         style="@style/tink_micro"
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:transitionName="@{@string/tink_amount_title_transition(model.title)}"/>
 
       <!-- Do not use wrap_content for width for animation performance reasons-->
-      <com.tink.pfmui.view.TinkTextView
+      <com.tink.moneymanagerui.view.TinkTextView
         android:id="@+id/amount"
         style="@style/tink_giga"
         android:layout_width="match_parent"
@@ -56,7 +56,7 @@
         android:text="@{totalAmount}"
         android:transitionName="@{@string/tink_amount_transition(model.title)}"/>
 
-      <com.tink.pfmui.view.TinkTextView
+      <com.tink.moneymanagerui.view.TinkTextView
         android:id="@+id/period"
         style="@style/tink_micro"
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
   android:layout_height="match_parent"
   android:background="?tink_backgroundColor">
 
-  <com.tink.pfmui.view.TinkToolbar
+  <com.tink.moneymanagerui.view.TinkToolbar
     android:id="@+id/tink_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"

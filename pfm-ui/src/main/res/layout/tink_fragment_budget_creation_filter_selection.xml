@@ -3,7 +3,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.budgets.creation.filterselection.BudgetCreationFilterSelectionViewModel"/>
+      type="com.tink.moneymanagerui.budgets.creation.filterselection.BudgetCreationFilterSelectionViewModel"/>
   </data>
   <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     android:background="?attr/tink_backgroundColor">
 
-    <com.tink.pfmui.view.TinkToolbar
+    <com.tink.moneymanagerui.view.TinkToolbar
       android:id="@+id/tink_toolbar"
       android:layout_width="0dp"
       android:layout_height="wrap_content"

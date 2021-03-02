@@ -7,7 +7,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.budgets.details.BudgetDetailsViewModel"/>
+      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tink.pfmui.charts.BarChartWithThreshold
+    <com.tink.moneymanagerui.charts.BarChartWithThreshold
       android:id="@+id/budgetProgress"
       android:layout_width="0dp"
       android:layout_height="match_parent"

@@ -7,7 +7,7 @@
   android:background="?tink_backgroundColor"
   android:transitionGroup="false">
 
-  <com.tink.pfmui.view.TinkToolbar
+  <com.tink.moneymanagerui.view.TinkToolbar
     android:id="@+id/tink_toolbar"
     android:layout_width="0dp"
     android:layout_height="?actionBarSize"
@@ -18,7 +18,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:navigationIcon="?android:homeAsUpIndicator">
 
-    <com.tink.pfmui.view.TinkTextView
+    <com.tink.moneymanagerui.view.TinkTextView
       android:id="@+id/category"
       style="@style/tink_mega"
       android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
       android:text="@string/tink_choose_category_text"
       android:textColor="?tink_colorOnPrimary"/>
 
-  </com.tink.pfmui.view.TinkToolbar>
+  </com.tink.moneymanagerui.view.TinkToolbar>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="0dp"

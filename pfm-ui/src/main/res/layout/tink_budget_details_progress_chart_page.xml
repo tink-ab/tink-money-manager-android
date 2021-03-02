@@ -7,7 +7,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.budgets.details.BudgetDetailsViewModel" />
+      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +51,7 @@
       app:layout_constraintStart_toStartOf="@+id/budgetProgress"
       tools:text="5 dagar kvar" />
 
-    <com.tink.pfmui.charts.CircularProgressChart
+    <com.tink.moneymanagerui.charts.CircularProgressChart
       android:id="@+id/budgetProgress"
       android:layout_width="256dp"
       android:layout_height="256dp"

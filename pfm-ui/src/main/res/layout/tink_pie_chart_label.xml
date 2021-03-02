@@ -14,7 +14,7 @@
     android:orientation="vertical"
     android:transitionName="@{@string/tink_label_transition(type)}">
 
-    <com.tink.pfmui.view.TinkTextView
+    <com.tink.moneymanagerui.view.TinkTextView
       android:id="@+id/title"
       style="@style/tink_nano.primary.autoSize"
       android:layout_width="@dimen/tink_category_icon_size"

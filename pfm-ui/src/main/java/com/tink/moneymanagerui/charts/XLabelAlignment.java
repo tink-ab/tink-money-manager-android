@@ -1,0 +1,11 @@
+package com.tink.moneymanagerui.charts;
+
+enum XLabelAlignment {
+
+	NONE,
+	BOTTOM_OUTSIDE_CHARTAREA,
+	BOTTOM_INSIDE_FOR_POSITIVE_OUTSIDE_FOR_NEGATIVE,
+	BOTTOM_INSIDE_CHART_AREA,
+	TOP_INSIDE_CHART_AREA;
+
+}

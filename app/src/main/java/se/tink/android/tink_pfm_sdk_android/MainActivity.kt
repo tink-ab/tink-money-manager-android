@@ -4,7 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.tink.core.Tink
-import com.tink.pfmui.FinanceOverviewFragment
+import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.service.network.TinkConfiguration
 import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 

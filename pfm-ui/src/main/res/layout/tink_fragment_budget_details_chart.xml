@@ -6,7 +6,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.budgets.details.BudgetDetailsViewModel"/>
+      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel"/>
   </data>
 
   <RelativeLayout
@@ -14,14 +14,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tink.pfmui.view.TinkToolbar
+    <com.tink.moneymanagerui.view.TinkToolbar
       android:id="@+id/tink_toolbar"
       android:layout_width="match_parent"
       android:layout_height="?actionBarSize"
       app:buttonGravity="center_vertical"
       app:navigationIcon="?android:homeAsUpIndicator" />
 
-    <com.tink.pfmui.view.TinkTabs
+    <com.tink.moneymanagerui.view.TinkTabs
       android:id="@+id/tabs"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.tink.pfmui.view.PeriodPicker
+    <com.tink.moneymanagerui.view.PeriodPicker
       android:id="@+id/periodPicker"
       android:layout_width="match_parent"
       android:layout_height="@dimen/tink_button_height"

@@ -6,7 +6,7 @@
   <data>
     <variable
       name="viewModel"
-      type="com.tink.pfmui.insights.InsightsViewModel"/>
+      type="com.tink.moneymanagerui.insights.InsightsViewModel"/>
   </data>
 
   <FrameLayout

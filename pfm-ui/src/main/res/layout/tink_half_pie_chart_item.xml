@@ -5,11 +5,11 @@
   <data>
     <variable
       name="model"
-      type="com.tink.pfmui.overview.charts.piechart.HalfChartItem"/>
+      type="com.tink.moneymanagerui.overview.charts.piechart.HalfChartItem"/>
 
     <variable
       name="theme"
-      type="com.tink.pfmui.overview.charts.piechart.HalfChartItemTheme"/>
+      type="com.tink.moneymanagerui.overview.charts.piechart.HalfChartItemTheme"/>
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
     android:onClick="@{model.onClick}"
     android:transitionName="@{@string/tink_transition_chart_item(model.title)}">
 
-    <com.tink.pfmui.view.TinkTextView
+    <com.tink.moneymanagerui.view.TinkTextView
       android:id="@+id/label"
       style="@style/tink_deci"
       android:layout_width="0dp"
@@ -36,7 +36,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.tink.pfmui.view.TinkTextView
+    <com.tink.moneymanagerui.view.TinkTextView
       android:id="@+id/amount"
       style="@style/tink_deci.primary"
       android:layout_width="wrap_content"
