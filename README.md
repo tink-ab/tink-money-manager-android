@@ -1,12 +1,12 @@
-# Tink PFM UI Android
+# Tink Money Manager SDK for Android
 
 ## Prerequisites
-   Before you can use Tink PFM UI, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
+   Before you can use the SDK, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
 
 ## Installation
 
 1. Download the [latest SDK release](https://github.com/tink-ab/tink-pfm-android/releases/latest) zip file.
-2. Unzip and take the `com` folder (containing the Tink PFM UI local maven dependencies) and put it in `~/.m2/repository/`.
+2. Unzip and take the `com` folder (containing the SDK's local maven dependencies) and put it in `~/.m2/repository/`.
 3. Add `mavenLocal()` as repository in your root level build.gradle file.
 
 ```groovy
@@ -20,7 +20,7 @@ allprojects {
 
 _Note: The `mavenLocal()` repository needs to be on top of the other repositories, as shown above._
 
-4. Add dependency on the Tink PFM UI:
+4. Add dependency on this SDK:
 
 ```groovy
 dependencies {
@@ -85,12 +85,12 @@ val financeOverviewFragment =
         insightActionHandler = yourInsightActionHandler // Your InsightActionHandler subclass (optional)
     )
 ```
-`[1]` Tink PFM UI needs a valid access token for a specific user to function correctly. Since Tink PFM UI does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
+`[1]` The SDK needs a valid access token for a specific user to function correctly. Since the SDK does not handle any type of authentication, this needs to be done by your backend. See [this link](https://docs.tink.com/api/#oauth) for more info on how this is done.
 
 _Note: All data and connections are scoped to the lifecycle of the `FinanceOverviewFragment`, i.e. after it is destroyed, all cached content will be garbage collected. That means it is important to not leak a reference to the fragment so no sensitive user data is retained in memory after usage._
 
 ## Refreshing access tokens
-User access tokens expire after a set amount of time. You can keep your user logged in by exchanging your a refresh token for a new access token [(see Tink docs)](https://docs.tink.com/api/#get-an-authorization-token) and passing it to the Tink PFM UI. This will overwrite the token that the fragment was initialzed with. If needed you can also refresh the statistics and latest transactions:
+User access tokens expire after a set amount of time. You can keep your user logged in by exchanging your a refresh token for a new access token [(see Tink docs)](https://docs.tink.com/api/#get-an-authorization-token) and passing it to the fragment. This will overwrite the token that the fragment was initialized with. If needed you can also refresh the statistics and latest transactions:
 
 ```kotlin
 financeOverviewFragment.setAccessToken(yourNewToken)
@@ -122,9 +122,9 @@ The Tink Finance Overview only works correctly when the screen orientation is lo
 You can achieve this by opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
 
 ## Documentation
-For more detailed usage and full documentation, please refer to our PFM SDK for Android guide.
+For more detailed usage and full documentation, please refer to our guide.
 
-- [PFM SDK for Android](https://docs.tink.com/resources/pfm-sdk-android)
+- [Money Manager SDK for Android](https://docs.tink.com/resources/pfm-sdk-android)
 
 ## [Tink](https://tink.com)
 Tink was founded in 2012 with the aim of changing the banking industry for the better. We have built Europe’s most robust open banking platform – with the broadest, deepest connectivity and powerful services that create value out of the financial data.

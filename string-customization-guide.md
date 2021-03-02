@@ -1,6 +1,6 @@
 # String Customization
 
-Tink PFM UI allows you to customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the Tink PFM UI.
+Money Manager SDK allows you to customize the text shown in the finance overview UI by overriding the string resources that are publicly available in the SDK.
 
 Override the string resource values in your application's `res/values/strings.xml`
 ```xml
@@ -15,7 +15,7 @@ For example, you can add a Swedish translation of the text in your application's
   <string name="tink_all_categories">Alla kategorier</string>
 </resources>
 ```
-Here's a list of all the public string resources in the Tink PFM UI that can be overridden:
+Here's a list of all the public string resources in the SDK that can be overridden:
 
 | String Resource ID | English Text |
 |------|-----|
