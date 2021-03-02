@@ -2,7 +2,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 group GROUP   // Maven Group ID for the artifact
-version TinkPfmVersion.name
+version TinkMoneyManagerVersion.name
 
 def aarPath(projectName) {
     def fallback = "build/outputs/aar/" + projectName + "-release.aar"
@@ -12,28 +12,28 @@ def aarPath(projectName) {
     return hasProperty('ARTIFACT_PATH') ? ARTIFACT_PATH : fallback
 }
 
-def pfmArtifactId(projectName) {
+def moneymanagerArtifactId(projectName) {
     def fallback = projectName
     return hasProperty('ARTIFACT_ID') && project.name == projectName ? ARTIFACT_ID : fallback
 }
 
-def pfmBintrayName(projectName) {
-    def fallback = GROUP + "." + pfmArtifactId(projectName) // TODO: What should these names be?
+def moneymanagerBintrayName(projectName) {
+    def fallback = GROUP + "." + moneymanagerArtifactId(projectName) // TODO: What should these names be?
     return hasProperty('BINTRAY_NAME') ? BINTRAY_NAME : fallback
 }
 
 publishing {
     publications {
-        tinkPfmSdk(MavenPublication) {
+        tinkMoneyManagerSdk(MavenPublication) {
             artifact aarPath(project.name)
 
             groupId GROUP
 
-            artifactId pfmArtifactId(project.name)
+            artifactId moneymanagerArtifactId(project.name)
             version this.version
 
             pom {
-                name = "Tink PFM UI " + project.name
+                name = "Tink Money Manager UI " + project.name
                 packaging = POM_PACKAGING
                 description = POM_DESCRIPTION
 
@@ -51,8 +51,8 @@ publishing {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             // Internal modules. Use the names of the generated public aars.
                             dependencyNode.appendNode('groupId', GROUP)
-                            dependencyNode.appendNode('artifactId', pfmArtifactId(it.name))
-                            dependencyNode.appendNode('version', TinkPfmVersion.name)
+                            dependencyNode.appendNode('artifactId', moneymanagerArtifactId(it.name))
+                            dependencyNode.appendNode('version', TinkMoneyManagerVersion.name)
                         } else if(it instanceof ExternalModuleDependency) {
                             def dependencyNode = dependenciesNode.appendNode('dependency')
                             dependencyNode.appendNode('groupId', it.group)
@@ -74,12 +74,12 @@ bintray {
     user = bintray_username
     key = bintray_apikey
 
-    setPublications('tinkPfmSdk')
+    setPublications('tinkMoneyManagerSdk')
     setConfigurations('archives')
     pkg {
         userOrg = 'tink'
         repo = BINTRAY_REPO
-        name = pfmBintrayName(project.name)
+        name = moneymanagerBintrayName(project.name)
         desc = POM_DESCRIPTION
 //        websiteUrl = POM_URL
         vcsUrl = POM_GIT_URL

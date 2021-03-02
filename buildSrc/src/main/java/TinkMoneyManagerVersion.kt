@@ -1,4 +1,4 @@
-object TinkPfmVersion {
+object TinkMoneyManagerVersion {
 
     private const val major = 0
     private const val minor = 11
