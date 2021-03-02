@@ -1,2 +1,2 @@
-include ':app', ':commons', ':data-commons', ':moneymanager-ui', ':codegen', ':annotations'
+include ':sample-moneymanager-ui', ':commons', ':data-commons', ':moneymanager-ui', ':codegen', ':annotations'
 rootProject.name='tink-pfm-sdk-android'
