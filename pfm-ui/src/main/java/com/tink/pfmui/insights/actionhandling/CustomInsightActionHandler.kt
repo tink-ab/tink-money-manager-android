@@ -41,6 +41,14 @@ internal object CustomInsightActionHandler : ActionHandler {
                 }
             }
 
+            is InsightAction.Data.CreateBudget -> {
+                (action.data as InsightAction.Data.CreateBudget).let {
+                    insightActionHandler
+                        ?.createBudget(it.amount, it.budgetFilter, it.periodicity)
+                        ?: false
+                }
+            }
+
             is InsightAction.Data.CreateTransfer -> {
                 (action.data as InsightAction.Data.CreateTransfer).let {
                     insightActionHandler

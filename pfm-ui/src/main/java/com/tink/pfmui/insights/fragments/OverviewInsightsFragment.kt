@@ -58,7 +58,9 @@ internal class OverviewInsightsFragment : BaseFragment() {
                     insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor)))
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
-                    insightsCardButton.setOnClickListener { fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance()) }
+                    insightsCardButton.setOnClickListener {
+                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+                    }
                 }
                 insightsCard.visibility = View.VISIBLE
             }

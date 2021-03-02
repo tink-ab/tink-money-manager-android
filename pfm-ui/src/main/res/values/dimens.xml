@@ -20,7 +20,7 @@
 
   <dimen name="tink_icon_size">28dp</dimen>
   <dimen name="tink_icon_size_small">20dp</dimen>
-  <dimen name="tink_chart_label_text_size">9dp</dimen>
+  <dimen name="tink_chart_label_text_size">9sp</dimen>
   <dimen name="tink_chart_label_line_height">12dp</dimen>
 
   <dimen name="tink_similar_transaction_row_background_left_padding">76dp</dimen>
@@ -38,5 +38,7 @@
 
   <dimen name="tink_account_details_header_height">176dp</dimen>
   <dimen name="tink_account_details_header_height_plus_spacing">192dp</dimen>
+
+  <dimen name="tink_budget_details_header_height">176dp</dimen>
 
 </resources>

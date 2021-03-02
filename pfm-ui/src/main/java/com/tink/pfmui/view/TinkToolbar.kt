@@ -4,6 +4,9 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import androidx.appcompat.view.menu.ActionMenuItemView
@@ -25,14 +28,14 @@ internal class TinkToolbar : Toolbar {
     private val typeface = FontUtils.getTypeface(FontUtils.BOLD_FONT, context)
     private val elevationInDp = 4.0f
 
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(
         context,
         attrs
     )
 
     constructor(
-        context: Context?,
+        context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr)
@@ -115,6 +118,31 @@ internal class TinkToolbar : Toolbar {
         textView.setTextColor(colorOnBackground)
         textView.typeface = typeface
         textView.letterSpacing = BUTTON_LETTERSPACING
+    }
+
+    fun setCustomView(view: View?) {
+        var customViewContainer = findViewById<ViewGroup>(R.id.tink_toolbar_custom_view_container)
+        if (customViewContainer == null) {
+            customViewContainer = FrameLayout(context)
+            customViewContainer.setId(R.id.tink_toolbar_custom_view_container)
+            customViewContainer.setLayoutParams(
+                FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+            )
+            addView(customViewContainer)
+        }
+        customViewContainer.removeAllViews()
+        customViewContainer.addView(view)
+    }
+
+    fun clearCustomView() {
+        val customViewContainer = findViewById<ViewGroup>(R.id.tink_toolbar_custom_view_container)
+        if (customViewContainer != null) {
+            customViewContainer.removeAllViews()
+            removeView(customViewContainer)
+        }
     }
 
     interface Theme {
