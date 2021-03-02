@@ -26,21 +26,21 @@
     android:layout_height="0dp"
     android:layout_marginTop="16dp"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    app:layout_constraintBottom_toTopOf="@id/skipBtn"
+    app:layout_constraintBottom_toTopOf="@id/doneBtn"
     app:layout_constraintTop_toBottomOf="@id/description"/>
-
-  <com.google.android.material.button.MaterialButton
-    android:id="@+id/skipBtn"
-    style="?attr/tink_textButtonStyle"
-    android:layout_width="match_parent"
-    android:text="@string/tink_transaction_similar_button_skip_text"
-    app:layout_constraintBottom_toTopOf="@id/doneBtn"/>
 
   <com.google.android.material.button.MaterialButton
     android:id="@+id/doneBtn"
     style="?attr/tink_containedButtonStyle"
     android:layout_width="match_parent"
     android:text="@string/tink_transaction_similar_button_accept_text"
+    app:layout_constraintBottom_toTopOf="@id/skipBtn"/>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/skipBtn"
+    style="?attr/tink_textButtonStyle"
+    android:layout_width="match_parent"
+    android:text="@string/tink_transaction_similar_button_skip_text"
     app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
