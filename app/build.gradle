@@ -36,7 +36,7 @@ android {
 dependencies {
 //    implementation project(':commons')
 //    implementation project(':data-commons')
-    implementation project(':pfm-ui')
+    implementation project(':moneymanager-ui')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat
