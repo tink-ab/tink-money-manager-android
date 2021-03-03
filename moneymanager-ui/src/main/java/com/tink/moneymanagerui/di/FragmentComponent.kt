@@ -1,0 +1,40 @@
+package com.tink.moneymanagerui.di
+
+import com.tink.annotations.PfmScope
+import com.tink.core.TinkComponent
+import com.tink.moneymanagerui.FinanceOverviewFragment
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+
+@PfmScope
+@Component(
+    modules = [
+        AndroidInjectionModule::class,
+        ContextModule::class,
+        ConfigurationModule::class,
+        CurrencyModule::class,
+        FragmentModule::class,
+        ServiceModule::class,
+        ThemingModule::class,
+        TrackingModule::class,
+        TransitionModule::class,
+        UtilsModule::class,
+        ViewModelModule::class,
+        RedirectionModule::class,
+        FragmentBindingModule::class
+    ],
+    dependencies = [TinkComponent::class]
+)
+internal interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> {
+
+    @Component.Factory
+    interface Factory {
+        fun create(
+            tinkComponent: TinkComponent,
+            @BindsInstance instance: FinanceOverviewFragment
+        ): AndroidInjector<FinanceOverviewFragment>
+    }
+}
+
