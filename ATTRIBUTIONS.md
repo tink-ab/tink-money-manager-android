@@ -1,4 +1,4 @@
-The following open source projects are referenced by the Tink PFM SDK:
+The following open source projects are referenced by the Tink Money Manager SDK:
 
 ## AndroidX
 
