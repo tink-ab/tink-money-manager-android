@@ -31,6 +31,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_category_default_child_format` | %s - Other |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
+| `tink_latest_transactions_toolbar_title` | Latest transactions |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |

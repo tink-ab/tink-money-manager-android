@@ -22,6 +22,7 @@
   <string name="tink_all_categories">All categories</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
+  <string name="tink_latest_transactions_toolbar_title">Latest transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
   <string name="tink_transaction_similar_title">Similar transactions</string>

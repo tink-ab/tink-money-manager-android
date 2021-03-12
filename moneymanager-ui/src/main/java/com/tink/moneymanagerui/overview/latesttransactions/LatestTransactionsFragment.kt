@@ -77,7 +77,7 @@ internal class LatestTransactionsFragment : BaseFragment() {
         val context = context ?: return
 
         val metaData = TransactionsListMetaData(
-            getString(R.string.tink_overview_latest_transactions_title),
+            getString(R.string.tink_latest_transactions_toolbar_title),
             false,
             null, null,
             true,
