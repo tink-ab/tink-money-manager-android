@@ -24,7 +24,7 @@ public class Currencies implements ChangeObserver<UserProfile>, Clearable {
 	}
 
 	public void attatchListener(UserConfigurationService service) {
-		service.subscribe(this);
+//		service.subscribe(this);
 	}
 
 	public void removeListener(UserConfigurationService service) {
