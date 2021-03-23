@@ -8,7 +8,8 @@ import javax.inject.Inject
 interface ActionHandler {
 
     /**
-     * @return true if the action was handled, false otherwise
+     * @param action The [InsightAction] that needs to be handled
+     * @param insight The [Insight] for which the action is being handled
      */
     fun handle(
         action: InsightAction,
@@ -16,26 +17,10 @@ interface ActionHandler {
     ): Boolean
 }
 
-abstract class AbstractActionHandler(
-    private val actionEventBus: ActionEventBus
-) : ActionHandler {
-
-    private val userId: String = "TODO" //TODO
-
-    fun actionPerformed(action: InsightAction, insight: Insight) =
-        actionEventBus.postActionPerformed(
-            PerformedInsightAction(
-                insightId = insight.id,
-                userId = userId,
-                actionType = action.actionType
-            )
-        )
-
-}
-
 class GeneralActionHandler @Inject constructor(
     val handlers: Set<ActionHandler>,
-    private val tracker: InsightsTracker
+    private val tracker: InsightsTracker,
+    private val actionEventBus: ActionEventBus
 ) : ActionHandler {
 
     override fun handle(
@@ -43,8 +28,33 @@ class GeneralActionHandler @Inject constructor(
         insight: Insight
     ): Boolean {
         tracker.trackButtonPressEvent()
-        return CustomInsightActionHandler.handle(action, insight)
-                || handlers.any { it.handle(action, insight) }
+        if (CustomInsightActionHandler.canHandleAction(action)) {
+            // Handle the insight action using the custom insight action handler
+            CustomInsightActionHandler.handle(action, insight) { isActionDone ->
+                if (isActionDone) {
+                    actionPerformed(action, insight)
+                }
+            }
+        } else {
+            // Attempt to handle the insight action using default handlers, if applicable
+            handlers
+                .any {
+                    if (it.handle(action, insight)) {
+                        actionPerformed(action, insight)
+                    }
+                    true
+                }
+        }
+        return true
     }
+
+    private fun actionPerformed(action: InsightAction, insight: Insight) =
+        actionEventBus.postActionPerformed(
+            PerformedInsightAction(
+                insightId = insight.id,
+                userId = "", // Not supported currently
+                actionType = action.actionType
+            )
+        )
 
 }
