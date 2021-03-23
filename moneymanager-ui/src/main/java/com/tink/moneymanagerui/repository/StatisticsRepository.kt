@@ -51,7 +51,7 @@ internal class StatisticsRepository @Inject constructor(
             scope.launch {
                 try {
                     withTimeout(STATISTICS_FETCH_TIMEOUT) {
-                        while (true) {
+                        while (isActive) {
                             val userProfile = userRepository.userProfile.value
                             if (userProfile != null) {
                                 val result = queryForStatistics(userProfile)
