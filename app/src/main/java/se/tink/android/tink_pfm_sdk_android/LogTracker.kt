@@ -1,7 +1,7 @@
 package se.tink.android.tink_pfm_sdk_android
 
-import com.tink.pfmui.tracking.ScreenEvent
-import com.tink.pfmui.tracking.Tracker
+import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.moneymanagerui.tracking.Tracker
 import timber.log.Timber
 
 private const val TAG = "LogTracker"
