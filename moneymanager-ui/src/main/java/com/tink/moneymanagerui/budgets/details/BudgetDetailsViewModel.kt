@@ -338,7 +338,7 @@ private fun composeRemainingBudgetStatusString(
     val now = DateTime.now()
 
     // Inside a budget period
-    if (now.isAfter(start) && now.isBefore(end)) {
+    return if (now.isAfter(start) && now.isBefore(end)) {
 
         val remainingYears = Years.yearsBetween(now, end).years
         val remainingMonths = Months.monthsBetween(now, end).months
@@ -346,47 +346,46 @@ private fun composeRemainingBudgetStatusString(
         val remainingDays = Days.daysBetween(now, end).days
 
         val averageAmount: Amount
-        val unitString: String?
 
         when {
             remainingYears > 1 -> {
                 averageAmount = remainingAmount / remainingYears.toDouble()
-                unitString = context.getString(R.string.tink_budget_period_year)
+                context.getString(
+                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyRound()
+                )
             }
             remainingMonths > 1 -> {
                 averageAmount = remainingAmount / remainingMonths.toDouble()
-                unitString = context.getString(R.string.tink_budget_period_month)
+                context.getString(
+                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyRound()
+                )
             }
             remainingWeeks > 1 -> {
                 averageAmount = remainingAmount / remainingWeeks.toDouble()
-                unitString = context.getString(R.string.tink_budget_period_week)
+                context.getString(
+                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyRound()
+                )
             }
             remainingDays > 1 -> {
                 averageAmount = remainingAmount / remainingDays.toDouble()
-                unitString = context.getString(R.string.tink_budget_period_day)
+                context.getString(
+                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyRound()
+                )
             }
             else -> {
-                averageAmount = remainingAmount
-                unitString = null
+                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyRound())
             }
         }
-
-        val amountString = averageAmount.formatCurrencyRound()
-        return unitString?.let {
-            context.getString(
-                R.string.tink_budget_details_amount_left_message, amountString, it
-            )
-        } ?: context.getString(R.string.tink_budget_details_amount_left_message_plain, amountString)
-
     } else if (now.isAfter(end)) { // Budget period in the past
-        return context.getString(R.string.tink_budget_details_managed_budget_message)
+        context.getString(R.string.tink_budget_details_managed_budget_message)
     } else if (now.isBefore(start)) { // Budget period not started yet
-        return context.getString(R.string.tink_budget_details_not_started)
+        context.getString(R.string.tink_budget_details_not_started)
+    } else {
+        context.getString(
+            R.string.tink_budget_details_amount_left_message_plain,
+            remainingAmount.formatCurrencyRound()
+        )
     }
-    return context.getString(
-        R.string.tink_budget_details_amount_left_message_plain,
-        remainingAmount.formatCurrencyRound()
-    )
 }
 
 internal fun ExactNumber.isZero() = this.toBigDecimal().signum() == 0
