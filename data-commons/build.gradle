@@ -54,7 +54,3 @@ dependencies {
 
     kapt libraries.arch_lifecycle_compiler
 }
-
-repositories {
-    mavenCentral()
-}
