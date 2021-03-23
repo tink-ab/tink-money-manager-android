@@ -24,7 +24,7 @@ _Note: The `mavenLocal()` repository needs to be on top of the other repositorie
 
 ```groovy
 dependencies {
-    implementation("com.tink.moneymanager:moneymanager-ui:0.11.0")
+    implementation("com.tink.moneymanager:moneymanager-ui:0.12.0")
 }
 ```
 
