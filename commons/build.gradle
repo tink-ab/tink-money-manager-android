@@ -55,7 +55,3 @@ dependencies {
     testRuntimeOnly libraries.test_junit_engine
     testImplementation libraries.test_junit_params // (Optional) If you need "Parameterized Tests"
 }
-
-repositories {
-    mavenCentral()
-}
