@@ -85,10 +85,8 @@
 
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
-  <string name="tink_budget_create_button_category">Create budget for %s</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
   <string name="tink_budget_create_field_amount_hint">Monthly budget</string>
-  <string name="tink_budget_create_field_amount_description">Average %s/month</string>
   <string name="tink_budget_create_field_period_hint">Budget Period</string>
   <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>
   <string name="tink_budget_create_field_period_end_hint">Period End Date</string>
@@ -120,7 +118,6 @@
     <item quantity="one">Ended %s day ago</item>
     <item quantity="other">Ended %s days ago</item>
   </plurals>
-  <string name="tink_budget_details_amount_spent">%s spent</string>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>
   <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and manage your budget</string>
@@ -134,7 +131,6 @@
   <string name="tink_budget_period_week">week</string>
   <string name="tink_budget_period_day">day</string>
   <string name="tink_budget_period_year">year</string>
-  <string name="tink_budget_details_spent_average">%1$s/%2$s spent on average</string>
   <string name="tink_budget_period_chart_week_label">w%d</string>
   <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But now you don\'t have any!</string>
   <string name="tink_budget_details_chart_status_message_last_year">You made your budget %s of the time over the last year</string>

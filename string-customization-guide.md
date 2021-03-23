@@ -54,10 +54,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_budget_create_suggestion_save_per_year_text` | Save up to %s per year |
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
-| `tink_budget_create_button_category` | Create budget for %s |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |
 | `tink_budget_create_field_amount_hint` | Monthly budget |
-| `tink_budget_create_field_amount_description` | Average %s/month |
 | `tink_budget_create_field_period_hint` | Budget Period |
 | `tink_budget_create_field_period_start_hint` | Period Start Date |
 | `tink_budget_create_field_period_end_hint` | Period End Date |
@@ -78,7 +76,6 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_menu_edit_budget_item` | Edit Budget |
 | `tink_budget_details_selector_monthly` | Monthly |
 | `tink_budget_details_selector_over_time` | Over time |
-| `tink_budget_details_amount_spent` | %s spent |
 | `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and manage your budget |
 | `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and manage your budget |
 | `tink_budget_details_amount_left_monthly_message` | You can spend %1$s per month and manage your budget |
@@ -92,7 +89,6 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_period_week` | week |
 | `tink_budget_period_day` | day |
 | `tink_budget_period_year` | year |
-| `tink_budget_details_spent_average` | %1$s/%2$s spent on average |
 | `tink_budget_period_chart_week_label` | w%d |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
 | `tink_budget_details_chart_status_message_last_year` | You made your budget %s of the time over the last year |
