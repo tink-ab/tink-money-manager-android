@@ -5,7 +5,7 @@ import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightAction
 
 @PfmScope
-internal object CustomInsightActionHandler : ActionHandler {
+internal object CustomInsightActionHandler {
 
     private var insightActionHandler: InsightActionHandler? = null
 
@@ -13,51 +13,73 @@ internal object CustomInsightActionHandler : ActionHandler {
         this.insightActionHandler = insightActionHandler
     }
 
-    override fun handle(action: InsightAction, insight: Insight): Boolean {
-        return when (action.data) {
+    fun canHandleAction(action: InsightAction): Boolean =
+        insightActionHandler != null && action.canBeHandled()
+
+    private fun InsightAction.canBeHandled(): Boolean =
+        when (data) {
+            is InsightAction.Data.ViewBudget,
+            is InsightAction.Data.CreateBudget,
+            is InsightAction.Data.CreateTransfer,
+            is InsightAction.Data.CategorizeExpense,
+            is InsightAction.Data.ViewTransactions,
+            is InsightAction.Data.ViewTransactionsByCategory -> true
+            else -> false
+        }
+
+    fun handle(
+        action: InsightAction,
+        insight: Insight,
+        onComplete: (isActionDone: Boolean) -> Unit
+    ) {
+        when (action.data) {
             is InsightAction.Data.CategorizeExpense -> {
                 insightActionHandler
-                    ?.categorizeTransaction((action.data as InsightAction.Data.CategorizeExpense).transactionId)
-                    ?: false
+                    ?.categorizeExpense(
+                        (action.data as InsightAction.Data.CategorizeExpense).transactionId
+                    ) { isActionDone ->
+                        onComplete.invoke(isActionDone)
+                    }
             }
 
             is InsightAction.Data.ViewTransactions -> {
                 insightActionHandler
                     ?.viewTransactions((action.data as InsightAction.Data.ViewTransactions).transactionIds)
-                    ?: false
+                onComplete.invoke(true)
             }
 
             is InsightAction.Data.ViewTransactionsByCategory -> {
                 insightActionHandler
                     ?.viewTransactionsByCategory((action.data as InsightAction.Data.ViewTransactionsByCategory).transactionsByCategory)
-                    ?: false
+                onComplete.invoke(true)
             }
 
             is InsightAction.Data.ViewBudget -> {
                 (action.data as InsightAction.Data.ViewBudget).let {
-                    insightActionHandler
-                        ?.viewBudget(it.budgetId, it.periodStartDate.toString())
-                        ?: false
+                    insightActionHandler?.viewBudget(it.budgetId, it.periodStartDate.toString())
+                    onComplete.invoke(true)
                 }
             }
 
             is InsightAction.Data.CreateBudget -> {
                 (action.data as InsightAction.Data.CreateBudget).let {
                     insightActionHandler
-                        ?.createBudget(it.amount, it.budgetFilter, it.periodicity)
-                        ?: false
+                        ?.createBudget(it.amount, it.budgetFilter, it.periodicity) { isActionDone ->
+                            onComplete.invoke(isActionDone)
+                        }
                 }
             }
 
             is InsightAction.Data.CreateTransfer -> {
                 (action.data as InsightAction.Data.CreateTransfer).let {
                     insightActionHandler
-                        ?.showTransfer(it.sourceUri, it.destinationUri, it.amount)
-                        ?: false
+                        ?.initiateTransfer(it.sourceUri, it.destinationUri, it.amount) {isActionDone ->
+                            onComplete.invoke(isActionDone)
+                        }
                 }
             }
 
-            else -> false // Other types will be handled internally by Tink
+            else -> onComplete.invoke(false) // Just a fallback but these other action types are handled internally
         }
     }
 }
