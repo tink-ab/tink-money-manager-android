@@ -5,7 +5,7 @@
 
 ## Installation
 
-1. Download the [latest SDK release](https://github.com/tink-ab/tink-pfm-android/releases/latest) zip file.
+1. Download the [latest SDK release](https://github.com/tink-ab/tink-money-manager-android/releases/latest) zip file.
 2. Unzip and take the `com` folder (containing the SDK's local maven dependencies) and put it in `~/.m2/repository/`.
 3. Add `mavenLocal()` as repository in your root level build.gradle file.
 
@@ -24,7 +24,7 @@ _Note: The `mavenLocal()` repository needs to be on top of the other repositorie
 
 ```groovy
 dependencies {
-    implementation("com.tink.pfm:pfm-ui:0.11.0")
+    implementation("com.tink.moneymanager:moneymanager-ui:0.12.0")
 }
 ```
 

@@ -12,12 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.tink.core.Tink
-import com.tink.pfmui.FinanceOverviewFragment
-import com.tink.pfmui.OverviewFeature
-import com.tink.pfmui.OverviewFeatures
-import com.tink.pfmui.StatisticType
+import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.OverviewFeature
+import com.tink.moneymanagerui.OverviewFeatures
+import com.tink.moneymanagerui.StatisticType
+import com.tink.sample.configuration.Configuration
 import com.tink.service.network.TinkConfiguration
-import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
 class MainActivity : FragmentActivity() {
 
