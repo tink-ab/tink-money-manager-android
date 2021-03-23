@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode TinkPfmVersion.code
-        versionName TinkPfmVersion.name
+        versionCode TinkMoneyManagerVersion.code
+        versionName TinkMoneyManagerVersion.name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -54,8 +54,4 @@ dependencies {
     testImplementation libraries.test_junit_api
     testRuntimeOnly libraries.test_junit_engine
     testImplementation libraries.test_junit_params // (Optional) If you need "Parameterized Tests"
-}
-
-repositories {
-    mavenCentral()
 }

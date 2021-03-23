@@ -7,9 +7,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.ArrayList
 import javax.inject.Inject
 
+@Deprecated("Use UserProfileService directly")
 class UserConfigurationServiceCachedImpl @Inject constructor(
     private val userService: UserProfileService
 ) : UserConfigurationService {
@@ -30,7 +32,7 @@ class UserConfigurationServiceCachedImpl @Inject constructor(
             try {
                 notifyOnRead(userService.getProfile())
             } catch (error: Throwable) {
-                //TODO: Core
+                Timber.e(error)
             }
         }
     }

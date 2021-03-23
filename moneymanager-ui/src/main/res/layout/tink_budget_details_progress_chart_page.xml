@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:custom="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+    <variable
+      name="viewModel"
+      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel" />
+  </data>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+      android:id="@+id/amountLeft"
+      style="@style/tink_tera"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@{viewModel.amountLeft}"
+      app:layout_constraintBottom_toBottomOf="@+id/budgetProgress"
+      app:layout_constraintEnd_toEndOf="@+id/budgetProgress"
+      app:layout_constraintStart_toStartOf="@+id/budgetProgress"
+      app:layout_constraintTop_toTopOf="@+id/budgetProgress"
+      tools:text="2 450 kr" />
+
+    <TextView
+      android:id="@+id/totalAmount"
+      style="@style/tink_micro"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:text="@{viewModel.totalAmount}"
+      app:layout_constraintEnd_toEndOf="@+id/budgetProgress"
+      app:layout_constraintStart_toStartOf="@+id/budgetProgress"
+      app:layout_constraintTop_toBottomOf="@+id/amountLeft"
+      tools:text="kvar av 3 000 kr" />
+
+    <TextView
+      android:id="@+id/daysLeft"
+      style="@style/tink_micro"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="4dp"
+      android:text="@{viewModel.daysLeft}"
+      app:layout_constraintBottom_toTopOf="@+id/amountLeft"
+      app:layout_constraintEnd_toEndOf="@+id/budgetProgress"
+      app:layout_constraintStart_toStartOf="@+id/budgetProgress"
+      tools:text="5 dagar kvar" />
+
+    <com.tink.moneymanagerui.charts.CircularProgressChart
+      android:id="@+id/budgetProgress"
+      android:layout_width="256dp"
+      android:layout_height="256dp"
+      android:visibility="@{!(viewModel.loading ?? false) &amp;&amp; !(viewModel.errorState ?? false)}"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:progress="@{viewModel.progress ?? (double) 0.0}"
+      custom:tink_backgroundRingColor="?attr/tink_colorPrimary"
+      custom:tink_backgroundRingAlpha="25"
+      custom:tink_backgroundRingStrokeWidth="14dp"
+      app:progressArcColor="@{viewModel.amountLeftColor}"
+      custom:tink_progressArcStrokeWidth="14dp" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

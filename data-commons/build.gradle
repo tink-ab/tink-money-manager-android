@@ -9,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode TinkPfmVersion.code
-        versionName TinkPfmVersion.name
+        versionCode TinkMoneyManagerVersion.code
+        versionName TinkMoneyManagerVersion.name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -53,8 +53,4 @@ dependencies {
     implementation libraries.arch_lifecycle_livedata_ktx
 
     kapt libraries.arch_lifecycle_compiler
-}
-
-repositories {
-    mavenCentral()
 }
