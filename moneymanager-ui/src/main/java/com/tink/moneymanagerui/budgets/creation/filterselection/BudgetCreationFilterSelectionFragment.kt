@@ -50,7 +50,7 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
         title = getString(if (viewModel.isEditing) {
-            R.string.tink_budget_edit_title
+            R.string.tink_budget_edit_toolbar_title
         } else {
             R.string.tink_budget_create_title
         })

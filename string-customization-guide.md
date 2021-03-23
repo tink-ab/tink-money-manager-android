@@ -67,7 +67,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_field_period_custom` | Custom |
 | `tink_budget_create_period_end_invalid_message` | End date must be after start date. |
 | `tink_budget_edit_menu_delete_budget_item` | Delete Budget |
-| `tink_budget_edit_title` | Edit budget |
+| `tink_budget_edit_toolbar_title` | Edit budget |
 | `tink_budget_edit_button` | Save changes |
 | `tink_budget_edit_field_amount_average_for_period` | Average %1$s/%2$s |
 | `tink_budget_delete_error_message` | We are not able to remove your budget right now. |
