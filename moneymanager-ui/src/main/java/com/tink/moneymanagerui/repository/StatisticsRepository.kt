@@ -10,13 +10,10 @@ import com.tink.model.misc.ExactNumber
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
+import com.tink.model.user.UserProfile
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
@@ -27,6 +24,9 @@ import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
 import timber.log.Timber
 import javax.inject.Inject
+
+private const val STATISTICS_FETCH_TIMEOUT = 15_000L
+private const val POLLING_INTERVAL = 2_000L
 
 @ExperimentalCoroutinesApi
 @PfmScope
@@ -48,28 +48,53 @@ internal class StatisticsRepository @Inject constructor(
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     private val statisticsLiveData = MediatorLiveData<List<Statistics>>().apply {
         fun update() {
-            val userProfile = userRepository.userProfile.value ?: return
             scope.launch {
-                val result: List<Statistics> = try {
-                    statisticsService.query(
-                        StatisticsQueryDescriptor(
-                            userProfile.periodMode,
-                            userProfile.currency
-                        )
+                try {
+                    withTimeout(STATISTICS_FETCH_TIMEOUT) {
+                        while (isActive) {
+                            val userProfile = userRepository.userProfile.value
+                            if (userProfile != null) {
+                                val result = queryForStatistics(userProfile)
+                                if (result != null) {
+                                    postValue(result)
+                                    scope.cancel()
+                                }
+                            }
+                            delay(POLLING_INTERVAL)
+                        }
+                    }
+                } catch (timeoutException: TimeoutCancellationException) {
+                    Timber.e(timeoutException)
+                    postValue(
+                        userRepository.userProfile.value
+                            ?.let {
+                                emptyList<Statistics>().handleNoDataForCurrentPeriod(it.currency)
+                            }
+                            ?: emptyList()
                     )
-                     // If statistics is missing data for the current month,
-                     // add statistics with amount set to zero for that month as fallback for the UI.
-                     // This can happen at the start of a new monthly period.
-                        .handleNoDataForCurrentPeriod(userProfile.currency)
-                } catch (error: Throwable) {
-                    Timber.e(error)
-                    emptyList()
                 }
-                postValue(result)
             }
         }
         addSource(userRepository.userProfile) { update() }
         addSource(refreshTrigger) { update() }
+    }
+
+    private suspend fun queryForStatistics(userProfile: UserProfile): List<Statistics>? {
+        return try {
+            statisticsService.query(
+                StatisticsQueryDescriptor(
+                    userProfile.periodMode,
+                    userProfile.currency
+                )
+            )
+                // If statistics is missing data for the current month,
+                // add statistics with amount set to zero for that month as fallback for the UI.
+                // This can happen at the start of a new monthly period.
+                .handleNoDataForCurrentPeriod(userProfile.currency)
+        } catch (error: Throwable) {
+            Timber.e(error)
+            null
+        }
     }
 
     private fun List<Statistics>.handleNoDataForCurrentPeriod(currencyCode: String): List<Statistics> {
