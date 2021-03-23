@@ -39,13 +39,13 @@
       style="?attr/tink_containedButtonStyle"
       android:layout_width="0dp"
       android:layout_height="@dimen/tink_button_height"
-      android:text="@{viewModel.isEditing ? @string/tink_budget_edit_button : @string/tink_budget_create_button}"
+      android:text="@string/tink_budget_category_selection_button"
       android:transitionName="actionButton"
       android:visibility="@{viewModel.selectedTreeListItem != null}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      tools:text="@string/tink_budget_create_button"/> <!--TODO: This should also take into account if we are just editing.-->
+      tools:text="@string/tink_budget_category_selection_button"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
