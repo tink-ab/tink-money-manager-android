@@ -30,22 +30,30 @@ class GeneralActionHandler @Inject constructor(
         tracker.trackButtonPressEvent()
         if (CustomInsightActionHandler.canHandleAction(action)) {
             // Handle the insight action using the custom insight action handler
-            CustomInsightActionHandler.handle(action, insight) { isActionDone ->
+            val isHandled = CustomInsightActionHandler.handle(action, insight) { isActionDone ->
                 if (isActionDone) {
                     actionPerformed(action, insight)
                 }
             }
+            // Attempt to handle the insight action using default handlers, if applicable
+            if (!isHandled) {
+                performDefaultHandling(action, insight)
+            }
         } else {
             // Attempt to handle the insight action using default handlers, if applicable
-            handlers
-                .any {
-                    if (it.handle(action, insight)) {
-                        actionPerformed(action, insight)
-                    }
-                    true
-                }
+            performDefaultHandling(action, insight)
         }
         return true
+    }
+
+    private fun performDefaultHandling(action: InsightAction, insight: Insight) {
+        handlers
+            .any {
+                if (it.handle(action, insight)) {
+                    actionPerformed(action, insight)
+                }
+                true
+            }
     }
 
     private fun actionPerformed(action: InsightAction, insight: Insight) =

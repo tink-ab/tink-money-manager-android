@@ -32,8 +32,8 @@ internal object CustomInsightActionHandler {
         action: InsightAction,
         insight: Insight,
         onComplete: (isActionDone: Boolean) -> Unit
-    ) {
-        when (action.data) {
+    ): Boolean {
+        return when (action.data) {
             is InsightAction.Data.CategorizeExpense -> {
                 insightActionHandler
                     ?.categorizeExpense(
@@ -41,6 +41,7 @@ internal object CustomInsightActionHandler {
                     ) { isActionDone ->
                         onComplete.invoke(isActionDone)
                     }
+                    ?: false
             }
 
             is InsightAction.Data.CategorizeTransactions -> {
@@ -50,24 +51,45 @@ internal object CustomInsightActionHandler {
                     ) { isActionDone ->
                         onComplete.invoke(isActionDone)
                     }
+                    ?: false
             }
 
             is InsightAction.Data.ViewTransactions -> {
-                insightActionHandler
+                val isActionHandled = insightActionHandler
                     ?.viewTransactions((action.data as InsightAction.Data.ViewTransactions).transactionIds)
-                onComplete.invoke(true)
+                    ?: false
+                // TODO: Move this into a separate function to avoid duplicity
+                if (isActionHandled) {
+                    onComplete.invoke(true)
+                    true
+                } else {
+                    false
+                }
             }
 
             is InsightAction.Data.ViewTransactionsByCategory -> {
-                insightActionHandler
+                val isActionHandled = insightActionHandler
                     ?.viewTransactionsByCategory((action.data as InsightAction.Data.ViewTransactionsByCategory).transactionsByCategory)
-                onComplete.invoke(true)
+                    ?: false
+                if (isActionHandled) {
+                    onComplete.invoke(true)
+                    true
+                } else {
+                    false
+                }
             }
 
             is InsightAction.Data.ViewBudget -> {
                 (action.data as InsightAction.Data.ViewBudget).let {
-                    insightActionHandler?.viewBudget(it.budgetId, it.periodStartDate.toString())
-                    onComplete.invoke(true)
+                    val isActionHandled = insightActionHandler
+                        ?.viewBudget(it.budgetId, it.periodStartDate.toString())
+                        ?: false
+                    if (isActionHandled) {
+                        onComplete.invoke(true)
+                        true
+                    } else {
+                        false
+                    }
                 }
             }
 
@@ -77,6 +99,7 @@ internal object CustomInsightActionHandler {
                         ?.createBudget(it.amount, it.budgetFilter, it.periodicity) { isActionDone ->
                             onComplete.invoke(isActionDone)
                         }
+                        ?: false
                 }
             }
 
@@ -86,10 +109,11 @@ internal object CustomInsightActionHandler {
                         ?.initiateTransfer(it.sourceUri, it.destinationUri, it.amount) {isActionDone ->
                             onComplete.invoke(isActionDone)
                         }
+                        ?: false
                 }
             }
 
-            else -> onComplete.invoke(false) // Just a fallback but these other action types are handled internally
+            else -> false // Return false so these action types are handled internally
         }
     }
 }
