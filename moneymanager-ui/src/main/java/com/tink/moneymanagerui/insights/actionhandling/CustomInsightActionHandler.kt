@@ -22,6 +22,7 @@ internal object CustomInsightActionHandler {
             is InsightAction.Data.CreateBudget,
             is InsightAction.Data.CreateTransfer,
             is InsightAction.Data.CategorizeExpense,
+            is InsightAction.Data.CategorizeTransactions,
             is InsightAction.Data.ViewTransactions,
             is InsightAction.Data.ViewTransactionsByCategory -> true
             else -> false
@@ -37,6 +38,15 @@ internal object CustomInsightActionHandler {
                 insightActionHandler
                     ?.categorizeExpense(
                         (action.data as InsightAction.Data.CategorizeExpense).transactionId
+                    ) { isActionDone ->
+                        onComplete.invoke(isActionDone)
+                    }
+            }
+
+            is InsightAction.Data.CategorizeTransactions -> {
+                insightActionHandler
+                    ?.categorizeTransactions(
+                        (action.data as InsightAction.Data.CategorizeTransactions).transactionIds
                     ) { isActionDone ->
                         onComplete.invoke(isActionDone)
                     }
