@@ -44,6 +44,11 @@ class InsightsModule {
 
     @Provides
     @IntoSet
+    fun categorizeTransactionsActionHandler(categorizeTransactionsActionHandler: CategorizeTransactionsActionHandler): ActionHandler =
+        categorizeTransactionsActionHandler
+
+    @Provides
+    @IntoSet
     fun viewTransactionsActionHandler(viewTransactionsActionHandler: ViewTransactionsActionHandler): ActionHandler =
         viewTransactionsActionHandler
 
