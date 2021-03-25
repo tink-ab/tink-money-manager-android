@@ -51,8 +51,10 @@ class GeneralActionHandler @Inject constructor(
             .any {
                 if (it.handle(action, insight)) {
                     actionPerformed(action, insight)
+                    true
+                } else {
+                    false
                 }
-                true
             }
     }
 
