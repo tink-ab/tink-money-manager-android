@@ -3,6 +3,7 @@ package com.tink.moneymanagerui.overview.budgets
 import android.content.Context
 import android.content.res.ColorStateList
 import android.view.ViewGroup
+import androidx.annotation.AttrRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.misc.Amount
@@ -75,7 +76,7 @@ data class BudgetOverviewItem(
 
     fun isContentTheSame(other: BudgetOverviewItem): Boolean = this == other
 
-    data class Icon(val resource: Int, val color: Int, val backgroundColor: Int)
+    data class Icon(@AttrRes val resource: Int, @AttrRes val color: Int, @AttrRes val backgroundColor: Int)
 }
 
 private fun BudgetOverviewItem.isOverSpent(): Boolean = spentAmount > budgetAmount
