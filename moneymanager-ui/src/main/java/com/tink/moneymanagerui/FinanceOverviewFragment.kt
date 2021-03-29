@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
@@ -86,7 +85,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Fresco.initialize(context)
         setupTimber()
         DaggerFragmentComponent
             .factory()
@@ -97,7 +95,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         refreshData()
 
         context.let(::initSecuredDataStorage)
-        //TODO:PFMSDK: Do we need Fresco and Timber?
     }
 
     override fun onCreateView(
