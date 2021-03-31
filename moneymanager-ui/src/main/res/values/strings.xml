@@ -135,13 +135,18 @@
   <string name="tink_budget_period_year">year</string>
   <string name="tink_budget_period_chart_week_label">w%d</string>
   <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But now you don\'t have any!</string>
-  <string name="tink_budget_details_chart_status_message_last_year">You made your budget %s of the time over the last year</string>
-  <string name="tink_budget_details_chart_status_message_since">You made your budget %1$s of the time since %2$s</string>
   <string name="tink_budget_transactions_toolbar_title">Budget</string>
   <string name="tink_budget_transactions_header_amount_left_of">%1$s left of %2$s</string>
   <string name="tink_budget_transactions_header_amount_over">%1$s over budget of %2$s</string>
   <string name="tink_budget_transactions_empty_message">There are no transactions to show for this period</string>
-
+  <plurals name="tink_budget_details_chart_status_message_last_year">
+    <item quantity="one">You made your budget %d%% of the time over the last year</item>
+    <item quantity="other">You made your budget %d%% of the time over the last year</item>
+  </plurals>
+  <plurals name="tink_budget_details_chart_status_message_since">
+    <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
+    <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
+  </plurals>
   <string name="tink_overview_budgets_title">Budgets</string>
   <string name="tink_overview_budgets_create_new">New Budget</string>
   <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>

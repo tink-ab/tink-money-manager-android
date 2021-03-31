@@ -93,8 +93,6 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_period_year` | year |
 | `tink_budget_period_chart_week_label` | w%d |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
-| `tink_budget_details_chart_status_message_last_year` | You made your budget %s of the time over the last year |
-| `tink_budget_details_chart_status_message_since` | You made your budget %1$s of the time since %2$s |
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_budget_transactions_header_amount_left_of` | %1$s left of %2$s |
 | `tink_budget_transactions_header_amount_over` | %1$s over budget of %2$s |
@@ -114,9 +112,17 @@ In addition to the above, here's a list of plurals used in the SDK that can be o
     <item quantity="other">%s days left</item>
   </plurals>
   <plurals name="tink_budget_details_ended_days_ago">
-      <item quantity="one">Ended %s day ago</item>
-      <item quantity="other">Ended %s days ago</item>
-    </plurals>
+    <item quantity="one">Ended %s day ago</item>
+    <item quantity="other">Ended %s days ago</item>
+  </plurals>
+  <plurals name="tink_budget_details_chart_status_message_last_year">
+    <item quantity="one">You made your budget %d%% of the time over the last year</item>
+    <item quantity="other">You made your budget %d%% of the time over the last year</item>
+  </plurals>
+  <plurals name="tink_budget_details_chart_status_message_since">
+    <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
+    <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
+  </plurals>
 </resources>
 ```
 
