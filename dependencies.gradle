@@ -1,14 +1,27 @@
 ext {
-    daggerVersion = '2.24'
-    supportLibVersion = '1.0.0'
-    lifecycleVersion = '2.2.0'
+    autoService = "1.0-rc4"
+    conscrypt = "2.2.1"
+    constraintLayout = "2.0.4"
+    daggerVersion = "2.24"
     gsonVersion = "2.8.0"
+    guavaAndroid = "30.1-android"
     jodaVersion = "2.9.6"
-    timberVersion = "4.7.1"
     kotlin_coroutines_version = "1.3.8"
-    materialVersion = '1.2.0'
+    lifecycleVersion = "2.2.0"
+    materialVersion = "1.2.0"
+    supportLibVersion = "1.0.0"
+    timberVersion = "4.7.1"
 
     tinkCoreVersion = "0.6.3"
+
+    // test
+    assertj = "3.11.1"
+    espresso = "3.1.1"
+    junit = "4.13.2"
+    junitExt = "1.1.0"
+    junitJupiter = "5.2.0"
+    mockk = "1.11.0"
+    runner = "1.1.1"
 
     libraries = [
             android_core_ktx                    : "androidx.core:core-ktx:$supportLibVersion",
@@ -23,9 +36,9 @@ ext {
             arch_lifecycle_compiler             : "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion",
             arch_lifecycle_livedata_ktx         : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
 
-            auto_service                        : "com.google.auto.service:auto-service:1.0-rc4",
+            auto_service                        : "com.google.auto.service:auto-service:$autoService",
 
-            conscrypt                           : 'org.conscrypt:conscrypt-android:2.2.1',
+            conscrypt                           : "org.conscrypt:conscrypt-android:$conscrypt",
 
             dagger                              : "com.google.dagger:dagger:$daggerVersion",
             dagger_android                      : "com.google.dagger:dagger-android:$daggerVersion",
@@ -34,7 +47,7 @@ ext {
             dagger_compiler                     : "com.google.dagger:dagger-compiler:$daggerVersion",
 
             gson                                : "com.google.code.gson:gson:$gsonVersion",
-            guava                               : "com.google.guava:guava:30.1-android",
+            guava                               : "com.google.guava:guava:$guavaAndroid",
             joda_time                           : "joda-time:joda-time:$jodaVersion",
             kotlin_stdlib                       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
             kotlin_coroutines                   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version",
@@ -42,17 +55,22 @@ ext {
 
             support_appcompat                   : "androidx.appcompat:appcompat:$supportLibVersion",
             support_cardview                    : "androidx.cardview:cardview:$supportLibVersion",
-            support_constraint_layout           : 'androidx.constraintlayout:constraintlayout:2.0.4',
+            support_constraint_layout           : "androidx.constraintlayout:constraintlayout:$constraintLayout",
 
             material_components                 : "com.google.android.material:material:$materialVersion",
 
-            test_junit_api                      : "org.junit.jupiter:junit-jupiter-api:5.2.0",
-            test_junit_engine                   : "org.junit.jupiter:junit-jupiter-engine:5.2.0",
-            test_junit_params                   : "org.junit.jupiter:junit-jupiter-params:5.2.0",
-            test_mockk                          : "io.mockk:mockk:1.8.7",
-            test_assertj                        : "org.assertj:assertj-core:3.11.1",
-
             timber                              : "com.jakewharton.timber:timber:$timberVersion",
+
+            test_junit_api                      : "org.junit.jupiter:junit-jupiter-api:$junitJupiter",
+            test_junit_engine                   : "org.junit.jupiter:junit-jupiter-engine:$junitJupiter",
+            test_junit_params                   : "org.junit.jupiter:junit-jupiter-params:$junitJupiter",
+            test_mockk                          : "io.mockk:mockk:$mockk",
+            test_assertj                        : "org.assertj:assertj-core:$assertj",
+
+            test_junit                          : "junit:junit:$junit",
+            test_junit_ext                      : "androidx.test.ext:junit:$junitExt",
+            test_runner                         : "androidx.test:runner:$runner",
+            test_espresso                       : "androidx.test.espresso:espresso-core:$espresso",
 
             tink_core                           : "com.tink:core:$tinkCoreVersion",
             tink_service                        : "com.tink:service:$tinkCoreVersion",
