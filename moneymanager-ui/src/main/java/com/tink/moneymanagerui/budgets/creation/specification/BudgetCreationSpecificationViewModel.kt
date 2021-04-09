@@ -225,7 +225,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             ) { monthlyAverageForCategory, periodValue ->
                 periodValue.getAverageAmount(monthlyAverageForCategory)
                     .formatCurrencyRound()
-                    ?.let { formattedAverageValue ->
+                    .let { formattedAverageValue ->
                         value = context.getString(
                             R.string.tink_budget_edit_field_amount_average_for_period,
                             formattedAverageValue,
