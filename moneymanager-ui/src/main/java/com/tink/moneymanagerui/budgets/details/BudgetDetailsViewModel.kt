@@ -15,6 +15,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import org.joda.time.DateTime
 import org.joda.time.Days
@@ -58,13 +59,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     val totalAmount: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.budgetAmount.formatCurrencyRound()?.let {
-                context.getString(R.string.tink_budget_details_total_amount, it)
-            }
+            context.getString(R.string.tink_budget_details_total_amount, budgetPeriod.budgetAmount.formatCurrencyExactIfNotIntegerWithSign())
         }
 
     val amountLeft: LiveData<String> = Transformations.map(budgetDetailsDataHolder.budgetPeriod) {
-        (it.budgetAmount - it.spentAmount).formatCurrencyRound() ?: ""
+        (it.budgetAmount - it.spentAmount).formatCurrencyExactIfNotIntegerWithSign()
     }
 
     val amountLeftColor: LiveData<Int> =
