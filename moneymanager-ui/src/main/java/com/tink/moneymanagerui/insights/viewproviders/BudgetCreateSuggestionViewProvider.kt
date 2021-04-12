@@ -79,7 +79,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
                 savePerYearText.text =
                     context.getString(
                         R.string.tink_insights_budget_create_suggestion_save_per_year_text,
-                        data.savePerYearAmount.formatCurrencyRound() ?: ""
+                        data.savePerYearAmount.formatCurrencyRound()
                     )
             }
         }

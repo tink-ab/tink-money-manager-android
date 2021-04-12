@@ -15,6 +15,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import org.joda.time.DateTime
 import org.joda.time.Days
@@ -58,13 +59,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     val totalAmount: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            budgetPeriod.budgetAmount.formatCurrencyRound()?.let {
-                context.getString(R.string.tink_budget_details_total_amount, it)
-            }
+            context.getString(R.string.tink_budget_details_total_amount, budgetPeriod.budgetAmount.formatCurrencyExactIfNotIntegerWithSign())
         }
 
     val amountLeft: LiveData<String> = Transformations.map(budgetDetailsDataHolder.budgetPeriod) {
-        (it.budgetAmount - it.spentAmount).formatCurrencyRound() ?: ""
+        (it.budgetAmount - it.spentAmount).formatCurrencyExactIfNotIntegerWithSign()
     }
 
     val amountLeftColor: LiveData<Int> =
@@ -342,29 +341,29 @@ private fun composeRemainingBudgetStatusString(
             remainingYears > 1 -> {
                 averageAmount = remainingAmount / remainingYears.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingMonths > 1 -> {
                 averageAmount = remainingAmount / remainingMonths.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingWeeks > 1 -> {
                 averageAmount = remainingAmount / remainingWeeks.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingDays > 1 -> {
                 averageAmount = remainingAmount / remainingDays.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             else -> {
-                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyRound())
+                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyExactIfNotIntegerWithSign())
             }
         }
     } else if (now.isAfter(end)) { // Budget period in the past
@@ -374,7 +373,7 @@ private fun composeRemainingBudgetStatusString(
     } else {
         context.getString(
             R.string.tink_budget_details_amount_left_message_plain,
-            remainingAmount.formatCurrencyRound()
+            remainingAmount.formatCurrencyExactIfNotIntegerWithSign()
         )
     }
 }
