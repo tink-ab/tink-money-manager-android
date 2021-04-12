@@ -7,6 +7,7 @@ import com.tink.moneymanagerui.collections.Currencies
 import se.tink.commons.extensions.absValue
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.isBiggerThan
+import se.tink.commons.extensions.isInteger
 import se.tink.commons.extensions.isSmallerThan
 import se.tink.commons.extensions.round
 import java.text.DecimalFormat
@@ -47,10 +48,21 @@ object CurrencyUtils {
         return formatCurrency(amount, CurrencyFormat.ROUND or CurrencyFormat.SYMBOL)
     }
 
+    fun formatCurrencyExactWithoutSign(amount: Amount): String {
+        return formatCurrency(amount, CurrencyFormat.EXACT or CurrencyFormat.SYMBOL)
+    }
+
     fun formatCurrencyExact(amount: Amount): String {
         return formatCurrency(
             amount,
             CurrencyFormat.EXACT or CurrencyFormat.SYMBOL or CurrencyFormat.AMOUNT_SIGN
+        )
+    }
+
+    fun formatCurrencyExactIfNotInteger(amount: Amount, additionalFlags: Int = 0): String {
+        return formatCurrency(
+            amount,
+            CurrencyFormat.EXACT_OR_INTEGER or CurrencyFormat.SYMBOL or additionalFlags
         )
     }
 
@@ -102,6 +114,8 @@ object CurrencyUtils {
             formatAmountExact(absValue, currencyCode)
 //        } else if (currencyFormat and CurrencyFormat.SHORT == CurrencyFormat.SHORT) {
 //            formatShort(absValue, currencyCode)
+        } else if(currencyFormat and CurrencyFormat.EXACT_OR_INTEGER == CurrencyFormat.EXACT_OR_INTEGER) {
+            formatAmountExactIfNotInteger(absValue, currencyCode)
         } else { // CurrencyFormat.DYNAMIC
             if (absValue.toBigDecimal().toInt() < DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode) &&
                 absValue.isBiggerThan(ZERO)
@@ -176,6 +190,18 @@ object CurrencyUtils {
             .format(amount.round(decimals).toBigDecimal())
     }
 
+    private fun formatIntegerAmount(
+        amount: ExactNumber,
+        currencyCode: String
+    ): String {
+        val currencySymbol = try {
+            Currency.getInstance(currencyCode).symbol
+        } catch (exception: Exception) {
+            Currency.getInstance(Currencies.getSharedInstance().defaultCurrencyCode).symbol
+        }
+        return "$currencySymbol${amount.toBigDecimal().toLong()}"
+    }
+
     // TODO: Remove deprecated Currencies usage
     private fun getDecimalFormat(
         currencyCode: String?,
@@ -236,6 +262,17 @@ object CurrencyUtils {
         return formatAmount(amount, EXACT_DIGITS, currencyCode)
     }
 
+    private fun formatAmountExactIfNotInteger(
+        amount: ExactNumber,
+        currencyCode: String
+    ): String {
+        return if (amount.isInteger()) {
+            formatIntegerAmount(amount, currencyCode)
+        } else {
+            formatAmountExact(amount, currencyCode)
+        }
+    }
+
     private fun formatAmount(amount: Double, decimals: Int, currency: String?, useCurrencySymbol: Boolean): String {
         val format = getDecimalFormat(currency, decimals)
         var formatted = format.format(amount)
@@ -266,6 +303,7 @@ object CurrencyUtils {
         const val DYNAMIC = 0x10
         const val VERY_SHORT = 0x16
         const val AMOUNT_SIGN = 0x20 // Include amount sign
+        const val EXACT_OR_INTEGER = 0x40 // Keep as integer if no decimals, otherwise exact
     }
 
     init {

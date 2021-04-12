@@ -12,8 +12,8 @@ import com.tink.model.category.CategoryTree
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsDataHolder
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRoundWithoutSign
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithoutSign
 import org.threeten.bp.Instant
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
@@ -158,14 +158,14 @@ internal class BudgetTransactionListViewModel @Inject constructor(
             if (delta.value.isSmallerThan(EXACT_NUMBER_ZERO)) {
                 context.getString(R.string.tink_budget_transactions_header_amount_over)
                     .format(
-                        delta.formatCurrencyRoundWithoutSign(),
-                        budgetPeriod.budgetAmount.formatCurrencyRound()
+                        delta.formatCurrencyExactIfNotIntegerWithoutSign(),
+                        budgetPeriod.budgetAmount.formatCurrencyExactIfNotIntegerWithSign()
                     )
             } else {
                 context.getString(R.string.tink_budget_transactions_header_amount_left_of)
                     .format(
-                        delta.formatCurrencyRoundWithoutSign(),
-                        budgetPeriod.budgetAmount.formatCurrencyRound()
+                        delta.formatCurrencyExactIfNotIntegerWithoutSign(),
+                        budgetPeriod.budgetAmount.formatCurrencyExactIfNotIntegerWithSign()
                     )
             }
         }

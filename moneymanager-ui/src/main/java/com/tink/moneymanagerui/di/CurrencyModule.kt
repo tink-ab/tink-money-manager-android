@@ -26,15 +26,15 @@ internal class CurrencyModule {
                 explicitlyPositive: Boolean
             ): String {
                 return if (!useSymbol && !useSign) {
-                    amount.formatCurrencyExactWithoutSignAndSymbol() ?: ""
+                    amount.formatCurrencyExactWithoutSignAndSymbol()
                 } else if (!useSign) {
-                    amount.formatCurrencyExactWithoutSign() ?: ""
+                    amount.formatCurrencyExactWithoutSign()
                 } else if (!useSymbol) {
-                    amount.formatCurrencyExactWithoutSymbol() ?: ""
+                    amount.formatCurrencyExactWithoutSymbol()
                 } else if (explicitlyPositive) {
-                    amount.formatCurrencyExactExplicitlyPositive() ?: ""
+                    amount.formatCurrencyExactExplicitlyPositive()
                 } else {
-                    amount.formatCurrencyExact() ?: ""
+                    amount.formatCurrencyExact()
                 }
             }
 

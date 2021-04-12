@@ -40,6 +40,7 @@ fun iconFromCategoryCode(code: String): Int = when {
     else -> R.attr.tink_icon_category_uncategorized
 }
 
+@AttrRes
 fun Category.iconColor(): Int {
     return when {
         code.isUncategorized() -> R.attr.tink_uncategorizedColor
@@ -49,6 +50,7 @@ fun Category.iconColor(): Int {
     }
 }
 
+@AttrRes
 fun Category.iconBackgroundColor(): Int {
     return when {
         code.isUncategorized() -> R.attr.tink_uncategorizedLightColor

@@ -3,13 +3,15 @@ package com.tink.moneymanagerui.overview.budgets
 import android.content.Context
 import android.content.res.ColorStateList
 import android.view.ViewGroup
+import androidx.annotation.AttrRes
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithoutSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRoundWithoutSign
 import kotlinx.android.synthetic.main.tink_budget_overview_item.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
@@ -75,7 +77,7 @@ data class BudgetOverviewItem(
 
     fun isContentTheSame(other: BudgetOverviewItem): Boolean = this == other
 
-    data class Icon(val resource: Int, val color: Int, val backgroundColor: Int)
+    data class Icon(@AttrRes val resource: Int, @AttrRes val color: Int, @AttrRes val backgroundColor: Int)
 }
 
 private fun BudgetOverviewItem.isOverSpent(): Boolean = spentAmount > budgetAmount
@@ -122,10 +124,10 @@ class BudgetOverviewItemViewHolder(
         val delta = budgetAmount - spentAmount
         return if (delta.value.isSmallerThan(EXACT_NUMBER_ZERO)) {
             context.getString(R.string.tink_overview_budget_over)
-                .format(delta.formatCurrencyRoundWithoutSign(), budgetAmount.formatCurrencyRound())
+                .format(delta.formatCurrencyExactIfNotIntegerWithoutSign(), budgetAmount.formatCurrencyRound())
         } else {
             context.getString(R.string.tink_overview_budget_left_of)
-                .format(delta.formatCurrencyRound(), budgetAmount.formatCurrencyRound())
+                .format(delta.formatCurrencyExactIfNotIntegerWithSign(), budgetAmount.formatCurrencyRound())
         }
     }
 }
