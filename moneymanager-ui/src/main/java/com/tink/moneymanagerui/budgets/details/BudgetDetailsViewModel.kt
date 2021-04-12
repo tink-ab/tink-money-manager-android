@@ -350,29 +350,29 @@ private fun composeRemainingBudgetStatusString(
             remainingYears > 1 -> {
                 averageAmount = remainingAmount / remainingYears.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingMonths > 1 -> {
                 averageAmount = remainingAmount / remainingMonths.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingWeeks > 1 -> {
                 averageAmount = remainingAmount / remainingWeeks.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             remainingDays > 1 -> {
                 averageAmount = remainingAmount / remainingDays.toDouble()
                 context.getString(
-                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyRound()
+                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
                 )
             }
             else -> {
-                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyRound())
+                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyExactIfNotIntegerWithSign())
             }
         }
     } else if (now.isAfter(end)) { // Budget period in the past
@@ -382,7 +382,7 @@ private fun composeRemainingBudgetStatusString(
     } else {
         context.getString(
             R.string.tink_budget_details_amount_left_message_plain,
-            remainingAmount.formatCurrencyRound()
+            remainingAmount.formatCurrencyExactIfNotIntegerWithSign()
         )
     }
 }
