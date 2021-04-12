@@ -276,23 +276,16 @@ internal class BudgetDetailsViewModel @Inject constructor(
                     historicPeriodsList.value,
                     budgetDetailsDataHolder.budget.value?.periodicity as? RecurringPeriodicity
                 ) { periodsList, periodicity ->
-                    val percentageStr = getBudgetManagedPercentageString(periodsList)
+                    val percentage = getBudgetManagedPercentage(periodsList)
                     value = if (periodicity.unit == Budget.Periodicity.Recurring.PeriodUnit.MONTH) {
-                        context.getString(
-                            R.string.tink_budget_details_chart_status_message_last_year,
-                            percentageStr
-                        )
+                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
                     } else {
                         val formattedStartPeriodLabel = periodsList.first().toHistoricIntervalLabel(
                             context,
                             dateUtils,
                             periodicity
                         )
-                        context.getString(
-                            R.string.tink_budget_details_chart_status_message_since,
-                            percentageStr,
-                            formattedStartPeriodLabel
-                        )
+                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_since, percentage, percentage, formattedStartPeriodLabel)
                     }
                 }
             }
@@ -320,13 +313,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
     fun showPreviousPeriod() = budgetDetailsDataHolder.previousPeriod()
 }
 
-private fun getBudgetManagedPercentageString(historicPeriodsList: List<BudgetPeriod>): String {
+private fun getBudgetManagedPercentage(historicPeriodsList: List<BudgetPeriod>): Int {
     val budgetManagedCount = historicPeriodsList.count {
         (it.budgetAmount - it.spentAmount).value.isBiggerThan(EXACT_NUMBER_ZERO)
     }
-    val budgetManagedPercentage =
-        (budgetManagedCount * 100.0f / historicPeriodsList.size).roundToInt()
-    return "$budgetManagedPercentage%"
+    return (budgetManagedCount * 100.0f / historicPeriodsList.size).roundToInt()
 }
 
 private fun composeRemainingBudgetStatusString(
