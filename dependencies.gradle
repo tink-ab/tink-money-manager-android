@@ -26,7 +26,6 @@ ext {
     libraries = [
             android_core_ktx                    : "androidx.core:core-ktx:$supportLibVersion",
             android_fragment_ktx                : "androidx.fragment:fragment-ktx:$supportLibVersion",
-            android_collection_ktx              : "androidx.collection:collection-ktx:$supportLibVersion",
 
             android_lifecycle_viewmodel_ktx     : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
 
