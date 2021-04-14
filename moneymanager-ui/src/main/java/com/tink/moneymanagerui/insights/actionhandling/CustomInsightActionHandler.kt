@@ -5,7 +5,7 @@ import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightAction
 
 @PfmScope
-internal object CustomInsightActionHandler : ActionHandler {
+internal object CustomInsightActionHandler {
 
     private var insightActionHandler: InsightActionHandler? = null
 
@@ -13,38 +13,92 @@ internal object CustomInsightActionHandler : ActionHandler {
         this.insightActionHandler = insightActionHandler
     }
 
-    override fun handle(action: InsightAction, insight: Insight): Boolean {
+    fun canHandleAction(action: InsightAction): Boolean =
+        insightActionHandler != null && action.canBeHandled()
+
+    private fun InsightAction.canBeHandled(): Boolean =
+        when (data) {
+            is InsightAction.Data.ViewBudget,
+            is InsightAction.Data.CreateBudget,
+            is InsightAction.Data.CreateTransfer,
+            is InsightAction.Data.CategorizeExpense,
+            is InsightAction.Data.CategorizeTransactions,
+            is InsightAction.Data.ViewTransactions,
+            is InsightAction.Data.ViewTransactionsByCategory -> true
+            else -> false
+        }
+
+    fun handle(
+        action: InsightAction,
+        insight: Insight,
+        onComplete: (isActionDone: Boolean) -> Unit
+    ): Boolean {
         return when (action.data) {
             is InsightAction.Data.CategorizeExpense -> {
                 insightActionHandler
-                    ?.categorizeTransaction((action.data as InsightAction.Data.CategorizeExpense).transactionId)
+                    ?.categorizeExpense(
+                        (action.data as InsightAction.Data.CategorizeExpense).transactionId
+                    ) { isActionDone ->
+                        onComplete.invoke(isActionDone)
+                    }
+                    ?: false
+            }
+
+            is InsightAction.Data.CategorizeTransactions -> {
+                insightActionHandler
+                    ?.categorizeTransactions(
+                        (action.data as InsightAction.Data.CategorizeTransactions).transactionIds
+                    ) { isActionDone ->
+                        onComplete.invoke(isActionDone)
+                    }
                     ?: false
             }
 
             is InsightAction.Data.ViewTransactions -> {
-                insightActionHandler
+                val isActionHandled = insightActionHandler
                     ?.viewTransactions((action.data as InsightAction.Data.ViewTransactions).transactionIds)
                     ?: false
+                // TODO: Move this into a separate function to avoid duplicity
+                if (isActionHandled) {
+                    onComplete.invoke(true)
+                    true
+                } else {
+                    false
+                }
             }
 
             is InsightAction.Data.ViewTransactionsByCategory -> {
-                insightActionHandler
+                val isActionHandled = insightActionHandler
                     ?.viewTransactionsByCategory((action.data as InsightAction.Data.ViewTransactionsByCategory).transactionsByCategory)
                     ?: false
+                if (isActionHandled) {
+                    onComplete.invoke(true)
+                    true
+                } else {
+                    false
+                }
             }
 
             is InsightAction.Data.ViewBudget -> {
                 (action.data as InsightAction.Data.ViewBudget).let {
-                    insightActionHandler
+                    val isActionHandled = insightActionHandler
                         ?.viewBudget(it.budgetId, it.periodStartDate.toString())
                         ?: false
+                    if (isActionHandled) {
+                        onComplete.invoke(true)
+                        true
+                    } else {
+                        false
+                    }
                 }
             }
 
             is InsightAction.Data.CreateBudget -> {
                 (action.data as InsightAction.Data.CreateBudget).let {
                     insightActionHandler
-                        ?.createBudget(it.amount, it.budgetFilter, it.periodicity)
+                        ?.createBudget(it.amount, it.budgetFilter, it.periodicity) { isActionDone ->
+                            onComplete.invoke(isActionDone)
+                        }
                         ?: false
                 }
             }
@@ -52,12 +106,14 @@ internal object CustomInsightActionHandler : ActionHandler {
             is InsightAction.Data.CreateTransfer -> {
                 (action.data as InsightAction.Data.CreateTransfer).let {
                     insightActionHandler
-                        ?.showTransfer(it.sourceUri, it.destinationUri, it.amount)
+                        ?.initiateTransfer(it.sourceUri, it.destinationUri, it.amount) {isActionDone ->
+                            onComplete.invoke(isActionDone)
+                        }
                         ?: false
                 }
             }
 
-            else -> false // Other types will be handled internally by Tink
+            else -> false // Return false so these action types are handled internally
         }
     }
 }

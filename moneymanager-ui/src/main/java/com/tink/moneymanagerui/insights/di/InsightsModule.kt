@@ -44,6 +44,11 @@ class InsightsModule {
 
     @Provides
     @IntoSet
+    fun categorizeTransactionsActionHandler(categorizeTransactionsActionHandler: CategorizeTransactionsActionHandler): ActionHandler =
+        categorizeTransactionsActionHandler
+
+    @Provides
+    @IntoSet
     fun viewTransactionsActionHandler(viewTransactionsActionHandler: ViewTransactionsActionHandler): ActionHandler =
         viewTransactionsActionHandler
 
@@ -59,8 +64,8 @@ class InsightsModule {
         passiveActionHandler
 
     @Provides
-    fun handlerComposite(handlers: Set<@JvmSuppressWildcards ActionHandler>, insightsTracker: InsightsTracker): ActionHandler =
-        GeneralActionHandler(handlers = handlers, tracker = insightsTracker)
+    fun handlerComposite(handlers: Set<@JvmSuppressWildcards ActionHandler>, insightsTracker: InsightsTracker, actionEventBus: ActionEventBus): ActionHandler =
+        GeneralActionHandler(handlers = handlers, tracker = insightsTracker, actionEventBus = actionEventBus)
 
     @Provides
     fun viewModelFactory(providers: ModelProviders): InsightsViewModelFactory =

@@ -5,12 +5,14 @@ import com.tink.model.insights.InsightAction
 import se.tink.android.redirection.RedirectionReceiver
 import javax.inject.Inject
 
-class ViewBudgetActionHandler @Inject constructor(
+class CategorizeTransactionsActionHandler @Inject constructor(
     private val redirectionReceiver: RedirectionReceiver
 ) : ActionHandler {
-    override fun handle(action: InsightAction, insight: Insight) =
-        (action.data as? InsightAction.Data.ViewBudget)?.let {
-            redirectionReceiver.showBudget(it.budgetId, it.periodStartDate.toString())
+
+    override fun handle(action: InsightAction, insight: Insight): Boolean =
+        (action.data as? InsightAction.Data.CategorizeTransactions)?.let {
+            // Show the transactions list
+            redirectionReceiver.showTransactionListForIds(it.transactionIds)
             true
         } ?: false
 }
