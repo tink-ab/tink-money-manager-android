@@ -98,15 +98,19 @@ open class InsightActionHandler {
      * This corresponds to [InsightAction.Type.CREATE_TRANSFER] action type.
      *
      * @param sourceUri URI for the source account that the transfer should be from
+     * @param sourceAccountNumber The account number to initiate a transfer from
      * @param destinationUri URI for the destination account that the transfer should be to
+     * @param destinationAccountNumber The account number to initiate a transfer to
      * @param amount The amount to be transferred
      * @param onComplete The lambda block to invoke to indicate if the action has completed successfully or not
      * @return `true` if the action will be handled, `false` otherwise
      */
     open fun initiateTransfer(
-        sourceUri: String,
-        destinationUri: String,
-        amount: Amount,
+        sourceUri: String?,
+        sourceAccountNumber: String?,
+        destinationUri: String?,
+        destinationAccountNumber: String?,
+        amount: Amount?,
         onComplete: (isActionDone: Boolean) -> Unit
     ): Boolean = false
 }

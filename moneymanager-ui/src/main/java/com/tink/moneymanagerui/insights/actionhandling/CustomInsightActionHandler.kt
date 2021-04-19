@@ -106,7 +106,13 @@ internal object CustomInsightActionHandler {
             is InsightAction.Data.CreateTransfer -> {
                 (action.data as InsightAction.Data.CreateTransfer).let {
                     insightActionHandler
-                        ?.initiateTransfer(it.sourceUri, it.destinationUri, it.amount) {isActionDone ->
+                        ?.initiateTransfer(
+                            it.sourceUri,
+                            it.sourceAccountNumber,
+                            it.destinationUri,
+                            it.destinationAccountNumber,
+                            it.amount
+                        ) { isActionDone ->
                             onComplete.invoke(isActionDone)
                         }
                         ?: false
