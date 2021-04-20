@@ -56,7 +56,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |
-| `tink_budget_create_field_amount_hint` | Monthly budget |
+| `tink_budget_create_field_amount_hint` | Amount |
 | `tink_budget_create_field_period_hint` | Budget Period |
 | `tink_budget_create_field_period_start_hint` | Period Start Date |
 | `tink_budget_create_field_period_end_hint` | Period End Date |
