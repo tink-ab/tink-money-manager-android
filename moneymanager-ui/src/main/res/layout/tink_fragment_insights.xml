@@ -24,46 +24,20 @@
       app:layout_constraintTop_toTopOf="parent"
       app:navigationIcon="?android:homeAsUpIndicator" />
 
-    <ImageView
-      android:id="@+id/emptyStateIllustration"
-      android:layout_width="300dp"
-      android:layout_height="300dp"
-      android:src="@drawable/tink_cat_wizard_end"
-      app:layout_constraintBottom_toTopOf="@+id/emptyStateTitle"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.4"
-      app:layout_constraintVertical_chainStyle="packed"/>
-
     <TextView
-      android:id="@+id/emptyStateTitle"
-      style="@style/tink_hecto"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
-      android:layout_marginEnd="24dp"
-      android:gravity="center"
-      android:text="@string/tink_insights_empty_state_title"
-      app:layout_constraintBottom_toTopOf="@+id/emptyStateSubtitle"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/emptyStateIllustration"/>
-
-    <TextView
-      android:id="@+id/emptyStateSubtitle"
+      android:id="@+id/emptyStateText"
       style="@style/tink_deci"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="12dp"
-      android:layout_marginStart="80dp"
-      android:layout_marginEnd="80dp"
+      android:layout_marginStart="48dp"
+      android:layout_marginEnd="48dp"
       android:gravity="center"
-      android:text="@string/tink_insights_empty_state_subtitle"
+      android:text="@string/tink_insights_empty_state_text"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/emptyStateTitle"/>
+      app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recyclerView"
