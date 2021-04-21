@@ -100,7 +100,11 @@ class BudgetOverviewItemViewHolder(
             budgetDateInterval.text = item.periodLabel
             budgetProgress.apply {
                 max = item.progressMax
-                progress = item.progress
+                progress = if (item.isOverSpent()) {
+                    item.progressMax
+                } else {
+                    item.progress
+                }
                 progressTintList = if (item.isOverSpent()) {
                     ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_warningColor))
                 } else {
