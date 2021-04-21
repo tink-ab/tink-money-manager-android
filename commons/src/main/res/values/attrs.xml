@@ -70,7 +70,8 @@
     <attr name="tink_icon_category_transfers_other" format="integer|reference" />
     <attr name="tink_icon_category_uncategorized" format="integer|reference" />
     <attr name="tink_icon_category_search" format="integer|reference" />
-    <attr name="tink_transaction_tag" format="integer|reference" />
+    <attr name="tink_icon_transaction_tag" format="integer|reference" />
+    <attr name="tink_icon_add_button" format="integer|reference" />
 
     <!-- Button styles -->
     <attr name="tink_containedButtonStyle" format="reference" />

@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tink_add_circle_outline_white"
+        app:srcCompat="?attr/tink_icon_add_button"
         app:tint="?attr/tink_expensesColor"
         android:background="?attr/tink_expensesLightColor"
         app:shapeAppearance="?attr/tink_categoryIconShapeStyle" />
