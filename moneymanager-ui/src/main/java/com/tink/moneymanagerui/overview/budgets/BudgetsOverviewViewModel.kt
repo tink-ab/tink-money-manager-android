@@ -36,7 +36,7 @@ internal class BudgetsOverviewViewModel @Inject constructor(
                         val budgetSpecification = summary.budgetSpecification
                         val icon = when {
                             budgetSpecification.filter.tags.isNotEmpty() -> BudgetOverviewItem.Icon(
-                                resource = R.attr.tink_transaction_tag,
+                                resource = R.attr.tink_icon_transaction_tag,
                                 color = R.attr.tink_transferColor,
                                 backgroundColor = R.attr.tink_transferLightColor
                             )

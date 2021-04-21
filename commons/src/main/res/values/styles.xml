@@ -68,8 +68,8 @@
     <item name="tink_icon_category_transfers_other">@drawable/tink_category_other</item>
     <item name="tink_icon_category_uncategorized">@drawable/tink_uncategorized</item>
     <item name="tink_icon_category_search">@drawable/tink_search</item>
-    <item name="tink_transaction_tag">@drawable/tink_transaction_tag</item>
-    <item name="tink_add_button">@drawable/tink_add_circle_outline_white</item>
+    <item name="tink_icon_transaction_tag">@drawable/tink_transaction_tag</item>
+    <item name="tink_icon_add_button">@drawable/tink_add_circle_outline_white</item>
 
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
