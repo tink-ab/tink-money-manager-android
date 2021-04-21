@@ -46,10 +46,11 @@
         <!-- Do not use wrap_content for width for animation performance reasons-->
         <com.tink.moneymanagerui.view.TinkTextView
           android:id="@+id/amount"
-          style="@style/tink_tera"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          style="@style/tink_tera.autoSize"
+          android:layout_width="180dp"
+          android:layout_height="50dp"
           android:gravity="center"
+          android:layout_gravity="center"
           android:text="@{model.amount}"
           android:transitionName="@{@string/tink_amount_transition(model.title)}"/>
 
