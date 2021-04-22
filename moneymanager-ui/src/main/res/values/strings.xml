@@ -76,8 +76,8 @@
 
   <string name="tink_insights_tab_title">Events</string>
   <string name="tink_insights_archive_title">Archive</string>
-  <string name="tink_insights_empty_state_title">You handled all events!</string>
-  <string name="tink_insights_empty_state_subtitle">Check the archive if you want to see your previous ones</string>
+  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want see your previous ones</string>
+  <string name="tink_insights_archived_empty_state_text">No archived events</string>
   <string name="tink_insights_overview_card_new_events_title">New Events</string>
   <string name="tink_insights_overview_card_archived_events_title">Archived Events</string>
   <string name="tink_insights_overview_card_action_text">View</string>
@@ -87,7 +87,7 @@
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
-  <string name="tink_budget_create_field_amount_hint">Monthly budget</string>
+  <string name="tink_budget_create_field_amount_hint">Amount</string>
   <string name="tink_budget_create_field_period_hint">Budget Period</string>
   <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>
   <string name="tink_budget_create_field_period_end_hint">Period End Date</string>

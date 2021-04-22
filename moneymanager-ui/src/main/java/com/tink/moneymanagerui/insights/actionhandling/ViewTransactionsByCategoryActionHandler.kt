@@ -6,9 +6,8 @@ import se.tink.android.redirection.RedirectionReceiver
 import javax.inject.Inject
 
 class ViewTransactionsByCategoryActionHandler @Inject constructor(
-    actionEventBus: ActionEventBus,
     private val redirectionReceiver: RedirectionReceiver
-) : AbstractActionHandler(actionEventBus) {
+) : ActionHandler {
 
     override fun handle(action: InsightAction, insight: Insight): Boolean =
         (action.data as? InsightAction.Data.ViewTransactionsByCategory)?.run {
@@ -17,7 +16,6 @@ class ViewTransactionsByCategoryActionHandler @Inject constructor(
                 .flatten()
                 .takeIf { it.isNotEmpty() }
                 ?.let { redirectionReceiver.showTransactionListForIds(it) }
-            actionPerformed(action, insight)
             true
         } ?: false
 }

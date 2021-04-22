@@ -60,6 +60,8 @@ class ArchivedInsightsFragment : BaseFragment() {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
         }
 
+        emptyStateText.text = getString(R.string.tink_insights_archived_empty_state_text)
+
         DataBindingUtil.bind<TinkFragmentInsightsBinding>(view)?.also {
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner

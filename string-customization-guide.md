@@ -46,8 +46,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_until_next_date` | Until %s |
 | `tink_insights_tab_title` | Events |
 | `tink_insights_archive_title` | Archive |
-| `tink_insights_empty_state_title` | You handled all events! |
-| `tink_insights_empty_state_subtitle` | Check the archive if you want to see your previous ones |
+| `tink_insights_empty_state_text` | No new events! Check the archive if you want see your previous ones |
+| `tink_insights_archived_empty_state_text` | No archived events |
 | `tink_insights_overview_card_new_events_title` | New Events |
 | `tink_insights_overview_card_archived_events_title` | Archived Events |
 | `tink_insights_overview_card_action_text` | View |
@@ -56,7 +56,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |
-| `tink_budget_create_field_amount_hint` | Monthly budget |
+| `tink_budget_create_field_amount_hint` | Amount |
 | `tink_budget_create_field_period_hint` | Budget Period |
 | `tink_budget_create_field_period_start_hint` | Period Start Date |
 | `tink_budget_create_field_period_end_hint` | Period End Date |

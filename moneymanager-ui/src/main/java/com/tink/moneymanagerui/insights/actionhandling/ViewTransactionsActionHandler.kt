@@ -6,10 +6,8 @@ import se.tink.android.redirection.RedirectionReceiver
 import javax.inject.Inject
 
 class ViewTransactionsActionHandler @Inject constructor(
-    actionEventBus: ActionEventBus,
     private val redirectionReceiver: RedirectionReceiver
-) : AbstractActionHandler(actionEventBus) {
-
+) : ActionHandler {
     override fun handle(action: InsightAction, insight: Insight): Boolean =
         (action.data as? InsightAction.Data.ViewTransactions)?.run {
             when {
@@ -20,7 +18,6 @@ class ViewTransactionsActionHandler @Inject constructor(
 //                )
                 else -> redirectionReceiver.showTransactionListForIds(transactionIds)
             }
-            actionPerformed(action, insight)
             true
         } ?: false
 }
