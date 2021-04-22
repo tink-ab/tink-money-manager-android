@@ -103,13 +103,6 @@
     <item name="autoSizeStepGranularity">1sp</item>
   </style>
 
-  <style name="tink_tera.autoSize" parent="tink_tera">
-    <item name="autoSizeTextType">uniform</item>
-    <item name="autoSizeMaxTextSize">34sp</item>
-    <item name="autoSizeMinTextSize">11sp</item>
-    <item name="autoSizeStepGranularity">1sp</item>
-  </style>
-
   <style name="tink_giga.inverted">
     <item name="android:textColor">@color/tink_white</item>
   </style>
@@ -232,6 +225,13 @@
 
   <style name="tink_tera.inverted">
     <item name="android:textColor">@color/tink_white</item>
+  </style>
+
+  <style name="tink_tera.autoSize" parent="tink_tera">
+    <item name="autoSizeTextType">uniform</item>
+    <item name="autoSizeMaxTextSize">34sp</item>
+    <item name="autoSizeMinTextSize">11sp</item>
+    <item name="autoSizeStepGranularity">1sp</item>
   </style>
 
   <style name="tink_betaBadge" parent="tink_nano.title">
