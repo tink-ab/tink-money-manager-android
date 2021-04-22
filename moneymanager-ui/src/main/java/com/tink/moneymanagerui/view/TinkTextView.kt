@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.common.base.Strings
 import com.tink.moneymanagerui.util.DimensionUtils
 
+@Deprecated("Use MaterialTextView instead", replaceWith = ReplaceWith("com.google.android.material.textview.MaterialTextView"))
 class TinkTextView : AppCompatTextView {
     private var theme: Theme? = null
     private var compundPaddingTop = 0

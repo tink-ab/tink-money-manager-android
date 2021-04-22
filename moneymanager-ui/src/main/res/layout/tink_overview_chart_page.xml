@@ -34,7 +34,7 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <com.tink.moneymanagerui.view.TinkTextView
+        <com.google.android.material.textview.MaterialTextView
           android:id="@+id/title"
           style="@style/tink_deci"
           android:layout_width="match_parent"
@@ -44,7 +44,7 @@
           android:transitionName="@{@string/tink_amount_title_transition(model.title)}"/>
 
         <!-- Do not use wrap_content for width for animation performance reasons-->
-        <com.tink.moneymanagerui.view.TinkTextView
+        <com.google.android.material.textview.MaterialTextView
           android:id="@+id/amount"
           style="@style/tink_tera.autoSize"
           android:layout_width="180dp"
@@ -54,7 +54,7 @@
           android:text="@{model.amount}"
           android:transitionName="@{@string/tink_amount_transition(model.title)}"/>
 
-        <com.tink.moneymanagerui.view.TinkTextView
+        <com.google.android.material.textview.MaterialTextView
           android:id="@+id/period"
           style="@style/tink_deci"
           android:layout_width="match_parent"
