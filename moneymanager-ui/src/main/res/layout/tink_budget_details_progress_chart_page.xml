@@ -15,11 +15,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
       android:id="@+id/amountLeft"
-      style="@style/tink_tera"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      style="@style/tink_tera.autoSize"
+      android:layout_width="180dp"
+      android:layout_height="50dp"
+      android:gravity="center"
       android:text="@{viewModel.amountLeft}"
       app:layout_constraintBottom_toBottomOf="@+id/budgetProgress"
       app:layout_constraintEnd_toEndOf="@+id/budgetProgress"

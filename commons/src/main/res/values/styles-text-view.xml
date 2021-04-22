@@ -227,6 +227,13 @@
     <item name="android:textColor">@color/tink_white</item>
   </style>
 
+  <style name="tink_tera.autoSize" parent="tink_tera">
+    <item name="autoSizeTextType">uniform</item>
+    <item name="autoSizeMaxTextSize">34sp</item>
+    <item name="autoSizeMinTextSize">11sp</item>
+    <item name="autoSizeStepGranularity">1sp</item>
+  </style>
+
   <style name="tink_betaBadge" parent="tink_nano.title">
     <item name="android:textAllCaps">true</item>
     <item name="android:padding">4dp</item>
