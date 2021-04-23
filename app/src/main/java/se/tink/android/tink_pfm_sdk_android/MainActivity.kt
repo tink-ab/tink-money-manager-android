@@ -16,8 +16,8 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.StatisticType
-import com.tink.sample.configuration.Configuration
 import com.tink.service.network.TinkConfiguration
+import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
 class MainActivity : FragmentActivity() {
 
