@@ -122,6 +122,9 @@ The Tink Finance Overview only works correctly when the screen orientation is lo
 You can achieve this by opening your Android manifest and setting `android:screenOrientation=“portrait”` on the Activity containing the `FinanceOverviewFragment`.
 
 ## Sample
+
+This sample project shows how to setup and use the `FinanceOverviewFragment` in your app.
+
 - [Sample](sample-moneymanager-ui)
 
 ## Documentation

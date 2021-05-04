@@ -8,11 +8,11 @@ This directory contains sample code that demonstrates the usage of `TinkMoneyMan
 ## Prerequisites
 
 1. Follow the [getting started guide](https://docs.tink.com/resources/getting-started/set-up-your-account) to retrieve your `client_id`.
-2. Make sure you are an Enterprise customer with permanent users enabled.
+2. Make sure you are an [Enterprise customer](https://tink.com/pricing/) with permanent users enabled.
 
 ## Configuration
 
-Before running the example project, you need to configure the following:
+Before running the sample project, you need to configure the following:
 
 1. Set up a configuration object with your specifics:
 
