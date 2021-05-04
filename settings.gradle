@@ -1,2 +1,2 @@
-include ':app'
+include ':sample-moneymanager-ui'
 rootProject.name = "tink-pfm-android"
