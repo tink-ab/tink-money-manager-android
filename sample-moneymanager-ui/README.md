@@ -26,7 +26,7 @@ Before running the sample project, you need to configure the following:
 ```
 
 `[1]` _Note: This is only required if you also use Tink Link in your application. Please follow the [third party authentication guide](https://docs.tink.com/resources/tutorials/tink-link-sdk-android-tutorial#third-party-authentication) to set this up.
-Otherwise, this can be just set to `https://localhost:3000/callback` as shown in the sample above. We will be working on improving this setup and making this field optional in the future._
+Otherwise, this can be just set to `https://localhost:3000/callback` as shown in the sample above. We will be working on improving this setup and making this field optional in the future.
 
 2. Initialize Tink in your application:
 
@@ -37,6 +37,6 @@ Otherwise, this can be just set to `https://localhost:3000/callback` as shown in
 ## Running the example app
 
 1. Open the project in Android Studio.
-2. Press the run button. If all went well, this should launch a simulator with the sample app running.
+2. Press the run button. If all went well, this should launch an emulator with the sample app running.
 
 Read more about Tink Money Manager Android in [here](https://docs.tink.com/resources/pfm-sdk-android).
