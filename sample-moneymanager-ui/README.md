@@ -3,7 +3,7 @@
 
 # Finance Overview Sample 
 
-![OverView Android PFM](https://images.ctfassets.net/tmqu5vj33f7w/Z48REXV9yE6LMW4pfV411/43103871e8015c6c6bb8ee89766c122d/Overview-Android.png)
+![OverView Android PFM](https://images.ctfassets.net/tmqu5vj33f7w/63ECPAITBhUtsy54d7DTfr/a3553270c02e62bfca691cc64f4255cd/PFM_SDK_Android.jpg)
 
 This directory contains sample code that demonstrates the usage of `TinkMoneyManager` Android SDK.
 
