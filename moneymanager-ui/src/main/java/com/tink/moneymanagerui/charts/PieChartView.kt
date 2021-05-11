@@ -54,7 +54,7 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
     // Can be called to calculate layout parameters without doing any heavy lifting
     fun preLayout(width: Int, height: Int) {
         val radius = minOf(width - paddingLeft - paddingRight, height - paddingTop - paddingBottom).toFloat() / 2f
-        val maxLabelRadius = labels.maxBy { it.radialSize }?.radialSize ?: 0f
+        val maxLabelRadius = labels.maxByOrNull { it.radialSize }?.radialSize ?: 0f
         var pieRadius = maxOf(0f, radius - maxLabelRadius)
         pieRadius = minOf(pieRadius, maxRadiusPercent * radius)
 

@@ -21,7 +21,7 @@ internal fun Canvas.drawBarChart(
     val cornerRadius = barCornerRadius ?: barWidth / 2
     val bottom = rectF.bottom
 
-    val max = data.max() ?: return
+    val max = data.maxOrNull() ?: return
     for ((index, top) in data.map { (1 - it / max) * rectF.height() + rectF.top }.withIndex()) {
         drawBarAtIndex(
             index,
@@ -52,7 +52,7 @@ internal fun Canvas.drawBarChartWithAmountLabels(
     val bottom = rectF.bottom
     val amountLabelHeight = amountLabelPaint.textSize + amountLabelTopMargin
 
-    val max = data.max() ?: return
+    val max = data.maxOrNull() ?: return
     for ((index, top) in data.map {
         (1 - it / max) * (rectF.height() - amountBottomMargin) +
                 (rectF.top + amountLabelHeight)

@@ -43,8 +43,8 @@ internal class PieChartSegmentTransition(private val group: Int? = null, private
     }
 
     private fun createAnimators(start: List<SegmentInfo>, end: List<SegmentInfo>, view: PieChartView): Animator? {
-        fun minAngle(s: List<SegmentInfo>) = s.minBy { it.startAngle }?.startAngle ?: 0f
-        fun maxAngle(s: List<SegmentInfo>) = s.maxBy { it.startAngle + it.angle }?.let { it.startAngle + it.angle } ?: 360f
+        fun minAngle(segments: List<SegmentInfo>) = segments.minByOrNull { it.startAngle }?.startAngle ?: 0f
+        fun maxAngle(segments: List<SegmentInfo>) = segments.maxByOrNull { it.startAngle + it.angle }?.let { it.startAngle + it.angle } ?: 360f
 
         val count = maxOf(start.size, end.size)
         val animators = mutableListOf<Animator>()
