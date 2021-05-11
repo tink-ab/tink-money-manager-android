@@ -87,6 +87,7 @@
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
+  <string name="tink_budget_create_field_name_hint">Name</string>
   <string name="tink_budget_create_field_amount_hint">Amount</string>
   <string name="tink_budget_create_field_period_hint">Budget Period</string>
   <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>

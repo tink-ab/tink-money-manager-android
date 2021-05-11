@@ -41,6 +41,7 @@ internal class BudgetCreationFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance(
+            name: String? = null,
             amount: Amount? = null,
             budgetFilter: BudgetFilter? = null,
             budgetPeriodicity: BudgetPeriodicity? = null
@@ -49,7 +50,7 @@ internal class BudgetCreationFragment : BaseFragment() {
             fragment.arguments = Bundle().apply {
                 putParcelable(
                     BUDGET_OPERATION,
-                    BudgetCreateOperation(amount, budgetFilter, budgetPeriodicity)
+                    BudgetCreateOperation(name, amount, budgetFilter, budgetPeriodicity)
                 )
             }
             return fragment
@@ -88,6 +89,7 @@ internal class BudgetCreationFragment : BaseFragment() {
     }
 
     private fun BudgetCreateOperation.setDataForPrefill() {
+        name?.let { dataHolder.name.value = it }
         amount?.let { dataHolder.amount.value = it }
         filter?.let { dataHolder.selectedFilter.value = it }
         periodicity?.let { dataHolder.periodicity.value = it }
@@ -157,6 +159,7 @@ internal data class BudgetEditOperation(
 
 @Parcelize
 internal data class BudgetCreateOperation(
+    val name: String? = null,
     val amount: Amount? = null,
     val filter: BudgetFilter? = null,
     val periodicity: BudgetPeriodicity? = null
