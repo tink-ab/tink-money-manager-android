@@ -164,7 +164,7 @@ internal class BarChartWithThreshold : View {
                 inset(-badgePadding, -badgePadding)
             }
 
-            val dataMax = data.max()!!
+            val dataMax = data.maxOrNull()!!
 
             val thresholdLineY: Float
 

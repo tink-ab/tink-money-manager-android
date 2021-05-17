@@ -87,6 +87,10 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         }
     }
 
+    fun updateBudgetName(newName: String) {
+        dataHolder.name.postValue(newName)
+    }
+
     val periodValue = MutableLiveData<PeriodValue>().apply {
         value = dataHolder.periodicity.value?.toPeriodValue() ?: MONTH
     }
@@ -245,7 +249,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         }
     }
 
-    val budgetName: LiveData<String?> = MediatorLiveData<String>().apply {
+    val defaultBudgetName: LiveData<String?> = MediatorLiveData<String>().apply {
         fun update() {
             val categoryTree = categoryRepository.categories.value
             val filter = dataHolder.selectedFilter.value
@@ -276,10 +280,10 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         postValue(false)
         fun update() {
             whenNonNull(
+                dataHolder.name.value.takeIf { !it.isNullOrBlank() },
                 dataHolder.amount.value,
                 dataHolder.selectedFilter.value,
                 dataHolder.periodicity.value,
-                budgetName.value
             ) { _, _, _, _ ->
                 postValue(true)
             } ?: postValue(false)
@@ -287,7 +291,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
         addSource(dataHolder.amount) { update() }
         addSource(dataHolder.selectedFilter) { update() }
-        addSource(budgetName) { update() }
+        addSource(dataHolder.name) { update() }
         addSource(dataHolder.periodicity) { update() }
     }
 
@@ -311,11 +315,11 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     fun onCreateBudgetButtonClicked() {
         whenNonNull(
+            dataHolder.name.value,
             dataHolder.amount.value,
             dataHolder.selectedFilter.value,
-            dataHolder.periodicity.value,
-            budgetName.value
-        ) { amount, filter, periodicity, name ->
+            dataHolder.periodicity.value
+        ) { name, amount, filter, periodicity ->
             BudgetCreateOrUpdateDescriptor(
                 id = dataHolder.id.value,
                 name = name,
@@ -346,6 +350,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
     }
 
     val amount get() = dataHolder.amount.value
+    val budgetName get() = dataHolder.name.value
     val isEditing get() = dataHolder.id.value != null
 
     fun deleteBudget() =

@@ -100,7 +100,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 userProfile.value?.currency
             ) { list, currency ->
                 val maxValue = run {
-                    val computedMax = list.map { it.amount }.max() ?: 0.0
+                    val computedMax = list.map { it.amount }.maxOrNull() ?: 0.0
                     if (computedMax <= 0) 1.0 else computedMax
                 }
 

@@ -139,7 +139,7 @@ internal class BarChartWithAmountLabels : View {
 
             //Compute bounds
 
-            val dataMax = data.max()!!
+            val dataMax = data.maxOrNull()!!
 
             barChartBounds.set(
                 0f,

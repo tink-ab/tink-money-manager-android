@@ -21,6 +21,7 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.YEAR
 import com.tink.moneymanagerui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
+import com.tink.moneymanagerui.extensions.textChangedObserver
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
@@ -74,8 +75,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 it.lifecycleOwner = viewLifecycleOwner
             }
 
-        viewModel.budgetName.observe(viewLifecycleOwner, { name ->
-            name?.let { title = getString(R.string.tink_budget_specification_toolbar_title, name) }
+        viewModel.defaultBudgetName.observe(viewLifecycleOwner, { name ->
+            if (nameInputText.text.isNullOrBlank()) {
+                nameInputText.setText(name.orEmpty())
+            }
         })
 
         viewModel.createdBudgetSpecification.observe(viewLifecycleOwner, {
@@ -96,6 +99,11 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                     viewModel.amountString.postValue(amountString)
                 }
             }
+        })
+
+        nameInputText.textChangedObserver().observe(viewLifecycleOwner, { name ->
+            title = name
+            viewModel.updateBudgetName(name)
         })
 
         amountInputText.setOnFocusChangeListener { inputView, hasFocus ->
@@ -151,6 +159,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 fragmentCoordinator.handleBackPress()
             }
         })
+
+        nameInputText.setText(viewModel.budgetName.orEmpty())
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
@@ -169,7 +179,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                     .setMessage(
                         getString(
                             R.string.tink_budget_delete_dialog_message,
-                            viewModel.budgetName.value
+                            viewModel.budgetName
                         )
                     )
                     .setPositiveButton(R.string.tink_budget_delete_dialog_confirm_button) { _, _ ->
