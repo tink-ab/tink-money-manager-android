@@ -276,6 +276,19 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         addSource(dataHolder.selectedFilter) { update() }
     }
 
+    val selectedCategories: LiveData<List<String>> = MediatorLiveData<List<String>>().apply {
+        fun update() {
+            val categoryTree = categoryRepository.categories.value
+            val filter = dataHolder.selectedFilter.value
+
+            filter?.categories
+                ?.mapNotNull { categoryTree?.findCategoryByCode(it.code)?.name }
+                ?.also { postValue(it) }
+        }
+        addSource(categoryRepository.categories) { update() }
+        addSource(dataHolder.selectedFilter) { update() }
+    }
+
     val areAllRequiredValuesPresent: MediatorLiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         postValue(false)
         fun update() {
