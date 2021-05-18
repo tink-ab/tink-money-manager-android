@@ -6,6 +6,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
 import com.tink.model.budget.Budget
+import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationDataHolder
 import com.tink.moneymanagerui.util.findChildByCategoryId
 import com.tink.moneymanagerui.util.toTreeListSelectionItem
@@ -36,14 +37,14 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
             mutableListOf<TreeListSelectionItem>().apply {
                 addAll(treeListSelectionItems)
                 // Hide create by keyword or tag option until implemented
-//                add(
-//                    TreeListSelectionItem.ActionItem(
-//                        id = context.getString(R.string.tink_filter_search_item),
-//                        label = context.getString(R.string.tink_budget_create_search_label),
-//                        iconRes = R.drawable.tink_search,
-//                        action = { _searchClicked.postValue(Event(true)) }
-//                    )
-//                )
+                add(
+                    TreeListSelectionItem.ActionItem(
+                        id = context.getString(R.string.tink_filter_search_item),
+                        label = context.getString(R.string.tink_budget_create_with_keyword),
+                        iconRes = R.attr.tink_icon_category_search,
+                        action = { _searchClicked.postValue(Event(true)) }
+                    )
+                )
             }
         }
 

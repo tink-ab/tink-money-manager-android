@@ -41,6 +41,7 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
             this,
             budgetCreationViewModelFactory
         )[BudgetCreationSearchViewModel::class.java]
+        viewModel.getTransactions()
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,9 +60,8 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         toolbar?.setCustomView(searchHeader)
         searchHeader.focus()
 
-        adapter.onItemClickedListener = {
-            val tagName = it.replace("#", "")
-            viewModel.selectedTag.postValue(tagName)
+        adapter.onItemClickedListener = { keyword ->
+            viewModel.freeTextQuery.postValue(keyword)
             SoftKeyboardUtils.closeSoftKeyboard(activity)
             navigation.goToSpecificationFragment()
         }
@@ -69,10 +69,8 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         searchSuggestionsList.layoutManager = LinearLayoutManager(context)
         searchSuggestionsList.adapter = adapter
 
-        viewModel.suggestions.observe(viewLifecycle, Observer { suggestions ->
-            if (suggestions != null) {
-                adapter.setData(suggestions)
-            }
+        viewModel.visibleSuggestions.observe(viewLifecycle, Observer { suggestions ->
+            adapter.setData(suggestions)
         })
     }
 

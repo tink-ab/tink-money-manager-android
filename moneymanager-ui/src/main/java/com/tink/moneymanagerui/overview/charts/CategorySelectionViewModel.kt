@@ -46,8 +46,8 @@ internal class CategorySelectionViewModel @Inject constructor(
                         )
                     }
                     category.children
-                        ?.sortedBy { item -> item.sortOrder }
-                        ?.forEach { child ->
+                        .sortedBy { item -> item.sortOrder }
+                        .forEach { child ->
                             if (!child.isDefaultChild) {
                                 add(child.toTreeListSelectionItem(context))
                             }
