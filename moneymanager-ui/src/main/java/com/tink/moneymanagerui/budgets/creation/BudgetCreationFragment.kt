@@ -117,10 +117,10 @@ internal class BudgetCreationFragment : BaseFragment() {
 
 internal class BudgetCreationNavigation(private val fragmentCoordinator: FragmentCoordinator) {
 
-    fun goToFilterSelectionFragment() {
+    fun goToFilterSelectionFragment(addToBackStack: Boolean = false) {
         fragmentCoordinator.replace(
             fragment = BudgetCreationFilterSelectionFragment.newInstance(),
-            addToBackStack = false,
+            addToBackStack = addToBackStack,
             animation = FragmentAnimationFlags.NONE
         )
     }

@@ -13,6 +13,7 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import org.joda.time.DateTime
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
+import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
@@ -39,6 +40,9 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     @Inject
     internal lateinit var budgetCreationViewModelFactory: BudgetCreationViewModelFactory
+
+    @Inject
+    internal lateinit var budgetCreationNavigation: BudgetCreationNavigation
 
     internal lateinit var viewModel: BudgetCreationSpecificationViewModel
 
@@ -161,6 +165,21 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         })
 
         nameInputText.setText(viewModel.budgetName.orEmpty())
+
+        viewModel.selectedCategories.observe(viewLifecycleOwner, { categories ->
+            if (viewModel.isEditing && categories != null) {
+                categoriesInputLayout.visibility = View.VISIBLE
+                categoriesInputText.setText(
+                    categories.joinToString(separator = ",")
+                )
+                categoriesInputText.setOnClickListener {
+                    amountInputText.closeKeyboard()
+                    editCategories()
+                }
+            } else {
+                categoriesInputLayout.visibility = View.GONE
+            }
+        })
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
@@ -231,5 +250,9 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             )
                 .show()
         }
+    }
+
+    private fun editCategories() {
+        budgetCreationNavigation.goToFilterSelectionFragment(addToBackStack = true)
     }
 }
