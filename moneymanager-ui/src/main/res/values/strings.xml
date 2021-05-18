@@ -102,6 +102,7 @@
   <string name="tink_budget_category_selection_button">Next</string>
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
   <string name="tink_budget_edit_toolbar_title">Edit budget</string>
+  <string name="tink_budget_edit_field_category_hint">Category</string>
   <string name="tink_budget_edit_button">Save changes</string>
   <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s/%2$s</string>
   <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
