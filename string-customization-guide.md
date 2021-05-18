@@ -69,6 +69,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_edit_menu_delete_budget_item` | Delete Budget |
 | `tink_budget_edit_toolbar_title` | Edit budget |
+| `tink_budget_edit_field_category_hint` | Category |
 | `tink_budget_edit_button` | Save changes |
 | `tink_budget_edit_field_amount_average_for_period` | Average %1$s/%2$s |
 | `tink_budget_delete_error_message` | We are not able to remove your budget right now. |
