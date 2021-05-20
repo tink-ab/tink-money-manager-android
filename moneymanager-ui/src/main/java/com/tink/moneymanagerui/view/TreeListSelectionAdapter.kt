@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.annotation.AttrRes
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -258,7 +259,7 @@ internal sealed class TreeListSelectionItem {
     data class ActionItem(
         override val id: String,
         override val label: String,
-        val iconRes: Int,
+        @AttrRes val iconRes: Int,
         val action: () -> Unit
     ) : TreeListSelectionItem() {
         override fun deepCopy(): TreeListSelectionItem {

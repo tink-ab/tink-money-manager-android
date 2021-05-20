@@ -97,7 +97,7 @@
   <string name="tink_budget_create_field_period_yearly">Yearly</string>
   <string name="tink_budget_create_field_period_custom">Custom</string>
   <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
-<!--  <string name="tink_budget_create_search_label">Create with keyword or &#35;tag</string>-->
+  <string name="tink_budget_create_with_keyword">Create with keyword</string>
 
   <string name="tink_budget_category_selection_button">Next</string>
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>

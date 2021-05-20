@@ -82,6 +82,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         viewModel.defaultBudgetName.observe(viewLifecycleOwner, { name ->
             if (nameInputText.text.isNullOrBlank()) {
                 nameInputText.setText(name.orEmpty())
+            } else {
+                amountInputText.requestFocus()
             }
         })
 
