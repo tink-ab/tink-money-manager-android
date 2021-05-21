@@ -1,19 +1,17 @@
 package com.tink.moneymanagerui.budgets.creation.filterselection
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import android.content.Context
+import androidx.lifecycle.*
 import com.tink.model.budget.Budget
-import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationDataHolder
 import com.tink.moneymanagerui.util.findChildByCategoryId
 import com.tink.moneymanagerui.util.toTreeListSelectionItem
 import com.tink.moneymanagerui.view.TreeListSelectionItem
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.categories.CategoryRepository
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.livedata.Event
+import com.tink.moneymanagerui.R
 import javax.inject.Inject
 
 internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
@@ -48,19 +46,26 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
             }
         }
 
-    val selectedTreeListItem = MutableLiveData<TreeListSelectionItem?>().also { liveData ->
+    val selectedTreeListItems = MediatorLiveData<List<TreeListSelectionItem>?>().also { liveData ->
         // Transform this to a Budget.Specification.Filter and then post it to the dataHolder.
         dataHolder.selectedFilter.addSource(
             Transformations.map(liveData) {
-                it?.let { selectionItem ->
-                    val selectedCategory = categoryRepository.categories.value
-                        ?.expenses
-                        ?.findChildByCategoryId(selectionItem.id)
-                        ?.let { category -> Budget.Specification.Filter.Category(category.code) }
+                it?.let { selectionItems ->
+                    val selectedCategories = mutableListOf<Budget.Specification.Filter.Category>()
+                    for (selectionItem in selectionItems) {
+                        categoryRepository.categories.value
+                            ?.expenses
+                            ?.findChildByCategoryId(selectionItem.id)
+                            ?.let { category ->
+                                selectedCategories.add(Budget.Specification.Filter.Category(category.code))
+                            }
+
+                    }
+
 
                     Budget.Specification.Filter(
                         accounts = listOf(),
-                        categories = listOfNotNull(selectedCategory),
+                        categories = selectedCategories,
                         tags = emptyList(), // Send empty list of tags until feature is implemented
                         freeTextQuery = "" // Send empty query until feature is implemented
                     )
@@ -69,6 +74,17 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
         ) { data ->
             dataHolder.selectedFilter.postValue(data)
         }
+    }
+
+    fun selectionFilterItems(context: Context): List<TreeListSelectionItem> {
+        return categoryRepository.categories.value?.let { categoryTree ->
+            selectedFilter?.categories
+                ?.map { it.code }
+                ?.mapNotNull { code ->
+                    categoryTree.findCategoryByCode(code)?.toTreeListSelectionItem(context)
+                }
+        }
+            .orEmpty()
     }
 
     val isEditing get() = dataHolder.id.value != null

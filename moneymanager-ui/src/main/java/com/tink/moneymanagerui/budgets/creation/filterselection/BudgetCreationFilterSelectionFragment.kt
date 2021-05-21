@@ -11,8 +11,7 @@ import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
 import com.tink.moneymanagerui.databinding.TinkFragmentBudgetCreationFilterSelectionBinding
 import com.tink.moneymanagerui.tracking.ScreenEvent
-import com.tink.moneymanagerui.view.TreeListSelectionAdapter
-import com.tink.moneymanagerui.view.TreeListSelectionItem
+import com.tink.moneymanagerui.view.TreeListMultiSelectionAdapter
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_filter_selection.*
 import javax.inject.Inject
 
@@ -30,7 +29,7 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
 
     internal lateinit var viewModel: BudgetCreationFilterSelectionViewModel
 
-    internal val adapter: TreeListSelectionAdapter = TreeListSelectionAdapter()
+    internal val adapter: TreeListMultiSelectionAdapter = TreeListMultiSelectionAdapter()
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_budget_creation_filter_selection
     override fun needsLoginToBeAuthorized(): Boolean = true
@@ -61,27 +60,15 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
                 it.lifecycleOwner = viewLifecycleOwner
             }
 
-        adapter.onItemSelectedListener = viewModel.selectedTreeListItem::postValue
+        adapter.onSelectionListener = viewModel.selectedTreeListItems::postValue
 
         filterSelectionList.layoutManager = LinearLayoutManager(context)
         filterSelectionList.adapter = adapter
 
-        viewModel.filterItems.observe(viewLifecycle, { items ->
+        viewModel.filterItems.observe(viewLifecycleOwner, { items ->
             if (items != null) {
-                // Fetch a TreeFilterSelectionItem from the pre-selected filter, if we have one.
-                val selectedFilter = viewModel.selectedFilter?.categories?.firstOrNull()?.code
-                    ?.let { categoryCode ->
-                        items
-                            .flatMap {
-                                if (it is TreeListSelectionItem.TopLevelItem) {
-                                    listOf(it) + it.children
-                                } else {
-                                    listOf(it)
-                                }
-                            }
-                            .find { it.id == categoryCode }
-                    }
-                adapter.setData(items, selectedFilter)
+                val selectedItems = viewModel.selectionFilterItems(requireContext())
+                adapter.setMultiSelectionData(items, selectedItems)
             }
         })
 
@@ -93,10 +80,21 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
             }
         })
 
-        actionButton.setOnClickListener {
-            adapter.selectedItem?.let {
-                navigation.goToSpecificationFragment()
+        viewModel.selectedTreeListItems.observe(viewLifecycleOwner, {
+            actionButton.visibility = if (it.isNullOrEmpty()) {
+                View.GONE
+            } else {
+                View.VISIBLE
             }
+        })
+
+        actionButton.setOnClickListener {
+            adapter.selectedItems
+                .takeIf { it.isNotEmpty() }
+                ?.let {
+                    viewModel.selectedTreeListItems.postValue(it.toList())
+                    navigation.goToSpecificationFragment()
+                }
         }
     }
 }
