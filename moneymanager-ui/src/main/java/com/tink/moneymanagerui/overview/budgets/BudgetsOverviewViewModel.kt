@@ -53,7 +53,11 @@ internal class BudgetsOverviewViewModel @Inject constructor(
                                 )
                                 ?.let { category ->
                                     BudgetOverviewItem.Icon(
-                                        resource = category.getIcon(),
+                                        resource = if (budgetSpecification.filter.categories.size > 1) {
+                                            se.tink.commons.R.attr.tink_icon_category_all_expenses
+                                        } else {
+                                            category.getIcon()
+                                        },
                                         color = category.iconColor(),
                                         backgroundColor = category.iconBackgroundColor()
                                     )
