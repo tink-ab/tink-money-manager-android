@@ -169,17 +169,17 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         nameInputText.setText(viewModel.budgetName.orEmpty())
 
         viewModel.selectedCategories.observe(viewLifecycleOwner, { categories ->
-            if (viewModel.isEditing && categories != null) {
+            val categoriesText = categories.joinToString(separator = ", ")
+            if (viewModel.isEditing) {
                 categoriesInputLayout.visibility = View.VISIBLE
-                categoriesInputText.setText(
-                    categories.joinToString(separator = ",")
-                )
+                categoriesInputText.setText(categoriesText)
                 categoriesInputText.setOnClickListener {
                     amountInputText.closeKeyboard()
                     editCategories()
                 }
             } else {
                 categoriesInputLayout.visibility = View.GONE
+                nameInputText.setText(categoriesText)
             }
         })
     }

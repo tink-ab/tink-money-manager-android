@@ -254,10 +254,10 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             val categoryTree = categoryRepository.categories.value
             val filter = dataHolder.selectedFilter.value
 
-            filter?.categories?.firstOrNull()
-                ?.let { categoryTree?.findCategoryByCode(it.code) }
+            filter?.categories
+                ?.mapNotNull { categoryTree?.findCategoryByCode(it.code)?.name }
                 ?.let {
-                    postValue(it.name)
+                    postValue(it.joinToString(separator = ", "))
                     return // Return function early if we found a name here.
                 }
 
