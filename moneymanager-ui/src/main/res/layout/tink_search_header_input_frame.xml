@@ -27,6 +27,7 @@
     android:layout_alignParentEnd="true"
     android:layout_centerVertical="true"
     android:padding="12dp"
+    android:contentDescription="@string/tink_clear_text_description"
     android:layout_marginEnd="12dp"/>
 
 </merge>
