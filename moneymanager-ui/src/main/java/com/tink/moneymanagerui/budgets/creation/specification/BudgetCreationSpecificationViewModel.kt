@@ -160,38 +160,45 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     private val statistics = statisticsRepository.statistics
 
-    private val allPeriodTotalAmountForCategory = MediatorLiveData<List<AmountForPeriod>>().apply {
+    private val allPeriodTotalAmountForCategory = MediatorLiveData<List<AmountForPeriodListToCategory>>().apply {
         fun update() {
             whenNonNull(
                 statistics.value,
-                dataHolder.selectedFilter.value?.categories?.firstOrNull(),
+                dataHolder.selectedFilter.value?.categories,
                 userProfile.value?.currency
-            ) { statisticsList, selectedCategory, currency ->
-                categoryRepository.categories.value
-                    ?.findCategoryByCode(selectedCategory.code)
-                    ?.let { category ->
-                        val statistics = when (category.type) {
-                            Category.Type.INCOME -> statisticsList.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY }
-                            Category.Type.EXPENSE -> statisticsList.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
-                            else -> return
-                        }
+            ) { statisticsList, selectedCategories, currency ->
+                val categoryToAmountForPeriodList = selectedCategories.map { selectedCategory ->
+                    val amountForPeriodList =
+                        categoryRepository.categories.value
+                            ?.findCategoryByCode(selectedCategory.code)
+                            ?.let { category ->
+                                val statistics = when (category.type) {
+                                    Category.Type.INCOME -> statisticsList.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY }
+                                    Category.Type.EXPENSE -> statisticsList.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
+                                    else -> emptyList()
+                                }
 
-                        val allPeriodTotalAmounts = statistics
-                            .filter { category.recursiveIdList.contains(it.identifier) }
-                            .groupBy { it.period }
-                            .map { (period, values) ->
-                                val totalAmount = Amount(
-                                    ExactNumber(values.sumByDouble { abs(it.value.value.doubleValue()) }),
-                                    currency
-                                )
-                                AmountForPeriod(
-                                    period,
-                                    totalAmount
-                                )
+                                statistics
+                                    .filter { category.recursiveIdList.contains(it.identifier) }
+                                    .groupBy { it.period }
+                                    .map { (period, values) ->
+                                        val totalAmount = Amount(
+                                            ExactNumber(values.sumOf {
+                                                abs(it.value.value.doubleValue())
+                                            }),
+                                            currency
+                                        )
+                                        AmountForPeriod(
+                                            period,
+                                            totalAmount
+                                        )
+                                    }
+                                    .sortedByDescending { it.period.end }
                             }
-                            .sortedByDescending { it.period.end }
-                        postValue(allPeriodTotalAmounts)
-                    }
+                            ?: emptyList()
+                    AmountForPeriodListToCategory(selectedCategory, amountForPeriodList)
+                }
+                postValue(categoryToAmountForPeriodList)
             }
         }
         addSource(dataHolder.selectedFilter) { update() }
@@ -199,22 +206,25 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         addSource(userProfile) { update() }
     }
 
-    private val averageForCategory = MediatorLiveData<Amount>().apply {
+    private val averageForCategoryList = MediatorLiveData<List<Amount>>().apply {
         fun update() {
             whenNonNull(
                 allPeriodTotalAmountForCategory.value,
                 userProfile.value?.currency
-            ) { periodBalances, currency ->
-                val balancesForLastTwelveMonths = periodBalances.filter {
-                    it.period.start.isBefore(Instant.now())
-                            && it.period.start.isAfter(Instant.now().minusMonths(12))
-                }
-                postValue(
-                    balancesForLastTwelveMonths.ifEmpty { null }
-                        ?.map { it.amount }
-                        ?.average()
-                        ?: Amount(EXACT_NUMBER_ZERO, currency)
-                )
+            ) { periodBalancesList, currency ->
+                val averageAmounts =
+                    periodBalancesList
+                        .map { (_, amountForPeriodList) ->
+                            val balancesForLastTwelveMonths = amountForPeriodList.filter {
+                                it.period.start.isBefore(Instant.now())
+                                        && it.period.start.isAfter(Instant.now().minusMonths(12))
+                            }
+                            balancesForLastTwelveMonths.ifEmpty { null }
+                                ?.map { it.amount }
+                                ?.average()
+                                ?: Amount(EXACT_NUMBER_ZERO, currency)
+                        }
+                postValue(averageAmounts)
             }
         }
         addSource(allPeriodTotalAmountForCategory) { update() }
@@ -224,10 +234,14 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
     val averageAmountText: LiveData<String> = MediatorLiveData<String>().apply {
         fun update() {
             whenNonNull(
-                averageForCategory.value,
+                averageForCategoryList.value,
                 periodValue.value
-            ) { monthlyAverageForCategory, periodValue ->
-                periodValue.getAverageAmount(monthlyAverageForCategory)
+            ) { averageForCategoryList, periodValue ->
+                averageForCategoryList
+                    .map {
+                        periodValue.getAverageAmount(it)
+                    }
+                    .sum()
                     .formatCurrencyExactIfNotIntegerWithSign()
                     .let { formattedAverageValue ->
                         value = context.getString(
@@ -238,7 +252,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                     }
             }
         }
-        addSource(averageForCategory) { update() }
+        addSource(averageForCategoryList) { update() }
         addSource(periodValue) { update() }
     }
 
@@ -433,4 +447,4 @@ enum class PeriodValue {
 
 internal val EXACT_NUMBER_ZERO = ExactNumber(0, 0)
 
-
+private data class AmountForPeriodListToCategory(val category: Budget.Specification.Filter.Category, val amountForPeriodList: List<AmountForPeriod>)
