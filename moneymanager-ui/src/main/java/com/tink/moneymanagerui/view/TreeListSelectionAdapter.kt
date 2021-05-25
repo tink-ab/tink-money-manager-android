@@ -132,7 +132,7 @@ internal open class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSele
         calculateDiff(oldFlatData, flatData).dispatchUpdatesTo(this)
     }
 
-    inline fun <reified T : TreeListSelectionItem> findItem(
+    private inline fun <reified T : TreeListSelectionItem> findItem(
         item: T?,
         list: List<TreeListSelectionItem>
     ): T? = item?.let { list.find { other -> other.isSameItem(it) } } as? T
@@ -410,45 +410,17 @@ internal class TreeListMultiSelectionAdapter : TreeListSelectionAdapter() {
         selectedItems = newSelectedItems
     }
 
-    fun setMultiSelectionData(data: List<TreeListSelectionItem>, selectedItems: List<TreeListSelectionItem> = emptyList()) {
-        val oldFlatData = flatData.map { it.deepCopy() }
+    fun setMultiSelectionData(data: List<TreeListSelectionItem>) {
+        val oldFlatData = flatData
         flatData = data.toMutableList()
-        if (selectedItems.isNotEmpty()) {
-            for (item in selectedItems) {
-                item.isSelected = true
-                this.selectedItems.add(item)
-                val expandedItem =
-                    if (item is TreeListSelectionItem.ChildItem) {
-                        // We need to make sure that the correct top level item is expanded first.
-                        flatData.find {
-                            (it is TreeListSelectionItem.TopLevelItem)
-                                    && it.children.any { child -> child.isSameItem(item) }
-                        }
-                    } else {
-                        findItem(item, flatData)
-                    } as TreeListSelectionItem.TopLevelItem
-                expandedItem.isExpanded = true
-                expandedItems.add(expandedItem)
+        for (item in flatData) {
+            if (item is TreeListSelectionItem.TopLevelItem) {
+                if (item.isExpanded) { expandedItems.add(item) }
+                if (item.isSelected) { selectedItems.add(item) }
+                item.children.forEach { if (it.isSelected) { selectedItems.add(it) } }
             }
-            updateExpandedItems()
-            setSelectedItems()
         }
+        updateExpandedItems()
         calculateDiff(oldFlatData, flatData).dispatchUpdatesTo(this)
-    }
-
-    private fun setSelectedItems() {
-        for (item in selectedItems) {
-            if (item is TreeListSelectionItem.ChildItem) {
-                flatData.forEach {
-                    if (it is TreeListSelectionItem.TopLevelItem) {
-                        it.children
-                            .firstOrNull { child -> child.isSameItem(item) }
-                            ?.let { child -> child.isSelected = true }
-                    }
-                }
-            } else if (item is TreeListSelectionItem.TopLevelItem) {
-                findItem(item, flatData)?.isSelected = true
-            }
-        }
     }
 }

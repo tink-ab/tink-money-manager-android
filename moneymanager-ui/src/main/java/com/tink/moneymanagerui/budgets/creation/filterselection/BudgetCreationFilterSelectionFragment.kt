@@ -67,8 +67,7 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
 
         viewModel.filterItems.observe(viewLifecycleOwner, { items ->
             if (items != null) {
-                val selectedItems = viewModel.selectionFilterItems(requireContext())
-                adapter.setMultiSelectionData(items, selectedItems)
+                adapter.setMultiSelectionData(items)
             }
         })
 
@@ -80,19 +79,11 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
             }
         })
 
-        viewModel.selectedTreeListItems.observe(viewLifecycleOwner, {
-            actionButton.visibility = if (it.isNullOrEmpty()) {
-                View.GONE
-            } else {
-                View.VISIBLE
-            }
-        })
-
         actionButton.setOnClickListener {
             adapter.selectedItems
                 .takeIf { it.isNotEmpty() }
                 ?.let {
-                    viewModel.selectedTreeListItems.postValue(it.toList())
+                    viewModel.onSelectionDone()
                     navigation.goToSpecificationFragment()
                 }
         }
