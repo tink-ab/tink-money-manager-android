@@ -218,7 +218,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                             val balancesForLastTwelveMonths = amountForPeriodList.filter {
                                 it.period.start in Instant.now().minusMonths(12)..Instant.now()
                             }
-                            balancesForLastTwelveMonths.ifEmpty { null }
+                            balancesForLastTwelveMonths.takeIf { it.isNotEmpty() }
                                 ?.map { it.amount }
                                 ?.average()
                                 ?: Amount(EXACT_NUMBER_ZERO, currency)
