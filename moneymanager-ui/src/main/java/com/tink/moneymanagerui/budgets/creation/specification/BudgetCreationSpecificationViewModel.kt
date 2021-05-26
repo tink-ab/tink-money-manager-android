@@ -216,8 +216,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                     periodBalancesList
                         .map { (_, amountForPeriodList) ->
                             val balancesForLastTwelveMonths = amountForPeriodList.filter {
-                                it.period.start.isBefore(Instant.now())
-                                        && it.period.start.isAfter(Instant.now().minusMonths(12))
+                                it.period.start in Instant.now().minusMonths(12)..Instant.now()
                             }
                             balancesForLastTwelveMonths.ifEmpty { null }
                                 ?.map { it.amount }
