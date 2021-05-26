@@ -54,22 +54,14 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
         fun update() {
             treeListSelectionItems.value
                 ?.takeIf { it.isNotEmpty() }
-                ?.let { items ->
-                    mutableListOf<TreeListSelectionItem>().apply {
-                        addAll(items)
-                        // Hide create by keyword or tag option until implemented
-                        add(
-                            TreeListSelectionItem.ActionItem(
-                                id = context.getString(R.string.tink_filter_search_item),
-                                label = context.getString(R.string.tink_budget_create_with_keyword),
-                                iconRes = R.attr.tink_icon_category_search,
-                                action = { _searchClicked.postValue(Event(true)) }
-                            )
-                        )
-                    }
-                        .also {
-                            postValue(it.updateBy(selectedFilterToItems.value))
-                        }
+                ?.plus(TreeListSelectionItem.ActionItem(
+                    id = context.getString(R.string.tink_filter_search_item),
+                    label = context.getString(R.string.tink_budget_create_with_keyword),
+                    iconRes = R.attr.tink_icon_category_search,
+                    action = { _searchClicked.postValue(Event(true)) }
+                ))
+                ?.also {
+                    postValue(it.updateBy(selectedFilterToItems.value))
                 }
         }
         addSource(treeListSelectionItems) { update() }
@@ -80,15 +72,13 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
 
     fun onSelectionDone() {
         selectedTreeListItems.value?.let { selectionItems ->
-            val selectedCategories = mutableListOf<Budget.Specification.Filter.Category>()
-            for (selectionItem in selectionItems) {
+            val selectedCategories = selectionItems.mapNotNull { selectionItem ->
                 categoryRepository.categories.value
                     ?.expenses
                     ?.findChildByCategoryId(selectionItem.id)
                     ?.let { category ->
-                        selectedCategories.add(Budget.Specification.Filter.Category(category.code))
+                        Budget.Specification.Filter.Category(category.code)
                     }
-
             }
             dataHolder.selectedFilter.postValue(
                 Budget.Specification.Filter(
