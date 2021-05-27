@@ -11,7 +11,7 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.plus
-import se.tink.commons.extensions.sum
+import se.tink.commons.extensions.sumOrNull
 import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
@@ -102,7 +102,7 @@ internal class BudgetSummaryEnricher @Inject constructor(
             ?.filter { (achievedIds + overspentIds).contains(it.id) }
             ?.map { it.amount }
             ?.takeIf { it.isNotEmpty() }
-            ?.sum()
+            ?.sumOrNull()
 
         return whenNonNull(
             items,

@@ -179,7 +179,9 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 }
             } else {
                 categoriesInputLayout.visibility = View.GONE
-                nameInputText.setText(categoriesText)
+                if (categoriesText.isNotBlank()) {
+                    nameInputText.setText(categoriesText)
+                }
             }
         })
     }

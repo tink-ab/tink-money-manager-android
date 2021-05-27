@@ -240,9 +240,9 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                     .map {
                         periodValue.getAverageAmount(it)
                     }
-                    .sum()
-                    .formatCurrencyExactIfNotIntegerWithSign()
-                    .let { formattedAverageValue ->
+                    .sumOrNull()
+                    ?.formatCurrencyExactIfNotIntegerWithSign()
+                    ?.let { formattedAverageValue ->
                         value = context.getString(
                             R.string.tink_budget_edit_field_amount_average_for_period,
                             formattedAverageValue,
@@ -269,6 +269,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
             filter?.categories
                 ?.mapNotNull { categoryTree?.findCategoryByCode(it.code)?.name }
+                ?.takeIf { it.isNotEmpty() }
                 ?.let {
                     postValue(it.joinToString(separator = ", "))
                     return // Return function early if we found a name here.
