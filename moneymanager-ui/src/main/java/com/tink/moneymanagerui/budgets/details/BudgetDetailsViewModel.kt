@@ -144,6 +144,25 @@ internal class BudgetDetailsViewModel @Inject constructor(
             periodsList.takeLast(periodsCount)
         }
 
+    val activeBudgetPeriodsCount = MediatorLiveData<Int>().apply {
+        fun update() {
+            whenNonNull(
+                historicPeriodsList.value,
+                budgetDetailsDataHolder.budgetPeriod.value
+            ) { historicPeriodsList, budgetPeriod ->
+                postValue(
+                    historicPeriodsList
+                        .filter {
+                            budgetPeriod.start == it.start || budgetPeriod.start.isAfter(it.start)
+                        }
+                        .size
+                )
+            }
+        }
+        addSource(budgetDetailsDataHolder.budgetPeriod) { update() }
+        addSource(historicPeriodsList) { update() }
+    }
+
     val historicPeriodData: LiveData<List<Float>> =
         Transformations.map(historicPeriodsList) { periodsList ->
             periodsList.map { it.spentAmount.value.toBigDecimal().toFloat() }
