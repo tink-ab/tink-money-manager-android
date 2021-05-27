@@ -41,7 +41,7 @@
       android:layout_height="@dimen/tink_button_height"
       android:text="@string/tink_budget_category_selection_button"
       android:transitionName="actionButton"
-      android:visibility="@{viewModel.selectedFilter != null}"
+      android:visibility="@{viewModel.showActionButton}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

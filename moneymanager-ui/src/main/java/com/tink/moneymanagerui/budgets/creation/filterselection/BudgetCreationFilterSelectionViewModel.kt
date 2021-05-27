@@ -12,6 +12,7 @@ import se.tink.android.categories.CategoryRepository
 import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.livedata.Event
 import com.tink.moneymanagerui.R
+import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
 internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
@@ -27,66 +28,113 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
                 ?.map { child -> child.toTreeListSelectionItem(context) }
         }
 
-    private val _searchClicked = MutableLiveData<Event<Boolean>>()
-    val searchClicked: LiveData<Event<Boolean>> = _searchClicked
-
-    internal val filterItems: LiveData<List<TreeListSelectionItem>> =
-        Transformations.map(treeListSelectionItems) { treeListSelectionItems ->
-            mutableListOf<TreeListSelectionItem>().apply {
-                addAll(treeListSelectionItems)
-                // Hide create by keyword or tag option until implemented
-                add(
-                    TreeListSelectionItem.ActionItem(
-                        id = context.getString(R.string.tink_filter_search_item),
-                        label = context.getString(R.string.tink_budget_create_with_keyword),
-                        iconRes = R.attr.tink_icon_category_search,
-                        action = { _searchClicked.postValue(Event(true)) }
-                    )
+    val selectedFilterToItems = MediatorLiveData<List<TreeListSelectionItem>>().apply {
+        fun update() {
+            whenNonNull(
+                categoryRepository.categories.value,
+                dataHolder.selectedFilter.value
+            ) { categoryTree, selectedFilter ->
+                postValue(
+                    selectedFilter.categories
+                        .map { it.code }
+                        .mapNotNull { code ->
+                            categoryTree.findCategoryByCode(code)?.toTreeListSelectionItem(context)
+                        }
                 )
             }
         }
+        addSource(categoryRepository.categories) { update() }
+        addSource(dataHolder.selectedFilter) { update() }
+    }
 
-    val selectedTreeListItems = MediatorLiveData<List<TreeListSelectionItem>?>().also { liveData ->
-        // Transform this to a Budget.Specification.Filter and then post it to the dataHolder.
-        dataHolder.selectedFilter.addSource(
-            Transformations.map(liveData) {
-                it?.let { selectionItems ->
-                    val selectedCategories = mutableListOf<Budget.Specification.Filter.Category>()
-                    for (selectionItem in selectionItems) {
-                        categoryRepository.categories.value
-                            ?.expenses
-                            ?.findChildByCategoryId(selectionItem.id)
-                            ?.let { category ->
-                                selectedCategories.add(Budget.Specification.Filter.Category(category.code))
-                            }
+    private val _searchClicked = MutableLiveData<Event<Boolean>>()
+    val searchClicked: LiveData<Event<Boolean>> = _searchClicked
 
-                    }
-
-
-                    Budget.Specification.Filter(
-                        accounts = listOf(),
-                        categories = selectedCategories,
-                        tags = emptyList(), // Send empty list of tags until feature is implemented
-                        freeTextQuery = "" // Send empty query until feature is implemented
-                    )
+    internal val filterItems = MediatorLiveData<List<TreeListSelectionItem>>().apply {
+        fun update() {
+            treeListSelectionItems.value
+                ?.takeIf { it.isNotEmpty() }
+                ?.plus(TreeListSelectionItem.ActionItem(
+                    id = context.getString(R.string.tink_filter_search_item),
+                    label = context.getString(R.string.tink_budget_create_with_keyword),
+                    iconRes = R.attr.tink_icon_category_search,
+                    action = { _searchClicked.postValue(Event(true)) }
+                ))
+                ?.also {
+                    postValue(it.updateBy(selectedFilterToItems.value))
                 }
+        }
+        addSource(treeListSelectionItems) { update() }
+        addSource(selectedFilterToItems) { update() }
+    }
+
+    val selectedTreeListItems = MutableLiveData<List<TreeListSelectionItem>?>()
+
+    fun onSelectionDone() {
+        selectedTreeListItems.value?.let { selectionItems ->
+            val selectedCategories = selectionItems.mapNotNull { selectionItem ->
+                categoryRepository.categories.value
+                    ?.expenses
+                    ?.findChildByCategoryId(selectionItem.id)
+                    ?.let { category ->
+                        Budget.Specification.Filter.Category(category.code)
+                    }
             }
-        ) { data ->
-            dataHolder.selectedFilter.postValue(data)
+            dataHolder.selectedFilter.postValue(
+                Budget.Specification.Filter(
+                    accounts = listOf(),
+                    categories = selectedCategories,
+                    tags = emptyList(), // Send empty list of tags until feature is implemented
+                    freeTextQuery = "" // Send empty query until feature is implemented
+                )
+            )
         }
     }
 
-    fun selectionFilterItems(context: Context): List<TreeListSelectionItem> {
-        return categoryRepository.categories.value?.let { categoryTree ->
-            selectedFilter?.categories
-                ?.map { it.code }
-                ?.mapNotNull { code ->
-                    categoryTree.findCategoryByCode(code)?.toTreeListSelectionItem(context)
-                }
+    val showActionButton = MediatorLiveData<Boolean>().apply {
+        value = false
+        fun update() {
+            postValue(
+                !selectedTreeListItems.value.isNullOrEmpty() || !selectedFilterToItems.value.isNullOrEmpty()
+            )
         }
-            .orEmpty()
+        addSource(selectedTreeListItems) { update() }
+        addSource(selectedFilterToItems) { update() }
     }
 
     val isEditing get() = dataHolder.id.value != null
-    val selectedFilter get() = dataHolder.selectedFilter.value
+}
+
+private fun List<TreeListSelectionItem>.updateBy(other: List<TreeListSelectionItem>?): List<TreeListSelectionItem> {
+    if (other != null && other.isNotEmpty()) {
+        forEach { thisItem ->
+            other.forEach { otherItem ->
+                otherItem.takeIf {
+                    when (thisItem) {
+                        is TreeListSelectionItem.ChildItem -> thisItem.id == otherItem.id
+                        is TreeListSelectionItem.TopLevelItem ->
+                            thisItem.id == otherItem.id || thisItem.children.any { it.id == otherItem.id }
+                        else -> false
+                    }
+                }?.let { matchingOtherItem ->
+                    when (thisItem) {
+                        is TreeListSelectionItem.ChildItem -> thisItem.isSelected = true
+                        is TreeListSelectionItem.TopLevelItem -> {
+                            if (thisItem.id == matchingOtherItem.id) {
+                                thisItem.isSelected = true
+                            } else {
+                                thisItem.children.firstOrNull { it.id == matchingOtherItem.id }
+                                    ?.let {
+                                        it.isSelected = true
+                                        thisItem.isExpanded = true
+                                    }
+                            }
+                        }
+                        else -> {}
+                    }
+                }
+            }
+        }
+    }
+    return this
 }
