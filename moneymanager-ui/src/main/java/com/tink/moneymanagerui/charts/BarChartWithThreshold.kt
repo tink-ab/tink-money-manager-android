@@ -18,6 +18,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
 import se.tink.commons.extensions.whenNonNull
 
+private const val ALL_BARS_ACTIVE = -1
 
 internal class BarChartWithThreshold : View {
     constructor(context: Context) : super(context)
@@ -38,7 +39,7 @@ internal class BarChartWithThreshold : View {
     var labels: List<String>? by InvalidateDelegate(null)
     var threshold: Float? by InvalidateDelegate(null)
     var thresholdLabel: String? by InvalidateDelegate(null)
-    var activeBarCount: Int by InvalidateDelegate(-1) //A value of -1 means no inactive overlays on any bars
+    var activeBarCount: Int by InvalidateDelegate(ALL_BARS_ACTIVE)
 
     private var barWidth: Float = 1f
 
