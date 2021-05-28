@@ -86,7 +86,8 @@ internal class PieChartNavigation(private val coordinator: FragmentCoordinator) 
             coordinator.replace(
                 createFunc(), false, FragmentAnimationFlags.NONE,
                 tag = tag,
-                sharedViews = sharedElements
+                // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
+//                sharedViews = sharedElements
             )
         }
     }

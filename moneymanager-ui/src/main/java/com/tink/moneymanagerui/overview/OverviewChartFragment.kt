@@ -98,7 +98,8 @@ internal class OverviewChartFragment : BaseFragment() {
 
                     val firstLoading = binding.amount.text.toString() == ""
                     if (position == view.pager.currentItem && !firstLoading && !transitionCoordinator.hasTransitionInProgress()) {
-                        TransitionManager.beginDelayedTransition(root, changeTransition())
+                        // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
+//                        TransitionManager.beginDelayedTransition(root, changeTransition())
                     }
                     updateData(root, binding, it)
                     if (position == view.pager.currentItem) {
@@ -153,8 +154,10 @@ internal class OverviewChartFragment : BaseFragment() {
         }
 
         private fun replaceWithDetailsFragment(fragment: BaseFragment, page: View) = fragmentCoordinator.replace(
-            fragment, true, FragmentAnimationFlags.NONE,
-            sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.tink_back_segment))
+            fragment, true
+        // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
+//            , FragmentAnimationFlags.NONE,
+//            sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.tink_back_segment))
         )
     }
 
