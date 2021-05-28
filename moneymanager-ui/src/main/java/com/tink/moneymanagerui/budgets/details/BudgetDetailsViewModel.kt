@@ -152,7 +152,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
             ) { historicPeriodsList, budget ->
                 postValue(
                     historicPeriodsList
-                        .filter { budget.created in it.start..it.end }
+                        .filter { budget.created.isBefore(it.end) }
                         .size
                 )
             }
