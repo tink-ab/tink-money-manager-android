@@ -148,18 +148,16 @@ internal class BudgetDetailsViewModel @Inject constructor(
         fun update() {
             whenNonNull(
                 historicPeriodsList.value,
-                budgetDetailsDataHolder.budgetPeriod.value
-            ) { historicPeriodsList, budgetPeriod ->
+                budgetDetailsDataHolder.budget.value
+            ) { historicPeriodsList, budget ->
                 postValue(
                     historicPeriodsList
-                        .filter {
-                            budgetPeriod.start == it.start || budgetPeriod.start.isAfter(it.start)
-                        }
+                        .filter { budget.created in it.start..it.end }
                         .size
                 )
             }
         }
-        addSource(budgetDetailsDataHolder.budgetPeriod) { update() }
+        addSource(budgetDetailsDataHolder.budget) { update() }
         addSource(historicPeriodsList) { update() }
     }
 
