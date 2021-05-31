@@ -96,6 +96,12 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_period_year` | year |
 | `tink_budget_period_chart_week_label` | w%d |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
+| `tink_budget_details_chart_status_message_current_week` | You have %s left on your budget this week |
+| `tink_budget_details_chart_status_message_current_month` | You have %s left on your budget this month |
+| `tink_budget_details_chart_status_message_current_year` | You have %s left on your budget this year |
+| `tink_budget_details_chart_over_budget_status_message_current_week` | You have gone over your budget this week |
+| `tink_budget_details_chart_over_budget_status_message_current_month` | You have gone over your budget this month |
+| `tink_budget_details_chart_over_budget_status_message_current_year` | You have gone over your budget this year |
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_budget_transactions_header_amount_left_of` | %1$s left of %2$s |
 | `tink_budget_transactions_header_amount_over` | %1$s over budget of %2$s |
