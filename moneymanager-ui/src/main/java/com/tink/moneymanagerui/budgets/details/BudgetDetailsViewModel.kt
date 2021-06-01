@@ -292,8 +292,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
                     historicPeriodsList.value,
                     budgetDetailsDataHolder.budget.value
                 ) { periodsList, budget ->
-                    if (budget.periodicity !is RecurringPeriodicity) return
-                    val periodicity = budget.periodicity as RecurringPeriodicity
+                    val periodicity = budget.periodicity as? RecurringPeriodicity ?: return
                     val lastPeriod = periodsList.last()
                     if (budget.created in lastPeriod.start..lastPeriod.end) {
                         // Set current period status message
