@@ -14,9 +14,11 @@ import android.view.View
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.drawBarChart
 import com.tink.moneymanagerui.util.ScreenUtils
+import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
 import se.tink.commons.extensions.whenNonNull
 
+private const val ALL_BARS_ACTIVE = -1
 
 internal class BarChartWithThreshold : View {
     constructor(context: Context) : super(context)
@@ -37,6 +39,7 @@ internal class BarChartWithThreshold : View {
     var labels: List<String>? by InvalidateDelegate(null)
     var threshold: Float? by InvalidateDelegate(null)
     var thresholdLabel: String? by InvalidateDelegate(null)
+    var activeBarCount: Int by InvalidateDelegate(ALL_BARS_ACTIVE)
 
     private var barWidth: Float = 1f
 
@@ -52,6 +55,11 @@ internal class BarChartWithThreshold : View {
     }
 
     private val overlayPaint = Paint().apply {
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
+    }
+
+    private val disabledOverlayPaint = Paint().apply {
+        color = context.getColorFromAttr(R.attr.tink_expensesLightColor)
         xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
     }
 
@@ -208,6 +216,22 @@ internal class BarChartWithThreshold : View {
                 thresholdLineY,
                 overlayPaint
             )
+
+            val betweenMargin = (barChartBounds.width() - data.size * barWidth) / (data.size - 1)
+
+            val barWidthWithMargin = betweenMargin + barWidth
+
+            if (activeBarCount >= 0) {
+                // Add disabled overlay for all inactive bars
+                canvas.drawRect(
+                    barChartBounds.left,
+                    barChartBounds.top,
+                    barChartBounds.right - (barWidthWithMargin * activeBarCount),
+                    barChartBounds.bottom,
+                    disabledOverlayPaint
+                )
+            }
+
             canvas.drawLine(
                 0f,
                 thresholdLineY,
@@ -223,7 +247,7 @@ internal class BarChartWithThreshold : View {
                 averageLineY,
                 averageLinePaint
             )
-            val betweenMargin = (barChartBounds.width() - data.size * barWidth) / (data.size - 1)
+
             for ((index, label) in labels?.withIndex() ?: listOf()) {
                 val x = index * (betweenMargin + barWidth) + barChartBounds.left
                 canvas.drawText(
