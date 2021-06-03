@@ -149,6 +149,12 @@
     <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
     <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
   </plurals>
+  <string name="tink_budget_details_chart_status_message_current_week">You have %s left on your budget this week</string>
+  <string name="tink_budget_details_chart_status_message_current_month">You have %s left on your budget this month</string>
+  <string name="tink_budget_details_chart_status_message_current_year">You have %s left on your budget this year</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_week">You have gone over your budget this week</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_month">You have gone over your budget this month</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_year">You have gone over your budget this year</string>
   <string name="tink_overview_budgets_title">Budgets</string>
   <string name="tink_overview_budgets_create_new">New Budget</string>
   <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>
