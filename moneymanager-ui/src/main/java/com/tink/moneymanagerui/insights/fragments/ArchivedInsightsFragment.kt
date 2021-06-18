@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.databinding.TinkFragmentInsightsBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.ArchivedInsightsViewModel
 import com.tink.moneymanagerui.insights.InsightsAdapter
 import com.tink.moneymanagerui.insights.di.InsightsViewModelFactory
@@ -46,8 +47,9 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         viewModel.refresh()
 
-        viewModel.insights.observe(viewLifecycleOwner, Observer {
-            insightsAdapter.setData(it)
+        viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
+            insightsAdapter.setData(insightsList)
+            emptyState.visibleIf { insightsList?.isNullOrEmpty() == true }
         })
 
         viewModel.errors.observe(viewLifecycleOwner, Observer {event ->
