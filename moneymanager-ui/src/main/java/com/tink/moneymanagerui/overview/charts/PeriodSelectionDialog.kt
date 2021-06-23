@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tink.moneymanagerui.R
 import kotlinx.android.synthetic.main.tink_dialog_period_selection.*
@@ -17,6 +19,13 @@ class PeriodSelectionDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        dialog?.setOnShowListener { dialog ->
+            (dialog as? BottomSheetDialog)
+                ?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                ?.let { bottomSheet ->
+                    BottomSheetBehavior.from(bottomSheet).state = BottomSheetBehavior.STATE_EXPANDED
+                }
+        }
         return inflater.inflate(R.layout.tink_dialog_period_selection, container)
     }
 
