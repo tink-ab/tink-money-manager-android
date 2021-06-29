@@ -1,8 +1,8 @@
 object TinkMoneyManagerVersion {
 
     private const val major = 0
-    private const val minor = 13
-    private const val patch = 1
+    private const val minor = 14
+    private const val patch = 0
 
     const val name = "$major.$minor.$patch"
 
