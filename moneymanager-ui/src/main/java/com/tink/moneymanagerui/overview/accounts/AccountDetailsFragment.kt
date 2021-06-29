@@ -90,6 +90,8 @@ internal class AccountDetailsFragment : BaseFragment() {
                 title = account.name
                 accountBalance.text = account.balance.formatCurrencyExact()
                 accountNumber.text = account.accountNumber
+                // Pronounce account number letter by letter in talkback instead of as a number
+                accountNumber.contentDescription = account.accountNumber.replace(".".toRegex(), "$0 ")
             }
         })
 

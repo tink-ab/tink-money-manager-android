@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
@@ -25,6 +24,7 @@ import kotlinx.android.synthetic.main.tink_fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import com.tink.model.time.Period
+import com.tink.moneymanagerui.FragmentAnimationFlags
 
 private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0
@@ -127,7 +127,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         )
     }
 
-    override fun onCategorySelected(id: String) = viewModel.setCategoryId(id)
+    override fun onCategorySelected(updatedCategoryId: String) = viewModel.setCategoryId(updatedCategoryId)
 
     private fun showTransactions() {
         val metaData = TransactionsListMetaData(

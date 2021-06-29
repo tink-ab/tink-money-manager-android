@@ -5,5 +5,6 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:elevation="@dimen/tink_toolbar_elevation"
+  app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
   app:buttonGravity="center_vertical"
   app:navigationIcon="?homeAsUpIndicator" />

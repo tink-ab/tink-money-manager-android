@@ -87,6 +87,7 @@
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
+  <string name="tink_budget_create_field_name_hint">Name</string>
   <string name="tink_budget_create_field_amount_hint">Amount</string>
   <string name="tink_budget_create_field_period_hint">Budget Period</string>
   <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>
@@ -96,11 +97,12 @@
   <string name="tink_budget_create_field_period_yearly">Yearly</string>
   <string name="tink_budget_create_field_period_custom">Custom</string>
   <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
-<!--  <string name="tink_budget_create_search_label">Create with keyword or &#35;tag</string>-->
+  <string name="tink_budget_create_with_keyword">Create with keyword</string>
 
   <string name="tink_budget_category_selection_button">Next</string>
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
   <string name="tink_budget_edit_toolbar_title">Edit budget</string>
+  <string name="tink_budget_edit_field_category_hint">Category</string>
   <string name="tink_budget_edit_button">Save changes</string>
   <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s/%2$s</string>
   <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
@@ -147,11 +149,21 @@
     <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
     <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
   </plurals>
+  <string name="tink_budget_details_chart_status_message_current_week">You have %s left on your budget this week</string>
+  <string name="tink_budget_details_chart_status_message_current_month">You have %s left on your budget this month</string>
+  <string name="tink_budget_details_chart_status_message_current_year">You have %s left on your budget this year</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_week">You have gone over your budget this week</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_month">You have gone over your budget this month</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_year">You have gone over your budget this year</string>
   <string name="tink_overview_budgets_title">Budgets</string>
   <string name="tink_overview_budgets_create_new">New Budget</string>
   <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>
   <string name="tink_overview_budget_over">%1$s over budget of %2$s</string>
   <string name="tink_overview_budget_left_of">%1$s left of %2$s</string>
+  <string name="tink_nav_app_bar_navigate_up_description">Navigate up</string>
+  <string name="tink_clear_text_description">Clear text</string>
+  <string name="tink_previous_month_description">Previous month</string>
+  <string name="tink_next_month_description">Next month</string>
 
   <string name="tink_search_label">Search</string>
 

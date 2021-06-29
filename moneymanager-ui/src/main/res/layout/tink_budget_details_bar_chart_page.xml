@@ -26,6 +26,7 @@
       app:tink_bar_color_below_threshold="?attr/tink_expensesColor"
       app:tink_bar_label_style="@style/tink_chart_label.budgets"
       app:tink_bar_width="10dp"
+      app:activeBarCount="@{viewModel.activeBudgetPeriodsCount ?? 0}"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

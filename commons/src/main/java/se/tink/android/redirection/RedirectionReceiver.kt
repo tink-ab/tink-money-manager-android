@@ -11,6 +11,7 @@ interface RedirectionReceiver {
     fun showAccountDetails(accountId: String)
     fun showBudget(id: String, periodStart: String)
     fun createBudget(
+        name: String? = null,
         amount: Amount? = null,
         filter: BudgetFilter? = null,
         periodicity: BudgetPeriodicity? = null

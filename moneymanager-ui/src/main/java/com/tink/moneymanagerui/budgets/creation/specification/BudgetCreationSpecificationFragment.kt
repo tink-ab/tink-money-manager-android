@@ -13,6 +13,7 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import org.joda.time.DateTime
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
+import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
@@ -21,6 +22,7 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.YEAR
 import com.tink.moneymanagerui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
+import com.tink.moneymanagerui.extensions.textChangedObserver
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
@@ -38,6 +40,9 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     @Inject
     internal lateinit var budgetCreationViewModelFactory: BudgetCreationViewModelFactory
+
+    @Inject
+    internal lateinit var budgetCreationNavigation: BudgetCreationNavigation
 
     internal lateinit var viewModel: BudgetCreationSpecificationViewModel
 
@@ -74,8 +79,12 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 it.lifecycleOwner = viewLifecycleOwner
             }
 
-        viewModel.budgetName.observe(viewLifecycleOwner, { name ->
-            name?.let { title = getString(R.string.tink_budget_specification_toolbar_title, name) }
+        viewModel.defaultBudgetName.observe(viewLifecycleOwner, { name ->
+            if (nameInputText.text.isNullOrBlank()) {
+                nameInputText.setText(name.orEmpty())
+            } else {
+                amountInputText.requestFocus()
+            }
         })
 
         viewModel.createdBudgetSpecification.observe(viewLifecycleOwner, {
@@ -96,6 +105,11 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                     viewModel.amountString.postValue(amountString)
                 }
             }
+        })
+
+        nameInputText.textChangedObserver().observe(viewLifecycleOwner, { name ->
+            title = name
+            viewModel.updateBudgetName(name)
         })
 
         amountInputText.setOnFocusChangeListener { inputView, hasFocus ->
@@ -151,6 +165,25 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 fragmentCoordinator.handleBackPress()
             }
         })
+
+        nameInputText.setText(viewModel.budgetName.orEmpty())
+
+        viewModel.selectedCategories.observe(viewLifecycleOwner, { categories ->
+            val categoriesText = categories.joinToString(separator = ", ")
+            if (viewModel.isEditing) {
+                categoriesInputLayout.visibility = View.VISIBLE
+                categoriesInputText.setText(categoriesText)
+                categoriesInputText.setOnClickListener {
+                    amountInputText.closeKeyboard()
+                    editCategories()
+                }
+            } else {
+                categoriesInputLayout.visibility = View.GONE
+                if (categoriesText.isNotBlank()) {
+                    nameInputText.setText(categoriesText)
+                }
+            }
+        })
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
@@ -169,7 +202,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                     .setMessage(
                         getString(
                             R.string.tink_budget_delete_dialog_message,
-                            viewModel.budgetName.value
+                            viewModel.budgetName
                         )
                     )
                     .setPositiveButton(R.string.tink_budget_delete_dialog_confirm_button) { _, _ ->
@@ -221,5 +254,9 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             )
                 .show()
         }
+    }
+
+    private fun editCategories() {
+        budgetCreationNavigation.goToFilterSelectionFragment(addToBackStack = true)
     }
 }

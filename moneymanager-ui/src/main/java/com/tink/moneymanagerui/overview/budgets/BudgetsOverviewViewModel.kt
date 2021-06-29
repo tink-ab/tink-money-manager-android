@@ -47,7 +47,15 @@ internal class BudgetsOverviewViewModel @Inject constructor(
                                 backgroundColor = R.attr.tink_transferLightColor
                             )
 
-                            budgetSpecification.filter.categories.isNotEmpty() -> categories
+                            budgetSpecification.filter.categories.size > 1 -> {
+                                BudgetOverviewItem.Icon(
+                                    resource = R.attr.tink_icon_category_all_expenses,
+                                    color = R.attr.tink_expensesColor,
+                                    backgroundColor = R.attr.tink_expensesLightColor
+                                )
+                            }
+
+                            budgetSpecification.filter.categories.size == 1 -> categories
                                 .findCategoryByCode(
                                     budgetSpecification.filter.categories.first().code
                                 )

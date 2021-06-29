@@ -28,11 +28,12 @@ internal class DefaultRedirectionReceiver @Inject constructor(
     }
 
     override fun createBudget(
+        name: String?,
         amount: Amount?,
         filter: BudgetFilter?,
         periodicity: BudgetPeriodicity?
     ) {
-        fragmentCoordinator.replace(BudgetCreationFragment.newInstance(amount, filter, periodicity))
+        fragmentCoordinator.replace(BudgetCreationFragment.newInstance(name, amount, filter, periodicity))
     }
 
     override fun showAccountDetails(accountId: String) {

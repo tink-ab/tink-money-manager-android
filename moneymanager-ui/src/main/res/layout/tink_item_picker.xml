@@ -14,6 +14,7 @@
     android:layout_width="48dp"
     android:layout_height="48dp"
     android:src="@drawable/tink_arrow_left"
+    android:contentDescription="@string/tink_previous_month_description"
     android:tint="@color/tink_period_selector_button_color"/>
 
   <TextView
@@ -33,6 +34,7 @@
     android:layout_height="48dp"
     android:rotation="180"
     android:src="@drawable/tink_arrow_left"
+    android:contentDescription="@string/tink_next_month_description"
     android:tint="@color/tink_period_selector_button_color"/>
 
 </LinearLayout>
