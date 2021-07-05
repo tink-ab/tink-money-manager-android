@@ -195,8 +195,8 @@
 
   <style name="tink_nano.primary.autoSize">
     <item name="autoSizeTextType">uniform</item>
-    <item name="autoSizeMaxTextSize">@dimen/tink_nano_text_size</item>
-    <item name="autoSizeMinTextSize">6sp</item>
+    <item name="autoSizeMaxTextSize">16sp</item>
+    <item name="autoSizeMinTextSize">8sp</item>
     <item name="autoSizeStepGranularity">1sp</item>
   </style>
 
