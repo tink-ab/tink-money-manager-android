@@ -3,19 +3,16 @@ package com.tink.moneymanagerui.overview
 import android.content.res.Resources
 import android.os.Bundle
 import android.transition.Fade
-import android.transition.TransitionManager
 import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.StatisticType
@@ -24,12 +21,13 @@ import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
 import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
-import com.tink.moneymanagerui.databinding.TinkFragmentOverviewChartBinding
 import com.tink.moneymanagerui.databinding.TinkOverviewChartPageBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
 import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.piechart.addBackSegment
 import com.tink.moneymanagerui.overview.charts.piechart.addSegments
+import kotlinx.android.synthetic.main.tink_overview_chart_page.*
 import se.tink.commons.currency.AmountFormatter
 import javax.inject.Inject
 import kotlin.math.abs
@@ -52,22 +50,19 @@ internal class OverviewChartFragment : BaseFragment() {
     }
 
     override fun authorizedOnCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) {
-        DataBindingUtil.bind<TinkFragmentOverviewChartBinding>(view.chartRoot)?.also {
-            it.loaded = viewModel.loaded
-            it.setLifecycleOwner(viewLifecycle)
-        }
         with(view) {
-            with(pager) {
+            with(overviewPager) {
                 adapter = ChartPagerAdapter(statistics.statisticTypes)
                 offscreenPageLimit = statistics.statisticTypes.size
                 currentItem = viewModel.lastVisitedPageInOverview
                 setPageTransformer(false, pageTransformer)
                 onPageSelected { viewModel.lastVisitedPageInOverview = it }
             }
-            pageIndicator.initialize(pager)
-            viewModel.loaded.observe(viewLifecycleOwner, Observer { loaded ->
-                pageIndicator.visibility =
-                    if (loaded && statistics.statisticTypes.size > 1) View.VISIBLE else View.GONE
+            pageIndicator.initialize(overviewPager)
+            viewModel.isDoneLoading.observe(viewLifecycleOwner, Observer { isDoneLoading ->
+                overviewProgressBar.visibleIf { !isDoneLoading }
+                overviewPager.visibleIf { isDoneLoading }
+                pageIndicator.visibleIf { isDoneLoading && statistics.statisticTypes.size > 1 }
             })
         }
     }
@@ -78,7 +73,7 @@ internal class OverviewChartFragment : BaseFragment() {
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) = container.removeView(obj as View)
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            val binding = DataBindingUtil.inflate<TinkOverviewChartPageBinding>(layoutInflater, R.layout.tink_overview_chart_page, container, true)
+            val binding = TinkOverviewChartPageBinding.inflate(layoutInflater, container, true)
             return binding.root.also {
                 // Start observing after initial layout is done to support transitions
                 it.post { doObserverModel(binding, position, it as ViewGroup) }
@@ -91,20 +86,21 @@ internal class OverviewChartFragment : BaseFragment() {
         private fun doObserverModel(binding: TinkOverviewChartPageBinding, position: Int, root: ViewGroup) {
             val data = getPageData(position)
             data.observe(viewLifecycle, Observer {
-                it?.let {
+                it?.let { overviewChartModel ->
                     // Animate currently visible page only
                     // Do not animate the initial value
                     // Animate after an update when the value changes
 
-                    val firstLoading = binding.amount.text.toString() == ""
-                    if (position == view.pager.currentItem && !firstLoading && !transitionCoordinator.hasTransitionInProgress()) {
+                    val isFirstLoading = overviewAmountText.text.toString().isBlank()
+                    if (position == view.overviewPager.currentItem && !isFirstLoading && !transitionCoordinator.hasTransitionInProgress()) {
                         // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
 //                        TransitionManager.beginDelayedTransition(root, changeTransition())
                     }
-                    updateData(root, binding, it)
-                    if (position == view.pager.currentItem) {
-                        binding.root.post { onViewReady() }
-                    }
+                    updateData(root, binding, overviewChartModel)
+//                    if (position == view.overviewPager.currentItem) {
+////                        binding.root.post { onViewReady() }
+//                    }
+                    onViewReady()
                 }
             })
         }
@@ -123,13 +119,18 @@ internal class OverviewChartFragment : BaseFragment() {
         }
 
         private fun updateData(root: ViewGroup, binding: TinkOverviewChartPageBinding, model: OverviewChartModel) {
-            binding.model = model
+            binding.pieChart.transitionName = getString(R.string.tink_pie_chart_transition, model.title)
+            binding.overviewTitle.text = model.title
+            binding.overviewTitle.transitionName = getString(R.string.tink_amount_title_transition, model.title)
+            binding.overviewAmountText.text = model.amount
+            binding.overviewAmountText.transitionName = getString(R.string.tink_amount_transition, model.title)
+            binding.overviewPeriod.text = model.period
+            binding.overviewPeriod.transitionName = getString(R.string.tink_amount_period_transition, model.title)
             root.pieChart.apply {
                 removeAllViews()
                 addBackSegment(model.title, model.color)
                 addSegments(model.data, { it }, model.colorGenerator, model.color, model.currency)
             }
-            binding.executePendingBindings()
         }
 
         private fun getPageData(position: Int) =

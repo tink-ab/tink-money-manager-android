@@ -1,52 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
-  <data>
-    <variable
-      name="loaded"
-      type="androidx.lifecycle.LiveData&lt;Boolean&gt;"/>
-  </data>
-
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/chartRoot"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/chartRoot"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ProgressBar
-      android:id="@+id/loader"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="@{!(loaded ?? false)}"
-      android:indeterminateTint="?tink_colorAccent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
-
-    <com.tink.moneymanagerui.view.ViewPagerIndicator
-      android:id="@+id/pageIndicator"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="gone"
-      app:tink_viewpager_indicator_color="?attr/tink_colorAccent"
-      android:layout_marginTop="16dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/overviewProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="?tink_colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager.widget.ViewPager
-      android:id="@+id/pager"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:paddingStart="@dimen/tink_overview_chart_preview_radius"
-      android:paddingEnd="@dimen/tink_overview_chart_preview_radius"
-      android:clipToPadding="false"
-      android:overScrollMode="never"
-      android:visibility="@{loaded}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/pageIndicator"/>
+        android:id="@+id/overviewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingEnd="@dimen/tink_overview_chart_preview_radius"
+        android:paddingStart="@dimen/tink_overview_chart_preview_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pageIndicator" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <com.tink.moneymanagerui.view.ViewPagerIndicator
+        android:id="@+id/pageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tink_viewpager_indicator_color="?attr/tink_colorAccent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

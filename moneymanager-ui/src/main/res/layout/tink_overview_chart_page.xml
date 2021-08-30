@@ -1,68 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-
-  <data>
-    <variable
-      name="model"
-      type="com.tink.moneymanagerui.overview.OverviewChartModel"/>
-  </data>
-
-  <FrameLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
-      android:id="@+id/content"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      tools:ignore="UselessParent">
-
-      <com.tink.moneymanagerui.charts.PieChartView
-        android:id="@+id/pieChart"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:transitionName="@{@string/tink_pie_chart_transition(model.title)}"
-        app:tink_thickness_percent="0.3"/>
+        tools:ignore="UselessParent">
 
-      <LinearLayout
-        android:id="@+id/fadingGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/fadingGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
-          android:id="@+id/title"
-          style="@style/tink_deci"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:text="@{model.title}"
-          android:transitionName="@{@string/tink_amount_title_transition(model.title)}"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/overviewTitle"
+                style="@style/tink_deci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
 
-        <!-- Do not use wrap_content for width for animation performance reasons-->
-        <com.google.android.material.textview.MaterialTextView
-          android:id="@+id/amount"
-          style="@style/tink_tera.autoSize"
-          android:layout_width="180dp"
-          android:layout_height="50dp"
-          android:gravity="center"
-          android:layout_gravity="center"
-          android:text="@{model.amount}"
-          android:transitionName="@{@string/tink_amount_transition(model.title)}"/>
+            <!-- Do not use wrap_content for width for animation performance reasons-->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/overviewAmountText"
+                style="@style/tink_tera.autoSize"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center" />
 
-        <com.google.android.material.textview.MaterialTextView
-          android:id="@+id/period"
-          style="@style/tink_deci"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:text="@{model.period}"
-          android:transitionName="@{@string/tink_amount_period_transition(model.title)}"/>
-      </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/overviewPeriod"
+                style="@style/tink_deci"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <com.tink.moneymanagerui.charts.PieChartView
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            app:tink_thickness_percent="0.3" />
     </FrameLayout>
-  </FrameLayout>
-</layout>
+</FrameLayout>

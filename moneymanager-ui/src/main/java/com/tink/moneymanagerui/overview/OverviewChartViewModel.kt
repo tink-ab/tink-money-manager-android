@@ -61,7 +61,7 @@ internal class OverviewChartViewModel @Inject constructor(
         addSource(userProfile) { update() }
     }
 
-    val loaded: LiveData<Boolean> = Transformations.map(data) { it != null }
+    val isDoneLoading: LiveData<Boolean> = Transformations.map(data) { it != null }
 
     var lastVisitedPageInOverview
         get() = dataStorage.lastVisitedPageInOverview

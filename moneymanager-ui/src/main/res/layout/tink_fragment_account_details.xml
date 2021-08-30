@@ -1,92 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-
-  <data>
-    <variable
-      name="viewModel"
-      type="com.tink.moneymanagerui.overview.accounts.AccountDetailsViewModel" />
-    <variable
-      name="transactionListModel"
-      type="com.tink.moneymanagerui.transaction.TransactionListViewModel" />
-  </data>
-
-  <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?tink_backgroundColor"
     tools:ignore="ContentDescription">
 
-    <com.tink.moneymanagerui.view.TinkToolbar
-      android:id="@+id/tink_toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="?actionBarSize"
-      android:transitionName="@string/tink_toolbar_transition"
-      app:buttonGravity="center_vertical"
-      app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
-      app:navigationIcon="?homeAsUpIndicator" />
-
-    <com.tink.moneymanagerui.view.TinkTextView
-      style="@style/tink_tera"
-      android:id="@+id/accountBalance"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/tink_toolbar"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="24dp" />
-
-    <com.tink.moneymanagerui.view.TinkTextView
-      style="@style/tink_hecto"
-      android:id="@+id/accountNumber"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/accountBalance"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="4dp" />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="16dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/accountNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:visibility="gone" />
 
     <View
-      android:id="@+id/divider"
-      android:layout_width="16dp"
-      android:layout_height="1dp"
-      android:layout_below="@id/accountNumber"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="16dp"
-      android:visibility="gone" />
-
-    <com.tink.moneymanagerui.view.TinkTextView
-      style="@style/tink_micro.primary"
-      android:id="@+id/extraText"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@id/divider"
-      android:layout_centerHorizontal="true"
-      android:layout_marginTop="16dp"
-      android:gravity="center"
-      android:visibility="gone" />
-
-    <View
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_alignParentBottom="true"
-      android:layout_marginTop="@dimen/tink_account_details_header_height_plus_spacing"
-      android:background="?tink_backgroundColor" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/tink_account_details_header_height_plus_spacing"
+        android:background="?tink_backgroundColor" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_alignParentStart="true"
-      android:layout_alignParentTop="true"
-      android:clipToPadding="false"
-      android:paddingTop="@dimen/tink_account_details_header_height_plus_spacing"
-      android:paddingBottom="8dp"
-      android:visibility="@{transactionListModel.hasTransactions}" />
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:paddingTop="@dimen/tink_account_details_header_height_plus_spacing" />
+
+    <com.tink.moneymanagerui.view.TinkTextView
+        android:id="@+id/extraText"
+        style="@style/tink_micro.primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <com.tink.moneymanagerui.view.TinkTextView
+        android:id="@+id/accountNumber"
+        style="@style/tink_hecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accountBalance"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp" />
+
+    <com.tink.moneymanagerui.view.TinkTextView
+        android:id="@+id/accountBalance"
+        style="@style/tink_tera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tink_toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <com.tink.moneymanagerui.view.TinkToolbar
+        android:id="@+id/tink_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:transitionName="@string/tink_toolbar_transition"
+        app:buttonGravity="center_vertical"
+        app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+        app:navigationIcon="?homeAsUpIndicator" />
 
     <include
-      android:id="@+id/loader"
-      layout="@layout/tink_loader_spinner" />
+        android:id="@+id/loader"
+        layout="@layout/tink_loader_spinner" />
 
-  </RelativeLayout>
-
-</layout>
+</RelativeLayout>

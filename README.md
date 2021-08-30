@@ -28,14 +28,7 @@ dependencies {
 }
 ```
 
-5. Enable databinding. In your app-level `build.gradle`, inside the `android` block:
-```groovy
-dataBinding {
-   enabled = true
-}
-```
-
-6. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block:
+5. Set the java compiler to Java 8 or higher. In your app-level `build.gradle`, inside the `android` block:
 ```groovy
 compileOptions {
    sourceCompatibility = JavaVersion.VERSION_1_8

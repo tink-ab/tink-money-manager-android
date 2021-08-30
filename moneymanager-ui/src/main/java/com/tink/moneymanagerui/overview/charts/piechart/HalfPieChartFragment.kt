@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.view.*
 import com.tink.moneymanagerui.charts.transitions.ChangePositionTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
-import com.tink.moneymanagerui.databinding.TinkFragmentHalfPieChartBinding
+import com.tink.moneymanagerui.databinding.TinkHalfPieChartItemBinding
 import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
 import com.tink.moneymanagerui.overview.charts.ChartItem
 import com.tink.moneymanagerui.overview.charts.ChartType
@@ -30,6 +29,7 @@ import com.tink.moneymanagerui.overview.charts.TransactionsItem
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
+import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.*
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
@@ -39,7 +39,7 @@ private const val TYPE_ARG = "type"
 internal class HalfPieChartFragment : BaseFragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(
-            parentFragment!!,
+            requireParentFragment(),
             viewModelFactory
         )[PieChartDetailsViewModel::class.java]
     }
@@ -70,17 +70,14 @@ internal class HalfPieChartFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) {
-        val binding = DataBindingUtil.bind<TinkFragmentHalfPieChartBinding>(view.root)
-            ?: throw IllegalStateException("Binding is null")
-
         viewModel.apply {
-            getStatistic(context!!, type).observe(
+            getStatistic(requireContext(), type).observe(
                 viewLifecycle,
-                Observer { it?.let { updateModel(binding, it) } })
+                Observer { it?.let { updateModel(it) } })
         }
     }
 
-    private fun updateModel(binding: TinkFragmentHalfPieChartBinding, model: DetailsChartModel) {
+    private fun updateModel(model: DetailsChartModel) {
         if (model.topLevel) return
 
         if (!transitionCoordinator.hasTransitionInProgress()) {
@@ -104,19 +101,18 @@ internal class HalfPieChartFragment : BaseFragment() {
             )
         }
 
-        binding.model = model
-        binding.itemTheme = HalfChartItemTheme(context!!.getColorFromAttr(ownTheme.chartItemColor))
-        binding.items = model.data.items.map { item ->
+        val halfPieChartItems = model.data.items.map { item ->
             HalfChartItem(
                 item.name,
                 amountFormatter.format(item.amount.toDouble(), model.currency, useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
-        binding.totalAmount =
-            amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
-        binding.executePendingBindings()
+        bindItems(view.itemsList, halfPieChartItems, HalfChartItemTheme(requireContext().getColorFromAttr(ownTheme.chartItemColor)))
+        pieChart.transitionName = getString(R.string.tink_pie_chart_transition, model.title)
+        halfPieChartTotalAmount.transitionName = getString(R.string.tink_amount_transition, model.title)
+        halfPieChartTotalAmount.text = amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
 
-        binding.root.post { onViewReady() }
+        view.rootView.post { onViewReady() }
     }
 
     private fun onItemClicked(item: ChartItem) {
@@ -173,3 +169,26 @@ internal class HalfPieChartFragment : BaseFragment() {
 internal data class HalfChartItem(val title: String, val amount: String, val onClick: View.OnClickListener)
 
 internal class HalfChartItemTheme(@ColorInt val textColor: Int)
+
+internal fun bindItems(
+    view: ViewGroup,
+    items: List<HalfChartItem>,
+    halfChartItemTheme: HalfChartItemTheme
+) {
+    with(view) {
+        removeAllViews()
+        val inflater = LayoutInflater.from(view.context)
+        for (item in items) {
+            TinkHalfPieChartItemBinding.inflate(inflater, view, true).apply {
+                root.setOnClickListener {
+                    item.onClick.onClick(root)
+                }
+                root.transitionName = view.context.getString(R.string.tink_transition_chart_item, item.title)
+                label.text = item.title
+                label.setTextColor(halfChartItemTheme.textColor)
+                amount.text = item.amount
+                amount.transitionName = view.context.getString(R.string.tink_transition_chart_item_amount, item.title)
+            }
+        }
+    }
+}
