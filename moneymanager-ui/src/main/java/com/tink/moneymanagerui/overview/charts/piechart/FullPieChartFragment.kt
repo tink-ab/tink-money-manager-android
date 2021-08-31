@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.imageview.ShapeableImageView
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.PieChartLabelView
@@ -32,7 +31,6 @@ import com.tink.moneymanagerui.overview.charts.StatisticItemsList
 import com.tink.moneymanagerui.overview.getAmountStringForOverviewPieChart
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.tracking.ScreenEvent
-import com.tink.moneymanagerui.view.TinkTextView
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
@@ -102,7 +100,6 @@ internal class FullPieChartFragment : BaseFragment() {
             pieChartLabel.icon.setBackgroundColor(requireContext().getColorFromAttr(circleColorRes))
             pieChartLabel.icon.setOnClickListener { onItemClick(item) }
 
-            label.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> placeLabelTitle(label, pieChartLabel.pieChartText, pieChartLabel.icon) }
             label.transitionName = item.category.code
             label.isTransitionGroup = false
             label.radialPadding = resources.getDimension(R.dimen.tink_pie_chart_label_radial_padding)
@@ -111,16 +108,6 @@ internal class FullPieChartFragment : BaseFragment() {
     }
 
     private fun onItemClick(item: StatisticItem) = pageViewModel.setCategoryId(item.category.id)
-
-    private fun placeLabelTitle(
-        label: PieChartLabelView,
-        pieChartText: TinkTextView,
-        icon: ShapeableImageView
-    ) {
-        val iconOnTop = (label.centerAngle - 90f + 360f) % 360 < 180
-        icon.translationY = if (iconOnTop) -pieChartText.height.toFloat() else 0f
-        pieChartText.translationY = if (iconOnTop) icon.height.toFloat() else 0f
-    }
 
     private fun changeTransition(data: StatisticItemsList) = TransitionSet().apply {
         addTransition(PieChartLabelTransition())
