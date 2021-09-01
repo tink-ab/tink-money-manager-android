@@ -97,9 +97,6 @@ internal class OverviewChartFragment : BaseFragment() {
 //                        TransitionManager.beginDelayedTransition(root, changeTransition())
                     }
                     updateData(root, binding, overviewChartModel)
-//                    if (position == view.overviewPager.currentItem) {
-////                        binding.root.post { onViewReady() }
-//                    }
                     onViewReady()
                 }
             })
