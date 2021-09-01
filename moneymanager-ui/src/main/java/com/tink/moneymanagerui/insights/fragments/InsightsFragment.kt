@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.databinding.TinkFragmentInsightsBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.ArchivedInsightsViewModel
 import com.tink.moneymanagerui.insights.CurrentInsightsViewModel
 import com.tink.moneymanagerui.insights.InsightsAdapter
@@ -67,21 +66,9 @@ class InsightsFragment : BaseFragment() {
         })
 
         recyclerView.apply {
-//            layoutManager = object : LinearLayoutManager(context) {
-//                override fun onLayoutCompleted(state: RecyclerView.State) {
-//                    super.onLayoutCompleted(state)
-//                    val canScrollUp = canScrollVertically(-1)
-//                    if (!canScrollUp) showBottomNavBar()
-//                }
-//            }
             layoutManager = LinearLayoutManager(context)
             adapter = insightsAdapter
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
-        }
-
-        DataBindingUtil.bind<TinkFragmentInsightsBinding>(view)?.also {
-            it.viewModel = viewModel
-            it.lifecycleOwner = viewLifecycleOwner
         }
 
         archiveViewModel.hasItems.observe(viewLifecycleOwner, Observer {
@@ -89,6 +76,17 @@ class InsightsFragment : BaseFragment() {
             invalidateToolbarMenu()
             updateToolbar()
         })
+
+        viewModel.hasItems.observe(viewLifecycle, { hasInsights ->
+            recyclerView.visibleIf { hasInsights }
+        })
+        viewModel.loading.observe(viewLifecycle, { isLoading ->
+            insightsProgressBar.visibleIf { isLoading }
+        })
+        viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
+            emptyState.visibleIf { shouldShowEmptyState }
+        })
+
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
@@ -108,7 +106,4 @@ class InsightsFragment : BaseFragment() {
     companion object {
         fun newInstance() = InsightsFragment()
     }
-
-//    private fun showBottomNavBar() =
-//        activity?.findViewById<TinkBottomNavBar>(R.id.bottomNavigation)?.show()
 }

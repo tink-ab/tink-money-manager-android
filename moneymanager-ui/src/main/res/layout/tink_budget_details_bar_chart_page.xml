@@ -1,58 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:custom="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-
-  <data>
-    <variable
-      name="viewModel"
-      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel"/>
-  </data>
-
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/root"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tink.moneymanagerui.charts.BarChartWithThreshold
-      android:id="@+id/budgetProgress"
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:padding="8dp"
-      android:visibility="@{!(viewModel.barChartEmpty ?? false)}"
-      app:tink_average_line_color="?attr/tink_chartMeanValueColor"
-      app:tink_bar_color_above_threshold="?attr/tink_warningColor"
-      app:tink_bar_color_below_threshold="?attr/tink_expensesColor"
-      app:tink_bar_label_style="@style/tink_chart_label.budgets"
-      app:tink_bar_width="10dp"
-      app:activeBarCount="@{viewModel.activeBudgetPeriodsCount ?? 0}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:threshold="@{viewModel.periodChartThreshold}"
-      app:data="@{viewModel.historicPeriodData}"
-      app:labels="@{viewModel.periodChartLabels}"
-      app:thresholdLabel="@{viewModel.periodChartThresholdLabel}"
-      app:tink_threshold_badge_color="?attr/tink_expensesColor"
-      app:tink_threshold_label_style="@style/tink_chart_label.budgets.white"
-      app:tink_threshold_line_color="?attr/tink_expensesColor"
-      app:tink_threshold_line_thickness="1dp"/>
-
     <TextView
-      android:id="@+id/emptyChartMessage"
-      style="@style/tink_hecto.secondary"
-      android:layout_width="280dp"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@{viewModel.barChartEmptyMessage}"
-      android:visibility="@{viewModel.barChartEmpty}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="@string/tink_budget_details_chart_empty_message"/>
+        android:id="@+id/emptyChartMessage"
+        style="@style/tink_hecto.secondary"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/tink_budget_details_chart_empty_message" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <com.tink.moneymanagerui.charts.BarChartWithThreshold
+        android:id="@+id/budgetProgress"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tink_average_line_color="?attr/tink_chartMeanValueColor"
+        app:tink_bar_color_above_threshold="?attr/tink_warningColor"
+        app:tink_bar_color_below_threshold="?attr/tink_expensesColor"
+        app:tink_bar_label_style="@style/tink_chart_label.budgets"
+        app:tink_bar_width="10dp"
+        app:tink_threshold_badge_color="?attr/tink_expensesColor"
+        app:tink_threshold_label_style="@style/tink_chart_label.budgets.white"
+        app:tink_threshold_line_color="?attr/tink_expensesColor"
+        app:tink_threshold_line_thickness="1dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

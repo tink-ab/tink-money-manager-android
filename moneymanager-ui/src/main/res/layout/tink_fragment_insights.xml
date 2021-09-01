@@ -1,72 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<androidx.constraintlayout.widget.ConstraintLayout
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:android="http://schemas.android.com/apk/res/android" >
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor">
 
-  <data>
-    <variable
-      name="viewModel"
-      type="com.tink.moneymanagerui.insights.InsightsViewModel"/>
-  </data>
-
-  <androidx.constraintlayout.widget.ConstraintLayout
+  <com.tink.moneymanagerui.view.TinkToolbar
+    android:id="@+id/tink_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?tink_backgroundColor">
+    android:layout_height="?actionBarSize"
+    android:transitionName="@string/tink_toolbar_transition"
+    app:buttonGravity="center_vertical"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+    app:navigationIcon="?android:homeAsUpIndicator" />
 
-    <com.tink.moneymanagerui.view.TinkToolbar
-      android:id="@+id/tink_toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="?actionBarSize"
-      android:transitionName="@string/tink_toolbar_transition"
-      app:buttonGravity="center_vertical"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
-      app:navigationIcon="?android:homeAsUpIndicator" />
+  <TextView
+    android:id="@+id/emptyStateText"
+    style="@style/tink_deci"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginStart="48dp"
+    android:layout_marginEnd="48dp"
+    android:gravity="center"
+    android:text="@string/tink_insights_empty_state_text"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-      android:id="@+id/emptyStateText"
-      style="@style/tink_deci"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="12dp"
-      android:layout_marginStart="48dp"
-      android:layout_marginEnd="48dp"
-      android:gravity="center"
-      android:text="@string/tink_insights_empty_state_text"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/recyclerView"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:visibility="@{viewModel.hasItems}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tink_toolbar"/>
+  <ProgressBar
+    android:id="@+id/insightsProgressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:indeterminateTint="?tink_colorAccent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
-    <ProgressBar
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="@{viewModel.loading}"
-      android:indeterminateTint="?tink_colorAccent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+  <androidx.constraintlayout.widget.Group
+    android:id="@+id/emptyState"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:constraint_referenced_ids="emptyStateSubtitle, emptyStateIllustration, emptyStateTitle"/>
 
-    <androidx.constraintlayout.widget.Group
-      android:id="@+id/emptyState"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="@{viewModel.showEmptyState}"
-      app:constraint_referenced_ids="emptyStateSubtitle, emptyStateIllustration, emptyStateTitle"/>
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,105 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools">
-  <data>
-    <variable
-      name="viewModel"
-      type="com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel"/>
-  </data>
-
-  <RelativeLayout
-    android:id="@+id/root"
+<RelativeLayout android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <com.tink.moneymanagerui.view.TinkToolbar
-      android:id="@+id/tink_toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="?actionBarSize"
-      app:buttonGravity="center_vertical"
-      app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
-      app:navigationIcon="?android:homeAsUpIndicator" />
-
-    <com.tink.moneymanagerui.view.TinkTabs
-      android:id="@+id/tabs"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/tink_toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabs"
-        android:paddingBottom="48dp"
         android:background="?attr/tink_backgroundColor"
+        android:paddingBottom="48dp"
         tools:context=".budgets.details.BudgetDetailsChartFragment">
 
-        <androidx.viewpager.widget.ViewPager
-          android:id="@+id/viewPager"
-          android:layout_width="match_parent"
-          android:layout_height="256dp"
-          android:layout_marginBottom="116dp"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintBottom_toBottomOf="parent" />
+        <ProgressBar
+            android:id="@+id/loadingSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="?tink_colorAccent"
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-          android:id="@+id/statusMessage"
-          style="@style/tink_deci.primary"
-          android:layout_width="280dp"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="28dp"
-          android:gravity="center"
-          android:text="@{viewModel.statusMessage}"
-          app:layout_constraintBottom_toTopOf="@+id/showTransactionsBtn"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/budgetProgress"
-          app:layout_constraintVertical_bias="1.0"
-          tools:text="Du kan spendera 650 kr på Taxi och klara din budget"/>
+            android:id="@+id/statusMessage"
+            style="@style/tink_deci.primary"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/showTransactionsBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="Du kan spendera 650 kr på Taxi och klara din budget" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:layout_marginBottom="116dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-          android:id="@+id/showTransactionsBtn"
-          style="?attr/tink_textButtonStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginBottom="32dp"
-          android:text="@string/tink_budget_details_show_transaction_btn_title"
-          android:visibility="@{!(viewModel.loading ?? false) &amp;&amp; !(viewModel.errorState ?? false)}"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          tools:text="Se transaktioner"/>
+            android:id="@+id/showTransactionsBtn"
+            style="?attr/tink_textButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/tink_budget_details_show_transaction_btn_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Se transaktioner" />
 
-        <ProgressBar
-          android:id="@+id/loadingSpinner"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:indeterminateTintMode="src_atop"
-          android:visibility="@{viewModel.loading}"
-          android:indeterminateTint="?tink_colorAccent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"/>
-
-      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.tink.moneymanagerui.view.PeriodPicker
-      android:id="@+id/periodPicker"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/tink_button_height"
-      android:layout_alignParentBottom="true"
-      android:text="@{viewModel.budgetPeriodInterval}"
-      android:visibility="@{!(viewModel.loading ?? false)}"
-      app:showButtons="@{viewModel.showPickerButtons ?? false}"
-      app:nextButtonEnabled="@{viewModel.hasNext ?? false}"
-      app:previousButtonEnabled="@{viewModel.hasPrevious ?? false}"
-      tools:text="September"/>
+        android:id="@+id/periodPicker"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tink_button_height"
+        android:layout_alignParentBottom="true"
+        tools:text="September" />
 
-  </RelativeLayout>
-</layout>
+    <com.tink.moneymanagerui.view.TinkTabs
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tink_toolbar" />
+
+    <com.tink.moneymanagerui.view.TinkToolbar
+        android:id="@+id/tink_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:buttonGravity="center_vertical"
+        app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+        app:navigationIcon="?android:homeAsUpIndicator" />
+
+</RelativeLayout>

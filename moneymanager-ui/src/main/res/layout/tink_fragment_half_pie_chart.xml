@@ -1,91 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:bind="http://schemas.android.com/tools">
-
-  <data>
-    <variable
-      name="model"
-      type="com.tink.moneymanagerui.overview.charts.DetailsChartModel"/>
-
-    <variable
-      name="totalAmount"
-      type="String"/>
-
-    <variable
-      name="items"
-      type="java.util.List&lt;com.tink.moneymanagerui.overview.charts.piechart.HalfChartItem&gt;"/>
-
-    <variable
-      name="itemTheme"
-      type="com.tink.moneymanagerui.overview.charts.piechart.HalfChartItemTheme"/>
-  </data>
-
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/root"
-    android:background="?tink_backgroundColor"
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- Do not use wrap_content for width for animation performance reasons-->
-    <com.tink.moneymanagerui.view.TinkTextView
-      android:id="@+id/amount"
-      style="@style/tink_tera"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@{totalAmount}"
-      android:transitionName="@{@string/tink_amount_transition(model.title)}"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/chartLayout"/>
-
-    <com.tink.moneymanagerui.charts.PieChartPartLayout
-      android:id="@+id/chartLayout"
-      android:layout_width="0dp"
-      android:layout_height="220dp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:tink_chart_visible_part="0.5"
-      app:layout_constraintEnd_toStartOf="@id/list"
-      app:layout_constraintHorizontal_weight="1"
-      app:layout_constraintTop_toTopOf="parent">
-
-      <com.tink.moneymanagerui.charts.PieChartView
-        android:id="@+id/pieChart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionGroup="true"
-        android:transitionName="@{@string/tink_pie_chart_transition(model.title)}"/>
-    </com.tink.moneymanagerui.charts.PieChartPartLayout>
+    android:layout_height="match_parent"
+    android:background="?tink_backgroundColor">
 
     <ScrollView
-      android:id="@+id/list"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:paddingStart="24dp"
-      android:paddingEnd="16dp"
-      android:clipChildren="false"
-      android:clipToPadding="false"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_weight="2"
-      app:layout_constraintStart_toEndOf="@+id/chartLayout"
-      app:layout_constraintTop_toTopOf="@id/chartLayout">
-
-      <LinearLayout
-        android:id="@+id/itemsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clipChildren="false"
-        android:orientation="vertical"
-        bind:items="@{items}"
-        bind:layout="@{@layout/tink_half_pie_chart_item}"
-        bind:theme="@{itemTheme}"/>
+        android:clipToPadding="false"
+        android:paddingEnd="16dp"
+        android:paddingStart="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toEndOf="@+id/chartLayout"
+        app:layout_constraintTop_toTopOf="@id/chartLayout">
+
+        <LinearLayout
+            android:id="@+id/itemsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:clipChildren="false"
+            android:orientation="vertical" />
 
     </ScrollView>
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+    <com.tink.moneymanagerui.charts.PieChartPartLayout
+        android:id="@+id/chartLayout"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/list"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tink_chart_visible_part="0.5">
+
+        <com.tink.moneymanagerui.charts.PieChartView
+            android:id="@+id/pieChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:transitionGroup="true" />
+    </com.tink.moneymanagerui.charts.PieChartPartLayout>
+
+    <com.tink.moneymanagerui.view.TinkTextView
+        android:id="@+id/halfPieChartTotalAmount"
+        style="@style/tink_tera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@id/chartLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

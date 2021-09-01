@@ -23,11 +23,15 @@ import org.joda.time.Months
 import org.joda.time.Weeks
 import org.joda.time.Years
 import se.tink.android.di.application.ApplicationScoped
+import se.tink.android.livedata.requireValue
 import se.tink.commons.extensions.*
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.absoluteValue
+import kotlin.math.min
 import kotlin.math.roundToInt
+
+private const val MAX_PERIOD_COUNT = 12
 
 internal class BudgetDetailsViewModel @Inject constructor(
     private val budgetDetailsDataHolder: BudgetDetailsDataHolder,
@@ -134,14 +138,19 @@ internal class BudgetDetailsViewModel @Inject constructor(
     val hasNext get() = budgetDetailsDataHolder.hasNext
     val hasPrevious get() = budgetDetailsDataHolder.hasPrevious
 
+    val visibilityState: LiveData<VisibleState> = MediatorLiveData<VisibleState>().apply {
+        value = VisibleState(isLoading = false, isError = false)
+        addSource(loading) { isLoading ->
+            value = requireValue.copy(isLoading = isLoading)
+        }
+        addSource(errorState) { isError ->
+            value = requireValue.copy(isError = isError)
+        }
+    }
+
     private val historicPeriodsList: LiveData<List<BudgetPeriod>> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriodsList) { periodsList ->
-            val periodsCount = if (periodsList.size > 12) {
-                12
-            } else {
-                periodsList.size
-            }
-            periodsList.takeLast(periodsCount)
+            periodsList.takeLast(min(periodsList.size, MAX_PERIOD_COUNT))
         }
 
     val activeBudgetPeriodsCount = MediatorLiveData<Int>().apply {
@@ -444,3 +453,6 @@ private fun composeRemainingBudgetStatusString(
 internal fun ExactNumber.isZero() = this.toBigDecimal().signum() == 0
 internal fun ExactNumber.isBiggerThanOrEqual(other: ExactNumber) = this.toBigDecimal() >= other.toBigDecimal()
 
+internal data class VisibleState(val isLoading: Boolean, val isError: Boolean) {
+    val isVisible = !isLoading && !isError
+}

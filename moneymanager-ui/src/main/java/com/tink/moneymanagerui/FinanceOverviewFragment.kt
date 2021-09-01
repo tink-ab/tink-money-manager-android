@@ -156,7 +156,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         if (arguments == null) {
             arguments = bundleOf()
         }
-        arguments!!.putString(ARG_ACCESS_TOKEN, accessToken)
+        requireArguments().putString(ARG_ACCESS_TOKEN, accessToken)
 
         Tink.setUser(User.fromAccessToken(accessToken));
     }
