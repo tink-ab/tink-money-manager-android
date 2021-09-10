@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
+import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.configuration.I18nConfiguration
+import com.tink.moneymanagerui.configuration.OnBackPressedListener
 import com.tink.moneymanagerui.di.DaggerFragmentComponent
 import com.tink.moneymanagerui.insights.actionhandling.CustomInsightActionHandler
 import com.tink.moneymanagerui.insights.actionhandling.InsightActionHandler
@@ -187,10 +189,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             styleResId: Int,
             tracker: Tracker? = null,
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
-            insightActionHandler: InsightActionHandler? = null
+            insightActionHandler: InsightActionHandler? = null,
+            backPressedListener: OnBackPressedListener? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
+            BackPressedConfiguration.backPressedListener = backPressedListener
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
