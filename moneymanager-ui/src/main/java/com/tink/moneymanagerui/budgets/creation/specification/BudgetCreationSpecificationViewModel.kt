@@ -91,6 +91,14 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         dataHolder.name.postValue(newName)
     }
 
+    fun updateBudgetAmount(amountString: String) {
+        amountTextWatcher.value?.let { amountTextWatcher ->
+            amountTextWatcher.getAmountFromText(amountString)?.let { amount ->
+                dataHolder.amount.postValue(amount)
+            }
+        }
+    }
+
     val periodValue = MutableLiveData<PeriodValue>().apply {
         value = dataHolder.periodicity.value?.toPeriodValue() ?: MONTH
     }
@@ -308,7 +316,9 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
         fun update() {
             whenNonNull(
                 dataHolder.name.value.takeIf { !it.isNullOrBlank() },
-                dataHolder.amount.value,
+                dataHolder.amount.value?.takeIf {
+                   it.value.unscaledValue > 0
+                },
                 dataHolder.selectedFilter.value,
                 dataHolder.periodicity.value,
             ) { _, _, _, _ ->
@@ -316,10 +326,18 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             } ?: postValue(false)
         }
 
-        addSource(dataHolder.amount) { update() }
-        addSource(dataHolder.selectedFilter) { update() }
-        addSource(dataHolder.name) { update() }
-        addSource(dataHolder.periodicity) { update() }
+        addSource(dataHolder.amount) {
+            update()
+        }
+        addSource(dataHolder.selectedFilter) {
+            update()
+        }
+        addSource(dataHolder.name) {
+            update()
+        }
+        addSource(dataHolder.periodicity) {
+            update()
+        }
     }
 
     private val _createdBudgetSpecification = MutableLiveData<BudgetSpecification>()

@@ -3,12 +3,11 @@ package com.tink.moneymanagerui.insights.fragments
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.databinding.TinkFragmentOverviewInsightsBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.CurrentInsightsViewModel
 import com.tink.moneymanagerui.insights.InsightsViewModel
 import com.tink.moneymanagerui.insights.di.InsightsViewModelFactory
@@ -37,16 +36,25 @@ internal class OverviewInsightsFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
-        DataBindingUtil.bind<TinkFragmentOverviewInsightsBinding>(view)?.also {
-            it.viewModel = viewModel
-            it.lifecycleOwner = viewLifecycleOwner
-        }
         viewModel.refresh()
         viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
             view.insightsCount.text = insightsList.size.toString()
         })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            view.insightsProgressBar.visibleIf { isLoading }
+        })
+
         viewModel.hasItems.observe(viewLifecycleOwner, Observer { hasItems ->
             view.apply {
+                insightsCountBackground.visibleIf { hasItems }
+                insightsCount.visibleIf { hasItems }
+                spacer.visibleIf { hasItems }
+                insightsCardTitle.text = if (hasItems) {
+                    getString(R.string.tink_insights_overview_card_new_events_title)
+                } else {
+                    getString(R.string.tink_insights_overview_card_archived_events_title)
+                }
                 if (hasItems) {
                     // new events UI
                     insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent)))

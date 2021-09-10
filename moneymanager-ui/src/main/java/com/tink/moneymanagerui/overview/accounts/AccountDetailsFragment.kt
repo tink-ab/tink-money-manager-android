@@ -2,7 +2,6 @@ package com.tink.moneymanagerui.overview.accounts
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.databinding.TinkFragmentAccountDetailsBinding
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
@@ -21,7 +19,9 @@ import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
+import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -41,7 +41,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
-    override fun getScreenEvent(): ScreenEvent? = ScreenEvent.ACCOUNT_DETAILS
+    override fun getScreenEvent(): ScreenEvent = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true
 
     private val recyclerViewOnScrollListener = object : RecyclerView.OnScrollListener() {
@@ -77,21 +77,19 @@ internal class AccountDetailsFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        DataBindingUtil.bind<TinkFragmentAccountDetailsBinding>(view)?.also {
-            it.viewModel = viewModel
-            it.transactionListModel = transactionListViewModel
-            it.lifecycleOwner = viewLifecycleOwner
-        }
+        transactionListViewModel.hasTransactions.observe(viewLifecycle, { hasTransactions ->
+            view.recyclerView.visibleIf { hasTransactions }
+        })
 
         setupViews()
 
         viewModel.account.observe(viewLifecycle, Observer {
             it?.let { account ->
                 title = account.name
-                accountBalance.text = account.balance.formatCurrencyExact()
-                accountNumber.text = account.accountNumber
+                view.accountBalance.text = account.balance.formatCurrencyExact()
+                view.accountNumber.text = account.accountNumber
                 // Pronounce account number letter by letter in talkback instead of as a number
-                accountNumber.contentDescription = account.accountNumber.replace(".".toRegex(), "$0 ")
+                view.accountNumber.contentDescription = account.accountNumber.replace(".".toRegex(), "$0 ")
             }
         })
 
@@ -102,7 +100,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         })
 
         transactionListViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            loader.visibility = if (loading) View.VISIBLE else View.GONE
+            view.loader.visibility = if (loading) View.VISIBLE else View.GONE
         })
 
         transactionListViewModel.transactionItems.observe(

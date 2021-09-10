@@ -2,14 +2,12 @@ package com.tink.moneymanagerui.insights.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.databinding.TinkFragmentInsightsBinding
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.ArchivedInsightsViewModel
 import com.tink.moneymanagerui.insights.InsightsAdapter
@@ -64,10 +62,15 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         emptyStateText.text = getString(R.string.tink_insights_archived_empty_state_text)
 
-        DataBindingUtil.bind<TinkFragmentInsightsBinding>(view)?.also {
-            it.viewModel = viewModel
-            it.lifecycleOwner = viewLifecycleOwner
-        }
+        viewModel.hasItems.observe(viewLifecycle, { hasInsights ->
+            recyclerView.visibleIf { hasInsights }
+        })
+        viewModel.loading.observe(viewLifecycle, { isLoading ->
+            insightsProgressBar.visibleIf { isLoading }
+        })
+        viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
+            emptyState.visibleIf { shouldShowEmptyState }
+        })
     }
 
     override fun authorizedOnStart() {

@@ -1,220 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-  <data>
-    <variable
-      name="viewModel"
-      type="com.tink.moneymanagerui.budgets.creation.specification.BudgetCreationSpecificationViewModel"/>
-  </data>
-  <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/tink_backgroundColor">
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?attr/tink_backgroundColor">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="@dimen/tink_horizontal_margin"
-        android:hint="@string/tink_budget_create_field_name_hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme="?attr/tink_textInputLayoutStyle">
-
-      <com.google.android.material.textfield.TextInputEditText
-          android:id="@+id/nameInputText"
-          style="?attr/tink_editTextStyle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:textAppearance="@style/tink_hecto"
-          tools:text="My budget"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/categoriesInputLayout"
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/nameInputLayout"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
       android:layout_marginStart="12dp"
       android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:hint="@string/tink_budget_edit_field_category_hint"
+      android:hint="@string/tink_budget_create_field_name_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
-      android:visibility="gone"
+      app:layout_constraintTop_toTopOf="parent"
       app:theme="?attr/tink_textInputLayoutStyle">
 
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/categoriesInputText"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/nameInputText"
         style="?attr/tink_editTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
         android:textAppearance="@style/tink_hecto"
-        tools:text="Restaurants, Groceries"/>
+        tools:text="My budget"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+  </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/amountInputLayout"
-      android:layout_width="0dp"
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/categoriesInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:hint="@string/tink_budget_edit_field_category_hint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/nameInputLayout"
+    android:visibility="gone"
+    app:theme="?attr/tink_textInputLayoutStyle">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/categoriesInputText"
+      style="?attr/tink_editTextStyle"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      android:layout_marginStart="12dp"
-      android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:hint="@string/tink_budget_create_field_amount_hint"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/categoriesInputLayout"
-      app:theme="?attr/tink_textInputLayoutStyle">
+      android:focusableInTouchMode="false"
+      android:textAppearance="@style/tink_hecto"
+      tools:text="Restaurants, Groceries"/>
 
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/amountInputText"
-        style="?attr/tink_editTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@={viewModel.amountString}"
-        android:textAppearance="@style/tink_hecto"
-        app:addTextChangedListener="@{viewModel.amountTextWatcher}"
-        app:keyListener="@{viewModel.amountInputKeyListener}"
-        tools:text="3 000"/>
+  </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/amountInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:hint="@string/tink_budget_create_field_amount_hint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/categoriesInputLayout"
+    app:theme="?attr/tink_textInputLayoutStyle">
 
-    <TextView
-      android:id="@+id/averageAmountText"
-      android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/amountInputText"
+      style="?attr/tink_editTextStyle"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="@dimen/tink_horizontal_margin"
-      android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:text="@{viewModel.averageAmountText}"
-      android:textAppearance="@style/tink_micro"
-      android:visibility="@{viewModel.showAverageAmount}"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/amountInputLayout"
-      tools:text="Snitt 3 500 kr/mån"/>
+      android:textAppearance="@style/tink_hecto"
+      tools:text="3 000"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/periodInputLayout"
-      android:layout_width="0dp"
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <TextView
+    android:id="@+id/averageAmountText"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/tink_horizontal_margin"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:textAppearance="@style/tink_micro"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/amountInputLayout"
+    tools:text="Snitt 3 500 kr/mån"/>
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/periodInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:hint="@string/tink_budget_create_field_period_hint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/averageAmountText"
+    app:theme="?attr/tink_textInputLayoutStyle">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/periodText"
+      style="?attr/tink_editTextStyle"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="24dp"
-      android:layout_marginStart="12dp"
-      android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:hint="@string/tink_budget_create_field_period_hint"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/averageAmountText"
-      app:theme="?attr/tink_textInputLayoutStyle">
+      android:editable="false"
+      android:focusableInTouchMode="false"
+      android:textAppearance="@style/tink_hecto"
+      tools:text="Egen"/>
 
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/periodText"
-        style="?attr/tink_editTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:focusableInTouchMode="false"
-        android:text="@{viewModel.periodValueText}"
-        android:textAppearance="@style/tink_hecto"
-        tools:text="Egen"/>
+  </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/periodStartInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:hint="@string/tink_budget_create_field_period_start_hint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/periodInputLayout"
+    app:theme="?attr/tink_textInputLayoutStyle">
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/periodStartInputLayout"
-      android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/periodStartText"
+      style="?attr/tink_editTextStyle"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="40dp"
-      android:layout_marginStart="12dp"
-      android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:hint="@string/tink_budget_create_field_period_start_hint"
-      android:visibility="@{viewModel.showPeriodDateField}"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/periodInputLayout"
-      app:theme="?attr/tink_textInputLayoutStyle">
+      android:editable="false"
+      android:focusableInTouchMode="false"
+      android:textAppearance="@style/tink_hecto"
+      tools:text="20 maj 2018"/>
+  </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/periodStartText"
-        style="?attr/tink_editTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:focusableInTouchMode="false"
-        android:textAppearance="@style/tink_hecto"
-        android:text="@{viewModel.periodStartText}"
-        tools:text="20 maj 2018"/>
-    </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/periodEndInputLayout"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:hint="@string/tink_budget_create_field_period_end_hint"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/periodStartInputLayout"
+    app:theme="?attr/tink_textInputLayoutStyle">
 
-    <com.google.android.material.textfield.TextInputLayout
-      android:id="@+id/periodEndInputLayout"
-      android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/periodEndText"
+      style="?attr/tink_editTextStyle"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="40dp"
-      android:layout_marginStart="12dp"
-      android:layout_marginEnd="@dimen/tink_horizontal_margin"
-      android:hint="@string/tink_budget_create_field_period_end_hint"
-      android:visibility="@{viewModel.showPeriodDateField}"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/periodStartInputLayout"
-      app:theme="?attr/tink_textInputLayoutStyle">
+      android:editable="false"
+      android:focusableInTouchMode="false"
+      android:textAppearance="@style/tink_hecto"
+      tools:text="28 maj 2018"/>
 
-      <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/periodEndText"
-        style="?attr/tink_editTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:editable="false"
-        android:focusableInTouchMode="false"
-        android:textAppearance="@style/tink_hecto"
-        android:text="@{viewModel.periodEndText}"
-        tools:text="28 maj 2018"/>
+  </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/actionButton"
+    style="?attr/tink_containedButtonStyle"
+    android:layout_width="0dp"
+    android:layout_height="@dimen/tink_button_height"
+    android:transitionName="actionButton"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/> <!--TODO: This should also take into account if we are just editing.-->
 
-    <com.google.android.material.button.MaterialButton
-      android:id="@+id/actionButton"
-      style="?attr/tink_containedButtonStyle"
-      android:layout_width="0dp"
-      android:layout_height="@dimen/tink_button_height"
-      android:enabled="@{!(viewModel.loading ?? false)}"
-      android:onClick="@{view -> viewModel.onCreateBudgetButtonClicked()}"
-      android:text="@{viewModel.isEditing ? @string/tink_budget_edit_button : @string/tink_budget_create_button}"
-      android:transitionName="actionButton"
-      android:visibility="@{viewModel.areAllRequiredValuesPresent}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"/> <!--TODO: This should also take into account if we are just editing.-->
+  <View
+    android:id="@+id/emptyView"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
-    <View
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:clickable="true"
-      android:focusable="true"
-      android:visibility="@{viewModel.loading}"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+  <ProgressBar
+    android:id="@+id/budgetProgressBar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:indeterminateTint="?tink_colorAccent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
-    <ProgressBar
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:visibility="@{viewModel.loading}"
-      android:indeterminateTint="?tink_colorAccent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

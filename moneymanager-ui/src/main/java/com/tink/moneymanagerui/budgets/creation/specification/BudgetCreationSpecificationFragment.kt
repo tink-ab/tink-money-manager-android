@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tink.moneymanagerui.BaseFragment
@@ -19,14 +18,14 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.WEEK
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.YEAR
-import com.tink.moneymanagerui.databinding.TinkFragmentBudgetCreationSpecificationBinding
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
-import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.view.*
 import se.tink.commons.extensions.getThemeResIdFromAttr
 import java.util.Calendar
 import javax.inject.Inject
@@ -73,11 +72,68 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        DataBindingUtil.bind<TinkFragmentBudgetCreationSpecificationBinding>(view.root)
-            ?.also {
-                it.viewModel = viewModel
-                it.lifecycleOwner = viewLifecycleOwner
-            }
+        viewModel.amountString.observe(viewLifecycleOwner, { amountString ->
+            amountInputText.setText(amountString)
+        })
+
+        var formattedNumberTextWatcher: FormattedNumberTextWatcher? = null
+        viewModel.amountTextWatcher.observe(viewLifecycleOwner, { amountTextWatcher ->
+            amountInputText.removeTextChangedListener(formattedNumberTextWatcher)
+            formattedNumberTextWatcher = amountTextWatcher
+            amountInputText.addTextChangedListener(formattedNumberTextWatcher)
+        })
+
+        viewModel.amountInputKeyListener.observe(viewLifecycleOwner, { amountInputKeyListener ->
+            amountInputText.keyListener = amountInputKeyListener
+        })
+
+        viewModel.averageAmountText.observe(viewLifecycleOwner, { averageAmount ->
+            averageAmountText.text = averageAmount
+        })
+
+        viewModel.showAverageAmount.observe(viewLifecycleOwner, { showAverageAmount ->
+            averageAmountText.visibleIf { showAverageAmount }
+        })
+
+        viewModel.periodValueText.observe(viewLifecycleOwner, { periodValue ->
+            periodText.setText(periodValue)
+        })
+
+        viewModel.showPeriodDateField.observe(viewLifecycleOwner, { showPeriodDateField ->
+            periodStartInputLayout.visibleIf { showPeriodDateField }
+        })
+
+        viewModel.periodStartText.observe(viewLifecycleOwner, { periodStart ->
+            periodStartText.setText(periodStart)
+        })
+
+        viewModel.showPeriodDateField.observe(viewLifecycleOwner, { showPeriodDateField ->
+            periodEndInputLayout.visibleIf { showPeriodDateField }
+        })
+
+        viewModel.periodEndText.observe(viewLifecycleOwner, { periodEnd ->
+            periodEndText.setText(periodEnd)
+        })
+
+        actionButton.text = if(viewModel.isEditing) {
+            getString(R.string.tink_budget_edit_button)
+        } else {
+            getString(R.string.tink_budget_create_button)
+        }
+
+        actionButton.setOnClickListener {
+            viewModel.onCreateBudgetButtonClicked()
+        }
+
+        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
+            actionButton.isEnabled = !isLoading
+            emptyView.visibleIf { isLoading }
+            budgetProgressBar.visibleIf { isLoading }
+        })
+
+        viewModel.areAllRequiredValuesPresent.observe(viewLifecycleOwner, { areAllRequiredValuesPresent ->
+            actionButton.visibleIf { areAllRequiredValuesPresent }
+        })
 
         viewModel.defaultBudgetName.observe(viewLifecycleOwner, { name ->
             if (nameInputText.text.isNullOrBlank()) {
@@ -110,6 +166,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         nameInputText.textChangedObserver().observe(viewLifecycleOwner, { name ->
             title = name
             viewModel.updateBudgetName(name)
+        })
+
+        amountInputText.textChangedObserver().observe(viewLifecycleOwner, { amount ->
+            viewModel.updateBudgetAmount(amount)
         })
 
         amountInputText.setOnFocusChangeListener { inputView, hasFocus ->

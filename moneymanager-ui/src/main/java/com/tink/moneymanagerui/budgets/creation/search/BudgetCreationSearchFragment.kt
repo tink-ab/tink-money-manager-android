@@ -47,7 +47,7 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        val searchHeader = SearchHeader(context!!)
+        val searchHeader = SearchHeader(requireContext())
         searchHeader.onTextChangedListener = {
             viewModel.searchText.postValue(it.toString())
         }

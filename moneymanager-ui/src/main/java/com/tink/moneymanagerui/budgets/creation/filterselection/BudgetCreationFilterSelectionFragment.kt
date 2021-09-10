@@ -2,14 +2,13 @@ package com.tink.moneymanagerui.budgets.creation.filterselection
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
-import com.tink.moneymanagerui.databinding.TinkFragmentBudgetCreationFilterSelectionBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.view.TreeListMultiSelectionAdapter
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_filter_selection.*
@@ -54,11 +53,9 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
             R.string.tink_budget_create_title
         })
 
-        DataBindingUtil.bind<TinkFragmentBudgetCreationFilterSelectionBinding>(view)
-            ?.also {
-                it.viewModel = viewModel
-                it.lifecycleOwner = viewLifecycleOwner
-            }
+        viewModel.showActionButton.observe(viewLifecycle, { shouldShowActionButton ->
+            actionButton.visibleIf { shouldShowActionButton }
+        })
 
         adapter.onSelectionListener = viewModel.selectedTreeListItems::postValue
 

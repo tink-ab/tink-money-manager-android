@@ -15,9 +15,9 @@ internal class ContextModule {
 
     @Provides
     @ApplicationScoped
-    fun applicationContext(fragment: FinanceOverviewFragment) = fragment.context!!.applicationContext
+    fun applicationContext(fragment: FinanceOverviewFragment) = fragment.requireContext().applicationContext
 
     @Provides
     @FragmentScoped
-    fun fragmentContext(fragment: FinanceOverviewFragment) = fragment.context!!
+    fun fragmentContext(fragment: FinanceOverviewFragment) = fragment.requireContext()
 }

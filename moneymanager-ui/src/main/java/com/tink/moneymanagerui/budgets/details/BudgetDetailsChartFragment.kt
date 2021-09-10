@@ -5,7 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -14,7 +14,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.databinding.TinkBudgetDetailsBarChartPageBinding
 import com.tink.moneymanagerui.databinding.TinkBudgetDetailsProgressChartPageBinding
-import com.tink.moneymanagerui.databinding.TinkFragmentBudgetDetailsChartBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.periodPicker
@@ -53,11 +53,34 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             budgetDetailsViewModelFactory
         )[BudgetDetailsViewModel::class.java]
 
-        DataBindingUtil.bind<TinkFragmentBudgetDetailsChartBinding>(view.root)
-            ?.also {
-                it.viewModel = viewModel
-                it.lifecycleOwner = viewLifecycleOwner
-            }
+        viewModel.statusMessage.observe(viewLifecycleOwner, Observer { message ->
+            view.statusMessage.text = message
+        })
+
+        viewModel.visibilityState.observe(viewLifecycleOwner, Observer { visibilityState ->
+            view.showTransactionsBtn.visibleIf { visibilityState.isVisible }
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            view.loadingSpinner.visibleIf { isLoading }
+            view.periodPicker.visibleIf { !isLoading }
+        })
+
+        viewModel.budgetPeriodInterval.observe(viewLifecycleOwner, Observer { budgetPeriodInterval ->
+            view.periodPicker.setText(budgetPeriodInterval)
+        })
+
+        viewModel.showPickerButtons.observe(viewLifecycleOwner, Observer { showPickerButtons ->
+            view.periodPicker.setShowButtons(showPickerButtons)
+        })
+
+        viewModel.hasNext.observe(viewLifecycleOwner, Observer { hasNext ->
+            view.periodPicker.setNextButtonEnabled(hasNext)
+        })
+
+        viewModel.hasPrevious.observe(viewLifecycleOwner, Observer { hasPrevious ->
+            view.periodPicker.setPreviousButtonEnabled(hasPrevious)
+        })
 
         viewModel.apply {
             budgetName.observe(viewLifecycle, { name ->
@@ -123,25 +146,54 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             if (position == 0) {
-                val binding = DataBindingUtil.inflate<TinkBudgetDetailsProgressChartPageBinding>(
-                    layoutInflater,
-                    R.layout.tink_budget_details_progress_chart_page,
-                    container,
-                    true
-                )
-                binding.viewModel = viewModel
-                binding.lifecycleOwner = this@BudgetDetailsChartFragment.viewLifecycle
-                return binding.root
+                val budgetDetailsProgressChartPage: TinkBudgetDetailsProgressChartPageBinding = TinkBudgetDetailsProgressChartPageBinding.inflate(layoutInflater, container, true)
+
+                viewModel.amountLeft.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeft ->
+                    budgetDetailsProgressChartPage.amountLeft.text = amountLeft
+                })
+                viewModel.totalAmount.observe(this@BudgetDetailsChartFragment.viewLifecycle, { totalAmount ->
+                    budgetDetailsProgressChartPage.totalAmount.text = totalAmount
+                })
+                viewModel.daysLeft.observe(this@BudgetDetailsChartFragment.viewLifecycle, { daysLeft ->
+                    budgetDetailsProgressChartPage.daysLeft.text = daysLeft
+                })
+                viewModel.progress.observe(this@BudgetDetailsChartFragment.viewLifecycle, { progress ->
+                    budgetDetailsProgressChartPage.budgetProgress.progress = progress ?: 0.0
+                })
+                viewModel.amountLeftColor.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeftColor ->
+                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor)
+                })
+                viewModel.visibilityState.observe(this@BudgetDetailsChartFragment.viewLifecycle, { visibilityState ->
+                    budgetDetailsProgressChartPage.budgetProgress.visibleIf { visibilityState.isVisible }
+                })
+                return budgetDetailsProgressChartPage.root
             } else {
-                val binding = DataBindingUtil.inflate<TinkBudgetDetailsBarChartPageBinding>(
-                    layoutInflater,
-                    R.layout.tink_budget_details_bar_chart_page,
-                    container,
-                    true
-                )
-                binding.viewModel = viewModel
-                binding.lifecycleOwner = this@BudgetDetailsChartFragment.viewLifecycle
-                return binding.root
+                val budgetDetailsBarChartPage = TinkBudgetDetailsBarChartPageBinding.inflate(layoutInflater, container, true)
+
+                viewModel.barChartEmptyMessage.observe(this@BudgetDetailsChartFragment.viewLifecycle, { message ->
+                    budgetDetailsBarChartPage.emptyChartMessage.text = message
+                })
+                viewModel.barChartEmpty.observe(this@BudgetDetailsChartFragment.viewLifecycle, { barChartEmpty ->
+                    budgetDetailsBarChartPage.budgetProgress.visibleIf { !barChartEmpty }
+                    budgetDetailsBarChartPage.emptyChartMessage.visibleIf { barChartEmpty }
+                })
+                viewModel.activeBudgetPeriodsCount.observe(this@BudgetDetailsChartFragment.viewLifecycle, { activeBudgetPeriodsCount ->
+                    budgetDetailsBarChartPage.budgetProgress.activeBarCount = activeBudgetPeriodsCount
+                })
+                viewModel.periodChartThreshold.observe(this@BudgetDetailsChartFragment.viewLifecycle, { periodChartThreshold ->
+                    budgetDetailsBarChartPage.budgetProgress.threshold = periodChartThreshold
+                })
+                viewModel.historicPeriodData.observe(this@BudgetDetailsChartFragment.viewLifecycle, { historicPeriodData ->
+                    budgetDetailsBarChartPage.budgetProgress.data = historicPeriodData
+                })
+                viewModel.periodChartLabels.observe(this@BudgetDetailsChartFragment.viewLifecycle, { periodChartLabels ->
+                    budgetDetailsBarChartPage.budgetProgress.labels = periodChartLabels
+                })
+                viewModel.periodChartThresholdLabel.observe(this@BudgetDetailsChartFragment.viewLifecycle, { periodChartThresholdLabel ->
+                    budgetDetailsBarChartPage.budgetProgress.thresholdLabel = periodChartThresholdLabel
+                })
+
+                return budgetDetailsBarChartPage.root
             }
         }
 
