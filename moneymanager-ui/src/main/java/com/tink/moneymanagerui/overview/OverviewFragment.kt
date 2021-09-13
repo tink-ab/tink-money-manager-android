@@ -30,14 +30,14 @@ internal class OverviewFragment : BaseFragment() {
         requireNotNull(arguments?.getParcelable(ARG_FEATURES))
     }
 
-    private val isToolbarVisible: Boolean by lazy {
-        requireArguments().getBoolean(ARG_IS_TOOLBAR_VISIBLE)
+    private val isOverviewToolbarVisible: Boolean by lazy {
+        requireArguments().getBoolean(ARG_IS_OVERVIEW_TOOLBAR_VISIBLE)
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
         tink_overview_toolbar.title = getString(R.string.tink_overview_toolbar_title)
-        tink_overview_toolbar.visibleIf { isToolbarVisible }
+        tink_overview_toolbar.visibleIf { isOverviewToolbarVisible }
         tink_overview_toolbar.setNavigationOnClickListener { onUpPressed() }
         for (feature in overviewFeatures.features) {
             addFeature(feature)
@@ -157,14 +157,14 @@ internal class OverviewFragment : BaseFragment() {
 
     companion object {
         private const val ARG_FEATURES = "ARG_FEATURES"
-        private const val ARG_IS_TOOLBAR_VISIBLE = "ARG_IS_TOOLBAR_VISIBLE"
+        private const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "ARG_IS_OVERVIEW_TOOLBAR_VISIBLE"
 
         @JvmStatic
-        fun newInstance(features: OverviewFeatures, isToolbarVisible: Boolean = false): OverviewFragment =
+        fun newInstance(features: OverviewFeatures, isOverviewToolbarVisible: Boolean = false): OverviewFragment =
             OverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_FEATURES to features,
-                    ARG_IS_TOOLBAR_VISIBLE to isToolbarVisible
+                    ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to isOverviewToolbarVisible
                 )
             }
     }

@@ -85,7 +85,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     }
 
     private val isOverviewToolbarVisible: Boolean by lazy {
-        requireArguments().getBoolean(ARG_IS_TOOLBAR_VISIBLE)
+        requireArguments().getBoolean(ARG_IS_OVERVIEW_TOOLBAR_VISIBLE)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
@@ -177,7 +177,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
-        private const val ARG_IS_TOOLBAR_VISIBLE = "isToolbarVisible"
+        private const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
@@ -207,7 +207,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
                     ARG_OVERVIEW_FEATURES to overviewFeatures,
-                    ARG_IS_TOOLBAR_VISIBLE to isOverviewToolbarVisible
+                    ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to isOverviewToolbarVisible
                 )
             }
         }
