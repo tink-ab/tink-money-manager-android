@@ -11,6 +11,8 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.configuration.BackPressedConfiguration
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.fragments.OverviewInsightsFragment
 import com.tink.moneymanagerui.overview.accounts.AccountsListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
@@ -28,11 +30,23 @@ internal class OverviewFragment : BaseFragment() {
         requireNotNull(arguments?.getParcelable(ARG_FEATURES))
     }
 
+    private val isToolbarVisible: Boolean by lazy {
+        requireArguments().getBoolean(ARG_IS_TOOLBAR_VISIBLE)
+    }
+
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
+        tink_overview_toolbar.title = getString(R.string.tink_overview_toolbar_title)
+        tink_overview_toolbar.visibleIf { isToolbarVisible }
+        tink_overview_toolbar.setNavigationOnClickListener { onUpPressed() }
         for (feature in overviewFeatures.features) {
             addFeature(feature)
         }
+    }
+
+    override fun onUpPressed() {
+        BackPressedConfiguration.backPressedListener?.onBackPressed()
+        activity?.onBackPressed()
     }
 
     private fun addFeature(feature: OverviewFeature) {
@@ -143,14 +157,15 @@ internal class OverviewFragment : BaseFragment() {
 
     companion object {
         private const val ARG_FEATURES = "ARG_FEATURES"
+        private const val ARG_IS_TOOLBAR_VISIBLE = "ARG_IS_TOOLBAR_VISIBLE"
 
         @JvmStatic
-        fun newInstance(features: OverviewFeatures): OverviewFragment =
+        fun newInstance(features: OverviewFeatures, isToolbarVisible: Boolean = false): OverviewFragment =
             OverviewFragment().apply {
                 arguments = bundleOf(
-                    ARG_FEATURES to features
+                    ARG_FEATURES to features,
+                    ARG_IS_TOOLBAR_VISIBLE to isToolbarVisible
                 )
             }
     }
-
 }
