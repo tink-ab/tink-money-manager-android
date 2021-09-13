@@ -7,6 +7,7 @@ import com.tink.core.Tink
 import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.service.network.TinkConfiguration
 import com.tink.sample.configuration.Configuration
+import timber.log.Timber
 
 class MainActivity : FragmentActivity() {
 
@@ -29,7 +30,9 @@ class MainActivity : FragmentActivity() {
             FinanceOverviewFragment.newInstance(
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkStyle_Default,
-                tracker = LogTracker()
+                tracker = LogTracker(),
+                backPressedListener = { Timber.d("User navigated back") },
+                isOverviewToolbarVisible = false
             ).also {
                 currentFinanceOverviewFragment = it
             }

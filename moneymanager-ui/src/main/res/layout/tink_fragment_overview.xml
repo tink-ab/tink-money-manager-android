@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="?tink_backgroundColor">
-
-  <LinearLayout
-    android:id="@+id/overviewContainer"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" />
+    android:orientation="vertical">
 
-</androidx.core.widget.NestedScrollView>
+    <com.tink.moneymanagerui.view.TinkToolbar android:id="@+id/tink_overview_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/tink_toolbar_elevation"
+        android:visibility="gone"
+        app:buttonGravity="center_vertical"
+        app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+        app:navigationIcon="?homeAsUpIndicator" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?tink_backgroundColor">
+
+        <LinearLayout
+            android:id="@+id/overviewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
