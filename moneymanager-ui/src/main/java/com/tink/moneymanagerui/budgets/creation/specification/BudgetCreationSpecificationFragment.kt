@@ -188,16 +188,16 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
         periodStartText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val currentDate = viewModel.periodStartValue.value ?: DateTime.now()
-            onPeriodDatePickerClicked(currentDate) { date ->
+            val startDate = viewModel.periodStartValueFormatted.value ?: DateTime.now()
+            onPeriodDatePickerClicked(startDate) { date ->
                 viewModel.periodStartValue.value = date
             }
         }
 
         periodEndText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val currentDate = viewModel.periodEndValue.value ?: DateTime.now()
-            onPeriodDatePickerClicked(currentDate) { date ->
+            val endDate = viewModel.periodEndValueFormatted.value ?: DateTime.now()
+            onPeriodDatePickerClicked(endDate) { date ->
                 viewModel.periodEndValue.value = date
             }
         }
