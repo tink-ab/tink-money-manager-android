@@ -19,7 +19,10 @@ fun Budget.Periodicity.Recurring.formattedPeriod(
 ): String =
     when (unit) {
         Budget.Periodicity.Recurring.PeriodUnit.MONTH ->
-            dateUtils.getMonthNameOfDate(budgetPeriod.end.toDateTime(), true, timezoneCode)
+            dateUtils.getMonthNameOfDate(
+                budgetPeriod.start.toDateTime().getHalfwayUntil(budgetPeriod.end.toDateTime()),
+                true,
+                timezoneCode)
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
             dateUtils.formatYearly(
