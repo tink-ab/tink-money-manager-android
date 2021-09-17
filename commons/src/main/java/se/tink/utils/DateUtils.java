@@ -1,16 +1,20 @@
 package se.tink.utils;
 
-import androidx.annotation.NonNull;
 import com.google.common.collect.Maps;
 import com.tink.model.time.Period;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
 import se.tink.commons.extensions.TimeExtensionsKt;
 
 public class DateUtils {
@@ -159,7 +163,9 @@ public class DateUtils {
 
 	private DateTime getDateTimeFromPeriod(Period period) {
 		//TODO: Core setup
-		return TimeExtensionsKt.toDateTime(period.getEnd());
+		final long periodDuration = period.getEnd().toEpochMilli() - period.getStart().toEpochMilli();
+		final Instant middleOfPeriod = Instant.ofEpochMilli(period.getStart().toEpochMilli() + periodDuration / 2);
+		return TimeExtensionsKt.toDateTime(middleOfPeriod);
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent) {
