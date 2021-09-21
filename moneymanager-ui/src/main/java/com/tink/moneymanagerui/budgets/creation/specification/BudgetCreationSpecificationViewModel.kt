@@ -143,19 +143,6 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             dateUtils.formatDateHuman(it)
         }
 
-    val isPeriodEndValid = MediatorLiveData<Boolean>().apply {
-        fun validate() {
-            whenNonNull(
-                periodStartValue.value,
-                periodEndValue.value
-            ) { periodStart, periodEnd ->
-                value = periodStart.isBefore(periodEnd)
-            }
-        }
-        addSource(periodStartValue) { validate() }
-        addSource(periodEndValue) { validate() }
-    }
-
     private val periodicity = MediatorLiveData<Budget.Periodicity>().apply {
         fun update() {
             periodValue.value?.let { periodValue ->
