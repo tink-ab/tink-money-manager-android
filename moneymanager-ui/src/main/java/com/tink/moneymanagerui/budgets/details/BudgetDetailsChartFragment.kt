@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.tink.model.budget.Budget
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
@@ -141,6 +142,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
     }
 
     inner class ChartPagerAdapter(val pageCount: Int) : PagerAdapter() {
+        private var periodicityTitle: String = ""
+
         override fun isViewFromObject(view: View, obj: Any) = obj == view
         override fun getCount(): Int = pageCount
 
@@ -192,6 +195,16 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                 viewModel.periodChartThresholdLabel.observe(this@BudgetDetailsChartFragment.viewLifecycle, { periodChartThresholdLabel ->
                     budgetDetailsBarChartPage.budgetProgress.thresholdLabel = periodChartThresholdLabel
                 })
+                viewModel.budgetPeriodicity.observe(this@BudgetDetailsChartFragment.viewLifecycle, { budgetPeriodicity ->
+                    periodicityTitle = context?.getString(
+                        when((budgetPeriodicity as? Budget.Periodicity.Recurring)?.unit) {
+                            Budget.Periodicity.Recurring.PeriodUnit.WEEK -> R.string.tink_budget_details_selector_weekly
+                            Budget.Periodicity.Recurring.PeriodUnit.YEAR -> R.string.tink_budget_details_selector_yearly
+                            else -> R.string.tink_budget_details_selector_monthly
+                        }
+                    ).orEmpty()
+                    notifyDataSetChanged()
+                })
 
                 return budgetDetailsBarChartPage.root
             }
@@ -199,9 +212,9 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
         override fun getPageTitle(position: Int) =
             if (position == 0) {
-                context?.getString(R.string.tink_budget_details_selector_monthly) ?: ""
+                periodicityTitle
             } else {
-                context?.getString(R.string.tink_budget_details_selector_over_time) ?: ""
+                context?.getString(R.string.tink_budget_details_selector_over_time).orEmpty()
             }
 
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =

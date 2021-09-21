@@ -35,7 +35,7 @@ private const val TYPE_ARG = "type"
 
 internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionListener {
     private val type by lazy { arguments?.getSerializable(TYPE_ARG) as? ChartType ?: ChartType.EXPENSES }
-    private val adapter by lazy { ChartPagerAdapter(context!!, childFragmentManager, type) }
+    private val adapter by lazy { ChartPagerAdapter(requireContext(), childFragmentManager, type) }
     private val viewModel by lazy {
         ViewModelProviders.of(rootFragment, viewModelFactory)[ChartDetailsViewModel::class.java].also {
             it.setType(type.type)
