@@ -47,7 +47,6 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
             insightsAdapter.setData(insightsList)
-            emptyStateText.visibleIf { insightsList?.isNullOrEmpty() == true }
         })
 
         viewModel.errors.observe(viewLifecycleOwner, Observer {event ->
