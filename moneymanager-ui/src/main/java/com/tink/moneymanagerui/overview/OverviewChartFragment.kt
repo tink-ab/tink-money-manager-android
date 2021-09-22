@@ -54,9 +54,7 @@ internal class OverviewChartFragment : BaseFragment() {
             with(overviewPager) {
                 adapter = ChartPagerAdapter(statistics.statisticTypes)
                 offscreenPageLimit = statistics.statisticTypes.size
-                currentItem = viewModel.lastVisitedPageInOverview
                 setPageTransformer(false, pageTransformer)
-                onPageSelected { viewModel.lastVisitedPageInOverview = it }
             }
             pageIndicator.initialize(overviewPager)
             viewModel.isDoneLoading.observe(viewLifecycleOwner, Observer { isDoneLoading ->
