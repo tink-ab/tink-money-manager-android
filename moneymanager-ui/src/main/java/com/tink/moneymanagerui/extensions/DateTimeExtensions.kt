@@ -32,7 +32,7 @@ fun DateTime.getHalfwayUntil(end: DateTime): DateTime {
 fun DateTime.getInstant(): Instant = Instant.ofEpochMilli(this.millis)
 
 fun DateTime.getAbbreviatedMonthName(): String {
-    return toString("MMMM")
+    return toString("MMM")
         .take(3)
         .capitalize(Locale.getDefault())
 }
