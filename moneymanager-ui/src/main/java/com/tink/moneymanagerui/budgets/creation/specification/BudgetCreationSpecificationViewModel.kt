@@ -110,33 +110,38 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
     val periodStartValue = MutableLiveData<DateTime>().apply {
         (dataHolder.periodicity.value as? OneOffPeriodicity)
             ?.start
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            ?.let { value = it.toDateTime().withUtcTimeRetainZone() }
+            ?.let {
+                value = it.toDateTime()
+            }
     }
     val periodEndValue = MutableLiveData<DateTime>().apply {
         (dataHolder.periodicity.value as? OneOffPeriodicity)
             ?.end
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            ?.let { value = it.toDateTime().withUtcTimeRetainZone() }
+            ?.let {
+                value = it.toDateTime()
+            }
     }
+
+    val periodStartValueFormatted: LiveData<DateTime> =
+        Transformations.map(periodStartValue) {
+            // We get UTC time from server, so we need to set it back to pre-fill proper values.
+            it.withUtcTimeRetainZone()
+        }
+
+    val periodEndValueFormatted: LiveData<DateTime> =
+        Transformations.map(periodEndValue) {
+            // We get UTC time from server, so we need to set it back to pre-fill proper values.
+            it.withUtcTimeRetainZone()
+        }
 
     val periodStartText: LiveData<String> =
-        Transformations.map(periodStartValue) { dateUtils.formatDateHuman(it) }
-    val periodEndText: LiveData<String> =
-        Transformations.map(periodEndValue) { dateUtils.formatDateHuman(it) }
-
-    val isPeriodEndValid = MediatorLiveData<Boolean>().apply {
-        fun validate() {
-            whenNonNull(
-                periodStartValue.value,
-                periodEndValue.value
-            ) { periodStart, periodEnd ->
-                value = periodStart.isBefore(periodEnd)
-            }
+        Transformations.map(periodStartValueFormatted) {
+            dateUtils.formatDateHuman(it)
         }
-        addSource(periodStartValue) { validate() }
-        addSource(periodEndValue) { validate() }
-    }
+    val periodEndText: LiveData<String> =
+        Transformations.map(periodEndValueFormatted) {
+            dateUtils.formatDateHuman(it)
+        }
 
     private val periodicity = MediatorLiveData<Budget.Periodicity>().apply {
         fun update() {

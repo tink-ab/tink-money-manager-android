@@ -83,6 +83,7 @@ enum class StatisticType {
 @Parcelize
 data class OverviewFeatures(val features: List<OverviewFeature>) : Parcelable {
     companion object {
+        @JvmField
         val ALL =
             OverviewFeatures(
                 listOf(

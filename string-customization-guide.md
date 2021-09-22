@@ -79,7 +79,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_show_transaction_btn_title` | See Transactions |
 | `tink_budget_details_toolbar_title` | Budget |
 | `tink_budget_details_menu_edit_budget_item` | Edit Budget |
+| `tink_budget_details_selector_weekly` | Weekly |
 | `tink_budget_details_selector_monthly` | Monthly |
+| `tink_budget_details_selector_yearly` | Yearly |
 | `tink_budget_details_selector_over_time` | Over time |
 | `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and manage your budget |
 | `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and manage your budget |
@@ -111,6 +113,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budgets_empty_create_new` | Create New Budget |
 | `tink_overview_budget_over` | %1$s over budget of %2$s |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
+| `tink_overview_toolbar_title` | Overview |
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_clear_text_description` | Clear text |

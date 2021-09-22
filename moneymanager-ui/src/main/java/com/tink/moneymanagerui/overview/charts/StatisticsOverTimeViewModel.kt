@@ -9,6 +9,8 @@ import com.tink.model.category.Category
 import com.tink.model.statistics.Statistics
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.models.PeriodBalance
+import com.tink.moneymanagerui.extensions.getHalfwayPoint
+import com.tink.moneymanagerui.extensions.getAbbreviatedMonthName
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
@@ -108,7 +110,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
                 val items = list.map {
                     val periodLabel = it.period?.let { period ->
-                        dateUtils.getMonthFromDateTime(period.end.toDateTime(), true)
+                        period.getHalfwayPoint().getAbbreviatedMonthName()
                     }
 
                     val amountLabel = amountFormatter.format(it.amount, currency, useSymbol = true, useRounding = true)

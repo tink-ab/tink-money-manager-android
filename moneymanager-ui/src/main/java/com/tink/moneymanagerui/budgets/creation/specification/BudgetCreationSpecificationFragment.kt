@@ -188,29 +188,21 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
         periodStartText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val currentDate = viewModel.periodStartValue.value ?: DateTime.now()
-            onPeriodDatePickerClicked(currentDate) { date ->
+            val startDate = viewModel.periodStartValueFormatted.value ?: DateTime.now()
+            val earliestPickableStart = viewModel.periodEndValueFormatted.value?.millis ?: Long.MAX_VALUE
+            onPeriodDatePickerClicked(startDate, earliestStartTime = earliestPickableStart) { date ->
                 viewModel.periodStartValue.value = date
             }
         }
 
         periodEndText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val currentDate = viewModel.periodEndValue.value ?: DateTime.now()
-            onPeriodDatePickerClicked(currentDate) { date ->
+            val endDate = viewModel.periodEndValueFormatted.value ?: DateTime.now()
+            val latestPickableEnd = viewModel.periodStartValueFormatted.value?.millis ?: 0
+            onPeriodDatePickerClicked(endDate, latestEndTime = latestPickableEnd) { date ->
                 viewModel.periodEndValue.value = date
             }
         }
-
-        viewModel.isPeriodEndValid.observe(viewLifecycleOwner, { isValid ->
-            if (isValid == false) {
-                viewModel.periodEndValue.value = null
-                periodEndInputLayout.error =
-                        getString(R.string.tink_budget_create_period_end_invalid_message)
-            } else {
-                periodEndInputLayout.error = null
-            }
-        })
 
         viewModel.budgetDeleteResult.observe(viewLifecycleOwner, { errorOrValue ->
             if (errorOrValue?.error != null) {
@@ -293,6 +285,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     private fun onPeriodDatePickerClicked(
         currentDate: DateTime,
+        earliestStartTime: Long = Long.MAX_VALUE,
+        latestEndTime: Long = 0,
         onDateSelect: (DateTime) -> Unit
     ) {
         context?.let { context ->
@@ -311,7 +305,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 // Calendar#MONTH expects 0-11 while DateTime#monthOfYear outputs 1-12
                 currentDate.monthOfYear - 1,
                 currentDate.dayOfMonth
-            )
+            ).apply {
+                datePicker.minDate = latestEndTime
+                datePicker.maxDate = earliestStartTime
+            }
                 .show()
         }
     }

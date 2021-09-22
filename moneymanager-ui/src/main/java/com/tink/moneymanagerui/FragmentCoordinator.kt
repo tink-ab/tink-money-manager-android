@@ -6,6 +6,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.transaction
+import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.extensions.isTrue
 
 /**
@@ -115,6 +116,7 @@ internal class FragmentCoordinator(
         backTo(null, FragmentManager.POP_BACK_STACK_INCLUSIVE, popImmediate)
 
     fun handleBackPress(): Boolean {
+        BackPressedConfiguration.backPressedListener?.onBackPressed()
         if (!topActiveFragment?.onBackPressed().isTrue()) {
             // Temporary fix to use popBackStack() instead of popBackStackImmediate() since the latter doesn't seem to pop the fragment from the backstack in the current setup.
             popBackStack()

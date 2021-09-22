@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import com.tink.moneymanagerui.ClientDataStorage
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.charts.calculateStatistic
 import com.tink.moneymanagerui.overview.charts.getPeriodString
@@ -30,7 +29,6 @@ import javax.inject.Inject
 private class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
 
 internal class OverviewChartViewModel @Inject constructor(
-    private val dataStorage: ClientDataStorage,
     private val dateUtils: DateUtils,
     statisticRepository: StatisticsRepository,
     categoryRepository: CategoryRepository,
@@ -62,12 +60,6 @@ internal class OverviewChartViewModel @Inject constructor(
     }
 
     val isDoneLoading: LiveData<Boolean> = Transformations.map(data) { it != null }
-
-    var lastVisitedPageInOverview
-        get() = dataStorage.lastVisitedPageInOverview
-        set(value) {
-            dataStorage.lastVisitedPageInOverview = value
-        }
 
     val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
         val data: List<Float> =

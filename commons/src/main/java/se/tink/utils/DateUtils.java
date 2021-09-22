@@ -1,16 +1,20 @@
 package se.tink.utils;
 
-import androidx.annotation.NonNull;
 import com.google.common.collect.Maps;
 import com.tink.model.time.Period;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
 import se.tink.commons.extensions.TimeExtensionsKt;
 
 public class DateUtils {
@@ -43,33 +47,6 @@ public class DateUtils {
 
 	private void setupLocale(Locale upLocale) {
 		this.defaultLocale = upLocale;
-	}
-
-	public String getMonthFromDateTime(DateTime date) {
-    return getMonthFromDateTime(date, false);
-	}
-
-	public String getMonthFromDateTime(DateTime date, boolean includeYearIfNotCurrent) {
-		String key;
-		if (includeYearIfNotCurrent && !date.year().equals(DateTime.now().year())) {
-			key = ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR_COMPACT;
-		} else {
-			key = ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT;
-		}
-		return ThreadSafeDateFormat
-				.threadSafeDateFormat(key, defaultLocale, timezoneCode)
-				.format(date);
-	}
-
-	public String formatDateString(String date) {
-		return ThreadSafeDateFormat
-			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY, defaultLocale, timezoneCode).format(new DateTime(date));
-	}
-
-	public String getTodayAsString() {
-		DateTime now = DateTime.now();
-		return ThreadSafeDateFormat.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY, defaultLocale, timezoneCode)
-			.format(now);
 	}
 
 	public boolean isToday(String date) {
@@ -159,7 +136,9 @@ public class DateUtils {
 
 	private DateTime getDateTimeFromPeriod(Period period) {
 		//TODO: Core setup
-		return TimeExtensionsKt.toDateTime(period.getEnd());
+		final long periodDuration = period.getEnd().toEpochMilli() - period.getStart().toEpochMilli();
+		final Instant middleOfPeriod = Instant.ofEpochMilli(period.getStart().toEpochMilli() + periodDuration / 2);
+		return TimeExtensionsKt.toDateTime(middleOfPeriod);
 	}
 
 	public String getMonthNameOfDate(DateTime date, boolean includeYearIfNotCurrent) {

@@ -8,6 +8,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.model.budget.Budget
 import com.tink.model.budget.BudgetPeriod
+import com.tink.model.budget.BudgetPeriodicity
 import com.tink.model.budget.RecurringPeriodicity
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
@@ -196,6 +197,10 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     val periodChartThreshold: LiveData<Float> = Transformations.map(budget) {
         it.amount.value.toBigDecimal().toFloat()
+    }
+
+    val budgetPeriodicity: LiveData<BudgetPeriodicity> = Transformations.map(budget) { budgetSpecification ->
+        budgetSpecification.periodicity
     }
 
     val periodChartThresholdLabel: LiveData<String> = Transformations.map(budget) {

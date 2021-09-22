@@ -21,6 +21,8 @@
 
   <string name="tink_all_categories">All categories</string>
 
+  <string name="tink_overview_toolbar_title">Overview</string>
+
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
   <string name="tink_latest_transactions_toolbar_title">Latest transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
@@ -112,7 +114,9 @@
   <string name="tink_budget_details_show_transaction_btn_title">See Transactions</string>
   <string name="tink_budget_details_toolbar_title">Budget</string>
   <string name="tink_budget_details_menu_edit_budget_item">Edit Budget</string>
+  <string name="tink_budget_details_selector_weekly">Weekly</string>
   <string name="tink_budget_details_selector_monthly">Monthly</string>
+  <string name="tink_budget_details_selector_yearly">Yearly</string>
   <string name="tink_budget_details_selector_over_time">Over time</string>
   <plurals name="tink_budget_details_days_left">
     <item quantity="one">%s day left</item>

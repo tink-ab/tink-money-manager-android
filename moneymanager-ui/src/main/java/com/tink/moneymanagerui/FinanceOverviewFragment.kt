@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
+import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.configuration.I18nConfiguration
+import com.tink.moneymanagerui.configuration.OnBackPressedListener
 import com.tink.moneymanagerui.di.DaggerFragmentComponent
 import com.tink.moneymanagerui.insights.actionhandling.CustomInsightActionHandler
 import com.tink.moneymanagerui.insights.actionhandling.InsightActionHandler
@@ -24,6 +26,7 @@ import com.tink.moneymanagerui.tracking.Tracker
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.tink_fragment.*
 import se.tink.android.repository.service.DataRefreshHandler
 import timber.log.Timber
 import java.io.IOException
@@ -81,6 +84,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         requireNotNull(arguments?.getParcelable<OverviewFeatures>(ARG_OVERVIEW_FEATURES))
     }
 
+    private val isOverviewToolbarVisible: Boolean by lazy {
+        requireArguments().getBoolean(ARG_IS_OVERVIEW_TOOLBAR_VISIBLE)
+    }
+
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     override fun onAttach(context: Context) {
@@ -110,7 +117,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentCoordinator.clear()
-        fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures), false, FragmentAnimationFlags.NONE)
+        fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures, isOverviewToolbarVisible), false, FragmentAnimationFlags.NONE)
     }
 
     fun handleBackPress() =
@@ -170,6 +177,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_STYLE_RES = "styleRes"
         private const val ARG_ACCESS_TOKEN = "accessToken"
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
+        private const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
@@ -187,15 +195,19 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             styleResId: Int,
             tracker: Tracker? = null,
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
-            insightActionHandler: InsightActionHandler? = null
+            insightActionHandler: InsightActionHandler? = null,
+            backPressedListener: OnBackPressedListener? = null,
+            isOverviewToolbarVisible: Boolean = false
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
+            BackPressedConfiguration.backPressedListener = backPressedListener
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
-                    ARG_OVERVIEW_FEATURES to overviewFeatures
+                    ARG_OVERVIEW_FEATURES to overviewFeatures,
+                    ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to isOverviewToolbarVisible
                 )
             }
         }
