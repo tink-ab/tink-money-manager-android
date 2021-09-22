@@ -22,8 +22,9 @@ fun Budget.Period.toPeriodChartLabel(
             periodicity.formattedPeriod(this, dateUtils)
 
         Budget.Periodicity.Recurring.PeriodUnit.MONTH,
-        Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN ->
-            dateUtils.getMonthFromDateTime(end.toDateTime())
+        Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN -> {
+            start.toDateTime().getHalfwayUntil(end.toDateTime()).getAbbreviatedMonthName()
+        }
     }
 }
 

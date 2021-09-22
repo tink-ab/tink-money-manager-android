@@ -49,33 +49,6 @@ public class DateUtils {
 		this.defaultLocale = upLocale;
 	}
 
-	public String getMonthFromDateTime(DateTime date) {
-    return getMonthFromDateTime(date, false);
-	}
-
-	public String getMonthFromDateTime(DateTime date, boolean includeYearIfNotCurrent) {
-		String key;
-		if (includeYearIfNotCurrent && !date.year().equals(DateTime.now().year())) {
-			key = ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR_COMPACT;
-		} else {
-			key = ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT;
-		}
-		return ThreadSafeDateFormat
-				.threadSafeDateFormat(key, defaultLocale, timezoneCode)
-				.format(date);
-	}
-
-	public String formatDateString(String date) {
-		return ThreadSafeDateFormat
-			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY, defaultLocale, timezoneCode).format(new DateTime(date));
-	}
-
-	public String getTodayAsString() {
-		DateTime now = DateTime.now();
-		return ThreadSafeDateFormat.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY, defaultLocale, timezoneCode)
-			.format(now);
-	}
-
 	public boolean isToday(String date) {
 		DateTime d1 = DateTime.parse(date);
 		DateTime d2 = DateTime.now();
