@@ -84,7 +84,7 @@ class InsightsFragment : BaseFragment() {
             insightsProgressBar.visibleIf { isLoading }
         })
         viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
-            emptyState.visibleIf { shouldShowEmptyState }
+            emptyStateText.visibleIf { shouldShowEmptyState }
         })
 
     }

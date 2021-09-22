@@ -47,7 +47,6 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
             insightsAdapter.setData(insightsList)
-            emptyState.visibleIf { insightsList?.isNullOrEmpty() == true }
         })
 
         viewModel.errors.observe(viewLifecycleOwner, Observer {event ->
@@ -69,7 +68,7 @@ class ArchivedInsightsFragment : BaseFragment() {
             insightsProgressBar.visibleIf { isLoading }
         })
         viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
-            emptyState.visibleIf { shouldShowEmptyState }
+            emptyStateText.visibleIf { shouldShowEmptyState }
         })
     }
 

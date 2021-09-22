@@ -27,6 +27,7 @@
     android:layout_marginEnd="48dp"
     android:gravity="center"
     android:text="@string/tink_insights_empty_state_text"
+    android:visibility="gone"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +51,5 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
-
-  <androidx.constraintlayout.widget.Group
-    android:id="@+id/emptyState"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:constraint_referenced_ids="emptyStateSubtitle, emptyStateIllustration, emptyStateTitle"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
