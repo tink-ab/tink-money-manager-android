@@ -37,7 +37,7 @@ fun Budget.Period.toHistoricIntervalLabel(
         Budget.Periodicity.Recurring.PeriodUnit.WEEK ->
             context.getString(
                 R.string.tink_budget_period_chart_week_label,
-                start.toDateTime().weekOfWeekyear().get()
+                getHalfwayPoint().weekOfWeekyear().get()
             )
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
@@ -45,6 +45,6 @@ fun Budget.Period.toHistoricIntervalLabel(
 
         Budget.Periodicity.Recurring.PeriodUnit.MONTH,
         Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN ->
-            dateUtils.getMonthAndYearFromDateTime(end.toDateTime())
+            dateUtils.getMonthAndYearFromDateTime(getHalfwayPoint())
     }
 }
