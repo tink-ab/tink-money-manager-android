@@ -13,9 +13,11 @@
   <string name="tink_date_formatter_daily_monthly">dd MMM</string>
   <string name="tink_date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
   <string name="tink_date_formatter_day_of_week_compact">EEE</string>
+  <string name="tink_date_formatter_day_of_week_full">EEEE</string>
   <string name="tink_date_formatter_month_and_day_of_week">EEEE MMM d</string>
-  <string name="tink_date_formatter_month_and_day">MMMM d</string>
-  <string name="tink_date_formatter_month_and_day_and_year">MMMM d yyyy</string>
+  <string name="tink_date_formatter_month_and_day">EEEE, MMM d</string>
+  <string name="tink_date_formatter_month_and_day_and_year">EEEE, MMM d, yyyy</string>
+  <string name="tink_date_formatter_date_with_year">MMM d, yyyy</string>
   <string name="tink_date_formatter_month_and_year">MMMM yyyy</string>
   <string name="tink_date_formatter_month_and_year_compact">MMM yyyy</string>
 
