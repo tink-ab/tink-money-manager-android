@@ -30,6 +30,8 @@ public class DateUtils {
 
 	private static DateUtils instance;
 
+	private static final int NUMBER_OF_DAYS_TO_SHOW_ONLY_WEEKDAY = 6;
+
 	public static DateUtils getInstance(Locale locale, String timezoneCode) {
 		if (instance == null) {
 			instance = new DateUtils();
@@ -55,43 +57,54 @@ public class DateUtils {
 		return (d1.year().get() == d2.year().get() && d1.getDayOfYear() == d2.getDayOfYear());
 	}
 
-	public String formatDateHuman(String date) {
+	public boolean isToday(DateTime evaluatedDate) {
+		DateTime today = DateTime.now();
+		return evaluatedDate.getYear() == today.getYear() && evaluatedDate.getDayOfYear() == today.getDayOfYear();
+	}
+
+	public boolean isTomorrow(DateTime evaluatedDate) {
+		DateTime tomorrow = DateTime.now().plusDays(1);
+		return evaluatedDate.getYear() == tomorrow.getYear() && evaluatedDate.getDayOfYear() == tomorrow.getDayOfYear();
+	}
+
+	public boolean isYesterday(DateTime evaluatedDate) {
+		DateTime yesterday = DateTime.now().minusDays(1);
+		return evaluatedDate.getYear() == yesterday.getYear() && evaluatedDate.getDayOfYear() == yesterday.getDayOfYear();
+	}
+
+	public boolean isCurrentYear(DateTime evaluatedDate) {
+		return evaluatedDate.getYear() == DateTime.now().getYear();
+	}
+
+	public boolean isInPastDays(DateTime evaluatedDate, int numberOfDaysToInclude) {
+		DateTime now = DateTime.now();
+		DateTime cutoffTime = now
+				.minusDays(numberOfDaysToInclude + 1)
+				.withHourOfDay(23)
+				.withMinuteOfHour(59)
+				.withSecondOfMinute(59);
+		return evaluatedDate.isAfter(cutoffTime) && evaluatedDate.isBefore(now);
+	}
+
+	public String formatDateHuman(@NonNull String date) {
 		return formatDateHuman(DateTime.parse(date));
 	}
 
 	public String formatDateHuman(@NonNull DateTime date) {
-		DateTime now = DateTime.now();
-		DateTime today = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), 0,
-			0);
-
-		long value = date.getMillis();
-
-		if (date.isBefore(today)) {
-
-			if (!today.minusDays(1).isAfter(value)) {
-				return formatHumanStrings.get(KEY_YESTERDAY);
-			} else if (!today.minusMonths(1).isAfter(value)) {
-				return upperFirstChar(ThreadSafeDateFormat
-					.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_WEEK, defaultLocale, timezoneCode)
-					.format(date));
-			}
-		} else {
-
-			if (today.plusDays(1).isAfter(value)) {
-				return formatHumanStrings.get(KEY_TODAY);
-			} else if (today.plusDays(2).isAfter(value)) {
-				return formatHumanStrings.get(KEY_TOMORROW);
-			} else if (today.plusMonths(1).isAfter(value)) {
-				return ThreadSafeDateFormat
-					.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_WEEK, defaultLocale, timezoneCode)
-					.format(date);
-			}
-		}
-
-		if (today.getYear() == date.getYear()) {
-			return ThreadSafeDateFormat
+		if (isTomorrow(date)) {
+			return formatHumanStrings.get(KEY_TOMORROW);
+		} else if (isToday(date)) {
+			return formatHumanStrings.get(KEY_TODAY);
+		} else if (isYesterday(date)) {
+			return formatHumanStrings.get(KEY_YESTERDAY);
+		} else if (isInPastDays(date, NUMBER_OF_DAYS_TO_SHOW_ONLY_WEEKDAY)) {
+			return upperFirstChar(ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_FULL, defaultLocale, timezoneCode)
+				.format(date));
+		} else if (isCurrentYear(date)) {
+			return upperFirstChar(ThreadSafeDateFormat
 				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY, defaultLocale, timezoneCode)
-				.format(date);
+				.format(date));
 		} else {
 			return upperFirstChar(ThreadSafeDateFormat
 				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_AND_YEAR, defaultLocale, timezoneCode)
@@ -177,12 +190,10 @@ public class DateUtils {
 		return date.toString(dtf);
 	}
 
-	public String getDailyMonthlyYearly(DateTime dateTime) {
-		return ThreadSafeDateFormat.threadSafeDateFormat(
-			ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY,
-			defaultLocale,
-			timezoneCode)
-			.format(dateTime);
+	public String getDateWithYear(DateTime dateTime) {
+		return upperFirstChar(ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DATE_WITH_YEAR, defaultLocale, timezoneCode)
+				.format(dateTime));
 	}
 
 	public String formatYearly(DateTime date, String timezoneCode) {

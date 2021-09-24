@@ -136,11 +136,11 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     val periodStartText: LiveData<String> =
         Transformations.map(periodStartValueFormatted) {
-            dateUtils.formatDateHuman(it)
+            dateUtils.getDateWithYear(it)
         }
     val periodEndText: LiveData<String> =
         Transformations.map(periodEndValueFormatted) {
-            dateUtils.formatDateHuman(it)
+            dateUtils.getDateWithYear(it)
         }
 
     private val periodicity = MediatorLiveData<Budget.Periodicity>().apply {

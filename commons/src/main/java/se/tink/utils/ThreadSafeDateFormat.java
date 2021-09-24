@@ -3,16 +3,18 @@ package se.tink.utils;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TimeZone;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.ReadablePartial;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Immutable thread safe date format.
@@ -30,11 +32,13 @@ public class ThreadSafeDateFormat {
 	public static final String FORMATTER_DAILY_MONTHLY = "FORMATTER_DAILY_MONTHLY";
 	public static final String FORMATTER_DAILY_MONTHLY_YEARLY = "FORMATTER_DAILY_MONTHLY_YEARLY";
 	public static final String FORMATTER_DAY_OF_WEEK_COMPACT = "FORMATTER_DAY_OF_WEEK_COMPACT";
+	public static final String FORMATTER_DAY_OF_WEEK_FULL = "FORMATTER_DAY_OF_WEEK_FULL";
 	public static final String FORMATTER_MONTH_AND_DAY_OF_WEEK = "FORMATTER_MONTH_AND_DAY_OF_WEEK";
 	public static final String FORMATTER_MONTH_AND_DAY = "FORMATTER_MONTH_AND_DAY";
 	public static final String FORMATTER_MONTH_AND_DAY_AND_YEAR = "FORMATTER_MONTH_AND_DAY_AND_YEAR";
 	public static final String FORMATTER_MONTH_AND_YEAR = "FORMATTER_MONTH_AND_YEAR";
 	public static final String FORMATTER_MONTH_AND_YEAR_COMPACT = "FORMATTER_MONTH_AND_YEAR_COMPACT";
+	public static final String FORMATTER_DATE_WITH_YEAR = "FORMATTER_DATE_WITH_YEAR";
 
 	private DateTimeFormatter dateFormat;
 	private ThreadSafeDateFormatBuilder builder;

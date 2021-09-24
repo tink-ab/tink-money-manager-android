@@ -17,7 +17,9 @@ import se.tink.utils.ThreadSafeDateFormat
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY
+import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DATE_WITH_YEAR
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT
+import se.tink.utils.ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_FULL
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_AND_YEAR
@@ -66,11 +68,13 @@ internal class I18nConfiguration @Inject constructor(
             FORMATTER_DAILY_MONTHLY to getString(R.string.tink_date_formatter_daily_monthly),
             FORMATTER_DAILY_MONTHLY_YEARLY to getString(R.string.tink_date_formatter_daily_monthly_yearly),
             FORMATTER_DAY_OF_WEEK_COMPACT to getString(R.string.tink_date_formatter_day_of_week_compact),
+            FORMATTER_DAY_OF_WEEK_FULL to getString(R.string.tink_date_formatter_day_of_week_full),
             FORMATTER_MONTH_AND_DAY_OF_WEEK to getString(R.string.tink_date_formatter_month_and_day_of_week),
             FORMATTER_MONTH_AND_DAY to getString(R.string.tink_date_formatter_month_and_day),
             FORMATTER_MONTH_AND_DAY_AND_YEAR to getString(R.string.tink_date_formatter_month_and_day_and_year),
             FORMATTER_MONTH_AND_YEAR to getString(R.string.tink_date_formatter_month_and_year),
-            FORMATTER_MONTH_AND_YEAR_COMPACT to getString(R.string.tink_date_formatter_month_and_year_compact)
+            FORMATTER_MONTH_AND_YEAR_COMPACT to getString(R.string.tink_date_formatter_month_and_year_compact),
+            FORMATTER_DATE_WITH_YEAR to getString(R.string.tink_date_formatter_date_with_year)
         )
     }
 
