@@ -50,9 +50,9 @@ public class DateUtils {
 	}
 
 	public boolean isToday(String date) {
-		DateTime d1 = DateTime.parse(date);
-		DateTime d2 = DateTime.now();
-		return (d1.year().get() == d2.year().get() && d1.getDayOfYear() == d2.getDayOfYear());
+		DateTime evaluatedDate = DateTime.parse(date);
+		DateTime currentDate = DateTime.now();
+		return (evaluatedDate.year().get() == currentDate.year().get() && evaluatedDate.getDayOfYear() == currentDate.getDayOfYear());
 	}
 
 	public String formatDateHuman(String date) {
