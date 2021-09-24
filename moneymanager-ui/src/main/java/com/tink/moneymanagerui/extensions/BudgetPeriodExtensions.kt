@@ -23,7 +23,7 @@ fun Budget.Period.toPeriodChartLabel(
 
         Budget.Periodicity.Recurring.PeriodUnit.MONTH,
         Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN -> {
-            start.toDateTime().getHalfwayUntil(end.toDateTime()).getAbbreviatedMonthName()
+            getHalfwayPoint().getAbbreviatedMonthName()
         }
     }
 }

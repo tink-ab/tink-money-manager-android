@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.extensions
 
+import com.tink.model.budget.Budget
 import com.tink.model.time.Period
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -36,3 +37,6 @@ fun DateTime.getAbbreviatedMonthName(): String {
         .take(3)
         .capitalize(Locale.getDefault())
 }
+
+fun Budget.Period.getHalfwayPoint(): DateTime =
+    start.toDateTime().getHalfwayUntil(end.toDateTime())

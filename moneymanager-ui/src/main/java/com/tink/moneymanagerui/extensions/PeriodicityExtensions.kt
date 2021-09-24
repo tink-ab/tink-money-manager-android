@@ -20,13 +20,13 @@ fun Budget.Periodicity.Recurring.formattedPeriod(
     when (unit) {
         Budget.Periodicity.Recurring.PeriodUnit.MONTH ->
             dateUtils.getMonthNameOfDate(
-                budgetPeriod.start.toDateTime().getHalfwayUntil(budgetPeriod.end.toDateTime()),
+                budgetPeriod.getHalfwayPoint(),
                 true,
                 timezoneCode)
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
             dateUtils.formatYearly(
-                budgetPeriod.start.toDateTime().getHalfwayUntil(budgetPeriod.end.toDateTime()),
+                budgetPeriod.getHalfwayPoint(),
                 timezoneCode
             )
 
@@ -38,18 +38,4 @@ fun Budget.Periodicity.Recurring.formattedPeriod(
                 timezoneCode,
                 true
             )
-    }
-
-fun Budget.Periodicity.Recurring.periodUnitString(context: Context): String =
-    when (unit) {
-        Budget.Periodicity.Recurring.PeriodUnit.WEEK ->
-            context.getString(R.string.tink_budget_period_week)
-
-        Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
-            context.getString(R.string.tink_budget_period_year)
-
-        Budget.Periodicity.Recurring.PeriodUnit.MONTH,
-        Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN ->
-            context.getString(R.string.tink_budget_period_month)
-
     }
