@@ -56,6 +56,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |
+| `tink_budget_create_field_name_hint` | Name |
 | `tink_budget_create_field_amount_hint` | Amount |
 | `tink_budget_create_field_period_hint` | Budget Period |
 | `tink_budget_create_field_period_start_hint` | Period Start Date |
@@ -65,9 +66,11 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_field_period_yearly` | Yearly |
 | `tink_budget_create_field_period_custom` | Custom |
 | `tink_budget_create_period_end_invalid_message` | End date must be after start date. |
+| `tink_budget_create_with_keyword` | Create with keyword |
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_edit_menu_delete_budget_item` | Delete Budget |
 | `tink_budget_edit_toolbar_title` | Edit budget |
+| `tink_budget_edit_field_category_hint` | Category |
 | `tink_budget_edit_button` | Save changes |
 | `tink_budget_edit_field_amount_average_for_period` | Average %1$s/%2$s |
 | `tink_budget_delete_error_message` | We are not able to remove your budget right now. |
@@ -93,6 +96,12 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_period_year` | year |
 | `tink_budget_period_chart_week_label` | w%d |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
+| `tink_budget_details_chart_status_message_current_week` | You have %s left on your budget this week |
+| `tink_budget_details_chart_status_message_current_month` | You have %s left on your budget this month |
+| `tink_budget_details_chart_status_message_current_year` | You have %s left on your budget this year |
+| `tink_budget_details_chart_over_budget_status_message_current_week` | You have gone over your budget this week |
+| `tink_budget_details_chart_over_budget_status_message_current_month` | You have gone over your budget this month |
+| `tink_budget_details_chart_over_budget_status_message_current_year` | You have gone over your budget this year |
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_budget_transactions_header_amount_left_of` | %1$s left of %2$s |
 | `tink_budget_transactions_header_amount_over` | %1$s over budget of %2$s |
@@ -103,6 +112,10 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budget_over` | %1$s over budget of %2$s |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
 | `tink_budget_transactions_toolbar_title` | Budget |
+| `tink_nav_app_bar_navigate_up_description` | Navigate up |
+| `tink_clear_text_description` | Clear text |
+| `tink_previous_month_description` | Previous month |
+| `tink_next_month_description` | Next month |
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
