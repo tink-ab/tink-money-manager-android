@@ -57,7 +57,7 @@ class TransactionItemFactory @Inject constructor(
                     label = description,
                     amount = amountFormatter.format(amount = amount, explicitlyPositive = true),
                     description = category.name,
-                    date = dateUtils.getDailyMonthlyYearly(date.toDateTime()),
+                    date = dateUtils.getDateWithYear(date.toDateTime()),
                     merchantLogoAllowed = !category.code.isUncategorized() && !category.code.isExcluded(),
                     selected = isSelected
                 )
