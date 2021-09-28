@@ -98,17 +98,17 @@ public class DateUtils {
 		} else if (isYesterday(date)) {
 			return formatHumanStrings.get(KEY_YESTERDAY);
 		} else if (isInPastDays(date, NUMBER_OF_DAYS_TO_SHOW_ONLY_WEEKDAY)) {
-			return upperFirstChar(ThreadSafeDateFormat
-				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_FULL, defaultLocale, timezoneCode)
-				.format(date));
+			return upperFirstChar(date.toString(
+					ThreadSafeDateFormat.getDateFormatsMap().get(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_FULL),
+					defaultLocale));
 		} else if (isCurrentYear(date)) {
-			return upperFirstChar(ThreadSafeDateFormat
-				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY, defaultLocale, timezoneCode)
-				.format(date));
+			return upperFirstChar(date.toString(
+					ThreadSafeDateFormat.getDateFormatsMap().get(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY),
+					defaultLocale));
 		} else {
-			return upperFirstChar(ThreadSafeDateFormat
-				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_AND_YEAR, defaultLocale, timezoneCode)
-				.format(date));
+			return upperFirstChar(date.toString(
+					ThreadSafeDateFormat.getDateFormatsMap().get(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_AND_YEAR),
+					defaultLocale));
 		}
 	}
 
