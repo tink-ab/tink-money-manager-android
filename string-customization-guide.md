@@ -117,7 +117,6 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budget_over` | %1$s over budget of %2$s |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
 | `tink_overview_toolbar_title` | Overview |
-| `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_clear_text_description` | Clear text |
 | `tink_previous_month_description` | Previous month |
