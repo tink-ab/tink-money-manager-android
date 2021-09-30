@@ -32,8 +32,6 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
 | `tink_latest_transactions_toolbar_title` | Latest transactions |
-| `tink_selector_12_months` | Last 12 months |
-| `tink_selector_6_months` | Last 6 months |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
 | `tink_transaction_similar_button_accept_text` | Yes, change selected |
@@ -83,6 +81,11 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_selector_monthly` | Monthly |
 | `tink_budget_details_selector_yearly` | Yearly |
 | `tink_budget_details_selector_over_time` | Over time |
+| `tink_selector_12_months` | Last 12 months |
+| `tink_selector_6_months` | Last 6 months |
+| `tink_selector_all_time` | All time |
+| `tink_selector_monthly` | Monthly |
+| `tink_selector_over_time` | Over time |
 | `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and manage your budget |
 | `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and manage your budget |
 | `tink_budget_details_amount_left_monthly_message` | You can spend %1$s per month and manage your budget |
@@ -119,6 +122,11 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_clear_text_description` | Clear text |
 | `tink_previous_month_description` | Previous month |
 | `tink_next_month_description` | Next month |
+| `tink_date_format_human_today` | Today |
+| `tink_date_format_human_tomorrow` | Tomorrow |
+| `tink_date_format_human_yesterday` | Yesterday |
+| `tink_period_selection_title` | Choose time period |
+| `tink_search_label` | Search |
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
