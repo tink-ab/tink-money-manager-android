@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.extensions.visibleIf
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
@@ -68,8 +69,10 @@ internal class TransactionsListFragment : BaseFragment() {
 
         viewModel.transactionItems.observe(
             viewLifecycleOwner,
-            Observer {
-                adapter.setTransactionItems(it.transactions)
+            Observer { transactionItems ->
+                emptyMessage.visibleIf { transactionItems.transactions.isEmpty() }
+                recyclerView.visibleIf { transactionItems.transactions.isNotEmpty() }
+                adapter.setTransactionItems(transactionItems.transactions)
             }
         )
 
@@ -81,8 +84,8 @@ internal class TransactionsListFragment : BaseFragment() {
 
         viewModel.loading.observe(
             viewLifecycleOwner,
-            Observer { loading ->
-                loader.visibility = if (loading) View.VISIBLE else View.GONE
+            Observer { isLoading ->
+                loader.visibleIf { isLoading }
             })
     }
 
