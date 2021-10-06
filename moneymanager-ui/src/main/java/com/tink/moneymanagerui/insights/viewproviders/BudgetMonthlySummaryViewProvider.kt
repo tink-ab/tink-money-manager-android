@@ -7,6 +7,7 @@ import androidx.annotation.AttrRes
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.BudgetState
 import com.tink.moneymanagerui.insights.enrichment.BudgetSummaryDetailItem
@@ -120,10 +121,10 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
             background: ImageView,
             group: View? = null
         ) {
-            if (category == null) {
-                group?.visibility = View.GONE
-            } else {
-                group?.visibility = View.VISIBLE
+            group?.visibleIf { category != null }
+            icon.visibleIf { category != null }
+            background.visibleIf { category != null }
+            if (category != null) {
                 icon.setIconRes(category.icon)
                 icon.tint(category.iconColor.color)
                 background.backgroundTint(category.iconColor.lightColor)
