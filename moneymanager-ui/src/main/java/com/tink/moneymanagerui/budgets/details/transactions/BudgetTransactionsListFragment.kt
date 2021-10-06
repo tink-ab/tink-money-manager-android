@@ -87,7 +87,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
             })
 
             emptyState.observe(viewLifecycle, { isEmpty ->
-                transactionsList.visibleIf { !isEmpty }
+                transactionsList.visibleIf(View.INVISIBLE) { !isEmpty }
             })
 
             loading.observe(viewLifecycle, { isLoading ->
