@@ -61,7 +61,7 @@ internal class BarChartWithAmountLabels : View {
     }
 
     private val amountLabelPaint = TextPaint().apply {
-        textSize = resources.getDimension(R.dimen.tink_nano_text_size)
+        textSize = resources.getDimension(R.dimen.tink_pico_text_size)
         color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
