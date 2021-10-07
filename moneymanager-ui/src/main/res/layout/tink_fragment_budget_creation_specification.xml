@@ -76,7 +76,8 @@
       android:layout_height="wrap_content"
       android:textAppearance="@style/tink_hecto"
       android:maxLength="15"
-      tools:text="3 000"/>
+      tools:text="3 000"
+      android:imeOptions="actionDone"/>
 
   </com.google.android.material.textfield.TextInputLayout>
 

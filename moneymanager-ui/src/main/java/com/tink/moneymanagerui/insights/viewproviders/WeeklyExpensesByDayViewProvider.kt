@@ -15,6 +15,7 @@ import com.tink.model.relations.ExpensesByDay
 import se.tink.commons.extensions.floatValue
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
+import java.text.DecimalFormatSymbols
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
@@ -76,6 +77,8 @@ private fun List<ExpensesByDay>.toChartData(
             useSymbol = false,
             useSign = false
         )
+            .trimEnd('0')
+            .trimEnd(DecimalFormatSymbols.getInstance().decimalSeparator)
     },
     map { it.averageAmount.value.floatValue() }
 )
