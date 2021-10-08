@@ -16,6 +16,7 @@ import com.tink.moneymanagerui.configuration.OnBackPressedListener
 import com.tink.moneymanagerui.di.DaggerFragmentComponent
 import com.tink.moneymanagerui.insights.actionhandling.CustomInsightActionHandler
 import com.tink.moneymanagerui.insights.actionhandling.InsightActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.JavaInsightActionHandler
 import com.tink.moneymanagerui.insights.actionhandling.PerformedActionNotifier
 import com.tink.moneymanagerui.overview.OverviewFragment
 import com.tink.moneymanagerui.repository.StatisticsRepository
@@ -187,6 +188,9 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          * @param tracker An optional [Tracker] implementation
          * @param overviewFeatures The [OverviewFeatures] object with the list of overview features to be included
          * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
+         * @param backPressedListener An optional [OnBackPressedListener] callback to listen to back presses in the SDK
+         * @param isOverviewToolbarVisible Set if you want to show a toolbar for the overview fragment, defaults to false
+         * @param javaInsightActionHandler an optional [JavaInsightActionHandler] you can use to handle insights when not using Kotlin, not used if insightActionHandler is set
          */
         @JvmOverloads
         @JvmStatic
@@ -197,10 +201,15 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
             insightActionHandler: InsightActionHandler? = null,
             backPressedListener: OnBackPressedListener? = null,
-            isOverviewToolbarVisible: Boolean = false
+            isOverviewToolbarVisible: Boolean = false,
+            javaInsightActionHandler: JavaInsightActionHandler? = null
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
-            insightActionHandler?.let { CustomInsightActionHandler.setInsightActionHandler(it) }
+            if (insightActionHandler != null) {
+                CustomInsightActionHandler.setInsightActionHandler(insightActionHandler)
+            } else if (javaInsightActionHandler != null) {
+                CustomInsightActionHandler.setInsightActionHandler(javaInsightActionHandler.toInsightActionHandler())
+            }
             BackPressedConfiguration.backPressedListener = backPressedListener
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
