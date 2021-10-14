@@ -11,6 +11,7 @@ import com.tink.model.statistics.Statistics
 import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
 import com.tink.model.user.UserProfile
+import com.tink.moneymanagerui.extensions.toPeriodIdentifier
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
 import kotlinx.coroutines.*
@@ -22,6 +23,7 @@ import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
+import se.tink.commons.extensions.toDateTime
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -68,7 +70,7 @@ internal class StatisticsRepository @Inject constructor(
                     postValue(
                         userRepository.userProfile.value
                             ?.let {
-                                emptyList<Statistics>().handleNoDataForCurrentPeriod(it.currency)
+                                emptyList<Statistics>().handleMonthsMissingData(it.currency)
                             }
                             ?: emptyList()
                     )
@@ -86,57 +88,47 @@ internal class StatisticsRepository @Inject constructor(
                     userProfile.periodMode,
                     userProfile.currency
                 )
-            )
-                // If statistics is missing data for the current month,
-                // add statistics with amount set to zero for that month as fallback for the UI.
-                // This can happen at the start of a new monthly period.
-                .handleNoDataForCurrentPeriod(userProfile.currency)
+            ).handleMonthsMissingData(userProfile.currency)
         } catch (error: Throwable) {
             Timber.e(error)
             null
         }
     }
 
-    private fun List<Statistics>.handleNoDataForCurrentPeriod(currencyCode: String): List<Statistics> {
-        val missingExpensesForCurrentPeriod =
-            none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.EXPENSES_BY_CATEGORY }
-        val missingIncomeForCurrentPeriod =
-            none { it.period.isInPeriod(DateTime.now()) && it.type == Statistics.Type.INCOME_BY_CATEGORY }
-        val data = toMutableList()
-        if (missingExpensesForCurrentPeriod && missingIncomeForCurrentPeriod) {
-            data.add(
-                getZeroDataStatisticsForType(
-                    Statistics.Type.EXPENSES_BY_CATEGORY,
-                    currencyCode
-                )
-            )
-            data.add(
-                getZeroDataStatisticsForType(
-                    Statistics.Type.INCOME_BY_CATEGORY,
-                    currencyCode
-                )
-            )
+    private fun List<Statistics>.handleMonthsMissingData(currencyCode: String): List<Statistics> {
+
+        val backfillStartTime = minByOrNull { it.period.start }
+            ?.period
+            ?.start
+            ?.toDateTime() ?: DateTime.now()
+
+        val existingPeriodIdentifiers = distinctBy { it.period.identifier }.map { it.period.identifier }
+        val monthsMissingTransactions = generateSequence(backfillStartTime) { date ->
+            date.plusMonths(1)
+        }.takeWhile { iteratedDate ->
+            iteratedDate.isBeforeNow
+        }.filter { iteratedDate ->
+            !existingPeriodIdentifiers.contains(iteratedDate.toPeriodIdentifier())
+        }.map { iteratedDate ->
+            getZeroDataStatisticsForType(currencyCode, iteratedDate)
         }
-        return data
+        return this.plus(monthsMissingTransactions)
     }
 
-    private fun getZeroDataStatisticsForType(
-        type: Statistics.Type,
-        currencyCode: String
-    ): Statistics {
-        val startOfCurrentMonth = DateTime.now().dayOfMonth().withMinimumValue()
-        val endOfCurrentMonth = DateTime.now().dayOfMonth().withMaximumValue()
+    private fun getZeroDataStatisticsForType(currencyCode: String, dateTime: DateTime): Statistics {
+        val startOfCurrentMonth = dateTime.dayOfMonth().withMinimumValue()
+        val endOfCurrentMonth = dateTime.dayOfMonth().withMaximumValue()
         val period =
             MonthPeriod(
-                monthOfYear = DateTime.now().monthOfYear,
-                year = DateTime.now().year,
-                identifier = "",
+                monthOfYear = dateTime.monthOfYear,
+                year = dateTime.year,
+                identifier = dateTime.toPeriodIdentifier(),
                 start = Instant.ofEpochMilli(startOfCurrentMonth.millis),
                 end = Instant.ofEpochMilli(endOfCurrentMonth.millis)
             )
         return Statistics(
             identifier = period.toString(),
-            type = type,
+            type = Statistics.Type.EXPENSES_BY_CATEGORY,
             period = period,
             value = Amount(ExactNumber(0), currencyCode)
         )
