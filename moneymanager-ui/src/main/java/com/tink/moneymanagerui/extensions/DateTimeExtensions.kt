@@ -6,6 +6,7 @@ import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.threeten.bp.Instant
 import se.tink.commons.extensions.toDateTime
+import java.text.DecimalFormat
 import java.util.Locale
 
 /**
@@ -36,6 +37,27 @@ fun DateTime.getAbbreviatedMonthName(): String {
     return toString("MMM")
         .take(3)
         .capitalize(Locale.getDefault())
+}
+
+internal fun DateTime.getStartOfMonth(): Instant =
+    dayOfMonth().withMinimumValue()
+        .hourOfDay().withMinimumValue()
+        .minuteOfHour().withMinimumValue()
+        .secondOfMinute().withMinimumValue()
+        .millisOfSecond().withMinimumValue()
+        .getInstant()
+
+internal fun DateTime.getEndOfMonth(): Instant =
+    dayOfMonth().withMaximumValue()
+        .hourOfDay().withMaximumValue()
+        .minuteOfHour().withMaximumValue()
+        .secondOfMinute().withMaximumValue()
+        .millisOfSecond().withMaximumValue()
+        .getInstant()
+
+internal fun DateTime.toPeriodIdentifier(): String {
+    val monthDecimalFormat = DecimalFormat("#00")
+    return "${year}-${monthDecimalFormat.format(monthOfYear)}"
 }
 
 fun Budget.Period.getHalfwayPoint(): DateTime =

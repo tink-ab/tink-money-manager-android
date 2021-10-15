@@ -7,11 +7,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.category.Category
 import com.tink.model.statistics.Statistics
+import com.tink.model.time.MonthPeriod
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.models.PeriodBalance
 import com.tink.moneymanagerui.extensions.getHalfwayPoint
 import com.tink.moneymanagerui.extensions.getAbbreviatedMonthName
+import com.tink.moneymanagerui.extensions.getEndOfMonth
+import com.tink.moneymanagerui.extensions.getStartOfMonth
+import com.tink.moneymanagerui.extensions.toPeriodIdentifier
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import org.joda.time.DateTime
+import org.threeten.bp.Instant
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.android.repository.user.UserRepository
@@ -68,6 +74,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                             values.sumByDouble { abs(it.value.value.doubleValue()) }
                         )
                     }
+                    .addEmptyDataForMissingMonths()
                     .sortedByDescending { it.period?.end }
                 postValue(balances)
             }
@@ -75,6 +82,38 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
         addSource(category) { update() }
         addSource(statistics) { update() }
+    }
+
+    private fun List<PeriodBalance>.addEmptyDataForMissingMonths(): List<PeriodBalance> {
+        val minimumStartTime = DateTime.now().minusMonths(11)
+        val backfillStartTime = minByOrNull { it.period?.start ?: Instant.MAX }
+            ?.period
+            ?.start
+            ?.toDateTime()
+            ?.takeIf { startTime ->
+                startTime < minimumStartTime
+            } ?: minimumStartTime
+        val existingPeriodIdentifiers = map { it.period?.identifier.orEmpty() }
+
+        val missingMonthsPeriodBalances = generateSequence(backfillStartTime) { date ->
+            date.plusMonths(1)
+        }.takeWhile { iteratedDate ->
+            iteratedDate.isBeforeNow
+        }.filter { iteratedDate ->
+            !existingPeriodIdentifiers.contains(iteratedDate.toPeriodIdentifier())
+        }.map { iteratedDate ->
+            PeriodBalance(
+                MonthPeriod(
+                    iteratedDate.monthOfYear,
+                    iteratedDate.year,
+                    iteratedDate.toPeriodIdentifier(),
+                    iteratedDate.getStartOfMonth(),
+                    iteratedDate.getEndOfMonth()
+                ), 0.0
+            )
+        }
+
+        return this.plus(missingMonthsPeriodBalances)
     }
 
     private val periodBalances = MediatorLiveData<List<PeriodBalance>>().apply {
