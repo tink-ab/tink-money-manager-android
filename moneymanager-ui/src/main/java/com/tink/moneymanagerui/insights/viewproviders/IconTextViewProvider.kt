@@ -38,11 +38,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
 
     override val viewType: InsightViewType = getViewType()
     override val supportedInsightTypes: List<InsightType> = listOf(
-        InsightType.LEFT_TO_SPEND_LOW,
         InsightType.ACCOUNT_BALANCE_LOW,
-        InsightType.GENERIC_FRAUD,
-        InsightType.EINVOICE,
-        InsightType.RESIDENCE_DO_YOU_OWN_IT,
         InsightType.LARGE_EXPENSE,
         InsightType.DOUBLE_CHARGE,
         InsightType.BUDGET_SUGGEST_CREATE_FIRST

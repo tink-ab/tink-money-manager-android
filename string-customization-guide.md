@@ -51,6 +51,14 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_budget_create_suggestion_save_per_year_text` | Save up to %s per year |
+| `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
+| `tink_insights_total_monthly_transactions_text` | %d transactions last month |
+| `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
+| `tink_insights_total_weekly_transactions_text` | %d transactions last week |
+| `tink_insights_total_expenses_text` | %s in total expenses |
+| `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
+| `tink_insights_largest_transaction_text` | %s was your largest expense |
+| `tink_insights_largest_transaction_recipient_text` | To %s (%s) |
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |

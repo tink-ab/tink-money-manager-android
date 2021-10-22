@@ -70,6 +70,8 @@
     <item name="tink_icon_category_search">@drawable/tink_search</item>
     <item name="tink_icon_transaction_tag">@drawable/tink_transaction_tag</item>
     <item name="tink_icon_add_button">@drawable/tink_add_circle_outline_white</item>
+    <item name="tink_icon_home">@drawable/tink_category_home</item>
+    <item name="tink_icon_transfers">@drawable/tink_category_transfer</item>
 
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
