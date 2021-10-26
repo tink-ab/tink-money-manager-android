@@ -38,13 +38,13 @@ class TransactionsSummaryViewProvider @Inject constructor(
         return when (insight.data) {
             is InsightData.WeeklyExpenseTransactionsData -> {
                 TransactionsSummaryDataHolder(
-                    true,
+                    TransactionSummaryType.WEEKLY_TRANSACTION_SUMMARY,
                     (insight.data as InsightData.WeeklyExpenseTransactionsData).transactionSummary
                 )
             }
             is InsightData.MonthlyExpenseTransactionsData -> {
                 TransactionsSummaryDataHolder(
-                    false,
+                    TransactionSummaryType.MONTHLY_TRANSACTION_SUMMARY,
                     (insight.data as InsightData.MonthlyExpenseTransactionsData).transactionSummary
                 )
             }
@@ -70,11 +70,9 @@ class TransactionsSummaryViewProvider @Inject constructor(
 
             with(itemView) {
                 tink_insights_transactions_summary_title.text = context.getString(
-                    if(data.isWeeklyTransactionsSummary) {
-                        R.string.tink_insights_weekly_summary_expense_transactions_title
-                    }
-                    else {
-                        R.string.tink_insights_monthly_summary_expense_transactions_title
+                    when (data.transactionSummaryType) {
+                        TransactionSummaryType.WEEKLY_TRANSACTION_SUMMARY -> R.string.tink_insights_weekly_summary_expense_transactions_title
+                        TransactionSummaryType.MONTHLY_TRANSACTION_SUMMARY -> R.string.tink_insights_monthly_summary_expense_transactions_title
                     }
                 )
 
@@ -82,11 +80,9 @@ class TransactionsSummaryViewProvider @Inject constructor(
                 total_expenses_text.text = context.getString(R.string.tink_insights_total_expenses_text, totalExpenses)
 
                 transactions_last_month_text.text = context.getString(
-                    if(data.isWeeklyTransactionsSummary) {
-                        R.string.tink_insights_total_weekly_transactions_text
-                    }
-                    else {
-                        R.string.tink_insights_total_monthly_transactions_text
+                    when (data.transactionSummaryType) {
+                        TransactionSummaryType.WEEKLY_TRANSACTION_SUMMARY -> R.string.tink_insights_total_weekly_transactions_text
+                        TransactionSummaryType.MONTHLY_TRANSACTION_SUMMARY -> R.string.tink_insights_total_monthly_transactions_text
                     }, data.transactionSummary.commonTransactionsOverview.totalNumberOfTransactions
                 )
                 most_common_transaction_last_month_text.text = context.getString(R.string.tink_insights_most_common_transaction_text,
@@ -105,8 +101,12 @@ class TransactionsSummaryViewProvider @Inject constructor(
     }
 }
 
-
 class TransactionsSummaryDataHolder(
-    val isWeeklyTransactionsSummary: Boolean,
+    val transactionSummaryType: TransactionSummaryType,
     val transactionSummary: TransactionSummary
 ) : InsightDataHolder
+
+enum class TransactionSummaryType {
+    WEEKLY_TRANSACTION_SUMMARY,
+    MONTHLY_TRANSACTION_SUMMARY
+}
