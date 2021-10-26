@@ -35,8 +35,14 @@ class TransactionsPageable(
 
     private var hasMore: Boolean = true
 
+    private val createdTime = System.currentTimeMillis()
+
     private val updateListenerJob = transactionUpdateEventBus.subscribe { updatedTransaction ->
-        updateWith(listOf(updatedTransaction))
+        // Ignore stale data at creation time in transaction update event bus, we are only interested in updates
+        // TODO: Should be fixed to a better more stable solution long term
+        if (System.currentTimeMillis() - createdTime > 100) {
+            updateWith(listOf(updatedTransaction))
+        }
     }
 
     override fun hasMore(): Boolean {
