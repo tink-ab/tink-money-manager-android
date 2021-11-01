@@ -72,7 +72,7 @@ class TransactionsPageable(
         currentTransactions.removeAll { transactionToRemove ->
             transactions.map { it.id }.contains(transactionToRemove.id)
         }
-        currentTransactions += transactions
+        currentTransactions += transactions.filter { accountId?.equals(it.accountId) ?: true }
         liveData.postValue(currentTransactions)
     }
 
