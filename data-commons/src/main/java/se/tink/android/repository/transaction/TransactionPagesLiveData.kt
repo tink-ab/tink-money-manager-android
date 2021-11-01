@@ -72,6 +72,7 @@ class TransactionsPageable(
         currentTransactions.removeAll { transactionToRemove ->
             transactions.map { it.id }.contains(transactionToRemove.id)
         }
+        // TODO: Should also filter by categoryId and period
         currentTransactions += transactions.filter { accountId?.equals(it.accountId) ?: true }
         liveData.postValue(currentTransactions)
     }
