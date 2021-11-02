@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
@@ -52,7 +53,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         adapter = TransactionItemListAdapter(dateUtils).also {
             it.onTransactionItemClickedListener = { transactionId ->
                 CategorizationFlowFragment
-                    .newInstance(transactionId)
+                    .newInstance(transactionId, MoneyManagerFeatureType.BUDGETS)
                     .also { fragment ->
                         fragmentCoordinator.replace(
                             fragment,
@@ -136,5 +137,9 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         periodPicker.iconRight.setOnClickListener {
             transactionsListViewModel.showNextPeriod()
         }
+    }
+
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return MoneyManagerFeatureType.BUDGETS
     }
 }

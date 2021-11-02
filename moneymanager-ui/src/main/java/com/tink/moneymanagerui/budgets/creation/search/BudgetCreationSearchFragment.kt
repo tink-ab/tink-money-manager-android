@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
@@ -72,6 +73,10 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         viewModel.visibleSuggestions.observe(viewLifecycle, Observer { suggestions ->
             adapter.setData(suggestions)
         })
+    }
+
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return MoneyManagerFeatureType.BUDGETS
     }
 
     override fun onDestroyView() {

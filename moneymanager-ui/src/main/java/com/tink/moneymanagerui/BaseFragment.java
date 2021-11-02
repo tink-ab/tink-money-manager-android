@@ -11,8 +11,21 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+
+import com.tink.moneymanagerui.tracking.AnalyticsSingleton;
+import com.tink.moneymanagerui.tracking.ScreenEvent;
+import com.tink.moneymanagerui.util.SoftKeyboardUtils;
+import com.tink.moneymanagerui.view.SnackbarManager;
+import com.tink.moneymanagerui.view.TinkToolbar;
+
+import java.util.Map;
+
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
@@ -20,19 +33,14 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
-import com.tink.moneymanagerui.tracking.AnalyticsSingleton;
-import com.tink.moneymanagerui.util.SoftKeyboardUtils;
-import com.tink.moneymanagerui.view.SnackbarManager;
-import com.tink.moneymanagerui.view.TinkToolbar;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
-import java.util.Map;
-import javax.inject.Inject;
-import com.tink.moneymanagerui.tracking.ScreenEvent;
 
 public abstract class BaseFragment extends Fragment implements HasAndroidInjector {
+
+	public static final String ARG_MONEY_MANAGER_FEATURE_TYPE = "arg_money_manager_feature_type";
 
 	// Make every new fragment above previous ones
 	private static int sTranslationZ = 0;
@@ -66,6 +74,11 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	public abstract int getLayoutId();
 
 	public abstract boolean needsLoginToBeAuthorized();
+
+	@Nullable
+	public MoneyManagerFeatureType getMoneyManagerFeatureType() {
+		return null;
+	}
 
 	@Nullable
 	protected ScreenEvent getScreenEvent() {
@@ -124,8 +137,13 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		viewLifecycle = new LifecycleRegistry(this);
 
 		if (view == null) {
-			getActivity().getTheme().applyStyle(R.style.TinkFinanceOverviewStyle, false);
-			View inflatedView = inflater.inflate(getLayoutId(), container, false);
+			View inflatedView;
+			if (getFeatureSpecificTheme() != null) {
+				inflatedView = createFromFeatureSpecificTheme(inflater, container, getFeatureSpecificTheme());
+			} else {
+				getActivity().getTheme().applyStyle(R.style.TinkFinanceOverviewStyle, false);
+				inflatedView = inflater.inflate(getLayoutId(), container, false);
+			}
 
 			view = shouldAddToolbar(inflatedView) ? addToolBar(inflatedView) : inflatedView;
 			toolbar = view.findViewById(R.id.tink_toolbar);
@@ -143,6 +161,18 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 			view.post(this::onViewReady);
 		}
 		return view;
+	}
+
+	@Nullable
+	@StyleRes
+	private Integer getFeatureSpecificTheme() {
+		return getMoneyManagerFeatureType() != null ? FinanceOverviewFragment.getFeatureSpecificThemes().get(getMoneyManagerFeatureType()) : null;
+	}
+
+	private View createFromFeatureSpecificTheme(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @StyleRes int styleResId) {
+		final Context contextThemeWrapper = new ContextThemeWrapper(getActivity(), styleResId);
+		LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+		return localInflater.inflate(getLayoutId(), container, false);
 	}
 
 	private boolean shouldAddToolbar(View view) {

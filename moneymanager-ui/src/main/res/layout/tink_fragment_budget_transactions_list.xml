@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     android:background="?attr/tink_backgroundColor">
 
+    <com.tink.moneymanagerui.view.TinkToolbar
+        android:id="@+id/tink_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+        app:navigationIcon="?android:homeAsUpIndicator" />
+
     <ProgressBar
         android:id="@+id/budgetProgress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -42,8 +52,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/budgetDateInterval"
+        app:layout_constraintTop_toBottomOf="@id/tink_toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:text="50 kr kvar av 100 kr" />
 
     <TextView

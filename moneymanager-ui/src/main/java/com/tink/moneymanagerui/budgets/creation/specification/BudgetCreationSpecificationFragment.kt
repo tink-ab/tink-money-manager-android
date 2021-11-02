@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import org.joda.time.DateTime
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
@@ -311,6 +312,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             }
                 .show()
         }
+    }
+
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return MoneyManagerFeatureType.BUDGETS
     }
 
     private fun editCategories() {

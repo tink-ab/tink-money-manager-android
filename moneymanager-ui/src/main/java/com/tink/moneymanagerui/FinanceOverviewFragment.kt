@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StyleRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.tink.core.Tink
@@ -180,6 +181,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
         private const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
 
+        @JvmStatic
+        var featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = mapOf()
+            private set
+
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
          *
@@ -191,18 +196,21 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          * @param backPressedListener An optional [OnBackPressedListener] callback to listen to back presses in the SDK
          * @param isOverviewToolbarVisible Set if you want to show a toolbar for the overview fragment, defaults to false
          * @param javaInsightActionHandler an optional [JavaInsightActionHandler] you can use to handle insights when not using Kotlin, not used if insightActionHandler is set
+         * @param featureSpecificThemes an optional Map where you can set specific themes for Money Manager's individual features. The keys in the map should be the [MoneyManagerFeatureType]
+         * and the values the theme for that specific feature. It's recommended to have your feature specific theme inherit from your app's base theme
          */
         @JvmOverloads
         @JvmStatic
         fun newInstance(
             accessToken: String,
-            styleResId: Int,
+            @StyleRes styleResId: Int,
             tracker: Tracker? = null,
             overviewFeatures: OverviewFeatures = OverviewFeatures.ALL,
             insightActionHandler: InsightActionHandler? = null,
             backPressedListener: OnBackPressedListener? = null,
             isOverviewToolbarVisible: Boolean = false,
-            javaInsightActionHandler: JavaInsightActionHandler? = null
+            javaInsightActionHandler: JavaInsightActionHandler? = null,
+            featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = emptyMap()
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
             if (insightActionHandler != null) {
@@ -211,6 +219,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
                 CustomInsightActionHandler.setInsightActionHandler(javaInsightActionHandler.toInsightActionHandler())
             }
             BackPressedConfiguration.backPressedListener = backPressedListener
+            this.featureSpecificThemes = featureSpecificThemes
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
                     ARG_ACCESS_TOKEN to accessToken,
@@ -221,4 +230,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             }
         }
     }
+}
+
+public enum class MoneyManagerFeatureType {
+    BUDGETS;
 }

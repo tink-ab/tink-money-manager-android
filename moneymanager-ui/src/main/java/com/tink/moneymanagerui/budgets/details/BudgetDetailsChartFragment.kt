@@ -11,6 +11,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.tink.model.budget.Budget
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.databinding.TinkBudgetDetailsBarChartPageBinding
@@ -219,6 +220,10 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =
             container.removeView(obj as View)
+    }
+
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return MoneyManagerFeatureType.BUDGETS
     }
 
     override fun onDestroyView() {

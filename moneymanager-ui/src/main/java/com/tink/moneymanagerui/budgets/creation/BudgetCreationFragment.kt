@@ -2,6 +2,7 @@ package com.tink.moneymanagerui.budgets.creation
 
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.core.os.bundleOf
 import com.tink.model.budget.BudgetFilter
 import com.tink.model.budget.BudgetPeriodicity
 import com.tink.model.budget.BudgetSpecification
@@ -9,6 +10,7 @@ import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.FragmentCoordinator
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.filterselection.BudgetCreationFilterSelectionFragment
 import com.tink.moneymanagerui.budgets.creation.search.BudgetCreationSearchFragment
@@ -35,7 +37,7 @@ internal class BudgetCreationFragment : BaseFragment() {
             } else {
                 BudgetCreateOperation()
             }
-            fragment.arguments = Bundle().apply { putParcelable(BUDGET_OPERATION, budgetOperation) }
+            fragment.arguments = bundleOf(BUDGET_OPERATION to budgetOperation,)
             return fragment
         }
 
@@ -46,14 +48,11 @@ internal class BudgetCreationFragment : BaseFragment() {
             budgetFilter: BudgetFilter? = null,
             budgetPeriodicity: BudgetPeriodicity? = null
         ): BudgetCreationFragment {
-            val fragment = BudgetCreationFragment()
-            fragment.arguments = Bundle().apply {
-                putParcelable(
-                    BUDGET_OPERATION,
-                    BudgetCreateOperation(name, amount, budgetFilter, budgetPeriodicity)
+            return BudgetCreationFragment().apply {
+                arguments = bundleOf(
+                    BUDGET_OPERATION to BudgetCreateOperation(name, amount, budgetFilter, budgetPeriodicity),
                 )
             }
-            return fragment
         }
     }
 
@@ -86,6 +85,10 @@ internal class BudgetCreationFragment : BaseFragment() {
         } else {
             navigation.goToFilterSelectionFragment()
         }
+    }
+
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return MoneyManagerFeatureType.BUDGETS
     }
 
     private fun BudgetCreateOperation.setDataForPrefill() {
