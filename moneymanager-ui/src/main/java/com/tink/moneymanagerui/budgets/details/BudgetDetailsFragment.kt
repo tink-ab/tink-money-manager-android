@@ -61,9 +61,7 @@ internal class BudgetDetailsFragment : BaseFragment() {
         fragmentCoordinator.replace(BudgetCreationFragment.newInstance(budgetSpecification))
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }
 
 internal class BudgetDetailsNavigation(

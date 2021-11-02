@@ -75,9 +75,7 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         })
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 
     override fun onDestroyView() {
         SoftKeyboardUtils.closeSoftKeyboard(activity)

@@ -314,9 +314,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 
     private fun editCategories() {
         budgetCreationNavigation.goToFilterSelectionFragment(addToBackStack = true)

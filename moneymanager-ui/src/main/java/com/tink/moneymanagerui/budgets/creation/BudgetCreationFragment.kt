@@ -87,9 +87,7 @@ internal class BudgetCreationFragment : BaseFragment() {
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 
     private fun BudgetCreateOperation.setDataForPrefill() {
         name?.let { dataHolder.name.value = it }

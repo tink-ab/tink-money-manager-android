@@ -111,9 +111,7 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return featureType
-    }
+    override fun getMoneyManagerFeatureType() = featureType
 
     companion object {
         fun newInstance(

@@ -139,7 +139,5 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }

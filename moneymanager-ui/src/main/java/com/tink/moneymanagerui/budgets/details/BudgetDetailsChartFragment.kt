@@ -222,9 +222,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             container.removeView(obj as View)
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return MoneyManagerFeatureType.BUDGETS
-    }
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 
     override fun onDestroyView() {
         viewPager?.clearOnPageChangeListeners()

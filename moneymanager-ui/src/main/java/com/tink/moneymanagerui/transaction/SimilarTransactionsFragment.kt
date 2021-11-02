@@ -103,9 +103,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return featureType
-    }
+    override fun getMoneyManagerFeatureType() = featureType
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.tink_menu_similar_transactions)
