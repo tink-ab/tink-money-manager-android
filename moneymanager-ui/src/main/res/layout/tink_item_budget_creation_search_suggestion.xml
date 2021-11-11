@@ -8,18 +8,17 @@
   android:layout_height="wrap_content"
   android:background="?selectableItemBackground">
 
-  <ImageView
-    android:id="@+id/icon"
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    android:src="@drawable/tink_search"
-    android:tint="?attr/tink_textColorSecondary"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+  <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/icon"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="16dp"
+      android:src="?tink_icon_category_search"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
 
   <TextView
     android:id="@+id/label"
