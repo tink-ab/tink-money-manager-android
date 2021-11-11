@@ -9,6 +9,7 @@ import com.tink.model.category.Category
 import com.tink.model.misc.ExactNumber
 import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.charts.CategorySelectionFragment
 import com.tink.moneymanagerui.overview.charts.CategorySelectionListener
@@ -30,6 +31,8 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     }
 
     private lateinit var viewModel: CategorizationFlowViewModel
+
+    private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
@@ -72,7 +75,8 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
                     dropdownToolbarAppearance = false,
                     includeTransferTypes = true,
                     includeTopLevelItem = false
-                )
+                ),
+                featureType
             )
             .also {
                 it.setTargetFragment(this, 0)
@@ -101,16 +105,23 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     override fun onCategorySelectionCancelled() = viewModel.categorySelectionCancelled()
 
     private fun showSimilarTransactionFragment(transactions: List<Transaction>, categoryId: String) {
-        SimilarTransactionsFragment.newInstance(transactions, categoryId).also {
+        SimilarTransactionsFragment.newInstance(transactions, categoryId, featureType).also {
             it.onSimilarTransactionsDone = viewModel::similarTransactionsDone
             fragmentCoordinator.replace(it)
         }
     }
 
+    override fun getMoneyManagerFeatureType() = featureType
+
     companion object {
-        fun newInstance(transactionId: String) =
+        fun newInstance(
+            transactionId: String,
+            moneyManagerFeatureType: MoneyManagerFeatureType? = null) =
             CategorizationFlowFragment().apply {
-                arguments = bundleOf(ARG_TRANSACTION_ID to transactionId)
+                arguments = bundleOf(
+                    ARG_TRANSACTION_ID to transactionId,
+                    ARG_MONEY_MANAGER_FEATURE_TYPE to moneyManagerFeatureType
+                )
             }
     }
 }

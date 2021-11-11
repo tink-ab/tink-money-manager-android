@@ -1,6 +1,7 @@
 package com.tink.moneymanagerui.charts
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
@@ -9,7 +10,12 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
+import androidx.annotation.AttrRes
+import androidx.appcompat.view.ContextThemeWrapper
+import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 
 private const val START_ANGLE_OFFSET = -90
 
@@ -72,10 +78,10 @@ internal class CircularProgressChart : View {
                 setStrokeWidth(arcWidth, backgroundRingWidth)
 
                 progressArcPaint.color =
-                        getColor(R.styleable.TinkCircularProgressChart_tink_progressArcColor, 0)
+                    context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.BUDGETS)
+
                 backgroundRingPaint.color =
-                    getColor(R.styleable.TinkCircularProgressChart_tink_backgroundRingColor, 0)
-                backgroundRingPaint.alpha = getInteger(R.styleable.TinkCircularProgressChart_tink_backgroundRingAlpha, 255)
+                    context.resolveColorForFeature(R.attr.tink_expensesLightColor, MoneyManagerFeatureType.BUDGETS)
 
                 progress =
                     getFloat(R.styleable.TinkCircularProgressChart_tink_progress, 0F).toDouble()
@@ -114,13 +120,15 @@ internal class CircularProgressChart : View {
         super.draw(canvas)
     }
 
-    fun setProgressArcColor(color: Int) {
-        this.progressArcPaint.color = color
+    fun setProgressArcColor(@AttrRes colorAttr: Int, moneyManagerFeatureType: MoneyManagerFeatureType) {
+        progressArcPaint.color =
+            context.resolveColorForFeature(colorAttr, moneyManagerFeatureType)
         invalidate()
     }
 
-    fun setBackgroundRingColor(color: Int) {
-        this.backgroundRingPaint.color = color
+    fun setBackgroundRingColor(@AttrRes colorAttr: Int, moneyManagerFeatureType: MoneyManagerFeatureType) {
+        backgroundRingPaint.color =
+            context.resolveColorForFeature(colorAttr, moneyManagerFeatureType)
         invalidate()
     }
 

@@ -336,6 +336,9 @@ private class ActionItemViewHolder(
             ?: throw IllegalStateException("Attempted to use ActionItemViewHolder for another item.")
 
         icon.setImageResFromAttr(actionItem.iconRes)
+
+        icon.tint(R.attr.tink_expensesColor)
+        icon.setBackgroundColor(itemView.context.getColorFromAttr(R.attr.tink_expensesLightColor))
     }
 }
 

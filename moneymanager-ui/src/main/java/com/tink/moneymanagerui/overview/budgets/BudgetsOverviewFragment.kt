@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
@@ -73,4 +74,6 @@ internal class BudgetsOverviewFragment : BaseFragment() {
             loader.visibility = if(loading) View.VISIBLE else View.GONE
         })
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }

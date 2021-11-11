@@ -4,8 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightType
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
@@ -13,10 +15,10 @@ import com.tink.moneymanagerui.insights.enrichment.BudgetState
 import com.tink.moneymanagerui.insights.enrichment.BudgetSummaryDetailItem
 import com.tink.moneymanagerui.insights.enrichment.BudgetSummaryViewDetails
 import com.tink.moneymanagerui.insights.extensions.getIcon
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import kotlinx.android.synthetic.main.tink_item_insight_budget_monthly_summary.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.backgroundTint
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setIconRes
 import se.tink.commons.extensions.tint
@@ -132,13 +134,12 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
         }
 
         private fun setUpProgress(data: BudgetMonthlySummaryDataHolder) {
-            val resolvedColor = view.context.getColorFromAttr(data.progressChartColor.color)
-            val resolvedLightColor = view.context.getColorFromAttr(data.progressChartColor.lightColor)
+            @ColorInt val resolvedColor = view.context.resolveColorForFeature(data.progressChartColor.color, MoneyManagerFeatureType.ACTIONABLE_INSIGHTS)
 
             with(view.progress) {
                 progress = data.progress
-                setProgressArcColor(resolvedColor)
-                setBackgroundRingColor(resolvedLightColor)
+                setProgressArcColor(data.progressChartColor.color, MoneyManagerFeatureType.ACTIONABLE_INSIGHTS)
+                setBackgroundRingColor(data.progressChartColor.lightColor, MoneyManagerFeatureType.ACTIONABLE_INSIGHTS)
             }
 
             with(view.currentSpending) {

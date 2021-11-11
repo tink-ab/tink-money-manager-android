@@ -7,6 +7,7 @@ import com.tink.model.budget.BudgetSpecification
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.FragmentCoordinator
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionsListFragment
@@ -59,6 +60,8 @@ internal class BudgetDetailsFragment : BaseFragment() {
     fun editBudget(budgetSpecification: BudgetSpecification) {
         fragmentCoordinator.replace(BudgetCreationFragment.newInstance(budgetSpecification))
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }
 
 internal class BudgetDetailsNavigation(
