@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.budgets.details.transactions
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
@@ -11,6 +12,7 @@ import com.tink.moneymanagerui.R
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
@@ -69,6 +71,12 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
 
             budgetProgressStr.observe(viewLifecycle, { budgetProgressString ->
                 budgetProgressText.text = budgetProgressString
+            })
+
+            amountLeftColor.observe(viewLifecycle, { amountLeftColor ->
+                val newColor = view.context.resolveColorForFeature(amountLeftColor, moneyManagerFeatureType)
+                budgetProgressText.setTextColor(newColor)
+                budgetProgress.progressTintList = ColorStateList.valueOf(newColor)
             })
 
             budgetPeriodInterval.observe(viewLifecycle, { budgetPeriodInterval ->
