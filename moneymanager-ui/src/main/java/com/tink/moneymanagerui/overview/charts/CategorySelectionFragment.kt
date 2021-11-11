@@ -15,6 +15,7 @@ import com.tink.moneymanagerui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.tink_fragment_select_category.view.*
 import com.tink.model.category.Category
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 
 private const val ARG_TYPE = "arg_type"
 private const val ARG_CATEGORY_ID = "arg_category"
@@ -25,6 +26,7 @@ internal class CategorySelectionFragment : BaseFragment() {
         arguments?.getSerializable(ARG_TYPE) as? Category.Type ?: Category.Type.EXPENSE
     }
     private val checkedCategoryId by lazy { arguments?.getString(ARG_CATEGORY_ID) }
+    private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
     private val options: Options by lazy { requireNotNull(arguments?.getParcelable<Options>(ARG_OPTIONS) ) }
     private val viewModel by lazy {
         ViewModelProviders.of(
@@ -89,6 +91,10 @@ internal class CategorySelectionFragment : BaseFragment() {
         }
     }
 
+    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
+        return featureType
+    }
+
     override fun onBackPressed(): Boolean {
         onCancelled()
         return super.onBackPressed()
@@ -106,13 +112,15 @@ internal class CategorySelectionFragment : BaseFragment() {
         fun newInstance(
             type: Category.Type,
             categoryId: String?,
-            options: Options = Options()
+            options: Options = Options(),
+            moneyManagerFeatureType: MoneyManagerFeatureType? = null
         ): CategorySelectionFragment {
             return CategorySelectionFragment().apply {
                 arguments = bundleOf(
                     ARG_TYPE to type,
                     ARG_CATEGORY_ID to categoryId,
-                    ARG_OPTIONS to options
+                    ARG_OPTIONS to options,
+                    ARG_MONEY_MANAGER_FEATURE_TYPE to moneyManagerFeatureType
                 )
             }
         }
@@ -130,5 +138,3 @@ internal interface CategorySelectionListener {
     fun onCategorySelected(updatedCategoryId: String)
     fun onCategorySelectionCancelled() { }
 }
-
-

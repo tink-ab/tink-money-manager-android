@@ -11,6 +11,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.tink.model.budget.Budget
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.databinding.TinkBudgetDetailsBarChartPageBinding
@@ -164,7 +165,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                     budgetDetailsProgressChartPage.budgetProgress.progress = progress ?: 0.0
                 })
                 viewModel.amountLeftColor.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeftColor ->
-                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor)
+                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor, MoneyManagerFeatureType.BUDGETS)
                 })
                 viewModel.visibilityState.observe(this@BudgetDetailsChartFragment.viewLifecycle, { visibilityState ->
                     budgetDetailsProgressChartPage.budgetProgress.visibleIf { visibilityState.isVisible }
@@ -220,6 +221,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) =
             container.removeView(obj as View)
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 
     override fun onDestroyView() {
         viewPager?.clearOnPageChangeListeners()

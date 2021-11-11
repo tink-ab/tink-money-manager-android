@@ -6,10 +6,12 @@ import android.text.SpannableString
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FontUtils
@@ -41,6 +43,8 @@ internal class SimilarTransactionsFragment : BaseFragment() {
     private val newCategoryCode by lazy {
         requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_ID))
     }
+
+    private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
 
     private val adapter = SimilarTransactionsAdapter()
 
@@ -99,6 +103,8 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         }
     }
 
+    override fun getMoneyManagerFeatureType() = featureType
+
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.tink_menu_similar_transactions)
         viewModel.markButtonText.value?.let {
@@ -139,14 +145,16 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         @JvmStatic
         fun newInstance(
             transactions: List<Transaction>,
-            newCategoryId: String
+            newCategoryId: String,
+            featureType: MoneyManagerFeatureType?
         ): SimilarTransactionsFragment {
             val transactionsArray = ArrayList(transactions)
             return SimilarTransactionsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(TRANSACTION_SIMILAR_CATEGORY_ID, newCategoryId)
-                    putParcelableArrayList(TRANSACTION_SIMILAR_TRANSACTIONS, transactionsArray)
-                }
+                arguments = bundleOf(
+                    TRANSACTION_SIMILAR_CATEGORY_ID to newCategoryId,
+                    TRANSACTION_SIMILAR_TRANSACTIONS to transactionsArray,
+                    ARG_MONEY_MANAGER_FEATURE_TYPE to featureType
+                )
             }
         }
     }

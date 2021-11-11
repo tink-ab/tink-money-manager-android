@@ -2,12 +2,14 @@ package com.tink.moneymanagerui.budgets.creation.search
 
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.R
 import se.tink.commons.extensions.inflate
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
+import se.tink.commons.extensions.tint
 
 internal class BudgetCreationSearchSuggestionsAdapter : RecyclerView.Adapter<ClickableViewHolder>(),
     OnViewHolderClickedListener {
@@ -58,7 +60,10 @@ class SuggestionViewHolder(
     onViewHolderClickedListener
 ) {
     val label: TextView = itemView.findViewById(R.id.label)
+    val icon: AppCompatImageView = itemView.findViewById(R.id.icon)
     fun bind(suggestion: String) {
         label.text = suggestion
+
+        icon.tint(R.attr.tink_expensesColor)
     }
 }

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
@@ -85,4 +86,6 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
                 }
         }
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }

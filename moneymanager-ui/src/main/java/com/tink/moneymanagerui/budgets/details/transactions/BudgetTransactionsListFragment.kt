@@ -1,15 +1,18 @@
 package com.tink.moneymanagerui.budgets.details.transactions
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
@@ -52,7 +55,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         adapter = TransactionItemListAdapter(dateUtils).also {
             it.onTransactionItemClickedListener = { transactionId ->
                 CategorizationFlowFragment
-                    .newInstance(transactionId)
+                    .newInstance(transactionId, MoneyManagerFeatureType.BUDGETS)
                     .also { fragment ->
                         fragmentCoordinator.replace(
                             fragment,
@@ -71,7 +74,9 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
             })
 
             amountLeftColor.observe(viewLifecycle, { amountLeftColor ->
-                budgetProgressText.setTextColor(amountLeftColor)
+                val newColor = view.context.resolveColorForFeature(amountLeftColor, moneyManagerFeatureType)
+                budgetProgressText.setTextColor(newColor)
+                budgetProgress.progressTintList = ColorStateList.valueOf(newColor)
             })
 
             budgetPeriodInterval.observe(viewLifecycle, { budgetPeriodInterval ->
@@ -137,4 +142,6 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
             transactionsListViewModel.showNextPeriod()
         }
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS
 }
