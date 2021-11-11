@@ -1,6 +1,7 @@
 package com.tink.moneymanagerui.charts
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.DashPathEffect
 import android.graphics.Paint
@@ -10,9 +11,13 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.text.TextPaint
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
+import androidx.annotation.ColorInt
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.drawBarChart
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.util.ScreenUtils
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
@@ -59,7 +64,7 @@ internal class BarChartWithThreshold : View {
     }
 
     private val disabledOverlayPaint = Paint().apply {
-        color = context.getColorFromAttr(R.attr.tink_expensesLightColor)
+        color = context.resolveColorForFeature(R.attr.tink_expensesLightColor, MoneyManagerFeatureType.BUDGETS)
         xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
     }
 
@@ -102,9 +107,9 @@ internal class BarChartWithThreshold : View {
             try {
                 barWidth = getDimension(R.styleable.TinkBarChartWithThreshold_tink_bar_width, 1f)
                 barPaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_bar_color_below_threshold, 0)
+                    context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.BUDGETS)
                 overlayPaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_bar_color_above_threshold, 0)
+                    context.resolveColorForFeature(R.attr.tink_warningColor, MoneyManagerFeatureType.BUDGETS)
                 thresholdLinePaint.color =
                         getColor(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_color, 0)
                 thresholdLinePaint.strokeWidth =

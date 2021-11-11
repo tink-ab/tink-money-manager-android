@@ -74,9 +74,9 @@ internal class BudgetDetailsViewModel @Inject constructor(
     val amountLeftColor: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.amountLeft) {
             if (it < 0) {
-                context.getColorFromAttr(R.attr.tink_warningColor)
+                R.attr.tink_warningColor
             } else {
-               context.getColorFromAttr(R.attr.tink_expensesColor)
+                R.attr.tink_expensesColor
             }
         }
 

@@ -165,7 +165,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                     budgetDetailsProgressChartPage.budgetProgress.progress = progress ?: 0.0
                 })
                 viewModel.amountLeftColor.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeftColor ->
-                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor)
+                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor, MoneyManagerFeatureType.BUDGETS)
                 })
                 viewModel.visibilityState.observe(this@BudgetDetailsChartFragment.viewLifecycle, { visibilityState ->
                     budgetDetailsProgressChartPage.budgetProgress.visibleIf { visibilityState.isVisible }
