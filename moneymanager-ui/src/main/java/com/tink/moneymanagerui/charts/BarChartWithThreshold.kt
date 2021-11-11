@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.charts
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.DashPathEffect
 import android.graphics.Paint
@@ -11,15 +10,12 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.text.TextPaint
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
-import androidx.annotation.ColorInt
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.drawBarChart
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.util.ScreenUtils
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.utils.extractTextStyle
 import se.tink.commons.extensions.whenNonNull
 
@@ -105,17 +101,15 @@ internal class BarChartWithThreshold : View {
             attrs, R.styleable.TinkBarChartWithThreshold, 0, 0
         ).apply {
             try {
+                val expensesColor = context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.BUDGETS)
+                val warningColor = context.resolveColorForFeature(R.attr.tink_warningColor, MoneyManagerFeatureType.BUDGETS)
                 barWidth = getDimension(R.styleable.TinkBarChartWithThreshold_tink_bar_width, 1f)
-                barPaint.color =
-                    context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.BUDGETS)
-                overlayPaint.color =
-                    context.resolveColorForFeature(R.attr.tink_warningColor, MoneyManagerFeatureType.BUDGETS)
-                thresholdLinePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_color, 0)
+                barPaint.color = expensesColor
+                overlayPaint.color = warningColor
+                thresholdLinePaint.color = expensesColor
                 thresholdLinePaint.strokeWidth =
                         getDimension(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_thickness, 0f)
-                thresholdBadgePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_threshold_badge_color, 0)
+                thresholdBadgePaint.color = expensesColor
                 averageLinePaint.color =
                         getColor(R.styleable.TinkBarChartWithThreshold_tink_average_line_color, 0)
 

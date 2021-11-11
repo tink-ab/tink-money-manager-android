@@ -133,15 +133,6 @@ internal class BudgetTransactionListViewModel @Inject constructor(
     fun showNextPeriod() = budgetDetailsDataHolder.nextPeriod()
     fun showPreviousPeriod() = budgetDetailsDataHolder.previousPeriod()
 
-    val amountLeftColor: LiveData<Int> =
-        Transformations.map(amountLeft) {
-            if (it > 0) {
-                context.getColorFromAttr(R.attr.tink_expensesColor)
-            } else {
-                context.getColorFromAttr(R.attr.tink_warningColor)
-            }
-        }
-
     val amountSpent: LiveData<Int> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
             budgetPeriod.spentAmount.value.toBigDecimal().toInt()

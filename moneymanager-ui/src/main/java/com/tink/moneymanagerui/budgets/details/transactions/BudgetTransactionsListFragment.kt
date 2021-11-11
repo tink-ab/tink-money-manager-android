@@ -71,10 +71,6 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
                 budgetProgressText.text = budgetProgressString
             })
 
-            amountLeftColor.observe(viewLifecycle, { amountLeftColor ->
-                budgetProgressText.setTextColor(amountLeftColor)
-            })
-
             budgetPeriodInterval.observe(viewLifecycle, { budgetPeriodInterval ->
                 budgetDateInterval.text = budgetPeriodInterval
             })
