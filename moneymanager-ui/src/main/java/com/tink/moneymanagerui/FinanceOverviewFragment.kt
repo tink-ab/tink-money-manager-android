@@ -233,5 +233,6 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 }
 
 public enum class MoneyManagerFeatureType {
+    ACTIONABLE_INSIGHTS,
     BUDGETS;
 }
