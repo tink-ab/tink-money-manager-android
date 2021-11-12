@@ -13,17 +13,6 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp">
 
-    <ImageView
-      android:id="@+id/image"
-      android:layout_width="match_parent"
-      android:layout_height="208dp"
-      android:padding="32dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:background="?tink_colorPrimary"
-      tools:src="@drawable/tink_items_on_shelf_illustration" />
-
     <TextView
       android:id="@+id/title"
       style="@style/tink_hecto.bold"
@@ -34,8 +23,8 @@
       android:layout_marginEnd="24dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/image"
-      tools:text="Your balance on Transaktionskonto is low" />
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="Help us categorize some fo last week's transactions" />
 
     <TextView
       android:id="@+id/description"
@@ -48,7 +37,7 @@
       app:layout_constraintEnd_toEndOf="@+id/title"
       app:layout_constraintStart_toStartOf="@+id/title"
       app:layout_constraintTop_toBottomOf="@+id/title"
-      tools:text="Your balance on Transaktionskonto is low. Do you want to transfer money to this account?" />
+      tools:text="3 recent transactions are missing a category" />
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/primaryButton"

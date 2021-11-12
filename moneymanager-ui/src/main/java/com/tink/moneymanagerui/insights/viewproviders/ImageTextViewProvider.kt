@@ -35,18 +35,9 @@ class ImageTextViewHolder(
     override val view: View = itemView
 
     override fun bind(data: InsightDataHolder, insight: Insight) {
-        view.image.setImageResource(insight.image)
-        view.image.setBackgroundColor(insight.backgroundColor(view.context))
         setupCommonBottomPart(insight)
     }
 }
-
-private val Insight.image
-    get() =
-        when (type) {
-            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.drawable.tink_items_on_shelf_illustration
-            else -> 0
-        }
 
 private const val ALPHA_10 = 26
 
