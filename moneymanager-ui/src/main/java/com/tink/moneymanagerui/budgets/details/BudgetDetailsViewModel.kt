@@ -16,6 +16,8 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
+import com.tink.moneymanagerui.extensions.toStartOfLocalDate
+import com.tink.moneymanagerui.extensions.totalMonths
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import org.joda.time.DateTime
@@ -23,6 +25,8 @@ import org.joda.time.Days
 import org.joda.time.Months
 import org.joda.time.Weeks
 import org.joda.time.Years
+import org.threeten.bp.Instant
+import org.threeten.bp.Period
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.requireValue
 import se.tink.commons.extensions.*
@@ -42,23 +46,71 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     val daysLeft: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            daysLeftFormatter(Days.daysBetween(DateTime.now(), budgetPeriod.end.toDateTime()).days)
+
+            val startOfToday = Instant.now().toDateTime().toStartOfLocalDate()
+            val budgetStart = budgetPeriod.start.toDateTime().toStartOfLocalDate()
+            val budgetEnd = budgetPeriod.end.toDateTime().toStartOfLocalDate()
+
+            when {
+                budgetPeriod.start.toDateTime().isAfter(Instant.now().toDateTime()) -> {
+                    val period = Period.between(budgetStart, startOfToday)
+                    budgetHeaderTextFormatter(
+                        BudgetStatus.NOT_STARTED,
+                        period.days.absoluteValue,
+                        period.totalMonths.absoluteValue
+                    )
+                }
+                Instant.now().toDateTime().isAfter(budgetPeriod.end.toDateTime()) -> {
+                    val between = Period.between(budgetEnd, startOfToday)
+                    budgetHeaderTextFormatter(
+                        BudgetStatus.ENDED,
+                        between.days.absoluteValue,
+                        between.totalMonths.absoluteValue
+                    )
+                }
+                else -> {
+                    val between = Period.between(budgetEnd, startOfToday)
+                    budgetHeaderTextFormatter(
+                        BudgetStatus.ACTIVE,
+                        between.days.absoluteValue,
+                        between.totalMonths.absoluteValue
+                    )
+                }
+            }
         }
 
-    private val daysLeftFormatter: (Int) -> String = { daysLeft ->
-        val quantityString: String
-        if (daysLeft >= 0) {
-            quantityString = context.resources.getQuantityString(
-                R.plurals.tink_budget_details_days_left,
-                daysLeft
-            )
-            String.format(quantityString, daysLeft)
+    private val budgetHeaderTextFormatter: (BudgetStatus, Int, Int) -> String = { status, daysDifference, monthsDifference ->
+        val roundedMonthsDifference = if (monthsDifference > 0 && daysDifference > 0) {
+            monthsDifference + 1
         } else {
-            quantityString = context.resources.getQuantityString(
-                R.plurals.tink_budget_details_ended_days_ago,
-                daysLeft
+            monthsDifference
+        }
+        val monthsRemainingMessage =
+            context.resources.getQuantityString(
+                R.plurals.tink_budget_months_plural,
+                roundedMonthsDifference,
+                roundedMonthsDifference
             )
-            String.format(quantityString, daysLeft.absoluteValue)
+        val daysRemainingMessage = context.resources.getQuantityString(
+            R.plurals.tink_budget_days_plural,
+            daysDifference,
+            daysDifference
+        )
+        val timeUnitsUsed = if (roundedMonthsDifference > 0) {
+            monthsRemainingMessage
+        } else {
+            daysRemainingMessage
+        }
+        when (status) {
+            BudgetStatus.ACTIVE -> {
+                context.getString(R.string.tink_budget_details_remaining, timeUnitsUsed)
+            }
+            BudgetStatus.ENDED -> {
+                context.getString(R.string.tink_budget_details_ended_months_days_ago, timeUnitsUsed)
+            }
+            BudgetStatus.NOT_STARTED -> {
+                context.getString(R.string.tink_budget_details_starts_in, timeUnitsUsed)
+            }
         }
     }
 
