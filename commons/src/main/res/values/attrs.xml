@@ -72,6 +72,8 @@
     <attr name="tink_icon_category_search" format="integer|reference" />
     <attr name="tink_icon_transaction_tag" format="integer|reference" />
     <attr name="tink_icon_add_button" format="integer|reference" />
+    <attr name="tink_icon_home" format="integer|reference" />
+    <attr name="tink_icon_transfers" format="integer|reference" />
 
     <!-- Button styles -->
     <attr name="tink_containedButtonStyle" format="reference" />

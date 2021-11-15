@@ -196,6 +196,12 @@ public class DateUtils {
 				.format(dateTime));
 	}
 
+	public String getMonthWithDayOfMonth(DateTime dateTime) {
+		return ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_MONTH, defaultLocale, timezoneCode)
+				.format(dateTime);
+	}
+
 	public String formatYearly(DateTime date, String timezoneCode) {
 		return ThreadSafeDateFormat
 				.threadSafeDateFormat(

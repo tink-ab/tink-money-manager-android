@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="16dp"
+  app:contentPadding="8dp"
+  app:cardBackgroundColor="?tink_cardBackgroundColor"
+  app:cardCornerRadius="@dimen/tink_card_corner_radius">
+
+  <TextView
+      android:id="@+id/title"
+      style="@style/tink_hecto.bold"
+      android:visibility="gone"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      tools:text="Expenses last week" />
+
+  <TextView
+      android:id="@+id/description"
+      style="@style/tink_deci.primary"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      tools:text="Expenses by day" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tink_insights_transactions_summary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/tink_hecto.bold"
+        android:layout_margin="8dp"
+        tools:text="@string/tink_insights_monthly_summary_expense_transactions_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center">
+
+      <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?tink_expensesLightColor"
+            android:background="@drawable/tink_circle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="?tink_icon_category_all_expenses"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:tint="?tink_colorAccent"
+            android:contentDescription="@null"/>
+
+      </FrameLayout>
+
+      <TextView
+          android:id="@+id/total_expenses_text"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="start|center"
+          android:layout_marginStart="16dp"
+          android:layout_weight="1"
+          style="@style/tink_hecto.bold"
+          tools:text="@string/tink_insights_total_expenses_text" />
+
+    </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginBottom="16dp"
+      android:gravity="center">
+
+      <FrameLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?tink_expensesLightColor"
+            android:background="@drawable/tink_circle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="?tink_icon_transfers"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            app:tint="?tink_colorAccent"
+            android:contentDescription="@null"/>
+
+      </FrameLayout>
+
+      <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/transactions_last_month_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/tink_hecto.bold"
+            tools:text="@string/tink_insights_total_monthly_transactions_text" />
+
+        <TextView
+            android:id="@+id/most_common_transaction_last_month_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/tink_deci.primary"
+            android:textColor="?attr/tink_textColorSecondary"
+            tools:text="@string/tink_insights_most_common_transaction_text" />
+
+      </LinearLayout>
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginBottom="16dp"
+      android:gravity="center">
+
+      <FrameLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="?tink_expensesLightColor"
+            android:background="@drawable/tink_circle" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:src="?tink_icon_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:tint="?tink_colorAccent"
+            android:contentDescription="@null" />
+
+      </FrameLayout>
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="start|center"
+          android:layout_weight="1"
+          android:layout_marginStart="16dp"
+          android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/largest_transaction_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/tink_hecto.bold"
+            android:layout_gravity="start|center"
+            tools:text="@string/tink_insights_largest_transaction_text" />
+
+        <TextView
+            android:id="@+id/largest_transaction_recipient_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/tink_deci.primary"
+            android:textColor="?attr/tink_textColorSecondary"
+            tools:text="@string/tink_insights_largest_transaction_recipient_text" />
+
+      </LinearLayout>
+
+  </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/secondaryButton"
+          style="?attr/tink_insightSecondaryActionButtonStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@null"
+          tools:text="Archive"/>
+
+      <com.google.android.material.button.MaterialButton
+          android:id="@+id/primaryButton"
+          style="?attr/tink_insightPrimaryActionButtonStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@null"
+          tools:text="View details"/>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
