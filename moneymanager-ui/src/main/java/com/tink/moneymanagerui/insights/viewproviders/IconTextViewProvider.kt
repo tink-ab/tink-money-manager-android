@@ -38,11 +38,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
 
     override val viewType: InsightViewType = getViewType()
     override val supportedInsightTypes: List<InsightType> = listOf(
-        InsightType.LEFT_TO_SPEND_LOW,
         InsightType.ACCOUNT_BALANCE_LOW,
-        InsightType.GENERIC_FRAUD,
-        InsightType.EINVOICE,
-        InsightType.RESIDENCE_DO_YOU_OWN_IT,
         InsightType.LARGE_EXPENSE,
         InsightType.DOUBLE_CHARGE,
         InsightType.BUDGET_SUGGEST_CREATE_FIRST
@@ -93,6 +89,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.tink_alert)
         InsightType.BUDGET_SUGGEST_CREATE_FIRST ->
             IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> IconResource.DrawableId(R.drawable.tink_uncategorized)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 
@@ -101,6 +98,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.LARGE_EXPENSE,
         InsightType.ACCOUNT_BALANCE_LOW -> R.attr.tink_criticalColor
         InsightType.BUDGET_SUGGEST_CREATE_FIRST -> R.attr.tink_expensesColor
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.attr.tink_uncategorizedColor
         else -> R.attr.tink_textColorSecondary
     }
 
