@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.overview.charts
 
+import android.content.Context
 import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
 import com.tink.moneymanagerui.BaseFragment
@@ -7,6 +8,8 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.charts.piechart.TabPieChartFragment
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.model.category.Category
+import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 
 internal enum class ChartType {
     EXPENSES {
@@ -18,7 +21,6 @@ internal enum class ChartType {
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
         override fun createOverTimeFragment(): BaseFragment = StatisticsOverTimeFragment()
-
     },
     INCOME {
         override val screenEvent = ScreenEvent.INCOME
@@ -43,7 +45,8 @@ internal enum class ChartType {
 
     abstract fun create1MonthFragment(): BaseFragment
     abstract fun createOverTimeFragment(): BaseFragment
+
+    fun getFeatureColor(context: Context): Int {
+        return context.resolveColorForFeature(color, MoneyManagerFeatureType.STATISTICS)
+    }
 }
-
-
-

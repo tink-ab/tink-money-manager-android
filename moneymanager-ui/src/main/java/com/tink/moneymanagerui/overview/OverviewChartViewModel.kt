@@ -17,11 +17,12 @@ import se.tink.android.livedata.mapDistinct
 import se.tink.android.categories.CategoryRepository
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
+import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import se.tink.android.repository.user.UserRepository
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -68,7 +69,7 @@ internal class OverviewChartViewModel @Inject constructor(
                 it.categories.expenses.children,
                 it.period
             ).items.map { it.amount }
-        val color = context.getColorFromAttr(attrColor = R.attr.tink_expensesColor)
+        val color = context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.STATISTICS)
         val period = getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(
             context,
@@ -90,7 +91,7 @@ internal class OverviewChartViewModel @Inject constructor(
                 it.categories.income.children,
                 it.period
             ).items.map { it.amount }
-        val color = context.getColorFromAttr(R.attr.tink_incomeColor)
+        val color = context.resolveColorForFeature(R.attr.tink_incomeColor, MoneyManagerFeatureType.STATISTICS)
         val periodString =
             getPeriodString(dateUtils, it.period, context)
         OverviewChartModel(

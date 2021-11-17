@@ -36,7 +36,6 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
     var thickness by observable(0f) { invalidateChildren() }
     var transitionThickness by observable(0f) { invalidateChildren() }
 
-
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TinkPieChartView)
         maxRadiusPercent = a.getFloat(R.styleable.TinkPieChartView_tink_max_radius_percent, 1f)
