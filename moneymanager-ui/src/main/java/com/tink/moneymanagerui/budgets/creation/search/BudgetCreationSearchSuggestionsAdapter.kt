@@ -4,17 +4,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.tink.moneymanagerui.R
 import se.tink.commons.extensions.inflate
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.tint
 
-internal class BudgetCreationSearchSuggestionsAdapter : RecyclerView.Adapter<ClickableViewHolder>(),
-    OnViewHolderClickedListener {
-
-    private var suggestions: MutableList<String> = mutableListOf()
+internal class BudgetCreationSearchSuggestionsAdapter : ListAdapter<String, ClickableViewHolder>(SuggestionDiffUtil), OnViewHolderClickedListener {
 
     var onItemClickedListener: ((String) -> Unit)? = null
 
@@ -22,33 +19,11 @@ internal class BudgetCreationSearchSuggestionsAdapter : RecyclerView.Adapter<Cli
         SuggestionViewHolder(parent, this)
 
     override fun onBindViewHolder(holder: ClickableViewHolder, position: Int) {
-        (holder as SuggestionViewHolder).bind(suggestions[position])
+        (holder as SuggestionViewHolder).bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = suggestions.size
 
     override fun onItemClicked(position: Int) {
-        onItemClickedListener?.invoke(suggestions[position])
-    }
-
-    fun setData(data: List<String>) {
-        val oldData = suggestions.toMutableList()
-        suggestions.clear()
-        suggestions.addAll(data)
-        DiffUtil.calculateDiff(
-            object : DiffUtil.Callback() {
-                override fun getOldListSize(): Int = oldData.size
-                override fun getNewListSize(): Int = suggestions.size
-
-                override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-                    oldData[oldItemPosition] == suggestions[newItemPosition]
-
-                override fun areContentsTheSame(oldPos: Int, newPos: Int): Boolean =
-                    oldData[oldPos] == suggestions[newPos]
-
-            }
-        )
-            .dispatchUpdatesTo(this)
+        onItemClickedListener?.invoke(getItem(position))
     }
 }
 
@@ -65,5 +40,15 @@ class SuggestionViewHolder(
         label.text = suggestion
 
         icon.tint(R.attr.tink_expensesColor)
+    }
+}
+
+internal object SuggestionDiffUtil : DiffUtil.ItemCallback<String>() {
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
     }
 }
