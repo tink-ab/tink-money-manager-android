@@ -57,8 +57,8 @@
 
       <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/budgetsEmptyIcon"
-        android:layout_width="@dimen/tink_category_icon_size"
-        android:layout_height="@dimen/tink_category_icon_size"
+        android:layout_width="@dimen/tink_add_budget_icon_width"
+        android:layout_height="@dimen/tink_add_budget_icon_height"
         android:layout_marginTop="20dp"
         android:scaleType="fitXY"
         android:clickable="true"
@@ -70,8 +70,8 @@
         app:srcCompat="?attr/tink_icon_add_button"
         app:tint="?attr/tink_expensesColor"
         android:contentDescription="@string/tink_budget_create_button"
-        android:background="?attr/tink_expensesLightColor"
-        app:shapeAppearance="?attr/tink_categoryIconShapeStyle" />
+        android:background="?attr/tink_addBudgetIconBackgroundColor"
+        app:shapeAppearance="?attr/tink_addBudgetIconShapeStyle" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/emptyCreateNewButton"
