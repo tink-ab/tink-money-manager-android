@@ -36,7 +36,6 @@ fun DateTime.getInstant(): Instant = Instant.ofEpochMilli(this.millis)
 fun DateTime.getAbbreviatedMonthName(): String {
     return toString("MMM")
         .take(3)
-        .capitalize(Locale.getDefault())
 }
 
 internal fun DateTime.getStartOfMonth(): Instant =
