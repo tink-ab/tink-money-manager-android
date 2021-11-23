@@ -50,7 +50,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
             title = insight.title,
             description = insight.description,
             icon = insight.data.icon(),
-            colorAttr = R.attr.tink_expensesColor,
+            colorAttr = R.attr.tink_categoryExpensesColor,
             savePercentage = viewDetails.savePercentage,
             savePerYearAmount = viewDetails.savePerYearAmount,
             state = insight.state,

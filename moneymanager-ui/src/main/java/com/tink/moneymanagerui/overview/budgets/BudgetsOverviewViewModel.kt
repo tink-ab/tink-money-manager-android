@@ -37,21 +37,21 @@ internal class BudgetsOverviewViewModel @Inject constructor(
                         val icon = when {
                             budgetSpecification.filter.tags.isNotEmpty() -> BudgetOverviewItem.Icon(
                                 resource = R.attr.tink_icon_transaction_tag,
-                                color = R.attr.tink_expensesColor,
-                                backgroundColor = R.attr.tink_expensesLightColor
+                                color = R.attr.tink_categoryExpensesColor,
+                                backgroundColor = R.attr.tink_categoryExpensesBackgroundColor
                             )
 
                             budgetSpecification.filter.freeTextQuery.isNotEmpty() -> BudgetOverviewItem.Icon(
                                 resource = R.attr.tink_icon_category_search,
-                                color = R.attr.tink_expensesColor,
-                                backgroundColor = R.attr.tink_expensesLightColor
+                                color = R.attr.tink_categoryExpensesColor,
+                                backgroundColor = R.attr.tink_categoryExpensesBackgroundColor
                             )
 
                             budgetSpecification.filter.categories.size > 1 -> {
                                 BudgetOverviewItem.Icon(
                                     resource = R.attr.tink_icon_category_all_expenses,
-                                    color = R.attr.tink_expensesColor,
-                                    backgroundColor = R.attr.tink_expensesLightColor
+                                    color = R.attr.tink_categoryExpensesColor,
+                                    backgroundColor = R.attr.tink_categoryExpensesBackgroundColor
                                 )
                             }
 

@@ -46,6 +46,14 @@
     <item name="tink_textColorPrimaryInverse">@color/tink_white</item>
     <item name="tink_cardBackgroundColor">@color/tink_white</item>
     <item name="tink_addBudgetIconBackgroundColor">@color/tink_expensive_blue_light</item>
+    <item name="tink_categoryUncategorizedColor">?tink_uncategorizedColor</item>
+    <item name="tink_categoryIncomeColor">?tink_incomeColor</item>
+    <item name="tink_categoryExpensesColor">?tink_expensesColor</item>
+    <item name="tink_categoryTransferColor">?tink_transferColor</item>
+    <item name="tink_categoryUncategorizedBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_categoryIncomeBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_categoryExpensesBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_categoryTransferBackgroundColor">?tink_uncategorizedLightColor</item>
 
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>

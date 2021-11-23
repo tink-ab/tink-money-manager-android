@@ -39,7 +39,7 @@ class SuggestionViewHolder(
     fun bind(suggestion: String) {
         label.text = suggestion
 
-        icon.tint(R.attr.tink_expensesColor)
+        icon.tint(R.attr.tink_categoryExpensesColor)
     }
 }
 
