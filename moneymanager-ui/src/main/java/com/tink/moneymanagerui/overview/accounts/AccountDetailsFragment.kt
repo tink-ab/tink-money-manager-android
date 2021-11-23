@@ -14,7 +14,7 @@ import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
-import com.tink.moneymanagerui.view.ParallaxHeaderScrollListener
+import com.tink.moneymanagerui.view.AlphaHeaderScrollListener
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
@@ -115,9 +115,8 @@ internal class AccountDetailsFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        val headerHeight = resources.getDimension(R.dimen.tink_account_details_header_height)
         val headers = listOf(accountBalance, accountNumber, divider, extraText)
-        recyclerView.addOnScrollListener(ParallaxHeaderScrollListener(headers, headerHeight))
+        recyclerView.addOnScrollListener(AlphaHeaderScrollListener(headers))
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
         adapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
