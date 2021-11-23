@@ -44,7 +44,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    val daysLeft: LiveData<String> =
+    val budgetHeaderText: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
 
             val startOfToday = Instant.now().toDateTime().toStartOfLocalDate()
