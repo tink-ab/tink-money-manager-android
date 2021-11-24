@@ -47,7 +47,9 @@
     <attr name="tink_textColorTertiary" format="color|reference" />
     <attr name="tink_dividerColor" format="color|reference" />
     <attr name="tink_cardBackgroundColor" format="color|reference" />
-    <attr name="tink_addBudgetIconBackgroundColor" format="color|reference" />
+    <attr name="tink_createBudgetIconColor" format="color|reference" />
+    <attr name="tink_createBudgetIconBackgroundColor" format="color|reference" />
+    <attr name="tink_createBudgetButtonColor" format="color|reference" />
 
     <attr name="tink_uncategorizedIconColor" format="color|reference"/>
     <attr name="tink_incomeIconColor" format="color|reference"/>
@@ -95,7 +97,7 @@
 
     <!-- Icon shape styles -->
     <attr name="tink_categoryIconShapeStyle" format="reference" />
-    <attr name="tink_addBudgetIconShapeStyle" format="reference" />
+    <attr name="tink_createBudgetIconShapeStyle" format="reference" />
 
     <!-- Recommended values are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a tink_circle -->
     <attr name="tink_checkbox_corner_radius_in_dp" format="dimension">4dp</attr>

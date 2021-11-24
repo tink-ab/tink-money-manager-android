@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="@string/tink_overview_budgets_create_new"
+        android:textColor="?attr/tink_createBudgetButtonColor"
         app:layout_constraintBaseline_toBaselineOf="@+id/title"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -70,8 +71,8 @@
         app:srcCompat="?attr/tink_icon_add_button"
         app:tint="?attr/tink_expensesColor"
         android:contentDescription="@string/tink_budget_create_button"
-        android:background="?attr/tink_addBudgetIconBackgroundColor"
-        app:shapeAppearance="?attr/tink_addBudgetIconShapeStyle" />
+        android:background="?attr/tink_createBudgetIconBackgroundColor"
+        app:shapeAppearance="?attr/tink_createBudgetIconShapeStyle" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/emptyCreateNewButton"
@@ -82,8 +83,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:textColor="?attr/tink_colorAccent"
         android:text="@string/tink_overview_budgets_empty_create_new"
+        android:textColor="?attr/tink_createBudgetButtonColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/budgetsEmptyIcon"
