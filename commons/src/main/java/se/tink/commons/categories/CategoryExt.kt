@@ -43,20 +43,30 @@ fun iconFromCategoryCode(code: String): Int = when {
 @AttrRes
 fun Category.iconColor(): Int {
     return when {
-        code.isUncategorized() -> R.attr.tink_uncategorizedColor
-        code.isIncome() -> R.attr.tink_incomeColor
-        code.isExpense() -> R.attr.tink_expensesColor
-        else -> R.attr.tink_transferColor
+        code.isUncategorized() -> R.attr.tink_uncategorizedIconColor
+        code.isIncome() -> R.attr.tink_incomeIconColor
+        code.isExpense() -> R.attr.tink_expensesIconColor
+        else -> R.attr.tink_transferIconColor
     }
 }
 
 @AttrRes
 fun Category.iconBackgroundColor(): Int {
     return when {
-        code.isUncategorized() -> R.attr.tink_uncategorizedLightColor
-        code.isIncome() -> R.attr.tink_incomeLightColor
-        code.isExpense() -> R.attr.tink_expensesLightColor
-        else -> R.attr.tink_transferLightColor
+        code.isUncategorized() -> R.attr.tink_uncategorizedIconBackgroundColor
+        code.isIncome() -> R.attr.tink_incomeIconBackgroundColor
+        code.isExpense() -> R.attr.tink_expensesIconBackgroundColor
+        else -> R.attr.tink_transferIconBackgroundColor
+    }
+}
+
+@AttrRes
+fun Category.graphColor(): Int {
+    return when {
+        code.isUncategorized() -> R.attr.tink_uncategorizedColor
+        code.isIncome() -> R.attr.tink_incomeColor
+        code.isExpense() -> R.attr.tink_expensesColor
+        else -> R.attr.tink_transferColor
     }
 }
 

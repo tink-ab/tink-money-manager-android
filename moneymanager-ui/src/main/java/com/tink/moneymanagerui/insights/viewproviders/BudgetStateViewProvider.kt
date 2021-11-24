@@ -41,6 +41,6 @@ class BudgetStateViewProvider @Inject constructor() : InsightViewProvider {
         when (type) {
             InsightType.BUDGET_CLOSE_NEGATIVE,
             InsightType.BUDGET_OVERSPENT -> R.attr.tink_warningColor
-            else -> R.attr.tink_expensesColor
+            else -> R.attr.tink_expensesIconColor
         }
 }

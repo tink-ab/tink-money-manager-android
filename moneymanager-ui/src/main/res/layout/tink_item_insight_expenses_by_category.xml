@@ -22,64 +22,64 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/iconBackground0"
       android:layout_width="72dp"
       android:layout_height="72dp"
       android:layout_marginTop="32dp"
       android:background="@drawable/tink_circle"
-      android:backgroundTint="?tink_colorOnExpenses"
+      android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
       app:layout_constraintEnd_toEndOf="@+id/categoryName0"
       app:layout_constraintStart_toStartOf="@+id/categoryName0"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/icon0"
       android:layout_width="32dp"
       android:layout_height="32dp"
-      app:tint="?tink_expensesColor"
+      app:tint="?attr/tink_expensesIconColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground0"
       app:layout_constraintStart_toStartOf="@+id/iconBackground0"
       app:layout_constraintTop_toTopOf="@+id/iconBackground0" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/iconBackground1"
       android:layout_width="64dp"
       android:layout_height="64dp"
       android:background="@drawable/tink_circle"
-      android:backgroundTint="?tink_colorOnExpenses"
+      android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/categoryName1"
       app:layout_constraintStart_toStartOf="@+id/categoryName1"
       app:layout_constraintTop_toTopOf="@id/iconBackground0" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/icon1"
       android:layout_width="28dp"
       android:layout_height="28dp"
-      app:tint="?tink_expensesColor"
+      app:tint="?attr/tink_expensesIconColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground1"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground1"
       app:layout_constraintStart_toStartOf="@+id/iconBackground1"
       app:layout_constraintTop_toTopOf="@+id/iconBackground1" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/iconBackground2"
       android:layout_width="54dp"
       android:layout_height="54dp"
       android:background="@drawable/tink_circle"
-      android:backgroundTint="?tink_colorOnExpenses"
+      android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground0"
       app:layout_constraintEnd_toEndOf="@+id/categoryName2"
       app:layout_constraintStart_toStartOf="@+id/categoryName2"
       app:layout_constraintTop_toTopOf="@id/iconBackground0" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/icon2"
       android:layout_width="24dp"
       android:layout_height="24dp"
-      app:tint="?tink_expensesColor"
+      app:tint="?attr/tink_expensesIconColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground2"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground2"
       app:layout_constraintStart_toStartOf="@+id/iconBackground2"

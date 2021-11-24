@@ -194,6 +194,7 @@
   </style>
 
   <style name="tink_nano.primary.autoSize">
+    <item name="android:textColor">?tink_textColorPrimary</item>
     <item name="autoSizeTextType">uniform</item>
     <item name="autoSizeMaxTextSize">16sp</item>
     <item name="autoSizeMinTextSize">8sp</item>

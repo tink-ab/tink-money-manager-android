@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.category.Category
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import kotlinx.android.synthetic.main.tink_fragment_statistics_over_time.*
 
@@ -91,4 +92,6 @@ class StatisticsOverTimeFragment : BaseFragment() {
     private fun showCategorySelector() {
         (parentFragment as? ChartDetailsPagerFragment)?.showCategorySelector()
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
 }

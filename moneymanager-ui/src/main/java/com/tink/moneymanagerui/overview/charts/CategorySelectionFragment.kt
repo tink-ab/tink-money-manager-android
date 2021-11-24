@@ -91,9 +91,7 @@ internal class CategorySelectionFragment : BaseFragment() {
         }
     }
 
-    override fun getMoneyManagerFeatureType(): MoneyManagerFeatureType? {
-        return featureType
-    }
+    override fun getMoneyManagerFeatureType() = featureType
 
     override fun onBackPressed(): Boolean {
         onCancelled()

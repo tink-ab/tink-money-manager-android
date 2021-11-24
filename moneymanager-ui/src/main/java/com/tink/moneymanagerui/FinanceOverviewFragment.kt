@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.StyleRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
@@ -25,6 +26,8 @@ import com.tink.moneymanagerui.security.DefaultRecoveryHandler
 import com.tink.moneymanagerui.security.SecuredClientDataStorage
 import com.tink.moneymanagerui.tracking.AnalyticsSingleton
 import com.tink.moneymanagerui.tracking.Tracker
+import com.tink.service.network.SdkClient
+import com.tink.service.network.coreClient
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -120,6 +123,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         super.onViewCreated(view, savedInstanceState)
         fragmentCoordinator.clear()
         fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures, isOverviewToolbarVisible), false, FragmentAnimationFlags.NONE)
+        AndroidThreeTen.init(view.context.applicationContext)
     }
 
     fun handleBackPress() =
@@ -213,6 +217,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = emptyMap()
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
+            coreClient = SdkClient.MONEY_MANAGER
             if (insightActionHandler != null) {
                 CustomInsightActionHandler.setInsightActionHandler(insightActionHandler)
             } else if (javaInsightActionHandler != null) {
@@ -233,6 +238,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 }
 
 public enum class MoneyManagerFeatureType {
+    ACCOUNTS,
     ACTIONABLE_INSIGHTS,
-    BUDGETS;
+    BUDGETS,
+    STATISTICS;
 }

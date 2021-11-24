@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
 
@@ -44,4 +45,6 @@ internal class AccountsListFragment : BaseFragment() {
             loader.visibility = if (loading) View.VISIBLE else View.GONE
         })
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
 }

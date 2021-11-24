@@ -5,6 +5,7 @@ import com.tink.model.time.Period
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.threeten.bp.Instant
+import org.threeten.bp.LocalDate
 import se.tink.commons.extensions.toDateTime
 import java.text.DecimalFormat
 import java.util.Locale
@@ -36,7 +37,6 @@ fun DateTime.getInstant(): Instant = Instant.ofEpochMilli(this.millis)
 fun DateTime.getAbbreviatedMonthName(): String {
     return toString("MMM")
         .take(3)
-        .capitalize(Locale.getDefault())
 }
 
 internal fun DateTime.getStartOfMonth(): Instant =
@@ -60,5 +60,19 @@ internal fun DateTime.toPeriodIdentifier(): String {
     return "${year}-${monthDecimalFormat.format(monthOfYear)}"
 }
 
+fun DateTime.clearTime(): DateTime =
+    this.withHourOfDay(0)
+        .withMinuteOfHour(0)
+        .withSecondOfMinute(0)
+        .withMillisOfSecond(0)
+
 fun Budget.Period.getHalfwayPoint(): DateTime =
     start.toDateTime().getHalfwayUntil(end.toDateTime())
+
+val org.threeten.bp.Period.totalMonths: Int
+    get() = years * 12 + months
+
+fun DateTime.toStartOfLocalDate(): LocalDate {
+    val startOfToday = this.withUtcTimeRetainZone().clearTime()
+    return LocalDate.of(startOfToday.year, startOfToday.monthOfYear, startOfToday.dayOfMonth)
+}

@@ -18,6 +18,7 @@
   <string name="tink_date_formatter_month_and_day">EEEE, MMM d</string>
   <string name="tink_date_formatter_month_and_day_and_year">EEEE, MMM d, yyyy</string>
   <string name="tink_date_formatter_date_with_year">MMM d, yyyy</string>
+  <string name="tink_date_formatter_month_and_day_of_month">d MMM</string>
   <string name="tink_date_formatter_month_and_year">MMMM yyyy</string>
   <string name="tink_date_formatter_month_and_year_compact">MMM yyyy</string>
 
@@ -88,6 +89,17 @@
   <string name="tink_insights_expenses_by_day_average_text">Average</string>
   <string name="tink_insights_budget_create_suggestion_save_per_year_text">Save up to %s per year</string>
 
+  <string name="tink_insights_monthly_summary_expense_transactions_title">Here’s a summary of your expense transactions last month</string>
+  <string name="tink_insights_total_monthly_transactions_text">%d transactions last month</string>
+
+  <string name="tink_insights_weekly_summary_expense_transactions_title">Here’s a summary of your expense transactions last week</string>
+  <string name="tink_insights_total_weekly_transactions_text">%d transactions last week</string>
+
+  <string name="tink_insights_total_expenses_text">%s in total expenses</string>
+  <string name="tink_insights_most_common_transaction_text">Most common was %s (%d)</string>
+  <string name="tink_insights_largest_transaction_text">%s was your largest expense</string>
+  <string name="tink_insights_largest_transaction_recipient_text">To %s (%s)</string>
+
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
   <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
@@ -120,13 +132,16 @@
   <string name="tink_budget_details_selector_monthly">Monthly</string>
   <string name="tink_budget_details_selector_yearly">Yearly</string>
   <string name="tink_budget_details_selector_over_time">Over time</string>
-  <plurals name="tink_budget_details_days_left">
-    <item quantity="one">%s day left</item>
-    <item quantity="other">%s days left</item>
+  <string name="tink_budget_details_remaining">%s remaining</string>
+  <string name="tink_budget_details_starts_in">Starts in %s</string>
+  <string name="tink_budget_details_ended_months_days_ago">Ended %s ago</string>
+  <plurals name="tink_budget_days_plural">
+    <item quantity="one">%s day</item>
+    <item quantity="other">%s days</item>
   </plurals>
-  <plurals name="tink_budget_details_ended_days_ago">
-    <item quantity="one">Ended %s day ago</item>
-    <item quantity="other">Ended %s days ago</item>
+  <plurals name="tink_budget_months_plural">
+    <item quantity="one">%s month</item>
+    <item quantity="other">%s months</item>
   </plurals>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>

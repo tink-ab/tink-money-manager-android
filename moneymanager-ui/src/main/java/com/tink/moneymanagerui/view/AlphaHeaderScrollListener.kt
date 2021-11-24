@@ -2,13 +2,14 @@ package com.tink.moneymanagerui.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.max
 
-internal class ParallaxHeaderScrollListener(
+internal class AlphaHeaderScrollListener(
     private val headers: List<View>,
-    private val headerHeight: Float
 ) : RecyclerView.OnScrollListener() {
 
     private var scrolledY = 0
+    private val scrolledGoneThreshold = 300
 
     override fun onScrolled(
         recyclerView: RecyclerView,
@@ -16,15 +17,9 @@ internal class ParallaxHeaderScrollListener(
         dy: Int
     ) {
         super.onScrolled(recyclerView, dx, dy)
-        if (dy == 0) {
-            // Layout event happened, recalculate
-            scrolledY = recyclerView.computeVerticalScrollOffset()
-        }
         scrolledY += dy
-        val alpha = (headerHeight - scrolledY * 1.66f) / headerHeight
-        val topMargin = -scrolledY / 8
-        for (header in headers) {
-            header.translationY = topMargin.toFloat()
+        val alpha = max(0, scrolledGoneThreshold - scrolledY) / scrolledGoneThreshold.toFloat()
+        headers.forEach { header ->
             header.alpha = alpha
         }
     }

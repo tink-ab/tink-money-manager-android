@@ -39,25 +39,19 @@ internal data class StatisticItemsList(override val items: ArrayList<StatisticIt
 internal data class TransactionsItemsList(override val items: ArrayList<TransactionsItem>) :
     ChartList()
 
-//TODO: Core setup - Remove `toDateTime`
 internal fun getPeriodString(
     dateUtils: DateUtils,
     period: Period,
     context: Context,
     toToday: Boolean = true
 ): String {
-    return if (toToday && period.isInPeriod(DateTime.now())) {
-        context.getString(
-            R.string.tink_date_span_string,
-            dateUtils.formatDateHumanShort(period.start.toDateTime()),
-            context.getString(R.string.tink_date_format_human_today)
-        )
+    val start = dateUtils.formatDateHumanShort(period.start.toDateTime())
+    val end = if (toToday && period.isInPeriod(DateTime.now())) {
+        context.getString(R.string.tink_date_format_human_today)
     } else {
-        context.getString(
-            R.string.tink_until_next_date,
-            dateUtils.formatDateHumanShort(period.end.toDateTime())
-        )
+        dateUtils.formatDateHumanShort(period.end.toDateTime())
     }
+    return context.getString(R.string.tink_date_span_string, start, end)
 }
 
 internal fun calculateStatistic(

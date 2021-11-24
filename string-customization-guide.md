@@ -51,6 +51,14 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_budget_create_suggestion_save_per_year_text` | Save up to %s per year |
+| `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
+| `tink_insights_total_monthly_transactions_text` | %d transactions last month |
+| `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
+| `tink_insights_total_weekly_transactions_text` | %d transactions last week |
+| `tink_insights_total_expenses_text` | %s in total expenses |
+| `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
+| `tink_insights_largest_transaction_text` | %s was your largest expense |
+| `tink_insights_largest_transaction_recipient_text` | To %s (%s) |
 | `tink_budget_create_title` | Create budget |
 | `tink_budget_create_button` | Create budget |
 | `tink_budget_specification_toolbar_title` | Budget \"%s\" |
@@ -81,6 +89,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_selector_monthly` | Monthly |
 | `tink_budget_details_selector_yearly` | Yearly |
 | `tink_budget_details_selector_over_time` | Over time |
+| `tink_budget_details_remaining` | %s remaining |
+| `tink_budget_details_starts_in` | Starts in %s |
+| `tink_budget_details_ended_months_days_ago` | Ended %s ago |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |
 | `tink_selector_all_time` | All time |
@@ -130,13 +141,13 @@ Here's a list of all the public string resources in the SDK that can be overridd
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
 <resources>
-  <plurals name="tink_budget_details_days_left">
-    <item quantity="one">%s day left</item>
-    <item quantity="other">%s days left</item>
+  <plurals name="tink_budget_days_plural">
+    <item quantity="one">%s day</item>
+    <item quantity="other">%s days</item>
   </plurals>
-  <plurals name="tink_budget_details_ended_days_ago">
-    <item quantity="one">Ended %s day ago</item>
-    <item quantity="other">Ended %s days ago</item>
+  <plurals name="tink_budget_months_plural">
+    <item quantity="one">%s month</item>
+    <item quantity="other">%s months</item>
   </plurals>
   <plurals name="tink_budget_details_chart_status_message_last_year">
     <item quantity="one">You made your budget %d%% of the time over the last year</item>

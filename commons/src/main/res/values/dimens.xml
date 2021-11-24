@@ -33,6 +33,8 @@
 
   <!-- Category icon dimensions -->
   <dimen name="tink_category_icon_size">40dp</dimen>
+  <dimen name="tink_add_budget_icon_width">40dp</dimen>
+  <dimen name="tink_add_budget_icon_height">40dp</dimen>
   <dimen name="tink_category_label_text_width">40dp</dimen>
   <dimen name="tink_category_label_text_height">40dp</dimen>
 

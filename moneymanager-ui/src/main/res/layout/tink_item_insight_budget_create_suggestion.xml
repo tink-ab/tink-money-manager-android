@@ -23,23 +23,23 @@
       android:paddingBottom="20dp"
       android:background="?tink_expensesColor">
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iconBackground"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/tink_circle"
-        android:backgroundTint="?tink_colorOnExpenses" />
+        android:backgroundTint="?attr/tink_expensesIconBackgroundColor" />
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="36dp"
         android:layout_marginStart="20dp"
         android:layout_centerHorizontal="true"
-        app:tint="?tink_expensesColor" />
+        app:tint="?attr/tink_expensesIconColor" />
 
       <com.tink.moneymanagerui.insights.views.InsightBubbleView
         android:id="@+id/insightBubbleSavePercentageOutline"

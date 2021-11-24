@@ -71,7 +71,7 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         searchSuggestionsList.adapter = adapter
 
         viewModel.visibleSuggestions.observe(viewLifecycle, Observer { suggestions ->
-            adapter.setData(suggestions)
+            adapter.submitList(suggestions)
         })
     }
 

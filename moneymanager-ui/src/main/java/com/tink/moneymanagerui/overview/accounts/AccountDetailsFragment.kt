@@ -2,6 +2,7 @@ package com.tink.moneymanagerui.overview.accounts
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +15,12 @@ import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
-import com.tink.moneymanagerui.view.ParallaxHeaderScrollListener
+import com.tink.moneymanagerui.view.AlphaHeaderScrollListener
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
@@ -115,16 +117,15 @@ internal class AccountDetailsFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        val headerHeight = resources.getDimension(R.dimen.tink_account_details_header_height)
         val headers = listOf(accountBalance, accountNumber, divider, extraText)
-        recyclerView.addOnScrollListener(ParallaxHeaderScrollListener(headers, headerHeight))
+        recyclerView.addOnScrollListener(AlphaHeaderScrollListener(headers))
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
         adapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
 
         adapter.onTransactionItemClickedListener = { id ->
             CategorizationFlowFragment
-                .newInstance(id)
+                .newInstance(id, MoneyManagerFeatureType.ACCOUNTS)
                 .also {
                     fragmentCoordinator.replace(
                         it,
@@ -136,6 +137,8 @@ internal class AccountDetailsFragment : BaseFragment() {
         recyclerView.adapter = adapter
     }
 
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
+
     companion object {
 
         private const val ACCOUNT_ID_ARGS = "account_id_args"
@@ -144,10 +147,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         fun newInstance(accountId: String): BaseFragment =
             AccountDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ACCOUNT_ID_ARGS, accountId)
-
-                }
+                arguments = bundleOf(ACCOUNT_ID_ARGS to accountId)
             }
     }
 }
