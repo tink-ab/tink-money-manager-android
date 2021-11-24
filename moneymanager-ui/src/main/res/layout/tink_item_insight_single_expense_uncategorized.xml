@@ -22,24 +22,24 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/iconBackground"
       android:layout_width="40dp"
       android:layout_height="40dp"
       android:layout_marginStart="24dp"
       android:background="@drawable/tink_circle"
-      android:backgroundTint="@color/tink_color_surface"
+      android:backgroundTint="?tink_categoryUncategorizedBackgroundColor"
       app:layout_constraintBottom_toBottomOf="@+id/topContainer"
       app:layout_constraintStart_toStartOf="@+id/topContainer"
       app:layout_constraintTop_toTopOf="@+id/topContainer"/>
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/icon"
       android:layout_width="20dp"
       android:layout_height="20dp"
       android:drawable="@drawable/tink_uncategorized"
-      android:tint="?tink_uncategorizedColor"
+      android:tint="?tink_categoryUncategorizedColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground"
       app:layout_constraintStart_toStartOf="@+id/iconBackground"
@@ -64,7 +64,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
       android:layout_marginStart="16dp"
-      android:text="Yesterday"
+      tools:text="Yesterday"
       app:layout_constraintEnd_toEndOf="@+id/amount"
       app:layout_constraintStart_toEndOf="@id/iconBackground"
       app:layout_constraintTop_toBottomOf="@+id/transactionDescription"

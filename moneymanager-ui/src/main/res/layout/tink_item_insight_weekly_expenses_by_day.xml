@@ -39,7 +39,7 @@
       android:layout_marginStart="24dp"
       android:layout_marginEnd="16dp"
       app:tink_horizontal_margin="8dp"
-      app:tink_bar_color_below_threshold="?tink_expensesLightColor"
+      app:tink_bar_color_below_threshold="?tink_expensesDarkColor"
       app:tink_bar_label_style="@style/tink_chart_label"
       app:tink_bar_width="28dp"
       app:layout_constraintBottom_toBottomOf="@+id/expensesByDayContainer"
@@ -62,13 +62,13 @@
       app:layout_constraintStart_toStartOf="@+id/expensesByDayContainer"
       app:layout_constraintTop_toTopOf="@+id/expensesByDayContainer" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/averageCircle"
       android:layout_width="14dp"
       android:layout_height="0dp"
       android:layout_marginEnd="4dp"
       android:src="@drawable/tink_circle"
-      android:tint="?tink_expensesLightColor"
+      android:tint="?tink_expensesDarkColor"
       app:layout_constraintBottom_toBottomOf="@+id/averageText"
       app:layout_constraintEnd_toStartOf="@id/averageText"
       app:layout_constraintTop_toTopOf="@+id/averageText" />

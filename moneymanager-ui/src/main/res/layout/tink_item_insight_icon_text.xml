@@ -14,7 +14,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/iconBackground"
       android:layout_width="40dp"
       android:layout_height="40dp"
@@ -28,7 +28,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/icon"
       android:layout_width="20dp"
       android:layout_height="20dp"

@@ -6,12 +6,13 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
-import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.inflate
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
 import com.tink.model.relations.ExpensesByDay
+import com.tink.moneymanagerui.util.CurrencyUtils
+import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.floatValue
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
@@ -20,8 +21,7 @@ import javax.inject.Inject
 
 @ContributesInsightViewProvider
 class WeeklyExpensesByDayViewProvider @Inject constructor(
-    private val dateUtils: DateUtils,
-    private val amountFormatter: AmountFormatter
+    private val dateUtils: DateUtils
 ) : InsightViewProvider {
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
         WeeklyExpensesByDayInsightViewHolder(parent, actionHandler)
@@ -30,7 +30,7 @@ class WeeklyExpensesByDayViewProvider @Inject constructor(
         val chartData = (insight.data as InsightData.WeeklyExpensesByDayData)
             .expensesByDay
             .sortedBy { it.date } // This will ensure we show data oldest to newest, from left to right in the chart
-            .toChartData(dateUtils, amountFormatter)
+            .toChartData(dateUtils)
         return WeeklyExpensesByDayDataHolder(chartData)
     }
 
@@ -66,17 +66,12 @@ class WeeklyExpensesByDayInsightViewHolder(
 }
 
 private fun List<ExpensesByDay>.toChartData(
-    dateUtils: DateUtils,
-    amountFormatter: AmountFormatter
+    dateUtils: DateUtils
 ) = ExpensesByDayChartData(
     map { dateUtils.getDayOfWeek(it.date) },
     map { it.totalAmount.value.floatValue() },
     map {
-        amountFormatter.format(
-            amount = it.totalAmount,
-            useSymbol = false,
-            useSign = false
-        )
+        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.totalAmount.value.doubleValue(), null)
             .trimEnd('0')
             .trimEnd(DecimalFormatSymbols.getInstance().decimalSeparator)
     },

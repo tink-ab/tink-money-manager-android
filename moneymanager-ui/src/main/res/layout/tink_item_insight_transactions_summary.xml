@@ -55,7 +55,7 @@
         <View
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:backgroundTint="?tink_expensesLightColor"
+            android:backgroundTint="?tink_categoryExpensesBackgroundColor"
             android:background="@drawable/tink_circle" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -64,7 +64,7 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            app:tint="?tink_colorAccent"
+            app:tint="?tink_categoryExpensesColor"
             android:contentDescription="@null"/>
 
       </FrameLayout>
@@ -95,7 +95,7 @@
         <View
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:backgroundTint="?tink_expensesLightColor"
+            android:backgroundTint="?tink_categoryExpensesBackgroundColor"
             android:background="@drawable/tink_circle" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -103,7 +103,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            app:tint="?tink_colorAccent"
+            app:tint="?tink_categoryExpensesColor"
             android:contentDescription="@null"/>
 
       </FrameLayout>
@@ -149,7 +149,7 @@
         <View
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:backgroundTint="?tink_expensesLightColor"
+            android:backgroundTint="?tink_categoryExpensesBackgroundColor"
             android:background="@drawable/tink_circle" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -157,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:tint="?tink_colorAccent"
+            app:tint="?tink_categoryExpensesColor"
             android:contentDescription="@null" />
 
       </FrameLayout>
