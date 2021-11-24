@@ -158,8 +158,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                 viewModel.totalAmount.observe(this@BudgetDetailsChartFragment.viewLifecycle, { totalAmount ->
                     budgetDetailsProgressChartPage.totalAmount.text = totalAmount
                 })
-                viewModel.daysLeft.observe(this@BudgetDetailsChartFragment.viewLifecycle, { daysLeft ->
-                    budgetDetailsProgressChartPage.daysLeft.text = daysLeft
+                viewModel.budgetHeaderText.observe(this@BudgetDetailsChartFragment.viewLifecycle, { budgetHeaderText ->
+                    budgetDetailsProgressChartPage.budgetHeader.text = budgetHeaderText
                 })
                 viewModel.progress.observe(this@BudgetDetailsChartFragment.viewLifecycle, { progress ->
                     budgetDetailsProgressChartPage.budgetProgress.progress = progress ?: 0.0

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.StyleRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
@@ -122,6 +123,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         super.onViewCreated(view, savedInstanceState)
         fragmentCoordinator.clear()
         fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures, isOverviewToolbarVisible), false, FragmentAnimationFlags.NONE)
+        AndroidThreeTen.init(view.context.applicationContext)
     }
 
     fun handleBackPress() =

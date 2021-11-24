@@ -19,7 +19,7 @@
         tools:text="kvar av 3 000 kr" />
 
     <TextView
-        android:id="@+id/daysLeft"
+        android:id="@+id/budgetHeader"
         style="@style/tink_micro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
