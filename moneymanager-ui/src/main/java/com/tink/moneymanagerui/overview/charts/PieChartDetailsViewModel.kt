@@ -119,7 +119,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
     fun getStatistic(context: Context, type: ChartType): LiveData<DetailsChartModel> =
         mapDistinct(statisticData) {
             val data = calculateStatistic(type, it)
-            val color = context.getColorFromAttr(type.color)
+            val color = type.getFeatureColor(context)
             val src = it.source
             val periodStr =
                 getPeriodString(dateUtils, src.period, context)

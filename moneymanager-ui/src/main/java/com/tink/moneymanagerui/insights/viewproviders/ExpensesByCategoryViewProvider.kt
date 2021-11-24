@@ -8,10 +8,10 @@ import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.CategoryTreeViewDetails
+import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import kotlinx.android.synthetic.main.tink_item_insight_expenses_by_category.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
-import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.abs
 import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.extensions.inflate
@@ -20,9 +20,7 @@ import se.tink.insights.getViewType
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
-class ExpensesByCategoryViewProvider @Inject constructor(
-    private val amountFormatter: AmountFormatter
-) : InsightViewProvider {
+class ExpensesByCategoryViewProvider @Inject constructor() : InsightViewProvider {
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
         ExpensesByCategoryViewHolder(parent, actionHandler)
 
@@ -38,7 +36,7 @@ class ExpensesByCategoryViewProvider @Inject constructor(
                 ExpensesByCategory(
                     iconFromCategoryCode(it.categoryCode),
                     categoryName,
-                    amountFormatter.format(it.amount.abs())
+                    it.amount.abs().formatCurrencyRound()
                 )
             }
 

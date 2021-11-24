@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.CurrentInsightsViewModel
@@ -74,4 +75,6 @@ internal class OverviewInsightsFragment : BaseFragment() {
             }
         })
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACTIONABLE_INSIGHTS
 }

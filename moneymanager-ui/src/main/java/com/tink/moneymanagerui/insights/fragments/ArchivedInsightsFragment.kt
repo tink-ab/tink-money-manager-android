@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.ArchivedInsightsViewModel
@@ -76,6 +77,8 @@ class ArchivedInsightsFragment : BaseFragment() {
         super.authorizedOnStart()
         viewModel.refresh()
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACTIONABLE_INSIGHTS
 
     companion object {
         fun newInstance() = ArchivedInsightsFragment()

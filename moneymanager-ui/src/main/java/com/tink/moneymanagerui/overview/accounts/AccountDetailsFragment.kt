@@ -2,6 +2,7 @@ package com.tink.moneymanagerui.overview.accounts
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
@@ -123,7 +125,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         adapter.onTransactionItemClickedListener = { id ->
             CategorizationFlowFragment
-                .newInstance(id)
+                .newInstance(id, MoneyManagerFeatureType.ACCOUNTS)
                 .also {
                     fragmentCoordinator.replace(
                         it,
@@ -135,6 +137,8 @@ internal class AccountDetailsFragment : BaseFragment() {
         recyclerView.adapter = adapter
     }
 
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
+
     companion object {
 
         private const val ACCOUNT_ID_ARGS = "account_id_args"
@@ -143,10 +147,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         fun newInstance(accountId: String): BaseFragment =
             AccountDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ACCOUNT_ID_ARGS, accountId)
-
-                }
+                arguments = bundleOf(ACCOUNT_ID_ARGS to accountId)
             }
     }
 }

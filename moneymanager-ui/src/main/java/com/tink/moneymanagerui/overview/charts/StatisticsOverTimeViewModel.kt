@@ -21,7 +21,7 @@ import org.threeten.bp.Instant
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
 import se.tink.android.repository.user.UserRepository
-import se.tink.commons.categories.iconColor
+import se.tink.commons.categories.graphColor
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.recursiveIdList
@@ -154,7 +154,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 
                     val amountLabel = amountFormatter.format(it.amount, currency, useSymbol = true, useRounding = true)
                     val factor = it.amount / maxValue
-                    val color = category.value?.iconColor() ?: 0
+                    val color = category.value?.graphColor() ?: 0
 
                     BarChartItem(amountLabel, periodLabel, factor.toFloat(), color)
                 }

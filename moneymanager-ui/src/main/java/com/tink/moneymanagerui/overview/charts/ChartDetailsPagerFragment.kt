@@ -25,6 +25,7 @@ import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
 import com.tink.model.time.Period
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 
 private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0
@@ -119,7 +120,8 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
         val fragment = CategorySelectionFragment.newInstance(
             type.type,
             viewModel.category.value?.code,
-            CategorySelectionFragment.Options(dropdownToolbarAppearance = false)
+            CategorySelectionFragment.Options(dropdownToolbarAppearance = false),
+            MoneyManagerFeatureType.STATISTICS
         )
         fragment.setTargetFragment(this, 0)
         fragmentCoordinator.replace(
@@ -136,9 +138,14 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
                 categoryId = viewModel.category.value?.id,
                 title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
         )
-        val fragment = TransactionsListFragment.newInstance(metaData)
+        val fragment = TransactionsListFragment.newInstance(
+            metaData,
+            MoneyManagerFeatureType.STATISTICS
+        )
         fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.SLIDE_UP)
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
 
     companion object {
         @JvmStatic

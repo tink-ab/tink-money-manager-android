@@ -45,6 +45,17 @@
     <item name="tink_textColorSecondaryDisabled">@color/tink_disabled_greyblack</item>
     <item name="tink_textColorPrimaryInverse">@color/tink_white</item>
     <item name="tink_cardBackgroundColor">@color/tink_white</item>
+    <item name="tink_createBudgetIconColor">@color/tink_color_error</item>
+    <item name="tink_createBudgetIconBackgroundColor">@color/tink_expensive_blue_light</item>
+    <item name="tink_createBudgetButtonColor">@color/tink_color_error</item>
+    <item name="tink_uncategorizedIconColor">?tink_uncategorizedColor</item>
+    <item name="tink_incomeIconColor">?tink_incomeColor</item>
+    <item name="tink_expensesIconColor">?tink_expensesColor</item>
+    <item name="tink_transferIconColor">?tink_transferColor</item>
+    <item name="tink_uncategorizedIconBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_incomeIconBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_expensesIconBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_transferIconBackgroundColor">?tink_uncategorizedLightColor</item>
 
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
@@ -82,6 +93,7 @@
 
     <!-- Icon shape styles -->
     <item name="tink_categoryIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
+    <item name="tink_createBudgetIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
 
     <item name="tink_checkbox_corner_radius_in_dp">12dp</item>
 

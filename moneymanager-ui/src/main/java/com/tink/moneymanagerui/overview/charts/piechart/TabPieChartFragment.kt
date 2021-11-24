@@ -1,6 +1,5 @@
 package com.tink.moneymanagerui.overview.charts.piechart
 
-
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -19,6 +18,7 @@ import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
 import com.tink.model.category.Category
 import com.tink.model.time.Period
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import javax.inject.Inject
 
 private const val TYPE_ARG = "type"
@@ -53,6 +53,8 @@ internal class TabPieChartFragment : BaseFragment(), PeriodProvider {
             formatter = viewModel.periodFormatter
         }
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
 
     override fun onChildViewReady(child: BaseFragment) = onViewReady()
 
@@ -92,7 +94,3 @@ internal class PieChartNavigation(private val coordinator: FragmentCoordinator) 
         }
     }
 }
-
-
-
-

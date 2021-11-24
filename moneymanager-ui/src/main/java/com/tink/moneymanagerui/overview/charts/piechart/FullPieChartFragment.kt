@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.PieChartLabelView
 import com.tink.moneymanagerui.charts.extensions.childOrNull
@@ -30,14 +31,13 @@ import com.tink.moneymanagerui.overview.charts.StatisticItem
 import com.tink.moneymanagerui.overview.charts.StatisticItemsList
 import com.tink.moneymanagerui.overview.getAmountStringForOverviewPieChart
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
+import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.setImageResFromAttr
-import se.tink.commons.extensions.tint
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -88,21 +88,31 @@ internal class FullPieChartFragment : BaseFragment() {
     private fun createLabel(item: StatisticItem, currency: String, startAngle: Float, sweep: Float): PieChartLabelView {
         val anchor = startAngle + sweep / 2f
         val lineWidth = resources.getDimension(R.dimen.tink_pie_chart_label_line_width)
-        val iconColor = ownTheme.iconTheme.iconColorAttr
-        val circleColorRes = ownTheme.iconTheme.iconCircleColorAttr
-        val circleColor = requireContext().getColorFromAttr(circleColorRes)
+
+        val iconColor = view.context.resolveColorForFeature(
+            ownTheme.iconTheme.iconColorAttr,
+            MoneyManagerFeatureType.STATISTICS
+        )
+        val circleColor = view.context.resolveColorForFeature(
+            ownTheme.iconTheme.iconCircleColorAttr,
+            MoneyManagerFeatureType.STATISTICS
+        )
+        val primaryTextColor = view.context.resolveColorForFeature(R.attr.tink_textColorPrimary, MoneyManagerFeatureType.STATISTICS)
         return PieChartLabelView(requireContext(), anchor).also { label ->
             val pieChartLabel = TinkPieChartLabelBinding.inflate(layoutInflater, label, true)
 
-            pieChartLabel.pieChartText.text = amountFormatter.format(item.amount.toDouble(), currency, useSymbol = true)
+            pieChartLabel.pieChartText.text =
+                amountFormatter.format(item.amount.toDouble(), currency, useSymbol = true)
+            pieChartLabel.pieChartText.setTextColor(primaryTextColor)
             pieChartLabel.icon.setImageResFromAttr(item.category.getIcon())
-            pieChartLabel.icon.tint(iconColor)
-            pieChartLabel.icon.setBackgroundColor(requireContext().getColorFromAttr(circleColorRes))
+            pieChartLabel.icon.setColorFilter(iconColor)
+            pieChartLabel.icon.setBackgroundColor(circleColor)
             pieChartLabel.icon.setOnClickListener { onItemClick(item) }
 
             label.transitionName = item.category.code
             label.isTransitionGroup = false
-            label.radialPadding = resources.getDimension(R.dimen.tink_pie_chart_label_radial_padding)
+            label.radialPadding =
+                resources.getDimension(R.dimen.tink_pie_chart_label_radial_padding)
             label.decorator = LabelDecorator(label, circleColor, lineWidth)
         }
     }
@@ -131,6 +141,8 @@ internal class FullPieChartFragment : BaseFragment() {
             })
         }
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
 
     companion object {
         fun newInstance(type: ChartType) = FullPieChartFragment().apply {
@@ -161,6 +173,3 @@ internal class LabelDecorator(private val view: PieChartLabelView, @ColorInt col
         canvas.drawLine(tmp.exactCenterX(), tmp.exactCenterY(), anchor.x, anchor.y, paint)
     }
 }
-
-
-

@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.overview
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.transition.Fade
@@ -7,18 +8,18 @@ import android.transition.TransitionSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.StatisticType
-import com.tink.moneymanagerui.extensions.onPageSelected
-import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
-import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
 import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.databinding.TinkOverviewChartPageBinding
@@ -27,7 +28,9 @@ import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
 import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.piechart.addBackSegment
 import com.tink.moneymanagerui.overview.charts.piechart.addSegments
+import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.*
+import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
 import se.tink.commons.currency.AmountFormatter
 import javax.inject.Inject
 import kotlin.math.abs
@@ -65,13 +68,22 @@ internal class OverviewChartFragment : BaseFragment() {
         }
     }
 
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
+
     private inner class ChartPagerAdapter(val statisticTypes: List<StatisticType>) : PagerAdapter() {
         override fun isViewFromObject(view: View, obj: Any) = obj == view
         override fun getCount() = statisticTypes.size
         override fun destroyItem(container: ViewGroup, position: Int, obj: Any) = container.removeView(obj as View)
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
-            val binding = TinkOverviewChartPageBinding.inflate(layoutInflater, container, true)
+
+            val binding =
+                FinanceOverviewFragment.featureSpecificThemes[MoneyManagerFeatureType.STATISTICS]?.let { featureThemeRes ->
+                    val contextThemeWrapper: Context = ContextThemeWrapper(activity, featureThemeRes)
+                    val localInflater: LayoutInflater = LayoutInflater.from(container.context).cloneInContext(contextThemeWrapper)
+                    TinkOverviewChartPageBinding.inflate(localInflater, container, true)
+                } ?: TinkOverviewChartPageBinding.inflate(layoutInflater, container, true)
+
             return binding.root.also {
                 // Start observing after initial layout is done to support transitions
                 it.post { doObserverModel(binding, position, it as ViewGroup) }
@@ -204,6 +216,3 @@ private class PageTransformer(resources: Resources) : ViewPager.PageTransformer 
         return maxOf(-1f, minOf(1f, (page.left - paddingLeft - scrollX) / clientWidth.toFloat()))
     }
 }
-
-
-

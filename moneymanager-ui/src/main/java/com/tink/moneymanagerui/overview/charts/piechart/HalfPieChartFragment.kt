@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.view.*
 import com.tink.moneymanagerui.charts.transitions.ChangePositionTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
@@ -131,7 +132,10 @@ internal class HalfPieChartFragment : BaseFragment() {
                 transactionIds = item.ids
             )
             fragmentCoordinator.add(
-                fragment = TransactionsListFragment.newInstance(metaData),
+                fragment = TransactionsListFragment.newInstance(
+                    metaData,
+                    MoneyManagerFeatureType.STATISTICS
+                ),
                 addToBackStack = true,
                 animation = FragmentAnimationFlags.SLIDE_UP
             )
@@ -158,6 +162,8 @@ internal class HalfPieChartFragment : BaseFragment() {
             addTransition(Fade(Fade.MODE_IN))
         })
     }
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS
 
     companion object {
         fun newInstance(type: ChartType) = HalfPieChartFragment().apply {
