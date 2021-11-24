@@ -45,7 +45,7 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
 
     sealed class BudgetColor(@AttrRes val color: Int, @AttrRes val lightColor: Int) {
         object OverBudget : BudgetColor(R.attr.tink_warningColor, R.attr.tink_warningLightColor)
-        object WithinBudget : BudgetColor(R.attr.tink_categoryExpensesColor, R.attr.tink_categoryExpensesBackgroundColor)
+        object WithinBudget : BudgetColor(R.attr.tink_expensesIconColor, R.attr.tink_expensesIconBackgroundColor)
     }
 
     override val viewType: InsightViewType = getViewType()

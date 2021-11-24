@@ -28,7 +28,7 @@
       android:layout_height="40dp"
       android:layout_marginStart="24dp"
       android:background="@drawable/tink_circle"
-      android:backgroundTint="?tink_categoryUncategorizedBackgroundColor"
+      android:backgroundTint="?attr/tink_uncategorizedIconBackgroundColor"
       app:layout_constraintBottom_toBottomOf="@+id/topContainer"
       app:layout_constraintStart_toStartOf="@+id/topContainer"
       app:layout_constraintTop_toTopOf="@+id/topContainer"/>
@@ -39,7 +39,7 @@
       android:layout_width="20dp"
       android:layout_height="20dp"
       android:drawable="@drawable/tink_uncategorized"
-      android:tint="?tink_categoryUncategorizedColor"
+      android:tint="?attr/tink_uncategorizedIconColor"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
       app:layout_constraintEnd_toEndOf="@+id/iconBackground"
       app:layout_constraintStart_toStartOf="@+id/iconBackground"

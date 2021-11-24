@@ -337,8 +337,8 @@ private class ActionItemViewHolder(
 
         icon.setImageResFromAttr(actionItem.iconRes)
 
-        icon.tint(R.attr.tink_categoryExpensesColor)
-        icon.setBackgroundColor(itemView.context.getColorFromAttr(R.attr.tink_categoryExpensesBackgroundColor))
+        icon.tint(R.attr.tink_expensesIconColor)
+        icon.setBackgroundColor(itemView.context.getColorFromAttr(R.attr.tink_expensesIconBackgroundColor))
     }
 }
 

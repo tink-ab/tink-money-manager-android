@@ -49,15 +49,15 @@
     <attr name="tink_cardBackgroundColor" format="color|reference" />
     <attr name="tink_addBudgetIconBackgroundColor" format="color|reference" />
 
-    <attr name="tink_categoryUncategorizedColor" format="color|reference"/>
-    <attr name="tink_categoryIncomeColor" format="color|reference"/>
-    <attr name="tink_categoryExpensesColor" format="color|reference"/>
-    <attr name="tink_categoryTransferColor" format="color|reference"/>
+    <attr name="tink_uncategorizedIconColor" format="color|reference"/>
+    <attr name="tink_incomeIconColor" format="color|reference"/>
+    <attr name="tink_expensesIconColor" format="color|reference"/>
+    <attr name="tink_transferIconColor" format="color|reference"/>
 
-    <attr name="tink_categoryUncategorizedBackgroundColor" format="color|reference"/>
-    <attr name="tink_categoryIncomeBackgroundColor" format="color|reference"/>
-    <attr name="tink_categoryExpensesBackgroundColor" format="color|reference"/>
-    <attr name="tink_categoryTransferBackgroundColor" format="color|reference"/>
+    <attr name="tink_uncategorizedIconBackgroundColor" format="color|reference"/>
+    <attr name="tink_incomeIconBackgroundColor" format="color|reference"/>
+    <attr name="tink_expensesIconBackgroundColor" format="color|reference"/>
+    <attr name="tink_transferIconBackgroundColor" format="color|reference"/>
 
     <!--    Icons-->
     <attr name="tink_icon_category_all_expenses" format="integer|reference" />
