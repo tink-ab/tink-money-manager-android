@@ -1,5 +1,5 @@
 steps:
-  - name: ':male-detective: run detect-secrets on new commits'
+  - name: ':male-detective: run detect-secrets on new commits in the repo'
     branches: '!master'
     plugins:
     - docker#v3.3.0:
