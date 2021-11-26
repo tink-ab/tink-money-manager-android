@@ -69,7 +69,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/tink_icon_add_button"
-        app:tint="?attr/tink_expensesColor"
+        app:tint="?attr/tink_createBudgetIconColor"
         android:contentDescription="@string/tink_budget_create_button"
         android:background="?attr/tink_createBudgetIconBackgroundColor"
         app:shapeAppearance="?attr/tink_createBudgetIconShapeStyle" />
