@@ -157,7 +157,7 @@
   <string name="tink_budget_period_day">day</string>
   <string name="tink_budget_period_year">year</string>
   <string name="tink_budget_period_chart_week_label">w%d</string>
-  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But now you don\'t have any!</string>
+  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But currently you don\'t have any.</string>
   <string name="tink_budget_transactions_toolbar_title">Budget</string>
   <string name="tink_budget_transactions_header_amount_left_of">%1$s left of %2$s</string>
   <string name="tink_budget_transactions_header_amount_over">%1$s over budget of %2$s</string>
