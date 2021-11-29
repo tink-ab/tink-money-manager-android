@@ -11,7 +11,7 @@ ext {
     lifecycleVersion = "2.2.0"
     materialVersion = "1.2.0"
     supportLibVersion = "1.0.0"
-    timberVersion = "5.0.1"
+    timberVersion = "4.7.1"
 
     tinkCoreVersion = "0.6.8"
 
