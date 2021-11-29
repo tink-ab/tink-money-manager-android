@@ -18,6 +18,8 @@ import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
 import com.tink.moneymanagerui.extensions.toStartOfLocalDate
 import com.tink.moneymanagerui.extensions.totalMonths
+import com.tink.moneymanagerui.util.extensions.floorAmount
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import org.joda.time.DateTime
@@ -116,11 +118,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     val totalAmount: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            context.getString(R.string.tink_budget_details_total_amount, budgetPeriod.budgetAmount.formatCurrencyExactIfNotIntegerWithSign())
+            context.getString(R.string.tink_budget_details_total_amount, budgetPeriod.budgetAmount.formatCurrencyExact())
         }
 
     val amountLeft: LiveData<String> = Transformations.map(budgetDetailsDataHolder.budgetPeriod) {
-        (it.budgetAmount - it.spentAmount).formatCurrencyExactIfNotIntegerWithSign()
+        (it.budgetAmount - it.spentAmount).formatCurrencyExact()
     }
 
     val amountLeftColor: LiveData<Int> =
@@ -468,31 +470,31 @@ private fun composeRemainingBudgetStatusString(
 
         when {
             remainingYears > 1 -> {
-                averageAmount = remainingAmount / remainingYears.toDouble()
+                averageAmount = remainingAmount / remainingYears
                 context.getString(
-                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
+                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.floorAmount()
                 )
             }
             remainingMonths > 1 -> {
-                averageAmount = remainingAmount / remainingMonths.toDouble()
+                averageAmount = remainingAmount / remainingMonths
                 context.getString(
-                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
+                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.floorAmount()
                 )
             }
             remainingWeeks > 1 -> {
-                averageAmount = remainingAmount / remainingWeeks.toDouble()
+                averageAmount = remainingAmount / remainingWeeks
                 context.getString(
-                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
+                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.floorAmount()
                 )
             }
             remainingDays > 1 -> {
-                averageAmount = remainingAmount / remainingDays.toDouble()
+                averageAmount = remainingAmount / remainingDays
                 context.getString(
-                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.formatCurrencyExactIfNotIntegerWithSign()
+                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.floorAmount()
                 )
             }
             else -> {
-                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.formatCurrencyExactIfNotIntegerWithSign())
+                context.getString(R.string.tink_budget_details_amount_left_message_plain, remainingAmount.floorAmount())
             }
         }
     } else if (now.isAfter(end)) { // Budget period in the past
@@ -502,7 +504,7 @@ private fun composeRemainingBudgetStatusString(
     } else {
         context.getString(
             R.string.tink_budget_details_amount_left_message_plain,
-            remainingAmount.formatCurrencyExactIfNotIntegerWithSign()
+            remainingAmount.floorAmount()
         )
     }
 }
