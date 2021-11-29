@@ -1,6 +1,5 @@
 steps:
   - name: ':male-detective: run detect-secrets on new commits'
-    branches: '!master'
     plugins:
     - docker#v3.3.0:
         image: gcr.io/tink-containers/detect-secrets:v1.1.0
