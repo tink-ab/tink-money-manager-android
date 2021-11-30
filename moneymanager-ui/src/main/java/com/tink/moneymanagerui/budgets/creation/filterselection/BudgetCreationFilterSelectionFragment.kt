@@ -77,6 +77,15 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
             }
         })
 
+        viewModel.allExpensesClicked.observe(viewLifecycle, { event ->
+            event.getContentIfNotHandled()?.let { isExpensesClicked ->
+                if (isExpensesClicked) {
+                    viewModel.onAllExpensesSelected()
+                    navigation.goToSpecificationFragment()
+                }
+            }
+        })
+
         actionButton.setOnClickListener {
             adapter.selectedItems
                 .takeIf { it.isNotEmpty() }

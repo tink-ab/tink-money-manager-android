@@ -3,6 +3,7 @@ package se.tink.commons.categories.enums;
 
 public enum CategoryExpenseType {
 
+	EXPENSES_ALL("allexpenses", "expenses"),
 	EXPENSES_FOOD("fooddrinks", "expenses:food"),
 	EXPENSES_WELLNESS("health", "expenses:wellness"),
 	EXPENSES_HOME("home", "expenses:home"),

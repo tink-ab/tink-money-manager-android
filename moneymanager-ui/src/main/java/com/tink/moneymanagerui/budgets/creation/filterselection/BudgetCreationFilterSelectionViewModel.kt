@@ -12,6 +12,7 @@ import se.tink.android.categories.CategoryRepository
 import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.livedata.Event
 import com.tink.moneymanagerui.R
+import se.tink.commons.categories.enums.CategoryExpenseType
 import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
@@ -50,18 +51,29 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
     private val _searchClicked = MutableLiveData<Event<Boolean>>()
     val searchClicked: LiveData<Event<Boolean>> = _searchClicked
 
+    private val _allExpensesClicked = MutableLiveData<Event<Boolean>>()
+    val allExpensesClicked: LiveData<Event<Boolean>> = _allExpensesClicked
+
     internal val filterItems = MediatorLiveData<List<TreeListSelectionItem>>().apply {
         fun update() {
             treeListSelectionItems.value
                 ?.takeIf { it.isNotEmpty() }
-                ?.plus(TreeListSelectionItem.ActionItem(
-                    id = context.getString(R.string.tink_filter_search_item),
-                    label = context.getString(R.string.tink_budget_create_with_keyword),
-                    iconRes = R.attr.tink_icon_category_search,
-                    action = { _searchClicked.postValue(Event(true)) }
-                ))
-                ?.also {
-                    postValue(it.updateBy(selectedFilterToItems.value))
+                ?.let { categories ->
+                    listOf(TreeListSelectionItem.ActionItem(
+                        id = context.getString(R.string.tink_filter_all_expenses_item),
+                        label = context.getString(R.string.tink_budget_create_all_expenses),
+                        iconRes = R.attr.tink_icon_category_all_expenses,
+                        action = { _allExpensesClicked.postValue(Event(true)) }
+                    ))
+                        .plus(categories)
+                        .plus(TreeListSelectionItem.ActionItem(
+                            id = context.getString(R.string.tink_filter_search_item),
+                            label = context.getString(R.string.tink_budget_create_with_keyword),
+                            iconRes = R.attr.tink_icon_category_search,
+                            action = { _searchClicked.postValue(Event(true)) }))
+                        .also {
+                            postValue(it.updateBy(selectedFilterToItems.value))
+                        }
                 }
         }
         addSource(treeListSelectionItems) { update() }
@@ -89,6 +101,17 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
                 )
             )
         }
+    }
+
+    fun onAllExpensesSelected() {
+        dataHolder.selectedFilter.postValue(
+            Budget.Specification.Filter(
+                accounts = emptyList(),
+                categories = listOf(Budget.Specification.Filter.Category(CategoryExpenseType.EXPENSES_ALL.code)),
+                tags = emptyList(),
+                freeTextQuery = ""
+            )
+        )
     }
 
     val showActionButton = MediatorLiveData<Boolean>().apply {
