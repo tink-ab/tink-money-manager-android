@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSign
+import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import kotlinx.android.synthetic.main.tink_item_overview_account.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
@@ -68,7 +68,7 @@ internal class AccountItemViewHolder(
             // Hiding the bank logo for now to align with iOS
 //            bankLogo.setImageURI(account.images.icon)
             accountName.text = account.name
-            accountBalance.text = account.balance.formatCurrencyExactWithoutSign()
+            accountBalance.text = account.balance.formatCurrencyRound()
         }
     }
 }

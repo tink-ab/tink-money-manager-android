@@ -31,7 +31,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_category_default_child_format` | %s - Other |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
-| `tink_latest_transactions_toolbar_title` | Latest transactions |
+| `tink_latest_transactions_toolbar_title` | All transactions |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
 | `tink_transaction_similar_button_accept_text` | Yes, change selected |

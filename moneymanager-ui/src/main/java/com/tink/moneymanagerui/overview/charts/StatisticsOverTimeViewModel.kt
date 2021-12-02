@@ -173,7 +173,12 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 userProfile.value?.currency
             ) { periodBalances, currency ->
                 val averageAmount = periodBalances.ifEmpty { null }?.map { it.amount }?.average() ?: 0.0
-                val averageString = amountFormatter.format(averageAmount, currency, useSymbol = true)
+                val averageString = amountFormatter.format(
+                    averageAmount,
+                    currency,
+                    useSymbol = true,
+                    useRounding = true
+                )
                 postValue(
                     context.resources.getString(
                         R.string.tink_expenses_header_description_average,
@@ -193,7 +198,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 userProfile.value?.currency
             ) { periodBalances, currency ->
                 val sumAmount = periodBalances.map { it.amount }.sum()
-                postValue(amountFormatter.format(sumAmount, currency, useSymbol = true))
+                postValue(amountFormatter.format(sumAmount, currency, useSymbol = true, useRounding = true))
             }
         }
         addSource(periodBalances) { update() }

@@ -27,7 +27,7 @@
   <string name="tink_overview_toolbar_title">Overview</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
-  <string name="tink_latest_transactions_toolbar_title">Latest transactions</string>
+  <string name="tink_latest_transactions_toolbar_title">All transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
   <string name="tink_transaction_similar_title">Similar transactions</string>

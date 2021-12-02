@@ -102,7 +102,7 @@ internal class FullPieChartFragment : BaseFragment() {
             val pieChartLabel = TinkPieChartLabelBinding.inflate(layoutInflater, label, true)
 
             pieChartLabel.pieChartText.text =
-                amountFormatter.format(item.amount.toDouble(), currency, useSymbol = true)
+                amountFormatter.format(item.amount.toDouble(), currency, useSymbol = true, useRounding = true)
             pieChartLabel.pieChartText.setTextColor(primaryTextColor)
             pieChartLabel.icon.setImageResFromAttr(item.category.getIcon())
             pieChartLabel.icon.setColorFilter(iconColor)
