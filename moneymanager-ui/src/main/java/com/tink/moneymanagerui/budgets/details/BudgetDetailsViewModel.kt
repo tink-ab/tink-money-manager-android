@@ -20,7 +20,6 @@ import com.tink.moneymanagerui.extensions.toStartOfLocalDate
 import com.tink.moneymanagerui.extensions.totalMonths
 import com.tink.moneymanagerui.util.extensions.floorAmount
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import org.joda.time.DateTime
 import org.joda.time.Days
@@ -372,7 +371,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
                                     ?.let { amount ->
                                         context.getString(
                                             R.string.tink_budget_details_chart_status_message_current_week,
-                                            amount.formatCurrencyExactIfNotIntegerWithSign()
+                                            amount.formatCurrencyExact()
                                         )
                                     }
                                     ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_week)
@@ -384,7 +383,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
                                     ?.let { amount ->
                                         context.getString(
                                             R.string.tink_budget_details_chart_status_message_current_month,
-                                            amount.formatCurrencyExactIfNotIntegerWithSign()
+                                            amount.formatCurrencyExact()
                                         )
                                     }
                                     ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_month)
@@ -396,7 +395,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
                                     ?.let { amount ->
                                         context.getString(
                                             R.string.tink_budget_details_chart_status_message_current_year,
-                                            amount.formatCurrencyExactIfNotIntegerWithSign()
+                                            amount.formatCurrencyExact()
                                         )
                                     }
                                     ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_year)

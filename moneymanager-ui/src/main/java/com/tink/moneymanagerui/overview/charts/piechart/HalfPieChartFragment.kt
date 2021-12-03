@@ -111,7 +111,7 @@ internal class HalfPieChartFragment : BaseFragment() {
         bindItems(view.itemsList, halfPieChartItems, HalfChartItemTheme(requireContext().getColorFromAttr(ownTheme.chartItemColor)))
         pieChart.transitionName = getString(R.string.tink_pie_chart_transition, model.title)
         halfPieChartTotalAmount.transitionName = getString(R.string.tink_amount_transition, model.title)
-        halfPieChartTotalAmount.text = amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true, useRounding = true)
+        halfPieChartTotalAmount.text = amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
 
         view.rootView.post { onViewReady() }
     }

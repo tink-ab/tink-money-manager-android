@@ -8,7 +8,7 @@ import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.BudgetCreateSuggestionViewDetails
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_budget_create_suggestion.view.*
 import kotlinx.android.synthetic.main.tink_item_insight_budget_create_suggestion.view.icon
 import se.tink.android.annotations.ContributesInsightViewProvider
@@ -79,7 +79,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
                 savePerYearText.text =
                     context.getString(
                         R.string.tink_insights_budget_create_suggestion_save_per_year_text,
-                        data.savePerYearAmount.formatCurrencyRound()
+                        data.savePerYearAmount.formatCurrencyExact()
                     )
             }
         }

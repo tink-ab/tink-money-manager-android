@@ -150,6 +150,5 @@ internal fun getAmountStringForOverviewPieChart(
     amountFormatter.format(
         amount,
         currency,
-        useSymbol = context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart),
-        useRounding = true
+        useSymbol = context.resources.getBoolean(R.bool.tink_config_overview_show_currency_symbol_in_chart)
     )

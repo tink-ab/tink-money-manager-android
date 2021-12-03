@@ -8,7 +8,7 @@ import com.tink.model.insights.InsightType
 import com.tink.model.relations.TransactionSummary
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_transactions_summary.view.*
 import org.joda.time.DateTime
 import se.tink.android.annotations.ContributesInsightViewProvider
@@ -76,7 +76,7 @@ class TransactionsSummaryViewProvider @Inject constructor(
                     }
                 )
 
-                val totalExpenses = data.transactionSummary.totalExpenses.formatCurrencyRound()
+                val totalExpenses = data.transactionSummary.totalExpenses.formatCurrencyExact()
                 total_expenses_text.text = context.getString(R.string.tink_insights_total_expenses_text, totalExpenses)
 
                 transactions_last_month_text.text = context.getString(
@@ -90,7 +90,7 @@ class TransactionsSummaryViewProvider @Inject constructor(
                     data.transactionSummary.commonTransactionsOverview.mostCommonTransactionCount
                 )
 
-                val largestExpense = data.transactionSummary.largestExpense.amount.formatCurrencyRound()
+                val largestExpense = data.transactionSummary.largestExpense.amount.formatCurrencyExact()
                 largest_transaction_text.text = context.getString(R.string.tink_insights_largest_transaction_text, largestExpense)
                 largest_transaction_recipient_text.text = context.getString(R.string.tink_insights_largest_transaction_recipient_text,
                     data.transactionSummary.largestExpense.description,

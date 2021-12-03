@@ -5,7 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightData
 import com.tink.model.misc.Amount
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.commons.extensions.doubleValue
@@ -120,8 +120,8 @@ internal class BudgetSummaryEnricher @Inject constructor(
                     targetAmount - differenceAmount
                 }
 
-            val targetAmountText = targetAmount.formatCurrencyRound()
-            val spentAmountText = spentAmount.formatCurrencyRound()
+            val targetAmountText = targetAmount.formatCurrencyExact()
+            val spentAmountText = spentAmount.formatCurrencyExact()
 
             BudgetSummaryViewDetails(
                 budgetItems,

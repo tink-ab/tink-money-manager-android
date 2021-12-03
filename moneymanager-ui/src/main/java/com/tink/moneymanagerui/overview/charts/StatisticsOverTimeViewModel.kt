@@ -176,8 +176,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 val averageString = amountFormatter.format(
                     averageAmount,
                     currency,
-                    useSymbol = true,
-                    useRounding = true
+                    useSymbol = true
                 )
                 postValue(
                     context.resources.getString(
@@ -198,7 +197,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 userProfile.value?.currency
             ) { periodBalances, currency ->
                 val sumAmount = periodBalances.map { it.amount }.sum()
-                postValue(amountFormatter.format(sumAmount, currency, useSymbol = true, useRounding = true))
+                postValue(amountFormatter.format(sumAmount, currency, useSymbol = true))
             }
         }
         addSource(periodBalances) { update() }
