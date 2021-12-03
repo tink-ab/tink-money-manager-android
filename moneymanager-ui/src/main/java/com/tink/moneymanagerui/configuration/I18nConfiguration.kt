@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.TimezoneManager
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.repository.user.UserRepository
 import se.tink.utils.DateUtils.KEY_TODAY
@@ -29,6 +28,7 @@ import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR_COMPACT
 import se.tink.utils.ThreadSafeDateFormat.FORMATTER_MONTH_NAME
 import se.tink.utils.ThreadSafeDateFormat.setDateFormatsMap
+import java.util.TimeZone
 import javax.inject.Inject
 
 internal class I18nConfiguration @Inject constructor(
@@ -43,7 +43,7 @@ internal class I18nConfiguration @Inject constructor(
         })
 
         val locale = suitableLocaleFinder.findLocale()
-        val timezone = TimezoneManager.defaultTimezone
+        val timezone = TimeZone.getDefault().id
         getInstance(locale, timezone).formatHumanStrings = getMapWithHumanDateStrings()
         setDateFormatsMap(getDateFormatsMap())
     }
