@@ -96,11 +96,11 @@ internal class BudgetSummaryEnricher @Inject constructor(
                 BudgetSummaryDetailItem(budgetState, iconType)
             }
 
-        val targetAmountSum = budgets.value
-            ?.filter { (achievedIds + overspentIds).contains(it.id) }
-            ?.map { it.amount }
-            ?.takeIf { it.isNotEmpty() }
-            ?.sumOrNull()
+        val targetAmountSum = (achievedBudgets + overspentBudgets)
+            .map {
+                it.budgetPeriod.budgetAmount
+            }
+            .sumOrNull()
 
         return whenNonNull(
             items,
