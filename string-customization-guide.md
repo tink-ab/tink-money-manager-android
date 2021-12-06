@@ -73,6 +73,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_field_period_custom` | Custom |
 | `tink_budget_create_period_end_invalid_message` | End date must be after start date. |
 | `tink_budget_create_with_keyword` | Create with keyword |
+| `tink_budget_create_all_expenses` | All expenses |
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_edit_menu_delete_budget_item` | Delete Budget |
 | `tink_budget_edit_toolbar_title` | Edit budget |

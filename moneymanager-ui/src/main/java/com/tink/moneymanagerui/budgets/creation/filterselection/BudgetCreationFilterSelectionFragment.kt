@@ -72,7 +72,18 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
         viewModel.searchClicked.observe(viewLifecycle, { event ->
             event.getContentIfNotHandled()?.let { isSearchClicked ->
                 if (isSearchClicked) {
+                    adapter.removeSelectedItems()
                     navigation.goToSearchFragment()
+                }
+            }
+        })
+
+        viewModel.allExpensesClicked.observe(viewLifecycle, { event ->
+            event.getContentIfNotHandled()?.let { isExpensesClicked ->
+                if (isExpensesClicked) {
+                    adapter.removeSelectedItems()
+                    viewModel.onAllExpensesSelected()
+                    navigation.goToSpecificationFragment()
                 }
             }
         })

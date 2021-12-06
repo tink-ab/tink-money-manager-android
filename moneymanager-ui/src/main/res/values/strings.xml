@@ -48,6 +48,7 @@
   <string name="tink_transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="tink_transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
   <string name="tink_filter_search_item" translatable="false">FilterSearchItem</string>
+  <string name="tink_filter_all_expenses_item" translatable="false">AllExpensesItem</string>
 
   <string name="tink_choose_category_text">Choose category</string>
 
@@ -114,6 +115,7 @@
   <string name="tink_budget_create_field_period_custom">Custom</string>
   <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
   <string name="tink_budget_create_with_keyword">Create with keyword</string>
+  <string name="tink_budget_create_all_expenses">All expenses</string>
 
   <string name="tink_budget_category_selection_button">Next</string>
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
