@@ -465,31 +465,35 @@ private fun composeRemainingBudgetStatusString(
         val remainingWeeks = Weeks.weeksBetween(now, end).weeks
         val remainingDays = Days.daysBetween(now, end).days
 
-        val averageAmount: Amount
+        val remainingAmountForPeriod: Amount = when {
+            remainingYears > 1 -> remainingAmount / remainingYears
+            remainingMonths > 1 -> remainingAmount / remainingMonths
+            remainingWeeks > 1 -> remainingAmount / remainingWeeks
+            remainingDays > 1 -> remainingAmount / remainingDays
+            else -> remainingAmount
+        }
 
         when {
+            hasNoMoneyLeftPerPeriod(remainingAmountForPeriod) -> context.getString(R.string.tink_budget_details_amount_left_none_message)
             remainingYears > 1 -> {
-                averageAmount = remainingAmount / remainingYears
                 context.getString(
-                    R.string.tink_budget_details_amount_left_yearly_message, averageAmount.floorAmount()
+                    R.string.tink_budget_details_amount_left_yearly_message,
+                    remainingAmountForPeriod.floorAmount()
                 )
             }
             remainingMonths > 1 -> {
-                averageAmount = remainingAmount / remainingMonths
                 context.getString(
-                    R.string.tink_budget_details_amount_left_monthly_message, averageAmount.floorAmount()
+                    R.string.tink_budget_details_amount_left_monthly_message, remainingAmountForPeriod.floorAmount()
                 )
             }
             remainingWeeks > 1 -> {
-                averageAmount = remainingAmount / remainingWeeks
                 context.getString(
-                    R.string.tink_budget_details_amount_left_weekly_message, averageAmount.floorAmount()
+                    R.string.tink_budget_details_amount_left_weekly_message, remainingAmountForPeriod.floorAmount()
                 )
             }
             remainingDays > 1 -> {
-                averageAmount = remainingAmount / remainingDays
                 context.getString(
-                    R.string.tink_budget_details_amount_left_daily_message, averageAmount.floorAmount()
+                    R.string.tink_budget_details_amount_left_daily_message, remainingAmountForPeriod.floorAmount()
                 )
             }
             else -> {
@@ -507,6 +511,8 @@ private fun composeRemainingBudgetStatusString(
         )
     }
 }
+
+private fun hasNoMoneyLeftPerPeriod(remainingAmount: Amount) = remainingAmount.value.toBigDecimal().toInt() == 0
 
 internal fun ExactNumber.isZero() = this.toBigDecimal().signum() == 0
 internal fun ExactNumber.isBiggerThanOrEqual(other: ExactNumber) = this.toBigDecimal() >= other.toBigDecimal()
