@@ -12,7 +12,7 @@ fun ExactNumber.subtract(other: ExactNumber) =
     toBigDecimal().subtract(other.toBigDecimal()).toExactNumber()
 
 fun ExactNumber.divide(other: ExactNumber): ExactNumber {
-    val result = this.toBigDecimal().divide(other.toBigDecimal(), MathContext.DECIMAL128)
+    val result = this.toBigDecimal().divide(other.toBigDecimal(), MathContext.DECIMAL32)
     return ExactNumber(result)
 }
 

@@ -26,7 +26,7 @@ operator fun Amount.plus(other: Amount): Amount {
 operator fun Amount.div(int: Int): Amount = this.div(int.toDouble())
 
 operator fun Amount.div(double: Double): Amount {
-    val result = this.value.toBigDecimal().divide(BigDecimal(double), MathContext.DECIMAL128)
+    val result = this.value.toBigDecimal().divide(BigDecimal(double), MathContext.DECIMAL32)
     return Amount(ExactNumber(result), this.currencyCode)
 }
 

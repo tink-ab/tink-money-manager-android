@@ -27,7 +27,7 @@
   <string name="tink_overview_toolbar_title">Overview</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
-  <string name="tink_latest_transactions_toolbar_title">Latest transactions</string>
+  <string name="tink_latest_transactions_toolbar_title">All transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
   <string name="tink_transaction_similar_title">Similar transactions</string>
@@ -145,6 +145,7 @@
     <item quantity="one">%s month</item>
     <item quantity="other">%s months</item>
   </plurals>
+  <string name="tink_budget_details_amount_left_none_message">You\'re about to exceed your budget</string>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>
   <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and manage your budget</string>

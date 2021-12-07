@@ -8,7 +8,7 @@ import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.CategoryTreeViewDetails
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_expenses_by_category.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
@@ -36,7 +36,7 @@ class ExpensesByCategoryViewProvider @Inject constructor() : InsightViewProvider
                 ExpensesByCategory(
                     iconFromCategoryCode(it.categoryCode),
                     categoryName,
-                    it.amount.abs().formatCurrencyRound()
+                    it.amount.abs().formatCurrencyExact()
                 )
             }
 
