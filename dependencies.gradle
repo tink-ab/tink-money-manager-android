@@ -66,6 +66,6 @@ ext {
 
             timber                              : "com.jakewharton.timber:timber:$timberVersion",
 
-            money_manager_ui                    : "com.tink.moneymanager:moneymanager-ui:0.17.0"
+            money_manager_ui                    : "com.tink.moneymanager:moneymanager-ui:0.18.0"
     ]
 }
