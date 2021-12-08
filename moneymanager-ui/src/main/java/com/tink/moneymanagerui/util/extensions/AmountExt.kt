@@ -1,12 +1,22 @@
 package com.tink.moneymanagerui.util.extensions
 
 import com.tink.model.misc.Amount
+import com.tink.moneymanagerui.collections.Currencies
 import com.tink.moneymanagerui.util.CurrencyUtils
 import com.tink.moneymanagerui.util.CurrencyUtils.CurrencyFormat
-
+import java.util.Currency
 
 internal fun Amount.formatCurrencyRound(): String {
     return CurrencyUtils.formatCurrencyRound(this)
+}
+
+internal fun Amount.floorAmount(): String {
+    val currencySymbol = try {
+        Currency.getInstance(currencyCode).symbol
+    } catch (exception: Exception) {
+        Currency.getInstance(Currencies.getSharedInstance().defaultCurrencyCode).symbol
+    }
+    return "$currencySymbol${this.value.toBigDecimal().toLong()}"
 }
 
 internal fun Amount.formatCurrencyExact(): String {

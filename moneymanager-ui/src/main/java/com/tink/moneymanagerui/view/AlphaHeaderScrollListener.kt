@@ -9,7 +9,7 @@ internal class AlphaHeaderScrollListener(
 ) : RecyclerView.OnScrollListener() {
 
     private var scrolledY = 0
-    private val scrolledGoneThreshold = 300
+    private val scrolledGoneThreshold = 100
 
     override fun onScrolled(
         recyclerView: RecyclerView,

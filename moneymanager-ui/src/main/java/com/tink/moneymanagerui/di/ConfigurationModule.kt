@@ -2,13 +2,12 @@ package com.tink.moneymanagerui.di
 
 import android.content.Context
 import com.tink.annotations.PfmScope
-import com.tink.moneymanagerui.Timezone
-import com.tink.moneymanagerui.TimezoneManager
 import com.tink.moneymanagerui.configuration.SuitableLocaleFinder
 import dagger.Module
 import dagger.Provides
 import se.tink.utils.DateUtils
 import java.util.Locale
+import java.util.TimeZone
 
 @Module
 internal class ConfigurationModule {
@@ -24,9 +23,9 @@ internal class ConfigurationModule {
     }
 
     @Provides
-    fun provideTimezone(): Timezone = TimezoneManager.defaultTimezone
+    fun provideTimezone(): String = TimeZone.getDefault().id
 
     @Provides
-    fun provideDateUtils(locale: Locale, timezone: Timezone): DateUtils =
+    fun provideDateUtils(locale: Locale, timezone: String): DateUtils =
         DateUtils.getInstance(locale, timezone)
 }

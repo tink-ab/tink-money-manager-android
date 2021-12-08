@@ -24,7 +24,7 @@ import com.tink.moneymanagerui.extensions.minusMonths
 import com.tink.moneymanagerui.extensions.withUtcTimeRetainZone
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
+import com.tink.moneymanagerui.util.extensions.floorAmount
 import com.tink.service.handler.ResultHandler
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
@@ -254,7 +254,6 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                         periodValue.getAverageAmount(it)
                     }
                     .sumOrNull()
-                    ?.formatCurrencyExactIfNotIntegerWithSign()
                     ?.let { formattedAverageValue ->
                         value = context.getString(
                             R.string.tink_budget_edit_field_amount_average_for_period,

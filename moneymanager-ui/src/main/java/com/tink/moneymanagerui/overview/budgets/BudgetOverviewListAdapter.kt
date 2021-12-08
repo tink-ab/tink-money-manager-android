@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithSign
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExactIfNotIntegerWithoutSign
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSign
 import kotlinx.android.synthetic.main.tink_budget_overview_item.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
@@ -128,10 +127,10 @@ class BudgetOverviewItemViewHolder(
         val delta = budgetAmount - spentAmount
         return if (delta.value.isSmallerThan(EXACT_NUMBER_ZERO)) {
             context.getString(R.string.tink_overview_budget_over)
-                .format(delta.formatCurrencyExactIfNotIntegerWithoutSign(), budgetAmount.formatCurrencyRound())
+                .format(delta.formatCurrencyExactWithoutSign(), budgetAmount.formatCurrencyExact())
         } else {
             context.getString(R.string.tink_overview_budget_left_of)
-                .format(delta.formatCurrencyExactIfNotIntegerWithSign(), budgetAmount.formatCurrencyRound())
+                .format(delta.formatCurrencyExact(), budgetAmount.formatCurrencyExact())
         }
     }
 }

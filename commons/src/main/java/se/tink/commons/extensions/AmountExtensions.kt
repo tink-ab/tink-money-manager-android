@@ -3,6 +3,7 @@ package se.tink.commons.extensions
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import java.math.BigDecimal
+import java.math.MathContext
 import kotlin.math.absoluteValue
 
 fun Amount.abs() = Amount(ExactNumber(value.unscaledValue.absoluteValue, value.scale), currencyCode)
@@ -22,8 +23,11 @@ operator fun Amount.plus(other: Amount): Amount {
     return Amount(value.add(other.value), currencyCode)
 }
 
+operator fun Amount.div(int: Int): Amount = this.div(int.toDouble())
+
 operator fun Amount.div(double: Double): Amount {
-    return Amount(value.divide(BigDecimal(double).toExactNumber()), currencyCode)
+    val result = this.value.toBigDecimal().divide(BigDecimal(double), MathContext.DECIMAL32)
+    return Amount(ExactNumber(result), this.currencyCode)
 }
 
 fun Iterable<Amount>.average(): Amount =

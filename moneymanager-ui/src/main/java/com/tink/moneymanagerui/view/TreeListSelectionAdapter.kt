@@ -426,4 +426,16 @@ internal class TreeListMultiSelectionAdapter : TreeListSelectionAdapter() {
         updateExpandedItems()
         calculateDiff(oldFlatData, flatData).dispatchUpdatesTo(this)
     }
+
+    fun removeSelectedItems() {
+        flatData.forEach { treeListItem ->
+            treeListItem.isSelected = false
+            if (treeListItem is TreeListSelectionItem.TopLevelItem) {
+                treeListItem.isExpanded = false
+            }
+        }
+        selectedItems.clear()
+        expandedItems.clear()
+        setMultiSelectionData(flatData)
+    }
 }

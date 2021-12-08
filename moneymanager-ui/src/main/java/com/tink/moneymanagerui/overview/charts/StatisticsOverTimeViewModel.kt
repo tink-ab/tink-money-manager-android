@@ -173,7 +173,11 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                 userProfile.value?.currency
             ) { periodBalances, currency ->
                 val averageAmount = periodBalances.ifEmpty { null }?.map { it.amount }?.average() ?: 0.0
-                val averageString = amountFormatter.format(averageAmount, currency, useSymbol = true)
+                val averageString = amountFormatter.format(
+                    averageAmount,
+                    currency,
+                    useSymbol = true
+                )
                 postValue(
                     context.resources.getString(
                         R.string.tink_expenses_header_description_average,

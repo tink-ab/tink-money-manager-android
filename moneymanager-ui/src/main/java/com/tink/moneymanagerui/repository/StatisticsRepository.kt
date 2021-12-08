@@ -116,8 +116,8 @@ internal class StatisticsRepository @Inject constructor(
     }
 
     private fun getZeroDataStatisticsForType(currencyCode: String, dateTime: DateTime): Statistics {
-        val startOfCurrentMonth = dateTime.dayOfMonth().withMinimumValue()
-        val endOfCurrentMonth = dateTime.dayOfMonth().withMaximumValue()
+        val startOfCurrentMonth = dateTime.dayOfMonth().withMinimumValue().millisOfDay().withMinimumValue()
+        val endOfCurrentMonth = dateTime.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue()
         val period =
             MonthPeriod(
                 monthOfYear = dateTime.monthOfYear,

@@ -27,7 +27,7 @@
   <string name="tink_overview_toolbar_title">Overview</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
-  <string name="tink_latest_transactions_toolbar_title">Latest transactions</string>
+  <string name="tink_latest_transactions_toolbar_title">All transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
   <string name="tink_transaction_similar_title">Similar transactions</string>
@@ -48,6 +48,7 @@
   <string name="tink_transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
   <string name="tink_transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
   <string name="tink_filter_search_item" translatable="false">FilterSearchItem</string>
+  <string name="tink_filter_all_expenses_item" translatable="false">AllExpensesItem</string>
 
   <string name="tink_choose_category_text">Choose category</string>
 
@@ -96,9 +97,9 @@
   <string name="tink_insights_total_weekly_transactions_text">%d transactions last week</string>
 
   <string name="tink_insights_total_expenses_text">%s in total expenses</string>
-  <string name="tink_insights_most_common_transaction_text">Most common was %s (%d)</string>
+  <string name="tink_insights_most_common_transaction_text">Most common was %1$s (%2$d)</string>
   <string name="tink_insights_largest_transaction_text">%s was your largest expense</string>
-  <string name="tink_insights_largest_transaction_recipient_text">To %s (%s)</string>
+  <string name="tink_insights_largest_transaction_recipient_text">To %1$s (%2$s)</string>
 
   <string name="tink_budget_create_title">Create budget</string>
   <string name="tink_budget_create_button">Create budget</string>
@@ -114,13 +115,14 @@
   <string name="tink_budget_create_field_period_custom">Custom</string>
   <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
   <string name="tink_budget_create_with_keyword">Create with keyword</string>
+  <string name="tink_budget_create_all_expenses">All expenses</string>
 
   <string name="tink_budget_category_selection_button">Next</string>
   <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
   <string name="tink_budget_edit_toolbar_title">Edit budget</string>
   <string name="tink_budget_edit_field_category_hint">Category</string>
   <string name="tink_budget_edit_button">Save changes</string>
-  <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s/%2$s</string>
+  <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s / %2$s</string>
   <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
   <string name="tink_budget_delete_dialog_message">Are you sure you want to remove the budget \"%s\"?</string>
   <string name="tink_budget_delete_dialog_confirm_button">Delete</string>
@@ -143,6 +145,7 @@
     <item quantity="one">%s month</item>
     <item quantity="other">%s months</item>
   </plurals>
+  <string name="tink_budget_details_amount_left_none_message">You\'re about to exceed your budget</string>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>
   <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and manage your budget</string>
@@ -157,7 +160,7 @@
   <string name="tink_budget_period_day">day</string>
   <string name="tink_budget_period_year">year</string>
   <string name="tink_budget_period_chart_week_label">w%d</string>
-  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But now you don\'t have any!</string>
+  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But currently you don\'t have any.</string>
   <string name="tink_budget_transactions_toolbar_title">Budget</string>
   <string name="tink_budget_transactions_header_amount_left_of">%1$s left of %2$s</string>
   <string name="tink_budget_transactions_header_amount_over">%1$s over budget of %2$s</string>

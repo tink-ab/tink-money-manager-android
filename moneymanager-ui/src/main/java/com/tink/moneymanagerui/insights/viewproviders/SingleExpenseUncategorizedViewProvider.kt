@@ -7,7 +7,7 @@ import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.TransactionViewDetails
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_single_expense_uncategorized.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.inflate
@@ -37,7 +37,7 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
             SingleExpenseUncategorizedDataHolder(
                 it.description,
                 dateUtils.formatDateHuman(it.date.toDateTime()), //TODO: Core setup
-                it.amount.formatCurrencyRound()
+                it.amount.formatCurrencyExact()
             )
         } ?: SingleExpenseUncategorizedDataHolder("", "", "")
     }

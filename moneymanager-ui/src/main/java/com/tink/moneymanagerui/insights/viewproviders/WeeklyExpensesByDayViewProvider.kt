@@ -55,7 +55,7 @@ class WeeklyExpensesByDayInsightViewHolder(
 
         view.apply {
             totalExpensesChart.data = data.chartData.totalAmountData
-            totalExpensesChart.amountLabels = data.chartData.totalAmountLabels
+            totalExpensesChart.amountLabels = data.chartData.formattedTotalAmountLabels
             totalExpensesChart.labels = data.chartData.dayLabels
 
             averageExpensesChart.data = data.chartData.averageAmountData
@@ -87,4 +87,13 @@ data class ExpensesByDayChartData(
     val totalAmountData: List<Float>,
     val totalAmountLabels: List<String>,
     val averageAmountData: List<Float>
-)
+) {
+    val formattedTotalAmountLabels: List<String> =
+        totalAmountLabels.map {
+            if (it.isEmpty()) {
+                "0"
+            } else {
+                it
+            }
+        }
+}

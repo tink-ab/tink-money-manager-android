@@ -11,13 +11,10 @@ fun BigDecimal.toExactNumber() = ExactNumber(unscaledValue().toLong(), scale().t
 fun ExactNumber.subtract(other: ExactNumber) =
     toBigDecimal().subtract(other.toBigDecimal()).toExactNumber()
 
-fun ExactNumber.divide(other: ExactNumber) =
-    toBigDecimal()
-        .divide(
-            other.toBigDecimal(),
-            MathContext(2, RoundingMode.HALF_UP)
-        )
-        .toExactNumber()
+fun ExactNumber.divide(other: ExactNumber): ExactNumber {
+    val result = this.toBigDecimal().divide(other.toBigDecimal(), MathContext.DECIMAL32)
+    return ExactNumber(result)
+}
 
 fun ExactNumber.multiply(other: ExactNumber) =
     toBigDecimal().multiply(other.toBigDecimal()).toExactNumber()
