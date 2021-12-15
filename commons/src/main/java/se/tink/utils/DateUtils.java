@@ -126,9 +126,31 @@ public class DateUtils {
 
 	public String formatDateRange(DateTime start, DateTime end, String timezoneCode,
 		boolean includeYearIfNotCurrent) {
-		String rangeStart = formatRangeBoundary(start, timezoneCode, includeYearIfNotCurrent);
-		String rangeEnd = formatRangeBoundary(end, timezoneCode, includeYearIfNotCurrent);
-		return String.format("%s - %s", rangeStart, rangeEnd);
+		String dateInterval;
+
+		boolean isSameDayOfMonth = getDayOfMonth(start, timezoneCode).equals(getDayOfMonth(end, timezoneCode));
+		boolean isSameMonth = start.monthOfYear().equals(end.monthOfYear());
+		boolean isThisYear = isCurrentYear(start) && isCurrentYear(end);
+
+		if (isSameDayOfMonth && isSameMonth && isThisYear) {
+			String day = getDayOfMonth(start, timezoneCode);
+			String month = getMonthCompact(start, timezoneCode);
+
+			dateInterval= String.format("%s %s", day, month);
+		} else if (isSameMonth && isThisYear) {
+			String startDay = getDayOfMonth(start, timezoneCode);
+			String endDay = getDayOfMonth(end, timezoneCode);
+			String month = getMonthCompact(start, timezoneCode);
+
+			dateInterval= String.format("%s - %s %s", startDay, endDay, month);
+		} else {
+			String startRange = formatRangeBoundary(start, timezoneCode, includeYearIfNotCurrent);
+			String endRange = formatRangeBoundary(end, timezoneCode, includeYearIfNotCurrent);
+
+			dateInterval=  String.format("%s - %s", startRange, endRange);
+		}
+
+		return dateInterval;
 	}
 
 	public String getWeekCountFromDate(DateTime start) {
@@ -137,11 +159,12 @@ public class DateUtils {
 
 	private String formatRangeBoundary(DateTime dateTime, String timezoneCode, boolean includeYearIfNotCurrent) {
 		String key;
-		if (includeYearIfNotCurrent && !dateTime.year().equals(DateTime.now().year())) {
+		if (includeYearIfNotCurrent && !isCurrentYear(dateTime)) {
 			key = ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY_YEARLY;
 		} else {
 			key = ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY;
 		}
+
 		return ThreadSafeDateFormat
 				.threadSafeDateFormat(key, defaultLocale, timezoneCode)
 				.format(dateTime);
@@ -160,7 +183,20 @@ public class DateUtils {
 
     public String getDayOfWeek(DateTime dateTime) {
 		return ThreadSafeDateFormat
-			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT, defaultLocale, timezoneCode).format(dateTime);
+			.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT, defaultLocale, timezoneCode)
+			.format(dateTime);
+	}
+
+	public String getDayOfMonth(DateTime dateTime, String timezoneCode) {
+		return ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY, defaultLocale, timezoneCode)
+				.format(dateTime);
+	}
+
+	public String getMonthCompact(DateTime dateTime, String timezoneCode) {
+		return ThreadSafeDateFormat
+				.threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT, defaultLocale, timezoneCode)
+				.format(dateTime);
 	}
 
 	public String getDayOfWeek(@NotNull LocalDate date) {
