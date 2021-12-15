@@ -56,6 +56,16 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
                 }
             }
         }
+    val showDoneButton: LiveData<Boolean> =
+        _markedState.map {
+            it?.let { marked ->
+                when (marked) {
+                    Marked.PARTIALLY,
+                    Marked.ALL -> true
+                    Marked.NONE -> false
+                }
+            } ?: false
+        }
 
     fun updateMarkedState(markedState: Marked) {
         _markedState.value = markedState
