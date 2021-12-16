@@ -42,7 +42,7 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val periodSelection = MutableLiveData<PeriodSelection>().apply {
-        value = PeriodSelection.SixMonths()
+        value = PeriodSelection.TwelveMonths()
     }
 
     private val category = MutableLiveData<Category>()
