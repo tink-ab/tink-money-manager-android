@@ -1,11 +1,13 @@
+plugins {
+    id "com.github.ben-manes.versions" version "0.39.0"
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    buildToolsVersion '29.0.3'
+    buildToolsVersion '32.0.0'
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
@@ -27,27 +29,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {
     implementation libraries.money_manager_ui
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat
-    implementation libraries.android_core_ktx
     implementation libraries.support_constraint_layout
 
-    implementation libraries.dagger
-    implementation libraries.dagger_android
-    implementation libraries.dagger_android_support
-
     implementation libraries.timber
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }

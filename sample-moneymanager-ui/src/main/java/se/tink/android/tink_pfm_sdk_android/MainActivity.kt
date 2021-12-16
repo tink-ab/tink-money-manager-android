@@ -16,20 +16,24 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.StatisticType
+import com.tink.service.network.Environment
 import com.tink.service.network.TinkConfiguration
-import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
 
 class MainActivity : FragmentActivity() {
 
-    private var currentFinanceOverviewFragment: FinanceOverviewFragment? = null
+    private lateinit var currentFinanceOverviewFragment: FinanceOverviewFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val environment = Environment.Production
+        val clientId = // TODO: Insert your clientId here
+        val accessToken = // TODO: Insert your access token here
+
         val config = TinkConfiguration(
-            Configuration.sampleEnvironment,
-            Configuration.sampleOAuthClientId,
+            environment,
+            clientId,
             Uri.parse("https://localhost:3000/callback")
         )
 
@@ -38,7 +42,7 @@ class MainActivity : FragmentActivity() {
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
-                accessToken = Configuration.sampleAccessToken,
+                accessToken = accessToken,
                 styleResId = R.style.TinkStyle_Default,
                 tracker = LogTracker(),
                 overviewFeatures = getOverviewFeatures()
@@ -81,14 +85,14 @@ class MainActivity : FragmentActivity() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(
             object: FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentAttached(
-                    fm: FragmentManager,
-                    f: Fragment,
+                    fragmentManager: FragmentManager,
+                    fragment: Fragment,
                     context: Context
                 ) {
-                    super.onFragmentAttached(fm, f, context)
+                    super.onFragmentAttached(fragmentManager, fragment, context)
                     currentFinanceOverviewFragment
-                        ?.childFragmentManager
-                        ?.registerFragmentLifecycleCallbacks(
+                        .childFragmentManager
+                        .registerFragmentLifecycleCallbacks(
                             object : FragmentManager.FragmentLifecycleCallbacks() {
                                 override fun onFragmentViewCreated(
                                     fm: FragmentManager,
@@ -112,12 +116,12 @@ class MainActivity : FragmentActivity() {
         val customView = parent.findViewById<FrameLayout>(R.id.myapp_custom_view)
         if (customView != null) {
             if (customView.findViewById<RelativeLayout>(R.id.myapp_custom_button_container) == null) {
-                val viewTwo = View.inflate(
+                val customComponent = View.inflate(
                     this,
                     R.layout.layout_custom_button,
                     customView
                 )
-                val customButton = viewTwo.findViewById<Button>(R.id.myapp_custom_button)
+                val customButton = customComponent.findViewById<Button>(R.id.myapp_custom_button)
                 customButton.setOnClickListener {
                     Toast.makeText(it.context, "My custom button clicked", Toast.LENGTH_SHORT)
                         .show()
@@ -127,7 +131,7 @@ class MainActivity : FragmentActivity() {
     }
 
     override fun onBackPressed() {
-        if (currentFinanceOverviewFragment?.handleBackPress() == false)
+        if (!currentFinanceOverviewFragment.handleBackPress())
             super.onBackPressed()
     }
 }
