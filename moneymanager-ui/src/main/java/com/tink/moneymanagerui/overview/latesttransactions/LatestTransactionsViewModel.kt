@@ -42,7 +42,9 @@ internal class LatestTransactionsViewModel @Inject constructor(
 
     val latestTransactions = transactionItems.map { items ->
         items
-            .transactions
+            .transactions.mapNotNull { item ->
+                transactionItemFactory.latestTransactionItemFromTransactionItem(item)
+            }
             .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             .take(3)
     }

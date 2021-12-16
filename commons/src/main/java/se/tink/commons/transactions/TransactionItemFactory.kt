@@ -1,18 +1,12 @@
 package se.tink.commons.transactions
 
-import android.content.Context
 import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.model.transaction.Transaction
 import org.joda.time.DateTime
-import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.R
-import se.tink.commons.categories.getIcon
-import se.tink.commons.categories.iconBackgroundColor
-import se.tink.commons.categories.iconColor
-import se.tink.commons.categories.isExcluded
-import se.tink.commons.categories.isUncategorized
+import se.tink.commons.categories.*
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.isValid
 import se.tink.commons.extensions.toDateTime
@@ -21,8 +15,7 @@ import javax.inject.Inject
 
 class TransactionItemFactory @Inject constructor(
     private val amountFormatter: AmountFormatter,
-    private val dateUtils: DateUtils,
-    @ApplicationScoped private val context: Context
+    private val dateUtils: DateUtils
 ) {
 
     fun fromTransaction(
@@ -35,9 +28,28 @@ class TransactionItemFactory @Inject constructor(
                 isUpcoming = false,
                 category = category,
                 date = this.date.toDateTime(), //TODO: Core setup
+                description = category.name,
                 label = description,
                 amount = amount,
                 upcomingTransactionData = null
+            )
+        }
+
+    fun latestTransactionItemFromTransactionItem(
+        transactionItem: ListItem.TransactionItem
+    ): ListItem.TransactionItem? =
+        with(transactionItem) {
+            ListItem.TransactionItem(
+                id = id,
+                icon = icon,
+                label = label,
+                description = dateUtils.formatDateHuman(date),
+                amount = amount,
+                dispensableAmount = dispensableAmount,
+                date = date,
+                merchantLogoAllowed = merchantLogoAllowed,
+                recurring = recurring,
+                upcomingTransactionData = upcomingTransactionData
             )
         }
 
@@ -71,6 +83,7 @@ class TransactionItemFactory @Inject constructor(
         isUpcoming: Boolean, // TODO: PFMSDK: Remove upcoming flag
         category: Category,
         date: DateTime,
+        description: String,
         label: String,
         amount: Amount,
         dispensableAmount: Amount = Amount(ExactNumber(0,0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
@@ -90,13 +103,11 @@ class TransactionItemFactory @Inject constructor(
                 }
             }
 
-            val descriptionText = category.name
-
             ListItem.TransactionItem(
                 id = id,
                 icon = icon,
                 label = label,
-                description = descriptionText,
+                description = description,
                 amount = amountFormatter.format(amount = amount, explicitlyPositive = true),
                 dispensableAmount = amountFormatter.format(
                     amount = dispensableAmount,
