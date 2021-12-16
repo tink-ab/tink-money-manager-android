@@ -360,61 +360,17 @@ internal class BudgetDetailsViewModel @Inject constructor(
                     budgetDetailsDataHolder.budget.value
                 ) { periodsList, budget ->
                     val periodicity = budget.periodicity as? RecurringPeriodicity ?: return
-                    val lastPeriod = periodsList.last()
-                    if (budget.created in lastPeriod.start..lastPeriod.end) {
-                        // Set current period status message
-                        val amountLeft = lastPeriod.budgetAmount - lastPeriod.spentAmount
-                        value = when (periodicity.unit) {
-                            Budget.Periodicity.Recurring.PeriodUnit.WEEK -> {
-                                amountLeft
-                                    .takeIf { it.value.isBiggerThan(EXACT_NUMBER_ZERO) }
-                                    ?.let { amount ->
-                                        context.getString(
-                                            R.string.tink_budget_details_chart_status_message_current_week,
-                                            amount.formatCurrencyExact()
-                                        )
-                                    }
-                                    ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_week)
-                            }
+                    val percentage = getBudgetManagedPercentage(periodsList)
 
-                            Budget.Periodicity.Recurring.PeriodUnit.MONTH -> {
-                                amountLeft
-                                    .takeIf { it.value.isBiggerThan(EXACT_NUMBER_ZERO) }
-                                    ?.let { amount ->
-                                        context.getString(
-                                            R.string.tink_budget_details_chart_status_message_current_month,
-                                            amount.formatCurrencyExact()
-                                        )
-                                    }
-                                    ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_month)
-                            }
-
-                            Budget.Periodicity.Recurring.PeriodUnit.YEAR -> {
-                                amountLeft
-                                    .takeIf { it.value.isBiggerThan(EXACT_NUMBER_ZERO) }
-                                    ?.let { amount ->
-                                        context.getString(
-                                            R.string.tink_budget_details_chart_status_message_current_year,
-                                            amount.formatCurrencyExact()
-                                        )
-                                    }
-                                    ?: context.getString(R.string.tink_budget_details_chart_over_budget_status_message_current_year)
-                            }
-                            else -> ""
-                        }
+                    value = if (periodicity.unit == Budget.Periodicity.Recurring.PeriodUnit.MONTH) {
+                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
                     } else {
-                        // Set historical status message
-                        val percentage = getBudgetManagedPercentage(periodsList)
-                        value = if (periodicity.unit == Budget.Periodicity.Recurring.PeriodUnit.MONTH) {
-                            context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
-                        } else {
-                            val formattedStartPeriodLabel = periodsList.first().toHistoricIntervalLabel(
-                                context,
-                                dateUtils,
-                                periodicity
-                            )
-                            context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_since, percentage, percentage, formattedStartPeriodLabel)
-                        }
+                        val formattedStartPeriodLabel = periodsList.first().toHistoricIntervalLabel(
+                            context,
+                            dateUtils,
+                            periodicity
+                        )
+                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_since, percentage, percentage, formattedStartPeriodLabel)
                     }
                 }
             }
