@@ -136,18 +136,18 @@ public class DateUtils {
 			String day = getDayOfMonth(start, timezoneCode);
 			String month = getMonthCompact(start, timezoneCode);
 
-			dateInterval= String.format("%s %s", day, month);
+			dateInterval = String.format("%s %s", day, month);
 		} else if (isSameMonth && isThisYear) {
 			String startDay = getDayOfMonth(start, timezoneCode);
 			String endDay = getDayOfMonth(end, timezoneCode);
 			String month = getMonthCompact(start, timezoneCode);
 
-			dateInterval= String.format("%s - %s %s", startDay, endDay, month);
+			dateInterval = String.format("%s - %s %s", startDay, endDay, month);
 		} else {
 			String startRange = formatRangeBoundary(start, timezoneCode, includeYearIfNotCurrent);
 			String endRange = formatRangeBoundary(end, timezoneCode, includeYearIfNotCurrent);
 
-			dateInterval=  String.format("%s - %s", startRange, endRange);
+			dateInterval =  String.format("%s - %s", startRange, endRange);
 		}
 
 		return dateInterval;
