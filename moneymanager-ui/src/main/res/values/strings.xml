@@ -31,9 +31,9 @@
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
   <string name="tink_transaction_similar_title">Similar transactions</string>
-  <string name="tink_transaction_similar_description">Do you want to categorize these transactions as well?</string>
+  <string name="tink_transaction_similar_description">Do you also want to assign these transactions to the %1$s category?</string>
   <string name="tink_transaction_similar_button_skip_text">Skip</string>
-  <string name="tink_transaction_similar_button_accept_text">Yes, change selected</string>
+  <string name="tink_transaction_similar_button_accept_text">Assign %1$d Selected</string>
   <string name="tink_transaction_similar_marker_button_mark_text">Select all</string>
   <string name="tink_transaction_similar_marker_button_unmark_text">Unselect all</string>
 

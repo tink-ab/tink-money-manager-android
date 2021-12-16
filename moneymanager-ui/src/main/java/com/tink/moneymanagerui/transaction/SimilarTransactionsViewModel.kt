@@ -61,6 +61,17 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
         _markedState.value = markedState
     }
 
+    val doneButtonText: LiveData<String> = MediatorLiveData<String>().apply {
+        fun update() {
+            val numberItemsToChange = markedTransactionsIds.value?.size
+                ?: transactions.value?.size
+                ?: 0
+            postValue(context.getString(R.string.tink_transaction_similar_button_accept_text, numberItemsToChange))
+        }
+        addSource(markedTransactionsIds) { update() }
+        addSource(transactions) { update() }
+    }
+
     private val _similarTransactionItems =
         MediatorLiveData<List<SimilarTransactionsAdapter.SimilarTransactionItem>>().apply {
             fun update() {
@@ -101,6 +112,15 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
         }
         addSource(categoryId) {update()}
         addSource(categoryTree) {update()}
+    }
+
+    val descriptionText: LiveData<String> = MediatorLiveData<String>().apply {
+        fun update() {
+            category.value?.let { category ->
+                postValue(context.getString(R.string.tink_transaction_similar_description, category.name))
+            }
+        }
+        addSource(category) { update() }
     }
 
     fun updateTransactions(transactionIDs: List<String>, categoryCode: String, onError: (TinkNetworkError) -> Unit) {
