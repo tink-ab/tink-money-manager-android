@@ -4,38 +4,26 @@ plugins {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply from: '../dependencies.gradle'
 
 android {
     buildToolsVersion '32.0.0'
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 32
 
     defaultConfig {
         applicationId "se.tink.android.pfmsdk"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 32
         versionCode 1
         versionName "1"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation libraries.money_manager_ui
-    implementation libraries.kotlin_stdlib
-    implementation libraries.support_appcompat
-    implementation libraries.support_constraint_layout
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
+    implementation "androidx.appcompat:appcompat:1.4.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
 
-    implementation libraries.timber
+    implementation "com.tink.moneymanager:moneymanager-ui:0.18.0"
+
+    implementation "com.jakewharton.timber:timber:5.0.1"
 }

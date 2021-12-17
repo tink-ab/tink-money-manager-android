@@ -1,4 +1,4 @@
-package se.tink.android.tink_pfm_sdk_android
+package com.tink.moneymanager.sample
 
 import android.content.Context
 import android.net.Uri
@@ -18,6 +18,7 @@ import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.StatisticType
 import com.tink.service.network.Environment
 import com.tink.service.network.TinkConfiguration
+import se.tink.android.tink_pfm_sdk_android.R
 
 class MainActivity : FragmentActivity() {
 
@@ -27,9 +28,11 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val environment = Environment.Production
-        val clientId = // TODO: Insert your clientId here
-        val accessToken = // TODO: Insert your access token here
+        val environment: Environment = Environment.Production
+        // TODO: Create a client in Tink Console https://console.tink.com/
+        val clientId: String =
+        // TODO: Insert access token https://docs.tink.com/resources/api-setup/get-access-token
+        val accessToken: String =
 
         val config = TinkConfiguration(
             environment,
@@ -43,7 +46,7 @@ class MainActivity : FragmentActivity() {
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
                 accessToken = accessToken,
-                styleResId = R.style.TinkStyle_Default,
+                styleResId = R.style.TinkStyle_ChewingGum,
                 tracker = LogTracker(),
                 overviewFeatures = getOverviewFeatures()
             ).also {
@@ -55,6 +58,10 @@ class MainActivity : FragmentActivity() {
         addFragmentLifecycleCallbacks()
     }
 
+    /**
+     * Choose which features to display as well as in what order
+     *
+     */
     private fun getOverviewFeatures() =
         OverviewFeatures(
             features =
@@ -112,6 +119,10 @@ class MainActivity : FragmentActivity() {
         )
     }
 
+    /**
+     * Add your own custom component to the finance overview
+     *
+     */
     private fun setupCustomViews(parent: View) {
         val customView = parent.findViewById<FrameLayout>(R.id.myapp_custom_view)
         if (customView != null) {

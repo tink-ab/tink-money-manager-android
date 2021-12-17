@@ -10,20 +10,10 @@ buildscript {
     }
 }
 
-ext {
-    compileSdkVersion = 32
-    targetSdkVersion = 32
-    minSdkVersion = 21
-}
-
 allprojects {
     repositories {
-        mavenLocal()
+        mavenLocal() // The Money Manager SDK is sourced from your local maven repository
         google()
         mavenCentral()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
