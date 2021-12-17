@@ -5,8 +5,8 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
-import com.google.common.base.Strings
 import com.tink.moneymanagerui.util.DimensionUtils
+import java.util.*
 
 @Deprecated("Use MaterialTextView instead", ReplaceWith("com.google.android.material.textview.MaterialTextView"))
 class TinkTextView : AppCompatTextView {
@@ -79,8 +79,8 @@ class TinkTextView : AppCompatTextView {
         letterSpacing = theme.spacing
         setLineSpacing(theme.lineHeight, 0f)
         var text = text.toString()
-        if (theme.toUpperCase() && !Strings.isNullOrEmpty(text)) {
-            text = text.toUpperCase()
+        if (theme.toUpperCase() && text.isNotEmpty()) {
+            text = text.uppercase(Locale.getDefault())
             setText(text)
         }
     }

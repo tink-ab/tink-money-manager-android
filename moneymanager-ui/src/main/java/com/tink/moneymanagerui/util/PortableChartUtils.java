@@ -1,6 +1,5 @@
 package com.tink.moneymanagerui.util;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +67,8 @@ public class PortableChartUtils {
 		return -findMaxValueLabel(-minValue);
 	}
 
-	private static List<Integer> allowedPositiveLabels = Lists.newArrayList();
-	private static List<Integer> allowedNegativeLabels = Lists.newArrayList();
+	private static final List<Integer> allowedPositiveLabels = new ArrayList<>();
+	private static final List<Integer> allowedNegativeLabels = new ArrayList<>();
 
 	private static final int ONE = 1;
 	private static final int MAX_LEADING_DIGIT = 6;

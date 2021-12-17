@@ -1,6 +1,5 @@
 package com.tink.moneymanagerui.util
 
-import com.google.common.collect.ImmutableList
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.collections.Currencies
@@ -30,7 +29,7 @@ object CurrencyUtils {
         ExactNumber(1000000, 0)
     private val BILLION =
         ExactNumber(1000000000, 0)
-    private val UNITS: MutableMap<String, ImmutableList<StringExactNumberPair>> =
+    private val UNITS: MutableMap<String, List<StringExactNumberPair>> =
         HashMap()
 
     private const val EXACT_DIGITS = 2
@@ -308,40 +307,35 @@ object CurrencyUtils {
 
     init {
         val enUsMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("k", THOUSAND),
                     StringExactNumberPair("mm", MILLION),
                     StringExactNumberPair("bn", BILLION)
                 )
         val svSeMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("t", THOUSAND),
                     StringExactNumberPair("mn", MILLION),
                     StringExactNumberPair("md", BILLION)
                 )
         val frFRMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("m", THOUSAND),
                     StringExactNumberPair("mn", MILLION),
                     StringExactNumberPair("md", BILLION)
                 )
         val defaultMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("k", THOUSAND),
                     StringExactNumberPair("M", MILLION),
                     StringExactNumberPair("G", BILLION)
                 )
         val nlNlMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("dzd", THOUSAND),
                     StringExactNumberPair("mln", MILLION),

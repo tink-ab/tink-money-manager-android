@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.util;
 
 import android.util.SparseArray;
-import com.google.common.base.Strings;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -137,7 +136,7 @@ public class ChartCurrencyUtils {
 			symbol = "kr";
 		}
 
-		if (Strings.isNullOrEmpty(unitSign)) {
+		if (unitSign != null && !unitSign.isEmpty()) {
 			return String.format(locale, "%d %s", (int) value, symbol);
 		}
 
