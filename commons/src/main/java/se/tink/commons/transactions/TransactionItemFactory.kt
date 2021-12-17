@@ -37,21 +37,7 @@ class TransactionItemFactory @Inject constructor(
 
     fun latestTransactionItemFromTransactionItem(
         transactionItem: ListItem.TransactionItem
-    ): ListItem.TransactionItem? =
-        with(transactionItem) {
-            ListItem.TransactionItem(
-                id = id,
-                icon = icon,
-                label = label,
-                description = dateUtils.formatDateHuman(date),
-                amount = amount,
-                dispensableAmount = dispensableAmount,
-                date = date,
-                merchantLogoAllowed = merchantLogoAllowed,
-                recurring = recurring,
-                upcomingTransactionData = upcomingTransactionData
-            )
-        }
+    ): ListItem.TransactionItem = transactionItem.copy(description = dateUtils.formatDateHuman(transactionItem.date))
 
     fun similarTransactionItemFromTransaction(
         transaction: Transaction,
