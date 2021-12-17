@@ -9,7 +9,7 @@
   <string name="tink_date_formatter_yearly">yyyy</string>
   <string name="tink_date_formatter_monthly_compact">MMM</string>
   <string name="tink_date_formatter_month_name">MMMMM</string>
-  <string name="tink_date_formatter_daily">yyyy-MM-dd</string> <!-- TODO Remove when BalanceLineChartArea is removed -->
+  <string name="tink_date_formatter_daily">dd</string>
   <string name="tink_date_formatter_daily_monthly">dd MMM</string>
   <string name="tink_date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
   <string name="tink_date_formatter_day_of_week_compact">EEE</string>
