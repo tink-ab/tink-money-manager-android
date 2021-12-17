@@ -1,6 +1,5 @@
 package se.tink.utils;
 
-import com.google.common.collect.Maps;
 import com.tink.model.time.Period;
 
 import org.jetbrains.annotations.NotNull;
@@ -10,6 +9,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.threeten.bp.Instant;
 import org.threeten.bp.LocalDate;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -26,7 +26,7 @@ public class DateUtils {
 	private TimeZone defaultTimezone;
 	private String timezoneCode;
 
-	private Map<String, String> formatHumanStrings = Maps.newHashMap();
+	private Map<String, String> formatHumanStrings = new HashMap<>();
 
 	private static DateUtils instance;
 

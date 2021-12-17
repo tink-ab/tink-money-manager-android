@@ -1,8 +1,6 @@
 package se.tink.utils;
 
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
+import androidx.annotation.NonNull;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -12,6 +10,7 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -22,8 +21,6 @@ import java.util.TimeZone;
  * Uses the Memento design pattern to easily clone preexisting static thread safe date formatters.
  */
 public class ThreadSafeDateFormat {
-
-	private static final CharMatcher TRIMMER = CharMatcher.whitespace();
 
 	public static final String FORMATTER_YEARLY = "FORMATTER_YEARLY";
 	public static final String FORMATTER_MONTHLY_COMPACT = "FORMATTER_MONTHLY_COMPACT";
@@ -43,7 +40,7 @@ public class ThreadSafeDateFormat {
 
 	private DateTimeFormatter dateFormat;
 	private ThreadSafeDateFormatBuilder builder;
-	public static Map<String, String> dateFormatsMap = Maps.newHashMap();
+	public static Map<String, String> dateFormatsMap = new HashMap<>();
 
 	/**
 	 * A builder used to construct {@link ThreadSafeDateFormat}s. Mostly used to create variations
@@ -56,14 +53,14 @@ public class ThreadSafeDateFormat {
 		private Locale locale;
 		private TimeZone timezone;
 
-		public ThreadSafeDateFormatBuilder(String pattern, Locale locale, TimeZone timezone) {
+		public ThreadSafeDateFormatBuilder(@NonNull String pattern, @NonNull Locale locale, @NonNull TimeZone timezone) {
 			setPattern(pattern);
 			setLocale(locale);
 			setTimezone(timezone);
 		}
 
-		private ThreadSafeDateFormatBuilder setTimezone(TimeZone timezone) {
-			this.timezone = Preconditions.checkNotNull(timezone);
+		private ThreadSafeDateFormatBuilder setTimezone(@NonNull TimeZone timezone) {
+			this.timezone = timezone;
 			return this;
 		}
 
@@ -71,8 +68,8 @@ public class ThreadSafeDateFormat {
 			return pattern;
 		}
 
-		public ThreadSafeDateFormatBuilder setPattern(String pattern) {
-			this.pattern = Preconditions.checkNotNull(pattern);
+		public ThreadSafeDateFormatBuilder setPattern(@NonNull String pattern) {
+			this.pattern = pattern;
 			return this;
 		}
 
@@ -80,8 +77,8 @@ public class ThreadSafeDateFormat {
 			return locale;
 		}
 
-		public ThreadSafeDateFormatBuilder setLocale(Locale locale) {
-			this.locale = Preconditions.checkNotNull(locale);
+		public ThreadSafeDateFormatBuilder setLocale(@NonNull Locale locale) {
+			this.locale = locale;
 			return this;
 		}
 
@@ -128,7 +125,7 @@ public class ThreadSafeDateFormat {
 		Date date = null;
 
 		try {
-			date = dateFormat.parseDateTime(TRIMMER.trimFrom(string)).toDate();
+			date = dateFormat.parseDateTime(string.trim()).toDate();
 		} catch (Exception e) {
 			throw new ParseException(
 				"could not parse date: " + string + " (with pattern: " + builder.getPattern()
