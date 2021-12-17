@@ -13,6 +13,7 @@ import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FontUtils
 import com.tink.moneymanagerui.view.CustomTypefaceSpan
@@ -103,11 +104,7 @@ internal class SimilarTransactionsFragment : BaseFragment() {
                 invalidateToolbarMenu()
             })
             showDoneButton.observe(viewLifecycleOwner, Observer { showDoneButton ->
-                if (showDoneButton) {
-                    doneBtn.visibility = View.VISIBLE
-                } else {
-                    doneBtn.visibility = View.GONE
-                }
+                doneBtn.visibleIf { showDoneButton }
             })
         }
     }
