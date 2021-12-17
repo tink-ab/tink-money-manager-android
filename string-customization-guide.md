@@ -46,8 +46,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_archive_title` | Archive |
 | `tink_insights_empty_state_text` | No new events! Check the archive if you want see your previous ones |
 | `tink_insights_archived_empty_state_text` | No archived events |
-| `tink_insights_overview_card_new_events_title` | New Events |
-| `tink_insights_overview_card_archived_events_title` | Archived Events |
+| `tink_insights_overview_card_new_events_title` | Events |
+| `tink_insights_overview_card_archived_events_title` | Archived events |
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_budget_create_suggestion_save_per_year_text` | Save up to %s per year |
