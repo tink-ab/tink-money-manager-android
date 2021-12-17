@@ -356,29 +356,20 @@ internal class BudgetDetailsViewModel @Inject constructor(
                     return
                 }
                 whenNonNull(
-                    historicPeriodsList.value,
+                    budgetDetailsDataHolder.budgetPeriodsList.value,
                     budgetDetailsDataHolder.budget.value
                 ) { periodsList, budget ->
-                    val periodicity = budget.periodicity as? RecurringPeriodicity ?: return
-                    val percentage = getBudgetManagedPercentage(periodsList)
+                    val percentage = getBudgetManagedPercentage(periodsList, budget.created)
 
-                    value = if (periodicity.unit == Budget.Periodicity.Recurring.PeriodUnit.MONTH) {
-                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
-                    } else {
-                        val formattedStartPeriodLabel = periodsList.first().toHistoricIntervalLabel(
-                            context,
-                            dateUtils,
-                            periodicity
-                        )
-                        context.resources.getQuantityString(R.plurals.tink_budget_details_chart_status_message_since, percentage, percentage, formattedStartPeriodLabel)
-                    }
+                    value = context.resources.getQuantityString(
+                        R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
                 }
             }
         }
         addSource(barChartEmpty) { update() }
         addSource(budgetDetailsDataHolder.budget) { update() }
         addSource(barChartEnabled) { update() }
-        addSource(historicPeriodsList) { update() }
+        addSource(budgetDetailsDataHolder.budgetPeriodsList) { update() }
     }
 
     val statusMessage: LiveData<String> = MediatorLiveData<String>().apply {
@@ -398,11 +389,13 @@ internal class BudgetDetailsViewModel @Inject constructor(
     fun showPreviousPeriod() = budgetDetailsDataHolder.previousPeriod()
 }
 
-private fun getBudgetManagedPercentage(historicPeriodsList: List<BudgetPeriod>): Int {
-    val budgetManagedCount = historicPeriodsList.count {
-        (it.budgetAmount - it.spentAmount).value.isBiggerThan(EXACT_NUMBER_ZERO)
-    }
-    return (budgetManagedCount * 100.0f / historicPeriodsList.size).roundToInt()
+private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCreated: Instant): Int {
+    val periodsForBudget = periodsList.filter { it.end > budgetCreated }
+    val budgetManagedCount = periodsForBudget
+        .count {
+            (it.budgetAmount - it.spentAmount).value.isBiggerThan(EXACT_NUMBER_ZERO)
+        }
+    return (budgetManagedCount * 100.0f / periodsForBudget.size).roundToInt()
 }
 
 private fun composeRemainingBudgetStatusString(
