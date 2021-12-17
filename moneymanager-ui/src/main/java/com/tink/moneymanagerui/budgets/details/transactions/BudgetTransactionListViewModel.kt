@@ -73,6 +73,7 @@ internal class BudgetTransactionListViewModel @Inject constructor(
                                     transactionItemFactory.createItem(
                                         id = id,
                                         isUpcoming = false,
+                                        description = category.name,
                                         category = category,
                                         date = this.date.toDateTime(),
                                         label = description,
