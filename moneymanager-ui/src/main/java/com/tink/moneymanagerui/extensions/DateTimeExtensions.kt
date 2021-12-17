@@ -8,7 +8,6 @@ import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import se.tink.commons.extensions.toDateTime
 import java.text.DecimalFormat
-import java.util.Locale
 
 /**
  * Switches the time to what it would be in UTC timezone, but keeps our timezone.

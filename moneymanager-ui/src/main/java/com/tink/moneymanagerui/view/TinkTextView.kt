@@ -40,36 +40,7 @@ class TinkTextView : AppCompatTextView {
         )
         helper = BaseLineHelper(materialStep)
         includeFontPadding = false
-        // TODO: PFMSDK: Resource IDs cannot be used for switch expressions in a library module
-//        if (attrs != null) {
-//            setCustomAttributes(context, attrs);
-//        }
     }
-
-    // TODO: PFMSDK: Resource IDs cannot be used for switch expressions in a library module
-//    private void setCustomAttributes(Context context, AttributeSet attrs) {
-//		@SuppressLint("CustomViewStyleable")
-//		TypedArray arrayAttributes = context
-//			.obtainStyledAttributes(attrs, R.styleable.TinkWidgetStyle);
-//
-//		try {
-//			int n = arrayAttributes.getIndexCount();
-//			for (int i = 0; i < n; i++) {
-//				int attr = arrayAttributes.getIndex(i);
-//				switch (attr) {
-//					case R.styleable.TinkWidgetStyle_ignore_baseLine:
-//						ignoreBaseLine = true;
-//						break;
-//					case R.styleable.TinkWidgetStyle_lineHeight:
-//						float dimension = arrayAttributes.getDimension(attr, 0);
-//						setLineSpacing(dimension, 0);
-//						break;
-//				}
-//			}
-//		} finally {
-//			arrayAttributes.recycle();
-//		}
-//	}
 
     fun setTheme(theme: Theme) {
         this.theme = theme
@@ -105,10 +76,6 @@ class TinkTextView : AppCompatTextView {
         height += helper!!.putHeightOnGrid(height)
         height += oneDpExtraHeightToAvoidClipping.toInt()
         setMeasuredDimension(measuredWidth, height)
-    }
-
-    fun setIgnoreBaseline(ignoreBaseline: Boolean) {
-        ignoreBaseLine = ignoreBaseline
     }
 
     override fun setText(

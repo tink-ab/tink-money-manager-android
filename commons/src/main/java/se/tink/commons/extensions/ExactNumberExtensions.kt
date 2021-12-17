@@ -30,8 +30,5 @@ fun ExactNumber.isInteger() = toBigDecimal().stripTrailingZeros().scale() <= 0
 fun ExactNumber.isBiggerThan(other: ExactNumber) = toBigDecimal() > other.toBigDecimal()
 fun ExactNumber.isSmallerThan(other: ExactNumber) = toBigDecimal() < other.toBigDecimal()
 
-
-fun ExactNumber.round() = round(0)
-
 fun ExactNumber.round(decimals: Int) =
     toBigDecimal().setScale(decimals, RoundingMode.HALF_UP).toExactNumber()

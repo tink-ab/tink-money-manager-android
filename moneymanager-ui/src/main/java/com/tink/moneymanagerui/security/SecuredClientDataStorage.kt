@@ -3,7 +3,6 @@ package com.tink.moneymanagerui.security
 import android.content.Context
 import android.content.SharedPreferences
 import se.tink.android.privacy.Clearable
-import se.tink.android.privacy.DataWipeManager
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -93,13 +92,6 @@ internal class SecuredClientDataStorage private constructor(appContext: Context)
         return if (value != null) {
             java.lang.Boolean.parseBoolean(value)
         } else defValue
-    }
-
-    fun getBytes(key: String): ByteArray? {
-        val `val` = getString(key, null)
-        return if (`val` != null) {
-            EncryptionManager.base64Decode(`val`)
-        } else null
     }
 
     override fun contains(key: String): Boolean {
@@ -198,18 +190,6 @@ internal class SecuredClientDataStorage private constructor(appContext: Context)
             return putString(key, `val`)
         }
 
-        fun putBytes(
-            key: String,
-            bytes: ByteArray?
-        ): SharedPreferences.Editor {
-            return if (bytes != null) {
-                val `val` = EncryptionManager.base64Encode(bytes)
-                putString(key, `val`)
-            } else {
-                remove(key)
-            }
-        }
-
         override fun remove(key: String): SharedPreferences.Editor {
             try {
                 val hashedKey = EncryptionManager.getHashed(key)
@@ -291,7 +271,6 @@ internal class SecuredClientDataStorage private constructor(appContext: Context)
             }
             setRecoveryHandler(recoveryHandler)
             mInstance = SecuredClientDataStorage(appContext)
-            DataWipeManager.sharedInstance().register(mInstance)
         }
     }
 

@@ -22,7 +22,6 @@ object CurrencyUtils {
     // if amount >= DYNAMIC_ROUNDING_THRESHOLD then rounded format is applied
     // else exact format is applied.
     private val DYNAMIC_ROUNDING_THRESHOLDS = DynamicRoundingThresholds
-    private const val NON_BREAKING_WHITESPACE = 160.toChar()
     private val ZERO = ExactNumber(0, 0)
     private val THOUSAND = ExactNumber(1000, 0)
     private val MILLION =
@@ -173,12 +172,6 @@ object CurrencyUtils {
         }
         return formatted
     }
-
-//    val minusSign: Char
-//        get() {
-//            val format = getDecimalFormat(null, 0)
-//            return (format as DecimalFormat).decimalFormatSymbols.minusSign
-//        }
 
     private fun formatAmount(
         amount: ExactNumber,

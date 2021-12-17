@@ -14,7 +14,6 @@ import java.util.Currency
 import java.util.Locale
 import kotlin.math.min
 
-private const val SPACE = 32.toChar()
 private const val NO_BREAK_SPACE = 160.toChar()
 
 internal class FormattedNumberTextWatcher(

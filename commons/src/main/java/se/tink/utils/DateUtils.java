@@ -51,12 +51,6 @@ public class DateUtils {
 		this.defaultLocale = upLocale;
 	}
 
-	public boolean isToday(String date) {
-		DateTime evaluatedDate = DateTime.parse(date);
-		DateTime currentDate = DateTime.now();
-		return (evaluatedDate.year().get() == currentDate.year().get() && evaluatedDate.getDayOfYear() == currentDate.getDayOfYear());
-	}
-
 	public boolean isToday(DateTime evaluatedDate) {
 		DateTime today = DateTime.now();
 		return evaluatedDate.getYear() == today.getYear() && evaluatedDate.getDayOfYear() == today.getDayOfYear();

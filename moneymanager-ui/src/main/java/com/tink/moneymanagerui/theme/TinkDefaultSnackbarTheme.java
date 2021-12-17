@@ -7,6 +7,8 @@ import com.tink.moneymanagerui.view.Hecto;
 import com.tink.moneymanagerui.R;
 import com.tink.moneymanagerui.view.TinkSnackbar;
 import com.tink.moneymanagerui.view.TinkTextView.Theme;
+
+import androidx.annotation.NonNull;
 import se.tink.commons.extensions.ContextUtils;
 
 public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
@@ -40,11 +42,13 @@ public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
 
 
 	@Override
+	@NonNull
 	public Theme getTextTheme() {
 		return textTheme;
 	}
 
 	@Override
+	@NonNull
 	public Theme getButtonTheme() {
 		return buttonTheme;
 	}
