@@ -2,7 +2,6 @@ package se.tink.commons.extensions
 
 import android.content.res.ColorStateList
 import android.widget.ImageView
-import androidx.annotation.ColorRes
 import se.tink.commons.icons.IconResource
 
 fun ImageView.tint(color: Int) {

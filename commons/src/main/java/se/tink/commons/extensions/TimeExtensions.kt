@@ -7,8 +7,6 @@ import java.util.Date
 
 fun Instant.toDateTime(): DateTime = DateTime(this.toEpochMilli())
 
-fun Period.startsAfterEndOf(other: Period) = start.isAfter(other.end)
-
 fun Period.isInPeriod(dateTime: DateTime): Boolean {
 
     val instant = Instant.ofEpochMilli(dateTime.millis)
@@ -20,25 +18,3 @@ fun Period.isInPeriod(dateTime: DateTime): Boolean {
     return afterStart && beforeStop
 }
 
-fun Period.toMonthString(): String? {
-
-    fun monthString(year: Int, month: Int) = if (month < 10) "$year-$month" else "$year-0$month"
-
-    return when (this) {
-        is YearPeriod -> null
-        is WeekPeriod -> null
-        is DayPeriod -> monthString(year, monthOfYear)
-        is MonthPeriod -> monthString(year, monthOfYear)
-    }
-}
-
-object PeriodUtil {
-    @JvmStatic
-    fun isAfter(one: Period, other: Period) = one.startsAfterEndOf(other)
-
-    @JvmStatic
-    fun isInPeriod(dateTime: DateTime, period: Period) = period.isInPeriod(dateTime)
-
-    @JvmStatic
-    fun getLatestStreamingDate(): Date = DateTime.now().toDate()
-}

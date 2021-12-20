@@ -1,9 +1,7 @@
 package com.tink.moneymanagerui.extensions
 
-import android.content.Context
 import com.tink.model.budget.Budget
 import com.tink.model.budget.BudgetPeriod
-import com.tink.moneymanagerui.R
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 

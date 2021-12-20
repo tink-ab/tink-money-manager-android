@@ -22,7 +22,6 @@ import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.floatValue
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import javax.inject.Inject

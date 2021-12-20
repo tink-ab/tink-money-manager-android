@@ -1,11 +1,10 @@
 package com.tink.moneymanagerui.collections;
 
-import androidx.annotation.NonNull;
 import com.tink.model.user.UserProfile;
 import com.tink.service.observer.ChangeObserver;
+
+import androidx.annotation.NonNull;
 import se.tink.android.privacy.Clearable;
-import se.tink.android.privacy.DataWipeManager;
-import se.tink.android.repository.service.UserConfigurationService;
 
 @Deprecated
 public class Currencies implements ChangeObserver<UserProfile>, Clearable {
@@ -18,17 +17,8 @@ public class Currencies implements ChangeObserver<UserProfile>, Clearable {
 	public static Currencies getSharedInstance() {
 		if (instance == null) {
 			instance = new Currencies();
-			DataWipeManager.sharedInstance().register(instance);
 		}
 		return instance;
-	}
-
-	public void attatchListener(UserConfigurationService service) {
-//		service.subscribe(this);
-	}
-
-	public void removeListener(UserConfigurationService service) {
-		service.unsubscribe(this);
 	}
 
 	public UserProfile getUserProfile() {

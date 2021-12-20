@@ -74,8 +74,4 @@ internal class SearchHeader : RelativeLayout {
         editText.clearFocus()
         editText.closeKeyboard()
     }
-
-    fun setImeOptions(imeOptions: Int) {
-        editText.imeOptions = imeOptions
-    }
 }

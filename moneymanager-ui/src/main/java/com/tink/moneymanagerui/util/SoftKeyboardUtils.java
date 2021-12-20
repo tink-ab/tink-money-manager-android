@@ -7,20 +7,6 @@ import android.view.inputmethod.InputMethodManager;
 
 public class SoftKeyboardUtils {
 
-	static public void openSoftKeyboard(Context context, View view) {
-		view.requestFocus();
-		InputMethodManager inputMethodManager = (InputMethodManager) context
-			.getSystemService(Context.INPUT_METHOD_SERVICE);
-		inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_FORCED);
-	}
-
-	static public void toggleSoftKeyboard(Context context) {
-		InputMethodManager inputMethodManager = (InputMethodManager) context
-			.getSystemService(Context.INPUT_METHOD_SERVICE);
-		inputMethodManager
-			.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-	}
-
 	static public void closeSoftKeyboard(Context context, View view) {
 		InputMethodManager keyboard = (InputMethodManager) context
 			.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -36,5 +22,4 @@ public class SoftKeyboardUtils {
 			closeSoftKeyboard(activity, currentFocus);
 		}
 	}
-
 }

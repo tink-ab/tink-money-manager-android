@@ -5,9 +5,6 @@ package se.tink.commons.extensions
 import android.content.Context
 import android.util.TypedValue
 import androidx.annotation.AttrRes
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-
 
 @JvmOverloads
 fun Context.getColorFromAttr(
@@ -38,5 +35,3 @@ fun Context.getThemeResIdFromAttr(
     theme.resolveAttribute(attrId, typedValue, resolveRefs)
     return typedValue.resourceId
 }
-
-fun Context.getColorCompat(@ColorRes colorRes: Int) = ContextCompat.getColor(this, colorRes)

@@ -30,7 +30,7 @@ import dagger.android.ContributesAndroidInjector
 internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
-    fun overviewChartFragment(): OverviewChartFragment
+    fun  overviewChartFragment(): OverviewChartFragment
 
     @ContributesAndroidInjector
     fun chartDetailsPagerFragment(): ChartDetailsPagerFragment

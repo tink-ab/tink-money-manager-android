@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.tink.moneymanagerui.tracking.AnalyticsSingleton;
@@ -29,7 +28,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -91,10 +89,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 
 	protected boolean hasToolbar() {
 		return getParentFragment() == null;
-	}
-
-	protected int getSoftInputMode() {
-		return WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED;
 	}
 
 	protected boolean doNotRecreateView() {
@@ -203,17 +197,17 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	}
 
 	@Override
-	public final void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public final void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
 	@Override
-	public final void onPrepareOptionsMenu(Menu menu) {
+	public final void onPrepareOptionsMenu(@NonNull Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
-	public final boolean onOptionsItemSelected(MenuItem item) {
+	public final boolean onOptionsItemSelected(@NonNull MenuItem item) {
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -359,10 +353,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		}
 	}
 
-	protected boolean isFirstCreation() {
-		return firstCreation;
-	}
-
 	/**
 	 * Must be called when view hierarchy is fully inflated and ready to be displayed.
 	 * Currently used to start transition animations.
@@ -406,10 +396,6 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 		return () -> viewLifecycle;
 	}
 
-	public boolean getMayChangeUI() {
-		return getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED);
-	}
-
 	/**
 	 * Called when a third party callback uri is received by the app.
 	 * Fragments that pass the callback parameters to the service should override this.
@@ -420,9 +406,5 @@ public abstract class BaseFragment extends Fragment implements HasAndroidInjecto
 	 */
 	public boolean handleThirdPartyCallbackResult(String state, Map<String, String> parameters) {
 		return false;
-	}
-
-	public void runUiDependant(Runnable callback) {
-		callbacksExecutor.runUiDependant(callback);
 	}
 }

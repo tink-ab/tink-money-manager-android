@@ -88,7 +88,6 @@ class InsightBubbleView : ConstraintLayout {
         }
     }
 
-    fun setIcon(@DrawableRes iconRes: Int) = icon.setImageResource(iconRes)
     fun setPrimaryText(text: String?) = primaryText.setupFor(text)
     fun setSecondaryText(text: String?) = secondaryText.setupFor(text)
 }

@@ -1,19 +1,17 @@
 package se.tink.utils;
 
-import androidx.annotation.NonNull;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.ReadablePartial;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
 
 /**
  * Immutable thread safe date format.
@@ -43,9 +41,7 @@ public class ThreadSafeDateFormat {
 	public static Map<String, String> dateFormatsMap = new HashMap<>();
 
 	/**
-	 * A builder used to construct {@link ThreadSafeDateFormat}s. Mostly used to create variations
-	 * of a preexisting {@link ThreadSafeDateFormat} by calling {@link
-	 * ThreadSafeDateFormat#toBuilder()}.
+	 * A builder used to construct {@link ThreadSafeDateFormat}s
 	 */
 	public static class ThreadSafeDateFormatBuilder implements Cloneable {
 
@@ -121,26 +117,6 @@ public class ThreadSafeDateFormat {
 		return dateFormat.print(date);
 	}
 
-	public Date parse(String string) throws ParseException {
-		Date date = null;
-
-		try {
-			date = dateFormat.parseDateTime(string.trim()).toDate();
-		} catch (Exception e) {
-			throw new ParseException(
-				"could not parse date: " + string + " (with pattern: " + builder.getPattern()
-					+ ")",
-				0);
-		}
-
-		return date;
-	}
-
-	public ThreadSafeDateFormatBuilder toBuilder() {
-		// Cloning since we don't allow internal builder to be mutable.
-		return builder.clone();
-	}
-
 	public static Map<String, String> getDateFormatsMap() {
 		return dateFormatsMap;
 	}
@@ -152,5 +128,4 @@ public class ThreadSafeDateFormat {
 	public static ThreadSafeDateFormat threadSafeDateFormat(String key, Locale locale, String timezoneCode) {
 		return new ThreadSafeDateFormat(dateFormatsMap.get(key), locale, timezoneCode);
 	}
-
 }
