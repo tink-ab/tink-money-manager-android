@@ -152,12 +152,8 @@ In addition to the above, here's a list of plurals used in the SDK that can be o
     <item quantity="other">%s months</item>
   </plurals>
   <plurals name="tink_budget_details_chart_status_message_last_year">
-    <item quantity="one">You made your budget %d%% of the time over the last year</item>
-    <item quantity="other">You made your budget %d%% of the time over the last year</item>
-  </plurals>
-  <plurals name="tink_budget_details_chart_status_message_since">
-    <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
-    <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
+    <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
+    <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
   </plurals>
 </resources>
 ```
