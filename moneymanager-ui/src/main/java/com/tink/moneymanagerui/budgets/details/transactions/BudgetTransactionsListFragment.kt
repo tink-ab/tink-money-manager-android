@@ -88,7 +88,7 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
             })
 
             amountLeft.observe(viewLifecycle, { amountLeft ->
-                budgetProgress.progress = if(amountLeft > 0) amountLeft else budgetProgress.max
+                budgetProgress.progress = if(amountLeft > 0) amountLeft.toInt() else budgetProgress.max
             })
 
             emptyState.observe(viewLifecycle, { isEmpty ->
