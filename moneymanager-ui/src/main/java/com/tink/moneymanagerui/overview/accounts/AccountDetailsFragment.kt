@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.BaseFragment
@@ -15,14 +16,11 @@ import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
-import com.tink.moneymanagerui.view.AlphaHeaderScrollListener
-import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.extensions.visibleIf
-import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -37,7 +35,9 @@ internal class AccountDetailsFragment : BaseFragment() {
     private lateinit var viewModel: AccountDetailsViewModel
     private lateinit var transactionListViewModel: TransactionListViewModel
 
-    private lateinit var adapter: TransactionItemListAdapter
+    private val accountHeaderAdapter = AccountHeaderAdapter()
+    private lateinit var transactionsAdapter: TransactionItemListAdapter
+    private val accountDetailsAdapter = ConcatAdapter(accountHeaderAdapter)
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
@@ -88,10 +88,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         viewModel.account.observe(viewLifecycle, Observer {
             it?.let { account ->
                 title = account.name
-                view.accountBalance.text = account.balance.formatCurrencyExact()
-                view.accountNumber.text = account.accountNumber
-                // Pronounce account number letter by letter in talkback instead of as a number
-                view.accountNumber.contentDescription = account.accountNumber.replace(".".toRegex(), "$0 ")
+                accountHeaderAdapter.submitList(listOf(AccountInformation(account.accountNumber, account.balance)))
             }
         })
 
@@ -108,7 +105,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         transactionListViewModel.transactionItems.observe(
             viewLifecycleOwner,
             Observer {
-                adapter.setTransactionItems(it.transactions)
+                transactionsAdapter.setTransactionItems(it.transactions)
             }
         )
     }
@@ -117,13 +114,12 @@ internal class AccountDetailsFragment : BaseFragment() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
-        val headers = listOf(accountBalance, accountNumber, divider, extraText)
-        recyclerView.addOnScrollListener(AlphaHeaderScrollListener(headers))
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
-        adapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
+        transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
+        accountDetailsAdapter.addAdapter(transactionsAdapter)
 
-        adapter.onTransactionItemClickedListener = { id ->
+        transactionsAdapter.onTransactionItemClickedListener = { id ->
             CategorizationFlowFragment
                 .newInstance(id, MoneyManagerFeatureType.ACCOUNTS)
                 .also {
@@ -134,7 +130,7 @@ internal class AccountDetailsFragment : BaseFragment() {
                     )
                 }
         }
-        recyclerView.adapter = adapter
+        recyclerView.adapter = accountDetailsAdapter
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
