@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerVi
 import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.MoneyManagerFeatureType
-import com.tink.moneymanagerui.extensions.visibleIf
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -78,10 +77,6 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
-
-        transactionListViewModel.hasTransactions.observe(viewLifecycle, { hasTransactions ->
-            view.recyclerView.visibleIf { hasTransactions }
-        })
 
         setupViews()
 
