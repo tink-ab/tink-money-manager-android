@@ -34,9 +34,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_latest_transactions_toolbar_title` | All transactions |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
-| `tink_transaction_similar_button_accept_text` | Yes, change selected |
+| `tink_transaction_similar_button_accept_text` | Assign %1$d selected |
 | `tink_transaction_similar_button_skip_text` | Skip |
-| `tink_transaction_similar_description` | Do you want to categorize these transactions as well? |
+| `tink_transaction_similar_description` | Do you also want to assign these transactions to the %1$s category? |
 | `tink_transaction_similar_marker_button_mark_text` | Select all |
 | `tink_transaction_similar_marker_button_unmark_text` | Unselect all |
 | `tink_transaction_similar_title` | Similar transactions |
