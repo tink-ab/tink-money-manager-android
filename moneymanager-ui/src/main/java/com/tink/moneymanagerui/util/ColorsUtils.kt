@@ -1,13 +1,11 @@
-package com.tink.moneymanagerui.util;
+package com.tink.moneymanagerui.util
 
+import androidx.core.graphics.ColorUtils
+import kotlin.math.roundToInt
 
-import androidx.core.graphics.ColorUtils;
-
-public class ColorsUtils {
-
-	public static int adjustAlpha(int baseColor, float factor) {
-		int alpha = Math.round(255 * factor);
-		return ColorUtils.setAlphaComponent(baseColor, alpha);
-	}
-
+object ColorsUtils {
+    fun adjustAlpha(baseColor: Int, factor: Float): Int {
+        val alpha = (255 * factor).roundToInt()
+        return ColorUtils.setAlphaComponent(baseColor, alpha)
+    }
 }

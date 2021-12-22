@@ -9,6 +9,6 @@ import javax.inject.Inject
 internal class MarketProvider @Inject constructor(
     @ApplicationScoped private val context: Context
 ) {
-    val market: String?
+    val market: String
         get() = TelephonyUtils.getTelephonySimMarket(context)
 }

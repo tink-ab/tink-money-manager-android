@@ -1,65 +1,41 @@
-package com.tink.moneymanagerui.theme;
+package com.tink.moneymanagerui.theme
 
-import android.content.Context;
-import android.graphics.Typeface;
-import com.tink.moneymanagerui.util.FontUtils;
-import com.tink.moneymanagerui.view.Hecto;
-import com.tink.moneymanagerui.R;
-import com.tink.moneymanagerui.view.TinkSnackbar;
-import com.tink.moneymanagerui.view.TinkTextView.Theme;
+import android.content.Context
+import android.graphics.Typeface
+import com.tink.moneymanagerui.R
+import se.tink.commons.extensions.getColorFromAttr
+import com.tink.moneymanagerui.view.Hecto
+import com.tink.moneymanagerui.util.FontUtils
+import com.tink.moneymanagerui.view.TinkSnackbar
+import com.tink.moneymanagerui.view.TinkTextView
 
-import androidx.annotation.NonNull;
-import se.tink.commons.extensions.ContextUtils;
+open class TinkDefaultSnackbarTheme(private val context: Context) : TinkSnackbar.Theme {
+    override val textTheme: TinkTextView.Theme
+    override val buttonTheme: TinkTextView.Theme
+    override val backgroundColor: Int
+        get() = context.getColorFromAttr(R.attr.tink_snackbarColor)
+    override val loadingIndicatorColor: Int
+        get() = context.getColorFromAttr(R.attr.tink_colorOnSnackBar)
 
-public class TinkDefaultSnackbarTheme implements TinkSnackbar.Theme {
-
-	private Context context;
-	private Theme textTheme;
-	private Theme buttonTheme;
-
-	public TinkDefaultSnackbarTheme(final Context context) {
-		this.context = context;
-
-		textTheme = new Hecto(context) {
-			@Override
-			public int getTextColor() {
-				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
-			}
-		};
-
-		buttonTheme = new Hecto(context) {
-			@Override
-			public int getTextColor() {
-				return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
-			}
-
-			@Override
-			public Typeface getFont() {
-				return FontUtils.getTypeface(FontUtils.BOLD_FONT, context);
-			}
-		};
-	}
-
-
-	@Override
-	@NonNull
-	public Theme getTextTheme() {
-		return textTheme;
-	}
-
-	@Override
-	@NonNull
-	public Theme getButtonTheme() {
-		return buttonTheme;
-	}
-
-	@Override
-	public int getBackgroundColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_snackbarColor);
-	}
-
-	@Override
-	public int getLoadingIndicatorColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_colorOnSnackBar);
-	}
+    init {
+        textTheme = object : Hecto(context) {
+            override var textColor: Int
+                get() = context.getColorFromAttr(R.attr.tink_colorOnSnackBar)
+                set(textColor) {
+                    super.textColor = textColor
+                }
+        }
+        buttonTheme = object : Hecto(context) {
+            override var textColor: Int
+                get() = context.getColorFromAttr(R.attr.tink_colorOnSnackBar)
+                set(textColor) {
+                    super.textColor = textColor
+                }
+            override var font: Typeface?
+                get() = FontUtils.getTypeface(FontUtils.BOLD_FONT, context)
+                set(font) {
+                    super.font = font
+                }
+        }
+    }
 }

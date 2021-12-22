@@ -1,15 +1,15 @@
-package com.tink.moneymanagerui.buildConfig;
+package com.tink.moneymanagerui.buildConfig
 
-enum Feature {
-	LEFT_TO_SPEND,
-	TAG_VIEW,
-	FAB,
-	SAVINGS_GOAL,
-	ID_CONTROL,
-	TOUCH_ID_LOGIN,
-	DISK_CACHE,
-	BLOCK_SCREENSHOTS,
-	LOANS,
-	FORCE_PASSWORD_PROTECTION,
-	MORTGAGE
+internal enum class Feature {
+    LEFT_TO_SPEND,
+    TAG_VIEW,
+    FAB,
+    SAVINGS_GOAL,
+    ID_CONTROL,
+    TOUCH_ID_LOGIN,
+    DISK_CACHE,
+    BLOCK_SCREENSHOTS,
+    LOANS,
+    FORCE_PASSWORD_PROTECTION,
+    MORTGAGE
 }

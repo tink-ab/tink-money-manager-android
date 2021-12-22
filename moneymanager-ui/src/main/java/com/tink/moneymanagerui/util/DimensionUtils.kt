@@ -1,14 +1,15 @@
-package com.tink.moneymanagerui.util;
+package com.tink.moneymanagerui.util
 
-import android.content.Context;
+import android.content.Context
+import kotlin.math.ceil
 
-public class DimensionUtils {
+object DimensionUtils {
+    fun getPixelsFromDP(dp: Float, context: Context): Float {
+        return ceil((dp * context.resources.displayMetrics.density).toDouble())
+            .toFloat()
+    }
 
-	public static float getPixelsFromDP(float dp, Context context) {
-		return (float) Math.ceil(dp * context.getResources().getDisplayMetrics().density);
-	}
-
-	public static float getEmFromDp(float dp) {
-		return 0.0624f * dp;
-	}
+    fun getEmFromDp(dp: Float): Float {
+        return 0.0624f * dp
+    }
 }

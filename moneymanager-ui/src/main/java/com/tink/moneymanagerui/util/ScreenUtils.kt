@@ -1,23 +1,23 @@
-package com.tink.moneymanagerui.util;
+package com.tink.moneymanagerui.util
 
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
-import android.view.Display;
-import android.view.WindowManager;
+import android.content.Context
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import android.view.WindowManager
 
-public class ScreenUtils {
+object ScreenUtils {
+    fun dpToPixels(context: Context, dp: Int): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+            context.resources.displayMetrics
+        ).toInt()
+    }
 
-	public static int dpToPixels(Context context, int dp) {
-		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-			context.getResources().getDisplayMetrics());
-	}
-
-	public static DisplayMetrics getScreenMetrics(Context context) {
-		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		DisplayMetrics metrics = new DisplayMetrics();
-		display.getMetrics(metrics);
-		return metrics;
-	}
+    fun getScreenMetrics(context: Context): DisplayMetrics {
+        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+        val metrics = DisplayMetrics()
+        display.getMetrics(metrics)
+        return metrics
+    }
 }

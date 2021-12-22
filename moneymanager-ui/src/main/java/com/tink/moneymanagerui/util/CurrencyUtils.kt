@@ -189,7 +189,7 @@ object CurrencyUtils {
         val currencySymbol = try {
             Currency.getInstance(currencyCode).symbol
         } catch (exception: Exception) {
-            Currency.getInstance(Currencies.getSharedInstance().defaultCurrencyCode).symbol
+            Currency.getInstance(Currencies.sharedInstance.defaultCurrencyCode).symbol
         }
         return "$currencySymbol${amount.toBigDecimal().toLong()}"
     }
@@ -202,14 +202,14 @@ object CurrencyUtils {
         var currencyCode = currencyCode
         var locale = Locale.getDefault()
         val userProfile =
-            Currencies.getSharedInstance().userProfile
+            Currencies.sharedInstance.userProfile
         if (userProfile != null) {
             val localeCode = userProfile.locale
             val splits = localeCode.split("_").toTypedArray()
             locale = Locale(splits[0], userProfile.market)
         }
         if (currencyCode == null) {
-            currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
+            currencyCode = Currencies.sharedInstance.defaultCurrencyCode
         }
         val format = DecimalFormat.getCurrencyInstance(locale)
         if (!currencyCode.isEmpty()) {

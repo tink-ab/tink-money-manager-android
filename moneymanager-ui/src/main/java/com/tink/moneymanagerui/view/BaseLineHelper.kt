@@ -1,27 +1,20 @@
-package com.tink.moneymanagerui.view;
+package com.tink.moneymanagerui.view
 
-class BaseLineHelper {
+import kotlin.math.ceil
+import kotlin.math.floor
 
-	private final float materialStep;
+internal class BaseLineHelper(private val materialStep: Float) {
+    fun putHeightOnGrid(height: Int): Int {
+        val offsetFromGrid = height % materialStep
+        return if (offsetFromGrid > 0) {
+            (materialStep - floor(offsetFromGrid.toDouble())).toInt()
+        } else 0
+    }
 
-	BaseLineHelper(float materialStep) {
-		this.materialStep = materialStep;
-	}
-
-	int putHeightOnGrid(int height) {
-		float offsetFromGrid = height % materialStep;
-		if (offsetFromGrid > 0) {
-			return (int) (materialStep - Math.floor(offsetFromGrid));
-		}
-		return 0;
-	}
-
-
-	int getCompoundTopPaddingToPutBaselineOnGrid(int baseLine) {
-		float offsetFromGrid = baseLine % materialStep;
-		if (offsetFromGrid > 0) {
-			return (int) (materialStep - Math.ceil(offsetFromGrid));
-		}
-		return 0;
-	}
+    fun getCompoundTopPaddingToPutBaselineOnGrid(baseLine: Int): Int {
+        val offsetFromGrid = baseLine % materialStep
+        return if (offsetFromGrid > 0) {
+            (materialStep - ceil(offsetFromGrid.toDouble())).toInt()
+        } else 0
+    }
 }

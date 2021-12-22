@@ -1,20 +1,10 @@
-package com.tink.moneymanagerui.theme;
+package com.tink.moneymanagerui.theme
 
-import android.content.Context;
-import com.tink.moneymanagerui.R;
-import se.tink.commons.extensions.ContextUtils;
+import android.content.Context
+import com.tink.moneymanagerui.R
+import se.tink.commons.extensions.getColorFromAttr
 
-public class TinkErrorSnackbarTheme extends TinkDefaultSnackbarTheme {
-
-	Context context;
-
-	public TinkErrorSnackbarTheme(Context context) {
-		super(context);
-		this.context = context;
-	}
-
-	@Override
-	public int getBackgroundColor() {
-		return ContextUtils.getColorFromAttr(context, R.attr.tink_warningColor);
-	}
+class TinkErrorSnackbarTheme(var context: Context) : TinkDefaultSnackbarTheme(context) {
+    override val backgroundColor: Int
+        get() = context.getColorFromAttr(R.attr.tink_warningColor)
 }

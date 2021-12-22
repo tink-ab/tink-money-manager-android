@@ -1,20 +1,13 @@
-package com.tink.moneymanagerui.configuration;
+package com.tink.moneymanagerui.configuration
 
-import android.content.Context;
-import android.telephony.TelephonyManager;
-import androidx.annotation.Nullable;
+import android.content.Context
+import android.telephony.TelephonyManager
+import java.util.Locale
 
-final class TelephonyUtils {
-
-	@Nullable
-	public static String getTelephonySimMarket(Context context) {
-		TelephonyManager telephonyManager = (TelephonyManager) context
-			.getSystemService(Context.TELEPHONY_SERVICE);
-
-		if (telephonyManager != null) {
-			return telephonyManager.getSimCountryIso().toUpperCase();
-		} else {
-			return null;
-		}
-	}
+internal object TelephonyUtils {
+    fun getTelephonySimMarket(context: Context): String {
+        val telephonyManager = context
+            .getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return telephonyManager.simCountryIso.uppercase(Locale.getDefault())
+    }
 }

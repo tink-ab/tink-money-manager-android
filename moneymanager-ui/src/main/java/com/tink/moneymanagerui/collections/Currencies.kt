@@ -1,60 +1,38 @@
-package com.tink.moneymanagerui.collections;
+package com.tink.moneymanagerui.collections
 
-import com.tink.model.user.UserProfile;
-import com.tink.service.observer.ChangeObserver;
+import com.tink.model.user.UserProfile
+import se.tink.android.privacy.Clearable
+import com.tink.service.observer.ChangeObserver
 
-import androidx.annotation.NonNull;
-import se.tink.android.privacy.Clearable;
+@Deprecated("")
+class Currencies : ChangeObserver<UserProfile?>, Clearable {
+    var userProfile: UserProfile? = null
+        private set
+    val defaultCurrencyCode: String
+        get() = userProfile?.currency ?: DEFAULT_CURRENCY_CODE
 
-@Deprecated
-public class Currencies implements ChangeObserver<UserProfile>, Clearable {
+    override fun onCreate(item: UserProfile?) {
+        userProfile = item
+    }
 
-	private static Currencies instance;
-	private static final String DEFAULT_CURRENCY_CODE = "EUR";
+    override fun onRead(item: UserProfile?) {
+        userProfile = item
+    }
 
-	private UserProfile userProfile;
+    override fun onUpdate(item: UserProfile?) {
+        userProfile = item
+    }
 
-	public static Currencies getSharedInstance() {
-		if (instance == null) {
-			instance = new Currencies();
-		}
-		return instance;
-	}
+    override fun onDelete(item: UserProfile?) {
+        userProfile = item
+    }
 
-	public UserProfile getUserProfile() {
-		return userProfile;
-	}
+    override fun clear() {
+        userProfile = null
+    }
 
-	@NonNull
-	public String getDefaultCurrencyCode() {
-		if (userProfile == null) {
-			return DEFAULT_CURRENCY_CODE;
-		}
-		return userProfile.getCurrency();
-	}
-
-	@Override
-	public void onCreate(UserProfile item) {
-		userProfile = item;
-	}
-
-	@Override
-	public void onRead(UserProfile item) {
-		userProfile = item;
-	}
-
-	@Override
-	public void onUpdate(UserProfile item) {
-		userProfile = item;
-	}
-
-	@Override
-	public void onDelete(UserProfile item) {
-		userProfile = item;
-	}
-
-	@Override
-	public void clear() {
-		userProfile = null;
-	}
+    companion object {
+        private const val DEFAULT_CURRENCY_CODE = "EUR"
+        val sharedInstance: Currencies = Currencies()
+    }
 }

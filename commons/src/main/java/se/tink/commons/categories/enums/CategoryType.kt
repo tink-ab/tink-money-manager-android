@@ -1,31 +1,6 @@
-package se.tink.commons.categories.enums;
+package se.tink.commons.categories.enums
 
-
-public enum CategoryType {
-
-	INCOME("INCOME", 2, "income"),
-	EXPENSES("EXPENSES", 0, "expenses");
-
-	private String name;
-	private int code;
-	private String stringCode;
-
-	CategoryType(String name, int code, String stringCode) {
-		this.name = name;
-		this.code = code;
-		this.stringCode = stringCode;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public String getStringCode() {
-		return stringCode;
-	}
-
+enum class CategoryType(val type: String, val code: Int, val stringCode: String) {
+    EXPENSES("EXPENSES", 0, "expenses"),
+    INCOME("INCOME", 2, "income");
 }

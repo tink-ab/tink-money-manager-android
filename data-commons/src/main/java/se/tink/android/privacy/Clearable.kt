@@ -1,7 +1,5 @@
-package se.tink.android.privacy;
+package se.tink.android.privacy
 
-
-public interface Clearable {
-
-	void clear();
+interface Clearable {
+    fun clear()
 }

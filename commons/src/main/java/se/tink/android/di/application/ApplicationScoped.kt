@@ -1,14 +1,11 @@
-package se.tink.android.di.application;
+package se.tink.android.di.application
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import javax.inject.Qualifier;
+import java.lang.annotation.Documented
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
+import javax.inject.Qualifier
 
 @Qualifier
 @Documented
-@Retention(RUNTIME)
-public @interface ApplicationScoped {
-
-}
+@Retention(RetentionPolicy.RUNTIME)
+annotation class ApplicationScoped 

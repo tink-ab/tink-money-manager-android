@@ -1,26 +1,25 @@
-package com.tink.moneymanagerui.di;
+package com.tink.moneymanagerui.di
 
-import com.tink.annotations.PfmScope;
-import com.tink.service.user.UserProfileService;
-import dagger.Module;
-import dagger.Provides;
-import java.security.Security;
-import org.conscrypt.Conscrypt;
-import se.tink.android.repository.service.UserConfigurationService;
-import se.tink.android.repository.service.UserConfigurationServiceCachedImpl;
+import dagger.Provides
+import com.tink.annotations.PfmScope
+import com.tink.service.user.UserProfileService
+import dagger.Module
+import se.tink.android.repository.service.UserConfigurationService
+import se.tink.android.repository.service.UserConfigurationServiceCachedImpl
+import org.conscrypt.Conscrypt
+import java.security.Security
 
 @Module
-class ServiceModule {
+internal class ServiceModule {
+    @Provides
+    @PfmScope
+    fun userConfigurationService(
+        userService: UserProfileService?
+    ): UserConfigurationService {
+        return UserConfigurationServiceCachedImpl(userService!!)
+    }
 
-	public ServiceModule() {
-		Security.insertProviderAt(Conscrypt.newProvider("GmsCore_OpenSSL"), 1);
-	}
-
-	@Provides
-	@PfmScope
-	UserConfigurationService userConfigurationService(
-		UserProfileService userService
-	) {
-		return new UserConfigurationServiceCachedImpl(userService);
-	}
+    init {
+        Security.insertProviderAt(Conscrypt.newProvider("GmsCore_OpenSSL"), 1)
+    }
 }
