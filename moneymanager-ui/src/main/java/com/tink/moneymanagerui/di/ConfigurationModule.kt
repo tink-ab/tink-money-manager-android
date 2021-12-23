@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import se.tink.utils.DateUtils
 import java.util.Locale
-import java.util.TimeZone
 
 @Module
 internal class ConfigurationModule {
@@ -23,9 +22,10 @@ internal class ConfigurationModule {
     }
 
     @Provides
-    fun provideTimezone(): String = TimeZone.getDefault().id
+    fun provideDateUtils(locale: Locale): DateUtils {
+        val dateUtils = DateUtils.getInstance()
+        dateUtils.locale = locale
+        return dateUtils
+    }
 
-    @Provides
-    fun provideDateUtils(locale: Locale, timezone: String): DateUtils =
-        DateUtils.getInstance(locale, timezone)
 }
