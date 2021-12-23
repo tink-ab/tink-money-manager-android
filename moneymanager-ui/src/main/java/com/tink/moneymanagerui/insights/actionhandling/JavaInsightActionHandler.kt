@@ -66,6 +66,19 @@ open class JavaInsightActionHandler {
     ): Boolean = false
 
     /**
+     * Handle action where the user requests to refresh an aggregated credential.
+     * This corresponds to [InsightAction.Type.REFRESH_CREDENTIAL] action type.
+     *
+     * @param credentialId The id of the aggregated credential
+     * @param onHandled The [OnInsightHandled] to invoke to indicate if the action has completed successfully or not
+     * @return `true` if the action will be handled, `false` otherwise
+     */
+    open fun refreshCredentials(
+        credentialId: String,
+        onHandled: OnInsightHandled
+    ) : Boolean = false
+
+    /**
      * Handle action where the user wants to view transactions matching the list of ids.
      * This corresponds to [InsightAction.Type.VIEW_TRANSACTION] and [InsightAction.Type.VIEW_TRANSACTIONS] action types.
      *
@@ -133,6 +146,13 @@ open class JavaInsightActionHandler {
                 onComplete: (isActionDone: Boolean) -> Unit
             ): Boolean {
                 return this@JavaInsightActionHandler.categorizeTransactions(transactionIds, onComplete)
+            }
+
+            override fun refreshCredentials(
+                credentialId: String,
+                onComplete: (isActionDone: Boolean) -> Unit
+            ): Boolean {
+                return this@JavaInsightActionHandler.refreshCredentials(credentialId, onComplete)
             }
 
             override fun viewTransactions(transactionIds: List<String>): Boolean {
