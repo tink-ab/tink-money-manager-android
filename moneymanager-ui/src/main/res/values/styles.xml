@@ -5,4 +5,33 @@
   <style name="tink_leftToSpendTutorialStepNumber" parent="tink_leftToSpendTutorialStepDescription">
     <item name="android:fontFamily">@font/tink_font_bold</item>
   </style>
+
+  <style name="tink_FinanceOverviewSampleStyle" parent="TinkFinanceOverviewStyle">
+    <item name="tink_chartMeanValueColor">#A7A7A7</item>
+    <item name="tink_colorAccent">#ff461e7d</item>
+    <item name="tink_colorAccentDark">#ff461e7d</item>
+    <item name="tink_colorAccentLight">#ff461e7d</item>
+    <item name="tink_colorPrimary">#ff461e7d</item>
+    <item name="tink_colorPrimaryDark">#ff461e7d</item>
+    <item name="tink_colorPrimaryLight">#ff461e7d</item>
+    <item name="tink_expensesColor">#ff5638ff</item>
+    <item name="tink_expensesDarkColor">#ff5638ff</item>
+    <item name="tink_expensesLightColor">#ffe6e1ff</item>
+    <item name="tink_colorOnExpenses">#ffffff</item>
+    <item name="tink_incomeColor">#ff36b472</item>
+    <item name="tink_incomeDarkColor">#30A266</item>
+    <item name="tink_incomeLightColor">#ffdffbed</item>
+    <item name="tink_colorOnIncome">#ffffff</item>
+    <item name="tink_transferColor">#494949</item>
+    <item name="tink_transferLightColor">#EEEEEE</item>
+    <item name="tink_colorOnTransfer">#ffffff</item>
+    <item name="tink_uncategorizedColor">#FEAE22</item>
+    <item name="tink_uncategorizedLightColor">#FFF3DE</item>
+    <item name="tink_snackbarColor">#808080</item>
+    <item name="tink_colorOnSnackBar">#ffffff</item>
+    <item name="tink_textColorAction">#ff461e7d</item>
+    <item name="tink_dividerColor">#EEEEEE</item>
+    <item name="tink_expensesIconBackgroundColor">#00FF00</item>
+    <item name="tink_warningLightColor">#FF0000</item>
+  </style>
 </resources>

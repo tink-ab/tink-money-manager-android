@@ -30,6 +30,8 @@
     <item name="tink_colorOnSnackBar">#ffffff</item>
     <item name="tink_textColorAction">#ff461e7d</item>
     <item name="tink_dividerColor">#EEEEEE</item>
+    <item name="tink_expensesIconBackgroundColor">#00FF00</item>
+    <item name="tink_warningLightColor">#FF0000</item>
   </style>
 
   <!-- TODO: Move these themes to a demo/test app package -->

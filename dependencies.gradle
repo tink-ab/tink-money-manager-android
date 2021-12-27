@@ -21,7 +21,10 @@ ext {
     junitExt = "1.1.0"
     junitJupiter = "5.8.1"
     mockk = "1.12.0"
-    runner = "1.1.1"
+    androidXTest = "1.4.0"
+    androidXFragmentTest = "1.4.0"
+    mockwebserver = "4.3.1"
+
 
     libraries = [
             android_core_ktx                    : "androidx.core:core-ktx:$coreKtx",
@@ -67,8 +70,11 @@ ext {
 
             test_junit                          : "junit:junit:$junit",
             test_junit_ext                      : "androidx.test.ext:junit:$junitExt",
-            test_runner                         : "androidx.test:runner:$runner",
+            test_runner                         : "androidx.test:runner:$androidXTest",
+            test_rules                          : "androidx.test:rules:$androidXTest",
+            test_fragment                       : "androidx.fragment:fragment-testing:$androidXFragmentTest",
             test_espresso                       : "androidx.test.espresso:espresso-core:$espresso",
+            test_mockwebserver                  : "com.squareup.okhttp3:mockwebserver:$mockwebserver",
 
             tink_core                           : "com.tink:core:$tinkCoreVersion",
             tink_service                        : "com.tink:service:$tinkCoreVersion",

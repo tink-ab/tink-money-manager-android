@@ -180,10 +180,10 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     companion object {
 
-        private const val ARG_STYLE_RES = "styleRes"
-        private const val ARG_ACCESS_TOKEN = "accessToken"
-        private const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
-        private const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
+        const val ARG_STYLE_RES = "styleRes"
+        const val ARG_ACCESS_TOKEN = "accessToken"
+        const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
+        const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
 
         @JvmStatic
         var featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = mapOf()
