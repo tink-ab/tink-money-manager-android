@@ -158,7 +158,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
     }
 
-    fun refreshData() {
+    private fun refreshData() {
         dataRefreshHandler.refreshCategories()
         dataRefreshHandler.refreshUserConfiguration()
         dataRefreshHandler.refreshRegistered()

@@ -87,5 +87,6 @@ dependencies {
     androidTestImplementation libraries.test_rules
     androidTestImplementation libraries.test_espresso
     androidTestImplementation libraries.test_mockwebserver
+    debugImplementation libraries.test_espresso_idling_resource
     debugImplementation libraries.test_fragment
 }

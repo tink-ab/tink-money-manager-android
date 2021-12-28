@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.feature.insight
+package com.tink.moneymanagerui
 
 import com.tink.service.network.Environment
 

@@ -16,7 +16,7 @@ ext {
 
     // test
     assertj = "3.21.1"
-    espresso = "3.1.1"
+    espresso = "3.4.0"
     junit = "4.13.2"
     junitExt = "1.1.0"
     junitJupiter = "5.8.1"
@@ -74,6 +74,7 @@ ext {
             test_rules                          : "androidx.test:rules:$androidXTest",
             test_fragment                       : "androidx.fragment:fragment-testing:$androidXFragmentTest",
             test_espresso                       : "androidx.test.espresso:espresso-core:$espresso",
+            test_espresso_idling_resource       : "androidx.test.espresso:espresso-idling-resource:$espresso",
             test_mockwebserver                  : "com.squareup.okhttp3:mockwebserver:$mockwebserver",
 
             tink_core                           : "com.tink:core:$tinkCoreVersion",
