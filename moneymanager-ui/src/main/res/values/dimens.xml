@@ -37,7 +37,6 @@
   <dimen name="tink_tink_overview_chart_container_height">375dp</dimen>
 
   <dimen name="tink_account_details_header_height">176dp</dimen>
-  <dimen name="tink_account_details_header_height_plus_spacing">192dp</dimen>
 
   <dimen name="tink_budget_details_header_height">176dp</dimen>
 
