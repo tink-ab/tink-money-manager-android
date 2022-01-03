@@ -45,9 +45,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
         BudgetCreateSuggestionViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
-        if (insight.viewDetails == null) {
-            throw IllegalStateException("ViewDetails for this insight must be of the type BudgetCreateSuggestionViewDetails")
-        }
+        checkNotNull(insight.viewDetails) {"ViewDetails for this insight must be of the type BudgetCreateSuggestionViewDetails"}
 
         val viewDetails = insight.viewDetails as BudgetCreateSuggestionViewDetails
         return BudgetCreateSuggestionViewDataHolder(

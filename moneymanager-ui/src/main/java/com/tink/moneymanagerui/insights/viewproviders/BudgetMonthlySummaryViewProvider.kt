@@ -144,15 +144,16 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
                 return categories.getOrNull(3)
             }
 
-            val moreIconColor = categories
+            val hasOverBudgetCategory = categories
                 .drop(3)
-                .fold(BudgetColor.WithinBudget as BudgetColor) { color, category ->
-                    return@fold if (color == BudgetColor.WithinBudget && category.iconColor == BudgetColor.WithinBudget) {
-                        BudgetColor.WithinBudget
-                    } else {
-                        BudgetColor.OverBudget
-                    }
-                }
+                .any { category -> category.iconColor != BudgetColor.WithinBudget }
+
+            val moreIconColor = if (hasOverBudgetCategory) {
+                BudgetColor.OverBudget
+            } else {
+                BudgetColor.WithinBudget
+            }
+
             return BudgetMonthlySummaryCategory(
                 icon = IconResource.DrawableId(R.drawable.tink_more_horizontal),
                 iconColor = moreIconColor
