@@ -64,13 +64,13 @@ class DateUtils() {
     fun formatDateHuman(date: DateTime): String {
         return when {
             isTomorrow(date) -> {
-                formatHumanStrings[KEY_TOMORROW] ?: ""
+                formatHumanStrings[KEY_TOMORROW]!!
             }
             isToday(date) -> {
-                formatHumanStrings[KEY_TODAY] ?: ""
+                formatHumanStrings[KEY_TODAY]!!
             }
             isYesterday(date) -> {
-                formatHumanStrings[KEY_YESTERDAY] ?: ""
+                formatHumanStrings[KEY_YESTERDAY]!!
             }
             isInPastDays(date, NUMBER_OF_DAYS_TO_SHOW_ONLY_WEEKDAY) -> {
                 upperFirstChar(
@@ -121,12 +121,12 @@ class DateUtils() {
         val isThisYear = isCurrentYear(start) && isCurrentYear(end)
 
         dateInterval = if (isToday(start)) {
-            val todayText =  formatHumanStrings[KEY_TODAY] ?: ""
+            val todayText =  formatHumanStrings[KEY_TODAY]!!
             val endHumanForm = formatDateHumanShort(end)
             String.format("%s - %s", todayText, endHumanForm)
         } else if (isToday(end)) {
             val startHumanForm = formatDateHumanShort(start)
-            val todayText =  formatHumanStrings[KEY_TODAY] ?: ""
+            val todayText =  formatHumanStrings[KEY_TODAY]!!
             String.format("%s - %s", startHumanForm, todayText)
         } else if (isSameDayOfMonth && isSameMonth && isThisYear) {
             val day = getDayOfMonth(start)
@@ -166,17 +166,17 @@ class DateUtils() {
         return middleOfPeriod.toDateTime()
     }
 
-    fun getDayOfWeek(dateTime: DateTime?): String {
+    fun getDayOfWeek(dateTime: DateTime): String {
         return threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT, locale, timezone)
             .format(dateTime)
     }
 
-    fun getDayOfMonth(dateTime: DateTime?): String {
+    fun getDayOfMonth(dateTime: DateTime): String {
         return threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DAILY, locale, timezone)
             .format(dateTime)
     }
 
-    fun getMonthCompact(dateTime: DateTime?): String {
+    fun getMonthCompact(dateTime: DateTime): String {
         return threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT, locale, timezone)
             .format(dateTime)
     }
@@ -203,19 +203,19 @@ class DateUtils() {
         return date.toString(dtf)
     }
 
-    fun getDateWithYear(dateTime: DateTime?): String {
+    fun getDateWithYear(dateTime: DateTime): String {
         return upperFirstChar(
             threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_DATE_WITH_YEAR, locale, timezone)
                 .format(dateTime)
         )
     }
 
-    fun getMonthWithDayOfMonth(dateTime: DateTime?): String {
+    fun getMonthWithDayOfMonth(dateTime: DateTime): String {
         return threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_MONTH, locale, timezone)
             .format(dateTime)
     }
 
-    fun formatYearly(date: DateTime?): String {
+    fun formatYearly(date: DateTime): String {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_YEARLY,
             locale,
@@ -223,7 +223,7 @@ class DateUtils() {
         ).format(date)
     }
 
-    fun getMonthAndYearFromDateTime(date: DateTime?): String {
+    fun getMonthAndYearFromDateTime(date: DateTime): String {
         return threadSafeDateFormat(ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR, locale, timezone).format(date)
     }
 
