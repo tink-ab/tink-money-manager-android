@@ -114,13 +114,8 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
         addSource(categoryTree) {update()}
     }
 
-    val descriptionText: LiveData<String> = MediatorLiveData<String>().apply {
-        fun update() {
-            category.value?.let { category ->
-                postValue(context.getString(R.string.tink_transaction_similar_description, category.name))
-            }
-        }
-        addSource(category) { update() }
+    val descriptionText: LiveData<String> = category.map { category ->
+        context.getString(R.string.tink_transaction_similar_description, category.name)
     }
 
     fun updateTransactions(transactionIDs: List<String>, categoryCode: String, onError: (TinkNetworkError) -> Unit) {
