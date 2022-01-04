@@ -49,11 +49,6 @@ class InsightsModule {
 
     @Provides
     @IntoSet
-    fun refreshCredentialActionHandler(refreshCredentialActionHandler: RefreshCredentialActionHandler): ActionHandler =
-        refreshCredentialActionHandler
-
-    @Provides
-    @IntoSet
     fun viewTransactionsActionHandler(viewTransactionsActionHandler: ViewTransactionsActionHandler): ActionHandler =
         viewTransactionsActionHandler
 
