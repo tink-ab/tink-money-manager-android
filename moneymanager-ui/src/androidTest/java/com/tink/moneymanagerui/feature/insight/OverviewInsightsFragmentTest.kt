@@ -10,18 +10,18 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.FinanceOverviewFragment.Companion.ARG_ACCESS_TOKEN
 import com.tink.moneymanagerui.FinanceOverviewFragment.Companion.ARG_IS_OVERVIEW_TOOLBAR_VISIBLE
 import com.tink.moneymanagerui.FinanceOverviewFragment.Companion.ARG_OVERVIEW_FEATURES
-import com.tink.moneymanagerui.FinanceOverviewFragment.Companion.ARG_STYLE_RES
 import com.tink.moneymanagerui.OverviewFeatures
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
+import org.hamcrest.Matchers
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class OverviewInsightsFragmentTest: BaseTestSuite() {
-    private fun setupDispatcher() {
-        val insightListBody = """
+
+    private var insightListBody = """
          [
             {
                 "userId": 1234,
@@ -52,7 +52,8 @@ class OverviewInsightsFragmentTest: BaseTestSuite() {
             }
         ]
         """
-      
+
+    private fun setupDispatcher() {
         val dispatcher: Dispatcher = object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return when (request.path) {
@@ -68,7 +69,6 @@ class OverviewInsightsFragmentTest: BaseTestSuite() {
     fun testDisplayNumberOfInsights() {
         setupDispatcher()
         val fragmentArgs = bundleOf(
-            ARG_STYLE_RES to  com.tink.moneymanagerui.R.style.tink_FinanceOverviewSampleStyle,
             ARG_ACCESS_TOKEN to testConfiguration.sampleAccessToken,
             ARG_OVERVIEW_FEATURES to OverviewFeatures.ALL,
             ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to true
@@ -81,6 +81,36 @@ class OverviewInsightsFragmentTest: BaseTestSuite() {
             .check(matches(withText("3")))
 
         // Move this line to navigation test when complete.
+        onView(withText(com.tink.moneymanagerui.R.string.tink_insights_overview_card_action_text))
+            .perform(click())
+
+        insightListBody = """
+         [
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "LARGE_EXPENSE",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "insightActions": []
+            }
+         ]"""
+        setupDispatcher()
+
+        onView(
+            Matchers.allOf(
+                withContentDescription("Navigate up"),
+                isDisplayed()
+            )
+        ).perform(click())
+
+
+        onView(withText(com.tink.moneymanagerui.R.string.tink_insights_overview_card_action_text))
+            .check(matches(isDisplayed()))
+        onView(withId(com.tink.moneymanagerui.R.id.insightsCount))
+            .check(matches(withText("1")))
+
         onView(withText(com.tink.moneymanagerui.R.string.tink_insights_overview_card_action_text))
             .perform(click())
 
