@@ -121,7 +121,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
             val color = type.getFeatureColor(context)
             val src = it.source
             val periodStr =
-                getPeriodString(dateUtils, src.period, context)
+                getPeriodString(dateUtils, src.period)
             val topLevel = src.category.parentId == null
             DetailsChartModel(
                 context,

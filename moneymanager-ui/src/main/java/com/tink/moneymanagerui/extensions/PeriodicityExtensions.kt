@@ -5,11 +5,9 @@ import com.tink.model.budget.BudgetPeriod
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 
-// We want to use UTC to get proper period breaks when formatting.
-private const val timezoneCode = "UTC"
 
 fun Budget.Periodicity.OneOff.formattedPeriod(dateUtils: DateUtils): String =
-    dateUtils.formatDateRange(start.toDateTime(), end.toDateTime(), timezoneCode, true)
+    dateUtils.formatDateRange(start.toDateTime(), end.toDateTime(), true)
 
 fun Budget.Periodicity.Recurring.formattedPeriod(
     budgetPeriod: BudgetPeriod,
@@ -19,13 +17,11 @@ fun Budget.Periodicity.Recurring.formattedPeriod(
         Budget.Periodicity.Recurring.PeriodUnit.MONTH ->
             dateUtils.getMonthNameOfDate(
                 budgetPeriod.getHalfwayPoint(),
-                true,
-                timezoneCode)
+                true)
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
             dateUtils.formatYearly(
-                budgetPeriod.getHalfwayPoint(),
-                timezoneCode
+                budgetPeriod.getHalfwayPoint()
             )
 
         Budget.Periodicity.Recurring.PeriodUnit.WEEK,
@@ -33,7 +29,6 @@ fun Budget.Periodicity.Recurring.formattedPeriod(
             dateUtils.formatDateRange(
                 budgetPeriod.start.toDateTime(),
                 budgetPeriod.end.toDateTime(),
-                timezoneCode,
                 true
             )
     }
