@@ -19,91 +19,6 @@
             android:layout_height="200dp"
             android:layout_gravity="center">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryOneBackground"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:background="@drawable/tink_circle"
-                android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
-                app:layout_constraintBottom_toTopOf="@id/categoryThreeBackground"
-                app:layout_constraintEnd_toStartOf="@id/categoryTwoBackground"
-                app:layout_constraintStart_toEndOf="@id/progress"
-                app:layout_constraintTop_toTopOf="@id/progress"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryOneIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:tint="?attr/tink_expensesIconColor"
-                app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
-                app:layout_constraintEnd_toEndOf="@id/categoryOneBackground"
-                app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryOneBackground" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryTwoBackground"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:background="@drawable/tink_circle"
-                android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
-                app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/categoryOneBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryOneBackground" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryTwoIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/categoryTwoBackground"
-                app:layout_constraintEnd_toEndOf="@id/categoryTwoBackground"
-                app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryTwoBackground"
-                tools:tint="?attr/tink_expensesIconColor" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryThreeBackground"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/tink_circle"
-                android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
-                app:layout_constraintBottom_toBottomOf="@id/progress"
-                app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
-                app:layout_constraintTop_toBottomOf="@id/categoryOneBackground" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryThreeIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:tint="?attr/tink_expensesIconColor"
-                app:layout_constraintBottom_toBottomOf="@id/categoryThreeBackground"
-                app:layout_constraintEnd_toEndOf="@id/categoryThreeBackground"
-                app:layout_constraintStart_toStartOf="@id/categoryThreeBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryThreeBackground" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryFourBackground"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/tink_circle"
-                android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
-                app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryThreeBackground" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/categoryFourIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:tint="?attr/tink_expensesIconColor"
-                app:layout_constraintBottom_toBottomOf="@id/categoryFourBackground"
-                app:layout_constraintEnd_toEndOf="@id/categoryFourBackground"
-                app:layout_constraintStart_toStartOf="@id/categoryFourBackground"
-                app:layout_constraintTop_toTopOf="@id/categoryFourBackground" />
-
             <View
                 android:id="@+id/topContainerBackground"
                 android:layout_width="match_parent"
@@ -139,33 +54,129 @@
                 app:layout_constraintTop_toBottomOf="@id/currentSpending"
                 tools:text="/ 6 000 kr" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/categoryThreeGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="categoryThreeBackground, categoryThreeIcon" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/categoryFourGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:constraint_referenced_ids="categoryFourBackground, categoryFourIcon" />
-
             <com.tink.moneymanagerui.charts.CircularProgressChart
                 android:id="@+id/progress"
                 android:layout_width="132dp"
                 android:layout_height="132dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/categoryOneBackground"
-                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/categoriesContainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
                 custom:tink_backgroundRingStrokeWidth="16dp"
                 custom:tink_invertedProgress="true"
                 custom:tink_progress="0.75"
                 custom:tink_progressArcStrokeWidth="8dp"
                 tools:tink_backgroundRingColor="@color/within_budget_light"
                 tools:tink_progressArcColor="@color/within_budget" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/categoriesContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/progress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryOneBackground"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/tink_circle"
+                    android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
+                    app:layout_constraintBottom_toTopOf="@id/categoryThreeBackground"
+                    app:layout_constraintEnd_toStartOf="@id/categoryTwoBackground"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryOneIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="?attr/tink_expensesIconColor"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
+                    app:layout_constraintEnd_toEndOf="@id/categoryOneBackground"
+                    app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryOneBackground" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryTwoBackground"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="20dp"
+                    android:background="@drawable/tink_circle"
+                    android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryOneBackground"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/categoryOneBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryOneBackground" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryTwoIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryTwoBackground"
+                    app:layout_constraintEnd_toEndOf="@id/categoryTwoBackground"
+                    app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryTwoBackground"
+                    tools:tint="?attr/tink_expensesIconColor" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryThreeBackground"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/tink_circle"
+                    android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/categoryOneBackground"
+                    app:layout_constraintTop_toBottomOf="@id/categoryOneBackground" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryThreeIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="?attr/tink_expensesIconColor"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryThreeBackground"
+                    app:layout_constraintEnd_toEndOf="@id/categoryThreeBackground"
+                    app:layout_constraintStart_toStartOf="@id/categoryThreeBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryThreeBackground" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryFourBackground"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/tink_circle"
+                    android:backgroundTint="?attr/tink_expensesIconBackgroundColor"
+                    app:layout_constraintStart_toStartOf="@id/categoryTwoBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryThreeBackground" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/categoryFourIcon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:tint="?attr/tink_expensesIconColor"
+                    app:layout_constraintBottom_toBottomOf="@id/categoryFourBackground"
+                    app:layout_constraintEnd_toEndOf="@id/categoryFourBackground"
+                    app:layout_constraintStart_toStartOf="@id/categoryFourBackground"
+                    app:layout_constraintTop_toTopOf="@id/categoryFourBackground" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/categoryThreeGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="categoryThreeBackground, categoryThreeIcon" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/categoryFourGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="categoryFourBackground, categoryFourIcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
