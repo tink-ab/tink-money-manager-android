@@ -14,7 +14,7 @@ internal fun Amount.floorAmount(): String {
     val currencySymbol = try {
         Currency.getInstance(currencyCode).symbol
     } catch (exception: Exception) {
-        Currency.getInstance(Currencies.getSharedInstance().defaultCurrencyCode).symbol
+        Currency.getInstance(Currencies.sharedInstance.defaultCurrencyCode).symbol
     }
     return "$currencySymbol${this.value.toBigDecimal().toLong()}"
 }
