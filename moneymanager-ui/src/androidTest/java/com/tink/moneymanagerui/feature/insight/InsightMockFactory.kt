@@ -1,20 +1,11 @@
 package com.tink.moneymanagerui.feature.insight
 
-import com.tink.model.budget.BudgetPeriod
 import com.tink.model.insights.*
-import com.tink.model.misc.Amount
-import com.tink.model.misc.ExactNumber
-import com.tink.model.relations.CommonTransactionsOverview
-import com.tink.model.relations.LargestExpense
-import com.tink.model.relations.TransactionSummary
-import com.tink.model.time.YearMonth
-import com.tink.model.time.YearWeek
-import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.insights.enrichment.*
-import org.threeten.bp.Instant
+import org.json.JSONObject
 
 object InsightMockFactory {
-    
+
     val allTypes = listOf(
         InsightType.ACCOUNT_BALANCE_LOW,
         InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL,
@@ -52,217 +43,380 @@ object InsightMockFactory {
         InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
         InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS)
 
-    val defaultActions = listOf(
-        InsightAction(
-            label = "action1",
-            actionType = InsightAction.Type.VIEW_BUDGET,
-            data = InsightAction.Data.Acknowledge)
+    val supportedTypes = listOf(
+        InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.BUDGET_CLOSE_NEGATIVE,
+        InsightType.BUDGET_CLOSE_POSITIVE,
+        InsightType.BUDGET_OVERSPENT,
+        InsightType.BUDGET_SUCCESS,
+        InsightType.BUDGET_SUGGEST_CREATE_FIRST,
+        InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY,
+        InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY,
+        InsightType.BUDGET_SUMMARY_ACHIEVED,
+        InsightType.BUDGET_SUMMARY_OVERSPENT,
+        InsightType.DOUBLE_CHARGE,
+        InsightType.LARGE_EXPENSE,
+        InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY,
+        InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS,
+        InsightType.SINGLE_UNCATEGORIZED_TRANSACTION,
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
+        InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
+        InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS
     )
     
-    fun getInsightsForTypes(types: List<InsightType> = allTypes): List<Insight> {
+    fun getInsightsForTypes(types: List<InsightType> = allTypes): List<JSONObject> {
         return types.map { type ->
             return@map when (type) {
-                /*
-                InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> {
-                    createRefreshCredentialsInsight()
-                }
-                 */
-                InsightType.BUDGET_SUMMARY_ACHIEVED -> {
-                    createBudgetSummaryAchievedInsight()
-                }
-                InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY,
-                InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> {
-                    val details = BudgetCreateSuggestionViewDetails(
-                        savePercentage = "10",
-                        savePerYearAmount = Amount(EXACT_NUMBER_ZERO, "SEK")
-                    )
-                    createInsight(id = type.name,
-                        type = type,
-                        data = InsightData.BudgetSuggestCreateFirstData,
-                        details = details)
-                }
-                InsightType.LARGE_EXPENSE -> {
-                    createLargeExpenseInsight()
-                }
-                InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> {
-                    createMonthlySummaryExpenseTransactions()
-                }
-                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY -> {
-                    createWeeklySummaryExpenseByDay()
-                }
-                InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS -> {
-                    createWeeklySummaryExpenseTransactions()
-                }
-                else -> {
-                    createInsight(id = type.name,
-                        type = type,
-                        data = InsightData.BudgetSuggestCreateFirstData)
-                }
+                InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
+                InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
+                InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
+                InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
+                InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> getMonthlySummaryExpensesTransactions()
+                InsightType.NEW_INCOME_TRANSACTION -> getNewIncomeTransaction()
+                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> getWeeklySummaryExpensesByCategory()
+                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY -> getWeeklySummaryExpensesByDay()
+                InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS -> getWeeklySummaryExpensesTransactions()
+                InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> getWeeklyUncategorizedTransactions()
+                else -> getDefaultInsight(type)
             }
         }
     }
 
-    /* TODO: Uncomment when Core is updated with InsightAction.Type.REFRESH_CREDENTIAL
-    private fun createRefreshCredentialsInsight(): Insight {
-        val actions = listOf(
-            InsightAction(
-                label = "Refresh label",
-                actionType = InsightAction.Type.REFRESH_CREDENTIAL,
-                data = InsightAction.Data.RefreshCredential("1234")),
-            InsightAction(
-                label = "Dismiss label",
-                actionType = InsightAction.Type.DISMISS,
-                data = InsightAction.Data.Dismiss)
-        )
-
-        val now = DateTime.now().toInstant().millis
-        val insightData = InsightData.AggregationRefreshPsd2CredentialData(
-            id = "123",
-            credential = InsightData.Credential(
-                id = "444",
-                provider = InsightData.ProviderSlim(
-                    name = "ND1",
-                    displayName = "Revolut"
-                )
-            ),
-            sessionExpiryDate = now
-        )
-
-        return createInsight(id = InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL.name,
-            type = InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL,
-            actions = actions,
-            data = insightData)
-    }
-     */
-
-    private fun createLargeExpenseInsight(): Insight {
-        val actions = listOf(
-            InsightAction(
-                label = "View transaction label",
-                actionType = InsightAction.Type.VIEW_TRANSACTION,
-                data = InsightAction.Data.NoData),
-            InsightAction(
-                label = "Dismiss label",
-                actionType = InsightAction.Type.DISMISS,
-                data = InsightAction.Data.Dismiss)
-        )
-
-        val insightData = InsightData.MonthlyExpenseTransactionsData(
-            YearMonth(2021, 12),
-            TransactionSummary(
-                CommonTransactionsOverview(
-                    "Common transaction description",
-                    0,
-                    0
-                ), Amount(EXACT_NUMBER_ZERO, "SEK"),
-                LargestExpense(1L, Amount(EXACT_NUMBER_ZERO, "SEK"), "...", "123")
-            )
-        )
-
-        return createInsight(id = InsightType.LARGE_EXPENSE.name,
-            type = InsightType.LARGE_EXPENSE,
-            actions = actions,
-            data = insightData)
-    }
-
-    private fun createMonthlySummaryExpenseTransactions(): Insight {
-        val insightData = InsightData.MonthlyExpenseTransactionsData(
-            YearMonth(2021, 12),
-            TransactionSummary(
-                CommonTransactionsOverview(
-                    "Common transaction description",
-                    0,
-                    0
-                ), Amount(EXACT_NUMBER_ZERO, "SEK"),
-                LargestExpense(1L, Amount(EXACT_NUMBER_ZERO, "SEK"), "...", "123")
-            )
-        )
-        return createInsight(id = InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS.name,
-            type = InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS,
-            data = insightData)
-    }
-
-    private fun createWeeklySummaryExpenseTransactions(): Insight {
-        val insightData = InsightData.WeeklyExpenseTransactionsData(
-            YearWeek(2021, 12),
-            TransactionSummary(
-                CommonTransactionsOverview(
-                    "Common transaction description",
-                    0,
-                    0
-                ), Amount(EXACT_NUMBER_ZERO, "SEK"),
-                LargestExpense(1L, Amount(EXACT_NUMBER_ZERO, "SEK"), "...", "123")
-            )
-        )
-        return createInsight(id = InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS.name,
-            type = InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
-            data = insightData)
-    }
-
-    private fun createWeeklySummaryExpenseByDay(): Insight {
-        val insightData = InsightData.WeeklyExpensesByDayData(
-            YearWeek(2021, 40),
-            listOf()
-        )
-        return createInsight(id = InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY.name,
-            type = InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
-            data = insightData)
-    }
-
-    private fun createBudgetSummaryAchievedInsight(
-    ): Insight {
-        val iconType: IconTypeViewDetails = IconTypeViewDetails.Category("1")
-        val summaryDetailsItem = BudgetSummaryDetailItem(
-            budgetState = BudgetState.SUCCESS,
-            iconTypeViewDetails = iconType
-        )
-        val details = BudgetSummaryViewDetails(
-            listOf(summaryDetailsItem, summaryDetailsItem, summaryDetailsItem, summaryDetailsItem, summaryDetailsItem),
-            "1000", "750", 0.4
-        )
-
-        val insightData = InsightData.BudgetSummaryAchievedData(
-            listOf(
-                InsightData.BudgetIdToPeriod(
-                    "1234", BudgetPeriod(
-                        start = Instant.now(),
-                        end = Instant.now(),
-                        spentAmount = Amount(ExactNumber(45), "SEK"),
-                        budgetAmount = Amount(ExactNumber(100), "SEK")
-                    )
-                ),
-                InsightData.BudgetIdToPeriod(
-                    "1235", BudgetPeriod(
-                        start = Instant.now(),
-                        end = Instant.now(),
-                        spentAmount = Amount(ExactNumber(2000), "SEK"),
-                        budgetAmount = Amount(ExactNumber(100), "SEK")
-                    )
-                )
-            ),
-            listOf(),
-            Amount(ExactNumber(1234), "SEK")
-        )
-        return createInsight(id = InsightType.BUDGET_SUMMARY_ACHIEVED.name,
-            type = InsightType.BUDGET_SUMMARY_ACHIEVED,
-            data = insightData,
-            details = details)
-    }
-
-    fun createInsight(id: String,
-                      type: InsightType = InsightType.UNKNOWN,
-                      actions: List<InsightAction> = defaultActions,
-                      data: InsightData,
-                      details: Insight.ViewDetails? = null): Insight {
-        return Insight(id = id,
-            type = type,
-            title = "Title $id",
-            description = "description $id",
-            created = Instant.now(),
-            actions = actions,
-            state = InsightState.Active,
-            data = data,
-            viewDetails = details
+    private fun getAccountBalanceLow(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "ACCOUNT_BALANCE_LOW",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "ACCOUNT_BALANCE_LOW",
+                    "accountId": "c6f26025fbb949a08348e2f73f0ae12c",
+                    "balance": {
+                        "currencyCode": "EUR",
+                        "amount": 2.42
+                    }
+                }
+            }"""
         )
     }
+
+    private fun getBudgetSuggestCreateTopCategory(): JSONObject {
+        return JSONObject("""
+            {
+                "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
+                "userId": 1234,
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
+                    "categorySpending": {
+                        "categoryCode": "expenses:food.coffee",
+                        "spentAmount": {
+                            "amount": 400,
+                            "currencyCode": "EUR"
+                        }
+                    },
+                    "suggestedBudgetAmount": {
+                        "amount": 350,
+                        "currencyCode": "EUR"
+                    }
+                }
+            }"""
+        )
+    }
+
+    private fun getBudgetSuggestCreateTopPrimaryCategory(): JSONObject {
+        return JSONObject("""
+            {
+                "type": "BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY",
+                "userId": 1234,
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY",
+                    "categorySpending": {
+                        "categoryCode": "expenses:food",
+                        "spentAmount": {
+                            "amount": 400,
+                            "currencyCode": "EUR"
+                        }
+                    },
+                    "suggestedBudgetAmount": {
+                        "amount": 360,
+                        "currencyCode": "EUR"
+                    }
+                }
+            }
+            """
+        )
+    }
+
+    private fun getMonthlySummaryExpenseByCategory(): JSONObject {
+        return JSONObject("""
+            {
+                "type": "MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY",
+                "userId": 1234,
+                "id": 1,
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY",
+                    "month": {
+                        "month": 1,
+                        "year": 2020 
+                    },
+                    "expensesByCategory": [
+                        {
+                            "categoryCode": "expenses:food.coffee",
+                            "spentAmount": {
+                                "currencyCode": "EUR",
+                                "amount": 28.0
+                            }
+                        },
+                        {
+                            "categoryCode": "expenses:food.groceries",
+                            "spentAmount": {
+                                "currencyCode": "EUR",
+                                "amount": 115.75
+                            }
+                        }
+                    ]
+                }
+            }"""
+        )
+    }
+
+    private fun getMonthlySummaryExpensesTransactions(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "title": "Title",
+                "type": "MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS",
+                "description": "Description",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS",
+                    "month": {
+                        "year": 2020,
+                        "month": 1
+                    },
+                    "transactionSummary": {
+                        "totalExpenses": {
+                        "currencyCode": "EUR",
+                        "amount": 200
+                        },
+                        "commonTransactionsOverview": {
+                            "totalNumberOfTransactions": 45,
+                            "mostCommonTransactionDescription": "Pressbyrån",
+                            "mostCommonTransactionCount": 6
+                            },
+                            "largestExpense": {
+                                "id": "f2f6f273ce394138897e9afff1464f5d",
+                                "date": 1569593745000,
+                                "amount": {
+                                "currencyCode": "EUR",
+                                "amount": 120.3
+                            },
+                            "description": "IKEA"
+                        }
+                    }
+                }
+            }"""
+        )
+    }
+
+    private fun getNewIncomeTransaction(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "NEW_INCOME_TRANSACTION",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "NEW_INCOME_TRANSACTION",
+                    "transactionId": "42f6f233ce394138897e9afff1464f5d",
+                    "accountId": "c6f26025fbb949a08348e2f73f0ae12c"
+                }
+            }"""
+        )
+    }
+
+    private fun getWeeklySummaryExpensesByCategory(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                
+                "data": {
+                    "type": "WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY",
+                    "week": {
+                        "year": 2019,
+                        "week": 43
+                    },
+                    "expensesByCategory": [
+                        {
+                            "categoryCode": "expenses:food.coffee",
+                            "spentAmount": {
+                                "currencyCode": "EUR",
+                                "amount": 7.0
+                            }
+                        },
+                        {
+                            "categoryCode": "expenses:food.groceries",
+                            "spentAmount": {
+                                "currencyCode": "EUR",
+                                "amount": 77.76
+                            }
+                        }
+                    ]
+                }
+            }"""
+        )
+    }
+
+    private fun getWeeklySummaryExpensesByDay(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
+                    "week": {
+                        "year": 2019,
+                        "week": 43
+                    },
+                    "expenseStatisticsByDay": [
+                        {
+                            "date": [2019,10,27],
+                            "expenseStatistics": {
+                                "totalAmount": {
+                                    "currencyCode": "EUR",
+                                    "amount": 57
+                                },
+                                "averageAmount": {
+                                    "currencyCode": "EUR",
+                                    "amount": 60
+                                }
+                            }
+                        },
+                        {
+                            "date": [2019,10,26],
+                            "expenseStatistics": {
+                                "totalAmount": {
+                                    "currencyCode": "EUR",
+                                    "amount": 63.5
+                                },
+                                "averageAmount": {
+                                    "currencyCode": "EUR",
+                                    "amount": 71
+                                }
+                            }
+                        }
+                    ]
+                }
+            }"""
+        )
+    }
+
+    private fun getWeeklySummaryExpensesTransactions(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS",
+                    "week": {
+                        "year": 2019,
+                        "week": 26
+                    },
+                    "transactionSummary": {
+                        "totalExpenses": {
+                            "currencyCode": "EUR",
+                            "amount": 71
+                        },
+                        "commonTransactionsOverview": {
+                            "totalNumberOfTransactions": 12,
+                            "mostCommonTransactionDescription": "Pressbyrån",
+                            "mostCommonTransactionCount": 3
+                        },
+                        "largestExpense": {
+                            "id": "42f6f233ce394138897e9afff1464f5d",
+                            "date": 1569593745000,
+                            "amount": {
+                                "currencyCode": "EUR",
+                                "amount": 60
+                            },
+                            "description": "Super Spa"
+                        }
+                    }
+                }
+            }"""
+        )
+    }
+
+    private fun getWeeklyUncategorizedTransactions(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "WEEKLY_UNCATEGORIZED_TRANSACTIONS",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "WEEKLY_UNCATEGORIZED_TRANSACTIONS",
+                    "week": {
+                        "year": 2019,
+                        "week": 43
+                    },
+                    "transactionIds": [
+                        "0e068c995f154de196136a381aa4a6a8",
+                        "e069e73732054062899a9470c22d178e",
+                        "dee31caf9c464291bafe193804fd2ca3"
+                    ]
+                }
+            }"""
+        )
+    }
+
+    private fun getDefaultInsight(type: InsightType): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "$type",
+                "title": "Title",
+                "description": "Description",
+                "createdTime": 1111111
+            }"""
+        )
+    }
+
 }
