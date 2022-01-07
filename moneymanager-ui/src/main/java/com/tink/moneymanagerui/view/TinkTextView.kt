@@ -13,7 +13,7 @@ class TinkTextView : AppCompatTextView {
     private var theme: Theme? = null
     private var compundPaddingTop = 0
     private var ignoreBaseLine = false
-    private var helper: BaseLineHelper? = null
+    private lateinit var helper: BaseLineHelper
 
     constructor(context: Context) : super(context) {
         initialize(null)
@@ -71,9 +71,9 @@ class TinkTextView : AppCompatTextView {
         }
         val oneDpExtraHeightToAvoidClipping =
             DimensionUtils.getPixelsFromDP(1f, context)
-        compundPaddingTop = helper!!.getCompoundTopPaddingToPutBaselineOnGrid(baseline)
+        compundPaddingTop = helper.getCompoundTopPaddingToPutBaselineOnGrid(baseline)
         var height = measuredHeight
-        height += helper!!.putHeightOnGrid(height)
+        height += helper.putHeightOnGrid(height)
         height += oneDpExtraHeightToAvoidClipping.toInt()
         setMeasuredDimension(measuredWidth, height)
     }
@@ -83,8 +83,8 @@ class TinkTextView : AppCompatTextView {
         type: BufferType
     ) {
         var themedText = text
-        if (theme != null && theme!!.toUpperCase()) {
-            themedText = themedText.toString().toUpperCase()
+        if (theme?.toUpperCase() == true) {
+            themedText = themedText.toString().uppercase(Locale.getDefault())
         }
         super.setText(themedText, type)
     }
