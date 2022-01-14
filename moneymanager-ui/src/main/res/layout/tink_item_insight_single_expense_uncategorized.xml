@@ -52,9 +52,11 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="2dp"
       android:layout_marginStart="16dp"
-      app:layout_constraintEnd_toEndOf="@+id/amount"
+      app:layout_constraintEnd_toStartOf="@+id/amount"
       app:layout_constraintStart_toEndOf="@+id/iconBackground"
       app:layout_constraintTop_toTopOf="@+id/iconBackground"
+      android:ellipsize="end"
+      android:maxLines="1"
       tools:text="Shell petrol"/>
 
     <TextView
@@ -76,6 +78,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="24dp"
+      android:paddingStart="24dp"
       app:layout_constraintBottom_toBottomOf="@+id/iconBackground"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@+id/iconBackground"

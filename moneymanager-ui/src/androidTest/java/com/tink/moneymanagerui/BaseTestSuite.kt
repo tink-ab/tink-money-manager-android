@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui
 
+import android.content.res.Resources
 import android.net.Uri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -16,6 +17,7 @@ import org.junit.Before
 
 abstract class BaseTestSuite {
 
+    val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
     val navigator = TestNavigator()
     var server = MockWebServer()
     private val url = server.url("/").toString()

@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.feature.insight
+package com.tink.moneymanagerui.mock
 
 import com.tink.model.insights.*
 import org.json.JSONObject

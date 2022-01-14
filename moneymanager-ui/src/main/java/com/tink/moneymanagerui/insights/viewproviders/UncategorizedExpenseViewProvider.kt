@@ -9,7 +9,6 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.TransactionViewDetails
 import com.tink.moneymanagerui.insights.enrichment.TransactionsViewDetails
-import com.tink.moneymanagerui.util.EspressoIdlingResource
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_single_expense_uncategorized.view.*
 import org.threeten.bp.Instant
@@ -23,7 +22,7 @@ import se.tink.utils.DateUtils
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
-class SingleExpenseUncategorizedViewProvider @Inject constructor(
+class UncategorizedExpenseViewProvider @Inject constructor(
     val dateUtils: DateUtils
 ) : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> =
@@ -35,27 +34,27 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
     override val viewType: InsightViewType = getViewType()
 
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
-        SingleExpenseUncategorizedViewHolder(parent, actionHandler)
+        UncategorizedExpenseViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
         return when(insight.data) {
             is InsightData.UncategorizedTransactionData -> {
                 (insight.viewDetails as? TransactionViewDetails)?.let {
-                    SingleExpenseUncategorizedDataHolder(
+                    SingleUncategorizedExpenseDataHolder(
                         it.description,
                         dateUtils.formatDateHuman(it.date.toDateTime()), //TODO: Core setup
                         it.amount.formatCurrencyExact()
                     )
-                } ?: SingleExpenseUncategorizedDataHolder("", "", "")
+                } ?: SingleUncategorizedExpenseDataHolder("", "", "")
             }
             is InsightData.WeeklyUncategorizedTransactionsData -> {
                 (insight.viewDetails as? TransactionsViewDetails)?.let {
-                    SingleExpenseUncategorizedDataHolder(
+                    WeeklyUncategorizedExpenseDataHolder(
                         concatDescriptions(it.descriptions),
                         getDateRangeFromInstants(it.dates),
                         it.numberOfTransactions.toString()
                     )
-                } ?: SingleExpenseUncategorizedDataHolder("", "", "")
+                } ?: WeeklyUncategorizedExpenseDataHolder("", "", "")
             }
             else -> {
                 throw IllegalStateException("InsightData for TransactionsSummaryViewProvider must be either UncategorizedTransactionData" +
@@ -71,13 +70,14 @@ class SingleExpenseUncategorizedViewProvider @Inject constructor(
 
     private fun getDateRangeFromInstants(instants: List<Instant>): String {
         if (instants.isEmpty()) return ""
-        val start = instants.first().toDateTime()
-        val end = instants.last().toDateTime()
-        return dateUtils.formatDateRange(start, end, "UTC", true)
+        val sortedInstants = instants.sorted()
+        val start = sortedInstants.first().toDateTime()
+        val end = sortedInstants.last().toDateTime()
+        return dateUtils.formatDateRange(start, end, true)
     }
 }
 
-class SingleExpenseUncategorizedViewHolder(
+class UncategorizedExpenseViewHolder(
     parent: ViewGroup, actionHandler: ActionHandler
 ) : InsightViewHolder(
     parent.inflate(R.layout.tink_item_insight_single_expense_uncategorized),
@@ -87,13 +87,23 @@ class SingleExpenseUncategorizedViewHolder(
 
     override fun bind(data: InsightDataHolder, insight: Insight) {
 
-        require(data is SingleExpenseUncategorizedDataHolder)
+        require(data is SingleUncategorizedExpenseDataHolder ||
+                data is WeeklyUncategorizedExpenseDataHolder
+        )
 
-        EspressoIdlingResource.increment()
         with(itemView) {
-            transactionDescription.text = data.description
-            date.text = data.date
-            amount.text = data.amount
+            when (data) {
+                is SingleUncategorizedExpenseDataHolder -> {
+                    transactionDescription.text = data.description
+                    date.text = data.date
+                    amount.text = data.amount
+                }
+                is WeeklyUncategorizedExpenseDataHolder -> {
+                    transactionDescription.text = data.description
+                    date.text = data.dateRange
+                    amount.text = resources.getString(R.string.tink_expenses_text, data.numberOfExpenses)
+                }
+            }
             icon.setImageResFromAttr(R.attr.tink_icon_category_uncategorized)
         }
 
@@ -101,9 +111,15 @@ class SingleExpenseUncategorizedViewHolder(
     }
 }
 
-class SingleExpenseUncategorizedDataHolder(
+class SingleUncategorizedExpenseDataHolder(
     val description: String,
     val date: String,
     val amount: String
+) : InsightDataHolder
+
+class WeeklyUncategorizedExpenseDataHolder(
+    val description: String,
+    val dateRange: String,
+    val numberOfExpenses: String
 ) : InsightDataHolder
 
