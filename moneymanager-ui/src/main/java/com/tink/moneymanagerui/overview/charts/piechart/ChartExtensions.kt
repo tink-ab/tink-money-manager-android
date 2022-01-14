@@ -49,7 +49,11 @@ internal fun <T> PieChartView.addSegments(
     }
 }
 
-private fun PieChartView.addSegment(startAngle: Float, sweep: Float, color: Int, colorPressed: Int): PieChartView.PieChartSegmentView {
+private fun PieChartView.addSegment(
+    startAngle: Float,
+    sweep: Float,
+    color: Int,
+    colorPressed: Int): PieChartView.PieChartSegmentView {
     return createSegment().also {
         it.startAngle = startAngle
         it.angle = sweep

@@ -10,8 +10,7 @@ import android.view.*
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.childOrNull
 import com.tink.moneymanagerui.charts.extensions.children
-import kotlin.math.atan2
-import kotlin.math.hypot
+import kotlin.math.*
 import kotlin.properties.ObservableProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -251,7 +250,7 @@ internal open class PieChartLabelView(context: Context, anchorAngle: Float) : Vi
     val radialSize get() = 2 * childRadius + radialPadding
 
     private val childCenterRadius get() = baseRadius + radialPadding + childRadius
-    val archSize: Float get() = (2 * Math.toDegrees(Math.asin((childRadius / childCenterRadius).toDouble()))).toFloat()
+    val archSize: Float get() = (2 * Math.toDegrees(asin((childRadius / childCenterRadius).toDouble()))).toFloat()
 
     private val anchor = PointF()
     private val center = PointF()
@@ -288,13 +287,13 @@ internal open class PieChartLabelView(context: Context, anchorAngle: Float) : Vi
     }
 
     fun getAnchor() = anchor.also {
-        it.x = centerX + baseRadius * Math.cos(Math.toRadians(anchorAngle + ZERO_ANGLE)).toFloat()
-        it.y = centerY + baseRadius * Math.sin(Math.toRadians(anchorAngle + ZERO_ANGLE)).toFloat()
+        it.x = centerX + baseRadius * cos(Math.toRadians(anchorAngle + ZERO_ANGLE)).toFloat()
+        it.y = centerY + baseRadius * sin(Math.toRadians(anchorAngle + ZERO_ANGLE)).toFloat()
     }
 
     private fun fillCenter(center: PointF, angle: Float) {
-        center.x = (centerX + childCenterRadius * Math.cos(Math.toRadians(angle + ZERO_ANGLE))).toFloat()
-        center.y = (centerY + childCenterRadius * Math.sin(Math.toRadians(angle + ZERO_ANGLE))).toFloat()
+        center.x = (centerX + childCenterRadius * cos(Math.toRadians(angle + ZERO_ANGLE))).toFloat()
+        center.y = (centerY + childCenterRadius * sin(Math.toRadians(angle + ZERO_ANGLE))).toFloat()
     }
 
     private fun setCenterAngleTranslation(value: Float) {

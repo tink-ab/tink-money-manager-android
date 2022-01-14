@@ -75,11 +75,13 @@ internal class FullPieChartFragment : BaseFragment() {
         view.pieChart.apply {
             removeAllViews()
             addBackSegment(model.title, model.color)
-            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency, ::createLabel, onClick = ::onItemClick)
+            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency,
+                ::createLabel, onClick = ::onItemClick)
         }
 
         labelTitle.text = model.title
-        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), model.currency, requireContext())
+        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(),
+            model.currency, requireContext())
         period.text = model.period
 
         onViewReady()
@@ -170,6 +172,7 @@ internal class LabelDecorator(private val view: PieChartLabelView, @ColorInt col
         view.offsetDescendantRectToMyCoords(icon, tmp)
         tmp.offset(directChild.translationX.toInt(), directChild.translationY.toInt())
         tmp.offset(icon.translationX.toInt(), icon.translationY.toInt())
+
         canvas.drawLine(tmp.exactCenterX(), tmp.exactCenterY(), anchor.x, anchor.y, paint)
     }
 }

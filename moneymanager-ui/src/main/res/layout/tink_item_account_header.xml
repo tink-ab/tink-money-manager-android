@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:gravity="center"
+  android:orientation="vertical">
+
+  <com.tink.moneymanagerui.view.TinkTextView
+      android:id="@+id/accountBalance"
+      style="@style/tink_tera"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="24dp"
+      tools:text="$1234"/>
+
+  <com.tink.moneymanagerui.view.TinkTextView
+      android:id="@+id/accountNumber"
+      style="@style/tink_hecto"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="4dp"
+      tools:text="123 456 789"/>
+
+</LinearLayout>
