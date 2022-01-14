@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.feature.insight
 
 import com.tink.model.insights.*
-import com.tink.moneymanagerui.insights.enrichment.*
 import org.json.JSONObject
 
 object InsightMockFactory {
@@ -41,7 +40,8 @@ object InsightMockFactory {
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
         InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
-        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS)
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS
+    )
 
     val supportedTypes = listOf(
         InsightType.ACCOUNT_BALANCE_LOW,
@@ -61,26 +61,30 @@ object InsightMockFactory {
         InsightType.SINGLE_UNCATEGORIZED_TRANSACTION,
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
-        InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS
+        InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS,
     )
-    
-    fun getInsightsForTypes(types: List<InsightType> = allTypes): List<JSONObject> {
-        return types.map { type ->
-            return@map when (type) {
-                InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
-                InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
-                InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
-                InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
-                InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> getMonthlySummaryExpensesTransactions()
-                InsightType.NEW_INCOME_TRANSACTION -> getNewIncomeTransaction()
-                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> getWeeklySummaryExpensesByCategory()
-                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY -> getWeeklySummaryExpensesByDay()
-                InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS -> getWeeklySummaryExpensesTransactions()
-                InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> getWeeklyUncategorizedTransactions()
-                else -> getDefaultInsight(type)
-            }
+
+    fun getInsightForType(type: InsightType): JSONObject {
+        return when (type) {
+            InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
+            InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
+            InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> getMonthlySummaryExpensesTransactions()
+            InsightType.NEW_INCOME_TRANSACTION -> getNewIncomeTransaction()
+            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION -> getSingleUncategorizedTransaction()
+            InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY -> getWeeklySummaryExpensesByCategory()
+            InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY -> getWeeklySummaryExpensesByDay()
+            InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS -> getWeeklySummaryExpensesTransactions()
+            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> getWeeklyUncategorizedTransactions()
+            else -> getDefaultInsight(type)
         }
     }
+
+    fun getInsightsForTypes(types: List<InsightType> = allTypes): List<JSONObject> =
+        types.map { type -> getInsightForType(type) }
+
 
     private fun getAccountBalanceLow(): JSONObject {
         return JSONObject("""
@@ -256,6 +260,23 @@ object InsightMockFactory {
         )
     }
 
+    fun getSingleUncategorizedTransaction(transactionId: String = "8a703fa458d144f9b802b09b26a43e89"): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "SINGLE_UNCATEGORIZED_TRANSACTION",
+                "title": "Singe uncategorized transaction",
+                "description": "You have an uncategorized transaction",
+                "createdTime": 1111111,
+                "data": {
+                    "type": "SINGLE_UNCATEGORIZED_TRANSACTION",
+                    "transactionId": "$transactionId"
+                }
+            }"""
+        )
+    }
+
     private fun getWeeklySummaryExpensesByCategory(): JSONObject {
         return JSONObject("""
             {
@@ -381,14 +402,14 @@ object InsightMockFactory {
         )
     }
 
-    private fun getWeeklyUncategorizedTransactions(): JSONObject {
+    fun getWeeklyUncategorizedTransactions(transactionIds: List<String> = listOf()): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
                 "id": 1,
                 "type": "WEEKLY_UNCATEGORIZED_TRANSACTIONS",
-                "title": "Title",
-                "description": "Description",
+                "title": "Weekly uncategorized transactions",
+                "description": "You have uncategorized transactions, do you want to categorize them?",
                 "createdTime": 1111111,
                 "data": {
                     "type": "WEEKLY_UNCATEGORIZED_TRANSACTIONS",
@@ -396,11 +417,7 @@ object InsightMockFactory {
                         "year": 2019,
                         "week": 43
                     },
-                    "transactionIds": [
-                        "0e068c995f154de196136a381aa4a6a8",
-                        "e069e73732054062899a9470c22d178e",
-                        "dee31caf9c464291bafe193804fd2ca3"
-                    ]
+                    "transactionIds": $transactionIds
                 }
             }"""
         )

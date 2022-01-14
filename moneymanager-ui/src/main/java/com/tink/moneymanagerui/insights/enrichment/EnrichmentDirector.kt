@@ -27,7 +27,8 @@ internal class EnrichmentDirector(
             InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY,
             InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> EnrichmentType.BUDGET_CREATE_SUGGESTION
 
-            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION -> EnrichmentType.TRANSACTION
+            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION,
+            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> EnrichmentType.TRANSACTION
 
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
             InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> EnrichmentType.CATEGORY_TREE

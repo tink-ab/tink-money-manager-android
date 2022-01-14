@@ -89,7 +89,8 @@ class InsightsRepository @Inject constructor(
             InsightType.SINGLE_UNCATEGORIZED_TRANSACTION,
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
             InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
-            InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS
+            InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
+            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS
         )
 
     }
