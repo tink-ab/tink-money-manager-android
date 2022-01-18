@@ -28,9 +28,12 @@ import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
 import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.piechart.addBackSegment
 import com.tink.moneymanagerui.overview.charts.piechart.addSegments
+import com.tink.service.network.ErrorState
 import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import se.tink.commons.currency.AmountFormatter
 import javax.inject.Inject
 import kotlin.math.abs
@@ -60,10 +63,11 @@ internal class OverviewChartFragment : BaseFragment() {
                 setPageTransformer(false, pageTransformer)
             }
             pageIndicator.initialize(overviewPager)
-            viewModel.isDoneLoading.observe(viewLifecycleOwner, Observer { isDoneLoading ->
-                overviewProgressBar.visibleIf { !isDoneLoading }
-                overviewPager.visibleIf { isDoneLoading }
-                pageIndicator.visibleIf { isDoneLoading && statistics.statisticTypes.size > 1 }
+            viewModel.overviewState.observe(viewLifecycleOwner, Observer { dataState ->
+                overviewProgressBar.visibleIf { dataState is LoadingState }
+                overviewPager.visibleIf { dataState is SuccessState }
+                pageIndicator.visibleIf { dataState is SuccessState && statistics.statisticTypes.size > 1 }
+                overviewErrorText.visibleIf { dataState is ErrorState }
             })
         }
     }

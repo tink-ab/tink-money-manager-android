@@ -1,14 +1,16 @@
 package com.tink.moneymanagerui.overview.accounts
 
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
 
 internal class AccountsListFragment : BaseFragment() {
@@ -34,15 +36,13 @@ internal class AccountsListFragment : BaseFragment() {
             adapter = accountListAdapter
         }
 
-        viewModel.accounts.observe(viewLifecycleOwner, Observer { list ->
-            list?.let { accounts ->
-                accountListAdapter.setAccounts(accounts)
+        viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->
+            if (accountState is SuccessState) {
+                accountListAdapter.setAccounts(accountState.data)
             }
-        })
-
-        viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            TransitionManager.beginDelayedTransition(loader as ViewGroup)
-            loader.visibility = if (loading) View.VISIBLE else View.GONE
+            loader.visibleIf { accountState is LoadingState }
+            accountList.visibleIf { accountState is SuccessState }
+            accounts_error_text.visibleIf { accountState is ErrorState }
         })
     }
 

@@ -36,6 +36,8 @@ internal class LatestTransactionsViewModel @Inject constructor(
         dataRefreshHandler.registerRefreshable(this)
     }
 
+    val categoriesState = categoryRepository.categoriesState
+
     override fun refresh() =
         appExecutors.mainThreadExecutor.execute { setListMode(TransactionListMode.All) }
 
