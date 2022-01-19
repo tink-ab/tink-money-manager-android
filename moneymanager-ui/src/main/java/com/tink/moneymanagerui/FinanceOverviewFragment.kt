@@ -27,7 +27,8 @@ import com.tink.moneymanagerui.security.SecuredClientDataStorage
 import com.tink.moneymanagerui.tracking.AnalyticsSingleton
 import com.tink.moneymanagerui.tracking.Tracker
 import com.tink.service.network.SdkClient
-import com.tink.service.network.coreClient
+import com.tink.service.network.SdkInformation
+import com.tink.service.network.coreSdkInformation
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -217,7 +218,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = emptyMap()
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
-            coreClient = SdkClient.MONEY_MANAGER
+            coreSdkInformation = SdkInformation(SdkClient.MONEY_MANAGER, BuildConfig.VERSION_NAME)
             if (insightActionHandler != null) {
                 CustomInsightActionHandler.setInsightActionHandler(insightActionHandler)
             } else if (javaInsightActionHandler != null) {

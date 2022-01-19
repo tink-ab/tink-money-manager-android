@@ -41,7 +41,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.ACCOUNT_BALANCE_LOW,
         InsightType.LARGE_EXPENSE,
         InsightType.DOUBLE_CHARGE,
-        InsightType.BUDGET_SUGGEST_CREATE_FIRST
+        InsightType.BUDGET_SUGGEST_CREATE_FIRST,
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL
     )
 
     override fun viewHolder(parent: ViewGroup, actionHandler: ActionHandler): InsightViewHolder =
@@ -90,6 +91,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.BUDGET_SUGGEST_CREATE_FIRST ->
             IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
         InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> IconResource.DrawableId(R.drawable.tink_uncategorized)
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> IconResource.DrawableId(R.drawable.tink_accounts)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 
@@ -99,6 +101,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.ACCOUNT_BALANCE_LOW -> R.attr.tink_criticalColor
         InsightType.BUDGET_SUGGEST_CREATE_FIRST -> R.attr.tink_expensesColor
         InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.attr.tink_uncategorizedColor
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> R.attr.tink_uncategorizedColor
         else -> R.attr.tink_textColorSecondary
     }
 
