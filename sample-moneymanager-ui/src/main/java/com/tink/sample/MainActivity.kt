@@ -8,6 +8,7 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.service.network.TinkConfiguration
 import com.tink.sample.configuration.Configuration
 import timber.log.Timber
+import java.lang.IllegalStateException
 
 class MainActivity : FragmentActivity() {
 
@@ -23,7 +24,13 @@ class MainActivity : FragmentActivity() {
             Uri.parse("https://localhost:3000/callback")
         )
 
-        Tink.init(config, applicationContext)
+        try {
+            // TODO: Move to App class
+            Tink.init(config, applicationContext)
+        } catch (e: IllegalStateException) {
+            // Tink has already been initialized
+        }
+
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
