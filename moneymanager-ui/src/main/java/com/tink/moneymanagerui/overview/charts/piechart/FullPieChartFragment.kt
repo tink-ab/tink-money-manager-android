@@ -67,7 +67,7 @@ internal class FullPieChartFragment : BaseFragment() {
     }
 
     private fun setAmountTextLayoutParams(innerDiameter: Int) {
-        val horizontalMargin = 10
+        val horizontalMargin = 35
         val amountTextParams: LinearLayout.LayoutParams = amountText.layoutParams as LinearLayout.LayoutParams
         amountTextParams.width = innerDiameter - horizontalMargin
         amountTextParams.height =  LinearLayout.LayoutParams.WRAP_CONTENT

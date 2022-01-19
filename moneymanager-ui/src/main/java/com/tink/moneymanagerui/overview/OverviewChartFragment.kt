@@ -5,9 +5,11 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -141,7 +143,20 @@ internal class OverviewChartFragment : BaseFragment() {
                 removeAllViews()
                 addBackSegment(model.title, model.color)
                 addSegments(model.data, { it }, model.colorGenerator, model.color, model.currency)
+                onInnerDiameterDetermined = { innerDiameter ->
+                    setAmountTextLayoutParams(binding, innerDiameter)
+                }
             }
+        }
+
+        private fun setAmountTextLayoutParams(binding: TinkOverviewChartPageBinding, innerDiameter: Int) {
+            val horizontalMargin = 50
+            val amountTextParams: LinearLayout.LayoutParams =
+                binding.overviewAmountText.layoutParams as LinearLayout.LayoutParams
+            amountTextParams.width = innerDiameter - horizontalMargin
+            amountTextParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
+            amountTextParams.gravity = Gravity.CENTER
+            binding.overviewAmountText.layoutParams = amountTextParams
         }
 
         private fun getPageData(position: Int) =
