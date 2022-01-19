@@ -1,11 +1,13 @@
 package com.tink.moneymanagerui
 
+import android.content.res.Resources
 import android.net.Uri
 import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.platform.app.InstrumentationRegistry
 import com.tink.core.Tink
+import com.tink.moneymanagerui.testutil.TestNavigator
 import com.tink.moneymanagerui.util.EspressoIdlingResource
 import com.tink.service.network.TinkConfiguration
 import okhttp3.mockwebserver.MockWebServer
@@ -15,6 +17,8 @@ import org.junit.Before
 
 abstract class BaseTestSuite {
 
+    val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
+    val navigator = TestNavigator()
     var server = MockWebServer()
     private val url = server.url("/").toString()
     private val testConfiguration = TestConfiguration(url)
