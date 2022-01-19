@@ -21,7 +21,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <com.tink.moneymanagerui.view.TinkTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/labelTitle"
                     style="@style/tink_micro"
                     android:layout_width="match_parent"
@@ -30,14 +30,15 @@
                     android:paddingBottom="4dp" />
 
                 <!-- Do not use wrap_content for width for animation performance reasons-->
-                <com.tink.moneymanagerui.view.TinkTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/amountText"
-                    style="@style/tink_giga"
+                    style="@style/tink_giga.autoSize"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    />
 
-                <com.tink.moneymanagerui.view.TinkTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/period"
                     style="@style/tink_micro"
                     android:layout_width="match_parent"

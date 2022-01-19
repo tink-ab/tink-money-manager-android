@@ -1,5 +1,7 @@
 package com.tink.moneymanagerui.charts
 
+import kotlin.math.abs
+
 
 internal object LabelLayout {
 
@@ -15,10 +17,10 @@ internal object LabelLayout {
             val distance = distance(labels, i, nextIdx, 1)
             val minDistance = labels[i].archSize / 2f + labels[nextIdx].archSize / 2f
 
-            if (distance < minDistance) {
-                val ccw = stepsToFit(labels, distance - minDistance, i, -1)
-                val cw = stepsToFit(labels, distance - minDistance, nextIdx, 1)
-                if (ccw <= cw) {
+            if (abs(distance) < minDistance) {
+                val counterClockWise = stepsToFit(labels, distance - minDistance, i, -1)
+                val clockWise = stepsToFit(labels, distance - minDistance, nextIdx, 1)
+                if (counterClockWise <= clockWise) {
                     move(labels, distance - minDistance, i, -1)
                 } else {
                     move(labels, distance - minDistance, nextIdx, 1)

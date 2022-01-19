@@ -62,20 +62,20 @@ internal class OverviewChartViewModel @Inject constructor(
 
     val isDoneLoading: LiveData<Boolean> = Transformations.map(data) { it != null }
 
-    val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
+    val expenses: LiveData<OverviewChartModel> = mapDistinct(data) { overviewData ->
         val data: List<Float> =
             calculateStatistic(
-                it.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
-                it.categories.expenses.children,
-                it.period
+                overviewData.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
+                overviewData.categories.expenses.children,
+                overviewData.period
             ).items.map { it.amount }
         val color = context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.STATISTICS)
-        val period = getPeriodString(dateUtils, it.period, context)
+        val period = getPeriodString(dateUtils, overviewData.period)
         OverviewChartModel(
             context,
             R.string.tink_expenses_title,
             data.sum(),
-            it.currency,
+            overviewData.currency,
             amountFormatter,
             period,
             color,
@@ -93,7 +93,7 @@ internal class OverviewChartViewModel @Inject constructor(
             ).items.map { it.amount }
         val color = context.resolveColorForFeature(R.attr.tink_incomeColor, MoneyManagerFeatureType.STATISTICS)
         val periodString =
-            getPeriodString(dateUtils, it.period, context)
+            getPeriodString(dateUtils, it.period)
         OverviewChartModel(
             context,
             R.string.tink_income_title,

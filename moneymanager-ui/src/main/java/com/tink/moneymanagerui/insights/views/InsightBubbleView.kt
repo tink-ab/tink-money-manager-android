@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
 import kotlinx.android.synthetic.main.tink_insight_bubble.view.*
 import se.tink.commons.utils.extractTextStyle
 
@@ -73,10 +74,8 @@ class InsightBubbleView : ConstraintLayout {
     private fun TextView.setupFor(text: String?) {
         if (text != null) {
             this.text = text
-            this.visibility == View.VISIBLE
-        } else {
-            this.visibility == View.GONE
         }
+        visibleIf { text != null }
     }
 
     private fun setTextStyle(textView: TextView, styleId: Int) {

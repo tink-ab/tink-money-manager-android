@@ -116,18 +116,18 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
 
     fun getStatistic(context: Context, type: ChartType): LiveData<DetailsChartModel> =
-        mapDistinct(statisticData) {
-            val data = calculateStatistic(type, it)
+        mapDistinct(statisticData) { statistics ->
+            val data = calculateStatistic(type, statistics)
             val color = type.getFeatureColor(context)
-            val src = it.source
+            val src = statistics.source
             val periodStr =
-                getPeriodString(dateUtils, src.period, context)
+                getPeriodString(dateUtils, src.period)
             val topLevel = src.category.parentId == null
             DetailsChartModel(
                 context,
                 type.title,
                 data.items.sumByFloat { it.amount },
-                it.source.currency,
+                statistics.source.currency,
                 periodStr,
                 color,
                 DefaultColorGenerator,

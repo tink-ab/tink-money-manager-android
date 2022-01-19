@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.di
 
+import android.content.Context
 import com.tink.moneymanagerui.FinanceOverviewFragment
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,7 @@ internal class ContextModule {
 
     @Provides
     @ApplicationScoped
-    fun applicationContext(fragment: FinanceOverviewFragment) = fragment.requireContext().applicationContext
+    fun applicationContext(fragment: FinanceOverviewFragment): Context = fragment.requireContext().applicationContext
 
     @Provides
     @FragmentScoped

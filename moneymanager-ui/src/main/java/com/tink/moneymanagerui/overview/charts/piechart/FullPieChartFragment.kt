@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionManager
 import android.transition.TransitionSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,12 +25,7 @@ import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartTransition
 import com.tink.moneymanagerui.charts.transitions.TranslationTransition
 import com.tink.moneymanagerui.databinding.TinkPieChartLabelBinding
-import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.ChartType
-import com.tink.moneymanagerui.overview.charts.DetailsChartModel
-import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.StatisticItem
-import com.tink.moneymanagerui.overview.charts.StatisticItemsList
+import com.tink.moneymanagerui.overview.charts.*
 import com.tink.moneymanagerui.overview.getAmountStringForOverviewPieChart
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.theme.resolveColorForFeature
@@ -63,6 +60,19 @@ internal class FullPieChartFragment : BaseFragment() {
         viewModel.apply {
             getStatistic(requireContext(), type).observe(viewLifecycle, Observer { it?.let { updateModel(it) } })
         }
+
+        view.pieChart.onInnerDiameterDetermined = { innerDiameter ->
+            setAmountTextLayoutParams(innerDiameter)
+        }
+    }
+
+    private fun setAmountTextLayoutParams(innerDiameter: Int) {
+        val horizontalMargin = 10
+        val amountTextParams: LinearLayout.LayoutParams = amountText.layoutParams as LinearLayout.LayoutParams
+        amountTextParams.width = innerDiameter - horizontalMargin
+        amountTextParams.height =  LinearLayout.LayoutParams.WRAP_CONTENT
+        amountTextParams.gravity = Gravity.CENTER
+        amountText.layoutParams = amountTextParams
     }
 
     private fun updateModel(model: DetailsChartModel) {
@@ -75,11 +85,13 @@ internal class FullPieChartFragment : BaseFragment() {
         view.pieChart.apply {
             removeAllViews()
             addBackSegment(model.title, model.color)
-            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency, ::createLabel, onClick = ::onItemClick)
+            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency,
+                ::createLabel, onClick = ::onItemClick)
         }
 
         labelTitle.text = model.title
-        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(), model.currency, requireContext())
+        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(),
+            model.currency, requireContext())
         period.text = model.period
 
         onViewReady()
@@ -170,6 +182,7 @@ internal class LabelDecorator(private val view: PieChartLabelView, @ColorInt col
         view.offsetDescendantRectToMyCoords(icon, tmp)
         tmp.offset(directChild.translationX.toInt(), directChild.translationY.toInt())
         tmp.offset(icon.translationX.toInt(), icon.translationY.toInt())
+
         canvas.drawLine(tmp.exactCenterX(), tmp.exactCenterY(), anchor.x, anchor.y, paint)
     }
 }
