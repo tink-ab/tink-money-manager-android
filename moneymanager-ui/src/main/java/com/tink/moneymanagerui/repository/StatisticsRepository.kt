@@ -18,6 +18,10 @@ import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
+import com.tink.service.network.ResponseState
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -81,6 +85,37 @@ internal class StatisticsRepository @Inject constructor(
         addSource(refreshTrigger) { update() }
     }
 
+    private val statisticsLiveDataState = MediatorLiveData<ResponseState<List<Statistics>>>().apply {
+        fun update() {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    withTimeout(STATISTICS_FETCH_TIMEOUT) {
+                        while (isActive) {
+                            val userProfile = userRepository.userProfile.value
+                            if (userProfile != null) {
+                                val result = queryForStatistics(userProfile)
+                                if (result != null) {
+                                    postValue(SuccessState(result))
+                                    cancel()
+                                }
+                            } else {
+                                postValue(LoadingState)
+                            }
+                            delay(POLLING_INTERVAL)
+                        }
+                    }
+                } catch (timeoutException: TimeoutCancellationException) {
+                    postValue(ErrorState("Request timed out"))
+                }
+            }
+        }
+        addSource(userRepository.userProfile) { update() }
+        addSource(refreshTrigger) {
+            postValue(LoadingState)
+            update()
+        }
+    }
+
     private suspend fun queryForStatistics(userProfile: UserProfile): List<Statistics>? {
         return try {
             statisticsService.query(
@@ -136,17 +171,65 @@ internal class StatisticsRepository @Inject constructor(
 
     val statistics: LiveData<List<Statistics>> = statisticsLiveData
 
+    val statisticsState: LiveData<ResponseState<List<Statistics>>> = statisticsLiveDataState
+
+    val fetchedStatistics: LiveData<List<Statistics>> = MediatorLiveData<List<Statistics>>().apply {
+        addSource(statisticsState) {
+            if (it is SuccessState<List<Statistics>>) {
+                value = it.data
+            }
+        }
+    }
+
     private val periodMap: LiveData<Map<String, Period>> = statistics.map { statistics ->
         statistics.associate { it.period.identifier to it.period  }
+    }
+
+    private val periodMapState: LiveData<ResponseState<Map<String, Period>>> = statisticsState.map { statistics ->
+        when(statistics) {
+            is LoadingState -> LoadingState
+            is ErrorState -> ErrorState(statistics.errorMessage)
+            is SuccessState -> {
+                SuccessState(
+                    statistics.data.associate { it.period.identifier to it.period  }
+                )
+            }
+        }
     }
 
     val periods: LiveData<List<Period>> = Transformations.map(periodMap) {
         it?.values?.toList()
     }
 
+    val periodsState: LiveData<ResponseState<List<Period>>> = Transformations.map(periodMapState) { periodMapState ->
+        when(periodMapState) {
+            is LoadingState -> LoadingState
+            is ErrorState -> ErrorState("")
+            is SuccessState -> {
+                SuccessState(
+                    periodMapState.data.values.toList()
+                )
+            }
+        }
+    }
+
     val currentPeriod: LiveData<Period> = Transformations.map(periodMap) {
         DateTime().let { now ->
             it?.values?.firstOrNull { it.isInPeriod(now) }
+        }
+    }
+
+    val currentPeriodState: LiveData<ResponseState<Period?>> = Transformations.map(periodMapState) { periodMapState ->
+        when(periodMapState) {
+            is LoadingState -> LoadingState
+            is ErrorState -> ErrorState(periodMapState.errorMessage)
+            is SuccessState -> {
+                SuccessState(
+                    DateTime().let { now ->
+                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                    }
+                )
+            }
         }
     }
 

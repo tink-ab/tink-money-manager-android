@@ -24,6 +24,9 @@
 
   <string name="tink_all_categories">All categories</string>
 
+  <string name="tink_overview_statistics_error">No statistics</string>
+  <string name="tink_overview_accounts_error">No accounts</string>
+
   <string name="tink_overview_toolbar_title">Overview</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>

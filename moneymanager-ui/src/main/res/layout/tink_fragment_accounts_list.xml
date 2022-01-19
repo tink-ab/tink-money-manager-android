@@ -5,6 +5,15 @@
   android:layout_marginTop="16dp"
   android:layout_marginBottom="16dp">
 
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/accounts_error_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    android:text="@string/tink_overview_accounts_error" />
+
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/accountList"
     android:layout_width="match_parent"

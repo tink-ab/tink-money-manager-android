@@ -8,6 +8,10 @@ import com.tink.model.budget.BudgetSpecification
 import com.tink.model.budget.BudgetSummary
 import com.tink.service.budget.BudgetService
 import com.tink.service.handler.ResultHandler
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
 import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +35,10 @@ class BudgetsRepository @Inject constructor(
 
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
+    init {
+        dataRefreshHandler.registerRefreshable(this)
+    }
+
     private val _budgets: AutoFetchLiveData<List<BudgetSummary>> =
         AutoFetchLiveData {
             scope.launch {
@@ -43,15 +51,26 @@ class BudgetsRepository @Inject constructor(
             }
         }
 
-    init {
-        dataRefreshHandler.registerRefreshable(this)
-    }
+    val budgets: LiveData<List<BudgetSummary>> = _budgets
+
+    private val _budgetsState: AutoFetchLiveData<ResponseState<List<BudgetSummary>>> =
+        AutoFetchLiveData {
+            scope.launch {
+                it.postValue(LoadingState)
+                val budgetSummaries = try {
+                    SuccessState(budgetService.listBudgets())
+                } catch (t: Throwable) {
+                    ErrorState(t)
+                }
+                it.postValue(budgetSummaries)
+            }
+        }
+
+    val budgetsState: LiveData<ResponseState<List<BudgetSummary>>> = _budgetsState
 
     override fun refresh() {
         _budgets.update()
     }
-
-    val budgets: LiveData<List<BudgetSummary>> = _budgets
 
     fun createOrUpdateBudget(descriptor: BudgetCreateOrUpdateDescriptor, resultHandler: ResultHandler<BudgetSpecification>) {
         scope.launchForResult(resultHandler) {

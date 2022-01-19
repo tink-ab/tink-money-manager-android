@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.account.Account
 import com.tink.service.account.AccountService
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
+import com.tink.service.network.ResponseState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -44,5 +48,32 @@ class AccountRepository @Inject constructor(
 
     override fun refresh() {
         _accounts.update()
+        _accountsState.update()
+    }
+
+    private val _accountsState: AutoFetchLiveData<ResponseState<List<Account>>> =
+        AutoFetchLiveData {
+            scope.launch {
+                val accounts: ResponseState<List<Account>> = try {
+                    val accounts = accountService.listAccounts()
+                    SuccessState(accounts)
+                } catch (t: Throwable) {
+                    ErrorState(t)
+                }
+                it.postValue(accounts)
+            }
+        }
+    val accountsState: LiveData<ResponseState<List<Account>>> = _accountsState
+
+    fun accountByIdState(id: String): LiveData<ResponseState<Account?>> = accountsState.map { accountList ->
+        when(accountList) {
+            is LoadingState -> LoadingState
+            is ErrorState -> ErrorState(accountList.errorMessage)
+            is SuccessState -> SuccessState(
+                    accountList.data.firstOrNull {
+                    it.id == id
+                }
+            )
+        }
     }
 }
