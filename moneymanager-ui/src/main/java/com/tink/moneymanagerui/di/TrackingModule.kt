@@ -12,7 +12,7 @@ internal class TrackingModule {
     fun exceptionTracker() = object : ExceptionTracker {
         override fun <E : Exception> exceptionThrown(e: E) {
             if(BuildConfig.DEBUG) {
-                throw e;
+                throw e
             }
         }
     }

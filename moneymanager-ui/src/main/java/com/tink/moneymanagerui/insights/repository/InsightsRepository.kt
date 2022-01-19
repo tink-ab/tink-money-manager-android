@@ -2,8 +2,8 @@ package com.tink.moneymanagerui.insights.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.tink.annotations.PfmScope
 import com.tink.model.insights.Insight
+import com.tink.moneymanagerui.insights.viewproviders.InsightViewProviderFactory
 import com.tink.service.insight.InsightService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,9 +16,9 @@ import se.tink.android.repository.TinkNetworkError
 import se.tink.commons.livedata.Event
 import javax.inject.Inject
 
-@PfmScope
 class InsightsRepository @Inject constructor(
-    private val insightService: InsightService
+    private val insightService: InsightService,
+    private val insightProviderFactory: InsightViewProviderFactory
 ) {
     private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
@@ -26,6 +26,7 @@ class InsightsRepository @Inject constructor(
         scope.launch {
             val result: ErrorOrValue<List<Insight>> = try {
                 val insights = insightService.listInsights()
+                    .filter { insightProviderFactory.provider(it.type) != null }
                 ErrorOrValue(value = insights)
             } catch (error: Throwable) {
                 ErrorOrValue(error = TinkNetworkError(error))
@@ -43,6 +44,7 @@ class InsightsRepository @Inject constructor(
             scope.launch {
                 val result: ErrorOrValue<List<Insight>> = try {
                     val insights = insightService.listArchived()
+                        .filter { insightProviderFactory.provider(it.type) != null }
                     ErrorOrValue(value = insights)
                 } catch (error: Throwable) {
                     ErrorOrValue(error = TinkNetworkError(error))
