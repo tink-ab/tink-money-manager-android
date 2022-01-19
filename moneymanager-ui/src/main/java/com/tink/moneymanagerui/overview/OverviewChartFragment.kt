@@ -148,7 +148,7 @@ internal class OverviewChartFragment : BaseFragment() {
         }
 
         private fun setAmountTextLayoutParams(binding: TinkOverviewChartPageBinding, innerDiameter: Int) {
-            val horizontalMargin = 5
+            val horizontalMargin = 50
             val amountTextParams: LinearLayout.LayoutParams =
                 binding.overviewAmountText.layoutParams as LinearLayout.LayoutParams
             amountTextParams.width = innerDiameter - horizontalMargin
