@@ -7,7 +7,7 @@ import com.tink.moneymanagerui.insights.viewproviders.IconTextViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.InsightViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.TransactionsSummaryViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.ExpensesByCategoryViewProvider
-import com.tink.moneymanagerui.insights.viewproviders.SingleExpenseUncategorizedViewProvider
+import com.tink.moneymanagerui.insights.viewproviders.UncategorizedExpenseViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.WeeklyExpensesByDayViewProvider
 import dagger.Binds
 import dagger.Module
@@ -34,7 +34,7 @@ abstract class InsightsViewProviderBindingModule {
 
     @Binds
     @IntoSet
-    abstract fun bindSingleExpenseUncategorizedViewProvider(viewProvider: SingleExpenseUncategorizedViewProvider): InsightViewProvider
+    abstract fun bindSingleExpenseUncategorizedViewProvider(expenseViewProvider: UncategorizedExpenseViewProvider): InsightViewProvider
 
     @Binds
     @IntoSet

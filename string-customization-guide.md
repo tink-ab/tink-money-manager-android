@@ -55,6 +55,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_monthly_transactions_text` | %d transactions last month |
 | `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
+| `tink_expenses_text` | %s expenses |
 | `tink_insights_total_expenses_text` | %s in total expenses |
 | `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
 | `tink_insights_largest_transaction_text` | %s was your largest expense |
@@ -130,6 +131,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budget_over` | %1$s over budget of %2$s |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
 | `tink_overview_toolbar_title` | Overview |
+| `tink_overview_statistics_error` | No statistics |
+| `tink_overview_accounts_error` | No accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_clear_text_description` | Clear text |
 | `tink_previous_month_description` | Previous month |

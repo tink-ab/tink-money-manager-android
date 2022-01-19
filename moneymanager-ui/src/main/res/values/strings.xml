@@ -24,6 +24,9 @@
 
   <string name="tink_all_categories">All categories</string>
 
+  <string name="tink_overview_statistics_error">No statistics</string>
+  <string name="tink_overview_accounts_error">No accounts</string>
+
   <string name="tink_overview_toolbar_title">Overview</string>
 
   <string name="tink_overview_latest_transactions_title">Latest transactions</string>
@@ -96,6 +99,7 @@
   <string name="tink_insights_weekly_summary_expense_transactions_title">Here’s a summary of your expense transactions last week</string>
   <string name="tink_insights_total_weekly_transactions_text">%d transactions last week</string>
 
+  <string name="tink_expenses_text">%s expenses</string>
   <string name="tink_insights_total_expenses_text">%s in total expenses</string>
   <string name="tink_insights_most_common_transaction_text">Most common was %1$s (%2$d)</string>
   <string name="tink_insights_largest_transaction_text">%s was your largest expense</string>

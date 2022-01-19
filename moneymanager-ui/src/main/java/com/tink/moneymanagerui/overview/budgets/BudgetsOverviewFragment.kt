@@ -9,6 +9,9 @@ import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
+import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_budgets_overview.*
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -54,24 +57,15 @@ internal class BudgetsOverviewFragment : BaseFragment() {
             fragmentCoordinator.replace(BudgetCreationFragment.newInstance())
         }
 
-        viewModel.budgetItems.observe(viewLifecycleOwner, {
-            budgetOverviewListAdapter.setItems(it)
-        })
-
-        viewModel.hasBudgets.observe(viewLifecycleOwner, { hasBudgets ->
-            //TransitionManager.beginDelayedTransition(view as ViewGroup)
-            if (hasBudgets) {
-                budgetsEmpty.visibility = View.GONE
-                budgetsOverviewContent.visibility = View.VISIBLE
-            } else {
-                budgetsOverviewContent.visibility = View.GONE
-                budgetsEmpty.visibility = View.VISIBLE
+        viewModel.overallBudgetState.observe(viewLifecycleOwner, { budgetItemsState ->
+            loader.visibleIf { budgetItemsState is LoadingState }
+            budgetsOverviewList.visibleIf { budgetItemsState is SuccessState }
+            val hasBudgets = budgetItemsState is SuccessState && budgetItemsState.data.isNotEmpty()
+            budgetsEmpty.visibleIf { budgetItemsState is SuccessState && !hasBudgets }
+            budgetsOverviewContent.visibleIf { budgetItemsState is SuccessState && hasBudgets }
+            if (budgetItemsState is SuccessState) {
+                budgetOverviewListAdapter.setItems(budgetItemsState.data)
             }
-        })
-
-        viewModel.loading.observe(viewLifecycleOwner, { loading ->
-            //TransitionManager.beginDelayedTransition(view as ViewGroup)
-            loader.visibility = if(loading) View.VISIBLE else View.GONE
         })
     }
 
