@@ -35,6 +35,8 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
     var thickness by observable(0f) { invalidateChildren() }
     var transitionThickness by observable(0f) { invalidateChildren() }
 
+    var onInnerDiameterDetermined: (innerDiameter: Int) -> Unit = {}
+
     init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.TinkPieChartView)
         maxRadiusPercent = a.getFloat(R.styleable.TinkPieChartView_tink_max_radius_percent, 1f)
@@ -69,6 +71,9 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
         for (label in labels) label.prelayout(bounds.centerX(), bounds.centerY(), outerRadius.toInt())
         LabelLayout.layout(labels.toList())
         for (label in labels) label.layout(left, top, right, bottom)
+
+        val innerDiameter = (outerRadius - thickness) * 2
+        onInnerDiameterDetermined(innerDiameter.toInt())
     }
 
     private fun invalidateChildren() {
