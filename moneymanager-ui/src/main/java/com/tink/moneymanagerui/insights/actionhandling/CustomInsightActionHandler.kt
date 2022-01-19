@@ -54,6 +54,15 @@ internal object CustomInsightActionHandler {
                     ?: false
             }
 
+            is InsightAction.Data.RefreshCredential -> {
+                insightActionHandler
+                    ?.refreshCredentials(
+                        (action.data as InsightAction.Data.RefreshCredential).credentialId
+                    ) { isActionDone ->
+                        onComplete.invoke(isActionDone)
+                    } ?: false
+            }
+
             is InsightAction.Data.ViewTransactions -> {
                 val isActionHandled = insightActionHandler
                     ?.viewTransactions((action.data as InsightAction.Data.ViewTransactions).transactionIds)

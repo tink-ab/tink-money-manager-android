@@ -74,6 +74,19 @@ open class InsightActionHandler {
     ): Boolean = false
 
     /**
+     * Handle action where the user requests to refresh an aggregated credential.
+     * This corresponds to [InsightAction.Type.REFRESH_CREDENTIAL] action type.
+     *
+     * @param credentialId The id of the aggregated credential
+     * @param onComplete The lambda block to invoke to indicate if the action has completed successfully or not
+     * @return `true` if the action will be handled, `false` otherwise
+     */
+    open fun refreshCredentials(
+        credentialId: String,
+        onComplete: (isActionDone: Boolean) -> Unit
+    ) : Boolean = false
+
+    /**
      * Handle action where the user wants to view transactions matching the list of ids.
      * This corresponds to [InsightAction.Type.VIEW_TRANSACTION] and [InsightAction.Type.VIEW_TRANSACTIONS] action types.
      *

@@ -13,10 +13,10 @@ ext {
     supportLibVersion = "1.0.0"
     timberVersion = "4.7.1"
 
-    tinkCoreVersion = "0.6.8"
+    tinkCoreVersion = "0.7.0"
 
     // test
-    assertj = "3.21.1"
+    assertj = "3.22.0"
     espresso = "3.4.0"
     junit = "4.13.2"
     junitExt = "1.1.0"

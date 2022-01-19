@@ -5,9 +5,11 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
@@ -31,6 +33,8 @@ import com.tink.moneymanagerui.overview.charts.piechart.addSegments
 import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
+import kotlinx.android.synthetic.main.tink_overview_chart_page.view.fadingGroup
+import kotlinx.android.synthetic.main.tink_overview_chart_page.view.pieChart
 import se.tink.commons.currency.AmountFormatter
 import javax.inject.Inject
 import kotlin.math.abs
@@ -137,7 +141,20 @@ internal class OverviewChartFragment : BaseFragment() {
                 removeAllViews()
                 addBackSegment(model.title, model.color)
                 addSegments(model.data, { it }, model.colorGenerator, model.color, model.currency)
+                onInnerDiameterDetermined = { innerDiameter ->
+                    setAmountTextLayoutParams(binding, innerDiameter)
+                }
             }
+        }
+
+        private fun setAmountTextLayoutParams(binding: TinkOverviewChartPageBinding, innerDiameter: Int) {
+            val horizontalMargin = 5
+            val amountTextParams: LinearLayout.LayoutParams =
+                binding.overviewAmountText.layoutParams as LinearLayout.LayoutParams
+            amountTextParams.width = innerDiameter - horizontalMargin
+            amountTextParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
+            amountTextParams.gravity = Gravity.CENTER
+            binding.overviewAmountText.layoutParams = amountTextParams
         }
 
         private fun getPageData(position: Int) =
