@@ -89,6 +89,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_date_format_human_yesterday` | Yesterday |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |
+| `tink_expenses_text` | %s expenses |
 | `tink_expenses_title` | Expenses |
 | `tink_income_header_description_average` | %s on average per month |
 | `tink_income_title` | Income |
@@ -102,8 +103,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
 | `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
 | `tink_insights_overview_card_action_text` | View |
-| `tink_insights_overview_card_archived_events_title` | Archived Events |
-| `tink_insights_overview_card_new_events_title` | New Events |
+| `tink_insights_overview_card_archived_events_title` | Archived events |
+| `tink_insights_overview_card_new_events_title` | Events |
 | `tink_insights_tab_title` | Events |
 | `tink_insights_total_expenses_text` | %s in total expenses |
 | `tink_insights_total_monthly_transactions_text` | %d transactions last month |
@@ -113,6 +114,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_next_month_description` | Next month |
 | `tink_other` | Other |
+| `tink_overview_accounts_error` | No accounts |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
 | `tink_overview_budget_over` | %1$s over budget of %2$s |
 | `tink_overview_budgets_create_new` | New Budget |
@@ -120,6 +122,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budgets_title` | Budgets |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
+| `tink_overview_statistics_error` | No statistics |
 | `tink_overview_toolbar_title` | Overview |
 | `tink_period_selection_title` | Choose time period |
 | `tink_previous_month_description` | Previous month |
@@ -131,14 +134,15 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_selector_over_time` | Over time |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
-| `tink_transaction_similar_button_accept_text` | Yes, change selected |
+| `tink_transaction_similar_button_accept_text` | Assign %1$d selected |
 | `tink_transaction_similar_button_skip_text` | Skip |
-| `tink_transaction_similar_description` | Do you want to categorize these transactions as well? |
+| `tink_transaction_similar_description` | Do you also want to assign these transactions to the %1$s category? |
 | `tink_transaction_similar_marker_button_mark_text` | Select all |
 | `tink_transaction_similar_marker_button_unmark_text` | Unselect all |
 | `tink_transaction_similar_title` | Similar transactions |
 | `tink_transactions_list_toolbar_title` | Transactions |
 | `tink_until_next_date` | Until %s |
+
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
@@ -152,12 +156,8 @@ In addition to the above, here's a list of plurals used in the SDK that can be o
     <item quantity="other">%s months</item>
   </plurals>
   <plurals name="tink_budget_details_chart_status_message_last_year">
-    <item quantity="one">You made your budget %d%% of the time over the last year</item>
-    <item quantity="other">You made your budget %d%% of the time over the last year</item>
-  </plurals>
-  <plurals name="tink_budget_details_chart_status_message_since">
-    <item quantity="one">You made your budget %1$d%% of the time since %2$s</item>
-    <item quantity="other">You made your budget %1$d%% of the time since %2$s</item>
+    <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
+    <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
   </plurals>
 </resources>
 ```
