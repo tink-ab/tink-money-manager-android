@@ -71,29 +71,11 @@ internal class FragmentCoordinator(
         }
     }
 
-    fun detachAllAndAttach(fragment: BaseFragment, tag: String) {
-        // The fragment has been added, or state is saved already, do nothing
-        if (fragment.isAdded || fragmentManager.isStateSaved) return
-
-        fragmentManager.transaction {
-            setAnimation(FragmentAnimationFlags.FADE)
-            for (f in fragmentManager.fragments) detach(f)
-            if (fragment.isDetached) attach(fragment) else add(containerViewId, fragment, tag)
-        }
-    }
-
     fun popBackStack() {
         if (fragmentManager.isStateSaved) return
 
         transitionCoordinator?.clear()
         fragmentManager.popBackStack()
-    }
-
-    fun popBackStackImmediate(): Boolean {
-        if (fragmentManager.isStateSaved) return false
-
-        transitionCoordinator?.onExiting(topActiveFragment)
-        return fragmentManager.popBackStackImmediate()
     }
 
     private fun backTo(stateName: String?, flag: Int, popImmediate: Boolean = true) {
@@ -107,10 +89,6 @@ internal class FragmentCoordinator(
         }
     }
 
-    fun backTo(stateName: String) = backTo(stateName, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-
-    fun backTo(type: Class<out Fragment>) = backTo(type.canonicalName, 0)
-
     @JvmOverloads
     fun backToMainScreen(popImmediate: Boolean = true) =
         backTo(null, FragmentManager.POP_BACK_STACK_INCLUSIVE, popImmediate)
@@ -123,9 +101,6 @@ internal class FragmentCoordinator(
         }
         return true
     }
-
-    fun handleThirdPartyCallbackResult(state: String, parameters: Map<String, String>) =
-        topActiveFragment?.handleThirdPartyCallbackResult(state, parameters).isTrue()
 
     fun clear() = with(fragmentManager) {
         transitionCoordinator?.clear()

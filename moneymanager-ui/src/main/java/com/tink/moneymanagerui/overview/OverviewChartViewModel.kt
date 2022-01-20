@@ -2,7 +2,6 @@ package com.tink.moneymanagerui.overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import android.content.Context
 import androidx.annotation.ColorInt
@@ -17,65 +16,85 @@ import se.tink.android.livedata.mapDistinct
 import se.tink.android.categories.CategoryRepository
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import se.tink.commons.currency.AmountFormatter
-import se.tink.commons.extensions.whenNonNull
 import com.tink.model.category.CategoryTree
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
 import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.repository.StatisticsState
 import com.tink.moneymanagerui.theme.resolveColorForFeature
+import com.tink.service.network.ResponseState
+import se.tink.android.livedata.map
+import se.tink.android.livedata.requireValue
+import com.tink.service.network.SuccessState
 import se.tink.android.repository.user.UserRepository
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-private class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
+internal class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
 
 internal class OverviewChartViewModel @Inject constructor(
     private val dateUtils: DateUtils,
-    statisticRepository: StatisticsRepository,
-    categoryRepository: CategoryRepository,
-    userRepository: UserRepository,
+    val statisticRepository: StatisticsRepository,
+    val categoryRepository: CategoryRepository,
+    val userRepository: UserRepository,
     private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.statistics
-    private val period = statisticRepository.currentPeriod
-    private val categories = categoryRepository.categories
+    private val statistics = statisticRepository.statisticsState
+    private val categories = categoryRepository.categoriesState
+    private val userProfile = userRepository.userProfileState
+    private val period = statisticRepository.currentPeriodState
 
-    private val userProfile = userRepository.userProfile
+    private val data = MediatorLiveData<StatisticsState>().apply {
+        value = StatisticsState()
 
-    private val data = MediatorLiveData<OverviewData>().apply {
-        fun update() = whenNonNull(
-            statistics.value,
-            period.value,
-            categories.value,
-            userProfile.value?.currency
-        ) { stat, period, categories, currency ->
-            value = OverviewData(stat, period, categories, currency)
+        addSource(statistics) {
+            value = requireValue.copy(statistics = it)
         }
-
-        addSource(statistics) { update() }
-        addSource(period) { update() }
-        addSource(categories) { update() }
-        addSource(userProfile) { update() }
+        addSource(period) {
+            value = requireValue.copy(period = it)
+        }
+        addSource(categories) {
+            value = requireValue.copy(categories = it)
+        }
+        addSource(userProfile) {
+            value = requireValue.copy(userProfile = it)
+        }
     }
 
-    val isDoneLoading: LiveData<Boolean> = Transformations.map(data) { it != null }
+    internal val overviewState: LiveData<ResponseState<OverviewData>> = data.map {
+        it.overallState
+    }
 
-    val expenses: LiveData<OverviewChartModel> = mapDistinct(data) {
+    private val overviewData: LiveData<OverviewData> = MediatorLiveData<OverviewData>().apply {
+        addSource(data) {
+            if (it.overallState is SuccessState<OverviewData>) {
+                postValue(it.overallState.data)
+            }
+        }
+    }
+
+    internal fun refreshData() {
+        userRepository.refreshState()
+        statisticRepository.refresh()
+        categoryRepository.refreshState()
+    }
+
+    val expenses: LiveData<OverviewChartModel> = mapDistinct(overviewData) { overviewData ->
         val data: List<Float> =
             calculateStatistic(
-                it.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
-                it.categories.expenses.children,
-                it.period
+                overviewData.statistics.filter { s -> s.type == Statistics.Type.EXPENSES_BY_CATEGORY },
+                overviewData.categories.expenses.children,
+                overviewData.period
             ).items.map { it.amount }
         val color = context.resolveColorForFeature(R.attr.tink_expensesColor, MoneyManagerFeatureType.STATISTICS)
-        val period = getPeriodString(dateUtils, it.period, context)
+        val period = getPeriodString(dateUtils, overviewData.period)
         OverviewChartModel(
             context,
             R.string.tink_expenses_title,
             data.sum(),
-            it.currency,
+            overviewData.currency,
             amountFormatter,
             period,
             color,
@@ -84,7 +103,7 @@ internal class OverviewChartViewModel @Inject constructor(
         )
     }
 
-    val income: LiveData<OverviewChartModel> = mapDistinct(data) {
+    val income: LiveData<OverviewChartModel> = mapDistinct(overviewData) {
         val data: List<Float> =
             calculateStatistic(
                 it.statistics.filter { s -> s.type == Statistics.Type.INCOME_BY_CATEGORY },
@@ -93,7 +112,7 @@ internal class OverviewChartViewModel @Inject constructor(
             ).items.map { it.amount }
         val color = context.resolveColorForFeature(R.attr.tink_incomeColor, MoneyManagerFeatureType.STATISTICS)
         val periodString =
-            getPeriodString(dateUtils, it.period, context)
+            getPeriodString(dateUtils, it.period)
         OverviewChartModel(
             context,
             R.string.tink_income_title,

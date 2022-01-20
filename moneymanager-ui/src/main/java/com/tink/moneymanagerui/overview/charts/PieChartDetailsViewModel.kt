@@ -17,12 +17,12 @@ import com.tink.moneymanagerui.charts.ColorGenerator
 import com.tink.moneymanagerui.charts.DefaultColorGenerator
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import com.tink.service.network.SuccessState
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.mapDistinct
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.floatValue
-import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -49,10 +49,10 @@ internal class PieChartDetailsViewModel @Inject constructor(
     userRepository: UserRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.statistics
-    private val period = MediatorLiveData<Period>().apply {
-        addSource(statisticRepository.currentPeriod) {
-            if (value == null) value = it
+    private val statistics = statisticRepository.fetchedStatistics
+    private val period = MediatorLiveData<Period?>().apply {
+        addSource(statisticRepository.currentPeriodState) {
+            if (value == null && it is SuccessState<Period?>) value = it.data
         }
     }
     val category = MutableLiveData<Category>()
@@ -71,10 +71,14 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
     }
 
-    val periods: LiveData<List<Period>> = Transformations.map(statisticRepository.periods) {
-        it.sortedWith(periodComparator).reversed().takeLast(12)
+    val periods: LiveData<List<Period>> = Transformations.map(statisticRepository.periodsState) {
+        if (it is SuccessState<List<Period>>) {
+            it.data.sortedWith(periodComparator).reversed().takeLast(12)
+        } else {
+            emptyList()
+        }
     }
-    val selectedPeriod: LiveData<Period> get() = period
+    val selectedPeriod: LiveData<Period?> get() = period
     val periodFormatter: (Period) -> String =
         { dateUtils.getMonthNameAndMaybeYearOfPeriod(it).capitalize() }
 
@@ -117,18 +121,18 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
 
     fun getStatistic(context: Context, type: ChartType): LiveData<DetailsChartModel> =
-        mapDistinct(statisticData) {
-            val data = calculateStatistic(type, it)
+        mapDistinct(statisticData) { statistics ->
+            val data = calculateStatistic(type, statistics)
             val color = type.getFeatureColor(context)
-            val src = it.source
+            val src = statistics.source
             val periodStr =
-                getPeriodString(dateUtils, src.period, context)
+                getPeriodString(dateUtils, src.period)
             val topLevel = src.category.parentId == null
             DetailsChartModel(
                 context,
                 type.title,
                 data.items.sumByFloat { it.amount },
-                it.source.currency,
+                statistics.source.currency,
                 periodStr,
                 color,
                 DefaultColorGenerator,

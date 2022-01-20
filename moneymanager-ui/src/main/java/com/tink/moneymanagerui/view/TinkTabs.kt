@@ -61,19 +61,6 @@ internal class TinkTabs @JvmOverloads constructor(
         super.addTab(tab, position, setSelected)
     }
 
-    fun updateNameOnFirstTab(name: String?) {
-        val tinkTextView = getTabAt(0)!!.customView as TinkTextView?
-        tinkTextView!!.text = name
-        getTabAt(0)!!.customView = tinkTextView
-    }
-
-    fun hide() {
-        postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_from_top)
-            startAnimation(anim)
-        }, 0)
-    }
-
     fun show() {
         postDelayed({
             val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_to_top)

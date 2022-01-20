@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.charts
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
@@ -11,8 +10,6 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
-import androidx.appcompat.view.ContextThemeWrapper
-import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.theme.resolveColorForFeature
@@ -132,27 +129,10 @@ internal class CircularProgressChart : View {
         invalidate()
     }
 
-    fun setLabel(label: String) {
-        this.label = label
-        updateTextBounds()
-        invalidate()
-    }
-
     fun setStrokeWidth(progressArcWidth: Int, backgroundRingWidth: Int) {
         progressArcPaint.strokeWidth = progressArcWidth.toFloat()
         backgroundRingStrokeWidth = backgroundRingWidth
         backgroundRingPaint.strokeWidth = backgroundRingStrokeWidth.toFloat()
-        invalidate()
-    }
-
-    fun applySettings(visualSettings: VisualSettings) {
-        progressArcPaint.color = visualSettings.progressArcColor
-        backgroundRingPaint.color = visualSettings.backgroundRingColor
-        backgroundRingPaint.alpha = (visualSettings.backgroundRingOpacity * 0xFF).toInt()
-        labelPaint.textSize = visualSettings.labelTextSize
-        labelPaint.color = visualSettings.labelTextColor
-        labelPaint.typeface = visualSettings.labelTypeface
-        updateTextBounds()
         invalidate()
     }
 

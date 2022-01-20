@@ -8,7 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.ArrayList
 import javax.inject.Inject
 
 @Deprecated("Use UserProfileService directly")

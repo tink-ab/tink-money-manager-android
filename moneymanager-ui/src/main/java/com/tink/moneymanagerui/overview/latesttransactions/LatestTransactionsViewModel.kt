@@ -36,14 +36,20 @@ internal class LatestTransactionsViewModel @Inject constructor(
         dataRefreshHandler.registerRefreshable(this)
     }
 
+    val categoriesState = categoryRepository.categoriesState
+
     override fun refresh() =
         appExecutors.mainThreadExecutor.execute { setListMode(TransactionListMode.All) }
 
 
     val latestTransactions = transactionItems.map { items ->
         items
-            .transactions
-            .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
+            .transactions.map { item ->
+                transactionItemFactory.latestTransactionItemFromTransactionItem(item)
+            }
+            .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }
+                .thenBy { it.id }
+            )
             .take(3)
     }
 

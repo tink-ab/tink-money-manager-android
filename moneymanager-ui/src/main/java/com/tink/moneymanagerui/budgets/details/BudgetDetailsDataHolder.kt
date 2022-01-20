@@ -24,9 +24,9 @@ internal class BudgetDetailsDataHolder(
 
     val budgetName: LiveData<String> = Transformations.map(budget) { it.name }
 
-    val amountLeft: LiveData<Int> =
+    val amountLeft: LiveData<Float> =
         Transformations.map(budgetPeriod) { budgetPeriod ->
-            (budgetPeriod.budgetAmount - budgetPeriod.spentAmount).value.toBigDecimal().toInt()
+            (budgetPeriod.budgetAmount - budgetPeriod.spentAmount).value.toBigDecimal().toFloat()
         }
 
     val budgetPeriodInterval: LiveData<String> = MediatorLiveData<String>().apply {

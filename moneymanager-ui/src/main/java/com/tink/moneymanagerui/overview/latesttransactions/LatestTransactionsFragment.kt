@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.StatusSubtitleMode
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_latest_transactions.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
@@ -56,6 +58,11 @@ internal class LatestTransactionsFragment : BaseFragment() {
         }
 
         action.setOnClickListener { showTransactions() }
+
+        // TODO: Remove this and instead have latestTransactions use ResponseState
+        viewModel.categoriesState.observe(viewLifecycleOwner, {
+            card.visibleIf { it is SuccessState }
+        })
 
         viewModel.latestTransactions.observe(viewLifecycleOwner, Observer {
             transactionsAdapter.setTransactionItems(it)

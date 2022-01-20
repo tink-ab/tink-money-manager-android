@@ -56,9 +56,30 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
                 }
             }
         }
+    val showDoneButton: LiveData<Boolean> =
+        _markedState.map {
+            it?.let { marked ->
+                when (marked) {
+                    Marked.PARTIALLY,
+                    Marked.ALL -> true
+                    Marked.NONE -> false
+                }
+            } ?: false
+        }
 
     fun updateMarkedState(markedState: Marked) {
         _markedState.value = markedState
+    }
+
+    val doneButtonText: LiveData<String> = MediatorLiveData<String>().apply {
+        fun update() {
+            val numberItemsToChange = markedTransactionsIds.value?.size
+                ?: transactions.value?.size
+                ?: 0
+            postValue(context.getString(R.string.tink_transaction_similar_button_accept_text, numberItemsToChange))
+        }
+        addSource(markedTransactionsIds) { update() }
+        addSource(transactions) { update() }
     }
 
     private val _similarTransactionItems =
@@ -101,6 +122,10 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
         }
         addSource(categoryId) {update()}
         addSource(categoryTree) {update()}
+    }
+
+    val descriptionText: LiveData<String> = category.map { category ->
+        context.getString(R.string.tink_transaction_similar_description, category.name)
     }
 
     fun updateTransactions(transactionIDs: List<String>, categoryCode: String, onError: (TinkNetworkError) -> Unit) {

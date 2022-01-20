@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.tink.annotations.PfmScope
 import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightType
 import com.tink.service.insight.InsightService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,7 @@ class InsightsRepository @Inject constructor(
         scope.launch {
             val result: ErrorOrValue<List<Insight>> = try {
                 val insights = insightService.listInsights()
+                    .filter { supportedTypes.contains(it.type) }
                 ErrorOrValue(value = insights)
             } catch (error: Throwable) {
                 ErrorOrValue(error = TinkNetworkError(error))
@@ -43,6 +45,7 @@ class InsightsRepository @Inject constructor(
             scope.launch {
                 val result: ErrorOrValue<List<Insight>> = try {
                     val insights = insightService.listArchived()
+                        .filter { supportedTypes.contains(it.type) }
                     ErrorOrValue(value = insights)
                 } catch (error: Throwable) {
                     ErrorOrValue(error = TinkNetworkError(error))
@@ -66,4 +69,29 @@ class InsightsRepository @Inject constructor(
 
     fun refreshInsights() = _insights.update()
     fun refreshArchived() = _archivedInsights.update()
+
+    companion object {
+        private val supportedTypes = listOf(
+            InsightType.ACCOUNT_BALANCE_LOW,
+            InsightType.BUDGET_CLOSE_NEGATIVE,
+            InsightType.BUDGET_CLOSE_POSITIVE,
+            InsightType.BUDGET_OVERSPENT,
+            InsightType.BUDGET_SUCCESS,
+            InsightType.BUDGET_SUGGEST_CREATE_FIRST,
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY,
+            InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY,
+            InsightType.BUDGET_SUMMARY_ACHIEVED,
+            InsightType.BUDGET_SUMMARY_OVERSPENT,
+            InsightType.DOUBLE_CHARGE,
+            InsightType.LARGE_EXPENSE,
+            InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY,
+            InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS,
+            InsightType.SINGLE_UNCATEGORIZED_TRANSACTION,
+            InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
+            InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
+            InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
+            InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS
+        )
+
+    }
 }

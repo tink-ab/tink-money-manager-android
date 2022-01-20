@@ -29,6 +29,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/overviewAmountText"
                 style="@style/tink_tera.autoSize"
+                android:maxLines="1"
                 android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

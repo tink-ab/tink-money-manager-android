@@ -12,6 +12,7 @@ import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.CurrentInsightsViewModel
 import com.tink.moneymanagerui.insights.InsightsViewModel
 import com.tink.moneymanagerui.insights.di.InsightsViewModelFactory
+import com.tink.moneymanagerui.util.EspressoIdlingResource
 import kotlinx.android.synthetic.main.tink_fragment_overview_insights.view.*
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
@@ -46,6 +47,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
             view.insightsProgressBar.visibleIf { isLoading }
         })
 
+        EspressoIdlingResource.increment()
         viewModel.hasItems.observe(viewLifecycleOwner, Observer { hasItems ->
             view.apply {
                 insightsCountBackground.visibleIf { hasItems }
@@ -59,12 +61,16 @@ internal class OverviewInsightsFragment : BaseFragment() {
                 if (hasItems) {
                     // new events UI
                     insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent)))
+                    insightsCard.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
                     insightsCardButton.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
                 } else {
                     // archived events UI
                     insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor)))
+                    insightsCard.setOnClickListener {
+                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+                    }
                     insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
                     insightsCardButton.setOnClickListener {
@@ -72,6 +78,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
                     }
                 }
                 insightsCard.visibility = View.VISIBLE
+                EspressoIdlingResource.decrement()
             }
         })
     }

@@ -5,15 +5,15 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
-import com.google.common.base.Strings
 import com.tink.moneymanagerui.util.DimensionUtils
+import java.util.*
 
 @Deprecated("Use MaterialTextView instead", ReplaceWith("com.google.android.material.textview.MaterialTextView"))
 class TinkTextView : AppCompatTextView {
     private var theme: Theme? = null
     private var compundPaddingTop = 0
     private var ignoreBaseLine = false
-    private var helper: BaseLineHelper? = null
+    private lateinit var helper: BaseLineHelper
 
     constructor(context: Context) : super(context) {
         initialize(null)
@@ -40,36 +40,7 @@ class TinkTextView : AppCompatTextView {
         )
         helper = BaseLineHelper(materialStep)
         includeFontPadding = false
-        // TODO: PFMSDK: Resource IDs cannot be used for switch expressions in a library module
-//        if (attrs != null) {
-//            setCustomAttributes(context, attrs);
-//        }
     }
-
-    // TODO: PFMSDK: Resource IDs cannot be used for switch expressions in a library module
-//    private void setCustomAttributes(Context context, AttributeSet attrs) {
-//		@SuppressLint("CustomViewStyleable")
-//		TypedArray arrayAttributes = context
-//			.obtainStyledAttributes(attrs, R.styleable.TinkWidgetStyle);
-//
-//		try {
-//			int n = arrayAttributes.getIndexCount();
-//			for (int i = 0; i < n; i++) {
-//				int attr = arrayAttributes.getIndex(i);
-//				switch (attr) {
-//					case R.styleable.TinkWidgetStyle_ignore_baseLine:
-//						ignoreBaseLine = true;
-//						break;
-//					case R.styleable.TinkWidgetStyle_lineHeight:
-//						float dimension = arrayAttributes.getDimension(attr, 0);
-//						setLineSpacing(dimension, 0);
-//						break;
-//				}
-//			}
-//		} finally {
-//			arrayAttributes.recycle();
-//		}
-//	}
 
     fun setTheme(theme: Theme) {
         this.theme = theme
@@ -79,8 +50,8 @@ class TinkTextView : AppCompatTextView {
         letterSpacing = theme.spacing
         setLineSpacing(theme.lineHeight, 0f)
         var text = text.toString()
-        if (theme.toUpperCase() && !Strings.isNullOrEmpty(text)) {
-            text = text.toUpperCase()
+        if (theme.toUpperCase() && text.isNotEmpty()) {
+            text = text.uppercase(Locale.getDefault())
             setText(text)
         }
     }
@@ -100,15 +71,11 @@ class TinkTextView : AppCompatTextView {
         }
         val oneDpExtraHeightToAvoidClipping =
             DimensionUtils.getPixelsFromDP(1f, context)
-        compundPaddingTop = helper!!.getCompoundTopPaddingToPutBaselineOnGrid(baseline)
+        compundPaddingTop = helper.getCompoundTopPaddingToPutBaselineOnGrid(baseline)
         var height = measuredHeight
-        height += helper!!.putHeightOnGrid(height)
+        height += helper.putHeightOnGrid(height)
         height += oneDpExtraHeightToAvoidClipping.toInt()
         setMeasuredDimension(measuredWidth, height)
-    }
-
-    fun setIgnoreBaseline(ignoreBaseline: Boolean) {
-        ignoreBaseLine = ignoreBaseline
     }
 
     override fun setText(
@@ -116,8 +83,8 @@ class TinkTextView : AppCompatTextView {
         type: BufferType
     ) {
         var themedText = text
-        if (theme != null && theme!!.toUpperCase()) {
-            themedText = themedText.toString().toUpperCase()
+        if (theme?.toUpperCase() == true) {
+            themedText = themedText.toString().uppercase(Locale.getDefault())
         }
         super.setText(themedText, type)
     }

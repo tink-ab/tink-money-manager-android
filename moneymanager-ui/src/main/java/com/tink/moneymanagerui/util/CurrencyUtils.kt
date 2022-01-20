@@ -1,6 +1,5 @@
 package com.tink.moneymanagerui.util
 
-import com.google.common.collect.ImmutableList
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.collections.Currencies
@@ -23,14 +22,13 @@ object CurrencyUtils {
     // if amount >= DYNAMIC_ROUNDING_THRESHOLD then rounded format is applied
     // else exact format is applied.
     private val DYNAMIC_ROUNDING_THRESHOLDS = DynamicRoundingThresholds
-    private const val NON_BREAKING_WHITESPACE = 160.toChar()
     private val ZERO = ExactNumber(0, 0)
     private val THOUSAND = ExactNumber(1000, 0)
     private val MILLION =
         ExactNumber(1000000, 0)
     private val BILLION =
         ExactNumber(1000000000, 0)
-    private val UNITS: MutableMap<String, ImmutableList<StringExactNumberPair>> =
+    private val UNITS: MutableMap<String, List<StringExactNumberPair>> =
         HashMap()
 
     private const val EXACT_DIGITS = 2
@@ -175,12 +173,6 @@ object CurrencyUtils {
         return formatted
     }
 
-//    val minusSign: Char
-//        get() {
-//            val format = getDecimalFormat(null, 0)
-//            return (format as DecimalFormat).decimalFormatSymbols.minusSign
-//        }
-
     private fun formatAmount(
         amount: ExactNumber,
         decimals: Int,
@@ -197,7 +189,7 @@ object CurrencyUtils {
         val currencySymbol = try {
             Currency.getInstance(currencyCode).symbol
         } catch (exception: Exception) {
-            Currency.getInstance(Currencies.getSharedInstance().defaultCurrencyCode).symbol
+            Currency.getInstance(Currencies.sharedInstance.defaultCurrencyCode).symbol
         }
         return "$currencySymbol${amount.toBigDecimal().toLong()}"
     }
@@ -210,14 +202,14 @@ object CurrencyUtils {
         var currencyCode = currencyCode
         var locale = Locale.getDefault()
         val userProfile =
-            Currencies.getSharedInstance().userProfile
+            Currencies.sharedInstance.userProfile
         if (userProfile != null) {
             val localeCode = userProfile.locale
             val splits = localeCode.split("_").toTypedArray()
             locale = Locale(splits[0], userProfile.market)
         }
         if (currencyCode == null) {
-            currencyCode = Currencies.getSharedInstance().defaultCurrencyCode
+            currencyCode = Currencies.sharedInstance.defaultCurrencyCode
         }
         val format = DecimalFormat.getCurrencyInstance(locale)
         if (!currencyCode.isEmpty()) {
@@ -308,40 +300,35 @@ object CurrencyUtils {
 
     init {
         val enUsMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("k", THOUSAND),
                     StringExactNumberPair("mm", MILLION),
                     StringExactNumberPair("bn", BILLION)
                 )
         val svSeMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("t", THOUSAND),
                     StringExactNumberPair("mn", MILLION),
                     StringExactNumberPair("md", BILLION)
                 )
         val frFRMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("m", THOUSAND),
                     StringExactNumberPair("mn", MILLION),
                     StringExactNumberPair("md", BILLION)
                 )
         val defaultMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("k", THOUSAND),
                     StringExactNumberPair("M", MILLION),
                     StringExactNumberPair("G", BILLION)
                 )
         val nlNlMap =
-            ImmutableList
-                .of(
+            listOf(
                     StringExactNumberPair("", ZERO),
                     StringExactNumberPair("dzd", THOUSAND),
                     StringExactNumberPair("mln", MILLION),

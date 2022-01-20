@@ -10,6 +10,7 @@ import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.toDateTime
 import com.tink.model.statistics.Statistics
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
+import org.joda.time.DateTimeZone
 import se.tink.commons.extensions.recursiveIdList
 import se.tink.utils.DateUtils
 import kotlin.math.abs
@@ -42,16 +43,15 @@ internal data class TransactionsItemsList(override val items: ArrayList<Transact
 internal fun getPeriodString(
     dateUtils: DateUtils,
     period: Period,
-    context: Context,
     toToday: Boolean = true
 ): String {
-    val start = dateUtils.formatDateHumanShort(period.start.toDateTime())
-    val end = if (toToday && period.isInPeriod(DateTime.now())) {
-        context.getString(R.string.tink_date_format_human_today)
+    val endOrToday = if (toToday && period.isInPeriod(DateTime.now(dateUtils.timezone))) {
+        DateTime.now()
     } else {
-        dateUtils.formatDateHumanShort(period.end.toDateTime())
+        period.end.toDateTime()
     }
-    return context.getString(R.string.tink_date_span_string, start, end)
+
+    return dateUtils.formatDateRange(period.start.toDateTime(), endOrToday, true)
 }
 
 internal fun calculateStatistic(

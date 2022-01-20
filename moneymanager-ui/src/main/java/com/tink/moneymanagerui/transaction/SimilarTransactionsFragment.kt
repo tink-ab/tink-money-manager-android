@@ -1,11 +1,15 @@
 package com.tink.moneymanagerui.transaction
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
+import android.util.TypedValue
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
+import androidx.core.graphics.alpha
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,10 +17,12 @@ import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FontUtils
 import com.tink.moneymanagerui.view.CustomTypefaceSpan
 import com.tink.moneymanagerui.view.TinkSnackbar
+import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.*
 import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.view.*
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import javax.inject.Inject
@@ -86,19 +92,27 @@ internal class SimilarTransactionsFragment : BaseFragment() {
                 onSimilarTransactionsDone?.invoke()
                 fragmentCoordinator.popBackStack()
             }
+
             skipBtn.setOnClickListener {
                 onSimilarTransactionsDone?.invoke()
                 fragmentCoordinator.popBackStack()
             }
-
-
         }
         viewModel.apply {
             similarTransactionItems.observe(viewLifecycleOwner, Observer { items ->
                 adapter.setData(items)
             })
+            doneButtonText.observe(viewLifecycleOwner, Observer { text ->
+                doneBtn.text = text
+            })
+            descriptionText.observe(viewLifecycleOwner, Observer { text ->
+                description.text = text
+            })
             markButtonText.observe(viewLifecycleOwner, Observer {
                 invalidateToolbarMenu()
+            })
+            showDoneButton.observe(viewLifecycleOwner, Observer { showDoneButton ->
+                doneBtn.visibleIf { showDoneButton }
             })
         }
     }

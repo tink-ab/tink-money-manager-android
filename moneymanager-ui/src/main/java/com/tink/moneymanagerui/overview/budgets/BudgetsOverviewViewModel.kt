@@ -2,12 +2,18 @@ package com.tink.moneymanagerui.overview.budgets
 
 import androidx.lifecycle.*
 import com.tink.model.budget.Budget
+import com.tink.model.budget.BudgetSummary
 import com.tink.model.category.CategoryTree
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.isBiggerThanOrEqual
 import com.tink.moneymanagerui.extensions.formattedPeriod
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
 import se.tink.android.categories.CategoryRepository
+import se.tink.android.livedata.requireValue
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
@@ -22,41 +28,24 @@ internal class BudgetsOverviewViewModel @Inject constructor(
     private val dateUtils: DateUtils
 ): ViewModel() {
 
-    private val budgetSummaries = budgetsRepository.budgets
-    private val categories = categoryRepository.categories
+    private val budgetSummaries = budgetsRepository.budgetsState
+    private val categories = categoryRepository.categoriesState
 
-    val budgetItems: LiveData<List<BudgetOverviewItem>> =
-        MediatorLiveData<List<BudgetOverviewItem>>().apply {
-            fun update() {
-                whenNonNull(
-                    categories.value,
-                    budgetSummaries.value
-                ) { categories, budgets ->
-                    _loading.postValue(false)
-                    budgets.mapNotNull { summary ->
-                        val budgetSpecification = summary.budgetSpecification
-                        val icon = getBudgetIcon(budgetSpecification, categories)
-                        val periodicity = budgetSpecification.periodicity
+    private val budgetItemsState: MediatorLiveData<BudgetsState> =
+        MediatorLiveData<BudgetsState>().apply {
+            value = BudgetsState()
 
-                        icon?.let {
-                            val budgetPeriod = summary.budgetPeriod
-                            BudgetOverviewItem(
-                                budgetId = budgetSpecification.id,
-                                icon = it,
-                                name = budgetSpecification.name,
-                                progress = getBudgetOverviewItemProgress(budgetPeriod),
-                                progressMax = budgetPeriod.budgetAmount.value.toBigDecimal().toInt(),
-                                periodLabel = getBudgetOverviewItemPeriodLabel(periodicity, budgetPeriod),
-                                budgetAmount = budgetPeriod.budgetAmount,
-                                spentAmount = budgetPeriod.spentAmount
-                            )
-                        }
-                    }.let(::postValue)
-                }
+            addSource(categories) {
+                value = BudgetsState(requireValue.budgets, it)
             }
-            addSource(categories) { update() }
-            addSource(budgetSummaries) { update() }
+            addSource(budgetSummaries) {
+                value = BudgetsState(it, requireValue.categories)
+            }
         }
+
+    val overallBudgetState: LiveData<ResponseState<List<BudgetOverviewItem>>> = budgetItemsState.map {
+        it.overallState
+    }
 
     private fun getBudgetIcon(
         budgetSpecification: Budget.Specification,
@@ -123,9 +112,41 @@ internal class BudgetsOverviewViewModel @Inject constructor(
         }
     }
 
-    private val _loading = MutableLiveData<Boolean>().apply { value = true }
-    val loading: LiveData<Boolean> = _loading
+    inner class BudgetsState(
+        val budgets: ResponseState<List<BudgetSummary>> = LoadingState,
+        val categories: ResponseState<CategoryTree> = LoadingState
+    ) {
 
-    val hasBudgets: LiveData<Boolean> =
-        Transformations.map(budgetItems) { it?.isNotEmpty() == true }
+        internal val overallState: ResponseState<List<BudgetOverviewItem>> =
+            when {
+                budgets is SuccessState && categories is SuccessState -> {
+
+                    val budgetOverviews: List<BudgetOverviewItem> = budgets.data.mapNotNull { summary ->
+                        val budgetSpecification = summary.budgetSpecification
+                        val icon = getBudgetIcon(budgetSpecification, categories.data)
+                        val periodicity = budgetSpecification.periodicity
+
+                        icon?.let {
+                            val budgetPeriod = summary.budgetPeriod
+                            BudgetOverviewItem(
+                                budgetId = budgetSpecification.id,
+                                icon = it,
+                                name = budgetSpecification.name,
+                                progress = getBudgetOverviewItemProgress(budgetPeriod),
+                                progressMax = budgetPeriod.budgetAmount.value.toBigDecimal().toInt(),
+                                periodLabel = getBudgetOverviewItemPeriodLabel(
+                                    periodicity,
+                                    budgetPeriod
+                                ),
+                                budgetAmount = budgetPeriod.budgetAmount,
+                                spentAmount = budgetPeriod.spentAmount
+                            )
+                        }
+                    }
+                    SuccessState(budgetOverviews)
+                }
+                budgets is ErrorState || categories is ErrorState -> ErrorState("")
+                else -> LoadingState
+            }
+    }
 }

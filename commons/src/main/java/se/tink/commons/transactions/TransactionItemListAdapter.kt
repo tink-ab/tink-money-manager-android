@@ -14,7 +14,6 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
-import se.tink.commons.extensions.visible
 import se.tink.utils.DateUtils
 import kotlin.properties.Delegates
 
@@ -212,17 +211,6 @@ class UpcomingHeaderViewHolder(
 ) {
     fun bind(item: ListItem.UpcomingGroupHeaderItem) {
         itemView.upcomingGroupTitle.text = item.title
-//        itemView.showTransactionsButton.setOnClickListener {
-//            onToggleUpcomingTransactions?.invoke()
-//        }
-//        itemView.showTransactionsButton.text =
-//            if (item.expanded) {
-//                R.string.upcoming_transaction_hide
-//            } else {
-//                R.string.upcoming_transaction_show
-//            }.let {
-//                parent.context?.getString(it) ?: ""
-//            }
     }
 }
 

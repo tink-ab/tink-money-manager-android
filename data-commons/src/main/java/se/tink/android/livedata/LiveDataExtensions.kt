@@ -12,12 +12,6 @@ fun <X : Any?, Y : Any?> LiveData<X>.map(mapFunction: (X) -> (Y)): LiveData<Y> =
 fun <X : Any?, Y : Any?> LiveData<X>.switchMap(mapFunction: (X) -> (LiveData<Y>)): LiveData<Y> =
     Transformations.switchMap(this, mapFunction)
 
-fun <T> MediatorLiveData<T>.merge(vararg values: LiveData<T>) {
-    for (ld in values) {
-        addSource(ld) { value = it }
-    }
-}
-
 fun <T, R> mapDistinct(source: LiveData<T>, map: (T) -> R): LiveData<R> = MediatorLiveData<R>().apply {
     addSource(source) {
         it?.let {

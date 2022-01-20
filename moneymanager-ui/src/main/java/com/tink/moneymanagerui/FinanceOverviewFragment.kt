@@ -27,12 +27,14 @@ import com.tink.moneymanagerui.security.SecuredClientDataStorage
 import com.tink.moneymanagerui.tracking.AnalyticsSingleton
 import com.tink.moneymanagerui.tracking.Tracker
 import com.tink.service.network.SdkClient
-import com.tink.service.network.coreClient
+import com.tink.service.network.SdkInformation
+import com.tink.service.network.coreSdkInformation
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.tink_fragment.*
 import se.tink.android.repository.service.DataRefreshHandler
+import se.tink.commons.BuildConfig
 import timber.log.Timber
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
@@ -217,7 +219,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = emptyMap()
         ): FinanceOverviewFragment {
             AnalyticsSingleton.tracker = tracker
-            coreClient = SdkClient.MONEY_MANAGER
+            coreSdkInformation = SdkInformation(SdkClient.MONEY_MANAGER, BuildConfig.libraryVersion)
             if (insightActionHandler != null) {
                 CustomInsightActionHandler.setInsightActionHandler(insightActionHandler)
             } else if (javaInsightActionHandler != null) {

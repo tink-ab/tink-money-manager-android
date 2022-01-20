@@ -89,28 +89,34 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
 
             setupCommonBottomPart(insight)
             setUpProgress(data)
+            setupCategories(data.categories)
+        }
+
+        private fun setupCategories(categories: List<BudgetMonthlySummaryCategory>) {
+            view.categoriesContainer.visibleIf { categories.isNotEmpty() }
 
             setUpCategory(
-                data.categories.getOrNull(0),
+                categories.getOrNull(0),
                 view.categoryOneIcon,
                 view.categoryOneBackground
             )
 
             setUpCategory(
-                data.categories.getOrNull(1),
+                categories.getOrNull(1),
                 view.categoryTwoIcon,
                 view.categoryTwoBackground
             )
 
             setUpCategory(
-                data.categories.getOrNull(2),
+                categories.getOrNull(2),
                 view.categoryThreeIcon,
                 view.categoryThreeBackground,
                 view.categoryThreeGroup
             )
 
+            val fourOrMoreCategory = getFourOrMoreCategory(categories)
             setUpCategory(
-                data.categories.getOrNull(3),
+                fourOrMoreCategory,
                 view.categoryFourIcon,
                 view.categoryFourBackground,
                 view.categoryFourGroup
@@ -131,6 +137,27 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
                 icon.tint(category.iconColor.color)
                 background.backgroundTint(category.iconColor.lightColor)
             }
+        }
+
+        private fun getFourOrMoreCategory(categories: List<BudgetMonthlySummaryCategory>): BudgetMonthlySummaryCategory? {
+            if (categories.size <= 4) {
+                return categories.getOrNull(3)
+            }
+
+            val hasOverBudgetCategory = categories
+                .drop(3)
+                .any { category -> category.iconColor != BudgetColor.WithinBudget }
+
+            val moreIconColor = if (hasOverBudgetCategory) {
+                BudgetColor.OverBudget
+            } else {
+                BudgetColor.WithinBudget
+            }
+
+            return BudgetMonthlySummaryCategory(
+                icon = IconResource.DrawableId(R.drawable.tink_more_horizontal),
+                iconColor = moreIconColor
+            )
         }
 
         private fun setUpProgress(data: BudgetMonthlySummaryDataHolder) {

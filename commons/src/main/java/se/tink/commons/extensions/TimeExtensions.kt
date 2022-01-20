@@ -1,13 +1,10 @@
 package se.tink.commons.extensions
 
-import com.tink.model.time.*
+import com.tink.model.time.Period
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
-import java.util.Date
 
 fun Instant.toDateTime(): DateTime = DateTime(this.toEpochMilli())
-
-fun Period.startsAfterEndOf(other: Period) = start.isAfter(other.end)
 
 fun Period.isInPeriod(dateTime: DateTime): Boolean {
 
@@ -20,25 +17,3 @@ fun Period.isInPeriod(dateTime: DateTime): Boolean {
     return afterStart && beforeStop
 }
 
-fun Period.toMonthString(): String? {
-
-    fun monthString(year: Int, month: Int) = if (month < 10) "$year-$month" else "$year-0$month"
-
-    return when (this) {
-        is YearPeriod -> null
-        is WeekPeriod -> null
-        is DayPeriod -> monthString(year, monthOfYear)
-        is MonthPeriod -> monthString(year, monthOfYear)
-    }
-}
-
-object PeriodUtil {
-    @JvmStatic
-    fun isAfter(one: Period, other: Period) = one.startsAfterEndOf(other)
-
-    @JvmStatic
-    fun isInPeriod(dateTime: DateTime, period: Period) = period.isInPeriod(dateTime)
-
-    @JvmStatic
-    fun getLatestStreamingDate(): Date = DateTime.now().toDate()
-}
