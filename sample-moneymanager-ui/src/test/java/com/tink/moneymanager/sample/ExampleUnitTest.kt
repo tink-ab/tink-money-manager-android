@@ -1,4 +1,4 @@
-package se.tink.android.tink_pfm_sdk_android
+package com.tink.moneymanager.sample
 
 import org.junit.Test
 

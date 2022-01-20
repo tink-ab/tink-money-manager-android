@@ -1,4 +1,4 @@
-package se.tink.android.tink_pfm_sdk_android
+package com.tink.moneymanager.sample
 
 import android.content.Context
 import android.net.Uri
@@ -16,20 +16,27 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.StatisticType
+import com.tink.service.network.Environment
 import com.tink.service.network.TinkConfiguration
-import se.tink.android.tink_pfm_sdk_android.configuration.Configuration
+import se.tink.android.tink_pfm_sdk_android.R
 
 class MainActivity : FragmentActivity() {
 
-    private var currentFinanceOverviewFragment: FinanceOverviewFragment? = null
+    private lateinit var currentFinanceOverviewFragment: FinanceOverviewFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val environment: Environment = Environment.Production
+        // TODO: Create a client in Tink Console https://console.tink.com/
+        val clientId: String =
+        // TODO: Insert access token https://docs.tink.com/resources/api-setup/get-access-token
+        val accessToken: String =
+
         val config = TinkConfiguration(
-            Configuration.sampleEnvironment,
-            Configuration.sampleOAuthClientId,
+            environment,
+            clientId,
             Uri.parse("https://localhost:3000/callback")
         )
 
@@ -38,8 +45,8 @@ class MainActivity : FragmentActivity() {
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
-                accessToken = Configuration.sampleAccessToken,
-                styleResId = R.style.TinkStyle_Default,
+                accessToken = accessToken,
+                styleResId = R.style.TinkStyle_ChewingGum,
                 tracker = LogTracker(),
                 overviewFeatures = getOverviewFeatures()
             ).also {
@@ -51,6 +58,10 @@ class MainActivity : FragmentActivity() {
         addFragmentLifecycleCallbacks()
     }
 
+    /**
+     * Choose which features to display as well as in what order
+     *
+     */
     private fun getOverviewFeatures() =
         OverviewFeatures(
             features =
@@ -81,14 +92,14 @@ class MainActivity : FragmentActivity() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(
             object: FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentAttached(
-                    fm: FragmentManager,
-                    f: Fragment,
+                    fragmentManager: FragmentManager,
+                    fragment: Fragment,
                     context: Context
                 ) {
-                    super.onFragmentAttached(fm, f, context)
+                    super.onFragmentAttached(fragmentManager, fragment, context)
                     currentFinanceOverviewFragment
-                        ?.childFragmentManager
-                        ?.registerFragmentLifecycleCallbacks(
+                        .childFragmentManager
+                        .registerFragmentLifecycleCallbacks(
                             object : FragmentManager.FragmentLifecycleCallbacks() {
                                 override fun onFragmentViewCreated(
                                     fm: FragmentManager,
@@ -108,16 +119,20 @@ class MainActivity : FragmentActivity() {
         )
     }
 
+    /**
+     * Add your own custom component to the finance overview
+     *
+     */
     private fun setupCustomViews(parent: View) {
         val customView = parent.findViewById<FrameLayout>(R.id.myapp_custom_view)
         if (customView != null) {
             if (customView.findViewById<RelativeLayout>(R.id.myapp_custom_button_container) == null) {
-                val viewTwo = View.inflate(
+                val customComponent = View.inflate(
                     this,
                     R.layout.layout_custom_button,
                     customView
                 )
-                val customButton = viewTwo.findViewById<Button>(R.id.myapp_custom_button)
+                val customButton = customComponent.findViewById<Button>(R.id.myapp_custom_button)
                 customButton.setOnClickListener {
                     Toast.makeText(it.context, "My custom button clicked", Toast.LENGTH_SHORT)
                         .show()
@@ -127,7 +142,7 @@ class MainActivity : FragmentActivity() {
     }
 
     override fun onBackPressed() {
-        if (currentFinanceOverviewFragment?.handleBackPress() == false)
+        if (!currentFinanceOverviewFragment.handleBackPress())
             super.onBackPressed()
     }
 }

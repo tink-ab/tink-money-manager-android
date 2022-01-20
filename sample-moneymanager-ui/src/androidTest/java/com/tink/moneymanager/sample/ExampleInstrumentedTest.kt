@@ -1,4 +1,4 @@
-package se.tink.android.tink_pfm_sdk_android
+package com.tink.moneymanager.sample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

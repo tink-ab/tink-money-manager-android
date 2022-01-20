@@ -1,3 +1,4 @@
 <resources>
-  <string name="app_name">Tink PFM UI Example</string>
+  <string name="app_name">Money Manager Sample</string>
+  <string name="custom_button">Custom Button</string>
 </resources>
