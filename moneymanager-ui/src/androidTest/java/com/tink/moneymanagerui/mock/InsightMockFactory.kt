@@ -45,6 +45,7 @@ object InsightMockFactory {
 
     val supportedTypes = listOf(
         InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL,
         InsightType.BUDGET_CLOSE_NEGATIVE,
         InsightType.BUDGET_CLOSE_POSITIVE,
         InsightType.BUDGET_OVERSPENT,
@@ -108,7 +109,7 @@ object InsightMockFactory {
         )
     }
 
-    private fun getBudgetSuggestCreateTopCategory(): JSONObject {
+    fun getBudgetSuggestCreateTopCategory(): JSONObject {
         return JSONObject("""
             {
                 "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
@@ -117,7 +118,10 @@ object InsightMockFactory {
                 "title": "Title",
                 "description": "Description",
                 "createdTime": 1111111,
-                "insightActions": [],
+                "insightActions": [ 
+                    ${getCreateBudgetAction()},
+                    ${getDismissAction()}
+                ],
                 "data": {
                     "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
                     "categorySpending": {
@@ -436,4 +440,44 @@ object InsightMockFactory {
         )
     }
 
+    private fun getDismissAction() = """ 
+        {
+            "label": "Dismiss",
+            "data":{ "type": "DISMISS" }
+        }
+    """
+
+    private fun getCreateBudgetAction(): String {
+        return """
+            {
+                "label": "Create budget",
+                "data": {
+                    "type": "CREATE_BUDGET",
+                    "budgetSuggestion": {
+                        "filter": {
+                            "categories": ["expenses:food.bars"],
+                            "accounts": ["d2b49640cbba4d8899a4886b6e8892f8"]
+                        }
+                    },
+                    "amount": {
+                        "currencyCode": "EUR",
+                        "amount": 300.0
+                    },
+                    "periodicityType": "BUDGET_PERIODICITY_TYPE_RECURRING",
+                    "recurringPeriodicityData": {
+                        "periodUnit": "MONTH"
+                    }
+                }
+            }
+        """
+    }
+
+    private fun getAcknowledgeAction(): String {
+        return """
+            {
+              "label": "Ok",
+              "data": { "type": "ACKNOWLEDGE" }
+            }
+        """
+    }
 }
