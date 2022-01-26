@@ -13,13 +13,15 @@ import com.tink.service.network.TinkConfiguration
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import org.junit.BeforeClass
+import java.lang.IllegalStateException
 
 
 abstract class BaseTestSuite {
 
     val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
     val navigator = TestNavigator()
-    var server = MockWebServer()
+    val server = MockWebServer()
     private val url = server.url("/").toString()
     private val testConfiguration = TestConfiguration(url)
 
@@ -39,7 +41,12 @@ abstract class BaseTestSuite {
             testConfiguration.sampleOAuthClientId,
             Uri.parse(url)
         )
-        Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
+
+        try {
+            Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
+        } catch (e: IllegalStateException) {
+
+        }
     }
 
     @Before
@@ -50,10 +57,12 @@ abstract class BaseTestSuite {
     @After
     fun tearDownIdlingRegistry() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+        val t = Tink
+        val x = 0
     }
 
     @After
     fun tearDownMockServer() {
-        server.shutdown()
+        //server.shutdown()
     }
 }

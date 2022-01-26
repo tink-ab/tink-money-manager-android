@@ -70,8 +70,11 @@ object InsightMockFactory {
         return when (type) {
             InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
             InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> getAggregateRefreshP2d2Credentials()
+            InsightType.BUDGET_SUGGEST_CREATE_FIRST -> getBudgetSuggestCreateFirst()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
+            InsightType.DOUBLE_CHARGE -> getDoubleCharge()
+            InsightType.LARGE_EXPENSE -> getLargeExpense()
             InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
             InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> getMonthlySummaryExpensesTransactions()
             InsightType.NEW_INCOME_TRANSACTION -> getNewIncomeTransaction()
@@ -88,14 +91,14 @@ object InsightMockFactory {
         types.map { type -> getInsightForType(type) }
 
 
-    private fun getAccountBalanceLow(): JSONObject {
+    fun getAccountBalanceLow(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
                 "id": 1,
                 "type": "ACCOUNT_BALANCE_LOW",
-                "title": "Title",
-                "description": "Description",
+                "title": "You have a low balance on Private Account",
+                "description": "Your balance is €10. Do you want to transfer more money to this account?",
                 "createdTime": 1111111,
                 "insightActions": [],
                 "data": {
@@ -106,6 +109,20 @@ object InsightMockFactory {
                         "amount": 2.42
                     }
                 }
+            }"""
+        )
+    }
+
+    fun getBudgetSuggestCreateFirst(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "BUDGET_SUGGEST_CREATE_FIRST",
+                "title": "Set up your first budget to help you keep track of expenses",
+                "description": "Creating budgets can help you stay on top of your spending – give it a go.",
+                "createdTime": 1111111,
+                "insightActions": []
             }"""
         )
     }
@@ -230,6 +247,48 @@ object InsightMockFactory {
                     ]
                 }
             }"""
+        )
+    }
+
+    fun getDoubleCharge(transactionIds: List<String> = listOf()): JSONObject {
+        return JSONObject("""
+             {
+                "userId": 1234,
+                "id": 1,
+                "type": "DOUBLE_CHARGE",
+                "title": "You may have been double charged",
+                "description": "You were charged €45 twice at Burger King",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "DOUBLE_CHARGE",
+                    "transactionIds": $transactionIds
+                }
+            }
+            """
+        )
+    }
+
+    fun getLargeExpense(transactionId: String = "8a703fa458d144f9b802b09b26a43e89"): JSONObject {
+        return JSONObject("""
+             {
+                "userId": 1234,
+                "id": 1,
+                "type": "LARGE_EXPENSE",
+                "title": "Unusual large expense",
+                "description": "You were charged for an unusually large expense at Stadium",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "LARGE_EXPENSE",
+                    "transactionId": $transactionId,
+                    "amount": {
+                        "currencyCode": "EUR",
+                        "amount": 1001.0
+                    }
+                }
+            }
+            """
         )
     }
 
