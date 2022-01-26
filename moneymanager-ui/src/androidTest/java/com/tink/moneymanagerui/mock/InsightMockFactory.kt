@@ -69,6 +69,7 @@ object InsightMockFactory {
     fun getInsightForType(type: InsightType): JSONObject {
         return when (type) {
             InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
+            InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> getAggregateRefreshP2d2Credentials()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
             InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
@@ -103,6 +104,32 @@ object InsightMockFactory {
                     "balance": {
                         "currencyCode": "EUR",
                         "amount": 2.42
+                    }
+                }
+            }"""
+        )
+    }
+
+    private fun getAggregateRefreshP2d2Credentials(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 2,
+                "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                "title": "Your connection to Handelsbanken will expire soon",
+                "description": "Reconnect to Handelsbanken to make sure your financial data stays up to date.",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                "data": {
+                    "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                    "credential": {
+                        "id": "credential-id",
+                        "provider": {
+                            "name": "handelsbanken-ob",
+                            "displayName": "Handelsbanken"
+                        },
+                        "sessionExpiryDate": 1566464477927
                     }
                 }
             }"""
