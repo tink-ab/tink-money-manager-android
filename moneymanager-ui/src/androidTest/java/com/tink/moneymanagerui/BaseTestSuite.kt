@@ -22,8 +22,8 @@ abstract class BaseTestSuite {
     val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
     val navigator = TestNavigator()
     val server = MockWebServer()
-    private val url = server.url("/").toString()
-    private val testConfiguration = TestConfiguration(url)
+    private lateinit var url: String
+    private lateinit var testConfiguration: TestConfiguration
 
     internal fun launchFinanceOverviewFragment() {
         val fragmentArgs = bundleOf(
@@ -36,6 +36,10 @@ abstract class BaseTestSuite {
 
     @Before
     fun tinkInit() {
+        server.start(4000)
+        url = server.url("/").toString()
+        testConfiguration = TestConfiguration(url)
+
         val config = TinkConfiguration(
             testConfiguration.sampleEnvironment,
             testConfiguration.sampleOAuthClientId,
@@ -57,12 +61,10 @@ abstract class BaseTestSuite {
     @After
     fun tearDownIdlingRegistry() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
-        val t = Tink
-        val x = 0
     }
 
     @After
     fun tearDownMockServer() {
-        //server.shutdown()
+        server.shutdown()
     }
 }

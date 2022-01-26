@@ -83,6 +83,7 @@ dependencies {
     implementation libraries.timber
 
     testImplementation libraries.test_junit
+    androidTestImplementation libraries.test_mockk_android
     androidTestImplementation libraries.test_junit_ext
     androidTestImplementation libraries.test_runner
     androidTestImplementation libraries.test_rules
