@@ -1,21 +1,15 @@
 package com.tink.moneymanagerui.feature.insight
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.tink.model.budget.BudgetFilter
-import com.tink.model.budget.BudgetPeriodicity
-import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.insights.actionhandling.InsightActionHandler
 import com.tink.moneymanagerui.mock.InsightMockFactory
 import com.tink.moneymanagerui.testutil.RecyclerViewItemCountAssertion
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Test
 import org.junit.runner.RunWith
-import timber.log.Timber
 
 @RunWith(AndroidJUnit4::class)
 class OverviewInsightsFragmentTest: BaseInsightTestSuit() {

@@ -9,7 +9,6 @@ import com.tink.model.insights.InsightState
 import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
-import com.tink.moneymanagerui.util.EspressoIdlingResource
 import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.enums.CategoryType
@@ -69,8 +68,6 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
 
         override fun bind(data: InsightDataHolder, insight: Insight) {
             require(data is IconTextViewDataHolder)
-
-            //EspressoIdlingResource.increment()
 
             setupCommonBottomPart(insight)
 

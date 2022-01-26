@@ -12,7 +12,6 @@ class PathDispatcher(
 
     fun addResponse(path: String, mockResponse: MockResponse) {
         pathToResponseMap[path] = mockResponse
-        val x = 0
     }
 
     fun addResponses(responses: Map<String, MockResponse>) {
