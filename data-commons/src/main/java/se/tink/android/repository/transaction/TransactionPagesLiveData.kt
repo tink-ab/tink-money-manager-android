@@ -8,9 +8,8 @@ import com.tink.model.transaction.Transaction
 import com.tink.service.handler.ResultHandler
 import com.tink.service.transaction.Pageable
 import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
@@ -21,6 +20,7 @@ abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
 class TransactionsPageable(
     private val transactionService: TransactionService,
     transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val dispatcher: DispatcherProvider,
     private val liveData: MutableLiveData<List<Transaction>>,
     private val accountId: String? = null,
     private val categoryId: String? = null,
@@ -30,8 +30,6 @@ class TransactionsPageable(
     private var currentOffset = 0
 
     private val currentTransactions = mutableListOf<Transaction>()
-
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     private var hasMore: Boolean = true
 
@@ -50,7 +48,7 @@ class TransactionsPageable(
     }
 
     override fun next(resultHandler: ResultHandler<Unit>) {
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             try {
                 val transactions = transactionService.listTransactions(
                     accountId, categoryId, period, currentOffset
@@ -106,12 +104,14 @@ class AccountTransactionPagesLiveData(
     accountId: String,
     appExecutors: AppExecutors,
     transactionService: TransactionService,
-    transactionUpdateEventBus: TransactionUpdateEventBus
+    transactionUpdateEventBus: TransactionUpdateEventBus,
+    dispatcher: DispatcherProvider,
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
     override val pageable: TransactionsPageable =
         TransactionsPageable(
             transactionService,
             transactionUpdateEventBus,
+            dispatcher,
             this,
             accountId
         )
@@ -129,10 +129,11 @@ class LeftToSpendTransactionPagesLiveData(
 class AllTransactionPagesLiveData (
     appExecutors: AppExecutors,
     transactionService: TransactionService,
-    transactionUpdateEventBus: TransactionUpdateEventBus
+    transactionUpdateEventBus: TransactionUpdateEventBus,
+    dispatcher: DispatcherProvider,
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
     override val pageable: TransactionsPageable =
-        TransactionsPageable(transactionService, transactionUpdateEventBus, this)
+        TransactionsPageable(transactionService, transactionUpdateEventBus, dispatcher, this)
 }
 
 class CategoryTransactionPagesLiveData(
@@ -140,6 +141,7 @@ class CategoryTransactionPagesLiveData(
     appExecutors: AppExecutors,
     transactionService: TransactionService,
     transactionUpdateEventBus: TransactionUpdateEventBus,
+    dispatcher: DispatcherProvider,
     val period: Period?
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
 
@@ -147,6 +149,7 @@ class CategoryTransactionPagesLiveData(
         TransactionsPageable(
             transactionService = transactionService,
             transactionUpdateEventBus = transactionUpdateEventBus,
+            dispatcher,
             liveData = this,
             categoryId = categoryId,
             period = period

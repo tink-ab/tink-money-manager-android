@@ -11,6 +11,7 @@ import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ internal class LatestTransactionsViewModel @Inject constructor(
     private val appExecutors: AppExecutors,
     transactionItemFactory: TransactionItemFactory,
     transactionUpdateEventBus: TransactionUpdateEventBus,
+    dispatcher: DispatcherProvider,
     private val dataRefreshHandler: DataRefreshHandler
 ) : TransactionListViewModel(
     transactionRepository,
@@ -28,7 +30,8 @@ internal class LatestTransactionsViewModel @Inject constructor(
     transactionService,
     appExecutors,
     transactionItemFactory,
-    transactionUpdateEventBus
+    transactionUpdateEventBus,
+    dispatcher
 ), Refreshable {
 
     init {

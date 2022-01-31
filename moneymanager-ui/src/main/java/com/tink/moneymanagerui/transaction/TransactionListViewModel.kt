@@ -7,9 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import se.tink.android.AppExecutors
@@ -36,10 +35,9 @@ internal open class TransactionListViewModel @Inject constructor(
     private val transactionService: TransactionService,
     private val appExecutors: AppExecutors,
     private val transactionItemFactory: TransactionItemFactory,
-    private val transactionUpdateEventBus: TransactionUpdateEventBus
+    private val transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val dispatcher: DispatcherProvider,
 ) : ViewModel() {
-
-
     private val _errors = MutableLiveData<Event<TinkNetworkError>>()
     val errors: LiveData<Event<TinkNetworkError>> = _errors
 
@@ -48,18 +46,23 @@ internal open class TransactionListViewModel @Inject constructor(
 
         return object : TransactionPagesLiveData() {
 
-            val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+            lateinit var currentScope: CoroutineScope
 
-            override fun dispose() = scope.cancel()
+            override fun dispose() {
+                if (this::currentScope.isInitialized) {
+                    currentScope.cancel()
+                }
+            }
 
             override fun loadMoreItems() {}
 
             init {
-                scope.launch {
+                CoroutineScope(dispatcher.io()).launch {
+                    currentScope = this
                     val transactions = try {
                         transactionRepository.fromIdList(ids)
                     } catch (error: Throwable) {
-                        emptyList<Transaction>()
+                        emptyList()
                     }
                     postValue(transactions)
                 }
@@ -113,7 +116,8 @@ internal open class TransactionListViewModel @Inject constructor(
             is TransactionListMode.All -> AllTransactionPagesLiveData(
                 appExecutors,
                 transactionService,
-                transactionUpdateEventBus
+                transactionUpdateEventBus,
+                dispatcher
             )
 
             is TransactionListMode.Category -> CategoryTransactionPagesLiveData(
@@ -121,6 +125,7 @@ internal open class TransactionListViewModel @Inject constructor(
                 appExecutors,
                 transactionService,
                 transactionUpdateEventBus,
+                dispatcher,
                 mode.period
             )
 
