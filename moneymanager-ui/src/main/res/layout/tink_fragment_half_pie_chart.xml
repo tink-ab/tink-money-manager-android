@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:background="?tink_backgroundColor">
 
+    <include
+        android:id="@+id/loaderSpinner"
+        layout="@layout/tink_loader_spinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:visibility="visible" />
+
     <ScrollView
         android:id="@+id/list"
         android:layout_width="0dp"

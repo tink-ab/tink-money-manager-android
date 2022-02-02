@@ -1,17 +1,14 @@
 package com.tink.moneymanagerui.overview.charts
 
-import android.content.Context
-import com.tink.moneymanagerui.R
+import com.tink.model.category.Category
+import com.tink.model.statistics.Statistics
+import com.tink.model.time.Period
+import com.tink.moneymanagerui.charts.extensions.sumByFloat
 import org.joda.time.DateTime
 import se.tink.commons.extensions.floatValue
-import com.tink.model.category.Category
-import com.tink.model.time.Period
 import se.tink.commons.extensions.isInPeriod
-import se.tink.commons.extensions.toDateTime
-import com.tink.model.statistics.Statistics
-import com.tink.moneymanagerui.charts.extensions.sumByFloat
-import org.joda.time.DateTimeZone
 import se.tink.commons.extensions.recursiveIdList
+import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
 import kotlin.math.abs
 

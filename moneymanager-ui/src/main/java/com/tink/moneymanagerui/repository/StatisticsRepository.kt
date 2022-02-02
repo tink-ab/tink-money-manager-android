@@ -12,17 +12,17 @@ import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
 import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.extensions.toPeriodIdentifier
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
-import com.tink.service.network.ResponseState
-import com.tink.service.network.ErrorState
-import com.tink.service.network.LoadingState
-import com.tink.service.network.SuccessState
-import com.tink.service.util.DispatcherProvider
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -220,16 +220,19 @@ internal class StatisticsRepository @Inject constructor(
         }
     }
 
-    val currentPeriodState: LiveData<ResponseState<Period?>> = Transformations.map(periodMapState) { periodMapState ->
+    val currentPeriodState: LiveData<ResponseState<Period>> = Transformations.map(periodMapState) { periodMapState ->
         when(periodMapState) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(periodMapState.errorMessage)
             is SuccessState -> {
-                SuccessState(
-                    DateTime().let { now ->
-                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                DateTime().let { now ->
+                    val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                    if (period == null) {
+                        return@let ErrorState("Did not have data for the current period.")
+                    } else {
+                        return@let SuccessState(period)
                     }
-                )
+                }
             }
         }
     }

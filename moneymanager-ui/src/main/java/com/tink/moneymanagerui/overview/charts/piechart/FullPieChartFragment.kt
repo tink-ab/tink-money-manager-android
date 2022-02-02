@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
@@ -25,11 +24,14 @@ import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartTransition
 import com.tink.moneymanagerui.charts.transitions.TranslationTransition
 import com.tink.moneymanagerui.databinding.TinkPieChartLabelBinding
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.overview.charts.*
 import com.tink.moneymanagerui.overview.getAmountStringForOverviewPieChart
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import se.tink.commons.categories.getIcon
@@ -58,7 +60,15 @@ internal class FullPieChartFragment : BaseFragment() {
 
     override fun authorizedOnCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) {
         viewModel.apply {
-            getStatistic(requireContext(), type).observe(viewLifecycle, Observer { it?.let { updateModel(it) } })
+            val transactionNameOther = getString(R.string.tink_other)
+            getDetailsChartDataState(type, transactionNameOther).observe(viewLifecycleOwner) { dataState ->
+                if (dataState is SuccessState) {
+                    updateModel(dataState.data)
+                }
+                loaderSpinner?.visibleIf { dataState is LoadingState }
+                fadingGroup.visibleIf { dataState is SuccessState }
+                pieChart.visibleIf { dataState is SuccessState }
+            }
         }
 
         view.pieChart.onInnerDiameterDetermined = { innerDiameter ->
@@ -75,24 +85,25 @@ internal class FullPieChartFragment : BaseFragment() {
         amountText.layoutParams = amountTextParams
     }
 
-    private fun updateModel(model: DetailsChartModel) {
-        if (!model.topLevel || model.data !is StatisticItemsList) return
+    private fun updateModel(data: DetailsChartData) {
+        if (!data.topLevel || data.data !is StatisticItemsList) return
 
         if (!transitionCoordinator.hasTransitionInProgress()) {
-            TransitionManager.beginDelayedTransition(view as ViewGroup, changeTransition(model.data))
+            TransitionManager.beginDelayedTransition(view as ViewGroup, changeTransition(data.data))
         }
 
         view.pieChart.apply {
             removeAllViews()
-            addBackSegment(model.title, model.color)
-            addSegments(model.data.items, { it.amount }, model.colorGenerator, model.color, model.currency,
+            val chartColor = context.resolveColorForFeature(data.color, MoneyManagerFeatureType.STATISTICS)
+            addBackSegment(getString(data.title), chartColor)
+            addSegments(data.data.items, { it.amount }, data.colorGenerator, chartColor, data.currency,
                 ::createLabel, onClick = ::onItemClick)
         }
 
-        labelTitle.text = model.title
-        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, model.amount.toDouble(),
-            model.currency, requireContext())
-        period.text = model.period
+        labelTitle.text = getString(data.title)
+        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, data.amount.toDouble(),
+            data.currency, requireContext())
+        period.text = data.period
 
         onViewReady()
     }

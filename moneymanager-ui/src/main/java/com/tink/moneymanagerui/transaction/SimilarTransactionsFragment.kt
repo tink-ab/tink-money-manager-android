@@ -1,15 +1,11 @@
 package com.tink.moneymanagerui.transaction
 
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.util.TypedValue
 import android.view.MenuItem
 import android.view.View
-import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
-import androidx.core.graphics.alpha
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,7 +27,7 @@ import javax.inject.Named
 internal class SimilarTransactionsFragment : BaseFragment() {
 
     @Inject
-    @field:Named(TinkSnackbar.Theme.ERROR_THEME)
+    @Named(TinkSnackbar.Theme.ERROR_THEME)
     lateinit var errorSnackbarTheme: TinkSnackbar.Theme
 
     var onSimilarTransactionsDone: (() -> Unit)? = null

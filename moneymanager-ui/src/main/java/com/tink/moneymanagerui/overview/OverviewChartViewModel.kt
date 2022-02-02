@@ -1,32 +1,32 @@
 package com.tink.moneymanagerui.overview
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.ViewModel
 import android.content.Context
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.overview.charts.calculateStatistic
-import com.tink.moneymanagerui.overview.charts.getPeriodString
-import com.tink.moneymanagerui.charts.ColorGenerator
-import com.tink.moneymanagerui.charts.DefaultColorGenerator
-import se.tink.android.di.application.ApplicationScoped
-import se.tink.android.livedata.mapDistinct
-import se.tink.android.categories.CategoryRepository
-import com.tink.moneymanagerui.repository.StatisticsRepository
-import se.tink.commons.currency.AmountFormatter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import com.tink.model.category.CategoryTree
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
 import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.charts.ColorGenerator
+import com.tink.moneymanagerui.charts.DefaultColorGenerator
+import com.tink.moneymanagerui.overview.charts.calculateStatistic
+import com.tink.moneymanagerui.overview.charts.getPeriodString
+import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.moneymanagerui.repository.StatisticsState
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.service.network.ResponseState
-import se.tink.android.livedata.map
-import se.tink.android.livedata.requireValue
 import com.tink.service.network.SuccessState
+import se.tink.android.categories.CategoryRepository
+import se.tink.android.di.application.ApplicationScoped
+import se.tink.android.livedata.map
+import se.tink.android.livedata.mapDistinct
+import se.tink.android.livedata.requireValue
 import se.tink.android.repository.user.UserRepository
+import se.tink.commons.currency.AmountFormatter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -34,9 +34,9 @@ internal class OverviewData(val statistics:  List<Statistics>, val period: Perio
 
 internal class OverviewChartViewModel @Inject constructor(
     private val dateUtils: DateUtils,
-    val statisticRepository: StatisticsRepository,
-    val categoryRepository: CategoryRepository,
-    val userRepository: UserRepository,
+    private val statisticRepository: StatisticsRepository,
+    private val categoryRepository: CategoryRepository,
+    private val userRepository: UserRepository,
     private val amountFormatter: AmountFormatter,
     @ApplicationScoped context: Context
 ) : ViewModel() {

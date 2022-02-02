@@ -11,14 +11,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
-import org.joda.time.DateTime
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.WEEK
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.YEAR
+import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.*
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
@@ -27,8 +23,9 @@ import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
+import org.joda.time.DateTime
 import se.tink.commons.extensions.getThemeResIdFromAttr
-import java.util.Calendar
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -47,7 +44,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     internal lateinit var viewModel: BudgetCreationSpecificationViewModel
 
     @Inject
-    @field:Named(TinkSnackbar.Theme.ERROR_THEME)
+    @Named(TinkSnackbar.Theme.ERROR_THEME)
     lateinit var errorSnackbarTheme: TinkSnackbar.Theme
 
     override fun getLayoutId(): Int = R.layout.tink_fragment_budget_creation_specification

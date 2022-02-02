@@ -1,63 +1,179 @@
 package com.tink.moneymanagerui.overview.charts
 
-import android.content.Context
-import androidx.annotation.ColorInt
+import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.tink.model.category.Category
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
-import com.tink.moneymanagerui.R
+import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.charts.ColorGenerator
 import com.tink.moneymanagerui.charts.DefaultColorGenerator
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
+import com.tink.moneymanagerui.overview.charts.model.ChartDetailsSourceState
+import com.tink.moneymanagerui.overview.charts.model.ChartDetailsState
+import com.tink.moneymanagerui.repository.StatisticsDetailsState
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
-import se.tink.android.di.application.ApplicationScoped
-import se.tink.android.livedata.mapDistinct
+import se.tink.android.livedata.map
+import se.tink.android.livedata.requireValue
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.floatValue
-import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.abs
 
-private data class SourceData(val period: Period, val category: Category, val currency: String)
+internal data class ChartSourceDataBase(
+    val period: Period,
+    val category: Category,
+    val currency: String)
 
-private sealed class ChartData(val source: SourceData)
-private class StatisticalData(source: SourceData, val statistic: List<Statistics>) : ChartData(source)
+internal sealed class ChartSourceData(val source: ChartSourceDataBase)
+
+internal class StatisticalChartSourceData(baseData: ChartSourceDataBase, val statistic: List<Statistics>) : ChartSourceData(baseData)
+
+internal class TransactionsChartSourceData(
+    baseData: ChartSourceDataBase,
+    val transactions: List<Transaction>
+) : ChartSourceData(baseData)
 
 private const val MAX_TRANSACTIONS_TO_SHOW = 6
 
-private class TransactionsData(
-    source: SourceData,
-    val transactions: List<Transaction>
-) : ChartData(source)
+internal class TabPieChartData(
+    val periods: List<Period>,
+    val selectedPeriod: Period,
+    val category: Category,
+    val userProfile: UserProfile)
 
+internal data class DetailsChartData(
+    @StringRes val title: Int,
+    val amount: Float,
+    val currency: String,
+    val period: String,
+    @AttrRes val color: Int,
+    val colorGenerator: ColorGenerator,
+    val topLevel: Boolean,
+    val data: ChartList
+)
 
 internal class PieChartDetailsViewModel @Inject constructor(
     private val dateUtils: DateUtils,
-    @ApplicationScoped private val context: Context,
+    private val transactionRepository: TransactionRepository,
     statisticRepository: StatisticsRepository,
-    transactionRepository: TransactionRepository,
     userRepository: UserRepository
 ) : ViewModel() {
 
-    private val statistics = statisticRepository.fetchedStatistics
-    private val period = MediatorLiveData<Period?>().apply {
-        addSource(statisticRepository.currentPeriodState) {
-            if (value == null && it is SuccessState<Period?>) value = it.data
+    private val category = MutableLiveData<ResponseState<Category>>(LoadingState)
+    private val userProfile = userRepository.userProfileState
+    private val selectedPeriod = MediatorLiveData<ResponseState<Period>>().apply {
+        addSource(statisticRepository.currentPeriodState) { value = it }
+    }
+    private val periods: LiveData<ResponseState<List<Period>>> = Transformations.map(statisticRepository.periodsState) {
+        if (it is SuccessState<List<Period>>) {
+            SuccessState(it.data.sortedWith(periodComparator).reversed().takeLast(12))
+        } else {
+            it
         }
     }
-    val category = MutableLiveData<Category>()
+    private val statisticsState = statisticRepository.statisticsState
 
-    val userProfile = userRepository.userProfile
+    private val tabPieChartData = MediatorLiveData<StatisticsDetailsState>().apply {
+        value = StatisticsDetailsState()
+
+        addSource(periods) {
+            value = requireValue.copy(periods = it)
+        }
+        addSource(selectedPeriod) {
+            value = requireValue.copy(selectedPeriod = it)
+        }
+        addSource(category) {
+            value = requireValue.copy(category = it)
+        }
+        addSource(userProfile) {
+            value = requireValue.copy(userProfile = it)
+        }
+    }
+
+    internal val tabPieChartDataState: LiveData<ResponseState<TabPieChartData>> = tabPieChartData.map {
+        it.overallState
+    }
+
+    private val detailsChartSourceData = MediatorLiveData<ChartDetailsSourceState>().apply {
+        value = ChartDetailsSourceState()
+
+        addSource(selectedPeriod) {
+            value = requireValue.copy(period = it)
+        }
+        addSource(category) {
+            value = requireValue.copy(category = it)
+        }
+        addSource(userProfile) {
+            val currency = userProfile.value?.map { userProfile ->  userProfile.currency } ?: LoadingState
+            value = requireValue.copy(currency = currency)
+        }
+    }
+
+    private val transactionsState: LiveData<ResponseState<List<Transaction>>> =
+        Transformations.switchMap(detailsChartSourceData) { sourceDataToTransactions(it) }
+
+    private fun sourceDataToTransactions(
+        chartDetailsSourceData: ChartDetailsSourceState
+    ): LiveData<ResponseState<List<Transaction>>> =
+        when {
+            chartDetailsSourceData.category is SuccessState && chartDetailsSourceData.period is SuccessState ->
+                transactionRepository.allTransactionsForCategoryAndPeriod(
+                    chartDetailsSourceData.category.data,
+                    chartDetailsSourceData.period.data
+                ).map { SuccessState(it) }
+
+            chartDetailsSourceData.category is ErrorState && chartDetailsSourceData.period is ErrorState ->
+                MutableLiveData(ErrorState(""))
+
+            else -> MutableLiveData(LoadingState)
+        }
+
+    private val detailsChartData = MediatorLiveData<ChartDetailsState>().apply {
+        value = ChartDetailsState()
+
+        addSource(detailsChartSourceData) {
+            value = requireValue.copy(sourceData = it.overallState)
+        }
+
+        addSource(statisticsState) {
+            value = requireValue.copy(statistics = it)
+        }
+
+        addSource(transactionsState) {
+            value = requireValue.copy(transactions = it) }
+    }
+
+    fun getDetailsChartDataState(type: ChartType, transactionNameOther: String): LiveData<ResponseState<DetailsChartData>> =
+        detailsChartData.map {
+            it.overallState.map { chartSourceDataToDetailsChartData(it, type, transactionNameOther) }
+        }
+
+     private fun chartSourceDataToDetailsChartData
+                 (chartSourceData: ChartSourceData, type: ChartType, transactionNameOther: String): DetailsChartData {
+         val data = calculateStatistic(type, chartSourceData, transactionNameOther)
+         val src = chartSourceData.source
+         val periodStr = getPeriodString(dateUtils, src.period)
+         val topLevel = src.category.parentId == null
+         return DetailsChartData(
+             type.title,
+             data.items.sumByFloat { it.amount },
+             chartSourceData.source.currency,
+             periodStr,
+             type.color,
+             DefaultColorGenerator,
+             topLevel,
+             data
+         )
+    }
 
 
     //TODO: Core setup - revisit
@@ -71,93 +187,32 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
     }
 
-    val periods: LiveData<List<Period>> = Transformations.map(statisticRepository.periodsState) {
-        if (it is SuccessState<List<Period>>) {
-            it.data.sortedWith(periodComparator).reversed().takeLast(12)
-        } else {
-            emptyList()
-        }
+    fun setSelectedPeriod(period: Period) = selectedPeriod.postValue(SuccessState(period))
+
+    fun setCategory(it: Category) {
+        category.value = SuccessState(it)
     }
-    val selectedPeriod: LiveData<Period?> get() = period
+
     val periodFormatter: (Period) -> String =
         { dateUtils.getMonthNameAndMaybeYearOfPeriod(it).capitalize() }
 
-    private val sourceData = MediatorLiveData<SourceData>().apply {
-        fun update() = whenNonNull(
-            period.value,
-            category.value,
-            userProfile.value?.currency
-        ) { period, category, currency ->
-            value = SourceData(period, category, currency)
-        }
-
-        addSource(period) { update() }
-        addSource(category) { update() }
-        addSource(userProfile) { update() }
-    }
-
-    private val statisticData: LiveData<ChartData> =
-        Transformations.switchMap(sourceData) { source ->
-            if (source.category.children.isNotEmpty()) {
-                Transformations.map(statistics) {
-                    StatisticalData(
-                        source,
-                        it
-                    ) as ChartData
-                }
-            } else {
-                Transformations.map(
-                    transactionRepository.allTransactionsForCategoryAndPeriod(
-                        source.category,
-                        source.period
-                    )
-                ) { transactions ->
-                    TransactionsData(
-                        source,
-                        transactions
-                    ) as ChartData
-                }
-            }
-        }
-
-    fun getStatistic(context: Context, type: ChartType): LiveData<DetailsChartModel> =
-        mapDistinct(statisticData) { statistics ->
-            val data = calculateStatistic(type, statistics)
-            val color = type.getFeatureColor(context)
-            val src = statistics.source
-            val periodStr =
-                getPeriodString(dateUtils, src.period)
-            val topLevel = src.category.parentId == null
-            DetailsChartModel(
-                context,
-                type.title,
-                data.items.sumByFloat { it.amount },
-                statistics.source.currency,
-                periodStr,
-                color,
-                DefaultColorGenerator,
-                topLevel,
-                data
+    private fun calculateStatistic(type: ChartType, sourceData: ChartSourceData, otherText: String): ChartList {
+        return when (sourceData) {
+            is TransactionsChartSourceData -> calculateTransactionsStatistic(
+                otherText,
+                sourceData.transactions
             )
-        }
-
-    private fun calculateStatistic(type: ChartType, data: ChartData): ChartList {
-        return when (data) {
-            is TransactionsData -> calculateTransactionsStatistic(
-                context.getString(R.string.tink_other),
-                data.transactions
-            )
-            is StatisticalData -> {
-                val src = data.source
+            is StatisticalChartSourceData -> {
+                val src = sourceData.source
                 when (type) {
                     ChartType.EXPENSES -> calculateStatistic(
-                        data.statistic.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY },
+                        sourceData.statistic.filter { it.type == Statistics.Type.EXPENSES_BY_CATEGORY },
                         src.category.children,
                         src.period
                     )
 
                     ChartType.INCOME -> calculateStatistic(
-                        data.statistic.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY },
+                        sourceData.statistic.filter { it.type == Statistics.Type.INCOME_BY_CATEGORY },
                         src.category.children,
                         src.period
                     )
@@ -201,42 +256,12 @@ internal class PieChartDetailsViewModel @Inject constructor(
                 }
         )
     }
+}
 
-    fun setPeriod(p: Period) = period.postValue(p)
-
-    fun setCategory(it: Category) {
-        category.value = it
+// TODO: Remove when method merged in core
+fun <T, R> ResponseState<T>.map (f: (T) -> R) : ResponseState<R> =
+    when (this) {
+        is SuccessState -> SuccessState(f(data))
+        is LoadingState -> LoadingState
+        is ErrorState -> ErrorState(errorMessage)
     }
-}
-
-internal data class DetailsChartModel(
-    val title: String,
-    val amount: Float,
-    val currency: String,
-    val period: String,
-    @ColorInt val color: Int,
-    val colorGenerator: ColorGenerator,
-    val topLevel: Boolean,
-    val data: ChartList
-) {
-    constructor(
-        context: Context,
-        @StringRes title: Int,
-        amount: Float,
-        currency: String,
-        period: String,
-        @ColorInt color: Int,
-        colorGenerator: ColorGenerator,
-        topLevel: Boolean,
-        data: ChartList
-    ) : this(
-        context.getString(title),
-        amount,
-        currency,
-        period,
-        color,
-        colorGenerator,
-        topLevel,
-        data
-    )
-}
