@@ -13,8 +13,8 @@ import com.tink.moneymanagerui.charts.DefaultColorGenerator
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
 import com.tink.moneymanagerui.overview.charts.model.ChartDetailsSourceState
 import com.tink.moneymanagerui.overview.charts.model.ChartDetailsState
-import com.tink.moneymanagerui.repository.StatisticsDetailsState
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import com.tink.moneymanagerui.repository.TabPieChartDetailsState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -45,8 +45,8 @@ internal class TransactionsChartSourceData(
 private const val MAX_TRANSACTIONS_TO_SHOW = 6
 
 internal class TabPieChartData(
-    val periods: List<Period>,
     val selectedPeriod: Period,
+    val periods: List<Period>,
     val category: Category,
     val userProfile: UserProfile)
 
@@ -82,14 +82,14 @@ internal class PieChartDetailsViewModel @Inject constructor(
     }
     private val statisticsState = statisticRepository.statisticsState
 
-    private val tabPieChartData = MediatorLiveData<StatisticsDetailsState>().apply {
-        value = StatisticsDetailsState()
+    private val tabPieChartData = MediatorLiveData<TabPieChartDetailsState>().apply {
+        value = TabPieChartDetailsState()
 
-        addSource(periods) {
-            value = requireValue.copy(periods = it)
-        }
         addSource(selectedPeriod) {
             value = requireValue.copy(selectedPeriod = it)
+        }
+        addSource(periods) {
+            value = requireValue.copy(periods = it)
         }
         addSource(category) {
             value = requireValue.copy(category = it)
@@ -131,9 +131,6 @@ internal class PieChartDetailsViewModel @Inject constructor(
                     chartDetailsSourceData.period.data
                 ).map { SuccessState(it) }
 
-            chartDetailsSourceData.category is ErrorState && chartDetailsSourceData.period is ErrorState ->
-                MutableLiveData(ErrorState(""))
-
             else -> MutableLiveData(LoadingState)
         }
 
@@ -149,12 +146,13 @@ internal class PieChartDetailsViewModel @Inject constructor(
         }
 
         addSource(transactionsState) {
-            value = requireValue.copy(transactions = it) }
+            value = requireValue.copy(transactions = it)
+        }
     }
 
     fun getDetailsChartDataState(type: ChartType, transactionNameOther: String): LiveData<ResponseState<DetailsChartData>> =
-        detailsChartData.map {
-            it.overallState.map { chartSourceDataToDetailsChartData(it, type, transactionNameOther) }
+        detailsChartData.map { data ->
+            data.overallState.map { chartSourceDataToDetailsChartData(it, type, transactionNameOther) }
         }
 
      private fun chartSourceDataToDetailsChartData

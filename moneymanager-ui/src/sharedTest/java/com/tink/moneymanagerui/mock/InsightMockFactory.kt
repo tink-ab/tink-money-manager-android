@@ -1,6 +1,6 @@
 package com.tink.moneymanagerui.mock
 
-import com.tink.model.insights.*
+import com.tink.model.insights.InsightType
 import org.json.JSONObject
 
 object InsightMockFactory {
