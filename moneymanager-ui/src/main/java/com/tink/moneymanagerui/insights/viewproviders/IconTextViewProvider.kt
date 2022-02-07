@@ -107,7 +107,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
 
     private fun Insight.isCritical() = when (type) {
         InsightType.DOUBLE_CHARGE,
-        InsightType.LARGE_EXPENSE -> true
+        InsightType.LARGE_EXPENSE,
+        InsightType.ACCOUNT_BALANCE_LOW -> true
         else -> false
     }
 }

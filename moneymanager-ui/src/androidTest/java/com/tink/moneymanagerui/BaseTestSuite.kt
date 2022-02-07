@@ -13,15 +13,16 @@ import com.tink.service.network.TinkConfiguration
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
+import java.lang.IllegalStateException
 
 
 abstract class BaseTestSuite {
 
     val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
     val navigator = TestNavigator()
-    var server = MockWebServer()
-    private val url = server.url("/").toString()
-    private val testConfiguration = TestConfiguration(url)
+    val server = MockWebServer()
+    private lateinit var url: String
+    private lateinit var testConfiguration: TestConfiguration
 
     internal fun launchFinanceOverviewFragment() {
         val fragmentArgs = bundleOf(
@@ -34,12 +35,21 @@ abstract class BaseTestSuite {
 
     @Before
     fun tinkInit() {
+        server.start(4000)
+        url = server.url("/").toString()
+        testConfiguration = TestConfiguration(url)
+
         val config = TinkConfiguration(
             testConfiguration.sampleEnvironment,
             testConfiguration.sampleOAuthClientId,
             Uri.parse(url)
         )
-        Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
+
+        try {
+            Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
+        } catch (e: IllegalStateException) {
+
+        }
     }
 
     @Before

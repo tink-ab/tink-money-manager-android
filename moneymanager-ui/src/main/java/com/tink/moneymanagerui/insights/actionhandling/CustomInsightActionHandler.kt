@@ -24,7 +24,8 @@ internal object CustomInsightActionHandler {
             is InsightAction.Data.CategorizeExpense,
             is InsightAction.Data.CategorizeTransactions,
             is InsightAction.Data.ViewTransactions,
-            is InsightAction.Data.ViewTransactionsByCategory -> true
+            is InsightAction.Data.ViewTransactionsByCategory,
+            is InsightAction.Data.RefreshCredential -> true
             else -> false
         }
 
@@ -55,8 +56,7 @@ internal object CustomInsightActionHandler {
             }
 
             is InsightAction.Data.RefreshCredential -> {
-                insightActionHandler
-                    ?.refreshCredentials(
+                insightActionHandler?.refreshCredentials(
                         (action.data as InsightAction.Data.RefreshCredential).credentialId
                     ) { isActionDone ->
                         onComplete.invoke(isActionDone)
