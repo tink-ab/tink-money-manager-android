@@ -45,6 +45,7 @@ object InsightMockFactory {
 
     val supportedTypes = listOf(
         InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL,
         InsightType.BUDGET_CLOSE_NEGATIVE,
         InsightType.BUDGET_CLOSE_POSITIVE,
         InsightType.BUDGET_OVERSPENT,
@@ -68,8 +69,12 @@ object InsightMockFactory {
     fun getInsightForType(type: InsightType): JSONObject {
         return when (type) {
             InsightType.ACCOUNT_BALANCE_LOW -> getAccountBalanceLow()
+            InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> getAggregateRefreshP2d2Credentials()
+            InsightType.BUDGET_SUGGEST_CREATE_FIRST -> getBudgetSuggestCreateFirst()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
+            InsightType.DOUBLE_CHARGE -> getDoubleCharge()
+            InsightType.LARGE_EXPENSE -> getLargeExpense()
             InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
             InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS -> getMonthlySummaryExpensesTransactions()
             InsightType.NEW_INCOME_TRANSACTION -> getNewIncomeTransaction()
@@ -86,14 +91,14 @@ object InsightMockFactory {
         types.map { type -> getInsightForType(type) }
 
 
-    private fun getAccountBalanceLow(): JSONObject {
+    fun getAccountBalanceLow(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
                 "id": 1,
                 "type": "ACCOUNT_BALANCE_LOW",
-                "title": "Title",
-                "description": "Description",
+                "title": "You have a low balance on Private Account",
+                "description": "Your balance is €10. Do you want to transfer more money to this account?",
                 "createdTime": 1111111,
                 "insightActions": [],
                 "data": {
@@ -108,16 +113,59 @@ object InsightMockFactory {
         )
     }
 
-    private fun getBudgetSuggestCreateTopCategory(): JSONObject {
+    fun getAggregateRefreshP2d2Credentials(refreshCredentials: String = "123"): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 2,
+                "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                "title": "Your connection to Handelsbanken will expire soon",
+                "description": "Reconnect to Handelsbanken to make sure your financial data stays up to date.",
+                "createdTime": 1111111,
+                "insightActions": [${getRefreshCredential(refreshCredentials)}, ${getDismissAction()}],
+                "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                "data": {
+                    "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
+                    "credential": {
+                        "id": "credential-id",
+                        "provider": {
+                            "name": "handelsbanken-ob",
+                            "displayName": "Handelsbanken"
+                        },
+                        "sessionExpiryDate": 1566464477927
+                    }
+                }
+            }"""
+        )
+    }
+
+    fun getBudgetSuggestCreateFirst(): JSONObject {
+        return JSONObject("""
+            {
+                "userId": 1234,
+                "id": 1,
+                "type": "BUDGET_SUGGEST_CREATE_FIRST",
+                "title": "Set up your first budget to help you keep track of expenses",
+                "description": "Creating budgets can help you stay on top of your spending – give it a go.",
+                "createdTime": 1111111,
+                "insightActions": []
+            }"""
+        )
+    }
+
+    fun getBudgetSuggestCreateTopCategory(): JSONObject {
         return JSONObject("""
             {
                 "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
                 "userId": 1234,
-                "id": 1,
-                "title": "Title",
-                "description": "Description",
+                "id": 3,
+                "title": "Set a budget for your top expense: Restaurants",
+                "description": "You spent €1,000 on Restaurants last month. How about setting up a budget of €800 to help save more money?",
                 "createdTime": 1111111,
-                "insightActions": [],
+                "insightActions": [ 
+                    ${getCreateBudgetAction()},
+                    ${getDismissAction()}
+                ],
                 "data": {
                     "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
                     "categorySpending": {
@@ -136,14 +184,14 @@ object InsightMockFactory {
         )
     }
 
-    private fun getBudgetSuggestCreateTopPrimaryCategory(): JSONObject {
+    fun getBudgetSuggestCreateTopPrimaryCategory(): JSONObject {
         return JSONObject("""
             {
                 "type": "BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY",
                 "userId": 1234,
-                "id": 1,
-                "title": "Title",
-                "description": "Description",
+                "id": 4,
+                "title": "Set a budget for your top expense: Restaurant",
+                "description": "You spent €345 on restaurant last month. How about setting up a budget of €310 to help save more money?",
                 "createdTime": 1111111,
                 "insightActions": [],
                 "data": {
@@ -165,12 +213,12 @@ object InsightMockFactory {
         )
     }
 
-    private fun getMonthlySummaryExpenseByCategory(): JSONObject {
+    fun getMonthlySummaryExpenseByCategory(): JSONObject {
         return JSONObject("""
             {
                 "type": "MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY",
                 "userId": 1234,
-                "id": 1,
+                "id": 5,
                 "title": "Title",
                 "description": "Description",
                 "createdTime": 1111111,
@@ -202,11 +250,53 @@ object InsightMockFactory {
         )
     }
 
-    private fun getMonthlySummaryExpensesTransactions(): JSONObject {
+    fun getDoubleCharge(transactionIds: List<String> = listOf()): JSONObject {
+        return JSONObject("""
+             {
+                "userId": 1234,
+                "id": 6,
+                "type": "DOUBLE_CHARGE",
+                "title": "You may have been double charged",
+                "description": "You were charged €45 twice at Burger King",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "DOUBLE_CHARGE",
+                    "transactionIds": $transactionIds
+                }
+            }
+            """
+        )
+    }
+
+    fun getLargeExpense(transactionId: String = "8a703fa458d144f9b802b09b26a43e89"): JSONObject {
+        return JSONObject("""
+             {
+                "userId": 1234,
+                "id": 7,
+                "type": "LARGE_EXPENSE",
+                "title": "Unusual large expense",
+                "description": "You were charged for an unusually large expense at Stadium",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "LARGE_EXPENSE",
+                    "transactionId": $transactionId,
+                    "amount": {
+                        "currencyCode": "EUR",
+                        "amount": 1001.0
+                    }
+                }
+            }
+            """
+        )
+    }
+
+    fun getMonthlySummaryExpensesTransactions(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 8,
                 "title": "Title",
                 "type": "MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS",
                 "description": "Description",
@@ -242,11 +332,11 @@ object InsightMockFactory {
         )
     }
 
-    private fun getNewIncomeTransaction(): JSONObject {
+    fun getNewIncomeTransaction(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 9,
                 "type": "NEW_INCOME_TRANSACTION",
                 "title": "Title",
                 "description": "Description",
@@ -264,7 +354,7 @@ object InsightMockFactory {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 10,
                 "type": "SINGLE_UNCATEGORIZED_TRANSACTION",
                 "title": "Singe uncategorized transaction",
                 "description": "You have an uncategorized transaction",
@@ -277,11 +367,11 @@ object InsightMockFactory {
         )
     }
 
-    private fun getWeeklySummaryExpensesByCategory(): JSONObject {
+    fun getWeeklySummaryExpensesByCategory(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 11,
                 "type": "WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY",
                 "title": "Title",
                 "description": "Description",
@@ -314,11 +404,11 @@ object InsightMockFactory {
         )
     }
 
-    private fun getWeeklySummaryExpensesByDay(): JSONObject {
+    fun getWeeklySummaryExpensesByDay(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 12,
                 "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
                 "title": "Title",
                 "description": "Description",
@@ -362,11 +452,11 @@ object InsightMockFactory {
         )
     }
 
-    private fun getWeeklySummaryExpensesTransactions(): JSONObject {
+    fun getWeeklySummaryExpensesTransactions(): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 13,
                 "type": "WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS",
                 "title": "Title",
                 "description": "Description",
@@ -406,7 +496,7 @@ object InsightMockFactory {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 14,
                 "type": "WEEKLY_UNCATEGORIZED_TRANSACTIONS",
                 "title": "Weekly uncategorized transactions",
                 "description": "You have uncategorized transactions, do you want to categorize them?",
@@ -423,11 +513,11 @@ object InsightMockFactory {
         )
     }
 
-    private fun getDefaultInsight(type: InsightType): JSONObject {
+    fun getDefaultInsight(type: InsightType): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
-                "id": 1,
+                "id": 15,
                 "type": "$type",
                 "title": "Title",
                 "description": "Description",
@@ -436,4 +526,56 @@ object InsightMockFactory {
         )
     }
 
+    fun getDismissAction() = """ 
+        {
+            "label": "Dismiss",
+            "data":{ "type": "DISMISS" }
+        }
+    """
+
+    fun getCreateBudgetAction(): String {
+        return """
+            {
+                "label": "Create budget",
+                "data": {
+                    "type": "CREATE_BUDGET",
+                    "budgetSuggestion": {
+                        "filter": {
+                            "categories": ["expenses:food.bars"],
+                            "accounts": ["d2b49640cbba4d8899a4886b6e8892f8"]
+                        }
+                    },
+                    "amount": {
+                        "currencyCode": "EUR",
+                        "amount": 300.0
+                    },
+                    "periodicityType": "BUDGET_PERIODICITY_TYPE_RECURRING",
+                    "recurringPeriodicityData": {
+                        "periodUnit": "MONTH"
+                    }
+                }
+            }
+        """
+    }
+
+    fun getAcknowledgeAction(): String {
+        return """
+            {
+              "label": "Ok",
+              "data": { "type": "ACKNOWLEDGE" }
+            }
+        """
+    }
+
+    fun getRefreshCredential(credentialsId: String = "123"): String {
+        return """
+            {
+                "label": "Refresh",
+                "data": { 
+                    "type": "REFRESH_CREDENTIAL",
+                     "credentialId": $credentialsId
+                }
+            }
+        """
+    }
 }

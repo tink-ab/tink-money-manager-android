@@ -95,6 +95,7 @@ dependencies {
     testImplementation libraries.test_arch
     testImplementation libraries.test_coroutines
 
+    androidTestImplementation libraries.test_mockk_android
     androidTestImplementation libraries.test_junit_ext
     androidTestImplementation libraries.test_runner
     androidTestImplementation libraries.test_rules
