@@ -1,6 +1,7 @@
 package se.tink.android.repository.budget
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.budget.BudgetCreateOrUpdateDescriptor
 import com.tink.model.budget.BudgetPeriod
@@ -93,8 +94,7 @@ class BudgetsRepository @Inject constructor(
         budgetId: String,
         start: Instant,
         end: Instant
-    ) =
-        BudgetTransactionsLiveData(budgetService, budgetId, start, end, dispatcher, transactionUpdateEventBus)
+    ) = BudgetTransactionsLiveData(budgetService, budgetId, start, end, dispatcher, transactionUpdateEventBus)
 
     fun budgetPeriodDetails(
         budgetId: String,
@@ -105,6 +105,18 @@ class BudgetsRepository @Inject constructor(
         CoroutineScope(dispatcher.io()).launchForResult(resultHandler) {
             budgetService.budgetPeriodDetails(budgetId, start, end)
         }
+    }
+
+    fun budgetPeriodDetailsState(
+        budgetId: String,
+        start: Instant,
+        end: Instant
+    ): LiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>> {
+        val liveData = MutableLiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>>(LoadingState)
+        CoroutineScope(dispatcher.io()).launch {
+            liveData.postValue(SuccessState(budgetService.budgetPeriodDetails(budgetId, start, end)))
+        }
+        return liveData
     }
 }
 
