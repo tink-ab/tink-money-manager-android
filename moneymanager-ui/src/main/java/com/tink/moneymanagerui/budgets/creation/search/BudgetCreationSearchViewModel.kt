@@ -1,30 +1,27 @@
 package com.tink.moneymanagerui.budgets.creation.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
+import androidx.lifecycle.*
 import com.tink.model.budget.Budget
 import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationDataHolder
 import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import se.tink.android.AppExecutors
 import se.tink.android.livedata.requireValue
 import se.tink.android.repository.transaction.AllTransactionPagesLiveData
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 internal class BudgetCreationSearchViewModel @Inject constructor(
     private val dataHolder: BudgetCreationDataHolder,
     transactionService: TransactionService,
     appExecutors: AppExecutors,
-    transactionUpdateEventBus: TransactionUpdateEventBus
+    transactionUpdateEventBus: TransactionUpdateEventBus,
+    dispatcher: DispatcherProvider,
 ) : ViewModel() {
 
-    private val rawTransactions = AllTransactionPagesLiveData(appExecutors, transactionService, transactionUpdateEventBus)
+    private val rawTransactions = AllTransactionPagesLiveData(appExecutors, transactionService, transactionUpdateEventBus, dispatcher)
 
     private val transactions = MediatorLiveData<List<Transaction>?>()
 

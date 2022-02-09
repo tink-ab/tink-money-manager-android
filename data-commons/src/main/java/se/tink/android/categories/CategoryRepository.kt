@@ -5,22 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.category.CategoryTree
 import com.tink.service.category.CategoryService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.launch
-import com.tink.service.network.ResponseState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
-import java.lang.Exception
+import com.tink.service.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @PfmScope
-class CategoryRepository @Inject constructor(private val service: CategoryService) {
-
-    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+class CategoryRepository @Inject constructor(
+    private val service: CategoryService,
+    private val dispatcher: DispatcherProvider
+) {
 
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     // Perhaps use a StateFlow instead (or wait until it's out of experimental).
@@ -30,16 +28,11 @@ class CategoryRepository @Inject constructor(private val service: CategoryServic
         override fun onActive() {
             refresh()
         }
-
-        override fun onInactive() {
-            // Not sure if this is really needed since we do a [postValue] in [onActive] anyway...
-            scope.coroutineContext.cancelChildren()
-        }
     }
     val categories: LiveData<CategoryTree> = _categories
 
     fun refresh() {
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             try {
                 _categories.postValue(service.getCategoryTree())
             } catch (e: Exception) {
@@ -62,7 +55,7 @@ class CategoryRepository @Inject constructor(private val service: CategoryServic
 
     fun refreshState() {
         _categoriesState.postValue(LoadingState)
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             try {
                 val categoryTree = service.getCategoryTree()
                 _categoriesState.postValue(SuccessState(categoryTree))

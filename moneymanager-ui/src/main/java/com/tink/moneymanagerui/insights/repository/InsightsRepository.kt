@@ -5,9 +5,8 @@ import androidx.lifecycle.Transformations
 import com.tink.model.insights.Insight
 import com.tink.moneymanagerui.insights.viewproviders.InsightViewProviderFactory
 import com.tink.service.insight.InsightService
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
@@ -18,12 +17,11 @@ import javax.inject.Inject
 
 class InsightsRepository @Inject constructor(
     private val insightService: InsightService,
+    private val dispatcher: DispatcherProvider,
     private val insightProviderFactory: InsightViewProviderFactory
 ) {
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-
     private val _insights: AutoFetchLiveData<ErrorOrValue<List<Insight>>> = AutoFetchLiveData {
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             val result: ErrorOrValue<List<Insight>> = try {
                 val insights = insightService.listInsights()
                     .filter { insightProviderFactory.provider(it.type) != null }
@@ -41,7 +39,7 @@ class InsightsRepository @Inject constructor(
 
     private val _archivedInsights: AutoFetchLiveData<ErrorOrValue<List<Insight>>> =
         AutoFetchLiveData {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 val result: ErrorOrValue<List<Insight>> = try {
                     val insights = insightService.listArchived()
                         .filter { insightProviderFactory.provider(it.type) != null }
