@@ -107,16 +107,19 @@ class BudgetsRepository @Inject constructor(
         }
     }
 
-    fun budgetPeriodDetailsState(
+
+    private val _budgetPeriodDetailsState: MutableLiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>> = MutableLiveData(LoadingState)
+    val budgetPeriodDetailsState = _budgetPeriodDetailsState
+
+    fun requestBudgetPeriodDetailsState(
         budgetId: String,
         start: Instant,
         end: Instant
-    ): LiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>> {
-        val liveData = MutableLiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>>(LoadingState)
+    ) {
+        _budgetPeriodDetailsState.postValue(LoadingState)
         CoroutineScope(dispatcher.io()).launch {
-            liveData.postValue(SuccessState(budgetService.budgetPeriodDetails(budgetId, start, end)))
+            _budgetPeriodDetailsState.postValue(SuccessState(budgetService.budgetPeriodDetails(budgetId, start, end)))
         }
-        return liveData
     }
 }
 

@@ -18,12 +18,14 @@ import com.tink.moneymanagerui.databinding.TinkBudgetDetailsBarChartPageBinding
 import com.tink.moneymanagerui.databinding.TinkBudgetDetailsProgressChartPageBinding
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.periodPicker
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.view.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
-import kotlinx.android.synthetic.main.tink_item_picker.view.iconLeft
-import kotlinx.android.synthetic.main.tink_item_picker.view.iconRight
+import kotlinx.android.synthetic.main.tink_item_picker.view.*
 import javax.inject.Inject
 
 internal class BudgetDetailsChartFragment : BaseFragment() {
@@ -55,17 +57,18 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             budgetDetailsViewModelFactory
         )[BudgetDetailsViewModel::class.java]
 
+
+        viewModel.budgetDetailsDataState.observe(viewLifecycleOwner) { responseState ->
+            view.loadingSpinner.visibleIf { responseState is LoadingState }
+            view.periodPicker.visibleIf { responseState !is LoadingState }
+        }
+
         viewModel.statusMessage.observe(viewLifecycleOwner, Observer { message ->
             view.statusMessage.text = message
         })
 
         viewModel.visibilityState.observe(viewLifecycleOwner, Observer { visibilityState ->
             view.showTransactionsBtn.visibleIf { visibilityState.isVisible }
-        })
-
-        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
-            view.loadingSpinner.visibleIf { isLoading }
-            view.periodPicker.visibleIf { !isLoading }
         })
 
         viewModel.budgetPeriodInterval.observe(viewLifecycleOwner, Observer { budgetPeriodInterval ->
@@ -152,21 +155,22 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             if (position == 0) {
                 val budgetDetailsProgressChartPage: TinkBudgetDetailsProgressChartPageBinding = TinkBudgetDetailsProgressChartPageBinding.inflate(layoutInflater, container, true)
 
-                viewModel.amountLeft.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeft ->
-                    budgetDetailsProgressChartPage.amountLeft.text = amountLeft
-                })
-                viewModel.totalAmount.observe(this@BudgetDetailsChartFragment.viewLifecycle, { totalAmount ->
-                    budgetDetailsProgressChartPage.totalAmount.text = totalAmount
-                })
-                viewModel.budgetHeaderText.observe(this@BudgetDetailsChartFragment.viewLifecycle, { budgetHeaderText ->
-                    budgetDetailsProgressChartPage.budgetHeader.text = budgetHeaderText
-                })
-                viewModel.progress.observe(this@BudgetDetailsChartFragment.viewLifecycle, { progress ->
-                    budgetDetailsProgressChartPage.budgetProgress.progress = progress ?: 0.0
-                })
-                viewModel.amountLeftColor.observe(this@BudgetDetailsChartFragment.viewLifecycle, { amountLeftColor ->
-                    budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(amountLeftColor, MoneyManagerFeatureType.BUDGETS)
-                })
+                viewModel.budgetDetailsDataState.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
+                    when(responseState) {
+                        is SuccessState -> {
+                            budgetDetailsProgressChartPage.budgetHeader.text = responseState.data.headerText
+                            budgetDetailsProgressChartPage.amountLeft.text = responseState.data.amountLeft
+                            budgetDetailsProgressChartPage.totalAmount.text =
+                                requireContext().getString(R.string.tink_budget_details_total_amount, responseState.data.totalAmount)
+                            budgetDetailsProgressChartPage.budgetProgress.progress = responseState.data.progress
+                            budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(
+                                responseState.data.amountLeftColor, MoneyManagerFeatureType.BUDGETS)
+                        }
+                        is LoadingState -> Unit // TODO
+                        is ErrorState -> Unit // TODO
+                    }
+                }
+
                 viewModel.visibilityState.observe(this@BudgetDetailsChartFragment.viewLifecycle, { visibilityState ->
                     budgetDetailsProgressChartPage.budgetProgress.visibleIf { visibilityState.isVisible }
                 })

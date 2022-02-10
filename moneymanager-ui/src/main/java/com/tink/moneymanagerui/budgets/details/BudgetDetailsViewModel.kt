@@ -14,13 +14,18 @@ import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
+import com.tink.moneymanagerui.budgets.details.model.BudgetDetailsData
+import com.tink.moneymanagerui.budgets.details.model.BudgetDetailsState
+import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
 import com.tink.moneymanagerui.extensions.toStartOfLocalDate
 import com.tink.moneymanagerui.extensions.totalMonths
+import com.tink.moneymanagerui.overview.charts.map
 import com.tink.moneymanagerui.util.extensions.floorAmount
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.service.network.ResponseState
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.Months
@@ -29,6 +34,7 @@ import org.joda.time.Years
 import org.threeten.bp.Instant
 import org.threeten.bp.Period
 import se.tink.android.di.application.ApplicationScoped
+import se.tink.android.livedata.map
 import se.tink.android.livedata.requireValue
 import se.tink.commons.extensions.*
 import se.tink.utils.DateUtils
@@ -41,44 +47,124 @@ private const val MAX_PERIOD_COUNT = 12
 
 internal class BudgetDetailsViewModel @Inject constructor(
     private val budgetDetailsDataHolder: BudgetDetailsDataHolder,
+    private val budgetSelectionControllerNew: BudgetSelectionControllerNew,
     private val dateUtils: DateUtils,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    val budgetHeaderText: LiveData<String> =
-        Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
+    private val budgetHeaderText: LiveData<ResponseState<String>> =
+        budgetSelectionStateLiveData { successData ->
+            getBudgetHeaderText(successData.currentSelectedPeriod)
+        }
 
-            val startOfToday = Instant.now().toDateTime().toStartOfLocalDate()
-            val budgetStart = budgetPeriod.start.toDateTime().toStartOfLocalDate()
-            val budgetEnd = budgetPeriod.end.toDateTime().toStartOfLocalDate()
+    private val amountLeft: LiveData<ResponseState<String>> =
+        budgetSelectionStateLiveData { successData ->
+            (successData.currentSelectedPeriod.budgetAmount - successData.currentSelectedPeriod.spentAmount)
+                .formatCurrencyExact()
+        }
 
-            when {
-                budgetPeriod.start.toDateTime().isAfter(Instant.now().toDateTime()) -> {
-                    val period = Period.between(budgetStart, startOfToday)
-                    budgetHeaderTextFormatter(
-                        BudgetStatus.NOT_STARTED,
-                        period.days.absoluteValue,
-                        period.totalMonths.absoluteValue
-                    )
-                }
-                Instant.now().toDateTime().isAfter(budgetPeriod.end.toDateTime()) -> {
-                    val between = Period.between(budgetEnd, startOfToday)
-                    budgetHeaderTextFormatter(
-                        BudgetStatus.ENDED,
-                        between.days.absoluteValue,
-                        between.totalMonths.absoluteValue
-                    )
-                }
-                else -> {
-                    val between = Period.between(budgetEnd, startOfToday)
-                    budgetHeaderTextFormatter(
-                        BudgetStatus.ACTIVE,
-                        between.days.absoluteValue,
-                        between.totalMonths.absoluteValue
-                    )
-                }
+    private val totalAmount: LiveData<ResponseState<String>> = budgetSelectionStateLiveData { successData ->
+        successData.currentSelectedPeriod.budgetAmount.formatCurrencyExact()
+    }
+
+    val amountLeftColor: LiveData<ResponseState<Int>> = budgetSelectionStateLiveData { successData ->
+        val amountLeft = (successData.currentSelectedPeriod.budgetAmount - successData.currentSelectedPeriod.spentAmount)
+            .value.toBigDecimal().toFloat()
+        if (amountLeft < 0) {
+            return@budgetSelectionStateLiveData R.attr.tink_warningColor
+        } else {
+            return@budgetSelectionStateLiveData R.attr.tink_expensesColor
+        }
+    }
+
+    val progress: LiveData<ResponseState<Double>> = budgetSelectionStateLiveData { successData ->
+        val budgetAmount = successData.currentSelectedPeriod.budgetAmount.value
+        if (budgetAmount.isZero()) {
+            0.0
+        } else {
+            budgetAmount
+                .subtract(successData.currentSelectedPeriod.spentAmount.value)
+                .takeIf { amountLeft -> amountLeft.isBiggerThanOrEqual(EXACT_NUMBER_ZERO) }
+                ?.divide(budgetAmount)?.doubleValue() ?: 1.0
+        }
+    }
+
+    private fun <T> budgetSelectionStateLiveData(onSuccess: (BudgetSelectionData) -> T) =
+        Transformations.map(budgetSelectionControllerNew.budgetSelectionState) { budgetSelectionState ->
+            budgetSelectionState.map { budgetSelectionData -> onSuccess(budgetSelectionData) }
+        }
+
+    private val budgetDetailsData = MediatorLiveData<BudgetDetailsState>().apply {
+        value = BudgetDetailsState()
+
+        addSource(budgetHeaderText) {
+            value = requireValue.copy(headerText = it)
+        }
+
+        addSource(amountLeft) {
+            value = requireValue.copy(amountLeft = it)
+        }
+
+        addSource(amountLeftColor) {
+            value = requireValue.copy(amountLeftColor = it)
+        }
+
+        addSource(totalAmount) {
+            value = requireValue.copy(totalAmount = it)
+        }
+
+        addSource(progress) {
+            value = requireValue.copy(progress = it)
+        }
+/*
+        addSource(periods) {
+            value = requireValue.copy(periods = it)
+        }
+        addSource(category) {
+            value = requireValue.copy(category = it)
+        }
+        addSource(userProfile) {
+            value = requireValue.copy(userProfile = it)
+        }
+         */
+    }
+
+    internal val budgetDetailsDataState: LiveData<ResponseState<BudgetDetailsData>> = budgetDetailsData.map {
+        it.overallState
+    }
+
+    private fun getBudgetHeaderText(budgetPeriod: BudgetPeriod): String {
+        val startOfToday = Instant.now().toDateTime().toStartOfLocalDate()
+        val budgetStart = budgetPeriod.start.toDateTime().toStartOfLocalDate()
+        val budgetEnd = budgetPeriod.end.toDateTime().toStartOfLocalDate()
+
+        return when {
+            budgetPeriod.start.toDateTime().isAfter(Instant.now().toDateTime()) -> {
+                val period = Period.between(budgetStart, startOfToday)
+                budgetHeaderTextFormatter(
+                    BudgetStatus.NOT_STARTED,
+                    period.days.absoluteValue,
+                    period.totalMonths.absoluteValue
+                )
+            }
+            Instant.now().toDateTime().isAfter(budgetPeriod.end.toDateTime()) -> {
+                val between = Period.between(budgetEnd, startOfToday)
+                budgetHeaderTextFormatter(
+                    BudgetStatus.ENDED,
+                    between.days.absoluteValue,
+                    between.totalMonths.absoluteValue
+                )
+            }
+            else -> {
+                val between = Period.between(budgetEnd, startOfToday)
+                budgetHeaderTextFormatter(
+                    BudgetStatus.ACTIVE,
+                    between.days.absoluteValue,
+                    between.totalMonths.absoluteValue
+                )
             }
         }
+    }
 
     private val budgetHeaderTextFormatter: (BudgetStatus, Int, Int) -> String = { status, daysDifference, monthsDifference ->
         val roundedMonthsDifference = if (monthsDifference > 0 && daysDifference > 0) {
@@ -115,36 +201,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
     }
 
-    val totalAmount: LiveData<String> =
-        Transformations.map(budgetDetailsDataHolder.budgetPeriod) { budgetPeriod ->
-            context.getString(R.string.tink_budget_details_total_amount, budgetPeriod.budgetAmount.formatCurrencyExact())
-        }
-
-    val amountLeft: LiveData<String> = Transformations.map(budgetDetailsDataHolder.budgetPeriod) {
-        (it.budgetAmount - it.spentAmount).formatCurrencyExact()
-    }
-
-    val amountLeftColor: LiveData<Int> =
-        Transformations.map(budgetDetailsDataHolder.amountLeft) {
-            if (it < 0) {
-                R.attr.tink_warningColor
-            } else {
-                R.attr.tink_expensesColor
-            }
-        }
-
-    val progress: LiveData<Double> = Transformations.map(budgetDetailsDataHolder.budgetPeriod) {
-        val budgetAmount = it.budgetAmount.value
-        if (budgetAmount.isZero()) {
-            0.0
-        } else {
-            budgetAmount
-                .subtract(it.spentAmount.value)
-                .takeIf { amountLeft -> amountLeft.isBiggerThanOrEqual(EXACT_NUMBER_ZERO) }
-                ?.divide(budgetAmount)?.doubleValue() ?: 1.0
-        }
-    }
-
+    @Deprecated("PLS REMOVE")
     val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun updateLoadingState() {
             whenNonNull(
@@ -386,7 +443,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
     }
 
     fun showNextPeriod() = budgetDetailsDataHolder.nextPeriod()
-    fun showPreviousPeriod() = budgetDetailsDataHolder.previousPeriod()
+    fun showPreviousPeriod() = budgetSelectionControllerNew//budgetDetailsDataHolder.previousPeriod()
 }
 
 private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCreated: Instant): Int {

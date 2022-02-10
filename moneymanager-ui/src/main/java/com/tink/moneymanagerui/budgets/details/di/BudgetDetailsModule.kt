@@ -5,21 +5,22 @@ import com.tink.moneymanagerui.BuildConfig
 import com.tink.moneymanagerui.FragmentCoordinator
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.ViewModelFactory
-import dagger.Binds
-import dagger.Module
-import dagger.Provides
-import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
-import org.joda.time.DateTime
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsChartFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsDataHolder
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsNavigation
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel
 import com.tink.moneymanagerui.budgets.details.BudgetSelectionController
+import com.tink.moneymanagerui.budgets.details.BudgetSelectionControllerNew
 import com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionListViewModel
 import com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionsListFragment
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoMap
+import org.joda.time.DateTime
 import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
 import se.tink.android.repository.ExceptionTracker
@@ -87,6 +88,40 @@ internal class BudgetDetailsModule {
         }
 
         return BudgetSelectionController(
+            requireNotNull(fragment.arguments?.getString(BudgetDetailsFragment.BUDGET_ID)),
+            budgetsRepository,
+            statisticsRepository,
+            fragment.lifecycle,
+            periodStart,
+            transactionUpdateEventBus
+        )
+    }
+
+    @Provides
+    @BudgetDetails
+    fun providesBudgetSelectionControllerNew(
+        fragment: BudgetDetailsFragment,
+        budgetsRepository: BudgetsRepository,
+        statisticsRepository: StatisticsRepository,
+        exceptionTracker: ExceptionTracker,
+        transactionUpdateEventBus: TransactionUpdateEventBus
+    ): BudgetSelectionControllerNew {
+
+        val periodStart = try {
+            fragment.arguments
+                ?.getString(BudgetDetailsFragment.PERIOD_START)
+                ?.let(DateTime::parse)
+                ?.plusDays(1)
+        } catch (e: IllegalArgumentException) {
+            if (!BuildConfig.DEBUG) {
+                exceptionTracker.exceptionThrown(e)
+            } else {
+                throw e
+            }
+            null
+        }
+
+        return BudgetSelectionControllerNew(
             requireNotNull(fragment.arguments?.getString(BudgetDetailsFragment.BUDGET_ID)),
             budgetsRepository,
             statisticsRepository,

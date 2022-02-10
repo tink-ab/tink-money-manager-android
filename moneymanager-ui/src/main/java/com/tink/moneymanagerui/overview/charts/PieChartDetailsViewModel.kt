@@ -2,7 +2,11 @@ package com.tink.moneymanagerui.overview.charts
 
 import androidx.annotation.AttrRes
 import androidx.annotation.StringRes
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.tink.model.category.Category
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
@@ -172,7 +176,6 @@ internal class PieChartDetailsViewModel @Inject constructor(
              data
          )
     }
-
 
     //TODO: Core setup - revisit
     private val periodComparator = Comparator<Period> { first, second ->
