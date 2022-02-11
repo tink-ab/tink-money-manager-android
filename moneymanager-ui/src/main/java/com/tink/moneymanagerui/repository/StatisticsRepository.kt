@@ -23,6 +23,11 @@ import kotlinx.coroutines.*
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
+import com.tink.service.network.ResponseState
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
+import com.tink.service.util.DispatcherProvider
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
