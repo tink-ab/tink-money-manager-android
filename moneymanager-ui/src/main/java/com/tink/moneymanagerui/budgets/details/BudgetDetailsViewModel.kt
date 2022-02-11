@@ -8,7 +8,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tink.model.budget.Budget
 import com.tink.model.budget.BudgetPeriod
-import com.tink.model.budget.BudgetPeriodicity
+import com.tink.model.budget.BudgetSpecification
 import com.tink.model.budget.RecurringPeriodicity
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
@@ -17,15 +17,15 @@ import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.model.BudgetDetailsData
 import com.tink.moneymanagerui.budgets.details.model.BudgetDetailsState
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
-import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
-import com.tink.moneymanagerui.extensions.toPeriodChartLabel
 import com.tink.moneymanagerui.extensions.toStartOfLocalDate
 import com.tink.moneymanagerui.extensions.totalMonths
 import com.tink.moneymanagerui.overview.charts.map
 import com.tink.moneymanagerui.util.extensions.floorAmount
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
-import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.Months
@@ -67,7 +67,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         successData.currentSelectedPeriod.budgetAmount.formatCurrencyExact()
     }
 
-    val amountLeftColor: LiveData<ResponseState<Int>> = budgetSelectionStateLiveData { successData ->
+    private val amountLeftColor: LiveData<ResponseState<Int>> = budgetSelectionStateLiveData { successData ->
         val amountLeft = (successData.currentSelectedPeriod.budgetAmount - successData.currentSelectedPeriod.spentAmount)
             .value.toBigDecimal().toFloat()
         if (amountLeft < 0) {
@@ -77,7 +77,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
     }
 
-    val progress: LiveData<ResponseState<Double>> = budgetSelectionStateLiveData { successData ->
+    private val progress: LiveData<ResponseState<Double>> = budgetSelectionStateLiveData { successData ->
         val budgetAmount = successData.currentSelectedPeriod.budgetAmount.value
         if (budgetAmount.isZero()) {
             0.0
@@ -88,6 +88,34 @@ internal class BudgetDetailsViewModel @Inject constructor(
                 ?.divide(budgetAmount)?.doubleValue() ?: 1.0
         }
     }
+    private val budget: LiveData<ResponseState<BudgetSpecification>> = budgetSelectionStateLiveData { successData ->
+       successData.budget
+    }
+
+    private val budgetPeriodsList: LiveData<ResponseState<List<BudgetPeriod>>> =  budgetSelectionStateLiveData { successData ->
+        successData.budgetPeriodsList.takeLast(min(successData.budgetPeriodsList.size, MAX_PERIOD_COUNT))
+    }
+
+    private val activeBudgetPeriodsCount = MediatorLiveData<ResponseState<Int>>().apply {
+        value = LoadingState
+
+        fun update() {
+            val budgetPeriodsListValue = budgetPeriodsList.value
+            val budgetValue = budget.value
+            value = if (budgetValue is SuccessState && budgetPeriodsListValue is SuccessState) {
+                val count = budgetPeriodsListValue.data
+                    .filter {budgetValue.data.created.isBefore(it.end)}
+                    .size
+                SuccessState(count)
+            } else if (budget.value is ErrorState || budgetPeriodsList.value is ErrorState) {
+                ErrorState("")
+            } else {
+                LoadingState
+            }
+        }
+        addSource(budget) { update() }
+        addSource(budgetPeriodsList) { update() }
+    }
 
     private fun <T> budgetSelectionStateLiveData(onSuccess: (BudgetSelectionData) -> T) =
         Transformations.map(budgetSelectionControllerNew.budgetSelectionState) { budgetSelectionState ->
@@ -96,6 +124,10 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     private val budgetDetailsData = MediatorLiveData<BudgetDetailsState>().apply {
         value = BudgetDetailsState()
+
+        addSource(budget) {
+            value = requireValue.copy(budget = it)
+        }
 
         addSource(budgetHeaderText) {
             value = requireValue.copy(headerText = it)
@@ -116,17 +148,10 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(progress) {
             value = requireValue.copy(progress = it)
         }
-/*
-        addSource(periods) {
-            value = requireValue.copy(periods = it)
+
+        addSource(budgetPeriodsList) {
+            value = requireValue.copy(budgetPeriodsList = it)
         }
-        addSource(category) {
-            value = requireValue.copy(category = it)
-        }
-        addSource(userProfile) {
-            value = requireValue.copy(userProfile = it)
-        }
-         */
     }
 
     internal val budgetDetailsDataState: LiveData<ResponseState<BudgetDetailsData>> = budgetDetailsData.map {
@@ -201,7 +226,13 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
     }
 
-    @Deprecated("PLS REMOVE")
+    val hasNext get() =  budgetSelectionControllerNew.hasNext
+    val hasPrevious get() = budgetSelectionControllerNew.hasPrevious
+
+    fun showNextPeriod() = budgetSelectionControllerNew.next()
+    fun showPreviousPeriod() = budgetSelectionControllerNew.previous()
+
+    @Deprecated("Use state instead")
     val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun updateLoadingState() {
             whenNonNull(
@@ -219,8 +250,9 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
     }
 
+    @Deprecated("Use state instead")
     val isBarChartShowing = MutableLiveData<Boolean>().apply { value = false }
-
+    @Deprecated("Use state instead")
     val showPickerButtons: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         value = false
         fun updatePickerState() {
@@ -237,57 +269,28 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(isBarChartShowing) { updatePickerState() }
     }
 
+    @Deprecated("Use state instead")
     val error get() = budgetDetailsDataHolder.error
+    @Deprecated("Use state instead")
     val errorState: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         value = false
         addSource(error) { event ->
             event.getContentIfNotHandled()?.let { value = true }
         }
     }
-    val budget get() = budgetDetailsDataHolder.budget
-    val budgetName get() = budgetDetailsDataHolder.budgetName
-    val hasNext get() = budgetDetailsDataHolder.hasNext
-    val hasPrevious get() = budgetDetailsDataHolder.hasPrevious
 
-    val visibilityState: LiveData<VisibleState> = MediatorLiveData<VisibleState>().apply {
-        value = VisibleState(isLoading = false, isError = false)
-        addSource(loading) { isLoading ->
-            value = requireValue.copy(isLoading = isLoading)
-        }
-        addSource(errorState) { isError ->
-            value = requireValue.copy(isError = isError)
-        }
-    }
 
-    private val historicPeriodsList: LiveData<List<BudgetPeriod>> =
-        Transformations.map(budgetDetailsDataHolder.budgetPeriodsList) { periodsList ->
-            periodsList.takeLast(min(periodsList.size, MAX_PERIOD_COUNT))
-        }
 
-    val activeBudgetPeriodsCount = MediatorLiveData<Int>().apply {
-        fun update() {
-            whenNonNull(
-                historicPeriodsList.value,
-                budgetDetailsDataHolder.budget.value
-            ) { historicPeriodsList, budget ->
-                postValue(
-                    historicPeriodsList
-                        .filter { budget.created.isBefore(it.end) }
-                        .size
-                )
-            }
-        }
-        addSource(budgetDetailsDataHolder.budget) { update() }
-        addSource(historicPeriodsList) { update() }
-    }
-
+    @Deprecated("Use state instead")
     val historicPeriodData: LiveData<List<Float>> =
         Transformations.map(historicPeriodsList) { periodsList ->
             periodsList.map { it.spentAmount.value.toBigDecimal().toFloat() }
         }
 
+    @Deprecated("Use state instead")
     val periodChartLabels: LiveData<List<String>> = MediatorLiveData<List<String>>().apply {
         fun update() {
+
             whenNonNull(
                 historicPeriodsList.value,
                 budgetDetailsDataHolder.budget.value?.periodicity as? RecurringPeriodicity
@@ -301,26 +304,16 @@ internal class BudgetDetailsViewModel @Inject constructor(
                 }
             }
         }
-        addSource(historicPeriodsList) { update() }
+        addSource(budgetPeriodsList) { update() }
         addSource(budgetDetailsDataHolder.budget) { update() }
     }
 
-    val periodChartThreshold: LiveData<Float> = Transformations.map(budget) {
-        it.amount.value.toBigDecimal().toFloat()
-    }
-
-    val budgetPeriodicity: LiveData<BudgetPeriodicity> = Transformations.map(budget) { budgetSpecification ->
-        budgetSpecification.periodicity
-    }
-
-    val periodChartThresholdLabel: LiveData<String> = Transformations.map(budget) {
-        it.amount.formatCurrencyRound()
-    }
-
+    @Deprecated("Use state instead")
     val barChartEnabled: LiveData<Boolean> = Transformations.map(budgetDetailsDataHolder.budget) {
         it.periodicity is Budget.Periodicity.Recurring
     }
 
+    @Deprecated("Use state instead")
     val barChartEmpty: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         value = false
         addSource(historicPeriodsList) { periodsList ->
@@ -332,6 +325,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
     }
 
+    @Deprecated("Use state instead")
     val barChartEmptyMessage: LiveData<String> =
         Transformations.map(budgetDetailsDataHolder.budget) {
             context.getString(
@@ -340,6 +334,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
             )
         }
 
+    @Deprecated("Use state instead")
     private val historicPeriodInterval = MediatorLiveData<String>().apply {
         fun update() {
             if (barChartEnabled.value == true) {
@@ -366,6 +361,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(historicPeriodsList) { update() }
     }
 
+    @Deprecated("Use state instead")
     val budgetPeriodInterval: LiveData<String> = MediatorLiveData<String>().apply {
         fun update() {
             value = if (isBarChartShowing.value == true && historicPeriodInterval.value != null) {
@@ -379,6 +375,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(isBarChartShowing) { update() }
     }
 
+    @Deprecated("Use state instead")
     private val progressStatusMessage: LiveData<String> = MediatorLiveData<String>().apply {
         fun updateText() {
             whenNonNull(
@@ -405,6 +402,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(budgetDetailsDataHolder.budgetPeriod) { updateText() }
     }
 
+    @Deprecated("Use state instead")
     private val barChartStatusMessage: LiveData<String> = MediatorLiveData<String>().apply {
         fun update() {
             if (barChartEnabled.value == true) {
@@ -429,6 +427,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(budgetDetailsDataHolder.budgetPeriodsList) { update() }
     }
 
+    @Deprecated("Use state instead")
     val statusMessage: LiveData<String> = MediatorLiveData<String>().apply {
         fun update() {
             value = if (isBarChartShowing.value == true && barChartStatusMessage.value != null) {
@@ -441,9 +440,6 @@ internal class BudgetDetailsViewModel @Inject constructor(
         addSource(barChartStatusMessage) { update() }
         addSource(isBarChartShowing) { update() }
     }
-
-    fun showNextPeriod() = budgetDetailsDataHolder.nextPeriod()
-    fun showPreviousPeriod() = budgetSelectionControllerNew//budgetDetailsDataHolder.previousPeriod()
 }
 
 private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCreated: Instant): Int {
@@ -455,6 +451,7 @@ private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCr
     return (budgetManagedCount * 100.0f / periodsForBudget.size).roundToInt()
 }
 
+// TODO: These guys should probably be somewhere else or be part of the class
 private fun composeRemainingBudgetStatusString(
     remainingAmount: Amount,
     start: DateTime,

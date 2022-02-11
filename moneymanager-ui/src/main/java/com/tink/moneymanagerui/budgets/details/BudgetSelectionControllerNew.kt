@@ -125,7 +125,6 @@ internal class BudgetSelectionControllerNew(
         it.overallState
     }
 
-
     private val periods: LiveData<List<Period>> = statisticsRepository.periods
 
     private var updateListenerJob: Job? = null
@@ -148,7 +147,7 @@ internal class BudgetSelectionControllerNew(
             .let { list ->
                 val currentPeriodState = _currentSelectedPeriodState.value
                 if (currentPeriodState is SuccessState) {
-                    list.toMutableList() + currentPeriodState.data
+                    return@let list.toMutableList() + currentPeriodState.data
                 }
                 return@let list }
             .distinct()
@@ -191,6 +190,30 @@ internal class BudgetSelectionControllerNew(
         _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodState.data)
         // Fetching more should not be necessary, since we don´t need the user to be able to
         // "see in the future"
+    }
+
+    val hasNext: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
+        return@createPeriodPickerStateLiveData currentPeriod != budgetPeriods.last()
+    }
+    val hasPrevious: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
+        val x = currentPeriod != budgetPeriods.first()
+        val y = budgetPeriods
+        return@createPeriodPickerStateLiveData currentPeriod != budgetPeriods.first()
+    }
+
+    private inline fun createPeriodPickerStateLiveData(
+        crossinline isVisible: (BudgetPeriod) -> Boolean
+    ): LiveData<Boolean> {
+        return MediatorLiveData<Boolean>().apply {
+            addSource(_currentSelectedPeriodState) { currentPeriodState ->
+                value = if (currentPeriodState is SuccessState) {
+                    isVisible(currentPeriodState.data)
+                } else {
+                    false
+                }
+
+            }
+        }
     }
 
     private fun shouldFetchMore(currentSelectedPeriod: BudgetPeriod, periods: List<Period>) =

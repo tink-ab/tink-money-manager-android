@@ -15,7 +15,7 @@ data class BudgetSelectionState(
     internal val overallState: ResponseState<BudgetSelectionData> =
         when {
             budget is SuccessState && budgetPeriodsList is SuccessState && currentSelectedPeriod is SuccessState -> {
-                SuccessState(BudgetSelectionData(budget.data, currentSelectedPeriod.data))
+                SuccessState(BudgetSelectionData(budget.data, budgetPeriodsList.data, currentSelectedPeriod.data))
             }
             budget is ErrorState ||  budgetPeriodsList is ErrorState || currentSelectedPeriod is ErrorState ->
                 ErrorState("")
@@ -26,5 +26,6 @@ data class BudgetSelectionState(
 
 data class BudgetSelectionData(
     val budget: BudgetSpecification,
+    val budgetPeriodsList: List<BudgetPeriod>,
     val currentSelectedPeriod: BudgetPeriod,
 )
