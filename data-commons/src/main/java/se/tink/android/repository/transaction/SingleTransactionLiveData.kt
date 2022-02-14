@@ -3,11 +3,10 @@ package se.tink.android.repository.transaction
 import androidx.lifecycle.MutableLiveData
 import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import se.tink.android.repository.TinkNetworkError
 
@@ -15,7 +14,8 @@ import se.tink.android.repository.TinkNetworkError
 class SingleTransactionLiveData(
     private val transactionId: String,
     val transactionService: TransactionService,
-    val transactionUpdateEventBus: TransactionUpdateEventBus
+    val transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val dispatcher: DispatcherProvider,
 ) : MutableLiveData<TransactionResult>() {
 
     private var fetchOnInit = true
@@ -23,18 +23,18 @@ class SingleTransactionLiveData(
     constructor(
         transaction: Transaction,
         transactionService: TransactionService,
-        transactionUpdateEventBus: TransactionUpdateEventBus
-    ) : this(transaction.id, transactionService, transactionUpdateEventBus) {
+        transactionUpdateEventBus: TransactionUpdateEventBus,
+        dispatcher: DispatcherProvider,
+    ) : this(transaction.id, transactionService, transactionUpdateEventBus, dispatcher) {
         fetchOnInit = false
         postValue(TransactionReceived(transaction))
     }
 
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
     private val updateSubscription: Job
 
     init {
         if (fetchOnInit) {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 try {
                     val transaction = transactionService.getTransaction(transactionId)
                     postValue(TransactionReceived(transaction))

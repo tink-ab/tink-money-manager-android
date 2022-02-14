@@ -12,14 +12,13 @@ import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
-import org.threeten.bp.Instant
-import se.tink.android.livedata.AutoFetchLiveData
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import org.threeten.bp.Instant
 import se.tink.android.extensions.launchForResult
+import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -30,10 +29,9 @@ import javax.inject.Inject
 class BudgetsRepository @Inject constructor(
     private val budgetService: BudgetService,
     private val transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val dispatcher: DispatcherProvider,
     dataRefreshHandler: DataRefreshHandler
 ) : Refreshable {
-
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
         dataRefreshHandler.registerRefreshable(this)
@@ -41,11 +39,11 @@ class BudgetsRepository @Inject constructor(
 
     private val _budgets: AutoFetchLiveData<List<BudgetSummary>> =
         AutoFetchLiveData {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 val budgetSummaries = try {
                     budgetService.listBudgets()
                 } catch (t: Throwable) {
-                    emptyList<BudgetSummary>()
+                    emptyList()
                 }
                 it.postValue(budgetSummaries)
             }
@@ -55,7 +53,7 @@ class BudgetsRepository @Inject constructor(
 
     private val _budgetsState: AutoFetchLiveData<ResponseState<List<BudgetSummary>>> =
         AutoFetchLiveData {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 it.postValue(LoadingState)
                 val budgetSummaries = try {
                     SuccessState(budgetService.listBudgets())
@@ -73,7 +71,7 @@ class BudgetsRepository @Inject constructor(
     }
 
     fun createOrUpdateBudget(descriptor: BudgetCreateOrUpdateDescriptor, resultHandler: ResultHandler<BudgetSpecification>) {
-        scope.launchForResult(resultHandler) {
+        CoroutineScope(dispatcher.io()).launchForResult(resultHandler) {
             val budgetSpecification = if (descriptor.id == null) {
                 budgetService.createBudget(descriptor)
             } else {
@@ -85,7 +83,7 @@ class BudgetsRepository @Inject constructor(
     }
 
     fun archiveBudget(id: String, resultHandler: ResultHandler<Unit>) {
-        scope.launchForResult(resultHandler) {
+        CoroutineScope(dispatcher.io()).launchForResult(resultHandler) {
             budgetService.archiveBudget(id)
             _budgets.update()
         }
@@ -96,7 +94,7 @@ class BudgetsRepository @Inject constructor(
         start: Instant,
         end: Instant
     ) =
-        BudgetTransactionsLiveData(budgetService, budgetId, start, end, transactionUpdateEventBus)
+        BudgetTransactionsLiveData(budgetService, budgetId, start, end, dispatcher, transactionUpdateEventBus)
 
     fun budgetPeriodDetails(
         budgetId: String,
@@ -104,7 +102,7 @@ class BudgetsRepository @Inject constructor(
         end: Instant,
         resultHandler: ResultHandler<Pair<BudgetSpecification, List<BudgetPeriod>>>
     ) {
-        scope.launchForResult(resultHandler) {
+        CoroutineScope(dispatcher.io()).launchForResult(resultHandler) {
             budgetService.budgetPeriodDetails(budgetId, start, end)
         }
     }

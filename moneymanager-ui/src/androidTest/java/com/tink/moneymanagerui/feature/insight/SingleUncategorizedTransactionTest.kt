@@ -8,6 +8,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tink.moneymanagerui.mock.InsightMockFactory
 import com.tink.moneymanagerui.mock.TransactionMockFactory
 import okhttp3.mockwebserver.MockResponse
+import org.joda.time.DateTime
 import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +33,7 @@ class SingleUncategorizedTransactionTest: BaseInsightTestSuit() {
             id = transactionId,
             amount = "-150",
             description = "Climbing shoes",
-            date = "1640602800000",
+            date = DateTime.parse("2021-12-27T05:20").millis.toString(),
             currencyCode = "EUR"
         )
         insight = InsightMockFactory.getSingleUncategorizedTransaction(transactionId)

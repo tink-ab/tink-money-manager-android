@@ -10,16 +10,16 @@ import com.tink.service.network.ResponseState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
+import com.tink.service.util.DispatcherProvider
 import timber.log.Timber
 import java.lang.Exception
 import javax.inject.Inject
 
 @PfmScope
 class UserRepository @Inject constructor(
-    private val userProfileService: UserProfileService
+    private val userProfileService: UserProfileService,
+    private val dispatcher: DispatcherProvider
 ) {
-    val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     // Perhaps use a StateFlow instead (or wait until it's out of experimental).
 
@@ -28,16 +28,11 @@ class UserRepository @Inject constructor(
         override fun onActive() {
             refresh()
         }
-
-        override fun onInactive() {
-            // Not sure if this is really needed since we do a [postValue] in [onActive] anyway...
-            scope.coroutineContext.cancelChildren()
-        }
     }
     val userProfile: LiveData<UserProfile?> = _userProfile
 
     fun refresh() {
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             try {
                 _userProfile.postValue(userProfileService.getProfile())
             } catch (error: Exception) {
@@ -60,7 +55,7 @@ class UserRepository @Inject constructor(
 
     fun refreshState() {
         _userProfileState.postValue(LoadingState)
-        scope.launch {
+        CoroutineScope(dispatcher.io()).launch {
             try {
                 val userProfile = userProfileService.getProfile()
                 _userProfileState.postValue(SuccessState(userProfile))

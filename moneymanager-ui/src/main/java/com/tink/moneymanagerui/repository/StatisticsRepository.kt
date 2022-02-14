@@ -22,6 +22,7 @@ import com.tink.service.network.ResponseState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
+import com.tink.service.util.DispatcherProvider
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -40,9 +41,9 @@ internal class StatisticsRepository @Inject constructor(
     private val statisticsService: StatisticsService,
     dataRefreshHandler: DataRefreshHandler,
     private val userRepository: UserRepository,
-    transactionUpdateEventBus: TransactionUpdateEventBus
+    transactionUpdateEventBus: TransactionUpdateEventBus,
+    private val dispatcher: DispatcherProvider,
 ) : Refreshable {
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
         dataRefreshHandler.registerRefreshable(this)
@@ -54,7 +55,7 @@ internal class StatisticsRepository @Inject constructor(
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     private val statisticsLiveData = MediatorLiveData<List<Statistics>>().apply {
         fun update() {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 try {
                     withTimeout(STATISTICS_FETCH_TIMEOUT) {
                         while (isActive) {
@@ -63,7 +64,7 @@ internal class StatisticsRepository @Inject constructor(
                                 val result = queryForStatistics(userProfile)
                                 if (result != null) {
                                     postValue(result)
-                                    scope.cancel()
+                                    cancel()
                                 }
                             }
                             delay(POLLING_INTERVAL)
@@ -87,7 +88,7 @@ internal class StatisticsRepository @Inject constructor(
 
     private val statisticsLiveDataState = MediatorLiveData<ResponseState<List<Statistics>>>().apply {
         fun update() {
-            CoroutineScope(Dispatchers.IO).launch {
+            CoroutineScope(dispatcher.io()).launch {
                 try {
                     withTimeout(STATISTICS_FETCH_TIMEOUT) {
                         while (isActive) {
@@ -137,11 +138,17 @@ internal class StatisticsRepository @Inject constructor(
             ?.start
             ?.toDateTime() ?: DateTime.now()
 
+        val endDate = DateTime.now()
+            .withDayOfMonth(backfillStartTime.dayOfMonth)
+            .withHourOfDay(23)
+            .withMinuteOfHour(59)
+            .withSecondOfMinute(59)
+
         val existingPeriodIdentifiers = distinctBy { it.period.identifier }.map { it.period.identifier }
         val monthsMissingTransactions = generateSequence(backfillStartTime) { date ->
             date.plusMonths(1)
         }.takeWhile { iteratedDate ->
-            iteratedDate.isBeforeNow
+            iteratedDate.isBefore(endDate)
         }.filter { iteratedDate ->
             !existingPeriodIdentifiers.contains(iteratedDate.toPeriodIdentifier())
         }.map { iteratedDate ->
@@ -226,7 +233,7 @@ internal class StatisticsRepository @Inject constructor(
             is SuccessState -> {
                 SuccessState(
                     DateTime().let { now ->
-                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) } ?: periodMapState.data.values.maxByOrNull { it.identifier }
                     }
                 )
             }

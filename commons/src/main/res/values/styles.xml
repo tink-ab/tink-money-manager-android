@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="TinkFinanceOverviewStyle" parent="Theme.MaterialComponents">
+  <style name="TinkFinanceOverviewStyle" parent="Theme.MaterialComponents.DayNight">
     <item name="tink_backgroundColor">@color/tink_white</item>
     <item name="tink_expensesColor">@color/tink_expensive_blue</item>
     <item name="tink_expensesLightColor">@color/tink_expensive_blue_light</item>

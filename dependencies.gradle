@@ -13,7 +13,7 @@ ext {
     supportLibVersion = "1.0.0"
     timberVersion = "4.7.1"
 
-    tinkCoreVersion = "0.7.0"
+    tinkCoreVersion = "0.8.0"
 
     // test
     assertj = "3.22.0"
@@ -68,6 +68,7 @@ ext {
             test_junit_engine                   : "org.junit.jupiter:junit-jupiter-engine:$junitJupiter",
             test_junit_params                   : "org.junit.jupiter:junit-jupiter-params:$junitJupiter",
             test_mockk                          : "io.mockk:mockk:$mockk",
+            test_mockk_android                  : "io.mockk:mockk-android:$mockk",
             test_assertj                        : "org.assertj:assertj-core:$assertj",
 
             test_junit                          : "junit:junit:$junit",

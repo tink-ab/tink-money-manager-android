@@ -6,11 +6,10 @@ import com.tink.model.account.Account
 import com.tink.service.account.AccountService
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
-import com.tink.service.network.SuccessState
 import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
+import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.map
@@ -21,9 +20,9 @@ import javax.inject.Inject
 @PfmScope
 class AccountRepository @Inject constructor(
     private val accountService: AccountService,
-    dataRefreshHandler: DataRefreshHandler
+    dataRefreshHandler: DataRefreshHandler,
+    private val dispatcher: DispatcherProvider
 ) : Refreshable {
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
     init {
         dataRefreshHandler.registerRefreshable(this)
@@ -31,11 +30,11 @@ class AccountRepository @Inject constructor(
 
     private val _accounts: AutoFetchLiveData<List<Account>> =
         AutoFetchLiveData {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 val accounts = try {
                     accountService.listAccounts()
                 } catch (t: Throwable) {
-                    emptyList<Account>()
+                    emptyList()
                 }
                 it.postValue(accounts)
             }
@@ -53,7 +52,7 @@ class AccountRepository @Inject constructor(
 
     private val _accountsState: AutoFetchLiveData<ResponseState<List<Account>>> =
         AutoFetchLiveData {
-            scope.launch {
+            CoroutineScope(dispatcher.io()).launch {
                 val accounts: ResponseState<List<Account>> = try {
                     val accounts = accountService.listAccounts()
                     SuccessState(accounts)
