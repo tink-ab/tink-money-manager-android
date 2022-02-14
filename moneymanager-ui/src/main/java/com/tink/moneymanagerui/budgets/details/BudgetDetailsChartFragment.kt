@@ -22,6 +22,7 @@ import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.*
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.periodPicker
@@ -59,27 +60,19 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             budgetDetailsViewModelFactory
         )[BudgetDetailsViewModel::class.java]
 
-        viewModel.budgetDetailsDataState.observe(viewLifecycleOwner) { responseState ->
+        viewModel.budgetDetailsData.observe(viewLifecycleOwner) { responseState ->
             view.loadingSpinner.visibleIf { responseState is LoadingState }
             view.periodPicker.visibleIf { responseState is SuccessState }
             view.showTransactionsBtn.visibleIf { responseState is SuccessState }
+            setBarChartVisibility(responseState)
+            view.periodPicker.setShowButtons(responseState is SuccessState && responseState.data.showPickerButtons)
 
             if (responseState is SuccessState) {
                 title = responseState.data.budget.name
+                view.periodPicker.setText(responseState.data.budgetPeriodIntervalText)
+                view.statusMessage.text = responseState.data.statusMessage
             }
         }
-
-        viewModel.statusMessage.observe(viewLifecycleOwner, Observer { message ->
-            view.statusMessage.text = message
-        })
-
-        viewModel.budgetPeriodInterval.observe(viewLifecycleOwner, Observer { budgetPeriodInterval ->
-            view.periodPicker.setText(budgetPeriodInterval)
-        })
-
-        viewModel.showPickerButtons.observe(viewLifecycleOwner, Observer { showPickerButtons ->
-            view.periodPicker.setShowButtons(showPickerButtons)
-        })
 
         viewModel.hasNext.observe(viewLifecycleOwner, Observer { hasNext ->
             view.periodPicker.setNextButtonEnabled(hasNext)
@@ -93,16 +86,6 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
             error.observe(viewLifecycle, { event ->
                 event.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
-            })
-            barChartEnabled.observe(viewLifecycle, {
-                if (it == true) {
-                    viewPager.adapter = ChartPagerAdapter(pageCount = 2)
-                    tabs.visibility = View.VISIBLE
-                    tabs.setupWithViewPager(viewPager)
-                } else {
-                    viewPager.adapter = ChartPagerAdapter(pageCount = 1)
-                    tabs.visibility = View.GONE
-                }
             })
         }
 
@@ -126,13 +109,24 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
         }
     }
 
+    private fun setBarChartVisibility(responseState: ResponseState<BudgetDetailsData2>?) {
+        if (responseState is SuccessState && responseState.data.barChartEnabled) {
+            viewPager.adapter = ChartPagerAdapter(pageCount = 2)
+            tabs.visibility = View.VISIBLE
+            tabs.setupWithViewPager(viewPager)
+        } else {
+            viewPager.adapter = ChartPagerAdapter(pageCount = 1)
+            tabs.visibility = View.GONE
+        }
+    }
+
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.tink_budget_details_menu)
     }
 
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_item_edit_budget) {
-            viewModel.budgetDetailsDataState.value?.let { budgetState ->
+            viewModel.budgetDetailsData.value?.let { budgetState ->
                 if (budgetState is SuccessState) {
                     (parentFragment as BudgetDetailsFragment).editBudget(budgetState.data.budget)
                     return true
@@ -155,8 +149,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             if (position == 0) {
                 val budgetDetailsProgressChartPage: TinkBudgetDetailsProgressChartPageBinding = TinkBudgetDetailsProgressChartPageBinding.inflate(layoutInflater, container, true)
 
-                viewModel.budgetDetailsDataState.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
-
+                viewModel.budgetDetailsData.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
                     budgetDetailsProgressChartPage.budgetProgress.visibleIf { responseState is SuccessState }
 
                     when(responseState) {
@@ -169,8 +162,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                             budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(
                                 responseState.data.amountLeftColor, MoneyManagerFeatureType.BUDGETS)
                         }
-                        is LoadingState -> Unit // TODO
-                        is ErrorState -> Unit // TODO
+                        is LoadingState -> Unit
+                        is ErrorState -> Unit
                     }
                 }
 
@@ -178,36 +171,27 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             } else {
                 val budgetDetailsBarChartPage = TinkBudgetDetailsBarChartPageBinding.inflate(layoutInflater, container, true)
 
-                viewModel.budgetDetailsDataState.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
+                viewModel.budgetDetailsData.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
                     when(responseState) {
                         is SuccessState -> {
+                            budgetDetailsBarChartPage.budgetProgress.visibleIf { !responseState.data.barChartEmpty }
+                            budgetDetailsBarChartPage.emptyChartMessage.visibleIf { responseState.data.barChartEmpty }
+
                             budgetDetailsBarChartPage.budgetProgress.threshold =
                                 responseState.data.budget.amount.value.toBigDecimal().toFloat()
-                                setPeriodicityTitle(responseState.data.budget.periodicity)
-                                budgetDetailsBarChartPage.budgetProgress.thresholdLabel =
-                                    responseState.data.budget.amount.formatCurrencyRound()
+                            setPeriodicityTitle(responseState.data.budget.periodicity)
+                            budgetDetailsBarChartPage.budgetProgress.thresholdLabel =
+                                responseState.data.budget.amount.formatCurrencyRound()
+                            budgetDetailsBarChartPage.budgetProgress.labels = responseState.data.periodChartLabels
+                            budgetDetailsBarChartPage.budgetProgress.activeBarCount = responseState.data.activeBudgetPeriodsCount
+                            budgetDetailsBarChartPage.emptyChartMessage.text = responseState.data.barChartEmptyMessage
+                            budgetDetailsBarChartPage.budgetProgress.data = responseState.data.budgetPeriodsData
+                            budgetDetailsBarChartPage.budgetProgress.labels = responseState.data.periodChartLabels
                         }
-                        is LoadingState -> Unit // TODO
-                        is ErrorState -> Unit // TODO
+                        is LoadingState -> Unit
+                        is ErrorState -> Unit
                     }
                 }
-
-                viewModel.barChartEmptyMessage.observe(this@BudgetDetailsChartFragment.viewLifecycle, { message ->
-                    budgetDetailsBarChartPage.emptyChartMessage.text = message
-                })
-                viewModel.barChartEmpty.observe(this@BudgetDetailsChartFragment.viewLifecycle, { barChartEmpty ->
-                    budgetDetailsBarChartPage.budgetProgress.visibleIf { !barChartEmpty }
-                    budgetDetailsBarChartPage.emptyChartMessage.visibleIf { barChartEmpty }
-                })
-                viewModel.activeBudgetPeriodsCount.observe(this@BudgetDetailsChartFragment.viewLifecycle, { activeBudgetPeriodsCount ->
-                    budgetDetailsBarChartPage.budgetProgress.activeBarCount = activeBudgetPeriodsCount
-                })
-                viewModel.historicPeriodData.observe(this@BudgetDetailsChartFragment.viewLifecycle, { historicPeriodData ->
-                    budgetDetailsBarChartPage.budgetProgress.data = historicPeriodData
-                })
-                viewModel.periodChartLabels.observe(this@BudgetDetailsChartFragment.viewLifecycle, { periodChartLabels ->
-                    budgetDetailsBarChartPage.budgetProgress.labels = periodChartLabels
-                })
 
                 return budgetDetailsBarChartPage.root
             }
