@@ -138,11 +138,17 @@ internal class StatisticsRepository @Inject constructor(
             ?.start
             ?.toDateTime() ?: DateTime.now()
 
+        val endDate = DateTime.now()
+            .withDayOfMonth(backfillStartTime.dayOfMonth)
+            .withHourOfDay(23)
+            .withMinuteOfHour(59)
+            .withSecondOfMinute(59)
+
         val existingPeriodIdentifiers = distinctBy { it.period.identifier }.map { it.period.identifier }
         val monthsMissingTransactions = generateSequence(backfillStartTime) { date ->
             date.plusMonths(1)
         }.takeWhile { iteratedDate ->
-            iteratedDate.isBeforeNow
+            iteratedDate.isBefore(endDate)
         }.filter { iteratedDate ->
             !existingPeriodIdentifiers.contains(iteratedDate.toPeriodIdentifier())
         }.map { iteratedDate ->
@@ -227,7 +233,7 @@ internal class StatisticsRepository @Inject constructor(
             is SuccessState -> {
                 SuccessState(
                     DateTime().let { now ->
-                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) } ?: periodMapState.data.values.maxByOrNull { it.identifier }
                     }
                 )
             }
