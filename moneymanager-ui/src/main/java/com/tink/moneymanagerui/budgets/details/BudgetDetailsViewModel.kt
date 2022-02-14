@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.budgets.details
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +13,7 @@ import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
+import com.tink.moneymanagerui.extensions.formattedPeriod
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
 import com.tink.moneymanagerui.extensions.toStartOfLocalDate
@@ -45,7 +45,7 @@ import kotlin.math.absoluteValue
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-data class BudgetDetailsData2(
+data class BudgetDetailsData(
     val budget: BudgetSpecification,
     val headerText: String,
     val amountLeft: String,
@@ -67,24 +67,24 @@ data class BudgetDetailsData2(
 private const val MAX_PERIOD_COUNT = 12
 
 internal class BudgetDetailsViewModel @Inject constructor(
-    private val budgetDetailsDataHolder: BudgetDetailsDataHolder,
     private val budgetSelectionControllerNew: BudgetSelectionControllerNew,
     private val dateUtils: DateUtils,
     @ApplicationScoped context: Context
 ) : ViewModel() {
 
-    val budgetDetailsData = MediatorLiveData<ResponseState<BudgetDetailsData2>>().apply {
+    val isBarChartShowing = MutableLiveData<Boolean>().apply { value = false }
+
+    val budgetDetailsData = MediatorLiveData<ResponseState<BudgetDetailsData>>().apply {
         value = LoadingState
 
-        addSource(budgetSelectionControllerNew.budgetSelectionState) { state ->
+        fun update() = whenNonNull(
+            budgetSelectionControllerNew.budgetSelectionState.value,
+            isBarChartShowing.value) { state, isBarChartShowing ->
             value = state.map { data ->
-
                 val budgetPeriodList = getBudgetPeriodsList(data)
                 val isBarChartEnabled = isBarChartEnabled(data)
 
-                val remove = getBudgetPeriodIntervalText(data, budgetPeriodList, isBarChartEnabled, context)
-
-                BudgetDetailsData2(
+                BudgetDetailsData(
                     budget = data.budget,
                     headerText = getBudgetHeaderText(data),
                     amountLeft = getAmountLeft(data),
@@ -98,12 +98,16 @@ internal class BudgetDetailsViewModel @Inject constructor(
                     barChartEnabled = isBarChartEnabled,
                     barChartEmpty = getBarChartEmpty(budgetPeriodList),
                     barChartEmptyMessage = getBarChartEmptyMessage(data, context),
-                    budgetPeriodIntervalText = getBudgetPeriodIntervalText(data, budgetPeriodList, isBarChartEnabled, context),
-                    statusMessage = getStatusMessage(data, budgetPeriodList, isBarChartShowing.value!!, context),
-                    showPickerButtons = getShowPickerButtons(data, isBarChartShowing.value!!)
+                    budgetPeriodIntervalText = getBudgetPeriodIntervalText(data, budgetPeriodList, isBarChartEnabled, isBarChartShowing, context),
+                    statusMessage = getStatusMessage(data, budgetPeriodList, isBarChartShowing, context),
+                    showPickerButtons = getShowPickerButtons(data, isBarChartShowing)
                 )
             }
         }
+
+
+        addSource(budgetSelectionControllerNew.budgetSelectionState) { update() }
+        addSource(isBarChartShowing) { update() }
     }
 
     private fun getAmountLeft(successData: BudgetSelectionData) =
@@ -215,6 +219,29 @@ internal class BudgetDetailsViewModel @Inject constructor(
         successData: BudgetSelectionData,
         budgetPeriodList: List<BudgetPeriod>,
         barChartEnabled: Boolean,
+        isBarChartShowing: Boolean,
+        context: Context
+    ): String {
+        return if (!isBarChartShowing) {
+            getProgressChartBudgetPeriodIntervalText(successData)
+        } else {
+            getBarChartBudgetPeriodIntervalText(successData, budgetPeriodList, barChartEnabled, context)
+        }
+    }
+
+    private fun getProgressChartBudgetPeriodIntervalText(
+        successData: BudgetSelectionData
+    ): String {
+        return when (val periodicity = successData.budget.periodicity) {
+           is Budget.Periodicity.OneOff -> periodicity.formattedPeriod(dateUtils)
+           is Budget.Periodicity.Recurring -> periodicity.formattedPeriod(successData.currentSelectedPeriod, dateUtils)
+       }
+    }
+
+    private fun getBarChartBudgetPeriodIntervalText(
+        successData: BudgetSelectionData,
+        budgetPeriodList: List<BudgetPeriod>,
+        barChartEnabled: Boolean,
         context: Context
     ): String {
         if (!barChartEnabled || successData.budget.periodicity !is RecurringPeriodicity) {
@@ -322,36 +349,6 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     fun showNextPeriod() = budgetSelectionControllerNew.next()
     fun showPreviousPeriod() = budgetSelectionControllerNew.previous()
-
-    val isBarChartShowing = MutableLiveData<Boolean>().apply { value = false }
-
-
-    @Deprecated("Use state instead")
-    val loading: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        fun updateLoadingState() {
-            whenNonNull(
-                budgetDetailsDataHolder.budget.value,
-                budgetDetailsDataHolder.budgetPeriod.value
-            ) { _, _ ->
-                value = false
-            }
-        }
-        value = true
-        addSource(budgetDetailsDataHolder.budget) { updateLoadingState() }
-        addSource(budgetDetailsDataHolder.budgetPeriod) { updateLoadingState() }
-        addSource(budgetDetailsDataHolder.error) { event ->
-            event.getContentIfNotHandled()?.let { value = false }
-        }
-    }
-    @Deprecated("Use state instead")
-    val error get() = budgetDetailsDataHolder.error
-    @Deprecated("Use state instead")
-    val errorState: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        value = false
-        addSource(error) { event ->
-            event.getContentIfNotHandled()?.let { value = true }
-        }
-    }
 }
 
 private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCreated: Instant): Int {

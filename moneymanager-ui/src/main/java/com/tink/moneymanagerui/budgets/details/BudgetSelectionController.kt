@@ -28,6 +28,7 @@ import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
 import java.util.*
 
+@Deprecated("Use BudgetSelectionControllerNew")
 internal class BudgetSelectionController(
     private val budgetId: String,
     private val budgetsRepository: BudgetsRepository,

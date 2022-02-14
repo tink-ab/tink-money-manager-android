@@ -42,6 +42,9 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
     internal lateinit var viewModel: BudgetDetailsViewModel
 
+    private val onePageAdapter = ChartPagerAdapter(pageCount = 1)
+    private val twoPageAdapter = ChartPagerAdapter(pageCount = 2)
+
     @Inject
     internal lateinit var budgetDetailsViewModelFactory: BudgetDetailsViewModelFactory
 
@@ -64,13 +67,20 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             view.loadingSpinner.visibleIf { responseState is LoadingState }
             view.periodPicker.visibleIf { responseState is SuccessState }
             view.showTransactionsBtn.visibleIf { responseState is SuccessState }
+            view.statusMessage.visibleIf { responseState is SuccessState }
             setBarChartVisibility(responseState)
             view.periodPicker.setShowButtons(responseState is SuccessState && responseState.data.showPickerButtons)
 
-            if (responseState is SuccessState) {
-                title = responseState.data.budget.name
-                view.periodPicker.setText(responseState.data.budgetPeriodIntervalText)
-                view.statusMessage.text = responseState.data.statusMessage
+            when (responseState) {
+                is SuccessState -> {
+                    title = responseState.data.budget.name
+                    view.periodPicker.setText(responseState.data.budgetPeriodIntervalText)
+                    view.statusMessage.text = responseState.data.statusMessage
+                }
+                is LoadingState -> Unit
+                is ErrorState -> {
+                    snackbarManager.displayError(R.string.tink_snackbar_utils_error_default, context)
+                }
             }
         }
 
@@ -81,13 +91,6 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
         viewModel.hasPrevious.observe(viewLifecycleOwner, Observer { hasPrevious ->
             view.periodPicker.setPreviousButtonEnabled(hasPrevious)
         })
-
-        viewModel.apply {
-
-            error.observe(viewLifecycle, { event ->
-                event.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
-            })
-        }
 
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
@@ -109,13 +112,20 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
         }
     }
 
-    private fun setBarChartVisibility(responseState: ResponseState<BudgetDetailsData2>?) {
-        if (responseState is SuccessState && responseState.data.barChartEnabled) {
-            viewPager.adapter = ChartPagerAdapter(pageCount = 2)
+    private fun setBarChartVisibility(responseState: ResponseState<BudgetDetailsData>?) {
+        if (responseState !is SuccessState) {
+            return
+        }
+        if (responseState.data.barChartEnabled) {
+            if (viewPager.adapter != twoPageAdapter) {
+                viewPager.adapter = twoPageAdapter
+                tabs.setupWithViewPager(viewPager)
+            }
             tabs.visibility = View.VISIBLE
-            tabs.setupWithViewPager(viewPager)
-        } else {
-            viewPager.adapter = ChartPagerAdapter(pageCount = 1)
+        } else if (viewPager.adapter != onePageAdapter) {
+            if (viewPager.adapter != onePageAdapter) {
+                viewPager.adapter = onePageAdapter
+            }
             tabs.visibility = View.GONE
         }
     }
@@ -147,10 +157,13 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
 
         override fun instantiateItem(container: ViewGroup, position: Int): Any {
             if (position == 0) {
-                val budgetDetailsProgressChartPage: TinkBudgetDetailsProgressChartPageBinding = TinkBudgetDetailsProgressChartPageBinding.inflate(layoutInflater, container, true)
+                val budgetDetailsProgressChartPage: TinkBudgetDetailsProgressChartPageBinding =
+                    TinkBudgetDetailsProgressChartPageBinding.inflate(layoutInflater, container, true)
 
                 viewModel.budgetDetailsData.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
                     budgetDetailsProgressChartPage.budgetProgress.visibleIf { responseState is SuccessState }
+                    budgetDetailsProgressChartPage.amountLeft.visibleIf { responseState is SuccessState }
+                    budgetDetailsProgressChartPage.totalAmount.visibleIf { responseState is SuccessState }
 
                     when(responseState) {
                         is SuccessState -> {

@@ -25,6 +25,9 @@ import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import java.util.*
 
+/**
+ * TODO: Rename to BudgetSelectionControllerNew when BudgetTransactionListViewModel is refactored
+ */
 internal class BudgetSelectionControllerNew(
     private val budgetId: String,
     private val budgetsRepository: BudgetsRepository,
@@ -187,7 +190,7 @@ internal class BudgetSelectionControllerNew(
             return
         }
 
-        _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodState.data)
+        _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriodState.data)
         // Fetching more should not be necessary, since we don´t need the user to be able to
         // "see in the future"
     }
