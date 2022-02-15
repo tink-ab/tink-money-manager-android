@@ -12,6 +12,7 @@ import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
+import timber.log.Timber
 
 internal class AccountsListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.tink_fragment_accounts_list
@@ -24,7 +25,7 @@ internal class AccountsListFragment : BaseFragment() {
         super.authorizedOnCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[AccountsViewModel::class.java]
         accountListAdapter.onAccountClickedListener = {
-            fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
+            fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.account.id))
         }
     }
 
@@ -36,14 +37,41 @@ internal class AccountsListFragment : BaseFragment() {
             adapter = accountListAdapter
         }
 
+        seeAllAccounts.setOnClickListener {
+            navigateToAllAccounts()
+        }
+
+        emptyStateSeeAllActions.setOnClickListener {
+            navigateToAllAccounts()
+        }
+
+        viewModel.favoriteAccounts.observe(viewLifecycleOwner, Observer { list ->
+            list?.let { accounts ->
+                accountListAdapter.setAccounts(accounts)
+            }
+        })
+        viewModel.hasFavoriteAccount.observe(viewLifecycleOwner, Observer { hasFavoriteAccount ->
+            accountsHeader.visibleIf { hasFavoriteAccount }
+            accountList.visibleIf { hasFavoriteAccount }
+            noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
+        })
+        // TODO: Load and display provider image from accountsWithImage liveData
         viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->
             if (accountState is SuccessState) {
-                accountListAdapter.setAccounts(accountState.data)
+                accountListAdapter.setAccounts(accountState.data.map {
+                        AccountWithImage(it, null)
+                    }
+                )
             }
             loader.visibleIf { accountState is LoadingState }
             accountList.visibleIf { accountState is SuccessState }
             accounts_error_text.visibleIf { accountState is ErrorState }
         })
+    }
+
+    private fun navigateToAllAccounts() {
+        // TODO: Navigate to account fragment when implemented
+        Timber.d("Clicked on see all accounts no favorites")
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS

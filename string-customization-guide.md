@@ -120,6 +120,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budgets_create_new` | New Budget |
 | `tink_overview_budgets_empty_create_new` | Create New Budget |
 | `tink_overview_budgets_title` | Budgets |
+| `tink_overview_favorite_accounts_see_all_accounts` | See all accounts |
+| `tink_overview_favorite_accounts_see_all` | See all |
+| `tink_overview_favorite_accounts_title` | Favorite accounts |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
 | `tink_overview_statistics_error` | No statistics |
