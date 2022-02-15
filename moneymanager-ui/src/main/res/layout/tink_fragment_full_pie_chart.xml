@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     android:background="?tink_backgroundColor">
 
+    <include
+        android:id="@+id/loaderSpinner"
+        layout="@layout/tink_loader_spinner"
+        android:visibility="visible" />
+
     <LinearLayout
         android:id="@+id/fadingGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible"
+        >
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/labelTitle"
@@ -45,6 +52,7 @@
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:transitionGroup="false"
-        app:tink_max_radius_percent="0.5" />
+        app:tink_max_radius_percent="0.5"
+        android:visibility="invisible"/>
 
 </FrameLayout>

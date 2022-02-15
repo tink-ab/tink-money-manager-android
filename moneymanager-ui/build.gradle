@@ -37,8 +37,17 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    resourcePrefix("tink_")
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        test {
+            java.srcDir sharedTestDir
+        }
+        androidTest {
+            java.srcDir sharedTestDir
+        }
+    }
 
+    resourcePrefix("tink_")
 }
 
 dependencies {
@@ -79,16 +88,20 @@ dependencies {
     kapt libraries.dagger_compiler
 
     implementation libraries.joda_time
-
     implementation libraries.timber
 
     testImplementation libraries.test_junit
+    testImplementation libraries.test_mockk
+    testImplementation libraries.test_arch
+    testImplementation libraries.test_coroutines
+
     androidTestImplementation libraries.test_mockk_android
     androidTestImplementation libraries.test_junit_ext
     androidTestImplementation libraries.test_runner
     androidTestImplementation libraries.test_rules
     androidTestImplementation libraries.test_espresso
     androidTestImplementation libraries.test_mockwebserver
+
     debugImplementation libraries.test_espresso_idling_resource
     debugImplementation libraries.test_fragment
 }

@@ -1,11 +1,11 @@
 package com.tink.moneymanagerui.overview.charts
 
+import android.content.res.Resources
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.content.res.Resources
-import se.tink.android.categories.CategoryRepository
 import com.tink.model.category.Category
+import se.tink.android.categories.CategoryRepository
 import se.tink.commons.extensions.findCategoryById
 import se.tink.commons.extensions.getCategoryByType
 import javax.inject.Inject
@@ -41,10 +41,10 @@ internal class ChartDetailsViewModel @Inject constructor(private val categoryRep
     }
 
     fun setCategoryId(id: String) {
-        categoryId.value = id
+        categoryId.postValue(id)
     }
 
     fun setType(type: Category.Type) {
-        categoryType.value = type
+        categoryType.postValue(type)
     }
 }

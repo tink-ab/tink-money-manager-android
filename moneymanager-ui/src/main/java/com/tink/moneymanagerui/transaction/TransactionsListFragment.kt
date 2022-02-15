@@ -1,7 +1,5 @@
 package com.tink.moneymanagerui.transaction
 
-import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.tracking.ScreenEvent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -12,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
@@ -38,7 +38,8 @@ internal class TransactionsListFragment : BaseFragment() {
         ) as? TransactionsListMetaData)
     }
 
-    private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
+    private val featureType: MoneyManagerFeatureType? by lazy {
+        arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
 
     private lateinit var viewModel: TransactionListViewModel
 

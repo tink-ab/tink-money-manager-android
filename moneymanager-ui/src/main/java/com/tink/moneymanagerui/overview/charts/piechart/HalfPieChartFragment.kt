@@ -1,7 +1,5 @@
 package com.tink.moneymanagerui.overview.charts.piechart
 
-import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.tracking.ScreenEvent
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionManager
@@ -10,27 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
-import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.view.*
+import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.transitions.ChangePositionTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.databinding.TinkHalfPieChartItemBinding
-import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.ChartItem
-import com.tink.moneymanagerui.overview.charts.ChartType
-import com.tink.moneymanagerui.overview.charts.DetailsChartModel
-import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.StatisticItem
-import com.tink.moneymanagerui.overview.charts.TransactionsItem
+import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.overview.charts.*
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
+import com.tink.moneymanagerui.theme.resolveColorForFeature
+import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.*
+import kotlinx.android.synthetic.main.tink_fragment_half_pie_chart.view.*
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.getColorFromAttr
 import javax.inject.Inject
@@ -72,14 +69,21 @@ internal class HalfPieChartFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ) {
         viewModel.apply {
-            getStatistic(requireContext(), type).observe(
-                viewLifecycle,
-                Observer { it?.let { updateModel(it) } })
+            getDetailsChartDataState(type, getString(R.string.tink_other)).observe(viewLifecycle) { dataState ->
+                if (dataState is SuccessState) {
+                    updateModel(dataState.data)
+                }
+
+                loaderSpinner?.visibleIf { dataState is LoadingState }
+                list.visibleIf { dataState is SuccessState }
+                chartLayout.visibleIf { dataState is SuccessState }
+                halfPieChartTotalAmount.visibleIf { dataState is SuccessState }
+            }
         }
     }
 
-    private fun updateModel(model: DetailsChartModel) {
-        if (model.topLevel) return
+    private fun updateModel(data: DetailsChartData) {
+        if (data.topLevel) return
 
         if (!transitionCoordinator.hasTransitionInProgress()) {
             TransitionManager.beginDelayedTransition(view as ViewGroup, changeTransition())
@@ -89,29 +93,32 @@ internal class HalfPieChartFragment : BaseFragment() {
         val fullSweep = 180 - 2 * startAngle
         view.pieChart.apply {
             removeAllViews()
-            addBackSegment(model.title, model.color)
+            val chartTitle = getString(data.title)
+            val chartColor = context.resolveColorForFeature(data.color, MoneyManagerFeatureType.STATISTICS)
+            addBackSegment(chartTitle, chartColor)
             addSegments(
-                model.data.items,
+                data.data.items,
                 { it.amount },
-                model.colorGenerator,
-                model.color,
-                model.currency,
+                data.colorGenerator,
+                chartColor,
+                data.currency,
                 startFrom = startAngle,
                 fullSweep = fullSweep,
                 onClick = ::onItemClicked
             )
         }
 
-        val halfPieChartItems = model.data.items.map { item ->
+        val halfPieChartItems = data.data.items.map { item ->
             HalfChartItem(
                 item.name,
-                amountFormatter.format(item.amount.toDouble(), model.currency, useSymbol = true),
+                amountFormatter.format(item.amount.toDouble(), data.currency, useSymbol = true),
                 View.OnClickListener { onItemClicked(item) })
         }
         bindItems(view.itemsList, halfPieChartItems, HalfChartItemTheme(requireContext().getColorFromAttr(ownTheme.chartItemColor)))
-        pieChart.transitionName = getString(R.string.tink_pie_chart_transition, model.title)
-        halfPieChartTotalAmount.transitionName = getString(R.string.tink_amount_transition, model.title)
-        halfPieChartTotalAmount.text = amountFormatter.format(model.amount.toDouble(), model.currency, useSymbol = true)
+        val chartTitle = getString(data.title)
+        pieChart.transitionName = getString(R.string.tink_pie_chart_transition, chartTitle)
+        halfPieChartTotalAmount.transitionName = getString(R.string.tink_amount_transition, chartTitle)
+        halfPieChartTotalAmount.text = amountFormatter.format(data.amount.toDouble(), data.currency, useSymbol = true)
 
         view.rootView.post { onViewReady() }
     }
