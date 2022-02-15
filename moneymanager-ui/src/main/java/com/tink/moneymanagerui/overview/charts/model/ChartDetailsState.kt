@@ -2,11 +2,15 @@ package com.tink.moneymanagerui.overview.charts.model
 
 import com.tink.model.statistics.Statistics
 import com.tink.model.transaction.Transaction
-import com.tink.moneymanagerui.overview.charts.*
+import com.tink.moneymanagerui.overview.charts.ChartSourceData
+import com.tink.moneymanagerui.overview.charts.ChartSourceDataBase
+import com.tink.moneymanagerui.overview.charts.StatisticalChartSourceData
+import com.tink.moneymanagerui.overview.charts.TransactionsChartSourceData
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
+import com.tink.service.network.map
 
 internal data class ChartDetailsState(
     val sourceData: ResponseState<ChartSourceDataBase> = LoadingState,

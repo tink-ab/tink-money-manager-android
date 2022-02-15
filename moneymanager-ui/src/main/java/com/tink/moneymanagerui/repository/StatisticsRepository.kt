@@ -19,7 +19,14 @@ import com.tink.service.network.SuccessState
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
 import com.tink.service.util.DispatcherProvider
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
@@ -228,9 +235,9 @@ internal class StatisticsRepository @Inject constructor(
                 DateTime().let { now ->
                     val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
                     if (period == null) {
-                        return@let ErrorState("Did not have data for the current period.")
+                        ErrorState("Did not have data for the current period.")
                     } else {
-                        return@let SuccessState(period)
+                        SuccessState(period)
                     }
                 }
             }
