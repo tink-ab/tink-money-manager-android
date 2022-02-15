@@ -240,6 +240,7 @@ internal class StatisticsRepository @Inject constructor(
             is SuccessState -> {
                 DateTime().let { now ->
                     val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                        ?: periodMapState.data.values.maxByOrNull { it.identifier }
                     if (period == null) {
                         ErrorState("Did not have data for the current period.")
                     } else {
