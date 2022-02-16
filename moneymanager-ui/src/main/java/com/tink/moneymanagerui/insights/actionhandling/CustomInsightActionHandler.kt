@@ -24,6 +24,7 @@ internal object CustomInsightActionHandler {
             is InsightAction.Data.CategorizeExpense,
             is InsightAction.Data.CategorizeTransactions,
             is InsightAction.Data.ViewTransactions,
+            is InsightAction.Data.ViewAccount,
             is InsightAction.Data.ViewTransactionsByCategory,
             is InsightAction.Data.RefreshCredential -> true
             else -> false
@@ -61,6 +62,18 @@ internal object CustomInsightActionHandler {
                     ) { isActionDone ->
                         onComplete.invoke(isActionDone)
                     } ?: false
+            }
+
+            is InsightAction.Data.ViewAccount -> {
+                val isActionHandled = insightActionHandler
+                    ?.viewAccount((action.data as InsightAction.Data.ViewAccount).accountId)
+                    ?: false
+                if (isActionHandled) {
+                    onComplete.invoke(true)
+                    true
+                } else {
+                    false
+                }
             }
 
             is InsightAction.Data.ViewTransactions -> {

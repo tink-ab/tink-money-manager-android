@@ -91,7 +91,7 @@ object InsightMockFactory {
         types.map { type -> getInsightForType(type) }
 
 
-    fun getAccountBalanceLow(): JSONObject {
+    fun getAccountBalanceLow(action: String = getAcknowledgeAction()): JSONObject {
         return JSONObject("""
             {
                 "userId": 1234,
@@ -100,7 +100,7 @@ object InsightMockFactory {
                 "title": "You have a low balance on Private Account",
                 "description": "Your balance is €10. Do you want to transfer more money to this account?",
                 "createdTime": 1111111,
-                "insightActions": [],
+                 "insightActions": [$action, ${getDismissAction()}],
                 "data": {
                     "type": "ACCOUNT_BALANCE_LOW",
                     "accountId": "c6f26025fbb949a08348e2f73f0ae12c",
@@ -122,7 +122,7 @@ object InsightMockFactory {
                 "title": "Your connection to Handelsbanken will expire soon",
                 "description": "Reconnect to Handelsbanken to make sure your financial data stays up to date.",
                 "createdTime": 1111111,
-                "insightActions": [${getRefreshCredential(refreshCredentials)}, ${getDismissAction()}],
+                "insightActions": [${getRefreshCredentialAction(refreshCredentials)}, ${getDismissAction()}],
                 "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
                 "data": {
                     "type": "AGGREGATION_REFRESH_PSD2_CREDENTIAL",
@@ -567,13 +567,25 @@ object InsightMockFactory {
         """
     }
 
-    fun getRefreshCredential(credentialsId: String = "123"): String {
+    fun getRefreshCredentialAction(credentialsId: String = "123"): String {
         return """
             {
                 "label": "Refresh",
                 "data": { 
                     "type": "REFRESH_CREDENTIAL",
                      "credentialId": $credentialsId
+                }
+            }
+        """
+    }
+
+    fun getViewAccountAction(accountId: String = "d2b49640cbba4d8899a4886b6e8892f8"): String {
+        return """
+            {
+                "label": "See details",
+                "data": { 
+                    "type": "VIEW_ACCOUNT",
+                    "accountId": $accountId
                 }
             }
         """

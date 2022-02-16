@@ -88,6 +88,15 @@ open class JavaInsightActionHandler {
     open fun viewTransactions(transactionIds: List<String>): Boolean = false
 
     /**
+     * Handle action where the user wants to view account matching the id.
+     * This corresponds to [InsightAction.Type.VIEW_ACCOUNT] and [InsightAction.Type.VIEW_TRANSACTIONS] action types.
+     *
+     * @param accountId Identifiers for the account that should be shown
+     * @return `true` if the action will be handled, `false` otherwise
+     */
+    open fun viewAccount(accountId: String): Boolean = false
+
+    /**
      * Handle action where the user wants to view transactions by categories.
      * This corresponds to [InsightAction.Type.VIEW_TRANSACTIONS_BY_CATEGORY] action type.
      *
