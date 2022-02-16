@@ -2,6 +2,7 @@ package com.tink.moneymanagerui.insights.viewproviders
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnNextLayout
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
@@ -16,8 +17,10 @@ import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.floatValue
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
+import timber.log.Timber
 import java.text.DecimalFormatSymbols
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @ContributesInsightViewProvider
 class WeeklyExpensesByDayViewProvider @Inject constructor(
@@ -59,8 +62,69 @@ class WeeklyExpensesByDayInsightViewHolder(
             totalExpensesChart.labels = data.chartData.dayLabels
 
             averageExpensesChart.data = data.chartData.averageAmountData
-            averageExpensesChart.amountLabels = listOf()
-            averageExpensesChart.labels = listOf()
+            averageExpensesChart.amountLabels = emptyList()
+            averageExpensesChart.labels = emptyList()
+
+//            averageExpensesChart.doOnNextLayout {
+//                val expensesMax = data.chartData.totalAmountData.maxOrNull() ?: 0.000001f
+//                val averageMax = data.chartData.averageAmountData.maxOrNull() ?: 0.000001f
+//                val height = it.height
+//                Timber.d("Height of total expenses is $height expenses max $expensesMax average max $averageMax")
+//
+//                if (expensesMax > averageMax) {
+//                    val scale = averageMax / expensesMax
+//                    val params = averageExpensesChart.layoutParams
+//                    params.height = (scale * height).roundToInt()
+//                    averageExpensesChart.layoutParams = params
+//                    Timber.d("Scale for average should be $scale")
+//                } else {
+//                    val scale = expensesMax / averageMax
+//                    val params = totalExpensesChart.layoutParams
+//                    params.height = (scale * height).roundToInt()
+//                    totalExpensesChart.layoutParams = params
+//                    Timber.d("Scale for expenses should be $scale")
+//                }
+//            }
+//            totalExpensesChart.doOnNextLayout {
+//                val expensesMax = data.chartData.totalAmountData.maxOrNull() ?: 0.000001f
+//                val averageMax = data.chartData.averageAmountData.maxOrNull() ?: 0.000001f
+//                val height = it.height
+//                Timber.d("Height of total expenses is $height expenses max $expensesMax average max $averageMax")
+//
+//                if (expensesMax > averageMax) {
+//                    val scale = averageMax / expensesMax
+//                    val params = averageExpensesChart.layoutParams
+//                    params.height = (scale * height).roundToInt()
+//                    averageExpensesChart.layoutParams = params
+//                    Timber.d("Scale for average should be $scale")
+//                } else {
+//                    val scale = expensesMax / averageMax
+//                    val params = totalExpensesChart.layoutParams
+//                    params.height = (scale * height).roundToInt()
+//                    totalExpensesChart.layoutParams = params
+//                    Timber.d("Scale for expenses should be $scale")
+//                }
+            totalExpensesChart.doOnNextLayout {
+                val expensesMax = data.chartData.totalAmountData.maxOrNull() ?: 0.000001f
+                val averageMax = data.chartData.averageAmountData.maxOrNull() ?: 0.000001f
+                val labelHeight = 100
+                val heightMinusLabel = it.height - labelHeight
+                Timber.d("Height of total expenses is $heightMinusLabel expenses max $expensesMax average max $averageMax")
+
+                if (expensesMax > averageMax) {
+                    val scale = averageMax / expensesMax
+                    val params = totalExpensesChart.layoutParams
+                    params.height = (scale * heightMinusLabel).roundToInt() + labelHeight
+                    totalExpensesChart.layoutParams = params
+                    Timber.d("Scale for average should be $scale")
+                } else {
+                    val scale = expensesMax / averageMax
+                    val params = averageExpensesChart.layoutParams
+                    params.height = (scale * heightMinusLabel).roundToInt() + labelHeight
+                    averageExpensesChart.layoutParams = params
+                    Timber.d("Scale for expenses should be $scale")
+                }
+            }
         }
     }
 }

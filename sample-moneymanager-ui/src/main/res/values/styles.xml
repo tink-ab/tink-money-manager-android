@@ -1,3 +1,4 @@
+
 <resources>
 
   <!-- Base application theme. -->
@@ -13,8 +14,8 @@
     <item name="tink_colorPrimary">#ff461e7d</item>
     <item name="tink_colorPrimaryDark">#ff461e7d</item>
     <item name="tink_colorPrimaryLight">#ff461e7d</item>
-    <item name="tink_expensesColor">#ff5638ff</item>
-    <item name="tink_expensesDarkColor">#ff5638ff</item>
+    <item name="tink_expensesColor">#FF0000</item>
+    <item name="tink_expensesDarkColor">#660000</item>
     <item name="tink_expensesLightColor">#ffe6e1ff</item>
     <item name="tink_colorOnExpenses">#ffffff</item>
     <item name="tink_incomeColor">#ff36b472</item>
@@ -43,8 +44,8 @@
     <item name="tink_colorPrimary">#4E7681</item>
     <item name="tink_colorPrimaryDark">#4E7681</item>
     <item name="tink_colorPrimaryLight">#4E7681</item>
-    <item name="tink_expensesColor">#4E7681</item>
-    <item name="tink_expensesDarkColor">#4E7681</item>
+    <item name="tink_expensesColor">#FF0000</item>
+    <item name="tink_expensesDarkColor">#660000</item>
     <item name="tink_expensesLightColor">#E4EBEC</item>
     <item name="tink_colorOnExpenses">#ffffff</item>
     <item name="tink_incomeColor">#ff36b472</item>

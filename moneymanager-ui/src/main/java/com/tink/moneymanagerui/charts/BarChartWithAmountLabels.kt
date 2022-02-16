@@ -60,12 +60,21 @@ internal class BarChartWithAmountLabels : View {
         isAntiAlias = true
     }
 
-    private val amountLabelPaint = TextPaint().apply {
+    private val amountLabelPaint: TextPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.tink_pico_text_size)
         color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true
+    }
+
+    private val transparentAmountLabelPaint: TextPaint = TextPaint().apply {
+        textSize = resources.getDimension(R.dimen.tink_pico_text_size)
+        color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
+        typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
+        textAlign = Paint.Align.CENTER
+        isAntiAlias = true
+        alpha = 0
     }
 
     private val averageLinePaint = Paint().apply {
@@ -162,12 +171,17 @@ internal class BarChartWithAmountLabels : View {
             //Draw items
 
             if (amountLabels.isNullOrEmpty()) {
-                canvas.drawBarChart(
+                val emptyValues = listOf("0","0","0","0","0")
+                canvas.drawBarChartWithAmountLabels(
                     barChartBounds,
                     data,
                     barWidth,
                     barPaint,
-                    barChartCornerRadius
+                    barChartCornerRadius,
+                    emptyValues,
+                    transparentAmountLabelPaint,
+                    amountLabelTopMargin,
+                    amountLabelBottomMargin
                 )
             } else {
                 canvas.drawBarChartWithAmountLabels(
