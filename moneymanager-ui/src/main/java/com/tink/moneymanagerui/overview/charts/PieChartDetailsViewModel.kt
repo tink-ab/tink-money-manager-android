@@ -23,6 +23,7 @@ import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
+import com.tink.service.network.map
 import se.tink.android.livedata.map
 import se.tink.android.livedata.requireValue
 import se.tink.android.repository.transaction.TransactionRepository
@@ -77,11 +78,9 @@ internal class PieChartDetailsViewModel @Inject constructor(
     private val selectedPeriod = MediatorLiveData<ResponseState<Period>>().apply {
         addSource(statisticRepository.currentPeriodState) { value = it }
     }
-    private val periods: LiveData<ResponseState<List<Period>>> = Transformations.map(statisticRepository.periodsState) {
-        if (it is SuccessState<List<Period>>) {
-            SuccessState(it.data.sortedWith(periodComparator).reversed().takeLast(12))
-        } else {
-            it
+    private val periods: LiveData<ResponseState<List<Period>>> = Transformations.map(statisticRepository.periodsState) { state ->
+        state.map { data ->
+            data.sortedWith(periodComparator).reversed().takeLast(12)
         }
     }
     private val statisticsState = statisticRepository.statisticsState
@@ -134,7 +133,9 @@ internal class PieChartDetailsViewModel @Inject constructor(
                     chartDetailsSourceData.category.data,
                     chartDetailsSourceData.period.data
                 ).map { SuccessState(it) }
-
+            chartDetailsSourceData.category is ErrorState || chartDetailsSourceData.period is ErrorState -> {
+                MutableLiveData(ErrorState("")) // TODO: Add function to aggregate error messages
+            }
             else -> MutableLiveData(LoadingState)
         }
 
@@ -258,11 +259,3 @@ internal class PieChartDetailsViewModel @Inject constructor(
         )
     }
 }
-
-// TODO: Remove when method merged in core
-fun <T, R> ResponseState<T>.map (f: (T) -> R) : ResponseState<R> =
-    when (this) {
-        is SuccessState -> SuccessState(f(data))
-        is LoadingState -> LoadingState
-        is ErrorState -> ErrorState(errorMessage)
-    }

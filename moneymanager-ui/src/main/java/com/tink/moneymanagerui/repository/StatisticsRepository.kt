@@ -19,7 +19,14 @@ import com.tink.service.network.SuccessState
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
 import com.tink.service.util.DispatcherProvider
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
@@ -138,11 +145,17 @@ internal class StatisticsRepository @Inject constructor(
             ?.start
             ?.toDateTime() ?: DateTime.now()
 
+        val endDate = DateTime.now()
+            .withDayOfMonth(backfillStartTime.dayOfMonth)
+            .withHourOfDay(23)
+            .withMinuteOfHour(59)
+            .withSecondOfMinute(59)
+
         val existingPeriodIdentifiers = distinctBy { it.period.identifier }.map { it.period.identifier }
         val monthsMissingTransactions = generateSequence(backfillStartTime) { date ->
             date.plusMonths(1)
         }.takeWhile { iteratedDate ->
-            iteratedDate.isBeforeNow
+            iteratedDate.isBefore(endDate)
         }.filter { iteratedDate ->
             !existingPeriodIdentifiers.contains(iteratedDate.toPeriodIdentifier())
         }.map { iteratedDate ->
@@ -227,10 +240,11 @@ internal class StatisticsRepository @Inject constructor(
             is SuccessState -> {
                 DateTime().let { now ->
                     val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                        ?: periodMapState.data.values.maxByOrNull { it.identifier }
                     if (period == null) {
-                        return@let ErrorState("Did not have data for the current period.")
+                        ErrorState("Did not have data for the current period.")
                     } else {
-                        return@let SuccessState(period)
+                        SuccessState(period)
                     }
                 }
             }
