@@ -57,6 +57,10 @@
     <item name="tink_expensesIconBackgroundColor">?tink_uncategorizedLightColor</item>
     <item name="tink_transferIconBackgroundColor">?tink_uncategorizedLightColor</item>
 
+    <item name="tink_accountIconColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_accountIconBackgroundColor">?tink_colorAccent</item>
+    <item name="tink_accountTextColor">?tink_accountIconColor</item>
+
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
     <item name="tink_icon_category_all_income">@drawable/tink_category_all_income</item>
@@ -83,6 +87,8 @@
     <item name="tink_icon_add_button">@drawable/tink_add_circle_outline_white</item>
     <item name="tink_icon_home">@drawable/tink_category_home</item>
     <item name="tink_icon_transfers">@drawable/tink_category_transfer</item>
+    <item name="tink_icon_ingested_account">@drawable/tink_ingested_account</item>
+    <item name="tink_icon_account">@drawable/tink_account</item>
 
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>

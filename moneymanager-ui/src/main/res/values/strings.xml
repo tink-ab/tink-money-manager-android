@@ -33,6 +33,10 @@
   <string name="tink_latest_transactions_toolbar_title">All transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
+  <string name="tink_overview_favorite_accounts_see_all">See all</string>
+  <string name="tink_overview_favorite_accounts_see_all_accounts">See all accounts</string>
+  <string name="tink_overview_favorite_accounts_title">Favorite accounts</string>
+
   <string name="tink_transaction_similar_title">Similar transactions</string>
   <string name="tink_transaction_similar_description">Do you also want to assign these transactions to the %1$s category?</string>
   <string name="tink_transaction_similar_button_skip_text">Skip</string>
