@@ -3,21 +3,11 @@ package com.tink.moneymanagerui.insights.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.tink.model.insights.Insight
-import com.tink.model.insights.InsightAction
-import com.tink.model.insights.InsightData
-import com.tink.model.insights.InsightState
-import com.tink.model.insights.InsightType
-import com.tink.model.misc.Amount
-import com.tink.model.misc.ExactNumber
-import com.tink.model.relations.ExpensesByDay
-import com.tink.model.time.YearWeek
 import com.tink.moneymanagerui.insights.viewproviders.InsightViewProviderFactory
 import com.tink.service.insight.InsightService
 import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDate
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.livedata.map
@@ -44,59 +34,7 @@ class InsightsRepository @Inject constructor(
     }
 
     val insights: LiveData<List<Insight>> = Transformations.map(_insights) {
-        listOf(
-            Insight(
-                "1",
-                InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
-                "Weekly summary",
-                "My weekly summary",
-                Instant.now(),
-                listOf(
-                    InsightAction(
-                        "View details",
-                        InsightAction.Type.ACKNOWLEDGE,
-                        InsightAction.Data.Acknowledge
-                    ),
-                    InsightAction(
-                        "Archive",
-                        InsightAction.Type.ACKNOWLEDGE,
-                        InsightAction.Data.Acknowledge
-                    )
-                ),
-                InsightState.Active,
-                InsightData.WeeklyExpensesByDayData(
-                    YearWeek(2022, 6),
-                    listOf(
-                        ExpensesByDay(
-                            LocalDate.now(),
-                            Amount(ExactNumber(10, 0), "SEK"),
-                            Amount(ExactNumber(20, 0), "SEK")
-                        ),
-                        ExpensesByDay(
-                            LocalDate.now(),
-                            Amount(ExactNumber(20, 0), "SEK"),
-                            Amount(ExactNumber(40, 0), "SEK")
-                        ),
-                        ExpensesByDay(
-                            LocalDate.now(),
-                            Amount(ExactNumber(30, 0), "SEK"),
-                            Amount(ExactNumber(60, 0), "SEK")
-                        ),
-                        ExpensesByDay(
-                            LocalDate.now(),
-                            Amount(ExactNumber(40, 0), "SEK"),
-                            Amount(ExactNumber(80, 0), "SEK")
-                        ),
-                        ExpensesByDay(
-                            LocalDate.now(),
-                            Amount(ExactNumber(50, 0), "SEK"),
-                            Amount(ExactNumber(100, 0), "SEK")
-                        ),
-                    )
-                )
-            )
-        )
-//        it?.value ?: emptyList()
+        it?.value ?: emptyList()
     }
 
     private val _archivedInsights: AutoFetchLiveData<ErrorOrValue<List<Insight>>> =

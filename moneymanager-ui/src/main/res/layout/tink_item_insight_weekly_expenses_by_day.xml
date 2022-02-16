@@ -42,35 +42,47 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/averageText" />
 
-    <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
-      android:id="@+id/averageExpensesChart"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/barChartContainer"
       android:layout_width="0dp"
       android:layout_height="0dp"
-      android:layout_marginStart="24dp"
-      android:layout_marginEnd="16dp"
-      app:tink_horizontal_margin="8dp"
-      app:tink_bar_color_below_threshold="?tink_expensesDarkColor"
-      app:tink_bar_label_style="@style/tink_chart_label"
-      app:tink_bar_width="28dp"
       app:layout_constraintBottom_toBottomOf="@+id/averageExpensesByDayContainer"
       app:layout_constraintEnd_toEndOf="@+id/averageExpensesByDayContainer"
       app:layout_constraintStart_toStartOf="@+id/averageExpensesByDayContainer"
-      app:layout_constraintTop_toTopOf="@+id/averageExpensesByDayContainer" />
+      app:layout_constraintTop_toTopOf="@+id/averageExpensesByDayContainer"
+      >
 
-    <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
-      android:id="@+id/totalExpensesChart"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginEnd="24dp"
-      app:tink_horizontal_margin="8dp"
-      app:tink_bar_color_below_threshold="?tink_expensesColor"
-      app:tink_bar_label_style="@style/tink_chart_label"
-      app:tink_bar_width="28dp"
-      app:layout_constraintBottom_toBottomOf="@+id/expensesByDayContainer"
-      app:layout_constraintEnd_toEndOf="@+id/expensesByDayContainer"
-      app:layout_constraintStart_toStartOf="@+id/expensesByDayContainer"
-      app:layout_constraintTop_toTopOf="@+id/expensesByDayContainer" />
+      <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
+        android:id="@+id/averageExpensesChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        app:tink_horizontal_margin="8dp"
+        app:tink_bar_color_below_threshold="?tink_expensesDarkColor"
+        app:tink_bar_label_style="@style/tink_chart_label"
+        app:tink_bar_width="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+      <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
+        android:id="@+id/totalExpensesChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="24dp"
+        app:tink_horizontal_margin="8dp"
+        app:tink_bar_color_below_threshold="?tink_expensesColor"
+        app:tink_bar_label_style="@style/tink_chart_label"
+        app:tink_bar_width="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
       android:id="@+id/averageCircle"
