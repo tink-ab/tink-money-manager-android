@@ -9,12 +9,12 @@ import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionState
 import com.tink.moneymanagerui.extensions.getInstant
 import com.tink.moneymanagerui.extensions.minusMonths
-import com.tink.moneymanagerui.overview.charts.map
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.service.handler.ResultHandler
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
+import com.tink.service.network.map
 import kotlinx.coroutines.Job
 import org.joda.time.DateTime
 import org.threeten.bp.Instant

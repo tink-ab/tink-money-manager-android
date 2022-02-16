@@ -18,11 +18,11 @@ import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
 import com.tink.moneymanagerui.extensions.toStartOfLocalDate
 import com.tink.moneymanagerui.extensions.totalMonths
-import com.tink.moneymanagerui.overview.charts.map
 import com.tink.moneymanagerui.util.extensions.floorAmount
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
+import com.tink.service.network.map
 import org.joda.time.DateTime
 import org.joda.time.Days
 import org.joda.time.Months
