@@ -2,22 +2,24 @@ package com.tink.moneymanagerui.insights.viewproviders
 
 import android.view.View
 import android.view.ViewGroup
-import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
-import se.tink.android.annotations.ContributesInsightViewProvider
-import se.tink.commons.extensions.inflate
+import androidx.core.view.doOnNextLayout
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
 import com.tink.model.relations.ExpensesByDay
+import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.util.CurrencyUtils
+import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
+import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.doubleValue
 import se.tink.commons.extensions.floatValue
+import se.tink.commons.extensions.inflate
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
 import java.text.DecimalFormatSymbols
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @ContributesInsightViewProvider
 class WeeklyExpensesByDayViewProvider @Inject constructor(
@@ -59,8 +61,42 @@ class WeeklyExpensesByDayInsightViewHolder(
             totalExpensesChart.labels = data.chartData.dayLabels
 
             averageExpensesChart.data = data.chartData.averageAmountData
-            averageExpensesChart.amountLabels = listOf()
-            averageExpensesChart.labels = listOf()
+            averageExpensesChart.amountLabels = emptyList()
+            averageExpensesChart.labels = emptyList()
+
+            barChartContainer.doOnNextLayout {
+                val expensesMax = data.chartData.totalAmountData.maxOrNull() ?: 0.000001f
+                val averageMax = data.chartData.averageAmountData.maxOrNull() ?: 0.000001f
+                val labelHeight = averageExpensesChart.getLabelHeight().toInt()
+                val bottomMargin = averageExpensesChart.barChartMarginBottom
+                val containerHeight = it.height
+
+                if (expensesMax > averageMax) {
+                    val expenseBarHeight = containerHeight - bottomMargin - labelHeight
+                    val scale = averageMax / expensesMax
+                    val averageBarHeight = (scale * expenseBarHeight).roundToInt()
+                    val averageHeight = averageBarHeight + bottomMargin + labelHeight
+
+                    setBarChartHeights(averageHeight, containerHeight)
+                } else {
+                    val averageHeight = containerHeight - labelHeight
+                    val averageBarHeight = averageHeight - bottomMargin - labelHeight
+                    val scale = expensesMax / averageMax
+                    val expenseBarHeight = (scale * averageBarHeight).roundToInt()
+                    val expenseHeight = expenseBarHeight + labelHeight + bottomMargin
+
+                    setBarChartHeights(averageHeight, expenseHeight)
+                }
+            }
+        }
+    }
+
+    private fun View.setBarChartHeights(averageChartHeight: Int, expenseChartHeight: Int) {
+        averageExpensesChart.layoutParams = averageExpensesChart.layoutParams.apply {
+            height = averageChartHeight
+        }
+        totalExpensesChart.layoutParams = totalExpensesChart.layoutParams.apply {
+            height = expenseChartHeight
         }
     }
 }
