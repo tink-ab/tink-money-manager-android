@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.di
 
+import com.tink.moneymanagerui.accounts.list.AccountDetailsListFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationModule
@@ -59,6 +60,9 @@ internal interface FragmentBindingModule {
 
     @ContributesAndroidInjector
     fun accountsListFragment(): AccountsListFragment
+
+    @ContributesAndroidInjector
+    fun accountListFragment(): AccountDetailsListFragment
 
     @ContributesAndroidInjector
     fun accountDetailsFragment(): AccountDetailsFragment

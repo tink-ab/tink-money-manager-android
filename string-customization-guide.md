@@ -19,6 +19,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 
 | String Resource ID | English Text |
 |------|-----|
+| `tink_accounts_error` | No accounts available |
 | `tink_all_categories` | All categories |
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_create_all_expenses` | All expenses |
