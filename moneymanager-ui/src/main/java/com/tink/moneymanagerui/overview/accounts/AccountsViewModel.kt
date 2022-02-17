@@ -52,4 +52,7 @@ internal class AccountsViewModel @Inject constructor(
     val hasFavoriteAccount: LiveData<Boolean> = favoriteAccounts.map {
         it.isNotEmpty()
     }
+
+    // TODO: Add logic to configure MM which account list mode to use
+    val accountDetailsDisplayMode = AccountDetailsScreenType.NOT_GROUPED_ACCOUNTS_LIST
 }

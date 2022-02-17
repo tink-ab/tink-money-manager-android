@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.list.AccountDetailsListFragment
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
-import timber.log.Timber
 
 internal class AccountsListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.tink_fragment_accounts_list
@@ -70,8 +70,7 @@ internal class AccountsListFragment : BaseFragment() {
     }
 
     private fun navigateToAllAccounts() {
-        // TODO: Navigate to account fragment when implemented
-        Timber.d("Clicked on see all accounts no favorites")
+        fragmentCoordinator.replace(AccountDetailsListFragment())
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
