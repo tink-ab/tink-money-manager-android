@@ -5,9 +5,9 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import se.tink.android.repository.account.AccountRepository
 import com.tink.model.account.Account
 import com.tink.service.network.ResponseState
+import se.tink.android.repository.account.AccountRepository
 import javax.inject.Inject
 
 internal class AccountsViewModel @Inject constructor(
@@ -54,5 +54,5 @@ internal class AccountsViewModel @Inject constructor(
     }
 
     // TODO: Add logic to configure MM which account list mode to use
-    val accountDetailsDisplayMode = AccountDetailsScreenType.NOT_GROUPED_ACCOUNTS_LIST
+    val accountDetailsDisplayMode = AccountDetailsScreenType.GROUPED_ACCOUNTS_LIST
 }

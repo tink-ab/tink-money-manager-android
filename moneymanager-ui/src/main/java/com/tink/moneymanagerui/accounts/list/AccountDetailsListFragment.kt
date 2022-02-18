@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
@@ -26,6 +27,10 @@ class AccountDetailsListFragment : BaseFragment() {
         fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
     }
 
+    private val groupedAccountsAdapter = GroupedAccountList {
+        fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
+    }
+
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[AccountsViewModel::class.java]
@@ -43,16 +48,38 @@ class AccountDetailsListFragment : BaseFragment() {
         allAccountsList.adapter = accountsAdapter
         allAccountsList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
+        groupedAccountsList.layoutManager = LinearLayoutManager(context)
+        groupedAccountsList.adapter = groupedAccountsAdapter
+        groupedAccountsList.isNestedScrollingEnabled = true
+
         viewModel.accountsState.observe(
             viewLifecycleOwner,
             Observer { accountsState ->
                 allAccountsList.visibleIf { accountsState is SuccessState }
+                groupedAccountsList.visibleIf { accountsState is SuccessState }
                 accountErrorText.visibleIf { accountsState is ErrorState }
                 accountsProgressBar.visibleIf { accountsState is LoadingState }
                 if (accountsState is SuccessState) {
+
                     accountsAdapter.submitList(accountsState.data.map {
                         AccountWithImage(it, null)
                     })
+
+                    val list = accountsState.data.map {
+                        AccountWithImage(it, null)
+                    }.toMutableList()
+                    // Add test data
+                    val a0 = list?.get(0)
+                    val a1 = a0.copy(account = a0.account.copy(accountNumber = "a1", type = Account.Type.LOAN))
+                    val a2 = a0.copy(account = a0.account.copy(accountNumber = "a2", type = Account.Type.MORTGAGE))
+                    val a3 = a0.copy(account = a0.account.copy(accountNumber = "a3", type = Account.Type.CREDIT_CARD))
+                    val a4 = a0.copy(account = a0.account.copy(accountNumber = "a4", type = Account.Type.OTHER))
+                    val a5 = a0.copy(account = a0.account.copy(accountNumber = "a5", type = Account.Type.PENSION))
+                    val a6 = a0.copy(account = a0.account.copy(accountNumber = "a6", type = Account.Type.CREDIT_CARD))
+
+                    list.addAll(listOf(a1, a2, a3, a4, a5, a6))
+
+                    groupedAccountsAdapter.submitList(list)
                 }
             }
         )
