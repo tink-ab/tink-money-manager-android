@@ -39,9 +39,11 @@ fun Iterable<Amount>.average(): Amount =
         pair.first / pair.second
     }
 
-
 fun Iterable<Amount>.sumOrNull(): Amount? =
     reduceOrNull { sum, amount -> sum + amount }
+
+fun Iterable<Amount>.sum(): Amount =
+    reduce { sum, amount -> sum + amount }
 
 val Amount.isValid get() = currencyCode.isNotEmpty()
 

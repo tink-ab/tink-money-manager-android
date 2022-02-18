@@ -50,7 +50,7 @@ class AccountDetailsListFragment : BaseFragment() {
 
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
         groupedAccountsList.adapter = groupedAccountsAdapter
-        groupedAccountsList.isNestedScrollingEnabled = true
+        //groupedAccountsList.isNestedScrollingEnabled = true
 
         viewModel.accountsState.observe(
             viewLifecycleOwner,
@@ -75,9 +75,12 @@ class AccountDetailsListFragment : BaseFragment() {
                     val a3 = a0.copy(account = a0.account.copy(accountNumber = "a3", type = Account.Type.CREDIT_CARD))
                     val a4 = a0.copy(account = a0.account.copy(accountNumber = "a4", type = Account.Type.OTHER))
                     val a5 = a0.copy(account = a0.account.copy(accountNumber = "a5", type = Account.Type.PENSION))
-                    val a6 = a0.copy(account = a0.account.copy(accountNumber = "a6", type = Account.Type.CREDIT_CARD))
+                    val a6 = a0.copy(account = a0.account.copy(accountNumber = "a6", type = Account.Type.OTHER))
+                    val a7 = a0.copy(account = a0.account.copy(accountNumber = "a7", type = Account.Type.OTHER))
+                    val a8 = a0.copy(account = a0.account.copy(accountNumber = "a8", type = Account.Type.OTHER))
+                    val a9 = a0.copy(account = a0.account.copy(accountNumber = "a9", type = Account.Type.OTHER))
 
-                    list.addAll(listOf(a1, a2, a3, a4, a5, a6))
+                    list.addAll(listOf(a1, a2, a3, a4, a5, a6, a7, a8, a9))
 
                     groupedAccountsAdapter.submitList(list)
                 }

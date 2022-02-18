@@ -2,7 +2,6 @@ package com.tink.moneymanagerui.accounts.list
 
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,13 +10,10 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import kotlinx.android.synthetic.main.tink_grouped_item_account.view.*
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.sum
 
 class GroupedAccountList(val accountClicked: (Account) -> Unit):
     ListAdapter<AccountWithImage, GroupedAccountList.GroupedAccountViewHolder>(AccountDiffUtil) {
-
-    private val accountsAdapter = NotGroupedAccountList { account ->
-        accountClicked(account)
-    }
 
     val accountGroupingKinds = AccountGroupByKind.values().toList()
 
@@ -61,13 +57,21 @@ class GroupedAccountList(val accountClicked: (Account) -> Unit):
     inner class GroupedAccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(accountWithImageList: List<AccountWithImage>) {
-            itemView.testText.text = accountWithImageList.size.toString()
+            val balanceSum = accountWithImageList.map { it.account.balance }.sum()
+
+            itemView.accountSumText.text = accountWithImageList.size.toString()
+
+            val accountsAdapter = NotGroupedAccountList { account ->
+                accountClicked(account)
+            }
 
             accountsAdapter.submitList(accountWithImageList)
 
-            itemView.childList.layoutManager = LinearLayoutManager(itemView.context)
-            itemView.childList.adapter = accountsAdapter
-            itemView.childList.addItemDecoration(DividerItemDecoration(itemView.context, DividerItemDecoration.VERTICAL))
+            itemView.childList.apply {
+                layoutManager = LinearLayoutManager(itemView.context)
+                adapter = accountsAdapter
+                isNestedScrollingEnabled = true
+            }
         }
     }
 
