@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.accounts.list.AccountGroupByKind
+import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
 import com.tink.service.network.ResponseState
+import com.tink.service.network.map
+import se.tink.android.livedata.map
 import se.tink.android.repository.account.AccountRepository
 import javax.inject.Inject
 
@@ -15,6 +18,28 @@ internal class AccountsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val accountsState: LiveData<ResponseState<List<Account>>> = accountRepository.accountsState
+
+    val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
+        it.map { accounts ->
+            accounts.groupBy { account ->
+                when (account.type) {
+                    Account.Type.CHECKING, Account.Type.CREDIT_CARD -> AccountGroupByKind.EVERYDAY
+                    Account.Type.SAVINGS, Account.Type.PENSION, Account.Type.INVESTMENT -> AccountGroupByKind.SAVINGS
+                    Account.Type.MORTGAGE, Account.Type.LOAN -> AccountGroupByKind.LOANS
+                    else -> AccountGroupByKind.OTHER
+                }
+            }.mapNotNull {
+                // TODO: Load provider images correctly
+                if (it.value.isNotEmpty()) {
+                    GroupedAccountsItem(it.key, it.value.map { AccountWithImage(it, null) })
+                } else {
+                    null
+                }
+            }.sortedBy {
+                it.accountGroup.sortOrder
+            }
+        }
+    }
 
     private val _accounts: LiveData<List<Account>> = accountRepository.accounts
 
