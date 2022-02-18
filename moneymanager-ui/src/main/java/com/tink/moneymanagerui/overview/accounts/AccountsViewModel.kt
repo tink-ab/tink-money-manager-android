@@ -22,12 +22,7 @@ internal class AccountsViewModel @Inject constructor(
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
         it.map { accounts ->
             accounts.groupBy { account ->
-                when (account.type) {
-                    Account.Type.CHECKING, Account.Type.CREDIT_CARD -> AccountGroupByKind.EVERYDAY
-                    Account.Type.SAVINGS, Account.Type.PENSION, Account.Type.INVESTMENT -> AccountGroupByKind.SAVINGS
-                    Account.Type.MORTGAGE, Account.Type.LOAN -> AccountGroupByKind.LOANS
-                    else -> AccountGroupByKind.OTHER
-                }
+                account.type.toAccountGroupByKind()
             }.mapNotNull {
                 // TODO: Load provider images correctly
                 if (it.value.isNotEmpty()) {
@@ -81,3 +76,17 @@ internal class AccountsViewModel @Inject constructor(
     // TODO: Add logic to configure MM which account list mode to use
     val accountDetailsDisplayMode = AccountDetailsScreenType.GROUPED_ACCOUNTS_LIST
 }
+
+fun Account.Type.toAccountGroupByKind(): AccountGroupByKind =
+    when (this) {
+        Account.Type.CHECKING,
+        Account.Type.CREDIT_CARD -> AccountGroupByKind.EVERYDAY
+        Account.Type.SAVINGS,
+        Account.Type.PENSION,
+        Account.Type.INVESTMENT -> AccountGroupByKind.SAVINGS
+        Account.Type.MORTGAGE,
+        Account.Type.LOAN -> AccountGroupByKind.LOANS
+        Account.Type.UNKNOWN,
+        Account.Type.EXTERNAL,
+        Account.Type.OTHER -> AccountGroupByKind.OTHER
+    }
