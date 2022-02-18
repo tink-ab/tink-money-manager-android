@@ -11,41 +11,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingHorizontal="8dp"
-      android:paddingVertical="12dp"
+      android:paddingTop="20dp"
       >
         <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/accountKindText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          android:paddingStart="16dp"
           android:maxLines="1"
-          android:layout_marginEnd="10dp"
-          tools:text="10"
-          style="@style/tink_hecto"
+          tools:text="Everyday"
+          style="@style/tink_h2"
           android:ellipsize="end" />
 
         <androidx.appcompat.widget.AppCompatTextView
-          android:id="@+id/accountSumText"
+          android:id="@+id/accountBalanceSumText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          android:paddingEnd="16dp"
           android:maxLines="1"
-          android:layout_marginEnd="10dp"
-          tools:text="10"
-          style="@style/tink_hecto"
+          tools:text="SEK 1000"
+          style="@style/tink_h2"
           android:ellipsize="end" />
 
         <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/childList"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          app:layout_constraintTop_toBottomOf="@id/accountKindText"
+          app:layout_constraintTop_toBottomOf="@id/accountBalanceSumText"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          android:paddingHorizontal="16dp"
           android:clipToPadding="false" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -8,7 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
-import kotlinx.android.synthetic.main.tink_grouped_item_account.view.*
+import com.tink.moneymanagerui.util.CurrencyUtils
+import java.util.*
+import kotlinx.android.synthetic.main.tink_grouped_item_account.view.accountBalanceSumText
+import kotlinx.android.synthetic.main.tink_grouped_item_account.view.accountKindText
+import kotlinx.android.synthetic.main.tink_grouped_item_account.view.childList
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.sum
 
@@ -25,7 +29,7 @@ class GroupedAccountList(val accountClicked: (Account) -> Unit):
 
     override fun onBindViewHolder(holder: GroupedAccountViewHolder, position: Int) {
         val key = kindToAccountsMap.keys.sorted()[position]
-        holder.bind(kindToAccountsMap[key]!!)
+        holder.bind(kindToAccountsMap[key]!!, key.toString())
     }
 
     override fun submitList(list: MutableList<AccountWithImage>?) {
@@ -56,10 +60,13 @@ class GroupedAccountList(val accountClicked: (Account) -> Unit):
 
     inner class GroupedAccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(accountWithImageList: List<AccountWithImage>) {
-            val balanceSum = accountWithImageList.map { it.account.balance }.sum()
+        fun bind(accountWithImageList: List<AccountWithImage>, accountKind: String) {
+            itemView.accountKindText.text = accountKind
+                .lowercase(Locale.getDefault())
+                .replaceFirstChar { it.titlecase(Locale.getDefault()) }
 
-            itemView.accountSumText.text = accountWithImageList.size.toString()
+            val balanceSum = accountWithImageList.map { it.account.balance }.sum()
+            itemView.accountBalanceSumText.text =  CurrencyUtils.formatCurrencyExact(balanceSum)
 
             val accountsAdapter = NotGroupedAccountList { account ->
                 accountClicked(account)
