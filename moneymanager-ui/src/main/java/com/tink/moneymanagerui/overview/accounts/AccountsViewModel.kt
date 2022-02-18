@@ -23,13 +23,11 @@ internal class AccountsViewModel @Inject constructor(
         it.map { accounts ->
             accounts.groupBy { account ->
                 account.type.toAccountGroupByKind()
-            }.mapNotNull {
+            }.map {
                 // TODO: Load provider images correctly
-                if (it.value.isNotEmpty()) {
-                    GroupedAccountsItem(it.key, it.value.map { AccountWithImage(it, null) })
-                } else {
-                    null
-                }
+                GroupedAccountsItem(it.key, it.value.map { AccountWithImage(it, null) })
+            }.filter {
+                it.accounts.isNotEmpty()
             }.sortedBy {
                 it.accountGroup.sortOrder
             }
