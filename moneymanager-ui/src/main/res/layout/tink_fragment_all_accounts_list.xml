@@ -19,18 +19,27 @@
       android:orientation="vertical"
       android:visibility="gone" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/accountErrorText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      style="@style/tink_hecto"
+      android:text="@string/tink_accounts_error" />
+
+    <include
+      android:id="@+id/accountsProgressBar"
+      layout="@layout/tink_loader_spinner"
+      android:visibility="visible"/>
+
   </FrameLayout>
 
   <FrameLayout
       android:id="@+id/accountsGroupedRoot"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
-
-
-    <include
-        android:id="@+id/groupedAccountsProgressBar"
-        layout="@layout/tink_loader_spinner"
-        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/groupedAccountsList"
@@ -41,26 +50,20 @@
       android:orientation="vertical"
       android:visibility="gone" />
 
-  </FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/groupedAccountErrorText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      style="@style/tink_hecto"
+      android:text="@string/tink_accounts_error" />
 
-  <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/accountErrorText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:maxLines="1"
-    android:layout_gravity="center"
-    android:visibility="gone"
-    style="@style/tink_hecto"
-    android:text="@string/tink_accounts_error" />
-
-  <FrameLayout
-    android:id="@+id/accountsProgressBar"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include layout="@layout/tink_loader_spinner"
+    <include
+      android:id="@+id/groupedAccountsProgressBar"
+      layout="@layout/tink_loader_spinner"
       android:visibility="visible"/>
 
   </FrameLayout>
-
 </FrameLayout>

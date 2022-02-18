@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
@@ -17,7 +16,14 @@ import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.*
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountErrorText
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsGroupedRoot
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsNotGroupedRoot
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsProgressBar
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.allAccountsList
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountErrorText
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsList
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsProgressBar
 
 class AccountDetailsListFragment : BaseFragment() {
 
@@ -50,7 +56,6 @@ class AccountDetailsListFragment : BaseFragment() {
 
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
         groupedAccountsList.adapter = groupedAccountsAdapter
-        //groupedAccountsList.isNestedScrollingEnabled = true
 
         viewModel.accountsState.observe(
             viewLifecycleOwner,
@@ -59,7 +64,6 @@ class AccountDetailsListFragment : BaseFragment() {
                 accountErrorText.visibleIf { accountsState is ErrorState }
                 accountsProgressBar.visibleIf { accountsState is LoadingState }
                 if (accountsState is SuccessState) {
-
                     accountsAdapter.submitList(accountsState.data.map {
                         AccountWithImage(it, null)
                     })
@@ -70,6 +74,7 @@ class AccountDetailsListFragment : BaseFragment() {
         viewModel.groupedAccountsState.observe(
             viewLifecycleOwner,
             Observer { groupedAccountsState ->
+                groupedAccountErrorText.visibleIf { groupedAccountsState is ErrorState }
                 groupedAccountsProgressBar.visibleIf { groupedAccountsState is LoadingState }
                 groupedAccountsList.visibleIf { groupedAccountsState is SuccessState }
                 if (groupedAccountsState is SuccessState) {

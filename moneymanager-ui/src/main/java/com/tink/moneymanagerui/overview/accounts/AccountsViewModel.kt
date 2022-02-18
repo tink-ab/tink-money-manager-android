@@ -9,9 +9,9 @@ import com.tink.moneymanagerui.accounts.list.AccountGroupByKind
 import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
 import com.tink.service.network.ResponseState
 import com.tink.service.network.map
+import javax.inject.Inject
 import se.tink.android.livedata.map
 import se.tink.android.repository.account.AccountRepository
-import javax.inject.Inject
 
 internal class AccountsViewModel @Inject constructor(
     accountRepository: AccountRepository
@@ -20,12 +20,12 @@ internal class AccountsViewModel @Inject constructor(
     val accountsState: LiveData<ResponseState<List<Account>>> = accountRepository.accountsState
 
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
-        it.map { accounts ->
+        accountState -> accountState.map { accounts ->
             accounts.groupBy { account ->
                 account.type.toAccountGroupByKind()
-            }.map {
+            }.map { mapEntry ->
                 // TODO: Load provider images correctly
-                GroupedAccountsItem(it.key, it.value.map { AccountWithImage(it, null) })
+                GroupedAccountsItem(mapEntry.key, mapEntry.value.map { AccountWithImage(it, null) })
             }.filter {
                 it.accounts.isNotEmpty()
             }.sortedBy {
@@ -39,7 +39,7 @@ internal class AccountsViewModel @Inject constructor(
     // TODO: Fetch provider images here and add them to accountsWithImage
     private val images = MutableLiveData<List<Pair<String, String?>>>()
 
-    val accountsWithImage: LiveData<List<AccountWithImage>> =
+    private val accountsWithImage: LiveData<List<AccountWithImage>> =
         MediatorLiveData<List<AccountWithImage>>().apply {
 
             addSource(_accounts) { newAccounts ->
@@ -60,8 +60,8 @@ internal class AccountsViewModel @Inject constructor(
         }
 
     val favoriteAccounts: LiveData<List<AccountWithImage>> = MediatorLiveData<List<AccountWithImage>>().apply {
-        addSource(accountsWithImage) {
-            value = it.filter {
+        addSource(accountsWithImage) { accountsWithImage ->
+            value = accountsWithImage.filter {
                 it.account.favored
             }
         }
