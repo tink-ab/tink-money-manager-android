@@ -88,6 +88,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_date_format_human_today` | Today |
 | `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_date_format_human_yesterday` | Yesterday |
+| `tink_everyday_account` | Everyday accounts |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |
 | `tink_expenses_text` | %s expenses |
@@ -112,8 +113,10 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
 | `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
 | `tink_latest_transactions_toolbar_title` | All transactions |
+| `tink_loans_account` | Loan accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_next_month_description` | Next month |
+| `tink_other_account` | Other accounts |
 | `tink_other` | Other |
 | `tink_overview_accounts_error` | No accounts |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
@@ -130,6 +133,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_toolbar_title` | Overview |
 | `tink_period_selection_title` | Choose time period |
 | `tink_previous_month_description` | Previous month |
+| `tink_savings_account` | Savings accounts |
 | `tink_search_label` | Search |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |

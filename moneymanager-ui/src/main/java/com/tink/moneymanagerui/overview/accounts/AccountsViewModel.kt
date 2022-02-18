@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.accounts.list.AccountGroupByKind
+import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
 import com.tink.service.network.ResponseState
+import com.tink.service.network.map
+import se.tink.android.livedata.map
 import se.tink.android.repository.account.AccountRepository
 import javax.inject.Inject
 
@@ -15,6 +18,21 @@ internal class AccountsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val accountsState: LiveData<ResponseState<List<Account>>> = accountRepository.accountsState
+
+    val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
+        it.map { accounts ->
+            accounts.groupBy { account ->
+                account.type.toAccountGroupByKind()
+            }.map {
+                // TODO: Load provider images correctly
+                GroupedAccountsItem(it.key, it.value.map { AccountWithImage(it, null) })
+            }.filter {
+                it.accounts.isNotEmpty()
+            }.sortedBy {
+                it.accountGroup.sortOrder
+            }
+        }
+    }
 
     private val _accounts: LiveData<List<Account>> = accountRepository.accounts
 
@@ -56,3 +74,17 @@ internal class AccountsViewModel @Inject constructor(
     // TODO: Add logic to configure MM which account list mode to use
     val accountDetailsDisplayMode = AccountDetailsScreenType.GROUPED_ACCOUNTS_LIST
 }
+
+fun Account.Type.toAccountGroupByKind(): AccountGroupByKind =
+    when (this) {
+        Account.Type.CHECKING,
+        Account.Type.CREDIT_CARD -> AccountGroupByKind.EVERYDAY
+        Account.Type.SAVINGS,
+        Account.Type.PENSION,
+        Account.Type.INVESTMENT -> AccountGroupByKind.SAVINGS
+        Account.Type.MORTGAGE,
+        Account.Type.LOAN -> AccountGroupByKind.LOANS
+        Account.Type.UNKNOWN,
+        Account.Type.EXTERNAL,
+        Account.Type.OTHER -> AccountGroupByKind.OTHER
+    }
