@@ -38,6 +38,11 @@
   <string name="tink_overview_favorite_accounts_title">Favorite accounts</string>
   <string name="tink_accounts_error">No accounts available</string>
 
+  <string name="tink_everyday_account">Everyday accounts</string>
+  <string name="tink_savings_account">Savings accounts</string>
+  <string name="tink_loans_account">Loan accounts</string>
+  <string name="tink_other_account">Other accounts</string>
+
   <string name="tink_transaction_similar_title">Similar transactions</string>
   <string name="tink_transaction_similar_description">Do you also want to assign these transactions to the %1$s category?</string>
   <string name="tink_transaction_similar_button_skip_text">Skip</string>

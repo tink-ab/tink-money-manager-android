@@ -10,10 +10,10 @@ import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.setImageResFromAttr
 import com.tink.moneymanagerui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.tink_item_account.view.*
-import kotlinx.android.synthetic.main.tink_item_account.view.bankLogo
 import se.tink.commons.extensions.inflate
 
-class NotGroupedAccountList(val accountClicked: (Account) -> Unit) : ListAdapter<AccountWithImage, NotGroupedAccountList.AccountViewHolder>(AccountDiffUtil) {
+class NotGroupedAccountList(val accountClicked: (Account) -> Unit):
+    ListAdapter<AccountWithImage, NotGroupedAccountList.AccountViewHolder>(AccountDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : AccountViewHolder {
         return AccountViewHolder(parent.inflate(R.layout.tink_item_account))

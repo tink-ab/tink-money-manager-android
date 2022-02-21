@@ -16,13 +16,24 @@ import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.*
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountErrorText
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsGroupedRoot
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsNotGroupedRoot
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsProgressBar
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.allAccountsList
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountErrorText
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsList
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsProgressBar
 
 class AccountDetailsListFragment : BaseFragment() {
 
     private lateinit var viewModel: AccountsViewModel
 
     private val accountsAdapter = NotGroupedAccountList {
+        fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
+    }
+
+    private val groupedAccountsAdapter = GroupedAccountList {
         fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
     }
 
@@ -43,6 +54,9 @@ class AccountDetailsListFragment : BaseFragment() {
         allAccountsList.adapter = accountsAdapter
         allAccountsList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
+        groupedAccountsList.layoutManager = LinearLayoutManager(context)
+        groupedAccountsList.adapter = groupedAccountsAdapter
+
         viewModel.accountsState.observe(
             viewLifecycleOwner,
             Observer { accountsState ->
@@ -53,6 +67,18 @@ class AccountDetailsListFragment : BaseFragment() {
                     accountsAdapter.submitList(accountsState.data.map {
                         AccountWithImage(it, null)
                     })
+                }
+            }
+        )
+
+        viewModel.groupedAccountsState.observe(
+            viewLifecycleOwner,
+            Observer { groupedAccountsState ->
+                groupedAccountErrorText.visibleIf { groupedAccountsState is ErrorState }
+                groupedAccountsProgressBar.visibleIf { groupedAccountsState is LoadingState }
+                groupedAccountsList.visibleIf { groupedAccountsState is SuccessState }
+                if (groupedAccountsState is SuccessState) {
+                    groupedAccountsAdapter.submitList(groupedAccountsState.data)
                 }
             }
         )
