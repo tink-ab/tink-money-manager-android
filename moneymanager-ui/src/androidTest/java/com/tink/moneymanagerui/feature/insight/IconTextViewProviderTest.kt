@@ -3,7 +3,8 @@ package com.tink.moneymanagerui.feature.insight
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.CustomInsightActionHandler
@@ -17,7 +18,6 @@ import okhttp3.mockwebserver.MockResponse
 import org.joda.time.DateTime
 import org.json.JSONObject
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -33,6 +33,9 @@ class IconTextViewProviderTest: BaseInsightTestSuit() {
     private val budgetSuggestCreateFirst = InsightMockFactory.getBudgetSuggestCreateFirst()
     private val doubleCharge = InsightMockFactory.getDoubleCharge(listOf(transactionId, transactionDoubleId))
     private val largeExpense = InsightMockFactory.getLargeExpense(transactionId)
+    private val creditCardLimitClose = InsightMockFactory.getCreditCardLimitClose()
+    private val creditCardLimitReached = InsightMockFactory.getCreditCardLimitReached()
+
 
     private val refreshCredentials = "726491029375"
     private val refreshToken = InsightMockFactory.getAggregateRefreshP2d2Credentials(refreshCredentials)
@@ -81,6 +84,16 @@ class IconTextViewProviderTest: BaseInsightTestSuit() {
     @Test
     fun test_display_large_expense() {
         testIconTextInsight(largeExpense)
+    }
+
+    @Test
+    fun test_credit_card_limit_close() {
+        testIconTextInsight(creditCardLimitClose)
+    }
+
+    @Test
+    fun test_credit_card_limit_reached() {
+        testIconTextInsight(creditCardLimitReached)
     }
 
     @Test

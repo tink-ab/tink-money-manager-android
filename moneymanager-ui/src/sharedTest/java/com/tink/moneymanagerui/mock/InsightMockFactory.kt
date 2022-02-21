@@ -55,6 +55,8 @@ object InsightMockFactory {
         InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY,
         InsightType.BUDGET_SUMMARY_ACHIEVED,
         InsightType.BUDGET_SUMMARY_OVERSPENT,
+        InsightType.CREDIT_CARD_LIMIT_CLOSE,
+        InsightType.CREDIT_CARD_LIMIT_REACHED,
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
         InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY,
@@ -73,6 +75,8 @@ object InsightMockFactory {
             InsightType.BUDGET_SUGGEST_CREATE_FIRST -> getBudgetSuggestCreateFirst()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_CATEGORY -> getBudgetSuggestCreateTopCategory()
             InsightType.BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY -> getBudgetSuggestCreateTopPrimaryCategory()
+            InsightType.CREDIT_CARD_LIMIT_CLOSE -> getCreditCardLimitClose()
+            InsightType.CREDIT_CARD_LIMIT_REACHED -> getCreditCardLimitReached()
             InsightType.DOUBLE_CHARGE -> getDoubleCharge()
             InsightType.LARGE_EXPENSE -> getLargeExpense()
             InsightType.MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY -> getMonthlySummaryExpenseByCategory()
@@ -86,6 +90,8 @@ object InsightMockFactory {
             else -> getDefaultInsight(type)
         }
     }
+
+
 
     fun getInsightsForTypes(types: List<InsightType> = allTypes): List<JSONObject> =
         types.map { type -> getInsightForType(type) }
@@ -210,6 +216,52 @@ object InsightMockFactory {
                 }
             }
             """
+        )
+    }
+
+    fun getCreditCardLimitClose(): JSONObject {
+        return JSONObject("""
+            {
+                "type": "CREDIT_CARD_LIMIT_CLOSE",
+                "userId": 1234,
+                "id": 21,
+                "title": "You are close at exceeding the credit limit on American Express Gold Card",
+                "description": "You have €34 of available credit on your card. Spend with care.",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "CREDIT_CARD_LIMIT_CLOSE",
+                    "account": {
+                        "accountId": "42f6f233ce394138897e9afff1464f5d",
+                        "accountName": "Personal credit account"
+                    },
+                    "availableCredit": {
+                        "amount": 100,
+                        "currencyCode": "EUR"
+                    }
+                }
+            }"""
+        )
+    }
+
+    fun getCreditCardLimitReached(): JSONObject {
+        return JSONObject("""
+            {
+                "type": "CREDIT_CARD_LIMIT_REACHED",
+                "userId": 1234,
+                "id": 21,
+                "title": "You just reached your credit limit on American Express Gold Card",
+                "description": "Your credit card is maxed out. You’ll be able to use it again after paying your invoice.",
+                "createdTime": 1111111,
+                "insightActions": [],
+                "data": {
+                    "type": "CREDIT_CARD_LIMIT_REACHED",
+                    "account": {
+                        "accountId": "42f6f233ce394138897e9afff1464f5d",
+                        "accountName": "Personal credit account"
+                    }
+                }
+            }"""
         )
     }
 
