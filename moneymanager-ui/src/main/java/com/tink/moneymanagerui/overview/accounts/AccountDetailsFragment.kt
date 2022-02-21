@@ -8,19 +8,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
-import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
-import se.tink.commons.transactions.TransactionItemListAdapter
-import com.tink.model.account.Account
-import com.tink.moneymanagerui.MoneyManagerFeatureType
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
+import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -40,7 +40,7 @@ internal class AccountDetailsFragment : BaseFragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
-    override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
+    override fun getLayoutId(): Int = R.layout.tink_fragment_account_details_edit
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true

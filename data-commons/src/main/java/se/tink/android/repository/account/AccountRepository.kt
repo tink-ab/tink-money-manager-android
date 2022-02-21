@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.account.Account
 import com.tink.service.account.AccountService
+import com.tink.service.account.UpdateAccountDescriptor
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -77,4 +78,12 @@ class AccountRepository @Inject constructor(
             )
         }
     }
+
+    fun updateAccountState(descriptor: UpdateAccountDescriptor){
+        CoroutineScope(dispatcher.io()).launch {
+            accountService.update(descriptor)
+            _accountsState.update()
+        }
+    }
+
 }
