@@ -3,9 +3,9 @@ package com.tink.moneymanagerui.accounts.list
 import androidx.annotation.StringRes
 import com.tink.moneymanagerui.R
 
-enum class AccountGroupByKind(@StringRes val description: Int, val sortOrder: Int) {
-    EVERYDAY(R.string.tink_everyday_account, 0),
-    SAVINGS(R.string.tink_savings_account, 1),
-    LOANS(R.string.tink_loans_account, 2),
-    OTHER(R.string.tink_other_account, 3)
-}
+data class AccountGroup(@StringRes val description: Int, val sortOrder: Int)
+
+internal val EVERYDAY_ACCOUNTS = AccountGroup(R.string.tink_everyday_account, 0)
+internal val SAVINGS_ACCOUNTS = AccountGroup(R.string.tink_savings_account, 1)
+internal val LOANS_ACCOUNTS = AccountGroup(R.string.tink_loans_account, 2)
+internal val OTHER_ACCOUNTS = AccountGroup(R.string.tink_other_account, 3)

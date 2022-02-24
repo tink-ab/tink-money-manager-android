@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsScreenType
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.service.network.ErrorState
@@ -47,8 +47,8 @@ class AccountDetailsListFragment : BaseFragment() {
 
         title = getString(R.string.tink_overview_toolbar_title)
 
-        accountsNotGroupedRoot.visibleIf { viewModel.accountDetailsDisplayMode == AccountDetailsScreenType.NOT_GROUPED_ACCOUNTS_LIST }
-        accountsGroupedRoot.visibleIf { viewModel.accountDetailsDisplayMode == AccountDetailsScreenType.GROUPED_ACCOUNTS_LIST }
+        accountsGroupedRoot.visibleIf { viewModel.accountDetailsViewMode.areAccountsGrouped }
+        accountsNotGroupedRoot.visibleIf { !viewModel.accountDetailsViewMode.areAccountsGrouped }
 
         allAccountsList.layoutManager = LinearLayoutManager(context)
         allAccountsList.adapter = accountsAdapter
@@ -89,4 +89,6 @@ class AccountDetailsListFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.tink_fragment_all_accounts_list
 
     override fun needsLoginToBeAuthorized(): Boolean = true
+
+    override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
 }
