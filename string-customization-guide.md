@@ -19,6 +19,17 @@ Here's a list of all the public string resources in the SDK that can be overridd
 
 | String Resource ID | English Text |
 |------|-----|
+| `tink_accounts_edit` | Edit accont |
+| `tink_accounts_edit_field_favorite_description` | Balance is shown in the overview |
+| `tink_accounts_edit_field_favorite_header` | Favorite account |
+| `tink_accounts_edit_field_included_description` | This account is shown in your statistics |
+| `tink_accounts_edit_field_included_header` | Included |
+| `tink_accounts_edit_field_name_description` | Original description: Sturehof |
+| `tink_accounts_edit_field_name_header` | Account name |
+| `tink_accounts_edit_field_shared_description` | 50% is included in your statistics |
+| `tink_accounts_edit_field_shared_header` | Shared account |
+| `tink_accounts_edit_field_type` | Account type |
+| `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_error` | No accounts available |
 | `tink_all_categories` | All categories |
 | `tink_budget_category_selection_button` | Next |

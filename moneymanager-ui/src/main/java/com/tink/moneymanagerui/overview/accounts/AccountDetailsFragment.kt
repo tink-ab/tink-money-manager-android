@@ -1,7 +1,9 @@
 package com.tink.moneymanagerui.overview.accounts
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +15,7 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
@@ -40,7 +43,7 @@ internal class AccountDetailsFragment : BaseFragment() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
-    override fun getLayoutId(): Int = R.layout.tink_fragment_account_details_edit
+    override fun getLayoutId(): Int = R.layout.tink_fragment_account_details
     override fun needsLoginToBeAuthorized(): Boolean = true
     override fun getScreenEvent(): ScreenEvent = ScreenEvent.ACCOUNT_DETAILS
     override fun hasToolbar(): Boolean = true
@@ -129,6 +132,19 @@ internal class AccountDetailsFragment : BaseFragment() {
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
+
+    override fun onCreateToolbarMenu(toolbar: Toolbar) {
+        super.onCreateToolbarMenu(toolbar)
+        toolbar.inflateMenu(R.menu.tink_menu_account_details)
+    }
+
+    override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_edit) {
+            fragmentCoordinator.replace(AccountDetailsEditFragment.newInstance(accountId))
+            return true
+        }
+        return super.onToolbarMenuItemSelected(item)
+    }
 
     companion object {
 
