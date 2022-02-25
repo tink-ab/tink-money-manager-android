@@ -58,19 +58,28 @@ internal class AccountsViewModel @Inject constructor(
             }
         }
 
-    val favoriteAccounts: LiveData<List<AccountWithImage>> = MediatorLiveData<List<AccountWithImage>>().apply {
+    val overviewAccounts: LiveData<List<AccountWithImage>> = MediatorLiveData<List<AccountWithImage>>().apply {
         addSource(accountsWithImage) { accountsWithImage ->
             value = accountsWithImage.filter {
-                it.account.favored
+                overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
             }
         }
     }
 
-    val hasFavoriteAccount: LiveData<Boolean> = favoriteAccounts.map {
+    val hasOverviewAccount: LiveData<Boolean> = overviewAccounts.map {
         it.isNotEmpty()
     }
 
+    val areAllAccountsOnOverview: LiveData<Boolean> = accountsWithImage.map { accounts ->
+        val overviewAccountsSize = accounts.filter {
+            overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
+        }.size
+        accounts.size == overviewAccountsSize
+    }
+
     val accountDetailsViewMode = FinanceOverviewFragment.accountGroupType
+
+    private val overviewAccountsMode = FinanceOverviewFragment.overviewAccountsMode
 }
 
 fun Account.Type.toAccountGroup(): AccountGroup =

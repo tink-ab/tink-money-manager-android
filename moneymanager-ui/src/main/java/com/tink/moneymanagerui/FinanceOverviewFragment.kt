@@ -13,6 +13,8 @@ import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.accounts.AccountGroupType
 import com.tink.moneymanagerui.accounts.NoAccountGroup
+import com.tink.moneymanagerui.accounts.OverviewAccountsMode
+import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.configuration.I18nConfiguration
@@ -189,6 +191,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             private set
 
         internal var accountGroupType: AccountGroupType = NoAccountGroup
+
+        internal var overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].

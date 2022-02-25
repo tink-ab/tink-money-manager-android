@@ -3,6 +3,8 @@ package com.tink.moneymanagerui
 import android.os.Parcelable
 import com.tink.moneymanagerui.accounts.AccountGroupType
 import com.tink.moneymanagerui.accounts.NoAccountGroup
+import com.tink.moneymanagerui.accounts.OverviewAccountsMode
+import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -29,7 +31,10 @@ sealed class OverviewFeature : Parcelable {
      * Represents the accounts list section in the overview screen.
      */
     @Parcelize
-    class Accounts(val accountGroupType: AccountGroupType = NoAccountGroup) : OverviewFeature()
+    class Accounts(
+        val overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts,
+        val accountGroupType: AccountGroupType = NoAccountGroup
+    ) : OverviewFeature()
 
     /**
      * Represents the actionable insights section in the overview screen.
