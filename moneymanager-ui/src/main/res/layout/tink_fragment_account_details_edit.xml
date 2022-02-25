@@ -18,10 +18,11 @@ tools:ignore="ContentDescription">
     <include
       android:id="@+id/loader"
       layout="@layout/tink_loader_spinner"
-      android:visibility="invisible" />
+      android:visibility="visible" />
   </FrameLayout>
 
   <LinearLayout
+    android:id="@+id/inputContainer"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
@@ -120,32 +121,33 @@ tools:ignore="ContentDescription">
     />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/sharedContainer"
+      android:id="@+id/favoriteContainer"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="26dp"
-      android:layout_marginBottom="16dp">
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp">
 
       <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/sharedTitle"
+        android:id="@+id/favoriteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/tink_accounts_edit_field_included_header"
+        android:text="@string/tink_accounts_edit_field_favorite_header"
         android:textAppearance="@style/tink_hecto" />
 
       <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sharedTitle"
+        app:layout_constraintTop_toBottomOf="@id/favoriteTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/tink_accounts_edit_field_included_description"
+        android:text="@string/tink_accounts_edit_field_favorite_description"
         android:textAppearance="@style/tink_micro" />
 
       <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/sharedSwitch"
+        android:id="@+id/favoriteSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -164,32 +166,32 @@ tools:ignore="ContentDescription">
     />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/favoriteContainer"
+      android:id="@+id/sharedContainer"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="26dp"
       android:layout_marginBottom="16dp">
 
       <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/favoriteTitle"
+        android:id="@+id/sharedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/tink_accounts_edit_field_included_header"
+        android:text="@string/tink_accounts_edit_field_shared_header"
         android:textAppearance="@style/tink_hecto" />
 
       <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/favoriteTitle"
+        app:layout_constraintTop_toBottomOf="@id/sharedTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/tink_accounts_edit_field_included_description"
+        android:text="@string/tink_accounts_edit_field_shared_description"
         android:textAppearance="@style/tink_micro" />
 
       <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/favoriteSwitch"
+        android:id="@+id/sharedSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -199,6 +201,7 @@ tools:ignore="ContentDescription">
         app:trackTint="@color/tink_switch_track_color" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <View
       android:layout_width="match_parent"
