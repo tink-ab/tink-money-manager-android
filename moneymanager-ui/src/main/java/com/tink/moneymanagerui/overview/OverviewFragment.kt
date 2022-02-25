@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.transaction
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.R
@@ -61,6 +62,7 @@ internal class OverviewFragment : BaseFragment() {
             }
 
             is OverviewFeature.Accounts -> {
+                FinanceOverviewFragment.accountGroupType = feature.accountGroupType
                 childFragmentManager.transaction {
                     replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
