@@ -62,6 +62,7 @@ internal class OverviewFragment : BaseFragment() {
             }
 
             is OverviewFeature.Accounts -> {
+                FinanceOverviewFragment.overviewAccountsMode = feature.overviewAccountsMode
                 FinanceOverviewFragment.accountGroupType = feature.accountGroupType
                 childFragmentManager.transaction {
                     replace(
