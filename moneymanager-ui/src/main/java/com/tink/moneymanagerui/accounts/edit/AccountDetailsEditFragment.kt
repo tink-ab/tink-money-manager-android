@@ -11,6 +11,7 @@ import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.util.SoftKeyboardUtils
 import com.tink.service.network.LoadingState
@@ -55,6 +56,10 @@ class AccountDetailsEditFragment : BaseFragment() {
         super.authorizedOnViewCreated(view, savedInstanceState)
         setupViews()
 
+        title = getString(R.string.tink_accounts_edit_title)
+
+        setEnabledFields(viewModel.enableFields)
+
         viewModel.accountDetailsEditData.observe(viewLifecycleOwner) { state ->
             loader.visibleIf { state is LoadingState }
             inputContainer.visibleIf { state is SuccessState }
@@ -73,8 +78,8 @@ class AccountDetailsEditFragment : BaseFragment() {
                     sharedSwitch.isChecked = isShared
                     favoriteSwitch.isChecked = isFavored
 
-                    favoriteSwitch.isEnabled = !isExcluded
-                    favoriteContainer.isEnabled = !isExcluded
+                    favoriteSwitch.isEnabled = viewModel.enableFields.isFavorite && !isExcluded
+                    favoriteContainer.isEnabled = viewModel.enableFields.isFavorite && !isExcluded
                     if (isExcluded) {
                         favoriteSwitch.isChecked = false
                     }
@@ -82,8 +87,8 @@ class AccountDetailsEditFragment : BaseFragment() {
             }
         }
 
-        viewModel.isUpdating.observe(viewLifecycleOwner) { isUpdating ->
-            saveButton.isEnabled = !isUpdating
+        viewModel.saveButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            saveButton.isEnabled = isEnabled
         }
     }
 
@@ -162,6 +167,21 @@ class AccountDetailsEditFragment : BaseFragment() {
             SoftKeyboardUtils.closeSoftKeyboard(requireActivity())
             viewModel.uppdateAccount()
         }
+    }
+
+    private fun setEnabledFields(enabledFields: AccountEditConfiguration) {
+        nameInputLayout.isEnabled = enabledFields.name
+
+        typeInputLayout.isEnabled = enabledFields.kind
+
+        includedSwitch.isEnabled = enabledFields.isIncluded
+        includedContainer.isEnabled = enabledFields.isIncluded
+
+        favoriteSwitch.isEnabled = enabledFields.isFavorite
+        favoriteContainer.isEnabled = enabledFields.isFavorite
+
+        sharedSwitch.isEnabled = enabledFields.isShared
+        sharedContainer.isEnabled = enabledFields.isShared
     }
 
     companion object {

@@ -135,7 +135,9 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         super.onCreateToolbarMenu(toolbar)
-        toolbar.inflateMenu(R.menu.tink_menu_account_details)
+        if (viewModel.accountCanBeEdited) {
+            toolbar.inflateMenu(R.menu.tink_menu_account_details)
+        }
     }
 
     override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {

@@ -31,6 +31,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_field_type_header` | Account type | 
 | `tink_accounts_edit_field_type` | Account type |
 | `tink_accounts_edit_save_button` | Save |
+| `tink_accounts_edit_title` | Accont details |
 | `tink_accounts_edit` | Edit accont |
 | `tink_accounts_error` | No accounts available |
 | `tink_accounts_type_checking` | Checking | 

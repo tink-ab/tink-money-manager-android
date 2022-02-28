@@ -6,7 +6,6 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="?tink_backgroundColor"
-
 tools:ignore="ContentDescription">
   <FrameLayout
     android:layout_height="match_parent"
@@ -26,8 +25,8 @@ tools:ignore="ContentDescription">
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="@dimen/tink_horizontal_margin"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="12dp"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,9 @@ tools:ignore="ContentDescription">
       android:id="@+id/nameInputLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="16dp"
+      android:paddingHorizontal="4dp"
       android:hint="@string/tink_accounts_edit_field_name_header"
       app:theme="@style/TinkTextInputLayoutStyle">
       <com.google.android.material.textfield.TextInputEditText
@@ -50,20 +51,13 @@ tools:ignore="ContentDescription">
       />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-      android:id="@+id/nameInputDescription"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:paddingTop="3dp"
-      android:textAppearance="@style/tink_micro"
-      android:text="@string/tink_accounts_edit_field_name_description"
-    />
-
     <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/typeInputLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="16dp"
+      android:paddingHorizontal="4dp"
       android:hint="@string/tink_accounts_edit_field_type_header"
       app:theme="@style/TinkTextInputLayoutStyle">
       <com.google.android.material.textfield.TextInputEditText
@@ -80,8 +74,10 @@ tools:ignore="ContentDescription">
       android:id="@+id/includedContainer"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="26dp"
-      android:layout_marginBottom="16dp">
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp">
 
       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/includedTitle"
@@ -126,7 +122,9 @@ tools:ignore="ContentDescription">
       android:layout_height="wrap_content"
       android:background="@color/tink_switch_layout_background_color"
       android:paddingTop="26dp"
-      android:paddingBottom="16dp">
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp"
+    >
 
       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/favoriteTitle"
@@ -169,8 +167,10 @@ tools:ignore="ContentDescription">
       android:id="@+id/sharedContainer"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="26dp"
-      android:layout_marginBottom="16dp">
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp">
 
       <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sharedTitle"

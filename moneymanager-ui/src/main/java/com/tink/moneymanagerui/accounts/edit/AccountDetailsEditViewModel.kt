@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tink.model.account.Account
 import com.tink.model.misc.ExactNumber
+import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.service.account.UpdateAccountDescriptor
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -15,6 +16,7 @@ import com.tink.service.network.map
 import kotlinx.coroutines.launch
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.account.AccountRepository
+import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
 data class AccountDetailsEditData(
@@ -38,13 +40,26 @@ class AccountDetailsEditViewModel@Inject constructor(
         accountRepository.accountByIdState(it)
     }
 
+    val enableFields = FinanceOverviewFragment.accountEditConfiguration
+
     val editedNameText: MutableLiveData<String> = MutableLiveData("")
     val editedType: MutableLiveData<Account.Type> = MutableLiveData(Account.Type.OTHER)
     val editedExcluded: MutableLiveData<Boolean> = MutableLiveData(false)
     val editedFavorite: MutableLiveData<Boolean> = MutableLiveData(false)
     val editedShared: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun update() {
+            whenNonNull(editedNameText.value, isUpdating.value) { editedNameText, isUpdating ->
+                value = editedNameText.isNotBlank() && !isUpdating
+            }
+        }
+
+        addSource(editedNameText) { update() }
+        addSource(isUpdating) { update() }
+    }
 
     val accountDetailsEditData: LiveData<ResponseState<AccountDetailsEditData>> =
         MediatorLiveData<ResponseState<AccountDetailsEditData>>().apply {
