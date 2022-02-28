@@ -11,7 +11,7 @@ import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsNavigation
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsViewModel
 import com.tink.moneymanagerui.budgets.details.BudgetSelectionController
-import com.tink.moneymanagerui.budgets.details.BudgetSelectionControllerNew
+import com.tink.moneymanagerui.budgets.details.BudgetSelectionControllerState
 import com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionListViewModel
 import com.tink.moneymanagerui.budgets.details.transactions.BudgetTransactionsListFragment
 import com.tink.moneymanagerui.repository.StatisticsRepository
@@ -105,7 +105,7 @@ internal class BudgetDetailsModule {
         statisticsRepository: StatisticsRepository,
         exceptionTracker: ExceptionTracker,
         transactionUpdateEventBus: TransactionUpdateEventBus
-    ): BudgetSelectionControllerNew {
+    ): BudgetSelectionControllerState {
 
         val periodStart = try {
             fragment.arguments
@@ -121,7 +121,7 @@ internal class BudgetDetailsModule {
             null
         }
 
-        return BudgetSelectionControllerNew(
+        return BudgetSelectionControllerState(
             requireNotNull(fragment.arguments?.getString(BudgetDetailsFragment.BUDGET_ID)),
             budgetsRepository,
             statisticsRepository,

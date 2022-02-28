@@ -9,7 +9,7 @@ import com.tink.moneymanagerui.extensions.formattedPeriod
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
-@Deprecated("Use BudgetSelectionControllerNew")
+@Deprecated("Use BudgetSelectionControllerState")
 internal class BudgetDetailsDataHolder(
     private val budgetSelectionController: BudgetSelectionController,
     private val dateUtils: DateUtils

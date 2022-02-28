@@ -1,6 +1,11 @@
 package com.tink.moneymanagerui.budgets.details
 
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
 import com.tink.model.budget.BudgetPeriod
 import com.tink.model.budget.BudgetSpecification
 import com.tink.model.time.Period
@@ -23,12 +28,12 @@ import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
-import java.util.*
+import java.util.TreeSet
 
 /**
- * TODO: Rename to BudgetSelectionControllerNew when BudgetTransactionListViewModel is refactored
+ * TODO: Rename to BudgetSelectionController when BudgetTransactionListViewModel is refactored
  */
-internal class BudgetSelectionControllerNew(
+internal class BudgetSelectionControllerState(
     private val budgetId: String,
     private val budgetsRepository: BudgetsRepository,
     statisticsRepository: StatisticsRepository,
@@ -60,7 +65,7 @@ internal class BudgetSelectionControllerNew(
 
         addSource(_budgetPeriodsState) { state ->
             value = state.map { periodDetails ->
-                return@map getBudgetPeriodsTreeSet(periodDetails.second).toList()
+                calculateBudgetPeriodsTreeSet(periodDetails.second).toList()
             }
         }
     }
@@ -69,7 +74,7 @@ internal class BudgetSelectionControllerNew(
         first.start.compareTo(second.start)
     }
 
-    private fun getBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
+    private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
         budgetPeriods.removeAll(periods.toSet())
         budgetPeriods.addAll(periods)
         return budgetPeriods
@@ -80,12 +85,13 @@ internal class BudgetSelectionControllerNew(
     private val _currentSelectedPeriodState = MediatorLiveData<ResponseState<BudgetPeriod>>().apply {
         value = LoadingState
 
-        addSource(_budgetPeriodsState) { state -> value = state.map { periodDetails ->
+        addSource(_budgetPeriodsState) { state ->
+            value = state.map { periodDetails ->
                 val currentValue = value
                 if (currentValue is SuccessState) {
-                    updateCurrentPeriod(currentValue.data, getBudgetPeriodsTreeSet(periodDetails.second))
+                    updateCurrentPeriod(currentValue.data, calculateBudgetPeriodsTreeSet(periodDetails.second))
                 } else {
-                    updateCurrentPeriod(null, getBudgetPeriodsTreeSet(periodDetails.second))
+                    updateCurrentPeriod(null, calculateBudgetPeriodsTreeSet(periodDetails.second))
                 }
             }
         }
@@ -150,11 +156,14 @@ internal class BudgetSelectionControllerNew(
             .let { list ->
                 val currentPeriodState = _currentSelectedPeriodState.value
                 if (currentPeriodState is SuccessState) {
-                    return@let list.toMutableList() + currentPeriodState.data
+                    list.toMutableList() + currentPeriodState.data
                 }
-                return@let list }
+                list
+            }
             .distinct()
-            .forEach { budgetsRepository.requestBudgetPeriodDetailsState(budgetId, it.start, it.end) }
+            .forEach {
+                budgetsRepository.requestBudgetPeriodDetailsState(budgetId, it.start, it.end)
+            }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -163,45 +172,40 @@ internal class BudgetSelectionControllerNew(
     }
 
     fun previous() {
-        val currentSelectedPeriodState = _currentSelectedPeriodState.value
-        if (currentSelectedPeriodState !is SuccessState) {
-            return
-        }
 
-        _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodState.data)
-        whenNonNull(
-            currentSelectedPeriodState.data,
-            periods.value
-        ) { currentSelectedPeriod, periods ->
-            if (shouldFetchMore(currentSelectedPeriod, periods)) {
-                val newPeriodRange = backTrackPeriodRange(currentSelectedPeriod, periods)
-                budgetsRepository.requestBudgetPeriodDetailsState(
-                    budgetId,
-                    newPeriodRange.first,
-                    newPeriodRange.second
-                )
+        (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriodData ->
+            _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodData)
+            whenNonNull(
+                currentSelectedPeriodData,
+                periods.value
+            ) { currentSelectedPeriod, periods ->
+                if (shouldFetchMore(currentSelectedPeriod, periods)) {
+                    val newPeriodRange = backTrackPeriodRange(currentSelectedPeriod, periods)
+                    budgetsRepository.requestBudgetPeriodDetailsState(
+                        budgetId,
+                        newPeriodRange.first,
+                        newPeriodRange.second
+                    )
+                }
             }
         }
     }
 
     fun next() {
-        val currentSelectedPeriodState = _currentSelectedPeriodState.value
-        if (currentSelectedPeriodState !is SuccessState) {
-            return
+
+        (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriod ->
+            _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriod)
         }
 
-        _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriodState.data)
         // Fetching more should not be necessary, since we don´t need the user to be able to
         // "see in the future"
     }
 
     val hasNext: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
-        return@createPeriodPickerStateLiveData currentPeriod != budgetPeriods.last()
+        currentPeriod != budgetPeriods.last()
     }
     val hasPrevious: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
-        val x = currentPeriod != budgetPeriods.first()
-        val y = budgetPeriods
-        return@createPeriodPickerStateLiveData currentPeriod != budgetPeriods.first()
+        currentPeriod != budgetPeriods.first()
     }
 
     private inline fun createPeriodPickerStateLiveData(

@@ -25,9 +25,7 @@ import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.*
-import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.periodPicker
 import kotlinx.android.synthetic.main.tink_fragment_budget_details_chart.view.*
-import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
 import kotlinx.android.synthetic.main.tink_item_picker.view.*
 import javax.inject.Inject
 
@@ -113,20 +111,20 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
     }
 
     private fun setBarChartVisibility(responseState: ResponseState<BudgetDetailsData>?) {
-        if (responseState !is SuccessState) {
-            return
-        }
-        if (responseState.data.barChartEnabled) {
-            if (viewPager.adapter != twoPageAdapter) {
-                viewPager.adapter = twoPageAdapter
-                tabs.setupWithViewPager(viewPager)
+        (responseState as? SuccessState)?.data?.barChartEnabled?.let { enabled ->
+            tabs.visibleIf { enabled }
+
+            if (enabled) {
+                if (viewPager.adapter != twoPageAdapter) {
+                    viewPager.adapter = twoPageAdapter
+                    tabs.setupWithViewPager(viewPager)
+                }
+
+            } else if (viewPager.adapter != onePageAdapter) {
+                if (viewPager.adapter != onePageAdapter) {
+                    viewPager.adapter = onePageAdapter
+                }
             }
-            tabs.visibility = View.VISIBLE
-        } else if (viewPager.adapter != onePageAdapter) {
-            if (viewPager.adapter != onePageAdapter) {
-                viewPager.adapter = onePageAdapter
-            }
-            tabs.visibility = View.GONE
         }
     }
 

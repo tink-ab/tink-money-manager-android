@@ -1,6 +1,11 @@
 package com.tink.moneymanagerui.budgets.details
 
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.OnLifecycleEvent
 import com.tink.model.budget.BudgetPeriod
 import com.tink.model.budget.BudgetSpecification
 import com.tink.model.time.Period
@@ -26,9 +31,9 @@ import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
-import java.util.*
+import java.util.TreeSet
 
-@Deprecated("Use BudgetSelectionControllerNew")
+@Deprecated("Use BudgetSelectionControllerState")
 internal class BudgetSelectionController(
     private val budgetId: String,
     private val budgetsRepository: BudgetsRepository,
@@ -60,12 +65,12 @@ internal class BudgetSelectionController(
 
         addSource(_budgetPeriodsState) { state ->
             value = state.map { periodDetails ->
-                return@map getBudgetPeriodsTreeSet(periodDetails.second).toList()
+                calculateBudgetPeriodsTreeSet(periodDetails.second).toList()
             }
         }
     }
 
-    private fun getBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
+    private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
         budgetPeriods.removeAll(periods.toSet())
         budgetPeriods.addAll(periods)
         return budgetPeriods
@@ -74,14 +79,15 @@ internal class BudgetSelectionController(
     private val _currentSelectedPeriodState = MediatorLiveData<ResponseState<BudgetPeriod>>().apply {
         value = LoadingState
 
-        addSource(_budgetPeriodsState) { state -> value = state.map { periodDetails ->
-            val currentValue = value
-            if (currentValue is SuccessState) {
-                updateCurrentPeriod(currentValue.data, getBudgetPeriodsTreeSet(periodDetails.second))
-            } else {
-                updateCurrentPeriod(null, getBudgetPeriodsTreeSet(periodDetails.second))
+        addSource(_budgetPeriodsState) { state ->
+            value = state.map { periodDetails ->
+                val currentValue = value
+                if (currentValue is SuccessState) {
+                    updateCurrentPeriod(currentValue.data, calculateBudgetPeriodsTreeSet(periodDetails.second))
+                } else {
+                    updateCurrentPeriod(null, calculateBudgetPeriodsTreeSet(periodDetails.second))
+                }
             }
-        }
         }
     }
 
@@ -151,8 +157,10 @@ internal class BudgetSelectionController(
             }
             .let { list -> currentSelectedPeriod.value?.let { list.toMutableList() + it } }
             ?.distinct()
-            ?.forEach { budgetsRepository.requestBudgetPeriodDetailsState(budgetId, it.start, it.end)
-                updateBudgetPeriods(budgetId, it.start, it.end) }
+            ?.forEach {
+                budgetsRepository.requestBudgetPeriodDetailsState(budgetId, it.start, it.end)
+                updateBudgetPeriods(budgetId, it.start, it.end)
+            }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
@@ -173,7 +181,6 @@ internal class BudgetSelectionController(
         lifecycle.addObserver(this)
     }
 
-    @Deprecated("REMOVE PLS")
     private fun updateBudgetPeriods(budgetId: String, start: Instant, end: Instant) {
         budgetsRepository.budgetPeriodDetails(
             start = start, //up for discussion

@@ -67,7 +67,7 @@ data class BudgetDetailsData(
 private const val MAX_PERIOD_COUNT = 12
 
 internal class BudgetDetailsViewModel @Inject constructor(
-    private val budgetSelectionControllerNew: BudgetSelectionControllerNew,
+    private val budgetSelectionControllerState: BudgetSelectionControllerState,
     private val dateUtils: DateUtils,
     @ApplicationScoped context: Context
 ) : ViewModel() {
@@ -78,7 +78,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         value = LoadingState
 
         fun update() = whenNonNull(
-            budgetSelectionControllerNew.budgetSelectionState.value,
+            budgetSelectionControllerState.budgetSelectionState.value,
             isBarChartShowing.value) { state, isBarChartShowing ->
             value = state.map { data ->
                 val budgetPeriodList = getBudgetPeriodsList(data)
@@ -106,7 +106,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         }
 
 
-        addSource(budgetSelectionControllerNew.budgetSelectionState) { update() }
+        addSource(budgetSelectionControllerState.budgetSelectionState) { update() }
         addSource(isBarChartShowing) { update() }
     }
 
@@ -344,11 +344,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
         return successData.budget.periodicity is Budget.Periodicity.Recurring && !isBarChartShowing
     }
 
-    val hasNext get() =  budgetSelectionControllerNew.hasNext
-    val hasPrevious get() = budgetSelectionControllerNew.hasPrevious
+    val hasNext get() =  budgetSelectionControllerState.hasNext
+    val hasPrevious get() = budgetSelectionControllerState.hasPrevious
 
-    fun showNextPeriod() = budgetSelectionControllerNew.next()
-    fun showPreviousPeriod() = budgetSelectionControllerNew.previous()
+    fun showNextPeriod() = budgetSelectionControllerState.next()
+    fun showPreviousPeriod() = budgetSelectionControllerState.previous()
 }
 
 private fun getBudgetManagedPercentage(periodsList: List<BudgetPeriod>, budgetCreated: Instant): Int {
