@@ -5,8 +5,14 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.account.Account
-import com.tink.moneymanagerui.accounts.list.AccountGroupByKind
+import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.accounts.AccountGroupable
+import com.tink.moneymanagerui.accounts.list.AccountGroup
+import com.tink.moneymanagerui.accounts.list.EVERYDAY_ACCOUNTS
 import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
+import com.tink.moneymanagerui.accounts.list.LOANS_ACCOUNTS
+import com.tink.moneymanagerui.accounts.list.OTHER_ACCOUNTS
+import com.tink.moneymanagerui.accounts.list.SAVINGS_ACCOUNTS
 import com.tink.service.network.ResponseState
 import com.tink.service.network.map
 import javax.inject.Inject
@@ -21,16 +27,9 @@ internal class AccountsViewModel @Inject constructor(
 
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
         accountState -> accountState.map { accounts ->
-            accounts.groupBy { account ->
-                account.type.toAccountGroupByKind()
-            }.map { mapEntry ->
-                // TODO: Load provider images correctly
-                GroupedAccountsItem(mapEntry.key, mapEntry.value.map { AccountWithImage(it, null) })
-            }.filter {
-                it.accounts.isNotEmpty()
-            }.sortedBy {
-                it.accountGroup.sortOrder
-            }
+            (FinanceOverviewFragment.accountGroupType as? AccountGroupable)
+                ?.groupAccounts(accounts)
+                ?: emptyList()
         }
     }
 
@@ -59,32 +58,40 @@ internal class AccountsViewModel @Inject constructor(
             }
         }
 
-    val favoriteAccounts: LiveData<List<AccountWithImage>> = MediatorLiveData<List<AccountWithImage>>().apply {
+    val overviewAccounts: LiveData<List<AccountWithImage>> = MediatorLiveData<List<AccountWithImage>>().apply {
         addSource(accountsWithImage) { accountsWithImage ->
             value = accountsWithImage.filter {
-                it.account.favored
+                overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
             }
         }
     }
 
-    val hasFavoriteAccount: LiveData<Boolean> = favoriteAccounts.map {
+    val hasOverviewAccount: LiveData<Boolean> = overviewAccounts.map {
         it.isNotEmpty()
     }
 
-    // TODO: Add logic to configure MM which account list mode to use
-    val accountDetailsDisplayMode = AccountDetailsScreenType.GROUPED_ACCOUNTS_LIST
+    val areAllAccountsOnOverview: LiveData<Boolean> = accountsWithImage.map { accounts ->
+        val overviewAccountsSize = accounts.filter {
+            overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
+        }.size
+        accounts.size == overviewAccountsSize
+    }
+
+    val accountDetailsViewMode = FinanceOverviewFragment.accountGroupType
+
+    private val overviewAccountsMode = FinanceOverviewFragment.overviewAccountsMode
 }
 
-fun Account.Type.toAccountGroupByKind(): AccountGroupByKind =
+fun Account.Type.toAccountGroup(): AccountGroup =
     when (this) {
         Account.Type.CHECKING,
-        Account.Type.CREDIT_CARD -> AccountGroupByKind.EVERYDAY
+        Account.Type.CREDIT_CARD -> EVERYDAY_ACCOUNTS
         Account.Type.SAVINGS,
         Account.Type.PENSION,
-        Account.Type.INVESTMENT -> AccountGroupByKind.SAVINGS
+        Account.Type.INVESTMENT -> SAVINGS_ACCOUNTS
         Account.Type.MORTGAGE,
-        Account.Type.LOAN -> AccountGroupByKind.LOANS
+        Account.Type.LOAN -> LOANS_ACCOUNTS
         Account.Type.UNKNOWN,
         Account.Type.EXTERNAL,
-        Account.Type.OTHER -> AccountGroupByKind.OTHER
+        Account.Type.OTHER -> OTHER_ACCOUNTS
     }

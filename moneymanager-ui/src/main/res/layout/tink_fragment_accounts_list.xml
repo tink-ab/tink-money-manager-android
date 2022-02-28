@@ -34,7 +34,7 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginStart="40dp"
-          android:text="@string/tink_overview_favorite_accounts_title" />
+          android:text="@string/tink_overview_highlighted_accounts_title" />
 
       <com.google.android.material.button.MaterialButton
           android:id="@+id/seeAllAccounts"

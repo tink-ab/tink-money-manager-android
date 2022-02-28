@@ -35,7 +35,7 @@
 
   <string name="tink_overview_favorite_accounts_see_all">See all</string>
   <string name="tink_overview_favorite_accounts_see_all_accounts">See all accounts</string>
-  <string name="tink_overview_favorite_accounts_title">Favorite accounts</string>
+  <string name="tink_overview_highlighted_accounts_title">Favorite accounts</string>
   <string name="tink_accounts_error">No accounts available</string>
   <string name="tink_accounts_edit">Edit accont</string>
   <string name="tink_accounts_edit_field_name_header">Account name</string>
