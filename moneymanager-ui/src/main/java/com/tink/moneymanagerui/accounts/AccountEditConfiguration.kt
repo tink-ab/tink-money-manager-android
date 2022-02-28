@@ -3,21 +3,19 @@ package com.tink.moneymanagerui.accounts
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+enum class EditAccountField {
+    NAME,
+    KIND,
+    IS_INCLUDED,
+    IS_SHARED,
+    IS_FAVORITE
+}
+
 @Parcelize
-data class AccountEditConfiguration(
-    val name: Boolean,
-    val kind: Boolean,
-    val isIncluded: Boolean,
-    val isShared: Boolean,
-    val isFavorite: Boolean,
-): Parcelable {
+data class AccountEditConfiguration( val fields: List<EditAccountField>): Parcelable {
     companion object {
         val AllAccountFieldsEditable = AccountEditConfiguration(
-            name = true,
-            kind = true,
-            isIncluded = true,
-            isShared = true,
-            isFavorite = true
+            EditAccountField.values().toList()
         )
     }
 }

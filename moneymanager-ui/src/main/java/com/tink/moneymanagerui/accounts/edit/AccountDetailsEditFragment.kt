@@ -11,7 +11,7 @@ import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.accounts.AccountEditConfiguration
+import com.tink.moneymanagerui.accounts.EditAccountField
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.util.SoftKeyboardUtils
 import com.tink.service.network.LoadingState
@@ -78,8 +78,8 @@ class AccountDetailsEditFragment : BaseFragment() {
                     sharedSwitch.isChecked = isShared
                     favoriteSwitch.isChecked = isFavored
 
-                    favoriteSwitch.isEnabled = viewModel.enableFields.isFavorite && !isExcluded
-                    favoriteContainer.isEnabled = viewModel.enableFields.isFavorite && !isExcluded
+                    favoriteSwitch.isEnabled = viewModel.enableFields.contains(EditAccountField.IS_FAVORITE) && !isExcluded
+                    favoriteContainer.isEnabled = viewModel.enableFields.contains(EditAccountField.IS_FAVORITE) && !isExcluded
                     if (isExcluded) {
                         favoriteSwitch.isChecked = false
                     }
@@ -169,19 +169,19 @@ class AccountDetailsEditFragment : BaseFragment() {
         }
     }
 
-    private fun setEnabledFields(enabledFields: AccountEditConfiguration) {
-        nameInputLayout.isEnabled = enabledFields.name
+    private fun setEnabledFields(enabledFields: List<EditAccountField>) {
+        nameInputLayout.isEnabled = enabledFields.contains(EditAccountField.NAME)
 
-        typeInputLayout.isEnabled = enabledFields.kind
+        typeInputLayout.isEnabled = enabledFields.contains(EditAccountField.KIND)
 
-        includedSwitch.isEnabled = enabledFields.isIncluded
-        includedContainer.isEnabled = enabledFields.isIncluded
+        includedSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_INCLUDED)
+        includedContainer.isEnabled = enabledFields.contains(EditAccountField.IS_INCLUDED)
 
-        favoriteSwitch.isEnabled = enabledFields.isFavorite
-        favoriteContainer.isEnabled = enabledFields.isFavorite
+        favoriteSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_FAVORITE)
+        favoriteContainer.isEnabled = enabledFields.contains(EditAccountField.IS_FAVORITE)
 
-        sharedSwitch.isEnabled = enabledFields.isShared
-        sharedContainer.isEnabled = enabledFields.isShared
+        sharedSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
+        sharedContainer.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
     }
 
     companion object {

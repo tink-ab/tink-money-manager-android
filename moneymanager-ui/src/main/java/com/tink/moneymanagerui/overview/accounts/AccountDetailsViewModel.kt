@@ -21,7 +21,5 @@ internal class AccountDetailsViewModel @Inject constructor(
 
     val account: LiveData<Account?> = accountId.switchMap { accountRepository.accountById(it) }
 
-    val accountCanBeEdited = FinanceOverviewFragment.accountEditConfiguration.let {
-        it.name || it.kind || it.isIncluded || it.isFavorite || it.isShared
-    }
+    val accountCanBeEdited = FinanceOverviewFragment.accountEditConfiguration.fields.isNotEmpty()
 }

@@ -40,7 +40,7 @@ class AccountDetailsEditViewModel@Inject constructor(
         accountRepository.accountByIdState(it)
     }
 
-    val enableFields = FinanceOverviewFragment.accountEditConfiguration
+    val enableFields = FinanceOverviewFragment.accountEditConfiguration.fields
 
     val editedNameText: MutableLiveData<String> = MutableLiveData("")
     val editedType: MutableLiveData<Account.Type> = MutableLiveData(Account.Type.OTHER)
