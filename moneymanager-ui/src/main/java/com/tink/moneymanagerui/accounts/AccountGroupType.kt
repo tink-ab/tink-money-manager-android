@@ -1,7 +1,6 @@
 package com.tink.moneymanagerui.accounts
 
 import android.os.Parcelable
-import com.tink.model.account.Account
 import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.toAccountGroup
@@ -14,12 +13,11 @@ object NoAccountGroup : AccountGroupType(false)
 
 @Parcelize
 object AccountGroupByKind : AccountGroupType(true), AccountGroupable {
-    override fun groupAccounts(accounts: List<Account>): List<GroupedAccountsItem> {
+    override fun groupAccounts(accounts: List<AccountWithImage>): List<GroupedAccountsItem> {
         return accounts.groupBy { account ->
-            account.type.toAccountGroup()
+            account.account.type.toAccountGroup()
         }.map { mapEntry ->
-            // TODO: Load provider images correctly
-            GroupedAccountsItem(mapEntry.key, mapEntry.value.map { AccountWithImage(it, null) })
+            GroupedAccountsItem(mapEntry.key, mapEntry.value)
         }.filter {
             it.accounts.isNotEmpty()
         }.sortedBy {
@@ -29,8 +27,8 @@ object AccountGroupByKind : AccountGroupType(true), AccountGroupable {
 }
 
 @Parcelize
-class CustomAccountGroup(val grouping: (List<Account>) -> List<GroupedAccountsItem>) : AccountGroupType(true), AccountGroupable {
-    override fun groupAccounts(accounts: List<Account>): List<GroupedAccountsItem> {
+class CustomAccountGroup(val grouping: (List<AccountWithImage>) -> List<GroupedAccountsItem>) : AccountGroupType(true), AccountGroupable {
+    override fun groupAccounts(accounts: List<AccountWithImage>): List<GroupedAccountsItem> {
         return grouping(accounts)
     }
 }

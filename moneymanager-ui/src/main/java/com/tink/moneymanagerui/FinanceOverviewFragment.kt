@@ -12,7 +12,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tink.core.Tink
 import com.tink.model.user.User
 import com.tink.moneymanagerui.accounts.AccountEditConfiguration
-import com.tink.moneymanagerui.accounts.AccountEditConfiguration.Companion.AllAccountFieldsEditable
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration.Companion.ALL
 import com.tink.moneymanagerui.accounts.AccountGroupType
 import com.tink.moneymanagerui.accounts.NoAccountGroup
 import com.tink.moneymanagerui.accounts.OverviewAccountsMode
@@ -194,7 +194,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
         internal var accountGroupType: AccountGroupType = NoAccountGroup
 
-        internal var accountEditConfiguration: AccountEditConfiguration = AllAccountFieldsEditable
+        internal var accountEditConfiguration: AccountEditConfiguration = ALL
 
         internal var overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts
 

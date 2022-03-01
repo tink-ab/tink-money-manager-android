@@ -14,7 +14,8 @@ enum class EditAccountField {
 @Parcelize
 data class AccountEditConfiguration( val fields: List<EditAccountField>): Parcelable {
     companion object {
-        val AllAccountFieldsEditable = AccountEditConfiguration(
+        @JvmField
+        val ALL = AccountEditConfiguration(
             EditAccountField.values().toList()
         )
     }
