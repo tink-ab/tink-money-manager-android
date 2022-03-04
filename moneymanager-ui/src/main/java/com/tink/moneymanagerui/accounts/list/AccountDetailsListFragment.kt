@@ -13,6 +13,7 @@ import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
+import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
@@ -91,4 +92,6 @@ class AccountDetailsListFragment : BaseFragment() {
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
+
+    override fun getScreenEvent() = ScreenEvent.ALL_ACCOUNTS
 }
