@@ -1,6 +1,8 @@
 package com.tink.moneymanagerui
 
 import android.os.Parcelable
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration.Companion.ALL
 import com.tink.moneymanagerui.accounts.AccountGroupType
 import com.tink.moneymanagerui.accounts.NoAccountGroup
 import com.tink.moneymanagerui.accounts.OverviewAccountsMode
@@ -33,7 +35,8 @@ sealed class OverviewFeature : Parcelable {
     @Parcelize
     class Accounts(
         val overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts,
-        val accountGroupType: AccountGroupType = NoAccountGroup
+        val accountGroupType: AccountGroupType = NoAccountGroup,
+        val accountEditConfiguration: AccountEditConfiguration = ALL
     ) : OverviewFeature()
 
     /**

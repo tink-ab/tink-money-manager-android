@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="?tink_backgroundColor"
+tools:ignore="ContentDescription">
+  <FrameLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="parent">
+    <include
+      android:id="@+id/loader"
+      layout="@layout/tink_loader_spinner"
+      android:visibility="visible" />
+  </FrameLayout>
+
+  <LinearLayout
+    android:id="@+id/inputContainer"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="12dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/saveButton">
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/nameInputLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="16dp"
+      android:paddingHorizontal="4dp"
+      android:hint="@string/tink_accounts_edit_field_name_header"
+      app:theme="@style/TinkTextInputLayoutStyle">
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/nameInputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?attr/tink_editTextStyle"
+        android:textAppearance="@style/tink_hecto"
+        tools:text="General account"
+      />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/typeInputLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="16dp"
+      android:paddingHorizontal="4dp"
+      android:hint="@string/tink_accounts_edit_field_type_header"
+      app:theme="@style/TinkTextInputLayoutStyle">
+      <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/typeInputText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?attr/tink_editTextStyle"
+        android:textAppearance="@style/tink_hecto"
+        tools:text="Transaction account"
+      />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/includedContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp">
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/includedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_included_header"
+        android:textAppearance="@style/tink_hecto" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/includedTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_included_description"
+        android:textAppearance="@style/tink_micro" />
+
+      <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/includedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:thumbTint="@color/tink_switch_thumb_color"
+        app:trackTint="@color/tink_switch_track_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="?attr/tink_textColorSecondary"
+      android:alpha="0.50"
+    />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/favoriteContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp"
+    >
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/favoriteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_favorite_header"
+        android:textAppearance="@style/tink_hecto" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/favoriteTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_favorite_description"
+        android:textAppearance="@style/tink_micro" />
+
+      <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/favoriteSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:thumbTint="@color/tink_switch_thumb_color"
+        app:trackTint="@color/tink_switch_track_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="?attr/tink_textColorSecondary"
+      android:alpha="0.50"
+    />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/sharedContainer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/tink_switch_layout_background_color"
+      android:paddingTop="26dp"
+      android:paddingBottom="16dp"
+      android:paddingHorizontal="4dp">
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sharedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_shared_header"
+        android:textAppearance="@style/tink_hecto" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/sharedTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/tink_accounts_edit_field_shared_description"
+        android:textAppearance="@style/tink_micro" />
+
+      <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sharedSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:thumbTint="@color/tink_switch_thumb_color"
+        app:trackTint="@color/tink_switch_track_color" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="?attr/tink_textColorSecondary"
+      android:alpha="0.50"
+    />
+
+  </LinearLayout>
+
+  <com.google.android.material.button.MaterialButton
+    android:id="@+id/saveButton"
+    style="?attr/tink_containedButtonStyle"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tink_button_height"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:text="@string/tink_accounts_edit_save_button"
+  />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

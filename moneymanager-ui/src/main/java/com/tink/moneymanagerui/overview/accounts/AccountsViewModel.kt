@@ -15,9 +15,9 @@ import com.tink.moneymanagerui.accounts.list.OTHER_ACCOUNTS
 import com.tink.moneymanagerui.accounts.list.SAVINGS_ACCOUNTS
 import com.tink.service.network.ResponseState
 import com.tink.service.network.map
-import javax.inject.Inject
 import se.tink.android.livedata.map
 import se.tink.android.repository.account.AccountRepository
+import javax.inject.Inject
 
 internal class AccountsViewModel @Inject constructor(
     accountRepository: AccountRepository
@@ -27,8 +27,9 @@ internal class AccountsViewModel @Inject constructor(
 
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountRepository.accountsState.map {
         accountState -> accountState.map { accounts ->
+            // TODO: Remove map when we have AccountWithImage.
             (FinanceOverviewFragment.accountGroupType as? AccountGroupable)
-                ?.groupAccounts(accounts)
+                ?.groupAccounts(accounts.map { AccountWithImage(it, null) })
                 ?: emptyList()
         }
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.account.Account
 import com.tink.service.account.AccountService
+import com.tink.service.account.UpdateAccountDescriptor
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -66,15 +67,27 @@ class AccountRepository @Inject constructor(
     // TODO: Add call to get provider images
     val accountsState: LiveData<ResponseState<List<Account>>> = _accountsState
 
-    fun accountByIdState(id: String): LiveData<ResponseState<Account?>> = accountsState.map { accountList ->
+    fun accountByIdState(id: String): LiveData<ResponseState<Account>> = accountsState.map { accountList ->
         when(accountList) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(accountList.errorMessage)
-            is SuccessState -> SuccessState(
-                    accountList.data.firstOrNull {
+            is SuccessState -> {
+                val account = accountList.data.firstOrNull {
                     it.id == id
                 }
-            )
+                if (account == null) {
+                    ErrorState("Account with id $id not found.")
+                } else {
+                    SuccessState(account)
+                }
+
+            }
         }
     }
+
+    suspend fun updateAccountState(descriptor: UpdateAccountDescriptor){
+        accountService.update(descriptor)
+        _accountsState.update()
+    }
+
 }

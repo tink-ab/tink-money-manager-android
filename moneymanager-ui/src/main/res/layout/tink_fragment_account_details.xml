@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?tink_backgroundColor"
-    tools:ignore="ContentDescription">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="?tink_backgroundColor"
+  tools:ignore="ContentDescription">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/tink_toolbar"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp" />
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_alignParentStart="true"
+      android:layout_below="@id/tink_toolbar"
+      android:clipToPadding="false"
+      android:paddingBottom="8dp" />
 
     <com.tink.moneymanagerui.view.TinkToolbar
-        android:id="@+id/tink_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:transitionName="@string/tink_toolbar_transition"
-        app:buttonGravity="center_vertical"
-        app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
-        app:navigationIcon="?homeAsUpIndicator" />
+      android:id="@+id/tink_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:transitionName="@string/tink_toolbar_transition"
+      app:buttonGravity="center_vertical"
+      app:navigationContentDescription="@string/tink_nav_app_bar_navigate_up_description"
+      app:navigationIcon="?homeAsUpIndicator" />
 
     <include
-        android:id="@+id/loader"
-        layout="@layout/tink_loader_spinner" />
+      android:id="@+id/loader"
+      layout="@layout/tink_loader_spinner" />
 
 </RelativeLayout>

@@ -64,6 +64,7 @@ internal class OverviewFragment : BaseFragment() {
             is OverviewFeature.Accounts -> {
                 FinanceOverviewFragment.overviewAccountsMode = feature.overviewAccountsMode
                 FinanceOverviewFragment.accountGroupType = feature.accountGroupType
+                FinanceOverviewFragment.accountEditConfiguration = feature.accountEditConfiguration
                 childFragmentManager.transaction {
                     replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
