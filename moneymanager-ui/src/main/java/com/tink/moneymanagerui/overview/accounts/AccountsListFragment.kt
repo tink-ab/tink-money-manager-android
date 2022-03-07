@@ -47,12 +47,13 @@ internal class AccountsListFragment : BaseFragment() {
 
         viewModel.overviewAccounts.observe(viewLifecycleOwner, Observer { list ->
             list?.let { accounts ->
+                // TODO: Load and display provider image from accountsWithImage liveData
                 accountListAdapter.setAccounts(accounts)
             }
         })
 
         viewModel.areAllAccountsOnOverview.observe(viewLifecycleOwner, Observer { areAllAccountsOnOverview ->
-            seeAllAccounts.visibleIf { !areAllAccountsOnOverview }
+            //seeAllAccounts.visibleIf { !areAllAccountsOnOverview }
         })
 
         viewModel.hasOverviewAccount.observe(viewLifecycleOwner, Observer { hasFavoriteAccount ->
@@ -61,14 +62,7 @@ internal class AccountsListFragment : BaseFragment() {
             noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
         })
 
-        // TODO: Load and display provider image from accountsWithImage liveData
         viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->
-            if (accountState is SuccessState) {
-                accountListAdapter.setAccounts(accountState.data.map {
-                        AccountWithImage(it, null)
-                    }
-                )
-            }
             loader.visibleIf { accountState is LoadingState }
             accountList.visibleIf { accountState is SuccessState }
             accounts_error_text.visibleIf { accountState is ErrorState }

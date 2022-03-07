@@ -15,6 +15,14 @@ class TestNavigator {
             .perform(click())
     }
 
+    /**
+     * Requires at least one non favorite account
+     */
+    fun fromOverviewToAccountDetailsList() {
+        onView(ViewMatchers.withId(R.id.seeAllAccounts))
+            .perform(click())
+    }
+
     fun backWithToolbar() {
         onView(withContentDescription(R.string.abc_action_bar_up_description))
             .perform(click());

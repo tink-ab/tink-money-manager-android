@@ -4,8 +4,18 @@ import org.json.JSONObject
 
 object TransactionMockFactory {
 
+    fun getTransactionsForAccount(
+        accountId: String = "4f034cc4629b4f72b6199d1d128af472",
+        numberOfTransactions: Int = 10
+    ) = (1..numberOfTransactions).map {
+            getTransaction(id = it.toString(), accountId = accountId)
+        }
+
+
+
     fun getTransaction(
         id: String = "8a703fa458d144f9b802b09b26a43e89",
+        accountId: String = "4f034cc4629b4f72b6199d1d128af472",
         amount: String = "-100.0",
         description: String = "Netflix",
         date: String = "1640602800000",
@@ -13,7 +23,7 @@ object TransactionMockFactory {
     ): JSONObject {
         return JSONObject("""
         {
-            "accountId" : "4f034cc4629b4f72b6199d1d128af472",
+            "accountId" : "$accountId",
             "amount" : $amount,
             "categoryId" : "075fab3ec31f43aa9d39675475c1fb1a",
             "categoryType" : "EXPENSES",
