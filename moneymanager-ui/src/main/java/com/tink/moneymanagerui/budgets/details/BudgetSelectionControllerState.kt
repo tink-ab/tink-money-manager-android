@@ -15,7 +15,6 @@ import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionState
 import com.tink.moneymanagerui.extensions.getInstant
 import com.tink.moneymanagerui.extensions.minusMonths
 import com.tink.moneymanagerui.repository.StatisticsRepository
-import com.tink.service.handler.ResultHandler
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
@@ -25,16 +24,16 @@ import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.livedata.requireValue
-import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
-import se.tink.commons.livedata.Event
 import java.util.TreeSet
 
-@Deprecated("Use BudgetSelectionControllerState")
-internal class BudgetSelectionController(
+/**
+ * TODO: Rename to BudgetSelectionController when BudgetTransactionListViewModel is refactored
+ */
+internal class BudgetSelectionControllerState(
     private val budgetId: String,
     private val budgetsRepository: BudgetsRepository,
     statisticsRepository: StatisticsRepository,
@@ -42,6 +41,14 @@ internal class BudgetSelectionController(
     private val periodStart: DateTime?,
     private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : LifecycleObserver {
+
+    init {
+        budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
+            DateTime.now().minusMonths(12).getInstant(),
+            Instant.now())
+
+        lifecycle.addObserver(this)
+    }
 
     private val _budgetPeriodsState = budgetsRepository.budgetPeriodDetailsState
 
@@ -51,13 +58,6 @@ internal class BudgetSelectionController(
         addSource(_budgetPeriodsState) { state ->
             value = state.map { periodDetails -> periodDetails.first }
         }
-    }
-
-    private val _budgetSpecification = MutableLiveData<BudgetSpecification>()
-    val budgetSpecification: LiveData<BudgetSpecification> = _budgetSpecification
-
-    val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
-        first.start.compareTo(second.start)
     }
 
     private val _budgetPeriodsListState = MediatorLiveData<ResponseState<List<BudgetPeriod>>>().apply {
@@ -70,11 +70,17 @@ internal class BudgetSelectionController(
         }
     }
 
+    private val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
+        first.start.compareTo(second.start)
+    }
+
     private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
         budgetPeriods.removeAll(periods.toSet())
         budgetPeriods.addAll(periods)
         return budgetPeriods
     }
+
+    private val _currentSelectedPeriodMutable = MutableLiveData<BudgetPeriod>()
 
     private val _currentSelectedPeriodState = MediatorLiveData<ResponseState<BudgetPeriod>>().apply {
         value = LoadingState
@@ -89,6 +95,8 @@ internal class BudgetSelectionController(
                 }
             }
         }
+
+        addSource(_currentSelectedPeriodMutable) {value = SuccessState(it)}
     }
 
     private fun updateCurrentPeriod(currentValue: BudgetPeriod?, allPeriods: TreeSet<BudgetPeriod>): BudgetPeriod {
@@ -106,18 +114,6 @@ internal class BudgetSelectionController(
             it.start.toDateTime().isBeforeNow && it.end.toDateTime().isAfterNow
         } ?: allPeriods.last()
     }
-
-
-
-    private val _budgetPeriodsList = MutableLiveData<List<BudgetPeriod>>()
-    val budgetPeriodsList: LiveData<List<BudgetPeriod>> = _budgetPeriodsList
-    private val _error = MutableLiveData<Event<TinkNetworkError>>()
-    val error: LiveData<Event<TinkNetworkError>> = _error
-    private val periods: LiveData<List<Period>> = statisticsRepository.periods
-
-
-    private val _currentSelectedPeriod = MutableLiveData<BudgetPeriod>()
-    val currentSelectedPeriod: LiveData<BudgetPeriod> = _currentSelectedPeriod
 
     private val budgetSelectionData = MediatorLiveData<BudgetSelectionState>().apply {
         value = BudgetSelectionState()
@@ -138,6 +134,8 @@ internal class BudgetSelectionController(
         it.overallState
     }
 
+    private val periods: LiveData<List<Period>> = statisticsRepository.periods
+
     private var updateListenerJob: Job? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -155,11 +153,16 @@ internal class BudgetSelectionController(
                     it.start.isBefore(date) && it.end.isAfter(date)
                 }
             }
-            .let { list -> currentSelectedPeriod.value?.let { list.toMutableList() + it } }
-            ?.distinct()
-            ?.forEach {
+            .let { list ->
+                val currentPeriodState = _currentSelectedPeriodState.value
+                if (currentPeriodState is SuccessState) {
+                    list.toMutableList() + currentPeriodState.data
+                }
+                list
+            }
+            .distinct()
+            .forEach {
                 budgetsRepository.requestBudgetPeriodDetailsState(budgetId, it.start, it.end)
-                updateBudgetPeriods(budgetId, it.start, it.end)
             }
     }
 
@@ -168,85 +171,56 @@ internal class BudgetSelectionController(
         updateListenerJob?.cancel()
     }
 
-    init {
-        budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
-            DateTime.now().minusMonths(12).getInstant(),
-            Instant.now())
-
-        updateBudgetPeriods(
-            budgetId,
-            DateTime.now().minusMonths(12).getInstant(),
-            Instant.now()
-        )
-        lifecycle.addObserver(this)
-    }
-
-    private fun updateBudgetPeriods(budgetId: String, start: Instant, end: Instant) {
-        budgetsRepository.budgetPeriodDetails(
-            start = start, //up for discussion
-            end = end, //make sure current period is in
-            budgetId = budgetId,
-            resultHandler =
-                ResultHandler(
-                    { periodDetails ->
-                        _budgetSpecification.postValue(periodDetails.first)
-                        budgetPeriods.removeAll(periodDetails.second)
-                        budgetPeriods.addAll(periodDetails.second)
-                        _budgetPeriodsList.postValue(budgetPeriods.toList())
-                        updateCurrent()
-                    },
-                    {
-                        _error.postValue(Event(TinkNetworkError(it)))
-                    }
-                )
-        )
-    }
-
-
-    private fun updateCurrent() {
-        _currentSelectedPeriod.postValue(
-            _currentSelectedPeriod.value?.let { current ->
-                budgetPeriods.first {
-                    it.start == current.start
-                }
-            } ?: periodStart?.let { preselectedStart ->
-                budgetPeriods.firstOrNull {
-                    it.start.toDateTime()
-                        .isBefore(preselectedStart.toDateTime()) && it.end.toDateTime()
-                        .isAfter(preselectedStart)
-                }
-            } ?: budgetPeriods.firstOrNull {
-                it.start.toDateTime().isBeforeNow && it.end.toDateTime().isAfterNow
-            } ?: budgetPeriods.last()
-        )
-    }
-
     fun previous() {
-        _currentSelectedPeriod.value = budgetPeriods.lower(_currentSelectedPeriod.value)
-        whenNonNull(
-            currentSelectedPeriod.value,
-            periods.value
-        ) { currentSelectedPeriod, periods ->
-            if (shouldFetchMore(currentSelectedPeriod, periods)) {
-                val newPeriodRange = backTrackPeriodRange(currentSelectedPeriod, periods)
-                budgetsRepository.requestBudgetPeriodDetailsState(
-                    budgetId,
-                    newPeriodRange.first,
-                    newPeriodRange.second
-                )
-                updateBudgetPeriods(
-                    budgetId,
-                    newPeriodRange.first,
-                    newPeriodRange.second
-                )
+
+        (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriodData ->
+            _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodData)
+            whenNonNull(
+                currentSelectedPeriodData,
+                periods.value
+            ) { currentSelectedPeriod, periods ->
+                if (shouldFetchMore(currentSelectedPeriod, periods)) {
+                    val newPeriodRange = backTrackPeriodRange(currentSelectedPeriod, periods)
+                    budgetsRepository.requestBudgetPeriodDetailsState(
+                        budgetId,
+                        newPeriodRange.first,
+                        newPeriodRange.second
+                    )
+                }
             }
         }
     }
 
     fun next() {
-        _currentSelectedPeriod.value = budgetPeriods.higher(_currentSelectedPeriod.value)
+
+        (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriod ->
+            _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriod)
+        }
+
         // Fetching more should not be necessary, since we don´t need the user to be able to
         // "see in the future"
+    }
+
+    val hasNext: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
+        currentPeriod != budgetPeriods.last()
+    }
+    val hasPrevious: LiveData<Boolean> = createPeriodPickerStateLiveData { currentPeriod ->
+        currentPeriod != budgetPeriods.first()
+    }
+
+    private inline fun createPeriodPickerStateLiveData(
+        crossinline isVisible: (BudgetPeriod) -> Boolean
+    ): LiveData<Boolean> {
+        return MediatorLiveData<Boolean>().apply {
+            addSource(_currentSelectedPeriodState) { currentPeriodState ->
+                value = if (currentPeriodState is SuccessState) {
+                    isVisible(currentPeriodState.data)
+                } else {
+                    false
+                }
+
+            }
+        }
     }
 
     private fun shouldFetchMore(currentSelectedPeriod: BudgetPeriod, periods: List<Period>) =

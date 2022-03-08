@@ -37,12 +37,7 @@ import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.commons.BuildConfig
 import timber.log.Timber
 import java.io.IOException
-import java.security.InvalidAlgorithmParameterException
-import java.security.InvalidKeyException
-import java.security.KeyStoreException
-import java.security.NoSuchAlgorithmException
-import java.security.NoSuchProviderException
-import java.security.UnrecoverableEntryException
+import java.security.*
 import java.security.cert.CertificateException
 import javax.crypto.NoSuchPaddingException
 import javax.inject.Inject

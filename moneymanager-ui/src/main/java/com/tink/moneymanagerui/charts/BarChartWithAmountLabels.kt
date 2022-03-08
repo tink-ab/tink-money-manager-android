@@ -13,12 +13,11 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.charts.extensions.drawBarChart
 import com.tink.moneymanagerui.charts.extensions.drawBarChartWithAmountLabels
 import com.tink.moneymanagerui.util.ScreenUtils
 import se.tink.commons.extensions.getColorFromAttr
-import se.tink.commons.utils.extractTextStyle
 import se.tink.commons.extensions.whenNonNull
+import se.tink.commons.utils.extractTextStyle
 
 
 internal class BarChartWithAmountLabels : View {
@@ -44,7 +43,7 @@ internal class BarChartWithAmountLabels : View {
     private var barChartMarginRight: Int = 0
     private var barChartMarginLeft: Int = 0
 
-    private val barChartMarginBottom = ScreenUtils.dpToPixels(context, 32)
+    val barChartMarginBottom = ScreenUtils.dpToPixels(context, 32)
     private val averageLineOverdraw = ScreenUtils.dpToPixels(context, 12).toFloat()
     private val amountLabelBottomMargin = ScreenUtils.dpToPixels(context, 8)
     private val amountLabelTopMargin = ScreenUtils.dpToPixels(context, 5)
@@ -60,12 +59,21 @@ internal class BarChartWithAmountLabels : View {
         isAntiAlias = true
     }
 
-    private val amountLabelPaint = TextPaint().apply {
+    private val amountLabelPaint: TextPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.tink_pico_text_size)
         color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
         textAlign = Paint.Align.CENTER
         isAntiAlias = true
+    }
+
+    private val transparentAmountLabelPaint: TextPaint = TextPaint().apply {
+        textSize = resources.getDimension(R.dimen.tink_pico_text_size)
+        color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
+        typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
+        textAlign = Paint.Align.CENTER
+        isAntiAlias = true
+        alpha = 0
     }
 
     private val averageLinePaint = Paint().apply {
@@ -80,6 +88,8 @@ internal class BarChartWithAmountLabels : View {
     private val averageLinePath = Path()
 
     private val barChartBounds = RectF()
+
+    fun getLabelHeight() = amountLabelPaint.textSize + amountLabelTopMargin
 
     init {
         setLayerType(LAYER_TYPE_HARDWARE, null)
@@ -136,9 +146,7 @@ internal class BarChartWithAmountLabels : View {
             canvas,
             data
         ) { canvas, data ->
-
             //Compute bounds
-
             val dataMax = data.maxOrNull()!!
 
             barChartBounds.set(
@@ -160,14 +168,18 @@ internal class BarChartWithAmountLabels : View {
                         ).toFloat()
 
             //Draw items
-
             if (amountLabels.isNullOrEmpty()) {
-                canvas.drawBarChart(
+                val emptyValues = listOf("0","0","0","0","0")
+                canvas.drawBarChartWithAmountLabels(
                     barChartBounds,
                     data,
                     barWidth,
                     barPaint,
-                    barChartCornerRadius
+                    barChartCornerRadius,
+                    emptyValues,
+                    transparentAmountLabelPaint,
+                    amountLabelTopMargin,
+                    amountLabelBottomMargin
                 )
             } else {
                 canvas.drawBarChartWithAmountLabels(
@@ -181,19 +193,16 @@ internal class BarChartWithAmountLabels : View {
                     amountLabelTopMargin,
                     amountLabelBottomMargin
                 )
-
             }
 
 
             // Draw average line
-
             averageLinePath.reset()
             averageLinePath.moveTo(barChartBounds.left - averageLineOverdraw, averageLineY)
             averageLinePath.lineTo(barChartBounds.right + averageLineOverdraw, averageLineY)
             canvas.drawPath(averageLinePath, averageLinePaint)
 
             // Draw labels
-
             val betweenMargin = (barChartBounds.width() - data.size * barWidth) / (data.size - 1)
             for ((index, label) in labels?.withIndex() ?: listOf()) {
                 val x = index * (betweenMargin + barWidth) + barChartBounds.left

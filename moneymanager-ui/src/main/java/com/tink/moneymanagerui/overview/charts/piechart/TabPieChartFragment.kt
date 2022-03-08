@@ -1,24 +1,21 @@
 package com.tink.moneymanagerui.overview.charts.piechart
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
-import com.tink.moneymanagerui.FragmentCoordinator
-import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.tracking.ScreenEvent
-import kotlinx.android.synthetic.main.tink_fragment_pie_chart.view.*
-import com.tink.moneymanagerui.overview.charts.PeriodProvider
-import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.ChartType
-import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.tink.model.category.Category
 import com.tink.model.time.Period
-import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.*
+import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
+import com.tink.moneymanagerui.overview.charts.ChartType
+import com.tink.moneymanagerui.overview.charts.PeriodProvider
+import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
+import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.service.network.SuccessState
+import kotlinx.android.synthetic.main.tink_fragment_pie_chart.view.*
 import javax.inject.Inject
 
 private const val TYPE_ARG = "type"
@@ -31,7 +28,14 @@ internal class TabPieChartFragment : BaseFragment(), PeriodProvider {
     @Inject
     lateinit var navigation: PieChartNavigation
 
-    override val period: Period? get() = viewModel.selectedPeriod.value
+    override val period: Period? get() {
+        val dataState = viewModel.tabPieChartDataState.value
+        return if (dataState is SuccessState) {
+            dataState.data.selectedPeriod
+        } else {
+            null
+        }
+    }
 
     override fun getLayoutId() = R.layout.tink_fragment_pie_chart
     override fun needsLoginToBeAuthorized() = true
@@ -42,14 +46,18 @@ internal class TabPieChartFragment : BaseFragment(), PeriodProvider {
 
     override fun authorizedOnCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) {
         viewModel.apply {
-            periods.observe(viewLifecycle, Observer { it?.let { view.periodPicker.items = it } })
-            selectedPeriod.observe(viewLifecycle, Observer { it?.let { view.periodPicker.currentItem = it } })
-            category.observe(viewLifecycle, Observer { it?.let { navigation.onCategoryChanged(view, it, type) } })
+            tabPieChartDataState.observe(viewLifecycleOwner) { dataState ->
+                if (dataState is SuccessState) {
+                    view.periodPicker.items = dataState.data.periods
+                    view.periodPicker.currentItem = dataState.data.selectedPeriod
+                    navigation.onCategoryChanged(view, dataState.data.category, type)
+                }
+            }
         }
         pageViewModel.category.observe(viewLifecycle, Observer { it?.let { viewModel.setCategory(it) } })
 
         with(view.periodPicker) {
-            onItemSelected = viewModel::setPeriod
+            onItemSelected = viewModel::setSelectedPeriod
             formatter = viewModel.periodFormatter
         }
     }

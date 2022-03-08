@@ -12,17 +12,24 @@ import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
 import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.extensions.toPeriodIdentifier
+import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
+import com.tink.service.network.SuccessState
 import com.tink.service.statistics.StatisticsQueryDescriptor
 import com.tink.service.statistics.StatisticsService
-import kotlinx.coroutines.*
+import com.tink.service.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeout
 import org.joda.time.DateTime
 import org.threeten.bp.Instant
 import se.tink.android.livedata.map
-import com.tink.service.network.ResponseState
-import com.tink.service.network.ErrorState
-import com.tink.service.network.LoadingState
-import com.tink.service.network.SuccessState
-import com.tink.service.util.DispatcherProvider
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
@@ -226,16 +233,20 @@ internal class StatisticsRepository @Inject constructor(
         }
     }
 
-    val currentPeriodState: LiveData<ResponseState<Period?>> = Transformations.map(periodMapState) { periodMapState ->
+    val currentPeriodState: LiveData<ResponseState<Period>> = Transformations.map(periodMapState) { periodMapState ->
         when(periodMapState) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(periodMapState.errorMessage)
             is SuccessState -> {
-                SuccessState(
-                    DateTime().let { now ->
-                        periodMapState.data.values.firstOrNull { it.isInPeriod(now) } ?: periodMapState.data.values.maxByOrNull { it.identifier }
+                DateTime().let { now ->
+                    val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
+                        ?: periodMapState.data.values.maxByOrNull { it.identifier }
+                    if (period == null) {
+                        ErrorState("Did not have data for the current period.")
+                    } else {
+                        SuccessState(period)
                     }
-                )
+                }
             }
         }
     }
