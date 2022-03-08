@@ -13,6 +13,7 @@ import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.accounts.EditAccountField
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.SoftKeyboardUtils
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
@@ -183,6 +184,8 @@ class AccountDetailsEditFragment : BaseFragment() {
         sharedSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
         sharedContainer.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
     }
+
+    override fun getScreenEvent() = ScreenEvent.ACCOUNT_EDIT
 
     companion object {
         private const val ACCOUNT_ID_ARGS = "account_id_args"
