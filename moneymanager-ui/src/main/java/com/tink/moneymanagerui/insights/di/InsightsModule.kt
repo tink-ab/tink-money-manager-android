@@ -4,7 +4,19 @@ import androidx.lifecycle.ViewModel
 import com.tink.moneymanagerui.ViewModelFactory
 import com.tink.moneymanagerui.insights.ArchivedInsightsViewModel
 import com.tink.moneymanagerui.insights.CurrentInsightsViewModel
-import com.tink.moneymanagerui.insights.actionhandling.*
+import com.tink.moneymanagerui.insights.actionhandling.ActionEventBus
+import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.CategorizeExpenseActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.CategorizeTransactionsActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.CreateBudgetActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.CreateTransferActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.GeneralActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.InsightsTracker
+import com.tink.moneymanagerui.insights.actionhandling.PassiveActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.ViewAccountActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.ViewBudgetActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.ViewTransactionsActionHandler
+import com.tink.moneymanagerui.insights.actionhandling.ViewTransactionsByCategoryActionHandler
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -26,6 +38,11 @@ class InsightsModule {
     @IntoSet
     fun createTransferActionHandler(createTransferActionHandler: CreateTransferActionHandler): ActionHandler =
         createTransferActionHandler
+
+    @Provides
+    @IntoSet
+    fun viewAccountActionHandler(viewAccountActionHandler: ViewAccountActionHandler): ActionHandler =
+        viewAccountActionHandler
 
     @Provides
     @IntoSet

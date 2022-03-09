@@ -9,7 +9,10 @@ import com.tink.model.insights.InsightState
 import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
-import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
+import javax.inject.Inject
+import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.icon
+import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.iconBackground
+import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.title
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.enums.CategoryType
 import se.tink.commons.categories.iconFromCategoryCode
@@ -21,7 +24,6 @@ import se.tink.commons.extensions.tint
 import se.tink.commons.icons.IconResource
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
-import javax.inject.Inject
 
 @ContributesInsightViewProvider
 class IconTextViewProvider @Inject constructor() : InsightViewProvider {
@@ -40,6 +42,8 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     override val supportedInsightTypes: List<InsightType> = listOf(
         InsightType.ACCOUNT_BALANCE_LOW,
         InsightType.LARGE_EXPENSE,
+        InsightType.CREDIT_CARD_LIMIT_CLOSE,
+        InsightType.CREDIT_CARD_LIMIT_REACHED,
         InsightType.DOUBLE_CHARGE,
         InsightType.BUDGET_SUGGEST_CREATE_FIRST,
         InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL
@@ -87,9 +91,11 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     private fun Insight.getIcon() = when (type) {
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
-        InsightType.ACCOUNT_BALANCE_LOW -> IconResource.DrawableId(R.drawable.tink_alert)
+        InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.CREDIT_CARD_LIMIT_REACHED -> IconResource.DrawableId(R.drawable.tink_alert)
         InsightType.BUDGET_SUGGEST_CREATE_FIRST ->
             IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
+        InsightType.CREDIT_CARD_LIMIT_CLOSE,
         InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> IconResource.DrawableId(R.drawable.tink_uncategorized)
         InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> IconResource.DrawableId(R.drawable.tink_accounts)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
@@ -98,17 +104,20 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
     private fun Insight.getColorAttr() = when (type) {
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
-        InsightType.ACCOUNT_BALANCE_LOW -> R.attr.tink_criticalColor
+        InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.CREDIT_CARD_LIMIT_REACHED -> R.attr.tink_criticalColor
         InsightType.BUDGET_SUGGEST_CREATE_FIRST -> R.attr.tink_expensesColor
-        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> R.attr.tink_uncategorizedColor
-        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> R.attr.tink_uncategorizedColor
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS,
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL,
+        InsightType.CREDIT_CARD_LIMIT_CLOSE -> R.attr.tink_uncategorizedColor
         else -> R.attr.tink_textColorSecondary
     }
 
     private fun Insight.isCritical() = when (type) {
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
-        InsightType.ACCOUNT_BALANCE_LOW -> true
+        InsightType.ACCOUNT_BALANCE_LOW,
+        InsightType.CREDIT_CARD_LIMIT_REACHED-> true
         else -> false
     }
 }
