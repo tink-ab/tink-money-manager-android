@@ -14,8 +14,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode TinkMoneyManagerVersion.code
-        versionName TinkMoneyManagerVersion.name
 
         buildConfigField "String", "libraryVersion", "\"$TinkMoneyManagerVersion.name\""
 
