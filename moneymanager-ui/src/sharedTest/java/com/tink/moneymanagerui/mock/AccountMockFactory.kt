@@ -13,7 +13,8 @@ object AccountMockFactory {
     fun getAccount(
         id: String = "SE2885222529285409533697",
         accountNumber: String = "SE2885222529285409533697",
-        balance: Double = 1000000.0,
+        balance: Double = 2000000.0,
+        currencyCode: String = "SEK",
         name: String = "Godis konto",
         type: String = "LOAN",
         ownership: Double = 1.0,
@@ -50,11 +51,11 @@ object AccountMockFactory {
             "closed": false,
             "flags": "[\"PSD2_PAYMENT_ACCOUNT\"]",
             "accountExclusion": "PFM_AND_SEARCH",
-            "currencyCode": "SEK",
+            "currencyCode": "$currencyCode",
             "currencyDenominatedBalance": {
-                "unscaledValue": 1,
-                "scale": -6,
-                "currencyCode": "SEK"
+                "unscaledValue": "$balance",
+                "scale": -0,
+                "currencyCode": "$currencyCode"
             },
             "refreshed": 1643375759000,
             "financialInstitutionId": "7cf96a1534fd407ebfd00ba534bae705",

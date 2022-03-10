@@ -9,6 +9,7 @@ import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.accounts.list.AccountDetailsListFragment
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.util.EspressoIdlingResource
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
@@ -31,6 +32,7 @@ internal class AccountsListFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
+        EspressoIdlingResource.increment()
 
         accountList.apply {
             layoutManager = AccountLayoutManager(context)
@@ -52,14 +54,11 @@ internal class AccountsListFragment : BaseFragment() {
             }
         })
 
-        viewModel.areAllAccountsOnOverview.observe(viewLifecycleOwner, Observer { areAllAccountsOnOverview ->
-            //seeAllAccounts.visibleIf { !areAllAccountsOnOverview }
-        })
-
-        viewModel.hasOverviewAccount.observe(viewLifecycleOwner, Observer { hasFavoriteAccount ->
-            accountsHeader.visibleIf { hasFavoriteAccount }
-            accountList.visibleIf { hasFavoriteAccount }
-            noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
+        viewModel.hasOverviewAccount.observe(viewLifecycleOwner, Observer { hasOverviewAccount ->
+            accountsHeader.visibleIf { hasOverviewAccount }
+            accountList.visibleIf { hasOverviewAccount }
+            noFavoriteAccountsCard.visibleIf { !hasOverviewAccount }
+            EspressoIdlingResource.decrement()
         })
 
         viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->

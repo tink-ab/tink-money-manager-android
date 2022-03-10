@@ -1,5 +1,7 @@
 package com.tink.moneymanagerui.feature.account
 
+import com.tink.model.misc.Amount
+import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.BaseTestSuite
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
@@ -16,6 +18,16 @@ import okhttp3.mockwebserver.MockResponse
 import org.json.JSONObject
 
 open class BaseAccountTestSuit: BaseTestSuite() {
+
+    val defaultAmount = Amount(ExactNumber(999.0), "SEK")
+
+    val defaultAccount = AccountMockFactory.getAccount(
+        id = "ID123",
+        name = "AccountTransactionListTest Account Name",
+        accountNumber = "AN875",
+        balance = defaultAmount.value.toBigDecimal().toDouble(),
+        currencyCode = defaultAmount.currencyCode
+    )
 
     private val defaultTransaction = TransactionMockFactory.getTransaction()
     val accountDispatcher = PathDispatcher(
@@ -39,6 +51,7 @@ open class BaseAccountTestSuit: BaseTestSuite() {
                 AccountMockFactory.getAccounts(accounts).toString()
             )
         )
+
         server.dispatcher = accountDispatcher
         launchFinanceOverviewFragment(features = OverviewFeatures(listOf(
             OverviewFeature.Accounts(

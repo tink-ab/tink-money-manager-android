@@ -71,13 +71,6 @@ internal class AccountsViewModel @Inject constructor(
         it.isNotEmpty()
     }
 
-    val areAllAccountsOnOverview: LiveData<Boolean> = accountsWithImage.map { accounts ->
-        val overviewAccountsSize = accounts.filter {
-            overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
-        }.size
-        accounts.size == overviewAccountsSize
-    }
-
     val accountDetailsViewMode = FinanceOverviewFragment.accountGroupType
 
     private val overviewAccountsMode = FinanceOverviewFragment.overviewAccountsMode
