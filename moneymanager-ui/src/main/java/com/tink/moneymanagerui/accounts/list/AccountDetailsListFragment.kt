@@ -11,20 +11,12 @@ import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountErrorText
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsGroupedRoot
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsNotGroupedRoot
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.accountsProgressBar
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.allAccountsList
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountErrorText
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsList
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.groupedAccountsProgressBar
+import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.*
 
 class AccountDetailsListFragment : BaseFragment() {
 
@@ -58,16 +50,14 @@ class AccountDetailsListFragment : BaseFragment() {
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
         groupedAccountsList.adapter = groupedAccountsAdapter
 
-        viewModel.accountsState.observe(
+        viewModel.accountsWithImageState.observe(
             viewLifecycleOwner,
             Observer { accountsState ->
                 allAccountsList.visibleIf { accountsState is SuccessState }
                 accountErrorText.visibleIf { accountsState is ErrorState }
                 accountsProgressBar.visibleIf { accountsState is LoadingState }
                 if (accountsState is SuccessState) {
-                    accountsAdapter.submitList(accountsState.data.map {
-                        AccountWithImage(it, null)
-                    })
+                    accountsAdapter.submitList(accountsState.data)
                 }
             }
         )

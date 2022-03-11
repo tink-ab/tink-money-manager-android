@@ -45,33 +45,21 @@ internal class AccountsListFragment : BaseFragment() {
             navigateToAllAccounts()
         }
 
-        viewModel.overviewAccounts.observe(viewLifecycleOwner, Observer { list ->
-            list?.let { accounts ->
-                accountListAdapter.setAccounts(accounts)
+        viewModel.overviewAccounts.observe(viewLifecycleOwner, Observer { overviewAccounts ->
+            overviewAccounts?.let { accounts ->
+                if (accounts is SuccessState) {
+                    accountListAdapter.setAccounts(accounts.data)
+                }
             }
-        })
-
-        viewModel.areAllAccountsOnOverview.observe(viewLifecycleOwner, Observer { areAllAccountsOnOverview ->
-            seeAllAccounts.visibleIf { !areAllAccountsOnOverview }
+            loader.visibleIf { overviewAccounts is LoadingState }
+            accountList.visibleIf { overviewAccounts is SuccessState }
+            accounts_error_text.visibleIf { overviewAccounts is ErrorState }
         })
 
         viewModel.hasOverviewAccount.observe(viewLifecycleOwner, Observer { hasFavoriteAccount ->
             accountsHeader.visibleIf { hasFavoriteAccount }
             accountList.visibleIf { hasFavoriteAccount }
             noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
-        })
-
-        // TODO: Load and display provider image from accountsWithImage liveData
-        viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->
-            if (accountState is SuccessState) {
-                accountListAdapter.setAccounts(accountState.data.map {
-                        AccountWithImage(it, null)
-                    }
-                )
-            }
-            loader.visibleIf { accountState is LoadingState }
-            accountList.visibleIf { accountState is SuccessState }
-            accounts_error_text.visibleIf { accountState is ErrorState }
         })
     }
 
