@@ -9,6 +9,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.setImageResFromAttr
 import com.tink.moneymanagerui.util.CurrencyUtils
+import com.tink.moneymanagerui.util.ImageUtils
 import kotlinx.android.synthetic.main.tink_item_account.view.*
 import se.tink.commons.extensions.inflate
 
@@ -26,8 +27,12 @@ class NotGroupedAccountList(val accountClicked: (Account) -> Unit):
     inner class AccountViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(accountWithImage: AccountWithImage) {
-            // TODO: Load image from accountWithImage when we have it
-            itemView.bankLogo.setImageResFromAttr(R.attr.tink_icon_ingested_account)
+            if (accountWithImage.hasIcon) {
+                ImageUtils.loadImageFromUrl(itemView.bankLogo, accountWithImage.iconUrl!!, R.attr.tink_icon_ingested_account)
+            } else {
+                itemView.bankLogo.setImageResFromAttr(R.attr.tink_icon_ingested_account)
+            }
+
             itemView.customerAccountName.text = accountWithImage.account.name
             itemView.customerAccountNumber.text = accountWithImage.account.accountNumber
             itemView.customerAccountBalance.text = CurrencyUtils.formatCurrencyExact(accountWithImage.account.balance)

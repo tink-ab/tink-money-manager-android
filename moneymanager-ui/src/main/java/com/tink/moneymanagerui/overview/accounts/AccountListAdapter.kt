@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.util.ImageUtils
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_overview_account.view.*
 import se.tink.android.viewholders.ClickableViewHolder
@@ -67,7 +68,7 @@ internal class AccountItemViewHolder(
     fun bind(account: AccountWithImage) {
         with(itemView) {
             if (account.hasIcon) {
-                // TODO: Load provider's image when implemented
+                ImageUtils.loadImageFromUrl(bankLogo, account.iconUrl!!, R.attr.tink_icon_ingested_account)
             } else {
                 bankLogo.setImageResFromAttr(R.attr.tink_icon_ingested_account)
             }
