@@ -178,7 +178,6 @@ internal class PieChartDetailsViewModel @Inject constructor(
          )
     }
 
-
     //TODO: Core setup - revisit
     private val periodComparator = Comparator<Period> { first, second ->
         when {

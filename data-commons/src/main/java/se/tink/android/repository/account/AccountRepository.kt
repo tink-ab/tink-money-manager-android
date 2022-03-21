@@ -33,13 +33,14 @@ class AccountRepository @Inject constructor(
         AutoFetchLiveData {
             CoroutineScope(dispatcher.io()).launch {
                 val accounts = try {
-                    accountService.listAccounts()
+                    accountService.listAccounts().sortedBy { it.name.lowercase() }
                 } catch (t: Throwable) {
                     emptyList()
                 }
                 it.postValue(accounts)
             }
         }
+
     val accounts: LiveData<List<Account>> = _accounts
 
     fun accountById(id: String): LiveData<Account?> = accounts.map { accountList ->
@@ -55,7 +56,7 @@ class AccountRepository @Inject constructor(
         AutoFetchLiveData {
             CoroutineScope(dispatcher.io()).launch {
                 val accounts: ResponseState<List<Account>> = try {
-                    val accounts = accountService.listAccounts()
+                    val accounts = accountService.listAccounts().sortedBy { it.name.lowercase() }
                     SuccessState(accounts)
                 } catch (t: Throwable) {
                     ErrorState(t)
@@ -64,7 +65,6 @@ class AccountRepository @Inject constructor(
             }
         }
 
-    // TODO: Add call to get provider images
     val accountsState: LiveData<ResponseState<List<Account>>> = _accountsState
 
     fun accountByIdState(id: String): LiveData<ResponseState<Account>> = accountsState.map { accountList ->
