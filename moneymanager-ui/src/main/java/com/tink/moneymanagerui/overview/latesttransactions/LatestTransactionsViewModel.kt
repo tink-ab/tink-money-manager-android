@@ -2,17 +2,17 @@ package com.tink.moneymanagerui.overview.latesttransactions
 
 import com.tink.moneymanagerui.transaction.TransactionListMode
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
+import com.tink.service.transaction.TransactionService
+import com.tink.service.util.DispatcherProvider
 import se.tink.android.AppExecutors
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.livedata.map
-import se.tink.android.repository.transaction.TransactionRepository
-import se.tink.commons.transactions.ListItem
-import se.tink.commons.transactions.TransactionItemFactory
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
-import com.tink.service.transaction.TransactionService
-import com.tink.service.util.DispatcherProvider
+import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
+import se.tink.commons.transactions.ListItem
+import se.tink.commons.transactions.TransactionItemFactory
 import javax.inject.Inject
 
 internal class LatestTransactionsViewModel @Inject constructor(

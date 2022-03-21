@@ -6,7 +6,11 @@ import com.tink.model.misc.ExactNumber
 import com.tink.model.transaction.Transaction
 import org.joda.time.DateTime
 import se.tink.commons.R
-import se.tink.commons.categories.*
+import se.tink.commons.categories.getIcon
+import se.tink.commons.categories.iconBackgroundColor
+import se.tink.commons.categories.iconColor
+import se.tink.commons.categories.isExcluded
+import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.isValid
 import se.tink.commons.extensions.toDateTime

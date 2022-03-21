@@ -60,9 +60,9 @@ internal class LatestTransactionsFragment : BaseFragment() {
         action.setOnClickListener { showTransactions() }
 
         // TODO: Remove this and instead have latestTransactions use ResponseState
-        viewModel.categoriesState.observe(viewLifecycleOwner, {
+        viewModel.categoriesState.observe(viewLifecycleOwner) {
             card.visibleIf { it is SuccessState }
-        })
+        }
 
         viewModel.latestTransactions.observe(viewLifecycleOwner, Observer {
             transactionsAdapter.setTransactionItems(it)

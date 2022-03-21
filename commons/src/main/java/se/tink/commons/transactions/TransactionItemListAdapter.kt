@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.tink_transaction_item.view.*
 import kotlinx.android.synthetic.main.tink_transaction_item_date_group.view.*
 import kotlinx.android.synthetic.main.tink_transaction_item_date_group_upcoming.view.*
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
@@ -91,11 +92,13 @@ class TransactionItemListAdapter(
             ?.sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             ?.let { list += it }
 
+        val timeZone = dateUtils?.timezone ?: DateTimeZone.forID(DateUtils.UTC_TIME_ZONE_CODE)
         transactionItems
             .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
-            .groupBy { it.date.withMillisOfDay(0) }
+            .groupBy { it.date.withZone(timeZone).withMillisOfDay(0) }
             .forEach { entry ->
                 if (groupByDates && dateUtils != null) {
+
                     list += ListItem.DateGroupItem(dateUtils.formatDateHuman(entry.key))
                 }
                 list += entry.value
