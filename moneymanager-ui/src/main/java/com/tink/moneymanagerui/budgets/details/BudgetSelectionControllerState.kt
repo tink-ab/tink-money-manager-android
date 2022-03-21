@@ -42,6 +42,10 @@ internal class BudgetSelectionControllerState(
     private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : LifecycleObserver {
 
+    private val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
+        first.start.compareTo(second.start)
+    }
+
     init {
         budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
             DateTime.now().minusMonths(12).getInstant(),
@@ -68,10 +72,6 @@ internal class BudgetSelectionControllerState(
                 calculateBudgetPeriodsTreeSet(periodDetails.second).toList()
             }
         }
-    }
-
-    private val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
-        first.start.compareTo(second.start)
     }
 
     private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
@@ -172,7 +172,6 @@ internal class BudgetSelectionControllerState(
     }
 
     fun previous() {
-
         (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriodData ->
             _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodData)
             whenNonNull(
@@ -192,7 +191,6 @@ internal class BudgetSelectionControllerState(
     }
 
     fun next() {
-
         (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriod ->
             _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriod)
         }
