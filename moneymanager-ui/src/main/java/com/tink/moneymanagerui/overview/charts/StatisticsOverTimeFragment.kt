@@ -37,23 +37,35 @@ class StatisticsOverTimeFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        viewModel.periodSelectionButtonText.observe(viewLifecycleOwner, Observer {
-            periodSelectionButton.text = it
-        })
+        viewModel.periodSelectionButtonText.observe(
+            viewLifecycleOwner,
+            Observer {
+                periodSelectionButton.text = it
+            }
+        )
 
-        viewModel.barChartItems.observe(viewLifecycleOwner, Observer {
-            adapter.items = it
-            adapter.averageHeightFactor = it.averageFactor
-            adapter.notifyDataSetChanged()
-        })
+        viewModel.barChartItems.observe(
+            viewLifecycleOwner,
+            Observer {
+                adapter.items = it
+                adapter.averageHeightFactor = it.averageFactor
+                adapter.notifyDataSetChanged()
+            }
+        )
 
-        viewModel.average.observe(viewLifecycleOwner, Observer {
-            average.text = it
-        })
+        viewModel.average.observe(
+            viewLifecycleOwner,
+            Observer {
+                average.text = it
+            }
+        )
 
-        viewModel.sum.observe(viewLifecycleOwner, Observer { text: String ->
-            sum.text = text
-        })
+        viewModel.sum.observe(
+            viewLifecycleOwner,
+            Observer { text: String ->
+                sum.text = text
+            }
+        )
 
         categoryViewModel.category.observe(
             viewLifecycle,
@@ -66,7 +78,6 @@ class StatisticsOverTimeFragment : BaseFragment() {
                     } else {
                         category.name
                     }
-
             }
         )
 

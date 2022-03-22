@@ -6,7 +6,11 @@ import com.tink.model.misc.ExactNumber
 import com.tink.model.transaction.Transaction
 import org.joda.time.DateTime
 import se.tink.commons.R
-import se.tink.commons.categories.*
+import se.tink.commons.categories.getIcon
+import se.tink.commons.categories.iconBackgroundColor
+import se.tink.commons.categories.iconColor
+import se.tink.commons.categories.isExcluded
+import se.tink.commons.categories.isUncategorized
 import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.isValid
 import se.tink.commons.extensions.toDateTime
@@ -27,7 +31,7 @@ class TransactionItemFactory @Inject constructor(
                 id = id,
                 isUpcoming = false,
                 category = category,
-                date = this.date.toDateTime(), //TODO: Core setup
+                date = this.date.toDateTime(), // TODO: Core setup
                 description = category.name,
                 label = description,
                 amount = amount,
@@ -44,7 +48,7 @@ class TransactionItemFactory @Inject constructor(
         category: Category,
         isSelected: Boolean = true
     ): SimilarTransactionsAdapter.SimilarTransactionItem? =
-        with (transaction) {
+        with(transaction) {
             if (amount.isValid) {
                 val icon = with(category) {
                     ListItem.TransactionItem.Icon(getIcon(), iconColor(), iconBackgroundColor())
@@ -72,7 +76,7 @@ class TransactionItemFactory @Inject constructor(
         description: String,
         label: String,
         amount: Amount,
-        dispensableAmount: Amount = Amount(ExactNumber(0,0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
+        dispensableAmount: Amount = Amount(ExactNumber(0, 0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {

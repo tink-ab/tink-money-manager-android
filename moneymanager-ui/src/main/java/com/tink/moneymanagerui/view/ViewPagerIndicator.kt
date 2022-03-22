@@ -15,9 +15,11 @@ import kotlin.math.roundToInt
 
 private const val SCALE_ADJUSTMENT = 0.05f
 
-internal class ViewPagerIndicator @JvmOverloads constructor(context: Context,
-                                                   attrs: AttributeSet? = null,
-                                                   defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+internal class ViewPagerIndicator @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
 
     var hideStartAndEndCircles: Boolean = false
     @Suppress("JoinDeclarationAndAssignment")
@@ -121,4 +123,3 @@ private var View.scale: Float
         scaleX = adjustedScale
         scaleY = adjustedScale
     }
-

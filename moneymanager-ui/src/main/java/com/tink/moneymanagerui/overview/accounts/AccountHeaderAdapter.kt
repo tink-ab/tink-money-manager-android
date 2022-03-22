@@ -18,7 +18,7 @@ internal class AccountHeaderAdapter : ListAdapter<AccountInformation, AccountHea
     }
 }
 
-internal class AccountHeaderViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder (parent.inflate(R.layout.tink_item_account_header)) {
+internal class AccountHeaderViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.tink_item_account_header)) {
     fun bind(account: AccountInformation) {
         with(itemView) {
             accountNumber.text = account.accountNumber

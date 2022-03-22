@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
 import com.tink.moneymanagerui.util.DimensionUtils
-import java.util.*
+import java.util.Locale
 
 @Deprecated("Use MaterialTextView instead", ReplaceWith("com.google.android.material.textview.MaterialTextView"))
 class TinkTextView : AppCompatTextView {

@@ -10,7 +10,8 @@ internal object DefaultColorGenerator : ColorGenerator {
         getColorForAnimationToBackground(baseColor, 0xFFFFFF, idx * 0.11875)
 
     private fun getColorForAnimationToBackground(
-        sectorColor: Int, backgroundColor: Int,
+        sectorColor: Int,
+        backgroundColor: Int,
         alphaFactor: Double
     ): Int {
         val sectorColorRed = getRedColor(sectorColor)
@@ -46,5 +47,4 @@ internal object DefaultColorGenerator : ColorGenerator {
         val blueMask = 0x0000FF
         return color and blueMask
     }
-
 }

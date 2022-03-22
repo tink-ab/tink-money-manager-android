@@ -39,7 +39,6 @@ fun Iterable<Amount>.average(): Amount =
         pair.first / pair.second
     }
 
-
 fun Iterable<Amount>.sumOrNull(): Amount? =
     reduceOrNull { sum, amount -> sum + amount }
 

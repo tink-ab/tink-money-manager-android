@@ -7,7 +7,6 @@ import java.math.RoundingMode
 
 fun BigDecimal.toExactNumber() = ExactNumber(unscaledValue().toLong(), scale().toLong())
 
-
 fun ExactNumber.subtract(other: ExactNumber) =
     toBigDecimal().subtract(other.toBigDecimal()).toExactNumber()
 

@@ -79,7 +79,8 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
         fun update() = whenNonNull(
             budgetSelectionControllerState.budgetSelectionState.value,
-            isBarChartShowing.value) { state, isBarChartShowing ->
+            isBarChartShowing.value
+        ) { state, isBarChartShowing ->
             value = state.map { data ->
                 val budgetPeriodList = getBudgetPeriodsList(data)
                 val isBarChartEnabled = isBarChartEnabled(data)
@@ -104,7 +105,6 @@ internal class BudgetDetailsViewModel @Inject constructor(
                 )
             }
         }
-
 
         addSource(budgetSelectionControllerState.budgetSelectionState) { update() }
         addSource(isBarChartShowing) { update() }
@@ -144,7 +144,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
     private fun getActiveBudgetPeriodsCount(successData: BudgetSelectionData, budgetPeriodsList: List<BudgetPeriod>): Int =
         budgetPeriodsList
-            .filter {successData.budget.created.isBefore(it.end)}
+            .filter { successData.budget.created.isBefore(it.end) }
             .size
 
     private fun getBudgetHeaderText(successData: BudgetSelectionData): String {
@@ -233,9 +233,9 @@ internal class BudgetDetailsViewModel @Inject constructor(
         successData: BudgetSelectionData
     ): String {
         return when (val periodicity = successData.budget.periodicity) {
-           is Budget.Periodicity.OneOff -> periodicity.formattedPeriod(dateUtils)
-           is Budget.Periodicity.Recurring -> periodicity.formattedPeriod(successData.currentSelectedPeriod, dateUtils)
-       }
+            is Budget.Periodicity.OneOff -> periodicity.formattedPeriod(dateUtils)
+            is Budget.Periodicity.Recurring -> periodicity.formattedPeriod(successData.currentSelectedPeriod, dateUtils)
+        }
     }
 
     private fun getBarChartBudgetPeriodIntervalText(
@@ -301,7 +301,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
         isBarChartShowing: Boolean,
         context: Context
     ): String {
-        return if(isBarChartShowing) {
+        return if (isBarChartShowing) {
             getChartStatusMessage(successData, budgetPeriodsList, context)
         } else {
             getProgressStatusMessage(successData, context)
@@ -311,16 +311,19 @@ internal class BudgetDetailsViewModel @Inject constructor(
     private fun getChartStatusMessage(
         successData: BudgetSelectionData,
         budgetPeriodsList: List<BudgetPeriod>,
-        context: Context): String {
+        context: Context
+    ): String {
         val percentage = getBudgetManagedPercentage(budgetPeriodsList, successData.budget.created)
 
         return context.resources.getQuantityString(
-            R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage)
+            R.plurals.tink_budget_details_chart_status_message_last_year, percentage, percentage
+        )
     }
 
     private fun getProgressStatusMessage(
         successData: BudgetSelectionData,
-        context: Context): String {
+        context: Context
+    ): String {
         val amountLeft = successData.currentSelectedPeriod.budgetAmount - successData.currentSelectedPeriod.spentAmount
         return amountLeft.takeIf { it.value.isBiggerThan(EXACT_NUMBER_ZERO) }
             ?.let {
@@ -340,11 +343,11 @@ internal class BudgetDetailsViewModel @Inject constructor(
     private fun getShowPickerButtons(
         successData: BudgetSelectionData,
         isBarChartShowing: Boolean
-        ): Boolean {
+    ): Boolean {
         return successData.budget.periodicity is Budget.Periodicity.Recurring && !isBarChartShowing
     }
 
-    val hasNext get() =  budgetSelectionControllerState.hasNext
+    val hasNext get() = budgetSelectionControllerState.hasNext
     val hasPrevious get() = budgetSelectionControllerState.hasPrevious
 
     fun showNextPeriod() = budgetSelectionControllerState.next()
@@ -432,5 +435,3 @@ internal fun ExactNumber.isBiggerThanOrEqual(other: ExactNumber) = this.toBigDec
 internal data class VisibleState(val isLoading: Boolean, val isError: Boolean) {
     val isVisible = !isLoading && !isError
 }
-
-

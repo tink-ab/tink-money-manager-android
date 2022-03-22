@@ -68,7 +68,7 @@ class InsightViewProviderDependencyGenerator : AbstractProcessor() {
                     |   }
                     |}
                     |
-                """.trimMargin()
+                    """.trimMargin()
                 )
                 for (element in elements) {
                     appendln("fun ${element.simpleName}.getViewType() = $enumClassName.${element.enumName()}")

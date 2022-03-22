@@ -34,7 +34,7 @@ internal class LatestTransactionsFragment : BaseFragment() {
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
         super.authorizedOnCreate(savedInstanceState)
 
-        //Try scoping the ViewModel to the parent fragment to allow data retention
+        // Try scoping the ViewModel to the parent fragment to allow data retention
         val scope = parentFragment ?: this
 
         viewModel = ViewModelProviders
@@ -60,23 +60,35 @@ internal class LatestTransactionsFragment : BaseFragment() {
         action.setOnClickListener { showTransactions() }
 
         // TODO: Remove this and instead have latestTransactions use ResponseState
-        viewModel.categoriesState.observe(viewLifecycleOwner, {
-            card.visibleIf { it is SuccessState }
-        })
+        viewModel.categoriesState.observe(
+            viewLifecycleOwner,
+            {
+                card.visibleIf { it is SuccessState }
+            }
+        )
 
-        viewModel.latestTransactions.observe(viewLifecycleOwner, Observer {
-            transactionsAdapter.setTransactionItems(it)
-        })
+        viewModel.latestTransactions.observe(
+            viewLifecycleOwner,
+            Observer {
+                transactionsAdapter.setTransactionItems(it)
+            }
+        )
 
-        viewModel.hasTransactions.observe(viewLifecycleOwner, Observer { hasTransactions ->
-            TransitionManager.beginDelayedTransition(view as ViewGroup)
-            mainContent.visibility = if(hasTransactions) View.VISIBLE else View.GONE
-        })
+        viewModel.hasTransactions.observe(
+            viewLifecycleOwner,
+            Observer { hasTransactions ->
+                TransitionManager.beginDelayedTransition(view as ViewGroup)
+                mainContent.visibility = if (hasTransactions) View.VISIBLE else View.GONE
+            }
+        )
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            TransitionManager.beginDelayedTransition(view as ViewGroup)
-            loader.visibility = if(loading) View.VISIBLE else View.GONE
-        })
+        viewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer { loading ->
+                TransitionManager.beginDelayedTransition(view as ViewGroup)
+                loader.visibility = if (loading) View.VISIBLE else View.GONE
+            }
+        )
     }
 
     private fun showTransactions() {

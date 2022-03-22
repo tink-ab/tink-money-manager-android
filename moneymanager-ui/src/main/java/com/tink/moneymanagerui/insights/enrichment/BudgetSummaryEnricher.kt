@@ -49,7 +49,6 @@ internal class BudgetSummaryEnricher @Inject constructor(
             addSource(input) { update() }
         }
 
-
     private fun dataForBudgetSummaryOverspent(data: InsightData.BudgetSummaryOverspentData) =
         dataForBudgetSummary(
             data.achievedBudgets,

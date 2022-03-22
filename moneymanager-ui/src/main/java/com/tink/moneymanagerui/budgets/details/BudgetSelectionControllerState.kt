@@ -47,9 +47,11 @@ internal class BudgetSelectionControllerState(
     }
 
     init {
-        budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
+        budgetsRepository.requestBudgetPeriodDetailsState(
+            budgetId,
             DateTime.now().minusMonths(12).getInstant(),
-            Instant.now())
+            Instant.now()
+        )
 
         lifecycle.addObserver(this)
     }
@@ -96,7 +98,7 @@ internal class BudgetSelectionControllerState(
             }
         }
 
-        addSource(_currentSelectedPeriodMutable) {value = SuccessState(it)}
+        addSource(_currentSelectedPeriodMutable) { value = SuccessState(it) }
     }
 
     private fun updateCurrentPeriod(currentValue: BudgetPeriod?, allPeriods: TreeSet<BudgetPeriod>): BudgetPeriod {
@@ -216,14 +218,13 @@ internal class BudgetSelectionControllerState(
                 } else {
                     false
                 }
-
             }
         }
     }
 
     private fun shouldFetchMore(currentSelectedPeriod: BudgetPeriod, periods: List<Period>) =
-        currentSelectedPeriod == budgetPeriods.first()
-                && currentSelectedPeriod.start.isAfter(periods.first().start)
+        currentSelectedPeriod == budgetPeriods.first() &&
+            currentSelectedPeriod.start.isAfter(periods.first().start)
 
     private fun backTrackPeriodRange(
         currentPeriod: BudgetPeriod,

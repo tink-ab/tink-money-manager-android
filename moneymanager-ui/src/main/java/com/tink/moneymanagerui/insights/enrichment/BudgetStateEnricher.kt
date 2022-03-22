@@ -8,7 +8,6 @@ import se.tink.android.livedata.map
 import se.tink.android.repository.budget.BudgetsRepository
 import javax.inject.Inject
 
-
 internal class BudgetStateEnricher @Inject constructor(
     private val budgetsRepository: BudgetsRepository
 ) : InsightsEnricher {

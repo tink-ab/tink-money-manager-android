@@ -15,14 +15,18 @@ import se.tink.android.AppExecutors
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.livedata.map
 import se.tink.android.repository.TinkNetworkError
-import se.tink.android.repository.transaction.*
+import se.tink.android.repository.transaction.AllTransactionPagesLiveData
+import se.tink.android.repository.transaction.CategoryTransactionPagesLiveData
+import se.tink.android.repository.transaction.LeftToSpendTransactionPagesLiveData
+import se.tink.android.repository.transaction.TransactionPagesLiveData
+import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.findCategoryById
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
 import se.tink.commons.transactions.ListItem
 import se.tink.commons.transactions.TransactionItemFactory
 import javax.inject.Inject
-
 
 internal open class TransactionListViewModel @Inject constructor(
     private val transactionRepository: TransactionRepository,
@@ -31,7 +35,7 @@ internal open class TransactionListViewModel @Inject constructor(
     private val appExecutors: AppExecutors,
     private val transactionItemFactory: TransactionItemFactory,
     private val transactionUpdateEventBus: TransactionUpdateEventBus,
-    private val dispatcher: DispatcherProvider,
+    private val dispatcher: DispatcherProvider
 ) : ViewModel() {
     private val _errors = MutableLiveData<Event<TinkNetworkError>>()
     val errors: LiveData<Event<TinkNetworkError>> = _errors
@@ -126,7 +130,7 @@ internal open class TransactionListViewModel @Inject constructor(
 
             is TransactionListMode.Account -> transactionRepository.forAccountId(mode.accountId)
 
-            is TransactionListMode.Invalid -> return //No correct values passed
+            is TransactionListMode.Invalid -> return // No correct values passed
         }
 
         rawTransactions?.let {
@@ -135,7 +139,6 @@ internal open class TransactionListViewModel @Inject constructor(
 
         loadMoreItems()
     }
-
 
     val hasTransactions = transactionItems.map { it.transactions.isNotEmpty() }
 

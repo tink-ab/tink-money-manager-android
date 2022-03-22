@@ -26,7 +26,6 @@ fun CategoryTree.findCategoryById(id: String): Category? =
         ?: findRecursiveById(income, id)
         ?: findRecursiveById(transfers, id)
 
-
 fun findRecursiveById(category: Category, categoryId: String): Category? {
     if (category.id == categoryId) {
         return category
@@ -39,7 +38,6 @@ fun findRecursiveById(category: Category, categoryId: String): Category? {
     }
     return null
 }
-
 
 fun CategoryTree.getCategoryByType(type: Category.Type): Category =
     when (type) {

@@ -13,8 +13,6 @@ import com.tink.service.network.TinkConfiguration
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
-import java.lang.IllegalStateException
-
 
 abstract class BaseTestSuite {
 
@@ -48,7 +46,6 @@ abstract class BaseTestSuite {
         try {
             Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
         } catch (e: IllegalStateException) {
-
         }
     }
 

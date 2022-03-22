@@ -37,4 +37,3 @@ internal interface FragmentComponent : AndroidInjector<FinanceOverviewFragment> 
         ): AndroidInjector<FinanceOverviewFragment>
     }
 }
-
