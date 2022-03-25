@@ -14,9 +14,16 @@ import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSign
 import kotlinx.android.synthetic.main.tink_budget_overview_item.view.*
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
-import se.tink.commons.extensions.*
+import se.tink.commons.extensions.compareTo
+import se.tink.commons.extensions.getColorFromAttr
+import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.isSmallerThan
+import se.tink.commons.extensions.minus
+import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.tint
 
-internal class BudgetOverviewListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+internal class BudgetOverviewListAdapter :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
 
     var onItemClickedListener: ((String) -> Unit)? = null

@@ -107,7 +107,6 @@ internal class SwedishHolidayTests {
         }
     }
 
-
     @Test
     fun testBusinessDays() {
         listOf(
@@ -127,9 +126,9 @@ internal class SwedishHolidayTests {
             DateComponents(1860, 7, 30)
         ).forEach {
             assert(
-                !it.isWeekend()
-                        && !it.isSwedishHoliday()
-                        && !it.isDeFactoSwedishHoliday()
+                !it.isWeekend() &&
+                    !it.isSwedishHoliday() &&
+                    !it.isDeFactoSwedishHoliday()
             ) { "$it should be a business day" }
         }
     }

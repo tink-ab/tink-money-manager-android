@@ -148,7 +148,6 @@ internal interface BudgetDetailsFragmentsModule {
 
     @ContributesAndroidInjector
     fun budgetTransactionsListFragment(): BudgetTransactionsListFragment
-
 }
 
 @Module

@@ -35,7 +35,7 @@ internal class SearchHeader : RelativeLayout {
             editText.setText(text)
             editText.setSelection(text.length)
         }
-    
+
     init {
         val searchContainer = LayoutInflater.from(context).inflate(
             R.layout.tink_search_header_input_frame,

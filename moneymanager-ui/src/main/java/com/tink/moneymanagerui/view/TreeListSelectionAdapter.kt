@@ -9,15 +9,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.tink.moneymanagerui.R
-import se.tink.commons.extensions.inflate
-import se.tink.commons.extensions.tint
-import se.tink.commons.extensions.visible
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.getColorFromAttr
+import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.tint
+import se.tink.commons.extensions.visible
 
-internal open class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSelectionViewHolder>(),
+internal open class TreeListSelectionAdapter :
+    RecyclerView.Adapter<TreeListSelectionViewHolder>(),
     OnViewHolderClickedListener {
 
     var flatData: MutableList<TreeListSelectionItem> = mutableListOf()
@@ -111,15 +112,15 @@ internal open class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSele
         if (selectedFilter != null) {
             // We have a pre-selection to make together with the new data. Discard our old selection.
             expandedItem =
-                    if (selectedFilter is TreeListSelectionItem.ChildItem) {
-                        // We need to make sure that the correct top level item is expanded first.
-                        flatData.find {
-                            (it is TreeListSelectionItem.TopLevelItem)
-                                    && it.children.any { child -> child.isSameItem(selectedFilter) }
-                        }
-                    } else {
-                        findItem(selectedFilter, flatData)
-                    } as TreeListSelectionItem.TopLevelItem
+                if (selectedFilter is TreeListSelectionItem.ChildItem) {
+                // We need to make sure that the correct top level item is expanded first.
+                flatData.find {
+                    (it is TreeListSelectionItem.TopLevelItem) &&
+                        it.children.any { child -> child.isSameItem(selectedFilter) }
+                }
+            } else {
+                findItem(selectedFilter, flatData)
+            } as TreeListSelectionItem.TopLevelItem
             selectedItem = findItem(selectedFilter, flatData)
         } else {
             // Expand the item in the new list, if any exists.
@@ -167,9 +168,9 @@ internal open class TreeListSelectionAdapter : RecyclerView.Adapter<TreeListSele
             if (oldItem.isSelected != newItem.isSelected) {
                 diff.isSelected = newItem.isSelected
             }
-            if (oldItem is TreeListSelectionItem.TopLevelItem
-                && newItem is TreeListSelectionItem.TopLevelItem
-                && oldItem.isExpanded != newItem.isExpanded
+            if (oldItem is TreeListSelectionItem.TopLevelItem &&
+                newItem is TreeListSelectionItem.TopLevelItem &&
+                oldItem.isExpanded != newItem.isExpanded
             ) {
                 diff.isExpanded = newItem.isExpanded
             }
@@ -195,10 +196,10 @@ internal sealed class TreeListSelectionItem {
     fun isSameItem(other: TreeListSelectionItem): Boolean = id == other.id
 
     open fun isSameContents(other: TreeListSelectionItem): Boolean {
-        return id == other.id
-                && isSelected == other.isSelected
-                && label == other.label
-                && amount == other.amount
+        return id == other.id &&
+            isSelected == other.isSelected &&
+            label == other.label &&
+            amount == other.amount
     }
 
     fun getViewType(): ViewType =
@@ -264,7 +265,6 @@ internal sealed class TreeListSelectionItem {
         override fun deepCopy(): TreeListSelectionItem {
             return copy()
         }
-
     }
 }
 
@@ -392,8 +392,8 @@ internal class TreeListMultiSelectionAdapter : TreeListSelectionAdapter() {
                 // Remove selection from parent item
                 flatData
                     .find {
-                        (it is TreeListSelectionItem.TopLevelItem)
-                                && it.children.any { child -> child.isSameItem(item) }
+                        (it is TreeListSelectionItem.TopLevelItem) &&
+                            it.children.any { child -> child.isSameItem(item) }
                     }
                     ?.let {
                         it.isSelected = false

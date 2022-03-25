@@ -1,19 +1,23 @@
 package com.tink.moneymanagerui.budgets.creation.filterselection
 
 import android.content.Context
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import androidx.lifecycle.ViewModel
 import com.tink.model.budget.Budget
+import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationDataHolder
 import com.tink.moneymanagerui.util.findChildByCategoryId
 import com.tink.moneymanagerui.util.toTreeListSelectionItem
 import com.tink.moneymanagerui.view.TreeListSelectionItem
-import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.categories.CategoryRepository
-import se.tink.commons.extensions.findCategoryByCode
-import se.tink.commons.livedata.Event
-import com.tink.moneymanagerui.R
+import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.categories.enums.CategoryExpenseType
+import se.tink.commons.extensions.findCategoryByCode
 import se.tink.commons.extensions.whenNonNull
+import se.tink.commons.livedata.Event
 import javax.inject.Inject
 
 internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
@@ -59,18 +63,23 @@ internal class BudgetCreationFilterSelectionViewModel @Inject constructor(
             treeListSelectionItems.value
                 ?.takeIf { it.isNotEmpty() }
                 ?.let { categories ->
-                    listOf(TreeListSelectionItem.ActionItem(
-                        id = context.getString(R.string.tink_filter_all_expenses_item),
-                        label = context.getString(R.string.tink_budget_create_all_expenses),
-                        iconRes = R.attr.tink_icon_category_all_expenses,
-                        action = { _allExpensesClicked.postValue(Event(true)) }
-                    ))
+                    listOf(
+                        TreeListSelectionItem.ActionItem(
+                            id = context.getString(R.string.tink_filter_all_expenses_item),
+                            label = context.getString(R.string.tink_budget_create_all_expenses),
+                            iconRes = R.attr.tink_icon_category_all_expenses,
+                            action = { _allExpensesClicked.postValue(Event(true)) }
+                        )
+                    )
                         .plus(categories)
-                        .plus(TreeListSelectionItem.ActionItem(
-                            id = context.getString(R.string.tink_filter_search_item),
-                            label = context.getString(R.string.tink_budget_create_with_keyword),
-                            iconRes = R.attr.tink_icon_category_search,
-                            action = { _searchClicked.postValue(Event(true)) }))
+                        .plus(
+                            TreeListSelectionItem.ActionItem(
+                                id = context.getString(R.string.tink_filter_search_item),
+                                label = context.getString(R.string.tink_budget_create_with_keyword),
+                                iconRes = R.attr.tink_icon_category_search,
+                                action = { _searchClicked.postValue(Event(true)) }
+                            )
+                        )
                         .also {
                             postValue(it.updateBy(selectedFilterToItems.value))
                         }

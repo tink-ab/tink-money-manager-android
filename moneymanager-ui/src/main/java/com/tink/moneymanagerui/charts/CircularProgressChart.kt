@@ -91,7 +91,6 @@ internal class CircularProgressChart : View {
         }
     }
 
-
     override fun draw(canvas: Canvas) {
         with(canvas) {
             getClipBounds(canvasRect)

@@ -8,4 +8,4 @@ import javax.inject.Qualifier
 @Qualifier
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-annotation class ApplicationScoped 
+annotation class ApplicationScoped

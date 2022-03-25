@@ -37,7 +37,12 @@ import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.commons.BuildConfig
 import timber.log.Timber
 import java.io.IOException
-import java.security.*
+import java.security.InvalidAlgorithmParameterException
+import java.security.InvalidKeyException
+import java.security.KeyStoreException
+import java.security.NoSuchAlgorithmException
+import java.security.NoSuchProviderException
+import java.security.UnrecoverableEntryException
 import java.security.cert.CertificateException
 import javax.crypto.NoSuchPaddingException
 import javax.inject.Inject
@@ -130,7 +135,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             false
         }
 
-    //TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
+    // TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
     fun initSecuredDataStorage(context: Context) {
         try {
             SecuredClientDataStorage.init(context.applicationContext, DefaultRecoveryHandler())
@@ -168,7 +173,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
         requireArguments().putString(ARG_ACCESS_TOKEN, accessToken)
 
-        Tink.setUser(User.fromAccessToken(accessToken));
+        Tink.setUser(User.fromAccessToken(accessToken))
     }
 
     private fun setupTimber() {

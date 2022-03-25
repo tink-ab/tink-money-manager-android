@@ -3,14 +3,26 @@ package com.tink.moneymanagerui.charts
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PointF
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Property
-import android.view.*
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewConfiguration
+import android.view.ViewGroup
+import android.view.ViewGroupOverlay
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.childOrNull
 import com.tink.moneymanagerui.charts.extensions.children
-import kotlin.math.*
+import kotlin.math.asin
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.hypot
+import kotlin.math.sin
 import kotlin.properties.ObservableProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -116,7 +128,7 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
 
         // Current color. Can be changed anytime with state change if [colorStateList] is set
         var color: Int
-            get () = paint.color
+            get() = paint.color
             set(value) {
                 paint.color = value
                 invalidate()
@@ -229,7 +241,6 @@ internal class PieChartView @JvmOverloads constructor(context: Context, attrs: A
     }
 }
 
-
 @SuppressLint("ViewConstructor")
 internal open class PieChartLabelView(context: Context, anchorAngle: Float) : ViewGroup(context) {
 
@@ -340,4 +351,3 @@ private fun <T> observable(initialValue: T, onAfterChange: () -> Unit): ReadWrit
     }
 
 private fun View.layout(b: Rect) = layout(b.left, b.top, b.right, b.bottom)
-

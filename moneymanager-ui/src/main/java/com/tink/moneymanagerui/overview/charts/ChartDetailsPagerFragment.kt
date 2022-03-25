@@ -13,7 +13,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.time.Period
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
@@ -23,9 +26,6 @@ import com.tink.moneymanagerui.view.CustomTypefaceSpan
 import kotlinx.android.synthetic.main.tink_fragment_chart_details_pager.view.*
 import se.tink.commons.extensions.onAttachedToWindow
 import se.tink.commons.extensions.visible
-import com.tink.model.time.Period
-import com.tink.moneymanagerui.FragmentAnimationFlags
-import com.tink.moneymanagerui.MoneyManagerFeatureType
 
 private const val PAGE_COUNT = 2
 private const val PAGE_MONTH = 0
@@ -71,7 +71,7 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
         toolbar.inflateMenu(R.menu.tink_details_options_menu)
-        toolbar.menu?.getItem(0)?.let {  menuItem ->
+        toolbar.menu?.getItem(0)?.let { menuItem ->
             val spannableTitle = SpannableString(menuItem.title)
             spannableTitle.setSpan(
                 CustomTypefaceSpan(FontUtils.getTypeface(R.font.tink_font_bold, context)),
@@ -133,10 +133,10 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
     private fun showTransactions() {
         val metaData = TransactionsListMetaData(
-                isLeftToSpend = false,
-                period = adapter.currentPagePeriod,
-                categoryId = viewModel.category.value?.id,
-                title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
+            isLeftToSpend = false,
+            period = adapter.currentPagePeriod,
+            categoryId = viewModel.category.value?.id,
+            title = viewModel.category.value?.name ?: getString(R.string.tink_transactions_list_toolbar_title)
         )
         val fragment = TransactionsListFragment.newInstance(
             metaData,
@@ -177,7 +177,6 @@ internal class ChartDetailsPagerFragment : BaseFragment(), CategorySelectionList
 
         override fun getCount() = PAGE_COUNT
         override fun getPageTitle(position: Int): String = context.getString(PAGE_TITLES[position])
-
     }
 }
 

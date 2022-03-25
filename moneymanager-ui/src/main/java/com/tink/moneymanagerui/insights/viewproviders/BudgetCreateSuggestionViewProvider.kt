@@ -3,14 +3,17 @@ package com.tink.moneymanagerui.insights.viewproviders
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.AttrRes
-import com.tink.model.insights.*
+import com.tink.model.insights.Insight
+import com.tink.model.insights.InsightAction
+import com.tink.model.insights.InsightData
+import com.tink.model.insights.InsightState
+import com.tink.model.insights.InsightType
 import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.insights.enrichment.BudgetCreateSuggestionViewDetails
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_budget_create_suggestion.view.*
-import kotlinx.android.synthetic.main.tink_item_insight_budget_create_suggestion.view.icon
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.iconFromCategoryCode
 import se.tink.commons.extensions.inflate
@@ -45,7 +48,7 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
         BudgetCreateSuggestionViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
-        checkNotNull(insight.viewDetails) {"ViewDetails for this insight must be of the type BudgetCreateSuggestionViewDetails"}
+        checkNotNull(insight.viewDetails) { "ViewDetails for this insight must be of the type BudgetCreateSuggestionViewDetails" }
 
         val viewDetails = insight.viewDetails as BudgetCreateSuggestionViewDetails
         return BudgetCreateSuggestionViewDataHolder(
@@ -66,7 +69,8 @@ class BudgetCreateSuggestionViewProvider @Inject constructor() : InsightViewProv
     ) : InsightViewHolder(
         parent.inflate(R.layout.tink_item_insight_budget_create_suggestion),
         actionHandler
-    ), InsightCommonBottomPart {
+    ),
+        InsightCommonBottomPart {
         override val view: View = itemView
 
         override fun bind(data: InsightDataHolder, insight: Insight) {

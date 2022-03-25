@@ -22,7 +22,7 @@ internal class SwedishHolidayDateRangeLimiterTest {
     @Test
     fun setToNearestDate() {
 
-        //Note: Month indices start at 0, i.e. 8 = September
+        // Note: Month indices start at 0, i.e. 8 = September
         mapOf(
             date(2019, 8, 14) to date(2019, 8, 16),
             date(2019, 8, 15) to date(2019, 8, 16),

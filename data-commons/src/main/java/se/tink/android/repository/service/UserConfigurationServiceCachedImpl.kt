@@ -12,7 +12,7 @@ import javax.inject.Inject
 @Deprecated("Use UserProfileService directly")
 class UserConfigurationServiceCachedImpl @Inject constructor(
     private val userService: UserProfileService,
-    private val dispatcher: DispatcherProvider,
+    private val dispatcher: DispatcherProvider
 ) : UserConfigurationService {
 
     private val changeObservers: MutableList<ChangeObserver<UserProfile>> = mutableListOf()

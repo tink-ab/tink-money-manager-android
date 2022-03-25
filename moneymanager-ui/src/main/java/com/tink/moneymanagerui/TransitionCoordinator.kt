@@ -64,8 +64,8 @@ internal class TransitionCoordinatorImpl(private val transitions: Set<Transition
 
         // Can't use [Fragment.isVisible], it checks for [Fragment.view] visibility also, which is false for exiting fragment at this point
         fun isVisible(f: Fragment): Boolean {
-            return f.isAdded && !f.isHidden && f.view != null
-                    && f.view?.windowToken != null && f.userVisibleHint
+            return f.isAdded && !f.isHidden && f.view != null &&
+                f.view?.windowToken != null && f.userVisibleHint
         }
 
         fun captureHierarchy(f: Fragment, set: MutableSet<FragmentClass>) {

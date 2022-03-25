@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.tink.model.category.Category
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.util.toTreeListSelectionItem
 import com.tink.moneymanagerui.view.TreeListSelectionItem
@@ -12,7 +13,6 @@ import se.tink.android.di.application.ApplicationScoped
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
 import se.tink.commons.categories.iconColor
-import com.tink.model.category.Category
 import javax.inject.Inject
 
 internal class CategorySelectionViewModel @Inject constructor(

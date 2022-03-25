@@ -10,9 +10,9 @@ import com.tink.model.statistics.Statistics
 import com.tink.model.time.MonthPeriod
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.models.PeriodBalance
-import com.tink.moneymanagerui.extensions.getHalfwayPoint
 import com.tink.moneymanagerui.extensions.getAbbreviatedMonthName
 import com.tink.moneymanagerui.extensions.getEndOfMonth
+import com.tink.moneymanagerui.extensions.getHalfwayPoint
 import com.tink.moneymanagerui.extensions.getStartOfMonth
 import com.tink.moneymanagerui.extensions.toPeriodIdentifier
 import com.tink.moneymanagerui.repository.StatisticsRepository
@@ -31,7 +31,7 @@ import se.tink.utils.DateUtils
 import javax.inject.Inject
 import kotlin.math.abs
 
-//TODO: Remove `toDateTime()` extension calls
+// TODO: Remove `toDateTime()` extension calls
 
 internal class StatisticsOverTimeViewModel @Inject constructor(
     statisticsRepository: StatisticsRepository,
@@ -109,7 +109,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
                     iteratedDate.toPeriodIdentifier(),
                     iteratedDate.getStartOfMonth(),
                     iteratedDate.getEndOfMonth()
-                ), 0.0
+                ),
+                0.0
             )
         }
 
@@ -124,8 +125,8 @@ internal class StatisticsOverTimeViewModel @Inject constructor(
             val periodSelection = periodSelection.value ?: return
 
             val filteredBalances = allBalances.filter {
-                it.period?.start?.toDateTime()?.isBefore(periodSelection.end) == true
-                        && it.period?.start?.toDateTime()?.isAfter(periodSelection.start) == true
+                it.period?.start?.toDateTime()?.isBefore(periodSelection.end) == true &&
+                    it.period?.start?.toDateTime()?.isAfter(periodSelection.start) == true
             }
 
             postValue(filteredBalances)

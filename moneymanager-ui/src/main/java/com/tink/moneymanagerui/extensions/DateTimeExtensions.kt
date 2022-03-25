@@ -28,7 +28,7 @@ fun DateTime.getHalfwayUntil(end: DateTime): DateTime {
     require(this.isBefore(end)) { "Start has to be before end" }
 
     val duration = end.millis - this.millis
-    return end.minus(duration/2)
+    return end.minus(duration / 2)
 }
 
 fun DateTime.getInstant(): Instant = Instant.ofEpochMilli(this.millis)
@@ -56,7 +56,7 @@ internal fun DateTime.getEndOfMonth(): Instant =
 
 internal fun DateTime.toPeriodIdentifier(): String {
     val monthDecimalFormat = DecimalFormat("#00")
-    return "${year}-${monthDecimalFormat.format(monthOfYear)}"
+    return "$year-${monthDecimalFormat.format(monthOfYear)}"
 }
 
 fun DateTime.clearTime(): DateTime =

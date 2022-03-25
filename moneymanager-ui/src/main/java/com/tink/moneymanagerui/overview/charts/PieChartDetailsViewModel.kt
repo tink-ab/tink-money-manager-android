@@ -36,7 +36,8 @@ import kotlin.math.abs
 internal data class ChartSourceDataBase(
     val period: Period,
     val category: Category,
-    val currency: String)
+    val currency: String
+)
 
 internal sealed class ChartSourceData(val source: ChartSourceDataBase)
 
@@ -53,7 +54,8 @@ internal class TabPieChartData(
     val selectedPeriod: Period,
     val periods: List<Period>,
     val category: Category,
-    val userProfile: UserProfile)
+    val userProfile: UserProfile
+)
 
 internal data class DetailsChartData(
     @StringRes val title: Int,
@@ -116,7 +118,7 @@ internal class PieChartDetailsViewModel @Inject constructor(
             value = requireValue.copy(category = it)
         }
         addSource(userProfile) {
-            val currency = userProfile.value?.map { userProfile ->  userProfile.currency } ?: LoadingState
+            val currency = userProfile.value?.map { userProfile -> userProfile.currency } ?: LoadingState
             value = requireValue.copy(currency = currency)
         }
     }
@@ -160,31 +162,34 @@ internal class PieChartDetailsViewModel @Inject constructor(
             data.overallState.map { chartSourceDataToDetailsChartData(it, type, transactionNameOther) }
         }
 
-     private fun chartSourceDataToDetailsChartData
-                 (chartSourceData: ChartSourceData, type: ChartType, transactionNameOther: String): DetailsChartData {
-         val data = calculateStatistic(type, chartSourceData, transactionNameOther)
-         val src = chartSourceData.source
-         val periodStr = getPeriodString(dateUtils, src.period)
-         val topLevel = src.category.parentId == null
-         return DetailsChartData(
-             type.title,
-             data.items.sumByFloat { it.amount },
-             chartSourceData.source.currency,
-             periodStr,
-             type.color,
-             DefaultColorGenerator,
-             topLevel,
-             data
-         )
+    private fun chartSourceDataToDetailsChartData(
+        chartSourceData: ChartSourceData,
+        type: ChartType,
+        transactionNameOther: String
+    ): DetailsChartData {
+        val data = calculateStatistic(type, chartSourceData, transactionNameOther)
+        val src = chartSourceData.source
+        val periodStr = getPeriodString(dateUtils, src.period)
+        val topLevel = src.category.parentId == null
+        return DetailsChartData(
+            type.title,
+            data.items.sumByFloat { it.amount },
+            chartSourceData.source.currency,
+            periodStr,
+            type.color,
+            DefaultColorGenerator,
+            topLevel,
+            data
+        )
     }
 
-    //TODO: Core setup - revisit
+    // TODO: Core setup - revisit
     private val periodComparator = Comparator<Period> { first, second ->
         when {
-            first.start.isAfter(second.start) ->  -1
-            first.start.isBefore(second.start) ->  1
-            first.end.isAfter(second.end) ->  -1
-            first.end.isBefore(second.end) ->  1
+            first.start.isAfter(second.start) -> -1
+            first.start.isBefore(second.start) -> 1
+            first.end.isAfter(second.end) -> -1
+            first.end.isBefore(second.end) -> 1
             else -> 0
         }
     }
@@ -253,7 +258,8 @@ internal class PieChartDetailsViewModel @Inject constructor(
                         TransactionsItem(
                             other,
                             toOther.sumByFloat { it.amount },
-                            toOther.flatMap { it.ids })
+                            toOther.flatMap { it.ids }
+                        )
                     )
                 }
         )

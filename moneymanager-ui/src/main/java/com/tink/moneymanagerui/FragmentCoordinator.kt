@@ -3,7 +3,6 @@ package com.tink.moneymanagerui
 import android.view.View
 import androidx.annotation.UiThread
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.transaction
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
