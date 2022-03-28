@@ -13,30 +13,39 @@ import com.tink.moneymanagerui.R
 internal sealed class Attribute(@AttrRes val id: Int)
 
 internal class ColorAttribute
-@JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Int = Color.BLACK,
-                          val setValue: (Int) -> Unit) : Attribute(id)
+@JvmOverloads constructor(
+    @AttrRes id: Int,
+    val defVal: Int = Color.BLACK,
+    val setValue: (Int) -> Unit
+) : Attribute(id)
 
 internal class DimensionAttribute
-@JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Float = 0f,
-                          val setValue: (Float) -> Unit) : Attribute(id)
+@JvmOverloads constructor(
+    @AttrRes id: Int,
+    val defVal: Float = 0f,
+    val setValue: (Float) -> Unit
+) : Attribute(id)
 
 internal class TypefaceAttribute
-@JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Int = R.font.tink_font_regular,
-                          val setValue: (Typeface?) -> Unit) : Attribute(id)
+@JvmOverloads constructor(
+    @AttrRes id: Int,
+    val defVal: Int = R.font.tink_font_regular,
+    val setValue: (Typeface?) -> Unit
+) : Attribute(id)
 
 internal class BooleanAttribute
-@JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Boolean = false,
-                          val setValue: (Boolean) -> Unit) : Attribute(id)
+@JvmOverloads constructor(
+    @AttrRes id: Int,
+    val defVal: Boolean = false,
+    val setValue: (Boolean) -> Unit
+) : Attribute(id)
 
 internal class FloatAttribute
-@JvmOverloads constructor(@AttrRes id: Int,
-                          val defVal: Float = 0f,
-                          val setValue: (Float) -> Unit) : Attribute(id)
-
+@JvmOverloads constructor(
+    @AttrRes id: Int,
+    val defVal: Float = 0f,
+    val setValue: (Float) -> Unit
+) : Attribute(id)
 
 internal fun Context.fetchThemeAttributesFromStyle(@StyleRes themeId: Int, attrs: List<Attribute>) {
     val sortedAttrs = attrs.sortedBy { it.id }

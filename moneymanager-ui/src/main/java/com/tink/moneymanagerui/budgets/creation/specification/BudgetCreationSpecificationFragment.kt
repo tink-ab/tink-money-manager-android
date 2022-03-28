@@ -104,9 +104,12 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             periodStartInputLayout.visibleIf { showPeriodDateField }
         }
 
-        viewModel.periodStartText.observe(viewLifecycleOwner) { periodStart ->
-            periodStartText.setText(periodStart)
-        }
+        viewModel.periodStartText.observe(
+            viewLifecycleOwner)
+            { periodStart ->
+                periodStartText.setText(periodStart)
+            }
+
 
         viewModel.showPeriodDateField.observe(viewLifecycleOwner) { showPeriodDateField ->
             periodEndInputLayout.visibleIf { showPeriodDateField }
@@ -116,7 +119,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             periodEndText.setText(periodEnd)
         }
 
-        actionButton.text = if(viewModel.isEditing) {
+        actionButton.text = if (viewModel.isEditing) {
             getString(R.string.tink_budget_edit_button)
         } else {
             getString(R.string.tink_budget_create_button)
@@ -270,7 +273,12 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     private fun onPeriodClicked() {
         val context = context ?: return
-        val choiceItems = arrayOf(WEEK, MONTH, YEAR, CUSTOM)
+        val choiceItems = arrayOf(
+            PeriodValue.WEEK,
+            PeriodValue.MONTH,
+            PeriodValue.YEAR,
+            PeriodValue.CUSTOM
+        )
         val choiceItemTexts = choiceItems
             .map { it.toChoiceString(context) }
             .toTypedArray()

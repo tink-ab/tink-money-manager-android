@@ -9,10 +9,7 @@ import com.tink.model.insights.InsightState
 import com.tink.model.insights.InsightType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
-import javax.inject.Inject
-import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.icon
-import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.iconBackground
-import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.title
+import kotlinx.android.synthetic.main.tink_item_insight_icon_text.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.categories.enums.CategoryType
 import se.tink.commons.categories.iconFromCategoryCode
@@ -24,6 +21,7 @@ import se.tink.commons.extensions.tint
 import se.tink.commons.icons.IconResource
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
+import javax.inject.Inject
 
 @ContributesInsightViewProvider
 class IconTextViewProvider @Inject constructor() : InsightViewProvider {
@@ -117,7 +115,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
         InsightType.DOUBLE_CHARGE,
         InsightType.LARGE_EXPENSE,
         InsightType.ACCOUNT_BALANCE_LOW,
-        InsightType.CREDIT_CARD_LIMIT_REACHED-> true
+        InsightType.CREDIT_CARD_LIMIT_REACHED -> true
         else -> false
     }
 }

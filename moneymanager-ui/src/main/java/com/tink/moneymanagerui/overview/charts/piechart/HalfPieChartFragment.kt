@@ -18,7 +18,13 @@ import com.tink.moneymanagerui.charts.transitions.PieChartLabelTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.databinding.TinkHalfPieChartItemBinding
 import com.tink.moneymanagerui.extensions.visibleIf
-import com.tink.moneymanagerui.overview.charts.*
+import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
+import com.tink.moneymanagerui.overview.charts.ChartItem
+import com.tink.moneymanagerui.overview.charts.ChartType
+import com.tink.moneymanagerui.overview.charts.DetailsChartData
+import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
+import com.tink.moneymanagerui.overview.charts.StatisticItem
+import com.tink.moneymanagerui.overview.charts.TransactionsItem
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
@@ -112,7 +118,8 @@ internal class HalfPieChartFragment : BaseFragment() {
             HalfChartItem(
                 item.name,
                 amountFormatter.format(item.amount.toDouble(), data.currency, useSymbol = true),
-                View.OnClickListener { onItemClicked(item) })
+                View.OnClickListener { onItemClicked(item) }
+            )
         }
         bindItems(view.itemsList, halfPieChartItems, HalfChartItemTheme(requireContext().getColorFromAttr(ownTheme.chartItemColor)))
         val chartTitle = getString(data.title)
@@ -150,24 +157,28 @@ internal class HalfPieChartFragment : BaseFragment() {
     }
 
     private fun changeTransition() = TransitionSet().apply {
-        addTransition(TransitionSet().apply {
-            addTransition(PieChartLabelTransition())
-            addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
-            addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
-            // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+        addTransition(
+            TransitionSet().apply {
+                addTransition(PieChartLabelTransition())
+                addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+                addTransition(Fade().apply { addTarget(R.id.tink_back_segment) })
+                // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //            addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble()).apply { }
 //            }.apply {
 //                addTarget(R.id.amount)
 //            })
-        })
-        addTransition(TransitionSet().apply {
-            ordering = TransitionSet.ORDERING_SEQUENTIAL
-            addTarget(R.id.chartItem)
-            addTransition(Fade(Fade.MODE_OUT))
-            addTransition(ChangePositionTransition())
-            addTransition(Fade(Fade.MODE_IN))
-        })
+            }
+        )
+        addTransition(
+            TransitionSet().apply {
+                ordering = TransitionSet.ORDERING_SEQUENTIAL
+                addTarget(R.id.chartItem)
+                addTransition(Fade(Fade.MODE_OUT))
+                addTransition(ChangePositionTransition())
+                addTransition(Fade(Fade.MODE_IN))
+            }
+        )
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.STATISTICS

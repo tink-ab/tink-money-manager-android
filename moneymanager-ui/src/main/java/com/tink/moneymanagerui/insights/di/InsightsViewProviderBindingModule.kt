@@ -3,10 +3,10 @@ package com.tink.moneymanagerui.insights.di
 import com.tink.moneymanagerui.insights.viewproviders.BudgetCreateSuggestionViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.BudgetMonthlySummaryViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.BudgetStateViewProvider
+import com.tink.moneymanagerui.insights.viewproviders.ExpensesByCategoryViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.IconTextViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.InsightViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.TransactionsSummaryViewProvider
-import com.tink.moneymanagerui.insights.viewproviders.ExpensesByCategoryViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.UncategorizedExpenseViewProvider
 import com.tink.moneymanagerui.insights.viewproviders.WeeklyExpensesByDayViewProvider
 import dagger.Binds

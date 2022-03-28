@@ -93,7 +93,7 @@ class InsightsModule {
         return object : InsightsTracker {
             override fun trackButtonPressEvent() {
                 // TODO: Remove the tracker logic where it's used before removing this provider logic
-                //analytics.track(AnalyticsEvent.EVENTS_BUTTON_PRESSED_EVENT)
+                // analytics.track(AnalyticsEvent.EVENTS_BUTTON_PRESSED_EVENT)
             }
         }
     }
@@ -114,4 +114,3 @@ interface InsightsViewModelModule {
 }
 
 class InsightsViewModelFactory(providers: ModelProviders) : ViewModelFactory(providers)
-

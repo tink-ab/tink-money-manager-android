@@ -21,9 +21,8 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class IconTextViewProviderTest: BaseInsightTestSuit() {
+class IconTextViewProviderTest : BaseInsightTestSuit() {
     private val transactionId = "8a703fa458d144f9b802b09b26a43e89"
     private val transactionDoubleId = "96b2888389df44f18f4b433c5a99e373"
     private var transaction = JSONObject()
@@ -35,7 +34,6 @@ class IconTextViewProviderTest: BaseInsightTestSuit() {
     private val largeExpense = InsightMockFactory.getLargeExpense(transactionId)
     private val creditCardLimitClose = InsightMockFactory.getCreditCardLimitClose()
     private val creditCardLimitReached = InsightMockFactory.getCreditCardLimitReached()
-
 
     private val refreshCredentials = "726491029375"
     private val refreshToken = InsightMockFactory.getAggregateRefreshP2d2Credentials(refreshCredentials)
@@ -60,8 +58,10 @@ class IconTextViewProviderTest: BaseInsightTestSuit() {
     }
 
     private fun setupDispatcher() {
-        insightDispatcher.addResponse("/api/v1/insights",
-            MockResponse().setResponseCode(200).setBody(insights.toString()))
+        insightDispatcher.addResponse(
+            "/api/v1/insights",
+            MockResponse().setResponseCode(200).setBody(insights.toString())
+        )
 
         server.dispatcher = insightDispatcher
     }
@@ -107,7 +107,8 @@ class IconTextViewProviderTest: BaseInsightTestSuit() {
         // TODO: Make assertions in a more controlled manner.
         Assert.assertEquals(
             "[text={\"insightId\":\"2\",\"insightAction\":\"DISMISS\"}]",
-            dismissRequest!!.body.toString())
+            dismissRequest!!.body.toString()
+        )
     }
 
     @Test

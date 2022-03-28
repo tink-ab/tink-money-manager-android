@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.tink.model.category.Category
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.view.TreeListSelectionAdapter
 import com.tink.moneymanagerui.view.TreeListSelectionItem
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.tink_fragment_select_category.view.*
-import com.tink.model.category.Category
-import com.tink.moneymanagerui.MoneyManagerFeatureType
 
 private const val ARG_TYPE = "arg_type"
 private const val ARG_CATEGORY_ID = "arg_category"
@@ -27,7 +27,7 @@ internal class CategorySelectionFragment : BaseFragment() {
     }
     private val checkedCategoryId by lazy { arguments?.getString(ARG_CATEGORY_ID) }
     private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
-    private val options: Options by lazy { requireNotNull(arguments?.getParcelable<Options>(ARG_OPTIONS) ) }
+    private val options: Options by lazy { requireNotNull(arguments?.getParcelable<Options>(ARG_OPTIONS)) }
     private val viewModel by lazy {
         ViewModelProviders.of(
             this,
@@ -59,29 +59,31 @@ internal class CategorySelectionFragment : BaseFragment() {
             includeTransfers = options.includeTransferTypes,
             includeTopLevel = options.includeTopLevelItem
         )
-        categories.observe(viewLifecycle, object : Observer<List<TreeListSelectionItem>> {
-            override fun onChanged(it: List<TreeListSelectionItem>?) {
-                it?.let { items ->
+        categories.observe(
+            viewLifecycle,
+            object : Observer<List<TreeListSelectionItem>> {
+                override fun onChanged(it: List<TreeListSelectionItem>?) {
+                    it?.let { items ->
 
-                    categories.removeObserver(this)
-                    view.list.adapter = adapter
-                    val selectedItem = checkedCategoryId?.let { id ->
-                        items
-                            .flatMap {
-                                if (it is TreeListSelectionItem.TopLevelItem) {
-                                    listOf(it) + it.children
-                                } else {
-                                    listOf(it)
+                        categories.removeObserver(this)
+                        view.list.adapter = adapter
+                        val selectedItem = checkedCategoryId?.let { id ->
+                            items
+                                .flatMap {
+                                    if (it is TreeListSelectionItem.TopLevelItem) {
+                                        listOf(it) + it.children
+                                    } else {
+                                        listOf(it)
+                                    }
                                 }
-                            }
-                            .find { it.id == id }
+                                .find { it.id == id }
+                        }
+                        adapter.setData(items, selectedItem)
+                        view.list.post { onViewReady() }
                     }
-                    adapter.setData(items, selectedItem)
-                    view.list.post { onViewReady() }
                 }
             }
-        })
-
+        )
 
         view.button.setOnClickListener {
             adapter.selectedItem?.let {

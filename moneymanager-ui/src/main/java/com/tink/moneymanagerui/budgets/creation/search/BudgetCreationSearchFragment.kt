@@ -70,9 +70,12 @@ internal class BudgetCreationSearchFragment : BaseFragment() {
         searchSuggestionsList.layoutManager = LinearLayoutManager(context)
         searchSuggestionsList.adapter = adapter
 
-        viewModel.visibleSuggestions.observe(viewLifecycle, Observer { suggestions ->
-            adapter.submitList(suggestions)
-        })
+        viewModel.visibleSuggestions.observe(
+            viewLifecycle,
+            Observer { suggestions ->
+                adapter.submitList(suggestions)
+            }
+        )
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS

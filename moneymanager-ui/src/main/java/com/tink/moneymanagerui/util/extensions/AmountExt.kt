@@ -46,8 +46,9 @@ internal fun Amount.formatCurrencyExactWithoutSign(): String {
 
 internal fun Amount.formatCurrencyRoundWithoutSymbol(): String {
     return CurrencyUtils.formatCurrency(
-        this, CurrencyFormat.ROUND
-                or CurrencyFormat.AMOUNT_SIGN
+        this,
+        CurrencyFormat.ROUND
+            or CurrencyFormat.AMOUNT_SIGN
     )
 }
 
@@ -55,7 +56,7 @@ internal fun Amount.formatCurrencyExactWithoutSymbol(): String {
     return CurrencyUtils.formatCurrency(
         this,
         CurrencyFormat.EXACT
-                or CurrencyFormat.AMOUNT_SIGN
+            or CurrencyFormat.AMOUNT_SIGN
     )
 }
 
@@ -67,8 +68,8 @@ internal fun Amount.formatCurrencyExactExplicitlyPositive(): String {
     return CurrencyUtils.formatCurrency(
         this,
         CurrencyFormat.EXACT
-                or CurrencyFormat.AMOUNT_SIGN
-                or CurrencyFormat.SYMBOL,
+            or CurrencyFormat.AMOUNT_SIGN
+            or CurrencyFormat.SYMBOL,
         true
     )
 }

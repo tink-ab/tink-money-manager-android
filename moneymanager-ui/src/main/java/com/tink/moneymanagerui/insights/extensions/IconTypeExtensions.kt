@@ -14,4 +14,3 @@ internal fun IconTypeViewDetails?.getIcon(): IconResource =
         is IconTypeViewDetails.Expenses -> IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
-

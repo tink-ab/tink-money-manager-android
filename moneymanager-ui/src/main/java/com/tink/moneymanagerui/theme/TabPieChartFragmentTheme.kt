@@ -26,4 +26,3 @@ private class IncomeTabPieChartFragmentTheme : TabPieChartFragmentTheme {
     override val iconTheme: CategoryIconTheme = IncomeIconTheme()
     override val chartItemColor: Int get() = R.attr.tink_incomeColor
 }
-

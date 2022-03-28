@@ -58,13 +58,19 @@ class InsightsFragment : BaseFragment() {
 
         viewModel.refresh()
 
-        viewModel.insights.observe(viewLifecycleOwner, Observer {
-            insightsAdapter.setData(it)
-        })
+        viewModel.insights.observe(
+            viewLifecycleOwner,
+            Observer {
+                insightsAdapter.setData(it)
+            }
+        )
 
-        viewModel.errors.observe(viewLifecycleOwner, Observer { event ->
-            event?.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
-        })
+        viewModel.errors.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                event?.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
+            }
+        )
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -72,22 +78,33 @@ class InsightsFragment : BaseFragment() {
             (itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
         }
 
-        archiveViewModel.hasItems.observe(viewLifecycleOwner, Observer {
-            showArchiveAction = it
-            invalidateToolbarMenu()
-            updateToolbar()
-        })
+        archiveViewModel.hasItems.observe(
+            viewLifecycleOwner,
+            Observer {
+                showArchiveAction = it
+                invalidateToolbarMenu()
+                updateToolbar()
+            }
+        )
 
-        viewModel.hasItems.observe(viewLifecycle, { hasInsights ->
-            recyclerView.visibleIf { hasInsights }
-        })
-        viewModel.loading.observe(viewLifecycle, { isLoading ->
-            insightsProgressBar.visibleIf { isLoading }
-        })
-        viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
-            emptyStateText.visibleIf { shouldShowEmptyState }
-        })
-
+        viewModel.hasItems.observe(
+            viewLifecycle,
+            { hasInsights ->
+                recyclerView.visibleIf { hasInsights }
+            }
+        )
+        viewModel.loading.observe(
+            viewLifecycle,
+            { isLoading ->
+                insightsProgressBar.visibleIf { isLoading }
+            }
+        )
+        viewModel.showEmptyState.observe(
+            viewLifecycle,
+            { shouldShowEmptyState ->
+                emptyStateText.visibleIf { shouldShowEmptyState }
+            }
+        )
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {

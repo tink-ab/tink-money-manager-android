@@ -5,11 +5,6 @@ import com.tink.moneymanagerui.FragmentCoordinator
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.TransitionCoordinatorImpl
 import com.tink.moneymanagerui.ViewModelFactory
-import dagger.Binds
-import dagger.Module
-import dagger.Provides
-import dagger.android.ContributesAndroidInjector
-import dagger.multibindings.IntoMap
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationDataHolder
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
@@ -19,6 +14,11 @@ import com.tink.moneymanagerui.budgets.creation.search.BudgetCreationSearchFragm
 import com.tink.moneymanagerui.budgets.creation.search.BudgetCreationSearchViewModel
 import com.tink.moneymanagerui.budgets.creation.specification.BudgetCreationSpecificationFragment
 import com.tink.moneymanagerui.budgets.creation.specification.BudgetCreationSpecificationViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoMap
 import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
 import javax.inject.Named
@@ -78,7 +78,6 @@ internal interface BudgetCreationFragmentsModule {
 
     @ContributesAndroidInjector
     fun specificationFragment(): BudgetCreationSpecificationFragment
-
 }
 
 @Module

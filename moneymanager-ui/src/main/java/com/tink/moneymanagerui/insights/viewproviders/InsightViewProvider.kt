@@ -41,7 +41,7 @@ interface InsightCommonBottomPart {
 
     fun setupCommonBottomPart(insight: Insight) {
 
-        //TODO: Update when backend brings back the `type` on actions
+        // TODO: Update when backend brings back the `type` on actions
         fun Button.setupFor(index: Int) {
             val insightAction = insight.actions.elementAtOrNull(index)
             if (insightAction != null) {
