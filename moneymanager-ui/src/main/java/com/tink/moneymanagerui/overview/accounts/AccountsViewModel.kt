@@ -34,11 +34,13 @@ internal class AccountsViewModel @Inject constructor(
     val accountsWithImageState: LiveData<ResponseState<List<AccountWithImage>>> =
         MediatorLiveData<ResponseState<List<AccountWithImage>>>().apply {
             fun update() {
-                postValue(mapState(accountsState.value, _accountIdToImageState.value) {accounts, idToImage ->
-                    accounts.map { account ->
-                        AccountWithImage(account, idToImage[account.financialInstitutionID])
+                postValue(
+                    mapState(accountsState.value, _accountIdToImageState.value) { accounts, idToImage ->
+                        accounts.map { account ->
+                            AccountWithImage(account, idToImage[account.financialInstitutionID])
+                        }
                     }
-                })
+                )
             }
 
             addSource(accountsState) { update() }
@@ -46,11 +48,12 @@ internal class AccountsViewModel @Inject constructor(
         }
 
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountsWithImageState.map {
-            accountState -> accountState.map { accounts ->
-        (FinanceOverviewFragment.accountGroupType as? AccountGroupable)
-            ?.groupAccounts(accounts)
-            ?: emptyList()
-            }
+            accountState ->
+        accountState.map { accounts ->
+            (FinanceOverviewFragment.accountGroupType as? AccountGroupable)
+                ?.groupAccounts(accounts)
+                ?: emptyList()
+        }
     }
 
     val overviewAccounts: LiveData<ResponseState<List<AccountWithImage>>> = MediatorLiveData<ResponseState<List<AccountWithImage>>>().apply {

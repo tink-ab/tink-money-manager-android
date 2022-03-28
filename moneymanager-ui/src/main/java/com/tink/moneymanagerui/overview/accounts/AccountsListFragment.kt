@@ -45,22 +45,28 @@ internal class AccountsListFragment : BaseFragment() {
             navigateToAllAccounts()
         }
 
-        viewModel.overviewAccounts.observe(viewLifecycleOwner, Observer { overviewAccounts ->
-            overviewAccounts?.let { accounts ->
-                if (accounts is SuccessState) {
-                    accountListAdapter.setAccounts(accounts.data)
+        viewModel.overviewAccounts.observe(
+            viewLifecycleOwner,
+            Observer { overviewAccounts ->
+                overviewAccounts?.let { accounts ->
+                    if (accounts is SuccessState) {
+                        accountListAdapter.setAccounts(accounts.data)
+                    }
                 }
+                loader.visibleIf { overviewAccounts is LoadingState }
+                accountList.visibleIf { overviewAccounts is SuccessState }
+                accounts_error_text.visibleIf { overviewAccounts is ErrorState }
             }
-            loader.visibleIf { overviewAccounts is LoadingState }
-            accountList.visibleIf { overviewAccounts is SuccessState }
-            accounts_error_text.visibleIf { overviewAccounts is ErrorState }
-        })
+        )
 
-        viewModel.hasOverviewAccount.observe(viewLifecycleOwner, Observer { hasFavoriteAccount ->
-            accountsHeader.visibleIf { hasFavoriteAccount }
-            accountList.visibleIf { hasFavoriteAccount }
-            noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
-        })
+        viewModel.hasOverviewAccount.observe(
+            viewLifecycleOwner,
+            Observer { hasFavoriteAccount ->
+                accountsHeader.visibleIf { hasFavoriteAccount }
+                accountList.visibleIf { hasFavoriteAccount }
+                noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
+            }
+        )
     }
 
     private fun navigateToAllAccounts() {

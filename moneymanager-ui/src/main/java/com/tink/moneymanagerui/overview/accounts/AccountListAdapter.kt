@@ -40,7 +40,6 @@ internal class AccountListAdapter :
         calculateDiff(oldData, accountItems).dispatchUpdatesTo(this)
     }
 
-
     private fun calculateDiff(old: List<AccountWithImage>, new: List<AccountWithImage>) =
         DiffUtil.calculateDiff(AccountItemDiffCallback(old, new))
 

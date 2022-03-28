@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 internal class AccountDetailsViewModel @Inject constructor(
     accountRepository: AccountRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val accountId: MutableLiveData<String> = MutableLiveData()
 

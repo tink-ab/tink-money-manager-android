@@ -21,7 +21,7 @@ class ProviderRepository @Inject constructor(
         AutoFetchLiveData {
             CoroutineScope(dispatcher.io()).launch {
                 val response: ResponseState<Map<String, String?>> = try {
-                    val idToImageMap =  providerService.listProviders(null)
+                    val idToImageMap = providerService.listProviders(null)
                         .filter { it.images != null }
                         .associate { provider ->
                             provider.financialInstitution.id to provider.images?.icon
@@ -35,5 +35,4 @@ class ProviderRepository @Inject constructor(
         }
 
     val accountIdToImagesState: LiveData<ResponseState<Map<String, String?>>> = _accountIdToImagesState
-
 }
