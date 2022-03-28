@@ -14,10 +14,6 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.WEEK
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.YEAR
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
@@ -105,11 +101,10 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         }
 
         viewModel.periodStartText.observe(
-            viewLifecycleOwner)
-            { periodStart ->
-                periodStartText.setText(periodStart)
-            }
-
+            viewLifecycleOwner
+        ) { periodStart ->
+            periodStartText.setText(periodStart)
+        }
 
         viewModel.showPeriodDateField.observe(viewLifecycleOwner) { showPeriodDateField ->
             periodEndInputLayout.visibleIf { showPeriodDateField }
