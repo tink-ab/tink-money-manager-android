@@ -17,7 +17,7 @@ fun ImageView.setImageResFromAttr(attrResId: Int) {
 }
 
 fun ImageView.setIconRes(iconRes: IconResource) =
-    when(iconRes) {
+    when (iconRes) {
         is IconResource.Attribute -> setImageResFromAttr(iconRes.attrResId)
         is IconResource.DrawableId -> setImageResource(iconRes.drawableResId)
     }

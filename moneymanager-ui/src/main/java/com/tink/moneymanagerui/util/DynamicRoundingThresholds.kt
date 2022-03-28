@@ -14,5 +14,3 @@ internal object DynamicRoundingThresholds {
         return map.takeIf { it.containsKey(currencyCode) }?.get(currencyCode) ?: DEFAULT
     }
 }
-
-

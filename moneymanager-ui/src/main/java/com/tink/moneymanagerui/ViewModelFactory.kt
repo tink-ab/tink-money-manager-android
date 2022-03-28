@@ -19,5 +19,4 @@ open class ViewModelFactory @Inject constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         providers[modelClass]?.get() as? T ?: error("Bind class $modelClass to view model")
-
 }

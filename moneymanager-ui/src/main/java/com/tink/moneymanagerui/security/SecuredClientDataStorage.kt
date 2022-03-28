@@ -13,8 +13,6 @@ import java.security.NoSuchAlgorithmException
 import java.security.NoSuchProviderException
 import java.security.UnrecoverableEntryException
 import java.security.cert.CertificateException
-import java.util.HashMap
-import java.util.HashSet
 import javax.crypto.NoSuchPaddingException
 
 internal class SecuredClientDataStorage private constructor(appContext: Context) :
@@ -212,7 +210,6 @@ internal class SecuredClientDataStorage private constructor(appContext: Context)
         override fun apply() {
             mEditor.apply()
         }
-
     }
 
     interface KeyStoreRecoveryNotifier {
@@ -281,23 +278,26 @@ internal class SecuredClientDataStorage private constructor(appContext: Context)
             Context.MODE_PRIVATE
         )
         encryptionManager =
-            EncryptionManager(appContext, mPrefs, object : KeyStoreRecoveryNotifier {
-                override fun onRecoveryRequired(
-                    e: Exception,
-                    keyStore: KeyStore,
-                    keyAliases: List<String>
-                ): Boolean {
-                    if (mRecoveryHandler != null) {
-                        return mRecoveryHandler!!.recover(
-                            e,
-                            keyStore,
-                            keyAliases,
-                            mPrefs
-                        )
-                    } else {
-                        throw RuntimeException(e)
+            EncryptionManager(
+                appContext, mPrefs,
+                object : KeyStoreRecoveryNotifier {
+                    override fun onRecoveryRequired(
+                        e: Exception,
+                        keyStore: KeyStore,
+                        keyAliases: List<String>
+                    ): Boolean {
+                        if (mRecoveryHandler != null) {
+                            return mRecoveryHandler!!.recover(
+                                e,
+                                keyStore,
+                                keyAliases,
+                                mPrefs
+                            )
+                        } else {
+                            throw RuntimeException(e)
+                        }
                     }
                 }
-            })
+            )
     }
 }

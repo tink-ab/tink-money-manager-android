@@ -19,10 +19,10 @@ import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
 import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
-private const val BUDGET_OPERATION = "BUDGET_OPERATION"
-
 internal class BudgetCreationFragment : BaseFragment() {
     companion object {
+        private const val BUDGET_OPERATION = "BUDGET_OPERATION"
+
         @JvmStatic
         fun newInstance(budgetSpecification: BudgetSpecification? = null): BudgetCreationFragment {
             val fragment = BudgetCreationFragment()
@@ -37,7 +37,7 @@ internal class BudgetCreationFragment : BaseFragment() {
             } else {
                 BudgetCreateOperation()
             }
-            fragment.arguments = bundleOf(BUDGET_OPERATION to budgetOperation,)
+            fragment.arguments = bundleOf(BUDGET_OPERATION to budgetOperation)
             return fragment
         }
 
@@ -50,7 +50,7 @@ internal class BudgetCreationFragment : BaseFragment() {
         ): BudgetCreationFragment {
             return BudgetCreationFragment().apply {
                 arguments = bundleOf(
-                    BUDGET_OPERATION to BudgetCreateOperation(name, amount, budgetFilter, budgetPeriodicity),
+                    BUDGET_OPERATION to BudgetCreateOperation(name, amount, budgetFilter, budgetPeriodicity)
                 )
             }
         }

@@ -83,22 +83,31 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         setupViews()
 
-        viewModel.account.observe(viewLifecycle, Observer {
-            it?.let { account ->
-                title = account.name
-                accountHeaderAdapter.submitList(listOf(AccountInformation(account.accountNumber, account.balance)))
+        viewModel.account.observe(
+            viewLifecycle,
+            Observer {
+                it?.let { account ->
+                    title = account.name
+                    accountHeaderAdapter.submitList(listOf(AccountInformation(account.accountNumber, account.balance)))
+                }
             }
-        })
+        )
 
-        transactionListViewModel.errors.observe(viewLifecycleOwner, Observer { event ->
-            event?.getContentIfNotHandled()?.let { error ->
-                snackbarManager.displayError(error, requireContext())
+        transactionListViewModel.errors.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                event?.getContentIfNotHandled()?.let { error ->
+                    snackbarManager.displayError(error, requireContext())
+                }
             }
-        })
+        )
 
-        transactionListViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            view.loader.visibility = if (loading) View.VISIBLE else View.GONE
-        })
+        transactionListViewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer { loading ->
+                view.loader.visibility = if (loading) View.VISIBLE else View.GONE
+            }
+        )
 
         transactionListViewModel.transactionItems.observe(
             viewLifecycleOwner,

@@ -31,6 +31,5 @@ internal fun FragmentTransaction.setAnimation(animation: FragmentAnimationFlags)
 
         FragmentAnimationFlags.NONE ->
             setCustomAnimations(0, 0)
-
     }
 }

@@ -1,12 +1,12 @@
 package se.tink.commons.categories
 
 import androidx.annotation.AttrRes
+import com.tink.model.category.Category
 import se.tink.commons.R
 import se.tink.commons.categories.enums.CategoryExpenseType
 import se.tink.commons.categories.enums.CategoryIncomeType
 import se.tink.commons.categories.enums.CategoryTransferType
 import se.tink.commons.categories.enums.CategoryType
-import com.tink.model.category.Category
 
 const val UNCATEGORIZED_CODE = "expenses:misc.uncategorized"
 
@@ -77,4 +77,3 @@ fun String.isUncategorized(): Boolean {
 fun String.isExcluded() = startsWith(CategoryTransferType.TRANSFERS_EXCLUDE.code)
 fun String.isIncome() = startsWith(CategoryType.INCOME.stringCode)
 fun String.isExpense() = startsWith(CategoryType.EXPENSES.stringCode)
-

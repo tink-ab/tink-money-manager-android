@@ -25,7 +25,12 @@ import com.tink.moneymanagerui.charts.transitions.PieChartTransition
 import com.tink.moneymanagerui.charts.transitions.TranslationTransition
 import com.tink.moneymanagerui.databinding.TinkPieChartLabelBinding
 import com.tink.moneymanagerui.extensions.visibleIf
-import com.tink.moneymanagerui.overview.charts.*
+import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
+import com.tink.moneymanagerui.overview.charts.ChartType
+import com.tink.moneymanagerui.overview.charts.DetailsChartData
+import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
+import com.tink.moneymanagerui.overview.charts.StatisticItem
+import com.tink.moneymanagerui.overview.charts.StatisticItemsList
 import com.tink.moneymanagerui.overview.getAmountStringForOverviewPieChart
 import com.tink.moneymanagerui.theme.getTabPieChartThemeForType
 import com.tink.moneymanagerui.theme.resolveColorForFeature
@@ -80,7 +85,7 @@ internal class FullPieChartFragment : BaseFragment() {
         val horizontalMargin = 35
         val amountTextParams: LinearLayout.LayoutParams = amountText.layoutParams as LinearLayout.LayoutParams
         amountTextParams.width = innerDiameter - horizontalMargin
-        amountTextParams.height =  LinearLayout.LayoutParams.WRAP_CONTENT
+        amountTextParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
         amountTextParams.gravity = Gravity.CENTER
         amountText.layoutParams = amountTextParams
     }
@@ -96,13 +101,17 @@ internal class FullPieChartFragment : BaseFragment() {
             removeAllViews()
             val chartColor = context.resolveColorForFeature(data.color, MoneyManagerFeatureType.STATISTICS)
             addBackSegment(getString(data.title), chartColor)
-            addSegments(data.data.items, { it.amount }, data.colorGenerator, chartColor, data.currency,
-                ::createLabel, onClick = ::onItemClick)
+            addSegments(
+                data.data.items, { it.amount }, data.colorGenerator, chartColor, data.currency,
+                ::createLabel, onClick = ::onItemClick
+            )
         }
 
         labelTitle.text = getString(data.title)
-        amountText.text = getAmountStringForOverviewPieChart(amountFormatter, data.amount.toDouble(),
-            data.currency, requireContext())
+        amountText.text = getAmountStringForOverviewPieChart(
+            amountFormatter, data.amount.toDouble(),
+            data.currency, requireContext()
+        )
         period.text = data.period
 
         onViewReady()
@@ -156,12 +165,14 @@ internal class FullPieChartFragment : BaseFragment() {
 
         val labelCategories = data.items.map { it.category.code }
         if (labelCategories.isNotEmpty()) {
-            addTransition(TranslationTransition().apply {
-                labelCategories.forEach {
-                    addTarget(getString(R.string.tink_label_title_transition, it))
-                    addTarget(getString(R.string.tink_label_icon_transition, it))
+            addTransition(
+                TranslationTransition().apply {
+                    labelCategories.forEach {
+                        addTarget(getString(R.string.tink_label_title_transition, it))
+                        addTarget(getString(R.string.tink_label_icon_transition, it))
+                    }
                 }
-            })
+            )
         }
     }
 

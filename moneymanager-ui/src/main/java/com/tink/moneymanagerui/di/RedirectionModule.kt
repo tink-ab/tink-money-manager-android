@@ -17,5 +17,5 @@ internal class RedirectionModule {
     fun redirectionReceiver(
         @ApplicationScoped context: Context,
         fragmentCoordinator: FragmentCoordinator
-    ) : RedirectionReceiver = DefaultRedirectionReceiver(context, fragmentCoordinator)
+    ): RedirectionReceiver = DefaultRedirectionReceiver(context, fragmentCoordinator)
 }

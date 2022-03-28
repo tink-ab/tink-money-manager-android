@@ -18,12 +18,13 @@ private const val MINUS = "-"
 internal typealias TextFormatter = (value: Float) -> String
 
 internal class TextAmountTransition(
-        private val negativeNumberSignFromFormatter:Char,
-        private val formatter: TextFormatter
+    private val negativeNumberSignFromFormatter: Char,
+    private val formatter: TextFormatter
 ) : Transition() {
 
     private fun CharSequence.parseInt() = try {
-        Integer.parseInt(this
+        Integer.parseInt(
+            this
                 .replace(negativeNumberSignFromFormatter.toString().toRegex(), MINUS)
                 .replace(Regex("[^\\d$MINUS]"), "")
         )
@@ -70,10 +71,14 @@ internal class TextAmountTransition(
         if (steps.size <= 1) return null
         view.text = startText
         val evaluatorStep = 1f / steps.size
-        return ObjectAnimator.ofObject(view, TEXT_PROPERTY, TypeEvaluator<CharSequence> { fraction, _, _ ->
-            val idx = minOf((fraction / evaluatorStep).toInt(), steps.size - 1)
-            steps[idx]
-        }, steps.last())
+        return ObjectAnimator.ofObject(
+            view, TEXT_PROPERTY,
+            TypeEvaluator<CharSequence> { fraction, _, _ ->
+                val idx = minOf((fraction / evaluatorStep).toInt(), steps.size - 1)
+                steps[idx]
+            },
+            steps.last()
+        )
     }
 }
 
@@ -85,4 +90,3 @@ private val TEXT_PROPERTY = object : Property<TextView, CharSequence>(CharSequen
         }
     }
 }
-

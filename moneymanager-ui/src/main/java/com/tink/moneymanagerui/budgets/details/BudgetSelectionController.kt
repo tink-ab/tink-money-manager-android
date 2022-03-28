@@ -107,14 +107,11 @@ internal class BudgetSelectionController(
         } ?: allPeriods.last()
     }
 
-
-
     private val _budgetPeriodsList = MutableLiveData<List<BudgetPeriod>>()
     val budgetPeriodsList: LiveData<List<BudgetPeriod>> = _budgetPeriodsList
     private val _error = MutableLiveData<Event<TinkNetworkError>>()
     val error: LiveData<Event<TinkNetworkError>> = _error
     private val periods: LiveData<List<Period>> = statisticsRepository.periods
-
 
     private val _currentSelectedPeriod = MutableLiveData<BudgetPeriod>()
     val currentSelectedPeriod: LiveData<BudgetPeriod> = _currentSelectedPeriod
@@ -169,9 +166,11 @@ internal class BudgetSelectionController(
     }
 
     init {
-        budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
+        budgetsRepository.requestBudgetPeriodDetailsState(
+            budgetId,
             DateTime.now().minusMonths(12).getInstant(),
-            Instant.now())
+            Instant.now()
+        )
 
         updateBudgetPeriods(
             budgetId,
@@ -183,25 +182,24 @@ internal class BudgetSelectionController(
 
     private fun updateBudgetPeriods(budgetId: String, start: Instant, end: Instant) {
         budgetsRepository.budgetPeriodDetails(
-            start = start, //up for discussion
-            end = end, //make sure current period is in
+            start = start, // up for discussion
+            end = end, // make sure current period is in
             budgetId = budgetId,
             resultHandler =
-                ResultHandler(
-                    { periodDetails ->
-                        _budgetSpecification.postValue(periodDetails.first)
-                        budgetPeriods.removeAll(periodDetails.second)
-                        budgetPeriods.addAll(periodDetails.second)
-                        _budgetPeriodsList.postValue(budgetPeriods.toList())
-                        updateCurrent()
-                    },
-                    {
-                        _error.postValue(Event(TinkNetworkError(it)))
-                    }
-                )
+            ResultHandler(
+                { periodDetails ->
+                    _budgetSpecification.postValue(periodDetails.first)
+                    budgetPeriods.removeAll(periodDetails.second)
+                    budgetPeriods.addAll(periodDetails.second)
+                    _budgetPeriodsList.postValue(budgetPeriods.toList())
+                    updateCurrent()
+                },
+                {
+                    _error.postValue(Event(TinkNetworkError(it)))
+                }
+            )
         )
     }
-
 
     private fun updateCurrent() {
         _currentSelectedPeriod.postValue(
@@ -250,8 +248,8 @@ internal class BudgetSelectionController(
     }
 
     private fun shouldFetchMore(currentSelectedPeriod: BudgetPeriod, periods: List<Period>) =
-        currentSelectedPeriod == budgetPeriods.first()
-                && currentSelectedPeriod.start.isAfter(periods.first().start)
+        currentSelectedPeriod == budgetPeriods.first() &&
+            currentSelectedPeriod.start.isAfter(periods.first().start)
 
     private fun backTrackPeriodRange(
         currentPeriod: BudgetPeriod,

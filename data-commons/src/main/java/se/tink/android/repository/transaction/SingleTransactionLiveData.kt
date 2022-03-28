@@ -15,7 +15,7 @@ class SingleTransactionLiveData(
     private val transactionId: String,
     val transactionService: TransactionService,
     val transactionUpdateEventBus: TransactionUpdateEventBus,
-    private val dispatcher: DispatcherProvider,
+    dispatcher: DispatcherProvider
 ) : MutableLiveData<TransactionResult>() {
 
     private var fetchOnInit = true
@@ -24,7 +24,7 @@ class SingleTransactionLiveData(
         transaction: Transaction,
         transactionService: TransactionService,
         transactionUpdateEventBus: TransactionUpdateEventBus,
-        dispatcher: DispatcherProvider,
+        dispatcher: DispatcherProvider
     ) : this(transaction.id, transactionService, transactionUpdateEventBus, dispatcher) {
         fetchOnInit = false
         postValue(TransactionReceived(transaction))

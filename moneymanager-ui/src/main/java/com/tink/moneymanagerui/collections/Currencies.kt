@@ -1,8 +1,8 @@
 package com.tink.moneymanagerui.collections
 
 import com.tink.model.user.UserProfile
-import se.tink.android.privacy.Clearable
 import com.tink.service.observer.ChangeObserver
+import se.tink.android.privacy.Clearable
 
 @Deprecated("")
 class Currencies : ChangeObserver<UserProfile?>, Clearable {

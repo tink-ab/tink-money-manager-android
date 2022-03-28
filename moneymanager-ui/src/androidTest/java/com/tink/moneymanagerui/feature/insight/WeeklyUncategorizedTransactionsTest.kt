@@ -14,7 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class WeeklyUncategorizedTransactionsTest: BaseInsightTestSuit() {
+class WeeklyUncategorizedTransactionsTest : BaseInsightTestSuit() {
     private var transactionIds = listOf("1111", "2222", "3333")
     private var transactions = listOf<JSONObject>()
     private var insight = JSONObject()
@@ -45,11 +45,11 @@ class WeeklyUncategorizedTransactionsTest: BaseInsightTestSuit() {
         insightDispatcher.addResponses(
             mutableMapOf(
                 "/api/v1/transactions/${transactionIds[0]}" to
-                        MockResponse().setResponseCode(200).setBody(transactions[0].toString()),
+                    MockResponse().setResponseCode(200).setBody(transactions[0].toString()),
                 "/api/v1/transactions/${transactionIds[1]}" to
-                        MockResponse().setResponseCode(200).setBody(transactions[1].toString()),
+                    MockResponse().setResponseCode(200).setBody(transactions[1].toString()),
                 "/api/v1/transactions/${transactionIds[2]}" to
-                        MockResponse().setResponseCode(200).setBody(transactions[2].toString()),
+                    MockResponse().setResponseCode(200).setBody(transactions[2].toString())
             )
         )
 
@@ -68,8 +68,12 @@ class WeeklyUncategorizedTransactionsTest: BaseInsightTestSuit() {
             .check(ViewAssertions.matches(ViewMatchers.withText("29 Jun 2021 - 05 Jul 2021")))
 
         Espresso.onView(ViewMatchers.withId(R.id.amount))
-            .check(ViewAssertions.matches(ViewMatchers.withText(
-                resources.getString(R.string.tink_expenses_text, 3)
-            )))
+            .check(
+                ViewAssertions.matches(
+                    ViewMatchers.withText(
+                        resources.getString(R.string.tink_expenses_text, 3)
+                    )
+                )
+            )
     }
 }

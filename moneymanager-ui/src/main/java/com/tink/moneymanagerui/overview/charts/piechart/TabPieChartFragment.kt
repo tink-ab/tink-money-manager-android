@@ -8,7 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.tink.model.category.Category
 import com.tink.model.time.Period
-import com.tink.moneymanagerui.*
+import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.FragmentCoordinator
+import com.tink.moneymanagerui.MoneyManagerFeatureType
+import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
 import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.PeriodProvider
@@ -95,7 +99,7 @@ internal class PieChartNavigation(private val coordinator: FragmentCoordinator) 
 
             coordinator.replace(
                 createFunc(), false, FragmentAnimationFlags.NONE,
-                tag = tag,
+                tag = tag
                 // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
 //                sharedViews = sharedElements
             )

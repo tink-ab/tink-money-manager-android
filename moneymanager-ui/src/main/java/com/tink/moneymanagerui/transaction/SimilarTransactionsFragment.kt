@@ -95,21 +95,36 @@ internal class SimilarTransactionsFragment : BaseFragment() {
             }
         }
         viewModel.apply {
-            similarTransactionItems.observe(viewLifecycleOwner, Observer { items ->
-                adapter.setData(items)
-            })
-            doneButtonText.observe(viewLifecycleOwner, Observer { text ->
-                doneBtn.text = text
-            })
-            descriptionText.observe(viewLifecycleOwner, Observer { text ->
-                description.text = text
-            })
-            markButtonText.observe(viewLifecycleOwner, Observer {
-                invalidateToolbarMenu()
-            })
-            showDoneButton.observe(viewLifecycleOwner, Observer { showDoneButton ->
-                doneBtn.visibleIf { showDoneButton }
-            })
+            similarTransactionItems.observe(
+                viewLifecycleOwner,
+                Observer { items ->
+                    adapter.setData(items)
+                }
+            )
+            doneButtonText.observe(
+                viewLifecycleOwner,
+                Observer { text ->
+                    doneBtn.text = text
+                }
+            )
+            descriptionText.observe(
+                viewLifecycleOwner,
+                Observer { text ->
+                    description.text = text
+                }
+            )
+            markButtonText.observe(
+                viewLifecycleOwner,
+                Observer {
+                    invalidateToolbarMenu()
+                }
+            )
+            showDoneButton.observe(
+                viewLifecycleOwner,
+                Observer { showDoneButton ->
+                    doneBtn.visibleIf { showDoneButton }
+                }
+            )
         }
     }
 
@@ -169,4 +184,3 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         }
     }
 }
-

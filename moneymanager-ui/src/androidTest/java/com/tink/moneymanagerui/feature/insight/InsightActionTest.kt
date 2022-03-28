@@ -18,14 +18,14 @@ import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class InsightActionTest: BaseInsightTestSuit() {
+class InsightActionTest : BaseInsightTestSuit() {
     private val accountId = "ee7ddbd178494220bb184791783f4f64"
     private val accountName = "Test account"
 
     private val accountBalance = InsightMockFactory.getAccountBalanceLow(
-        InsightMockFactory.getViewAccountAction(accountId))
+        InsightMockFactory.getViewAccountAction(accountId)
+    )
     private var insights = listOf<JSONObject>()
 
     private fun setupData(insight: JSONObject) {
@@ -33,13 +33,17 @@ class InsightActionTest: BaseInsightTestSuit() {
     }
 
     private fun setupDispatcher() {
-        insightDispatcher.addResponse("/api/v1/insights",
-            MockResponse().setResponseCode(200).setBody(insights.toString()))
+        insightDispatcher.addResponse(
+            "/api/v1/insights",
+            MockResponse().setResponseCode(200).setBody(insights.toString())
+        )
 
-        insightDispatcher.addResponse("/api/v1/accounts/list",
+        insightDispatcher.addResponse(
+            "/api/v1/accounts/list",
             MockResponse().setResponseCode(200).setBody(
                 AccountMockFactory.getListWithOneAccount(accountId, accountName).toString()
-            ))
+            )
+        )
         server.dispatcher = insightDispatcher
     }
 
@@ -47,7 +51,7 @@ class InsightActionTest: BaseInsightTestSuit() {
     fun test_view_accounts_default_handler() {
         openInsight(accountBalance)
         onView(withText("See details")).perform(ViewActions.click())
-        onView(withText(accountName)).check(matches(isDisplayed()));
+        onView(withText(accountName)).check(matches(isDisplayed()))
     }
 
     @Test

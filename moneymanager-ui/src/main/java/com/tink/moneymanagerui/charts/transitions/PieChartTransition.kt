@@ -57,5 +57,3 @@ internal class PieChartTransition : Transition() {
         return if (!animators.isEmpty()) AnimatorSet().apply { playTogether(animators) } else null
     }
 }
-
-
