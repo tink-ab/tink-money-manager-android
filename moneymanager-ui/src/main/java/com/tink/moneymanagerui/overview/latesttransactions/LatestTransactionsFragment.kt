@@ -61,10 +61,10 @@ internal class LatestTransactionsFragment : BaseFragment() {
 
         // TODO: Remove this and instead have latestTransactions use ResponseState
         viewModel.categoriesState.observe(
-            viewLifecycleOwner) {
-                card.visibleIf { it is SuccessState }
-            }
-
+            viewLifecycleOwner
+        ) {
+            card.visibleIf { it is SuccessState }
+        }
 
         viewModel.latestTransactions.observe(
             viewLifecycleOwner,

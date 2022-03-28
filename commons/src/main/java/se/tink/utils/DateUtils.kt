@@ -39,8 +39,8 @@ class DateUtils() {
     private fun isSameDay(firstDate: DateTime, secondDate: DateTime): Boolean {
         val firstDateWithZone = firstDate.withZone(timezone)
         val secondDateWithZone = secondDate.withZone(timezone)
-        return firstDateWithZone.year == secondDateWithZone.year
-                && firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
+        return firstDateWithZone.year == secondDateWithZone.year &&
+            firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
     }
 
     fun isCurrentYear(evaluatedDate: DateTime): Boolean {
