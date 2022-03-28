@@ -8,8 +8,8 @@ import com.tink.moneymanagerui.insights.actionhandling.ActionEventBus
 import com.tink.moneymanagerui.insights.enrichment.EnrichmentDirectorFactory
 import com.tink.moneymanagerui.insights.repository.InsightsRepository
 import org.threeten.bp.Instant
-import se.tink.commons.livedata.Event
 import se.tink.android.repository.TinkNetworkError
+import se.tink.commons.livedata.Event
 import javax.inject.Inject
 
 private typealias InsightsListProcessor = List<Insight>.() -> List<Insight>
@@ -35,7 +35,8 @@ class CurrentInsightsViewModel @Inject internal constructor(
     ActionableInsightsLiveData(repository.insights, actionEventBus),
     enrichmentDirectorFactory,
     sortByCreatedDescending
-), InsightsViewModel {
+),
+    InsightsViewModel {
     override val errors: LiveData<Event<TinkNetworkError>?> = repository.insightErrors
     override fun refresh() = repository.refreshInsights()
 }
@@ -65,7 +66,8 @@ class ArchivedInsightsViewModel @Inject internal constructor(
     repository.archivedInsights,
     enrichmentDirectorFactory,
     sortByArchivedDescending
-), InsightsViewModel {
+),
+    InsightsViewModel {
     override val errors: LiveData<Event<TinkNetworkError>?> = repository.archivedInsightsErrors
     override fun refresh() = repository.refreshArchived()
 }

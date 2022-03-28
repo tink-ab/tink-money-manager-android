@@ -1,8 +1,6 @@
 package se.tink.android.repository.transaction
 
 import androidx.lifecycle.MutableLiveData
-import se.tink.android.AppExecutors
-import se.tink.android.livedata.createChangeObserver
 import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
 import com.tink.service.handler.ResultHandler
@@ -11,6 +9,8 @@ import com.tink.service.transaction.TransactionService
 import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import se.tink.android.AppExecutors
+import se.tink.android.livedata.createChangeObserver
 
 abstract class TransactionPagesLiveData : MutableLiveData<List<Transaction>>() {
     abstract fun dispose()
@@ -105,7 +105,7 @@ class AccountTransactionPagesLiveData(
     appExecutors: AppExecutors,
     transactionService: TransactionService,
     transactionUpdateEventBus: TransactionUpdateEventBus,
-    dispatcher: DispatcherProvider,
+    dispatcher: DispatcherProvider
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
     override val pageable: TransactionsPageable =
         TransactionsPageable(
@@ -126,11 +126,11 @@ class LeftToSpendTransactionPagesLiveData(
     override val pageable: TransactionsPageable = TODO()
 }
 
-class AllTransactionPagesLiveData (
+class AllTransactionPagesLiveData(
     appExecutors: AppExecutors,
     transactionService: TransactionService,
     transactionUpdateEventBus: TransactionUpdateEventBus,
-    dispatcher: DispatcherProvider,
+    dispatcher: DispatcherProvider
 ) : AbstractTransactionPagesLiveData(appExecutors, transactionService) {
     override val pageable: TransactionsPageable =
         TransactionsPageable(transactionService, transactionUpdateEventBus, dispatcher, this)

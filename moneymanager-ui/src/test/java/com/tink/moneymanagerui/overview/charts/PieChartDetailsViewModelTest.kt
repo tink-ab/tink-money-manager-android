@@ -32,7 +32,7 @@ import se.tink.android.repository.user.UserRepository
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
-class  PieChartDetailsViewModelTest {
+class PieChartDetailsViewModelTest {
 
     @get:Rule
     var coroutinesTestRule = CoroutineTestRule()
@@ -52,9 +52,13 @@ class  PieChartDetailsViewModelTest {
         viewModel.tabPieChartDataState.observeForever(observer)
 
         verify { observer.onChanged(match { it is LoadingState }) }
-        verify(exactly = 0) { observer.onChanged(match {
-            it is SuccessState<TabPieChartData> || it is ErrorState<TabPieChartData>
-        }) }
+        verify(exactly = 0) {
+            observer.onChanged(
+                match {
+                    it is SuccessState<TabPieChartData> || it is ErrorState<TabPieChartData>
+                }
+            )
+        }
     }
 
     @Test
@@ -72,7 +76,7 @@ class  PieChartDetailsViewModelTest {
         )
     }
 
-    private fun `verify tabPieChartDataState returns ErrorState` (viewModel: PieChartDetailsViewModel) {
+    private fun `verify tabPieChartDataState returns ErrorState`(viewModel: PieChartDetailsViewModel) {
         val observer: Observer<ResponseState<TabPieChartData>> = mockk(relaxed = true)
         viewModel.tabPieChartDataState.observeForever(observer)
         verify { observer.onChanged(match { it is ErrorState }) }
@@ -81,35 +85,37 @@ class  PieChartDetailsViewModelTest {
     @Test
     fun `tabPieChartDataState has correct period`() = coroutinesTestRule.testScope.runTest {
         val periodMock = mockk<Period>(relaxed = true)
-        tabPieChartDataStateReturnedSuccessThatMatches(currentPeriodStateMock = SuccessState(periodMock))
-        { it.selectedPeriod == periodMock }
+        tabPieChartDataStateReturnedSuccessThatMatches(currentPeriodStateMock = SuccessState(periodMock)) {
+            it.selectedPeriod == periodMock
+        }
     }
 
     @Test
     fun `tabPieChartDataState has correct periods list`() = coroutinesTestRule.testScope.runTest {
         val periodsListMock = mutableListOf<Period>()
         for (i: Long in 20L downTo 0L) {
-            periodsListMock.add( mockk<Period>().apply {
-                every { start } returns Instant.ofEpochMilli(i)
-            })
+            periodsListMock.add(
+                mockk<Period>().apply {
+                    every { start } returns Instant.ofEpochMilli(i)
+                }
+            )
         }
 
-        tabPieChartDataStateReturnedSuccessThatMatches(periodsStateMock = SuccessState(periodsListMock))
-        {  it.periods.size == 12 && it.periods.containsAll(periodsListMock.take(12)) }
+        tabPieChartDataStateReturnedSuccessThatMatches(periodsStateMock = SuccessState(periodsListMock)) {
+            it.periods.size == 12 && it.periods.containsAll(periodsListMock.take(12))
+        }
     }
 
     @Test
     fun `tabPieChartDataState has correct user profile`() = coroutinesTestRule.testScope.runTest {
         val userProfileMock = mockk<UserProfile>(relaxed = true)
-        tabPieChartDataStateReturnedSuccessThatMatches(userProfileStateMock = SuccessState(userProfileMock))
-        { it.userProfile == userProfileMock }
+        tabPieChartDataStateReturnedSuccessThatMatches(userProfileStateMock = SuccessState(userProfileMock)) { it.userProfile == userProfileMock }
     }
 
     @Test
     fun `tabPieChartDataState has correct category`() = coroutinesTestRule.testScope.runTest {
         val categoryMock = mockk<Category>(relaxed = true)
-        tabPieChartDataStateReturnedSuccessThatMatches(categoryMock = categoryMock)
-        { it.category == categoryMock }
+        tabPieChartDataStateReturnedSuccessThatMatches(categoryMock = categoryMock) { it.category == categoryMock }
     }
 
     private fun tabPieChartDataStateReturnedSuccessThatMatches(
@@ -117,7 +123,8 @@ class  PieChartDetailsViewModelTest {
         periodsStateMock: ResponseState<List<Period>> = SuccessState(mockk(relaxed = true)),
         userProfileStateMock: ResponseState<UserProfile> = SuccessState(mockk(relaxed = true)),
         categoryMock: Category = mockk(relaxed = true),
-        matcher: (TabPieChartData) -> Boolean) {
+        matcher: (TabPieChartData) -> Boolean
+    ) {
         val viewModel = getViewModel(
             currentPeriodStateMock = currentPeriodStateMock,
             periodsStateMock = periodsStateMock,
@@ -128,9 +135,13 @@ class  PieChartDetailsViewModelTest {
         val observer: Observer<ResponseState<TabPieChartData>> = mockk(relaxed = true)
         viewModel.tabPieChartDataState.observeForever(observer)
 
-        verify { observer.onChanged(match<SuccessState<TabPieChartData>> {
-            matcher(it.data)
-        })}
+        verify {
+            observer.onChanged(
+                match<SuccessState<TabPieChartData>> {
+                    matcher(it.data)
+                }
+            )
+        }
     }
 
     @Test
@@ -140,12 +151,15 @@ class  PieChartDetailsViewModelTest {
         val observer: Observer<ResponseState<DetailsChartData>> = mockk(relaxed = true)
         viewModel.getDetailsChartDataState(mockk(), "").observeForever(observer)
 
-        verify { observer.onChanged(match { it is LoadingState}) }
-        verify(exactly = 0) { observer.onChanged(match {
-            it is SuccessState<DetailsChartData> || it is ErrorState<DetailsChartData>
-        }) }
+        verify { observer.onChanged(match { it is LoadingState }) }
+        verify(exactly = 0) {
+            observer.onChanged(
+                match {
+                    it is SuccessState<DetailsChartData> || it is ErrorState<DetailsChartData>
+                }
+            )
+        }
     }
-
 
     @Test
     fun `detailsChartDataState is error of one source is error`() = coroutinesTestRule.testScope.runTest {
@@ -163,23 +177,23 @@ class  PieChartDetailsViewModelTest {
                 statisticsStateMock = ErrorState(),
                 currentPeriodStateMock = SuccessState(mockk(relaxed = true)),
                 userProfileStateMock = SuccessState(mockk(relaxed = true)),
-                categoryMock = category)
+                categoryMock = category
+            )
         )
     }
 
-    private fun `verify detailsChartDataState returns ErrorState` (viewModel: PieChartDetailsViewModel) {
+    private fun `verify detailsChartDataState returns ErrorState`(viewModel: PieChartDetailsViewModel) {
         val observer: Observer<ResponseState<DetailsChartData>> = mockk(relaxed = true)
         viewModel.getDetailsChartDataState(mockk(), "").observeForever(observer)
-        verify { observer.onChanged(match { it is ErrorState}) }
+        verify { observer.onChanged(match { it is ErrorState }) }
     }
-
-
 
     @Test
     fun `DetailsChartData has correct title color`() = coroutinesTestRule.testScope.runTest {
         detailsChartDataStateReturnedSuccessThatMatches(
             chartTypeMock = ChartType.EXPENSES,
-            categoryMock = categoryMockWithChildren) {
+            categoryMock = categoryMockWithChildren
+        ) {
             it.title == ChartType.EXPENSES.title && it.color == ChartType.EXPENSES.color
         }
     }
@@ -218,8 +232,9 @@ class  PieChartDetailsViewModelTest {
             chartTypeMock = ChartType.INCOME,
             statisticsStateMock = SuccessState(statisticsList),
             currentPeriodStateMock = SuccessState(currentPeriod),
-            categoryMock = categoryMockWithChildren) {
-                it.amount == 101f
+            categoryMock = categoryMockWithChildren
+        ) {
+            it.amount == 101f
         }
     }
 
@@ -245,7 +260,8 @@ class  PieChartDetailsViewModelTest {
         detailsChartDataStateReturnedSuccessThatMatches(
             chartTypeMock = ChartType.INCOME,
             currentPeriodStateMock = SuccessState(currentPeriod),
-            transactionsMock = transactionsList) {
+            transactionsMock = transactionsList
+        ) {
             it.amount == 1111f
         }
     }
@@ -257,7 +273,8 @@ class  PieChartDetailsViewModelTest {
         userProfileStateMock: ResponseState<UserProfile> = SuccessState(mockk(relaxed = true)),
         transactionsMock: List<Transaction> = mockk(relaxed = true),
         categoryMock: Category = mockk(relaxed = true),
-        matcher: (DetailsChartData) -> Boolean) {
+        matcher: (DetailsChartData) -> Boolean
+    ) {
         val viewModel = getViewModel(
             statisticsStateMock = statisticsStateMock,
             currentPeriodStateMock = currentPeriodStateMock,
@@ -269,9 +286,13 @@ class  PieChartDetailsViewModelTest {
         val observer: Observer<ResponseState<DetailsChartData>> = mockk(relaxed = true)
         viewModel.getDetailsChartDataState(chartTypeMock, "").observeForever(observer)
 
-        verify { observer.onChanged(match<SuccessState<DetailsChartData>> {
-            matcher(it.data)
-        })}
+        verify {
+            observer.onChanged(
+                match<SuccessState<DetailsChartData>> {
+                    matcher(it.data)
+                }
+            )
+        }
     }
 
     private fun getViewModel(
@@ -280,7 +301,7 @@ class  PieChartDetailsViewModelTest {
         periodsStateMock: ResponseState<List<Period>> = LoadingState,
         userProfileStateMock: ResponseState<UserProfile> = LoadingState,
         transactionsMock: List<Transaction> = listOf(),
-        categoryMock: Category = mockk(relaxed = true),
+        categoryMock: Category = mockk(relaxed = true)
     ): PieChartDetailsViewModel {
         return PieChartDetailsViewModel(
             mockk(relaxed = true),

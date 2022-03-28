@@ -1,9 +1,9 @@
 package se.tink.android.repository.service
 
 import com.tink.annotations.PfmScope
-import javax.inject.Inject
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.repository.user.UserRepository
+import javax.inject.Inject
 
 @PfmScope
 class DataRefreshHandler @Inject constructor(

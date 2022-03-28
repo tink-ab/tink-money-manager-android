@@ -1,13 +1,13 @@
 package com.tink.moneymanagerui.di
 
-import dagger.Provides
 import com.tink.annotations.PfmScope
 import com.tink.service.user.UserProfileService
 import com.tink.service.util.DispatcherProvider
 import dagger.Module
+import dagger.Provides
+import org.conscrypt.Conscrypt
 import se.tink.android.repository.service.UserConfigurationService
 import se.tink.android.repository.service.UserConfigurationServiceCachedImpl
-import org.conscrypt.Conscrypt
 import java.security.Security
 
 @Module
@@ -16,7 +16,7 @@ internal class ServiceModule {
     @PfmScope
     fun userConfigurationService(
         userService: UserProfileService?,
-        dispatcher: DispatcherProvider,
+        dispatcher: DispatcherProvider
     ): UserConfigurationService {
         return UserConfigurationServiceCachedImpl(userService!!, dispatcher)
     }

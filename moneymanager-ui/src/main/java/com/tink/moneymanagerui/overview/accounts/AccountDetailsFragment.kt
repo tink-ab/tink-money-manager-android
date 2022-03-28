@@ -8,19 +8,19 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
-import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
-import se.tink.commons.transactions.TransactionItemListAdapter
-import com.tink.model.account.Account
-import com.tink.moneymanagerui.MoneyManagerFeatureType
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
+import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -80,22 +80,31 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         setupViews()
 
-        viewModel.account.observe(viewLifecycle, Observer {
-            it?.let { account ->
-                title = account.name
-                accountHeaderAdapter.submitList(listOf(AccountInformation(account.accountNumber, account.balance)))
+        viewModel.account.observe(
+            viewLifecycle,
+            Observer {
+                it?.let { account ->
+                    title = account.name
+                    accountHeaderAdapter.submitList(listOf(AccountInformation(account.accountNumber, account.balance)))
+                }
             }
-        })
+        )
 
-        transactionListViewModel.errors.observe(viewLifecycleOwner, Observer { event ->
-            event?.getContentIfNotHandled()?.let { error ->
-                snackbarManager.displayError(error, requireContext())
+        transactionListViewModel.errors.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                event?.getContentIfNotHandled()?.let { error ->
+                    snackbarManager.displayError(error, requireContext())
+                }
             }
-        })
+        )
 
-        transactionListViewModel.loading.observe(viewLifecycleOwner, Observer { loading ->
-            view.loader.visibility = if (loading) View.VISIBLE else View.GONE
-        })
+        transactionListViewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer { loading ->
+                view.loader.visibility = if (loading) View.VISIBLE else View.GONE
+            }
+        )
 
         transactionListViewModel.transactionItems.observe(
             viewLifecycleOwner,

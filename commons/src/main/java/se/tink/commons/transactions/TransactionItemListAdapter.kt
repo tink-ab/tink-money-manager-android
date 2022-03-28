@@ -108,7 +108,6 @@ class TransactionItemListAdapter(
         calculateDiff(oldData, flatData).dispatchUpdatesTo(this)
     }
 
-
     private fun calculateDiff(old: List<ListItem>, new: List<ListItem>) =
         DiffUtil.calculateDiff(TransactionItemDiffCallback(old, new))
 

@@ -1,19 +1,18 @@
 package com.tink.moneymanagerui.overview.charts.piechart
 
-import androidx.fragment.app.Fragment
 import android.transition.Fade
 import android.transition.TransitionSet
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.TransitionDescription
-import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import com.tink.moneymanagerui.charts.PieChartView
+import com.tink.moneymanagerui.charts.extensions.doOnEnd
 import com.tink.moneymanagerui.charts.transitions.ChangePositionTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartSegmentTransition
 import com.tink.moneymanagerui.charts.transitions.PieChartTransition
-import com.tink.moneymanagerui.charts.extensions.doOnEnd
+import kotlinx.android.synthetic.main.tink_fragment_full_pie_chart.view.*
 import javax.inject.Inject
-
 
 internal class FullToHalfChartTransition @Inject constructor() : TransitionDescription {
     override val fragment1 get() = FullPieChartFragment::class
@@ -28,29 +27,37 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
         with(fragment) {
             sharedElementEnterTransition = TransitionSet().apply {
                 ordering = TransitionSet.ORDERING_SEQUENTIAL
-                addTransition(TransitionSet().apply {
-                    addTransition(ChangePositionTransition().apply {
-                        addTarget(R.id.pieChart)
-                    })
-                    addTransition(PieChartTransition())
-                })
+                addTransition(
+                    TransitionSet().apply {
+                        addTransition(
+                            ChangePositionTransition().apply {
+                                addTarget(R.id.pieChart)
+                            }
+                        )
+                        addTransition(PieChartTransition())
+                    }
+                )
 
-                addTransition(TransitionSet().apply {
-                    addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
-                    // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+                addTransition(
+                    TransitionSet().apply {
+                        addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+                        // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //                    addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                        CurrencyUtils.formatAmountRoundWithoutCurrencySymbol(it.toDouble())
 //                    }.apply {
 //                        addTarget(R.id.amount)
 //                    })
-                })
+                    }
+                )
             }
             setDecoratorsVisibility(fragment.view, false)
             enterTransition = TransitionSet().apply {
-                addTransition(Fade().apply {
-                    excludeTarget(PieChartView::class.java, true)
-                    excludeTarget(PieChartView.PieChartSegmentView::class.java, true)
-                })
+                addTransition(
+                    Fade().apply {
+                        excludeTarget(PieChartView::class.java, true)
+                        excludeTarget(PieChartView.PieChartSegmentView::class.java, true)
+                    }
+                )
                 startDelay = 150
                 doOnEnd { setDecoratorsVisibility(fragment.view, true) }
             }
@@ -64,22 +71,28 @@ internal class FullToHalfChartTransition @Inject constructor() : TransitionDescr
         with(fragment) {
             sharedElementEnterTransition = TransitionSet().apply {
                 ordering = TransitionSet.ORDERING_SEQUENTIAL
-                addTransition(TransitionSet().apply {
-                    addTransition(ChangePositionTransition().apply {
-                        addTarget(R.id.pieChart)
-                    })
-                    addTransition(PieChartTransition())
-                })
+                addTransition(
+                    TransitionSet().apply {
+                        addTransition(
+                            ChangePositionTransition().apply {
+                                addTarget(R.id.pieChart)
+                            }
+                        )
+                        addTransition(PieChartTransition())
+                    }
+                )
 
-                addTransition(TransitionSet().apply {
-                    addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
-                    // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
+                addTransition(
+                    TransitionSet().apply {
+                        addTransition(PieChartSegmentTransition(R.id.tink_transition_group_main))
+                        // TODO: Fix this once we have figured out how to do amount transitions for floating point numbers
 //                    addTransition(TextAmountTransition(CurrencyUtils.minusSign) {
 //                        CurrencyUtils.formatAmountExactWithCurrencySymbol(it.toDouble())
 //                    }.apply {
 //                        addTarget(R.id.amount)
 //                    })
-                })
+                    }
+                )
             }
             enterTransition = Fade()
             allowEnterTransitionOverlap = false

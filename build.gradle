@@ -29,6 +29,8 @@ subprojects {
     if(it.name != "app" && it.name != "annotations" && it.name != "codegen") {
         apply from: "../maven-publish.gradle"
     }
+
+    apply { from("../ktlint.gradle") }
 }
 
 task clean(type: Delete) {

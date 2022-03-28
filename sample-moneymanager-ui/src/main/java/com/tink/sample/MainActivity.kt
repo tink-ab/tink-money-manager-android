@@ -5,10 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.tink.core.Tink
 import com.tink.moneymanagerui.FinanceOverviewFragment
-import com.tink.service.network.TinkConfiguration
 import com.tink.sample.configuration.Configuration
+import com.tink.service.network.TinkConfiguration
 import timber.log.Timber
-import java.lang.IllegalStateException
 
 class MainActivity : FragmentActivity() {
 
@@ -30,7 +29,6 @@ class MainActivity : FragmentActivity() {
         } catch (e: IllegalStateException) {
             // Tink has already been initialized
         }
-
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,

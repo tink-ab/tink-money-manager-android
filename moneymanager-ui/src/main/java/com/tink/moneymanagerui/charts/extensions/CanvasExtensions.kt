@@ -53,10 +53,12 @@ internal fun Canvas.drawBarChartWithAmountLabels(
     val amountLabelHeight = amountLabelPaint.textSize + amountLabelTopMargin
 
     val max = data.maxOrNull() ?: return
-    for ((index, top) in data.map {
-        (1 - it / max) * (rectF.height() - amountBottomMargin) +
+    for (
+        (index, top) in data.map {
+            (1 - it / max) * (rectF.height() - amountBottomMargin) +
                 (rectF.top + amountLabelHeight)
-    }.withIndex()) {
+        }.withIndex()
+    ) {
         drawBarAtIndex(
             index,
             rectF.left,
@@ -85,7 +87,7 @@ private fun Canvas.drawBarAtIndex(
     val adjustedTop: Float
     val x = index * (betweenMargin + barWidth) + left
 
-    if (bottom - top < 0.001) { //Amount is 0, draw thin placeholder bar
+    if (bottom - top < 0.001) { // Amount is 0, draw thin placeholder bar
         adjustedTop = bottom - 2f
         drawRect(x, adjustedTop, x + barWidth, bottom, barPaint)
     } else {

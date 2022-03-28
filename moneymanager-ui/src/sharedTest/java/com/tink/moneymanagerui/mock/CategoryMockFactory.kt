@@ -17,7 +17,8 @@ object CategoryMockFactory {
     }
 
     private fun getExpensesCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "expenses",
                 "defaultChild": false,
@@ -35,7 +36,8 @@ object CategoryMockFactory {
     }
 
     private fun getIncomeCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "income",
                 "defaultChild": false,
@@ -53,7 +55,8 @@ object CategoryMockFactory {
     }
 
     private fun getTransferCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "transfers",
                 "defaultChild": false,
@@ -71,7 +74,8 @@ object CategoryMockFactory {
     }
 
     private fun getFoodCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "expenses:food",
                 "defaultChild": false,
@@ -89,7 +93,8 @@ object CategoryMockFactory {
     }
 
     private fun getFoodCoffeeCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "expenses:food.coffee",
                 "defaultChild": false,
@@ -107,7 +112,8 @@ object CategoryMockFactory {
     }
 
     private fun getFoodOtherCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "code": "expenses:food.other",
                 "defaultChild": true,
@@ -125,7 +131,8 @@ object CategoryMockFactory {
     }
 
     private fun getFoodGroceriesCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {        
                 "code": "expenses:food.groceries",
                 "defaultChild": false,

@@ -11,7 +11,8 @@ object TransactionMockFactory {
         date: String = "1640602800000",
         currencyCode: String = "SEK"
     ): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
         {
             "accountId" : "4f034cc4629b4f72b6199d1d128af472",
             "amount" : $amount,

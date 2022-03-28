@@ -18,7 +18,7 @@ private const val NO_BREAK_SPACE = 160.toChar()
 
 internal class FormattedNumberTextWatcher(
     locale: Locale,
-    private val currencyCode: String,
+    private val currencyCode: String
 ) : TextWatcher {
 
     private val numberFormat: DecimalFormat = getDecimalFormatForLocale(locale)

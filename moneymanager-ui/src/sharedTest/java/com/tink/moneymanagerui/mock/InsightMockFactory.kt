@@ -65,7 +65,7 @@ object InsightMockFactory {
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_CATEGORY,
         InsightType.WEEKLY_SUMMARY_EXPENSES_BY_DAY,
         InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
-        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS,
+        InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS
     )
 
     fun getInsightForType(type: InsightType): JSONObject {
@@ -91,14 +91,12 @@ object InsightMockFactory {
         }
     }
 
-
-
     fun getInsightsForTypes(types: List<InsightType> = allTypes): List<JSONObject> =
         types.map { type -> getInsightForType(type) }
 
-
     fun getAccountBalanceLow(action: String = getAcknowledgeAction()): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 1,
@@ -120,7 +118,8 @@ object InsightMockFactory {
     }
 
     fun getAggregateRefreshP2d2Credentials(refreshCredentials: String = "123"): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 2,
@@ -146,7 +145,8 @@ object InsightMockFactory {
     }
 
     fun getBudgetSuggestCreateFirst(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 1,
@@ -160,7 +160,8 @@ object InsightMockFactory {
     }
 
     fun getBudgetSuggestCreateTopCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "type": "BUDGET_SUGGEST_CREATE_TOP_CATEGORY",
                 "userId": 1234,
@@ -191,7 +192,8 @@ object InsightMockFactory {
     }
 
     fun getBudgetSuggestCreateTopPrimaryCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "type": "BUDGET_SUGGEST_CREATE_TOP_PRIMARY_CATEGORY",
                 "userId": 1234,
@@ -220,7 +222,8 @@ object InsightMockFactory {
     }
 
     fun getCreditCardLimitClose(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "type": "CREDIT_CARD_LIMIT_CLOSE",
                 "userId": 1234,
@@ -245,7 +248,8 @@ object InsightMockFactory {
     }
 
     fun getCreditCardLimitReached(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "type": "CREDIT_CARD_LIMIT_REACHED",
                 "userId": 1234,
@@ -266,7 +270,8 @@ object InsightMockFactory {
     }
 
     fun getMonthlySummaryExpenseByCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "type": "MONTHLY_SUMMARY_EXPENSES_BY_CATEGORY",
                 "userId": 1234,
@@ -303,7 +308,8 @@ object InsightMockFactory {
     }
 
     fun getDoubleCharge(transactionIds: List<String> = listOf()): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
              {
                 "userId": 1234,
                 "id": 6,
@@ -322,7 +328,8 @@ object InsightMockFactory {
     }
 
     fun getLargeExpense(transactionId: String = "8a703fa458d144f9b802b09b26a43e89"): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
              {
                 "userId": 1234,
                 "id": 7,
@@ -345,7 +352,8 @@ object InsightMockFactory {
     }
 
     fun getMonthlySummaryExpensesTransactions(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 8,
@@ -385,7 +393,8 @@ object InsightMockFactory {
     }
 
     fun getNewIncomeTransaction(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 9,
@@ -403,7 +412,8 @@ object InsightMockFactory {
     }
 
     fun getSingleUncategorizedTransaction(transactionId: String = "8a703fa458d144f9b802b09b26a43e89"): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 10,
@@ -420,7 +430,8 @@ object InsightMockFactory {
     }
 
     fun getWeeklySummaryExpensesByCategory(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 11,
@@ -457,7 +468,8 @@ object InsightMockFactory {
     }
 
     fun getWeeklySummaryExpensesByDay(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 12,
@@ -505,7 +517,8 @@ object InsightMockFactory {
     }
 
     fun getWeeklySummaryExpensesTransactions(): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 13,
@@ -545,7 +558,8 @@ object InsightMockFactory {
     }
 
     fun getWeeklyUncategorizedTransactions(transactionIds: List<String> = listOf()): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 14,
@@ -566,7 +580,8 @@ object InsightMockFactory {
     }
 
     fun getDefaultInsight(type: InsightType): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
             {
                 "userId": 1234,
                 "id": 15,

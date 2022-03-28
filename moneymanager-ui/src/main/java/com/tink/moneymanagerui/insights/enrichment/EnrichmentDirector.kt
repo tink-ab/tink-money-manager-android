@@ -50,7 +50,7 @@ internal class EnrichmentDirector(
 
     val enrichedInsights: LiveData<List<Insight>> = MediatorLiveData<List<Insight>>().apply {
 
-        //Prevent unnecessary updates by de-bouncing the list recalculation
+        // Prevent unnecessary updates by de-bouncing the list recalculation
         val listRecalculationEvents = PublishSubject.create<Unit>().also {
             it.debounce(50, TimeUnit.MILLISECONDS)
                 .subscribe {

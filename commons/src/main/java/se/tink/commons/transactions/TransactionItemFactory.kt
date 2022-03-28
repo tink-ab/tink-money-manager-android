@@ -31,7 +31,7 @@ class TransactionItemFactory @Inject constructor(
                 id = id,
                 isUpcoming = false,
                 category = category,
-                date = this.date.toDateTime(), //TODO: Core setup
+                date = this.date.toDateTime(), // TODO: Core setup
                 description = category.name,
                 label = description,
                 amount = amount,
@@ -48,7 +48,7 @@ class TransactionItemFactory @Inject constructor(
         category: Category,
         isSelected: Boolean = true
     ): SimilarTransactionsAdapter.SimilarTransactionItem? =
-        with (transaction) {
+        with(transaction) {
             if (amount.isValid) {
                 val icon = with(category) {
                     ListItem.TransactionItem.Icon(getIcon(), iconColor(), iconBackgroundColor())
@@ -76,7 +76,7 @@ class TransactionItemFactory @Inject constructor(
         description: String,
         label: String,
         amount: Amount,
-        dispensableAmount: Amount = Amount(ExactNumber(0,0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
+        dispensableAmount: Amount = Amount(ExactNumber(0, 0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
         upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {

@@ -19,4 +19,3 @@ internal class IncomeIconTheme : CategoryIconTheme {
     override val iconColorAttr: Int get() = R.attr.tink_incomeColor
     override val iconCircleColorAttr: Int get() = R.attr.tink_incomeLightColor
 }
-

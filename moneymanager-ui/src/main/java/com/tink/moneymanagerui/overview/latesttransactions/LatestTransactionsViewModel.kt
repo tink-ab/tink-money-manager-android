@@ -32,7 +32,8 @@ internal class LatestTransactionsViewModel @Inject constructor(
     transactionItemFactory,
     transactionUpdateEventBus,
     dispatcher
-), Refreshable {
+),
+    Refreshable {
 
     init {
         setListMode(TransactionListMode.All)
@@ -44,14 +45,14 @@ internal class LatestTransactionsViewModel @Inject constructor(
     override fun refresh() =
         appExecutors.mainThreadExecutor.execute { setListMode(TransactionListMode.All) }
 
-
     val latestTransactions = transactionItems.map { items ->
         items
             .transactions.map { item ->
                 transactionItemFactory.latestTransactionItemFromTransactionItem(item)
             }
-            .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }
-                .thenBy { it.id }
+            .sortedWith(
+                compareByDescending<ListItem.TransactionItem> { it.date }
+                    .thenBy { it.id }
             )
             .take(3)
     }

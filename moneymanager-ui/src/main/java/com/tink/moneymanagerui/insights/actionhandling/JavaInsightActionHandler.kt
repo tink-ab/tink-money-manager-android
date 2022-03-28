@@ -76,7 +76,7 @@ open class JavaInsightActionHandler {
     open fun refreshCredentials(
         credentialId: String,
         onHandled: OnInsightHandled
-    ) : Boolean = false
+    ): Boolean = false
 
     /**
      * Handle action where the user wants to view transactions matching the list of ids.

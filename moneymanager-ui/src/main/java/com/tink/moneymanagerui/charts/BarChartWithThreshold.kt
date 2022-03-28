@@ -16,8 +16,8 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.charts.extensions.drawBarChart
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.util.ScreenUtils
-import se.tink.commons.utils.extractTextStyle
 import se.tink.commons.extensions.whenNonNull
+import se.tink.commons.utils.extractTextStyle
 
 private const val ALL_BARS_ACTIVE = -1
 
@@ -35,7 +35,6 @@ internal class BarChartWithThreshold : View {
         applyAttributes(attrs)
     }
 
-
     var data: List<Float>? by InvalidateDelegate(null)
     var labels: List<String>? by InvalidateDelegate(null)
     var threshold: Float? by InvalidateDelegate(null)
@@ -49,7 +48,6 @@ internal class BarChartWithThreshold : View {
     private val barChartMarginBottom = ScreenUtils.dpToPixels(context, 20)
     private val barChartMarginLeft = ScreenUtils.dpToPixels(context, 36)
     private val averageLineOverdraw = ScreenUtils.dpToPixels(context, 12).toFloat()
-
 
     private val barPaint = Paint().apply {
         isAntiAlias = true
@@ -108,10 +106,10 @@ internal class BarChartWithThreshold : View {
                 overlayPaint.color = warningColor
                 thresholdLinePaint.color = expensesColor
                 thresholdLinePaint.strokeWidth =
-                        getDimension(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_thickness, 0f)
+                    getDimension(R.styleable.TinkBarChartWithThreshold_tink_threshold_line_thickness, 0f)
                 thresholdBadgePaint.color = expensesColor
                 averageLinePaint.color =
-                        getColor(R.styleable.TinkBarChartWithThreshold_tink_average_line_color, 0)
+                    getColor(R.styleable.TinkBarChartWithThreshold_tink_average_line_color, 0)
 
                 val barLabelTextStyle =
                     getResourceId(R.styleable.TinkBarChartWithThreshold_tink_bar_label_style, -1)
@@ -135,7 +133,6 @@ internal class BarChartWithThreshold : View {
         }
     }
 
-
     @Suppress("NAME_SHADOWING")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -143,11 +140,11 @@ internal class BarChartWithThreshold : View {
         val globalRight = width.toFloat()
         val globalBottom = height.toFloat()
 
-        if (canvas == null
-            || data.isNullOrEmpty()
-            || labels.isNullOrEmpty()
-            || threshold == null
-            || thresholdLabel == null
+        if (canvas == null ||
+            data.isNullOrEmpty() ||
+            labels.isNullOrEmpty() ||
+            threshold == null ||
+            thresholdLabel == null
         ) return
 
         whenNonNull(
@@ -157,7 +154,7 @@ internal class BarChartWithThreshold : View {
             thresholdLabel
         ) { canvas, data, threshold, thresholdLabel ->
 
-            //Compute bounds
+            // Compute bounds
 
             thresholdLabelPaint.getTextBounds(
                 thresholdLabel,
@@ -183,7 +180,7 @@ internal class BarChartWithThreshold : View {
                     globalBottom - barChartMarginBottom
                 )
                 thresholdLineY = (1 - threshold / dataMax) * barChartBounds.height() +
-                        barChartBounds.top
+                    barChartBounds.top
             } else {
                 thresholdLineY = thresholdBadgeBounds.height() / 2
                 barChartBounds.set(
@@ -204,7 +201,7 @@ internal class BarChartWithThreshold : View {
             val averageLineY =
                 (barChartBounds.top + barChartBounds.height() * (1 - data.average() / dataMax)).toFloat()
 
-            //Draw items
+            // Draw items
 
             canvas.drawBarChart(barChartBounds, data, barWidth, barPaint)
 

@@ -17,6 +17,6 @@ class TestNavigator {
 
     fun backWithToolbar() {
         onView(withContentDescription(R.string.abc_action_bar_up_description))
-            .perform(click());
+            .perform(click())
     }
 }

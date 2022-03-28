@@ -27,7 +27,7 @@ internal class OverviewInsightsFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.tink_fragment_overview_insights
     override fun needsLoginToBeAuthorized() = true
     override fun doNotRecreateView(): Boolean = false
-    override fun viewReadyAfterLayout(): Boolean  = false
+    override fun viewReadyAfterLayout(): Boolean = false
     override fun hasToolbar(): Boolean = false
 
     override fun authorizedOnCreate(savedInstanceState: Bundle?) {
@@ -39,48 +39,57 @@ internal class OverviewInsightsFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
         viewModel.refresh()
-        viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
-            view.insightsCount.text = insightsList.size.toString()
-        })
+        viewModel.insights.observe(
+            viewLifecycleOwner,
+            Observer { insightsList ->
+                view.insightsCount.text = insightsList.size.toString()
+            }
+        )
 
-        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
-            view.insightsProgressBar.visibleIf { isLoading }
-        })
+        viewModel.loading.observe(
+            viewLifecycleOwner,
+            Observer { isLoading ->
+                view.insightsProgressBar.visibleIf { isLoading }
+            }
+        )
 
         EspressoIdlingResource.increment()
-        viewModel.hasItems.observe(viewLifecycleOwner, Observer { hasItems ->
-            view.apply {
-                insightsCountBackground.visibleIf { hasItems }
-                insightsCount.visibleIf { hasItems }
-                spacer.visibleIf { hasItems }
-                insightsCardTitle.text = if (hasItems) {
-                    getString(R.string.tink_insights_overview_card_new_events_title)
-                } else {
-                    getString(R.string.tink_insights_overview_card_archived_events_title)
-                }
-                if (hasItems) {
-                    // new events UI
-                    insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent)))
-                    insightsCard.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
-                    insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
-                    insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
-                    insightsCardButton.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
-                } else {
-                    // archived events UI
-                    insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor)))
-                    insightsCard.setOnClickListener {
-                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+        viewModel.hasItems.observe(
+            viewLifecycleOwner,
+            Observer { hasItems ->
+                view.apply {
+                    insightsCountBackground.visibleIf { hasItems }
+                    insightsCount.visibleIf { hasItems }
+                    spacer.visibleIf { hasItems }
+                    insightsCardTitle.text = if (hasItems) {
+                        getString(R.string.tink_insights_overview_card_new_events_title)
+                    } else {
+                        getString(R.string.tink_insights_overview_card_archived_events_title)
                     }
-                    insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
-                    insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
-                    insightsCardButton.setOnClickListener {
-                        fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+                    if (hasItems) {
+                        // new events UI
+                        insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_colorAccent)))
+                        insightsCard.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
+                        insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
+                        insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorOnAccent))
+                        insightsCardButton.setOnClickListener { fragmentCoordinator.replace(InsightsFragment.newInstance()) }
+                    } else {
+                        // archived events UI
+                        insightsCard.setCardBackgroundColor(ColorStateList.valueOf(context.getColorFromAttr(R.attr.tink_cardBackgroundColor)))
+                        insightsCard.setOnClickListener {
+                            fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+                        }
+                        insightsCardTitle.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
+                        insightsCardButton.setTextColor(context.getColorFromAttr(R.attr.tink_colorPrimary))
+                        insightsCardButton.setOnClickListener {
+                            fragmentCoordinator.replace(ArchivedInsightsFragment.newInstance())
+                        }
                     }
+                    insightsCard.visibility = View.VISIBLE
+                    EspressoIdlingResource.decrement()
                 }
-                insightsCard.visibility = View.VISIBLE
-                EspressoIdlingResource.decrement()
             }
-        })
+        )
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACTIONABLE_INSIGHTS
