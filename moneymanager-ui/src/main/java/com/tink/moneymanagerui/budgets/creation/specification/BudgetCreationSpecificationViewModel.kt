@@ -21,7 +21,6 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
 import com.tink.moneymanagerui.configuration.SuitableLocaleFinder
 import com.tink.moneymanagerui.extensions.minusMonths
-import com.tink.moneymanagerui.extensions.withUtcTimeRetainZone
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
@@ -130,24 +129,12 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             }
     }
 
-    val periodStartValueFormatted: LiveData<DateTime> =
-        Transformations.map(periodStartValue) {
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            it.withUtcTimeRetainZone()
-        }
-
-    val periodEndValueFormatted: LiveData<DateTime> =
-        Transformations.map(periodEndValue) {
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            it.withUtcTimeRetainZone()
-        }
-
     val periodStartText: LiveData<String> =
-        Transformations.map(periodStartValueFormatted) {
+        Transformations.map(periodStartValue) {
             dateUtils.getDateWithYear(it)
         }
     val periodEndText: LiveData<String> =
-        Transformations.map(periodEndValueFormatted) {
+        Transformations.map(periodEndValue) {
             dateUtils.getDateWithYear(it)
         }
 
