@@ -5,8 +5,7 @@ import org.joda.time.DateTimeZone
 import org.joda.time.ReadablePartial
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import java.lang.RuntimeException
-import java.util.*
+import java.util.Locale
 
 /**
  * Immutable thread safe date format.
@@ -96,11 +95,10 @@ class ThreadSafeDateFormat private constructor(builder: ThreadSafeDateFormatBuil
         const val FORMATTER_MONTH_AND_YEAR_COMPACT = "FORMATTER_MONTH_AND_YEAR_COMPACT"
         const val FORMATTER_DATE_WITH_YEAR = "FORMATTER_DATE_WITH_YEAR"
         @JvmStatic
-		var dateFormatsMap: Map<String, String> = HashMap()
+        var dateFormatsMap: Map<String, String> = HashMap()
         @JvmStatic
-		fun threadSafeDateFormat(key: String, locale: Locale, timezone: DateTimeZone): ThreadSafeDateFormat {
+        fun threadSafeDateFormat(key: String, locale: Locale, timezone: DateTimeZone): ThreadSafeDateFormat {
             return ThreadSafeDateFormat(dateFormatsMap[key], locale, timezone)
         }
     }
-
 }

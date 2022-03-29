@@ -2,7 +2,6 @@ package com.tink.moneymanagerui.charts
 
 import kotlin.math.abs
 
-
 internal object LabelLayout {
 
     fun layout(labels: List<PieChartLabelView>) {

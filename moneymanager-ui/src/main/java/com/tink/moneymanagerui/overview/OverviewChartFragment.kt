@@ -31,11 +31,11 @@ import com.tink.moneymanagerui.overview.charts.ChartType
 import com.tink.moneymanagerui.overview.charts.piechart.addBackSegment
 import com.tink.moneymanagerui.overview.charts.piechart.addSegments
 import com.tink.service.network.ErrorState
+import com.tink.service.network.LoadingState
+import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_overview_chart.view.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.*
 import kotlinx.android.synthetic.main.tink_overview_chart_page.view.*
-import com.tink.service.network.LoadingState
-import com.tink.service.network.SuccessState
 import se.tink.commons.currency.AmountFormatter
 import javax.inject.Inject
 import kotlin.math.abs
@@ -50,7 +50,7 @@ internal class OverviewChartFragment : BaseFragment() {
     override fun getLayoutId() = R.layout.tink_fragment_overview_chart
     override fun needsLoginToBeAuthorized() = true
     override fun doNotRecreateView(): Boolean = false
-    override fun viewReadyAfterLayout(): Boolean  = false
+    override fun viewReadyAfterLayout(): Boolean = false
     override fun hasToolbar(): Boolean = false
 
     private val statistics: OverviewFeature.Statistics by lazy {
@@ -65,12 +65,15 @@ internal class OverviewChartFragment : BaseFragment() {
                 setPageTransformer(false, pageTransformer)
             }
             pageIndicator.initialize(overviewPager)
-            viewModel.overviewState.observe(viewLifecycleOwner, Observer { dataState ->
-                overviewProgressBar.visibleIf { dataState is LoadingState }
-                overviewPager.visibleIf { dataState is SuccessState }
-                pageIndicator.visibleIf { dataState is SuccessState && statistics.statisticTypes.size > 1 }
-                overviewErrorText.visibleIf { dataState is ErrorState }
-            })
+            viewModel.overviewState.observe(
+                viewLifecycleOwner,
+                Observer { dataState ->
+                    overviewProgressBar.visibleIf { dataState is LoadingState }
+                    overviewPager.visibleIf { dataState is SuccessState }
+                    pageIndicator.visibleIf { dataState is SuccessState && statistics.statisticTypes.size > 1 }
+                    overviewErrorText.visibleIf { dataState is ErrorState }
+                }
+            )
         }
     }
 
@@ -101,21 +104,24 @@ internal class OverviewChartFragment : BaseFragment() {
 
         private fun doObserverModel(binding: TinkOverviewChartPageBinding, position: Int, root: ViewGroup) {
             val data = getPageData(position)
-            data.observe(viewLifecycle, Observer {
-                it?.let { overviewChartModel ->
-                    // Animate currently visible page only
-                    // Do not animate the initial value
-                    // Animate after an update when the value changes
+            data.observe(
+                viewLifecycle,
+                Observer {
+                    it?.let { overviewChartModel ->
+                        // Animate currently visible page only
+                        // Do not animate the initial value
+                        // Animate after an update when the value changes
 
-                    val isFirstLoading = overviewAmountText.text.toString().isBlank()
-                    if (position == view.overviewPager.currentItem && !isFirstLoading && !transitionCoordinator.hasTransitionInProgress()) {
-                        // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
+                        val isFirstLoading = overviewAmountText.text.toString().isBlank()
+                        if (position == view.overviewPager.currentItem && !isFirstLoading && !transitionCoordinator.hasTransitionInProgress()) {
+                            // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
 //                        TransitionManager.beginDelayedTransition(root, changeTransition())
+                        }
+                        updateData(root, binding, overviewChartModel)
+                        onViewReady()
                     }
-                    updateData(root, binding, overviewChartModel)
-                    onViewReady()
                 }
-            })
+            )
         }
 
         private fun changeTransition() = TransitionSet().apply {
@@ -165,12 +171,16 @@ internal class OverviewChartFragment : BaseFragment() {
 //                PAGE_LEFT_TO_SPEND -> viewModel.leftToSpend
                 StatisticType.INCOME -> viewModel.income
                 else -> throw IllegalArgumentException("Invalid position $position")
-        }
+            }
 
         private fun onPageClicked(page: View, position: Int) {
             when (statisticTypes[position]) {
-                StatisticType.EXPENSES -> replaceWithDetailsFragment(ChartDetailsPagerFragment.newInstance(
-                    ChartType.EXPENSES), page)
+                StatisticType.EXPENSES -> replaceWithDetailsFragment(
+                    ChartDetailsPagerFragment.newInstance(
+                        ChartType.EXPENSES
+                    ),
+                    page
+                )
 //                PAGE_LEFT_TO_SPEND -> {
 //                    val fragment = ChartDetailsPagerFragment.newInstance(ChartType.LEFT_TO_SPEND)
 //                    fragmentCoordinator.replace(fragment, true, FragmentAnimationFlags.NONE)
@@ -182,7 +192,7 @@ internal class OverviewChartFragment : BaseFragment() {
 
         private fun replaceWithDetailsFragment(fragment: BaseFragment, page: View) = fragmentCoordinator.replace(
             fragment, true
-        // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
+            // TODO: Transition doesn't work in Fragment 1.3.4, uncomment and use when it's fixed, see https://issuetracker.google.com/issues/188457866
 //            , FragmentAnimationFlags.NONE,
 //            sharedViews = listOf(page.pieChart, page.title, page.period, page.amount, page.findViewById(R.id.tink_back_segment))
         )

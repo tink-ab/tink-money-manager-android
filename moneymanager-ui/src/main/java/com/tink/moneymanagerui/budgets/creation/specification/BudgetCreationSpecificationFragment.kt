@@ -14,7 +14,6 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
-import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.*
 import com.tink.moneymanagerui.extensions.closeKeyboard
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
@@ -25,7 +24,7 @@ import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
 import org.joda.time.DateTime
 import se.tink.commons.extensions.getThemeResIdFromAttr
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -70,50 +69,80 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        viewModel.amountString.observe(viewLifecycleOwner, { amountString ->
-            amountInputText.setText(amountString)
-        })
+        viewModel.amountString.observe(
+            viewLifecycleOwner,
+            { amountString ->
+                amountInputText.setText(amountString)
+            }
+        )
 
         var formattedNumberTextWatcher: FormattedNumberTextWatcher? = null
-        viewModel.amountTextWatcher.observe(viewLifecycleOwner, { amountTextWatcher ->
-            amountInputText.removeTextChangedListener(formattedNumberTextWatcher)
-            formattedNumberTextWatcher = amountTextWatcher
-            amountInputText.addTextChangedListener(formattedNumberTextWatcher)
-        })
+        viewModel.amountTextWatcher.observe(
+            viewLifecycleOwner,
+            { amountTextWatcher ->
+                amountInputText.removeTextChangedListener(formattedNumberTextWatcher)
+                formattedNumberTextWatcher = amountTextWatcher
+                amountInputText.addTextChangedListener(formattedNumberTextWatcher)
+            }
+        )
 
-        viewModel.amountInputKeyListener.observe(viewLifecycleOwner, { amountInputKeyListener ->
-            amountInputText.keyListener = amountInputKeyListener
-        })
+        viewModel.amountInputKeyListener.observe(
+            viewLifecycleOwner,
+            { amountInputKeyListener ->
+                amountInputText.keyListener = amountInputKeyListener
+            }
+        )
 
-        viewModel.averageAmountText.observe(viewLifecycleOwner, { averageAmount ->
-            averageAmountText.text = averageAmount
-        })
+        viewModel.averageAmountText.observe(
+            viewLifecycleOwner,
+            { averageAmount ->
+                averageAmountText.text = averageAmount
+            }
+        )
 
-        viewModel.showAverageAmount.observe(viewLifecycleOwner, { showAverageAmount ->
-            averageAmountText.visibleIf { showAverageAmount }
-        })
+        viewModel.showAverageAmount.observe(
+            viewLifecycleOwner,
+            { showAverageAmount ->
+                averageAmountText.visibleIf { showAverageAmount }
+            }
+        )
 
-        viewModel.periodValueText.observe(viewLifecycleOwner, { periodValue ->
-            periodText.setText(periodValue)
-        })
+        viewModel.periodValueText.observe(
+            viewLifecycleOwner,
+            { periodValue ->
+                periodText.setText(periodValue)
+            }
+        )
 
-        viewModel.showPeriodDateField.observe(viewLifecycleOwner, { showPeriodDateField ->
-            periodStartInputLayout.visibleIf { showPeriodDateField }
-        })
+        viewModel.showPeriodDateField.observe(
+            viewLifecycleOwner,
+            { showPeriodDateField ->
+                periodStartInputLayout.visibleIf { showPeriodDateField }
+            }
+        )
 
-        viewModel.periodStartText.observe(viewLifecycleOwner, { periodStart ->
-            periodStartText.setText(periodStart)
-        })
+        viewModel.periodStartText.observe(
+            viewLifecycleOwner,
+            { periodStart ->
+                periodStartText.setText(periodStart)
+            }
+        )
 
-        viewModel.showPeriodDateField.observe(viewLifecycleOwner, { showPeriodDateField ->
-            periodEndInputLayout.visibleIf { showPeriodDateField }
-        })
+        viewModel.showPeriodDateField.observe(
+            viewLifecycleOwner,
+            { showPeriodDateField ->
+                periodEndInputLayout.visibleIf { showPeriodDateField }
+            }
+        )
 
-        viewModel.periodEndText.observe(viewLifecycleOwner, { periodEnd ->
-            periodEndText.setText(periodEnd)
-        })
+        viewModel.periodEndText.observe(
+            viewLifecycleOwner,
+            { periodEnd ->
+                periodEndText.setText(periodEnd)
+            }
+        )
 
-        actionButton.text = if(viewModel.isEditing) {
+        actionButton.text = if (viewModel.isEditing) {
             getString(R.string.tink_budget_edit_button)
         } else {
             getString(R.string.tink_budget_create_button)
@@ -123,52 +152,76 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             viewModel.onCreateBudgetButtonClicked()
         }
 
-        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
-            actionButton.isEnabled = !isLoading
-            emptyView.visibleIf { isLoading }
-            budgetProgressBar.visibleIf { isLoading }
-        })
-
-        viewModel.areAllRequiredValuesPresent.observe(viewLifecycleOwner, { areAllRequiredValuesPresent ->
-            actionButton.visibleIf { areAllRequiredValuesPresent }
-        })
-
-        viewModel.defaultBudgetName.observe(viewLifecycleOwner, { name ->
-            if (nameInputText.text.isNullOrBlank()) {
-                nameInputText.setText(name.orEmpty())
-            } else {
-                amountInputText.requestFocus()
+        viewModel.loading.observe(
+            viewLifecycleOwner,
+            { isLoading ->
+                actionButton.isEnabled = !isLoading
+                emptyView.visibleIf { isLoading }
+                budgetProgressBar.visibleIf { isLoading }
             }
-        })
+        )
 
-        viewModel.createdBudgetSpecification.observe(viewLifecycleOwner, {
-            it?.let { specification ->
-                (parentFragment as BudgetCreationFragment).goToDetailsFragment(specification.id)
+        viewModel.areAllRequiredValuesPresent.observe(
+            viewLifecycleOwner,
+            { areAllRequiredValuesPresent ->
+                actionButton.visibleIf { areAllRequiredValuesPresent }
             }
-        })
+        )
 
-        viewModel.createdBudgetError.observe(viewLifecycleOwner, { error ->
-            context?.let {
-                snackbarManager.displayError(error, it, errorSnackbarTheme)
-            }
-        })
-
-        viewModel.amountTextWatcher.observe(viewLifecycleOwner, { amountTextWatcher ->
-            viewModel.amount?.let {
-                amountTextWatcher.getTextFromAmount(it).let { amountString ->
-                    viewModel.amountString.postValue(amountString)
+        viewModel.defaultBudgetName.observe(
+            viewLifecycleOwner,
+            { name ->
+                if (nameInputText.text.isNullOrBlank()) {
+                    nameInputText.setText(name.orEmpty())
+                } else {
+                    amountInputText.requestFocus()
                 }
             }
-        })
+        )
 
-        nameInputText.textChangedObserver().observe(viewLifecycleOwner, { name ->
-            title = name
-            viewModel.updateBudgetName(name)
-        })
+        viewModel.createdBudgetSpecification.observe(
+            viewLifecycleOwner,
+            {
+                it?.let { specification ->
+                    (parentFragment as BudgetCreationFragment).goToDetailsFragment(specification.id)
+                }
+            }
+        )
 
-        amountInputText.textChangedObserver().observe(viewLifecycleOwner, { amount ->
-            viewModel.updateBudgetAmount(amount)
-        })
+        viewModel.createdBudgetError.observe(
+            viewLifecycleOwner,
+            { error ->
+                context?.let {
+                    snackbarManager.displayError(error, it, errorSnackbarTheme)
+                }
+            }
+        )
+
+        viewModel.amountTextWatcher.observe(
+            viewLifecycleOwner,
+            { amountTextWatcher ->
+                viewModel.amount?.let {
+                    amountTextWatcher.getTextFromAmount(it).let { amountString ->
+                        viewModel.amountString.postValue(amountString)
+                    }
+                }
+            }
+        )
+
+        nameInputText.textChangedObserver().observe(
+            viewLifecycleOwner,
+            { name ->
+                title = name
+                viewModel.updateBudgetName(name)
+            }
+        )
+
+        amountInputText.textChangedObserver().observe(
+            viewLifecycleOwner,
+            { amount ->
+                viewModel.updateBudgetAmount(amount)
+            }
+        )
 
         amountInputText.setOnFocusChangeListener { inputView, hasFocus ->
             val editText = inputView as EditText
@@ -202,38 +255,44 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             }
         }
 
-        viewModel.budgetDeleteResult.observe(viewLifecycleOwner, { errorOrValue ->
-            if (errorOrValue?.error != null) {
-                snackbarManager.displayError(
-                    getString(R.string.tink_budget_delete_error_message),
-                    context
-                )
-            } else if (errorOrValue?.value != null) {
-                // Exit budgets edit flow
-                fragmentCoordinator.popBackStack()
-                // Pop to overview
-                fragmentCoordinator.handleBackPress()
+        viewModel.budgetDeleteResult.observe(
+            viewLifecycleOwner,
+            { errorOrValue ->
+                if (errorOrValue?.error != null) {
+                    snackbarManager.displayError(
+                        getString(R.string.tink_budget_delete_error_message),
+                        context
+                    )
+                } else if (errorOrValue?.value != null) {
+                    // Exit budgets edit flow
+                    fragmentCoordinator.popBackStack()
+                    // Pop to overview
+                    fragmentCoordinator.handleBackPress()
+                }
             }
-        })
+        )
 
         nameInputText.setText(viewModel.budgetName.orEmpty())
 
-        viewModel.selectedCategories.observe(viewLifecycleOwner, { categories ->
-            val categoriesText = categories.joinToString(separator = ", ")
-            if (viewModel.isEditing) {
-                categoriesInputLayout.visibility = View.VISIBLE
-                categoriesInputText.setText(categoriesText)
-                categoriesInputText.setOnClickListener {
-                    amountInputText.closeKeyboard()
-                    editCategories()
-                }
-            } else {
-                categoriesInputLayout.visibility = View.GONE
-                if (categoriesText.isNotBlank()) {
-                    nameInputText.setText(categoriesText)
+        viewModel.selectedCategories.observe(
+            viewLifecycleOwner,
+            { categories ->
+                val categoriesText = categories.joinToString(separator = ", ")
+                if (viewModel.isEditing) {
+                    categoriesInputLayout.visibility = View.VISIBLE
+                    categoriesInputText.setText(categoriesText)
+                    categoriesInputText.setOnClickListener {
+                        amountInputText.closeKeyboard()
+                        editCategories()
+                    }
+                } else {
+                    categoriesInputLayout.visibility = View.GONE
+                    if (categoriesText.isNotBlank()) {
+                        nameInputText.setText(categoriesText)
+                    }
                 }
             }
-        })
+        )
     }
 
     override fun onCreateToolbarMenu(toolbar: Toolbar) {
@@ -267,7 +326,12 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     private fun onPeriodClicked() {
         val context = context ?: return
-        val choiceItems = arrayOf(WEEK, MONTH, YEAR, CUSTOM)
+        val choiceItems = arrayOf(
+            PeriodValue.WEEK,
+            PeriodValue.MONTH,
+            PeriodValue.YEAR,
+            PeriodValue.CUSTOM
+        )
         val choiceItemTexts = choiceItems
             .map { it.toChoiceString(context) }
             .toTypedArray()

@@ -9,15 +9,14 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
-import se.tink.commons.transactions.TransactionItemListAdapter
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
-import kotlinx.android.synthetic.main.tink_item_picker.view.iconLeft
-import kotlinx.android.synthetic.main.tink_item_picker.view.iconRight
+import kotlinx.android.synthetic.main.tink_item_picker.view.*
+import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -69,71 +68,116 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         transactionsList.adapter = adapter
         transactionsListViewModel.apply {
 
-            budgetProgressStr.observe(viewLifecycle, { budgetProgressString ->
-                budgetProgressText.text = budgetProgressString
-            })
-
-            amountLeftColor.observe(viewLifecycle, { amountLeftColor ->
-                val newColor = view.context.resolveColorForFeature(amountLeftColor, moneyManagerFeatureType)
-                budgetProgressText.setTextColor(newColor)
-                budgetProgress.progressTintList = ColorStateList.valueOf(newColor)
-            })
-
-            budgetPeriodInterval.observe(viewLifecycle, { budgetPeriodInterval ->
-                budgetDateInterval.text = budgetPeriodInterval
-            })
-
-            totalAmount.observe(viewLifecycle, { totalAmount ->
-                budgetProgress.max = totalAmount
-            })
-
-            amountLeft.observe(viewLifecycle, { amountLeft ->
-                budgetProgress.progress = if(amountLeft > 0) amountLeft.toInt() else budgetProgress.max
-            })
-
-            emptyState.observe(viewLifecycle, { isEmpty ->
-                transactionsList.visibleIf(View.INVISIBLE) { !isEmpty }
-            })
-
-            loading.observe(viewLifecycle, { isLoading ->
-                loadingSpinner.visibleIf { isLoading }
-            })
-
-            emptyState.observe(viewLifecycle, { isEmpty ->
-                emptyMessage.visibleIf { isEmpty }
-            })
-
-            budgetPeriodInterval.observe(viewLifecycle, { budgetPeriodInterval ->
-                periodPicker.setText(budgetPeriodInterval)
-            })
-
-            showPicker.observe(viewLifecycle, { showPicker ->
-                periodPicker.visibleIf { showPicker }
-            })
-
-            hasNext.observe(viewLifecycle, { hasNext ->
-                periodPicker.setNextButtonEnabled(hasNext)
-            })
-
-            hasPrevious.observe(viewLifecycle, { hasPrevious ->
-                periodPicker.setPreviousButtonEnabled(hasPrevious)
-            })
-
-            transactionItems.observe(viewLifecycle, { transactionItems ->
-                transactionItems?.let {
-                    adapter.setTransactionItems(it)
+            budgetProgressStr.observe(
+                viewLifecycle,
+                { budgetProgressString ->
+                    budgetProgressText.text = budgetProgressString
                 }
-            })
-            budgetName.observe(viewLifecycle, { name ->
-                name?.let {
-                    title = it
+            )
+
+            amountLeftColor.observe(
+                viewLifecycle,
+                { amountLeftColor ->
+                    val newColor = view.context.resolveColorForFeature(amountLeftColor, moneyManagerFeatureType)
+                    budgetProgressText.setTextColor(newColor)
+                    budgetProgress.progressTintList = ColorStateList.valueOf(newColor)
                 }
-            })
-            error.observe(viewLifecycle, { error ->
-                if (error != null) {
-                    snackbarManager.displayError(error, context)
+            )
+
+            budgetPeriodInterval.observe(
+                viewLifecycle,
+                { budgetPeriodInterval ->
+                    budgetDateInterval.text = budgetPeriodInterval
                 }
-            })
+            )
+
+            totalAmount.observe(
+                viewLifecycle,
+                { totalAmount ->
+                    budgetProgress.max = totalAmount
+                }
+            )
+
+            amountLeft.observe(
+                viewLifecycle,
+                { amountLeft ->
+                    budgetProgress.progress = if (amountLeft > 0) amountLeft.toInt() else budgetProgress.max
+                }
+            )
+
+            emptyState.observe(
+                viewLifecycle,
+                { isEmpty ->
+                    transactionsList.visibleIf(View.INVISIBLE) { !isEmpty }
+                }
+            )
+
+            loading.observe(
+                viewLifecycle,
+                { isLoading ->
+                    loadingSpinner.visibleIf { isLoading }
+                }
+            )
+
+            emptyState.observe(
+                viewLifecycle,
+                { isEmpty ->
+                    emptyMessage.visibleIf { isEmpty }
+                }
+            )
+
+            budgetPeriodInterval.observe(
+                viewLifecycle,
+                { budgetPeriodInterval ->
+                    periodPicker.setText(budgetPeriodInterval)
+                }
+            )
+
+            showPicker.observe(
+                viewLifecycle,
+                { showPicker ->
+                    periodPicker.visibleIf { showPicker }
+                }
+            )
+
+            hasNext.observe(
+                viewLifecycle,
+                { hasNext ->
+                    periodPicker.setNextButtonEnabled(hasNext)
+                }
+            )
+
+            hasPrevious.observe(
+                viewLifecycle,
+                { hasPrevious ->
+                    periodPicker.setPreviousButtonEnabled(hasPrevious)
+                }
+            )
+
+            transactionItems.observe(
+                viewLifecycle,
+                { transactionItems ->
+                    transactionItems?.let {
+                        adapter.setTransactionItems(it)
+                    }
+                }
+            )
+            budgetName.observe(
+                viewLifecycle,
+                { name ->
+                    name?.let {
+                        title = it
+                    }
+                }
+            )
+            error.observe(
+                viewLifecycle,
+                { error ->
+                    if (error != null) {
+                        snackbarManager.displayError(error, context)
+                    }
+                }
+            )
         }
         periodPicker.iconLeft.setOnClickListener {
             transactionsListViewModel.showPreviousPeriod()

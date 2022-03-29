@@ -5,16 +5,16 @@ import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
 import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.overview.OverviewData
-import com.tink.service.network.ResponseState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
 
 data class StatisticsState(
     val statistics: ResponseState<List<Statistics>> = LoadingState,
     val categories: ResponseState<CategoryTree> = LoadingState,
     val userProfile: ResponseState<UserProfile> = LoadingState,
-    val period: ResponseState<Period?> = LoadingState,
+    val period: ResponseState<Period?> = LoadingState
 ) {
 
     internal val overallState: ResponseState<OverviewData> =

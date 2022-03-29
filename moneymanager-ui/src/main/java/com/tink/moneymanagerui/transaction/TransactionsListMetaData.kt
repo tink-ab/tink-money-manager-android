@@ -1,8 +1,8 @@
 package com.tink.moneymanagerui.transaction
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import com.tink.model.time.Period
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 internal data class TransactionsListMetaData(

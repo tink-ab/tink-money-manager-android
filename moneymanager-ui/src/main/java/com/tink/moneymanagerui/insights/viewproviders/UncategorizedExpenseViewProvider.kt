@@ -37,12 +37,12 @@ class UncategorizedExpenseViewProvider @Inject constructor(
         UncategorizedExpenseViewHolder(parent, actionHandler)
 
     override fun getDataHolder(insight: Insight): InsightDataHolder {
-        return when(insight.data) {
+        return when (insight.data) {
             is InsightData.UncategorizedTransactionData -> {
                 (insight.viewDetails as? TransactionViewDetails)?.let {
                     SingleUncategorizedExpenseDataHolder(
                         it.description,
-                        dateUtils.formatDateHuman(it.date.toDateTime()), //TODO: Core setup
+                        dateUtils.formatDateHuman(it.date.toDateTime()), // TODO: Core setup
                         it.amount.formatCurrencyExact()
                     )
                 } ?: SingleUncategorizedExpenseDataHolder("", "", "")
@@ -57,8 +57,10 @@ class UncategorizedExpenseViewProvider @Inject constructor(
                 } ?: WeeklyUncategorizedExpenseDataHolder("", "", "")
             }
             else -> {
-                throw IllegalStateException("InsightData for TransactionsSummaryViewProvider must be either UncategorizedTransactionData" +
-                        " or WeeklyUncategorizedTransactionsData")
+                throw IllegalStateException(
+                    "InsightData for TransactionsSummaryViewProvider must be either UncategorizedTransactionData" +
+                        " or WeeklyUncategorizedTransactionsData"
+                )
             }
         }
     }
@@ -78,16 +80,19 @@ class UncategorizedExpenseViewProvider @Inject constructor(
 }
 
 class UncategorizedExpenseViewHolder(
-    parent: ViewGroup, actionHandler: ActionHandler
+    parent: ViewGroup,
+    actionHandler: ActionHandler
 ) : InsightViewHolder(
     parent.inflate(R.layout.tink_item_insight_single_expense_uncategorized),
     actionHandler
-), InsightCommonBottomPart {
+),
+    InsightCommonBottomPart {
     override val view: View = itemView
 
     override fun bind(data: InsightDataHolder, insight: Insight) {
 
-        require(data is SingleUncategorizedExpenseDataHolder ||
+        require(
+            data is SingleUncategorizedExpenseDataHolder ||
                 data is WeeklyUncategorizedExpenseDataHolder
         )
 
@@ -122,4 +127,3 @@ class WeeklyUncategorizedExpenseDataHolder(
     val dateRange: String,
     val numberOfExpenses: String
 ) : InsightDataHolder
-

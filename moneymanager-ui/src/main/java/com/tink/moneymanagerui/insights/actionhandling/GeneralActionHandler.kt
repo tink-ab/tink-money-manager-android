@@ -5,7 +5,6 @@ import com.tink.model.insights.InsightAction
 import com.tink.model.insights.PerformedInsightAction
 import javax.inject.Inject
 
-
 class GeneralActionHandler @Inject constructor(
     val handlers: Set<ActionHandler>,
     private val tracker: InsightsTracker,
@@ -55,5 +54,4 @@ class GeneralActionHandler @Inject constructor(
                 actionType = action.actionType
             )
         )
-
 }

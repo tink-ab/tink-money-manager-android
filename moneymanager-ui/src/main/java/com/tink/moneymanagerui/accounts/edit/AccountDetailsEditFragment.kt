@@ -19,7 +19,6 @@ import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_account_details_edit.*
 
-
 class AccountDetailsEditFragment : BaseFragment() {
     private val accountId: String by lazy { requireNotNull(arguments?.getString(ACCOUNT_ID_ARGS)) }
     private lateinit var viewModel: AccountDetailsEditViewModel
@@ -66,13 +65,12 @@ class AccountDetailsEditFragment : BaseFragment() {
             inputContainer.visibleIf { state is SuccessState }
             saveButton.visibleIf { state is SuccessState }
 
-
             if (state is SuccessState) {
                 state.data.apply {
                     if (nameInputText.text.isNullOrBlank()) {
                         nameInputText.setText(name)
                     }
-                    val typeText = accountTypeToNameList.find { it.first == type}?.second
+                    val typeText = accountTypeToNameList.find { it.first == type }?.second
                         ?: getString(R.string.tink_accounts_type_other)
                     typeInputText.setText(typeText)
                     includedSwitch.isChecked = !isExcluded

@@ -8,7 +8,8 @@ object AccountMockFactory {
         accountId: String = "ee7ddbd178494220bb184791783f4f63",
         accountName: String = "Checking account 1"
     ): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
         {
            "accounts":[
               {

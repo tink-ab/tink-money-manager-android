@@ -8,15 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.util.CurrencyUtils
-import kotlinx.android.synthetic.main.tink_grouped_item_account.view.accountBalanceSumText
-import kotlinx.android.synthetic.main.tink_grouped_item_account.view.accountKindText
-import kotlinx.android.synthetic.main.tink_grouped_item_account.view.accountsList
+import kotlinx.android.synthetic.main.tink_grouped_item_account.view.*
 import se.tink.commons.extensions.inflate
 
-class GroupedAccountList(val accountClicked: (Account) -> Unit):
+class GroupedAccountList(val accountClicked: (Account) -> Unit) :
     ListAdapter<GroupedAccountsItem, GroupedAccountList.GroupedAccountViewHolder>(AccountGroupDiffUtil) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : GroupedAccountViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupedAccountViewHolder {
         return GroupedAccountViewHolder(parent.inflate(R.layout.tink_grouped_item_account))
     }
 

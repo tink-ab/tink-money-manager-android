@@ -29,7 +29,7 @@ data class AccountDetailsEditData(
 
 class AccountDetailsEditViewModel@Inject constructor(
     private val accountRepository: AccountRepository
-): ViewModel() {
+) : ViewModel() {
     private val accountId: MutableLiveData<String> = MutableLiveData()
 
     fun setAccountId(id: String) {
@@ -132,7 +132,8 @@ class AccountDetailsEditViewModel@Inject constructor(
         val accountValue = account.value
         val editedData = accountDetailsEditData.value
         if (accountValue !is SuccessState<Account> ||
-            editedData !is SuccessState<AccountDetailsEditData>) return
+            editedData !is SuccessState<AccountDetailsEditData>
+        ) return
 
         val ownershipPart = if (editedData.data.isShared) ExactNumber(0.5) else ExactNumber(1)
 
@@ -145,9 +146,9 @@ class AccountDetailsEditViewModel@Inject constructor(
                     favored = editedData.data.isFavored,
                     name = editedData.data.name,
                     ownership = ownershipPart,
-                    type = editedData.data.type)
+                    type = editedData.data.type
+                )
             )
         }
-
     }
 }

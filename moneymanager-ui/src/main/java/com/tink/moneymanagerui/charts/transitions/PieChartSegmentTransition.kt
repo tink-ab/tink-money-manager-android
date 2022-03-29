@@ -111,11 +111,13 @@ internal class PieChartSegmentTransition(private val group: Int? = null, private
             // Clear color state list to prevent unexpected color change with state change during animation
             val colorStateList = view.colorStateList
             view.colorStateList = null
-            animators.add(ObjectAnimator.ofArgb(view, PieChartView.COLOR, s.color, e.color).apply {
-                doOnEnd {
-                    view.colorStateList = colorStateList
+            animators.add(
+                ObjectAnimator.ofArgb(view, PieChartView.COLOR, s.color, e.color).apply {
+                    doOnEnd {
+                        view.colorStateList = colorStateList
+                    }
                 }
-            })
+            )
         }
 
         return if (!animators.isEmpty()) AnimatorSet().apply { playTogether(animators) } else null
@@ -129,5 +131,3 @@ internal class PieChartSegmentTransition(private val group: Int? = null, private
         const val TRANSITION_ALL = 0xFFFFFFF
     }
 }
-
-

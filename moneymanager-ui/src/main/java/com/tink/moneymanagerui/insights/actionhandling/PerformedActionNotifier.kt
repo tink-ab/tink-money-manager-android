@@ -9,7 +9,7 @@ import javax.inject.Inject
 class PerformedActionNotifier @Inject constructor(
     eventBus: ActionEventBus,
     private val insightService: InsightService,
-    private val dispatcher: DispatcherProvider,
+    private val dispatcher: DispatcherProvider
 ) {
     init {
         eventBus.subscribe { performedAction ->

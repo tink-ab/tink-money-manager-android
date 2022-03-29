@@ -16,7 +16,7 @@ internal data class ChartDetailsState(
     val sourceData: ResponseState<ChartSourceDataBase> = LoadingState,
     val statistics: ResponseState<List<Statistics>> = LoadingState,
     val transactions: ResponseState<List<Transaction>> = LoadingState
-    ) {
+) {
 
     internal val overallState: ResponseState<ChartSourceData> =
         when (sourceData) {

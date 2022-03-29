@@ -13,19 +13,18 @@ data class TabPieChartDetailsState(
     val selectedPeriod: ResponseState<Period> = LoadingState,
     val periods: ResponseState<List<Period>> = LoadingState,
     val category: ResponseState<Category> = LoadingState,
-    val userProfile: ResponseState<UserProfile> = LoadingState,
+    val userProfile: ResponseState<UserProfile> = LoadingState
 ) {
 
     internal val overallState: ResponseState<TabPieChartData> =
         when {
-             selectedPeriod is SuccessState && periods is SuccessState && category is SuccessState && userProfile is SuccessState ->
+            selectedPeriod is SuccessState && periods is SuccessState && category is SuccessState && userProfile is SuccessState ->
                 SuccessState(
                     TabPieChartData(
                         selectedPeriod.data,
                         periods.data,
                         category.data,
-                        userProfile.data,
-
+                        userProfile.data
                     )
                 )
             selectedPeriod is ErrorState || periods is ErrorState || category is ErrorState || userProfile is ErrorState ->

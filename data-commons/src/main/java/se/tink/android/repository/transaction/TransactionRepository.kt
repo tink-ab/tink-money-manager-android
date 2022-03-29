@@ -8,7 +8,12 @@ import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
 import com.tink.service.util.DispatcherProvider
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import se.tink.android.AppExecutors
 import se.tink.android.repository.TinkNetworkError
 import javax.inject.Inject
@@ -44,7 +49,6 @@ class TransactionRepository @Inject constructor(
 
     fun forAccountId(accountId: String): TransactionPagesLiveData =
         AccountTransactionPagesLiveData(accountId, appExecutors, transactionService, transactionUpdateEventBus, dispatcher)
-
 
     fun fetchById(id: String): SingleTransactionLiveData =
         SingleTransactionLiveData(id, transactionService, transactionUpdateEventBus, dispatcher)

@@ -16,7 +16,6 @@ class TransactionEnricher @Inject constructor(
     private val transactionRepository: TransactionRepository
 ) : InsightsEnricher {
 
-
     override fun enrich(input: LiveData<List<Insight>>): LiveData<List<Insight>> {
 
         return input.switchMap { insightList ->

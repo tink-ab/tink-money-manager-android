@@ -1,11 +1,12 @@
 package com.tink.moneymanagerui.insights.di
 
-import com.tink.moneymanagerui.insights.enrichment.*
 import com.tink.moneymanagerui.insights.enrichment.BudgetCreateSuggestionEnricher
 import com.tink.moneymanagerui.insights.enrichment.BudgetStateEnricher
 import com.tink.moneymanagerui.insights.enrichment.BudgetSummaryEnricher
+import com.tink.moneymanagerui.insights.enrichment.CategoryTreeEnricher
 import com.tink.moneymanagerui.insights.enrichment.EnrichmentType
 import com.tink.moneymanagerui.insights.enrichment.InsightsEnricher
+import com.tink.moneymanagerui.insights.enrichment.TransactionEnricher
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

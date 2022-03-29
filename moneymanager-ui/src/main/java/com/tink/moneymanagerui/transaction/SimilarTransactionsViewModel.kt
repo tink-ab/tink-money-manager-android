@@ -6,22 +6,22 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.category.Category
+import com.tink.model.category.CategoryTree
+import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.R
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.map
+import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.transaction.TransactionRepository
+import se.tink.commons.extensions.findCategoryById
+import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.transactions.Marked
 import se.tink.commons.transactions.SimilarTransactionsAdapter
 import se.tink.commons.transactions.TransactionItemFactory
-import se.tink.commons.extensions.whenNonNull
-import com.tink.model.category.CategoryTree
-import com.tink.model.transaction.Transaction
-import se.tink.android.repository.TinkNetworkError
-import se.tink.commons.extensions.findCategoryById
 import javax.inject.Inject
 
-internal class SimilarTransactionsViewModel  @Inject constructor(
+internal class SimilarTransactionsViewModel @Inject constructor(
     categoryRepository: CategoryRepository,
     private val transactionRepository: TransactionRepository,
     private val transactionItemFactory: TransactionItemFactory,
@@ -120,8 +120,8 @@ internal class SimilarTransactionsViewModel  @Inject constructor(
         fun update() = whenNonNull(categoryTree.value, categoryId.value) { tree, id ->
             tree.findCategoryById(id)?.let(::postValue)
         }
-        addSource(categoryId) {update()}
-        addSource(categoryTree) {update()}
+        addSource(categoryId) { update() }
+        addSource(categoryTree) { update() }
     }
 
     val descriptionText: LiveData<String> = category.map { category ->

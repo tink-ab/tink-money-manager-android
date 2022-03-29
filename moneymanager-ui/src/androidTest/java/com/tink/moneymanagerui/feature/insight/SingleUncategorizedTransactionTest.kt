@@ -13,18 +13,21 @@ import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class SingleUncategorizedTransactionTest: BaseInsightTestSuit() {
+class SingleUncategorizedTransactionTest : BaseInsightTestSuit() {
     private val transactionId = "8a703fa458d144f9b802b09b26a43e89"
     private var transaction = JSONObject()
     private var insight = JSONObject()
 
     private fun setupDispatcher() {
-        insightDispatcher.addResponse("/api/v1/insights",
-            MockResponse().setResponseCode(200).setBody(listOf(insight).toString()))
-        insightDispatcher.addResponse(  "/api/v1/transactions/$transactionId",
-            MockResponse().setResponseCode(200).setBody(transaction.toString()))
+        insightDispatcher.addResponse(
+            "/api/v1/insights",
+            MockResponse().setResponseCode(200).setBody(listOf(insight).toString())
+        )
+        insightDispatcher.addResponse(
+            "/api/v1/transactions/$transactionId",
+            MockResponse().setResponseCode(200).setBody(transaction.toString())
+        )
         server.dispatcher = insightDispatcher
     }
 
@@ -38,7 +41,6 @@ class SingleUncategorizedTransactionTest: BaseInsightTestSuit() {
         )
         insight = InsightMockFactory.getSingleUncategorizedTransaction(transactionId)
     }
-
 
     @Test
     fun test_display_single_uncategorized_insight() {

@@ -46,13 +46,19 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         viewModel.refresh()
 
-        viewModel.insights.observe(viewLifecycleOwner, Observer { insightsList ->
-            insightsAdapter.setData(insightsList)
-        })
+        viewModel.insights.observe(
+            viewLifecycleOwner,
+            Observer { insightsList ->
+                insightsAdapter.setData(insightsList)
+            }
+        )
 
-        viewModel.errors.observe(viewLifecycleOwner, Observer {event ->
-            event?.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
-        })
+        viewModel.errors.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                event?.getContentIfNotHandled()?.let { snackbarManager.displayError(it, context) }
+            }
+        )
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -62,15 +68,24 @@ class ArchivedInsightsFragment : BaseFragment() {
 
         emptyStateText.text = getString(R.string.tink_insights_archived_empty_state_text)
 
-        viewModel.hasItems.observe(viewLifecycle, { hasInsights ->
-            recyclerView.visibleIf { hasInsights }
-        })
-        viewModel.loading.observe(viewLifecycle, { isLoading ->
-            insightsProgressBar.visibleIf { isLoading }
-        })
-        viewModel.showEmptyState.observe(viewLifecycle, { shouldShowEmptyState ->
-            emptyStateText.visibleIf { shouldShowEmptyState }
-        })
+        viewModel.hasItems.observe(
+            viewLifecycle,
+            { hasInsights ->
+                recyclerView.visibleIf { hasInsights }
+            }
+        )
+        viewModel.loading.observe(
+            viewLifecycle,
+            { isLoading ->
+                insightsProgressBar.visibleIf { isLoading }
+            }
+        )
+        viewModel.showEmptyState.observe(
+            viewLifecycle,
+            { shouldShowEmptyState ->
+                emptyStateText.visibleIf { shouldShowEmptyState }
+            }
+        )
     }
 
     override fun authorizedOnStart() {

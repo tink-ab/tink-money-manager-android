@@ -4,15 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.tink.annotations.PfmScope
 import com.tink.model.user.UserProfile
-import com.tink.service.user.UserProfileService
-import kotlinx.coroutines.*
-import com.tink.service.network.ResponseState
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
+import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
+import com.tink.service.user.UserProfileService
 import com.tink.service.util.DispatcherProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 @PfmScope
@@ -22,7 +22,6 @@ class UserRepository @Inject constructor(
 ) {
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     // Perhaps use a StateFlow instead (or wait until it's out of experimental).
-
 
     private val _userProfile = object : MutableLiveData<UserProfile?>() {
         override fun onActive() {
