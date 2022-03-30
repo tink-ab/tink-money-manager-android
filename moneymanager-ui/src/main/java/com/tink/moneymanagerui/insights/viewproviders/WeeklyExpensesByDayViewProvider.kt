@@ -8,6 +8,7 @@ import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
 import com.tink.model.relations.ExpensesByDay
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.charts.BarChartWithAmountLabels
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
@@ -55,14 +56,28 @@ class WeeklyExpensesByDayInsightViewHolder(
 
         setupCommonBottomPart(insight)
 
-        view.apply {
-            totalExpensesChart.data = data.chartData.totalAmountData
-            totalExpensesChart.amountLabels = data.chartData.formattedTotalAmountLabels
-            totalExpensesChart.labels = data.chartData.dayLabels
+        if (data.chartData.totalAmountData.size == data.chartData.dayLabels.size &&
+            data.chartData.totalAmountData.size == data.chartData.formattedTotalAmountLabels.size &&
+            data.chartData.totalAmountData.size == data.chartData.averageAmountData.size
+        ) {
+            setupBarChart(data)
+        }
+    }
 
-            averageExpensesChart.data = data.chartData.averageAmountData
-            averageExpensesChart.amountLabels = emptyList()
-            averageExpensesChart.labels = emptyList()
+    private fun setupBarChart(data: WeeklyExpensesByDayDataHolder) {
+        view.apply {
+            totalExpensesChart.data = data.chartData.totalAmountData.withIndex().map { item ->
+                BarChartWithAmountLabels.AmountWithLabel(
+                    item.value,
+                    data.chartData.dayLabels[item.index],
+                    data.chartData.formattedTotalAmountLabels[item.index]
+                )
+            }
+
+            averageExpensesChart.data = data.chartData.averageAmountData.map {
+                BarChartWithAmountLabels.AmountWithLabel(it, "", "0")
+            }
+            averageExpensesChart.showAmountLabels = false
 
             barChartContainer.doOnNextLayout {
                 val expensesMax = data.chartData.totalAmountData.maxOrNull() ?: 0.000001f
@@ -126,10 +141,8 @@ data class ExpensesByDayChartData(
 ) {
     val formattedTotalAmountLabels: List<String> =
         totalAmountLabels.map {
-            if (it.isEmpty()) {
+            it.ifEmpty {
                 "0"
-            } else {
-                it
             }
         }
 }

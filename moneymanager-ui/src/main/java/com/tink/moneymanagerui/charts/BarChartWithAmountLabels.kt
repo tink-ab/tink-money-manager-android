@@ -19,7 +19,6 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.utils.extractTextStyle
 
-
 internal class BarChartWithAmountLabels : View {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -34,10 +33,8 @@ internal class BarChartWithAmountLabels : View {
         applyAttributes(attrs)
     }
 
-
-    var data: List<Float>? by InvalidateDelegate(null)
-    var labels: List<String>? by InvalidateDelegate(null)
-    var amountLabels: List<String>? by InvalidateDelegate(null)
+    var data: List<AmountWithLabel>? by InvalidateDelegate(null)
+    var showAmountLabels = true
 
     private var barWidth: Float = 1f
     private var barChartMarginRight: Int = 0
@@ -49,7 +46,6 @@ internal class BarChartWithAmountLabels : View {
     private val amountLabelTopMargin = ScreenUtils.dpToPixels(context, 5)
     private val barChartCornerRadius = ScreenUtils.dpToPixels(context, 4).toFloat()
 
-
     private val barPaint = Paint().apply {
         isAntiAlias = true
     }
@@ -59,7 +55,7 @@ internal class BarChartWithAmountLabels : View {
         isAntiAlias = true
     }
 
-    private val amountLabelPaint: TextPaint = TextPaint().apply {
+    private val visibleAmountLabelPaint: TextPaint = TextPaint().apply {
         textSize = resources.getDimension(R.dimen.tink_pico_text_size)
         color = context.getColorFromAttr(R.attr.tink_textColorSecondary)
         typeface = ResourcesCompat.getFont(context, R.font.tink_font_regular)
@@ -89,7 +85,7 @@ internal class BarChartWithAmountLabels : View {
 
     private val barChartBounds = RectF()
 
-    fun getLabelHeight() = amountLabelPaint.textSize + amountLabelTopMargin
+    fun getLabelHeight() = visibleAmountLabelPaint.textSize + amountLabelTopMargin
 
     init {
         setLayerType(LAYER_TYPE_HARDWARE, null)
@@ -130,7 +126,6 @@ internal class BarChartWithAmountLabels : View {
         }
     }
 
-
     @Suppress("NAME_SHADOWING")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -138,16 +133,16 @@ internal class BarChartWithAmountLabels : View {
         val globalRight = width.toFloat()
         val globalBottom = height.toFloat()
 
-        if (canvas == null
-            || data.isNullOrEmpty()
+        if (canvas == null ||
+            data.isNullOrEmpty()
         ) return
 
         whenNonNull(
             canvas,
             data
         ) { canvas, data ->
-            //Compute bounds
-            val dataMax = data.maxOrNull()!!
+            // Compute bounds
+            val dataMax = data.maxOf { it.amount }
 
             barChartBounds.set(
                 0f,
@@ -159,42 +154,32 @@ internal class BarChartWithAmountLabels : View {
             barChartBounds.right -= barChartMarginRight
             barChartBounds.left += barChartMarginLeft
 
-            val amountLabelHeight = amountLabelPaint.textSize + amountLabelTopMargin
+            val amountLabelHeight = visibleAmountLabelPaint.textSize + amountLabelTopMargin
 
             val averageLineY =
-                ((barChartBounds.top + amountLabelHeight)
-                        + (barChartBounds.height() - amountLabelBottomMargin)
-                        * (1 - data.average() / dataMax)
-                        ).toFloat()
+                (
+                    (barChartBounds.top + amountLabelHeight) +
+                        (barChartBounds.height() - amountLabelBottomMargin) *
+                        (1 - data.map { it.amount }.average() / dataMax)
+                    ).toFloat()
 
-            //Draw items
-            if (amountLabels.isNullOrEmpty()) {
-                val emptyValues = listOf("0","0","0","0","0")
-                canvas.drawBarChartWithAmountLabels(
-                    barChartBounds,
-                    data,
-                    barWidth,
-                    barPaint,
-                    barChartCornerRadius,
-                    emptyValues,
-                    transparentAmountLabelPaint,
-                    amountLabelTopMargin,
-                    amountLabelBottomMargin
-                )
+            val amountLabelPaint = if (showAmountLabels) {
+                visibleAmountLabelPaint
             } else {
-                canvas.drawBarChartWithAmountLabels(
-                    barChartBounds,
-                    data,
-                    barWidth,
-                    barPaint,
-                    barChartCornerRadius,
-                    amountLabels!!,
-                    amountLabelPaint,
-                    amountLabelTopMargin,
-                    amountLabelBottomMargin
-                )
+                transparentAmountLabelPaint
             }
 
+            // Draw items
+            canvas.drawBarChartWithAmountLabels(
+                barChartBounds,
+                data,
+                barWidth,
+                barPaint,
+                barChartCornerRadius,
+                amountLabelPaint,
+                amountLabelTopMargin,
+                amountLabelBottomMargin
+            )
 
             // Draw average line
             averageLinePath.reset()
@@ -204,7 +189,7 @@ internal class BarChartWithAmountLabels : View {
 
             // Draw labels
             val betweenMargin = (barChartBounds.width() - data.size * barWidth) / (data.size - 1)
-            for ((index, label) in labels?.withIndex() ?: listOf()) {
+            for ((index, label) in data.map { it.label }.withIndex()) {
                 val x = index * (betweenMargin + barWidth) + barChartBounds.left
                 canvas.drawText(
                     label,
@@ -215,4 +200,10 @@ internal class BarChartWithAmountLabels : View {
             }
         }
     }
+
+    data class AmountWithLabel(
+        val amount: Float,
+        val label: String,
+        val amountLabel: String
+    )
 }
