@@ -30,7 +30,7 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-internal class OverviewData(val statistics:  List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
+internal class OverviewData(val statistics: List<Statistics>, val period: Period, val categories: CategoryTree, val currency: String)
 
 internal class OverviewChartViewModel @Inject constructor(
     private val dateUtils: DateUtils,

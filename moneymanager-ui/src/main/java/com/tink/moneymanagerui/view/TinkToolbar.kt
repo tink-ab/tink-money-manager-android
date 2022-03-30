@@ -103,7 +103,7 @@ internal class TinkToolbar : Toolbar {
     }
 
     private fun styleMenu(menu: ActionMenuView) {
-        //style action items
+        // style action items
         for (i in 0 until menu.childCount) {
             val child = menu.getChildAt(i)
             if (child is ActionMenuItemView) {

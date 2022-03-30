@@ -81,7 +81,8 @@ class BudgetMonthlySummaryViewProvider @Inject constructor() : InsightViewProvid
     ) : InsightViewHolder(
         parent.inflate(R.layout.tink_item_insight_budget_monthly_summary),
         actionHandler
-    ), InsightCommonBottomPart {
+    ),
+        InsightCommonBottomPart {
         override val view: View = itemView
 
         override fun bind(data: InsightDataHolder, insight: Insight) {

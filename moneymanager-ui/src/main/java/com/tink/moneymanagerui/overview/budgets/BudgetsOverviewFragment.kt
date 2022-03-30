@@ -57,16 +57,19 @@ internal class BudgetsOverviewFragment : BaseFragment() {
             fragmentCoordinator.replace(BudgetCreationFragment.newInstance())
         }
 
-        viewModel.overallBudgetState.observe(viewLifecycleOwner, { budgetItemsState ->
-            loader.visibleIf { budgetItemsState is LoadingState }
-            budgetsOverviewList.visibleIf { budgetItemsState is SuccessState }
-            val hasBudgets = budgetItemsState is SuccessState && budgetItemsState.data.isNotEmpty()
-            budgetsEmpty.visibleIf { budgetItemsState is SuccessState && !hasBudgets }
-            budgetsOverviewContent.visibleIf { budgetItemsState is SuccessState && hasBudgets }
-            if (budgetItemsState is SuccessState) {
-                budgetOverviewListAdapter.setItems(budgetItemsState.data)
+        viewModel.overallBudgetState.observe(
+            viewLifecycleOwner,
+            { budgetItemsState ->
+                loader.visibleIf { budgetItemsState is LoadingState }
+                budgetsOverviewList.visibleIf { budgetItemsState is SuccessState }
+                val hasBudgets = budgetItemsState is SuccessState && budgetItemsState.data.isNotEmpty()
+                budgetsEmpty.visibleIf { budgetItemsState is SuccessState && !hasBudgets }
+                budgetsOverviewContent.visibleIf { budgetItemsState is SuccessState && hasBudgets }
+                if (budgetItemsState is SuccessState) {
+                    budgetOverviewListAdapter.setItems(budgetItemsState.data)
+                }
             }
-        })
+        )
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.BUDGETS

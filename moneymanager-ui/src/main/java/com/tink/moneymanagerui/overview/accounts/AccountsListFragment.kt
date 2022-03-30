@@ -36,14 +36,17 @@ internal class AccountsListFragment : BaseFragment() {
             adapter = accountListAdapter
         }
 
-        viewModel.accountsState.observe(viewLifecycleOwner, Observer { accountState ->
-            if (accountState is SuccessState) {
-                accountListAdapter.setAccounts(accountState.data)
+        viewModel.accountsState.observe(
+            viewLifecycleOwner,
+            Observer { accountState ->
+                if (accountState is SuccessState) {
+                    accountListAdapter.setAccounts(accountState.data)
+                }
+                loader.visibleIf { accountState is LoadingState }
+                accountList.visibleIf { accountState is SuccessState }
+                accounts_error_text.visibleIf { accountState is ErrorState }
             }
-            loader.visibleIf { accountState is LoadingState }
-            accountList.visibleIf { accountState is SuccessState }
-            accounts_error_text.visibleIf { accountState is ErrorState }
-        })
+        )
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS

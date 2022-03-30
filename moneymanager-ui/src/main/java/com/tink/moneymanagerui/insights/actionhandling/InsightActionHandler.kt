@@ -5,7 +5,6 @@ import com.tink.model.budget.BudgetPeriodicity
 import com.tink.model.insights.InsightAction
 import com.tink.model.misc.Amount
 
-
 /**
  * This class contains a set of methods that you can implement to perform the necessary logic when
  * a user selects an action for an insight that requires more user interaction.
@@ -84,7 +83,7 @@ open class InsightActionHandler {
     open fun refreshCredentials(
         credentialId: String,
         onComplete: (isActionDone: Boolean) -> Unit
-    ) : Boolean = false
+    ): Boolean = false
 
     /**
      * Handle action where the user wants to view account matching the id.

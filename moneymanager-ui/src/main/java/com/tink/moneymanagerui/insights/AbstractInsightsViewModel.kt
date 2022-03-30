@@ -5,8 +5,8 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightType
-import se.tink.android.livedata.map
 import com.tink.moneymanagerui.insights.enrichment.EnrichmentDirectorFactory
+import se.tink.android.livedata.map
 
 abstract class AbstractInsightsViewModel internal constructor(
     insightsSource: LiveData<List<Insight>>,

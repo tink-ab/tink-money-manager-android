@@ -10,22 +10,21 @@ import com.tink.service.network.SuccessState
 data class BudgetSelectionState(
     val budget: ResponseState<BudgetSpecification> = LoadingState,
     val budgetPeriodsList: ResponseState<List<BudgetPeriod>> = LoadingState,
-    val currentSelectedPeriod: ResponseState<BudgetPeriod> = LoadingState,
+    val currentSelectedPeriod: ResponseState<BudgetPeriod> = LoadingState
 ) {
     internal val overallState: ResponseState<BudgetSelectionData> =
         when {
             budget is SuccessState && budgetPeriodsList is SuccessState && currentSelectedPeriod is SuccessState -> {
                 SuccessState(BudgetSelectionData(budget.data, budgetPeriodsList.data, currentSelectedPeriod.data))
             }
-            budget is ErrorState ||  budgetPeriodsList is ErrorState || currentSelectedPeriod is ErrorState ->
+            budget is ErrorState || budgetPeriodsList is ErrorState || currentSelectedPeriod is ErrorState ->
                 ErrorState("")
             else -> LoadingState
-
         }
 }
 
 data class BudgetSelectionData(
     val budget: BudgetSpecification,
     val budgetPeriodsList: List<BudgetPeriod>,
-    val currentSelectedPeriod: BudgetPeriod,
+    val currentSelectedPeriod: BudgetPeriod
 )

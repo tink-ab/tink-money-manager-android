@@ -1,6 +1,9 @@
 package com.tink.moneymanagerui.overview.budgets
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import com.tink.model.budget.Budget
 import com.tink.model.budget.BudgetSummary
 import com.tink.model.category.CategoryTree
@@ -18,7 +21,9 @@ import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
 import se.tink.commons.categories.iconColor
-import se.tink.commons.extensions.*
+import se.tink.commons.extensions.absValue
+import se.tink.commons.extensions.findCategoryByCode
+import se.tink.commons.extensions.subtract
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
@@ -26,7 +31,7 @@ internal class BudgetsOverviewViewModel @Inject constructor(
     budgetsRepository: BudgetsRepository,
     categoryRepository: CategoryRepository,
     private val dateUtils: DateUtils
-): ViewModel() {
+) : ViewModel() {
 
     private val budgetSummaries = budgetsRepository.budgetsState
     private val categories = categoryRepository.categoriesState
@@ -49,7 +54,7 @@ internal class BudgetsOverviewViewModel @Inject constructor(
 
     private fun getBudgetIcon(
         budgetSpecification: Budget.Specification,
-        categories: CategoryTree,
+        categories: CategoryTree
     ) = when {
         budgetSpecification.filter.tags.isNotEmpty() -> BudgetOverviewItem.Icon(
             resource = R.attr.tink_icon_transaction_tag,
@@ -71,17 +76,18 @@ internal class BudgetsOverviewViewModel @Inject constructor(
             )
         }
 
-        budgetSpecification.filter.categories.size == 1 -> categories
-            .findCategoryByCode(
-                budgetSpecification.filter.categories.first().code
-            )
-            ?.let { category ->
-                BudgetOverviewItem.Icon(
-                    resource = category.getIcon(),
-                    color = category.iconColor(),
-                    backgroundColor = category.iconBackgroundColor()
+        budgetSpecification.filter.categories.size == 1 ->
+            categories
+                .findCategoryByCode(
+                    budgetSpecification.filter.categories.first().code
                 )
-            }
+                ?.let { category ->
+                    BudgetOverviewItem.Icon(
+                        resource = category.getIcon(),
+                        color = category.iconColor(),
+                        backgroundColor = category.iconBackgroundColor()
+                    )
+                }
 
         else -> null
     }
@@ -98,7 +104,7 @@ internal class BudgetsOverviewViewModel @Inject constructor(
 
     private fun getBudgetOverviewItemPeriodLabel(
         periodicity: Budget.Periodicity,
-        budgetPeriod: Budget.Period,
+        budgetPeriod: Budget.Period
     ): String {
         return when (periodicity) {
             is Budget.Periodicity.OneOff -> periodicity.formattedPeriod(

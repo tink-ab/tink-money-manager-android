@@ -67,11 +67,11 @@ class AccountRepository @Inject constructor(
     val accountsState: LiveData<ResponseState<List<Account>>> = _accountsState
 
     fun accountByIdState(id: String): LiveData<ResponseState<Account?>> = accountsState.map { accountList ->
-        when(accountList) {
+        when (accountList) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(accountList.errorMessage)
             is SuccessState -> SuccessState(
-                    accountList.data.firstOrNull {
+                accountList.data.firstOrNull {
                     it.id == id
                 }
             )

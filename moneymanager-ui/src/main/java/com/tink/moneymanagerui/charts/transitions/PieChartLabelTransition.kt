@@ -61,7 +61,3 @@ internal class PieChartLabelTransition : Transition() {
         }
     }
 }
-
-
-
-

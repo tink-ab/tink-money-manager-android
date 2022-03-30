@@ -6,7 +6,7 @@ import com.tink.service.observer.ChangeObserver
 import se.tink.android.AppExecutors
 import se.tink.android.repository.TinkNetworkError
 
-interface ListChangeObserver<T>: ChangeObserver<List<T>>
+interface ListChangeObserver<T> : ChangeObserver<List<T>>
 
 // T must provide equals method which is not based on objects identity
 fun <T> MutableLiveData<List<T>>.createChangeObserver(executors: AppExecutors): ListChangeObserver<T> {
@@ -60,5 +60,4 @@ private constructor(
 
     constructor(value: T) : this(value, null)
     constructor(error: TinkNetworkError) : this(null, error)
-
 }

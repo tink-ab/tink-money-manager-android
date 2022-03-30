@@ -48,5 +48,4 @@ internal interface TabPieChartFragmentsModule {
 
     @ContributesAndroidInjector
     fun halfPieChartFragment(): HalfPieChartFragment
-
 }

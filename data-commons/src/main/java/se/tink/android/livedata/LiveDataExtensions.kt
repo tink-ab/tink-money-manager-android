@@ -21,7 +21,7 @@ fun <T, R> mapDistinct(source: LiveData<T>, map: (T) -> R): LiveData<R> = Mediat
     }
 }
 
-fun <T: Any> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) =
+fun <T : Any> LiveData<T>.observe(owner: LifecycleOwner, observer: (T) -> Unit) =
     observe(owner, Observer { it?.let(observer) })
 
 val <T> LiveData<T>.requireValue: T

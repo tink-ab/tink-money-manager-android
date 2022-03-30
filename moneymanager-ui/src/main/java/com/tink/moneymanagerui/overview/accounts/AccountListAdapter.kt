@@ -11,7 +11,8 @@ import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.extensions.inflate
 
-internal class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
+internal class AccountListAdapter :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
 
     private var accountItems: List<Account> = emptyList()
@@ -36,7 +37,6 @@ internal class AccountListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder
         this.accountItems = accounts
         calculateDiff(oldData, accountItems).dispatchUpdatesTo(this)
     }
-
 
     private fun calculateDiff(old: List<Account>, new: List<Account>) =
         DiffUtil.calculateDiff(AccountItemDiffCallback(old, new))

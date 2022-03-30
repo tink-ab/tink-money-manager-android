@@ -1,12 +1,11 @@
 package com.tink.moneymanagerui.overview.charts
 
-import androidx.fragment.app.Fragment
 import android.transition.ChangeBounds
 import android.transition.Fade
+import androidx.fragment.app.Fragment
 import com.tink.moneymanagerui.TransitionDescription
 import com.tink.moneymanagerui.overview.charts.piechart.CategorySelectionTransition
 import javax.inject.Inject
-
 
 internal class ChartToCategoryTransition @Inject constructor() : TransitionDescription {
     override val fragment1 get() = ChartDetailsPagerFragment::class

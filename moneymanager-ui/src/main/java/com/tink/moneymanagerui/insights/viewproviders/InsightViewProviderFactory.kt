@@ -4,7 +4,6 @@ import com.tink.model.insights.InsightType
 import se.tink.insights.InsightViewType
 import javax.inject.Inject
 
-
 class InsightViewProviderFactory @Inject constructor(
     private val supportedProviders: Set<@JvmSuppressWildcards InsightViewProvider>
 ) {
@@ -14,5 +13,4 @@ class InsightViewProviderFactory @Inject constructor(
 
     fun provider(viewType: InsightViewType): InsightViewProvider? =
         supportedProviders.find { it.viewType == viewType }
-
 }

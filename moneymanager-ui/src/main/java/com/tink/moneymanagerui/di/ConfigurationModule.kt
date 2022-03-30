@@ -27,5 +27,4 @@ internal class ConfigurationModule {
         dateUtils.locale = locale
         return dateUtils
     }
-
 }
