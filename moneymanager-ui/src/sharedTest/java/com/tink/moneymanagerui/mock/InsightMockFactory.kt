@@ -470,49 +470,151 @@ object InsightMockFactory {
     fun getWeeklySummaryExpensesByDay(): JSONObject {
         return JSONObject(
             """
-            {
-                "userId": 1234,
-                "id": 12,
-                "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
-                "title": "Title",
-                "description": "Description",
-                "createdTime": 1111111,
-                "data": {
-                    "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
-                    "week": {
-                        "year": 2019,
-                        "week": 43
-                    },
-                    "expenseStatisticsByDay": [
-                        {
-                            "date": [2019,10,27],
-                            "expenseStatistics": {
-                                "totalAmount": {
-                                    "currencyCode": "EUR",
-                                    "amount": 57
-                                },
-                                "averageAmount": {
-                                    "currencyCode": "EUR",
-                                    "amount": 60
-                                }
-                            }
-                        },
-                        {
-                            "date": [2019,10,26],
-                            "expenseStatistics": {
-                                "totalAmount": {
-                                    "currencyCode": "EUR",
-                                    "amount": 63.5
-                                },
-                                "averageAmount": {
-                                    "currencyCode": "EUR",
-                                    "amount": 71
-                                }
-                            }
-                        }
-                    ]
-                }
-            }"""
+                {
+    "id": "2957caaa648f45d5b944befa61412b95",
+    "userId": "328858b0e20744bc85df7ca70861cf90",
+    "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY",
+    "title": "Here’s your spending per day last week",
+    "description": "Expenses last week.",
+    "data": {
+      "week": {
+        "year": 2022,
+        "week": 2
+      },
+      "expenseStatisticsByDay": [
+        {
+          "date": [
+            2022,
+            1,
+            10
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 12.24
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 12.24
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            11
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 3.0
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 6.0
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            12
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 0.46
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 1.46
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            13
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 20.54
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 20.54
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            14
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 17.08
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 10.08
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            15
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 10
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 0
+            }
+          }
+        },
+        {
+          "date": [
+            2022,
+            1,
+            16
+          ],
+          "expenseStatistics": {
+            "totalAmount": {
+              "currencyCode": "EUR",
+              "amount": 3.71
+            },
+            "averageAmount": {
+              "currencyCode": "EUR",
+              "amount": 3.71
+            }
+          }
+        }
+      ],
+      "type": "WEEKLY_SUMMARY_EXPENSES_BY_DAY"
+    },
+    "createdTime": 1642501091101,
+    "insightActions": [
+      {
+        "label": "OK, good to know",
+        "data": {
+          "type": "ACKNOWLEDGE"
+        }
+      }
+    ]
+  }
+            """
         )
     }
 

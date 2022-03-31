@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.PointF
 import android.graphics.RectF
+import com.tink.moneymanagerui.charts.BarChartWithAmountLabels
 
 /**
  * Draws a simple bar chart in the Rect defined. Bars will be rounded at the top.
@@ -38,11 +39,10 @@ internal fun Canvas.drawBarChart(
 
 internal fun Canvas.drawBarChartWithAmountLabels(
     rectF: RectF,
-    data: List<Float>,
+    data: List<BarChartWithAmountLabels.AmountWithLabel>,
     barWidth: Float,
     barPaint: Paint,
     barCornerRadius: Float,
-    amountLabels: List<String>,
     amountLabelPaint: Paint,
     amountLabelTopMargin: Int,
     amountBottomMargin: Int
@@ -52,10 +52,11 @@ internal fun Canvas.drawBarChartWithAmountLabels(
     val bottom = rectF.bottom
     val amountLabelHeight = amountLabelPaint.textSize + amountLabelTopMargin
 
-    val max = data.maxOrNull() ?: return
+    val max = data.maxByOrNull { it.amount } ?: return
+
     for (
         (index, top) in data.map {
-            (1 - it / max) * (rectF.height() - amountBottomMargin) +
+            (1 - it.amount / max.amount) * (rectF.height() - amountBottomMargin) +
                 (rectF.top + amountLabelHeight)
         }.withIndex()
     ) {
@@ -68,7 +69,7 @@ internal fun Canvas.drawBarChartWithAmountLabels(
             barCornerRadius,
             betweenMargin,
             barPaint,
-            AmountLabel(amountLabels[index], amountBottomMargin, amountLabelPaint)
+            AmountLabel(data[index].amountLabel, amountBottomMargin, amountLabelPaint)
         )
     }
 }
