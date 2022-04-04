@@ -142,11 +142,11 @@ class AccountDetailsEditViewModel@Inject constructor(
             accountRepository.updateAccountState(
                 UpdateAccountDescriptor(
                     id = accountValue.data.id,
-                    excluded = editedData.data.isExcluded,
                     favored = editedData.data.isFavored,
                     name = editedData.data.name,
                     ownership = ownershipPart,
-                    type = editedData.data.type
+                    type = editedData.data.type,
+                    accountExclusion = editedData.data.isExcluded,
                 )
             )
         }
