@@ -78,7 +78,7 @@ internal class AccountDetailsFragment : BaseFragment() {
         transactionListViewModel.setListMode(metadata.toListMode())
 
         transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
-        accountDetailsAdapter= ConcatAdapter(accountHeaderAdapter, transactionsAdapter)
+        accountDetailsAdapter = ConcatAdapter(accountHeaderAdapter, transactionsAdapter)
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {

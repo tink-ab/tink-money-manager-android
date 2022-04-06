@@ -3,6 +3,8 @@
   <string name="tink_snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
   <string name="tink_onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
+  <string name="tink_changes_saved">Changes saved</string>
+
   <string name="tink_date_format_human_today">Today</string>
   <string name="tink_date_format_human_yesterday">Yesterday</string>
   <string name="tink_date_format_human_tomorrow">Tomorrow</string>
