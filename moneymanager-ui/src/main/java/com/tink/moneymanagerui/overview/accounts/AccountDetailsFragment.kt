@@ -16,13 +16,15 @@ import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
+import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
-import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -108,7 +110,10 @@ internal class AccountDetailsFragment : BaseFragment() {
         transactionListViewModel.loading.observe(
             viewLifecycleOwner,
             Observer { loading ->
-                view.loader.visibility = if (loading) View.VISIBLE else View.GONE
+                view.loader.visibleIf { loading }
+                if (loading) {
+                    noTransactionsText.visibility = View.GONE
+                }
             }
         )
 
@@ -116,6 +121,7 @@ internal class AccountDetailsFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 transactionsAdapter.setTransactionItems(it.transactions)
+                noTransactionsText.visibleIf { it.transactions.isEmpty() }
             }
         )
     }
@@ -123,7 +129,6 @@ internal class AccountDetailsFragment : BaseFragment() {
     private fun setupViews() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
-        recyclerView.setHasFixedSize(true)
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
         accountDetailsAdapter.addAdapter(transactionsAdapter)
