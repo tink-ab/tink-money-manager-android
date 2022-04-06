@@ -39,7 +39,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     private val accountHeaderAdapter = AccountHeaderAdapter()
     private lateinit var transactionsAdapter: TransactionItemListAdapter
-    private val accountDetailsAdapter = ConcatAdapter(accountHeaderAdapter)
+    private lateinit var accountDetailsAdapter: ConcatAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
@@ -76,6 +76,9 @@ internal class AccountDetailsFragment : BaseFragment() {
             accountId = accountId
         )
         transactionListViewModel.setListMode(metadata.toListMode())
+
+        transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
+        accountDetailsAdapter= ConcatAdapter(accountHeaderAdapter, transactionsAdapter)
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,7 +126,6 @@ internal class AccountDetailsFragment : BaseFragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
-        transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
         accountDetailsAdapter.addAdapter(transactionsAdapter)
 
         transactionsAdapter.onTransactionItemClickedListener = { id ->
