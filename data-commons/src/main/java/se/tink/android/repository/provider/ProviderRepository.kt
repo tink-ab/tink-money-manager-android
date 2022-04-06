@@ -1,6 +1,7 @@
 package se.tink.android.repository.provider
 
 import androidx.lifecycle.LiveData
+import com.tink.annotations.PfmScope
 import com.tink.service.network.ErrorState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 import se.tink.android.livedata.AutoFetchLiveData
 import javax.inject.Inject
 
+@PfmScope
 class ProviderRepository @Inject constructor(
     private val providerService: ProviderService,
 

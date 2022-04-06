@@ -19,6 +19,7 @@ import com.tink.service.network.map
 import se.tink.android.livedata.map
 import se.tink.android.repository.account.AccountRepository
 import se.tink.android.repository.provider.ProviderRepository
+import se.tink.commons.extensions.whenNonNull
 import javax.inject.Inject
 
 internal class AccountsViewModel @Inject constructor(
@@ -34,13 +35,15 @@ internal class AccountsViewModel @Inject constructor(
     val accountsWithImageState: LiveData<ResponseState<List<AccountWithImage>>> =
         MediatorLiveData<ResponseState<List<AccountWithImage>>>().apply {
             fun update() {
-                postValue(
-                    mapState(accountsState.value, _accountIdToImageState.value) { accounts, idToImage ->
-                        accounts.map { account ->
-                            AccountWithImage(account, idToImage[account.financialInstitutionID])
+                whenNonNull(accountsState.value, _accountIdToImageState.value) { accountsStateValue, accountIdToImageStateValue ->
+                    postValue(
+                        mapState(accountsStateValue, accountIdToImageStateValue) { accounts, idToImage ->
+                            accounts.map { account ->
+                                AccountWithImage(account, idToImage[account.financialInstitutionID])
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
 
             addSource(accountsState) { update() }
