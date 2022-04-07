@@ -94,6 +94,7 @@ class AccountDetailsEditFragment : BaseFragment() {
         viewModel.isUpdating.observe(viewLifecycleOwner) { isUpdating ->
             if (isUpdating) {
                 Toast.makeText(context, R.string.tink_changes_saved, Toast.LENGTH_LONG).show()
+                fragmentCoordinator.popBackStack()
             }
         }
     }
