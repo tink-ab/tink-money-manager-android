@@ -100,9 +100,8 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     fun updateBudgetAmount(amountString: String) {
         amountTextWatcher.value?.let { amountTextWatcher ->
-            amountTextWatcher.getAmountFromText(amountString)?.let { amount ->
-                dataHolder.amount.postValue(amount)
-            }
+            val amount = amountTextWatcher.getAmountFromText(amountString)
+            dataHolder.amount.postValue(amount)
         }
     }
 
