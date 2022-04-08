@@ -77,9 +77,10 @@ internal class BudgetSelectionControllerState(
     }
 
     private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
-        budgetPeriods.removeAll(periods.toSet())
-        budgetPeriods.addAll(periods)
-        return budgetPeriods
+        return budgetPeriods.apply {
+            clear()
+            addAll(periods)
+        }
     }
 
     private val _currentSelectedPeriodMutable = MutableLiveData<BudgetPeriod>()
