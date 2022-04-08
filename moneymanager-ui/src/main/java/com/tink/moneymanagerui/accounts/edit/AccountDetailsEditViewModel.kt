@@ -48,7 +48,7 @@ class AccountDetailsEditViewModel@Inject constructor(
     val editedFavorite: MutableLiveData<Boolean> = MutableLiveData(false)
     val editedShared: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun update() {

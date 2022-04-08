@@ -106,6 +106,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_category_default_child_format` | %s - Other |
 | `tink_category_list_fragment_button_text` | Select |
+| `tink_changes_saved` | Changes saved |
 | `tink_choose_category_text` | Choose category |
 | `tink_clear_text_description` | Clear text |
 | `tink_date_format_human_today` | Today |
