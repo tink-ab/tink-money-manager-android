@@ -43,7 +43,7 @@ internal class AccountsOverviewListFragment : BaseFragment() {
             navigateToAllAccounts()
         }
 
-        emptyStateSeeAllActions.setOnClickListener {
+        noFavoriteAccountsCard.setOnClickListener {
             navigateToAllAccounts()
         }
 
