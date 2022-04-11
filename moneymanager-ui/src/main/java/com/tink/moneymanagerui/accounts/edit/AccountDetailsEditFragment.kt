@@ -200,11 +200,15 @@ class AccountDetailsEditFragment : BaseFragment() {
             requireContext(),
             requireContext().getThemeResIdFromAttr(R.attr.tink_alertDialogStyle)
         )
-            .setMessage(getString(R.string.tink_accounts_edit_unsaved_changes))
-            .setPositiveButton(R.string.tink_continue) { _, _ -> }
-            .setNegativeButton(R.string.tink_discard) { _, _ ->
+            .setTitle(R.string.tink_accounts_edit_unsaved_changes_title)
+            .setMessage(getString(R.string.tink_accounts_edit_unsaved_changes_message))
+            .setPositiveButton(R.string.tink_accounts_edit_unsaved_changes_yes_discard) { _, _ ->
                 fragmentCoordinator.popBackStack()
-            }.setOnKeyListener { dialog, keyCode, _ ->
+            }
+            .setNegativeButton(R.string.tink_accounts_edit_unsaved_changes_no_save) { _, _ ->
+                viewModel.uppdateAccount()
+            }
+            .setOnKeyListener { dialog, keyCode, _ ->
                 return@setOnKeyListener onSaveBeforeExitDialogKeyPress(keyCode, dialog)
             }
             .show()

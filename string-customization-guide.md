@@ -32,7 +32,10 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_field_type` | Account type |
 | `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_edit_title` | Accont details |
-| `tink_accounts_edit_unsaved_changes` | You have unsaved changes |
+| `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
+| `tink_accounts_edit_unsaved_changes_no_save` | No, save |
+| `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
 | `tink_accounts_edit` | Edit accont |
 | `tink_accounts_error` | No accounts available |
 | `tink_accounts_type_checking` | Checking | 
@@ -110,11 +113,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_changes_saved` | Changes saved |
 | `tink_choose_category_text` | Choose category |
 | `tink_clear_text_description` | Clear text |
-| `tink_continue` | Continue |
 | `tink_date_format_human_today` | Today |
 | `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_date_format_human_yesterday` | Yesterday |
-| `tink_discard` | Discard |
 | `tink_everyday_account` | Everyday accounts |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |

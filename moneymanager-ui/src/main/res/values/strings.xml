@@ -43,7 +43,10 @@
   <string name="tink_accounts_error">No accounts available</string>
   <string name="tink_accounts_edit">Edit accont</string>
   <string name="tink_accounts_edit_title">Account details</string>
-  <string name="tink_accounts_edit_unsaved_changes">You have unsaved changes</string>
+  <string name="tink_accounts_edit_unsaved_changes_title">You have unsaved changes</string>
+  <string name="tink_accounts_edit_unsaved_changes_message">Want to discard the changes you haven’t saved?</string>
+  <string name="tink_accounts_edit_unsaved_changes_no_save">No, save</string>
+  <string name="tink_accounts_edit_unsaved_changes_yes_discard">Yes, discard</string>
   <string name="tink_accounts_edit_field_name_header">Account name</string>
   <string name="tink_accounts_edit_field_name_description">Original description: Sturehof</string>
   <string name="tink_accounts_edit_field_type_header">Account type</string>
