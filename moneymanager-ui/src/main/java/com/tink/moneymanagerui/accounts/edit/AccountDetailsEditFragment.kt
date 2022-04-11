@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProviders
@@ -58,7 +59,7 @@ class AccountDetailsEditFragment : BaseFragment() {
 
         title = getString(R.string.tink_accounts_edit_title)
 
-        setEnabledFields(viewModel.enableFields)
+        setVisibleFields(viewModel.enableFields)
 
         viewModel.accountDetailsEditData.observe(viewLifecycleOwner) { state ->
             loader.visibleIf { state is LoadingState }
@@ -88,6 +89,13 @@ class AccountDetailsEditFragment : BaseFragment() {
 
         viewModel.saveButtonEnabled.observe(viewLifecycleOwner) { isEnabled ->
             saveButton.isEnabled = isEnabled
+        }
+
+        viewModel.isUpdating.observe(viewLifecycleOwner) { isUpdating ->
+            if (isUpdating) {
+                Toast.makeText(context, R.string.tink_changes_saved, Toast.LENGTH_LONG).show()
+                fragmentCoordinator.popBackStack()
+            }
         }
     }
 
@@ -168,19 +176,19 @@ class AccountDetailsEditFragment : BaseFragment() {
         }
     }
 
-    private fun setEnabledFields(enabledFields: List<EditAccountField>) {
-        nameInputLayout.isEnabled = enabledFields.contains(EditAccountField.NAME)
+    private fun setVisibleFields(enabledFields: List<EditAccountField>) {
+        nameInputLayout.visibleIf { enabledFields.contains(EditAccountField.NAME) }
 
-        typeInputLayout.isEnabled = enabledFields.contains(EditAccountField.KIND)
+        typeInputLayout.visibleIf { enabledFields.contains(EditAccountField.KIND) }
 
-        includedSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_INCLUDED)
-        includedContainer.isEnabled = enabledFields.contains(EditAccountField.IS_INCLUDED)
+        includedSwitch.visibleIf { enabledFields.contains(EditAccountField.IS_INCLUDED) }
+        includedContainer.visibleIf { enabledFields.contains(EditAccountField.IS_INCLUDED) }
 
-        favoriteSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_FAVORITE)
-        favoriteContainer.isEnabled = enabledFields.contains(EditAccountField.IS_FAVORITE)
+        favoriteSwitch.visibleIf { enabledFields.contains(EditAccountField.IS_FAVORITE) }
+        favoriteContainer.visibleIf { enabledFields.contains(EditAccountField.IS_FAVORITE) }
 
-        sharedSwitch.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
-        sharedContainer.isEnabled = enabledFields.contains(EditAccountField.IS_SHARED)
+        sharedSwitch.visibleIf { enabledFields.contains(EditAccountField.IS_SHARED) }
+        sharedContainer.visibleIf { enabledFields.contains(EditAccountField.IS_SHARED) }
     }
 
     override fun getScreenEvent() = ScreenEvent.ACCOUNT_EDIT

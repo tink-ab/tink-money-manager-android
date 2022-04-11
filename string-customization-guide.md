@@ -106,6 +106,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_category_default_child_format` | %s - Other |
 | `tink_category_list_fragment_button_text` | Select |
+| `tink_changes_saved` | Changes saved |
 | `tink_choose_category_text` | Choose category |
 | `tink_clear_text_description` | Clear text |
 | `tink_date_format_human_today` | Today |
@@ -165,6 +166,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_selector_over_time` | Over time |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
+| `tink_transactions_error` | You haven\'t made any transactions yet |
 | `tink_transaction_similar_button_accept_text` | Assign %1$d selected |
 | `tink_transaction_similar_button_skip_text` | Skip |
 | `tink_transaction_similar_description` | Do you also want to assign these transactions to the %1$s category? |
