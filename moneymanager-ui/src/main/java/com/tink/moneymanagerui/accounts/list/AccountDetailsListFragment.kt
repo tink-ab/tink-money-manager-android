@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.extensions.visibleIf
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState

@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +8,9 @@ import com.tink.moneymanagerui.R
 import kotlinx.android.synthetic.main.tink_item_account_header.view.*
 import se.tink.commons.extensions.inflate
 
-internal class AccountHeaderAdapter : ListAdapter<AccountInformation, AccountHeaderViewHolder>(AccountInformationDiffUtil) {
+internal class AccountHeaderAdapter : ListAdapter<AccountInformation, AccountHeaderViewHolder>(
+    AccountInformationDiffUtil
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountHeaderViewHolder {
         return AccountHeaderViewHolder(parent)
     }

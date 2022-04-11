@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts
 
 import com.tink.model.account.Account
 

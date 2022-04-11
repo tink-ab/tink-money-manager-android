@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.overview.accounts.AccountWithImage
+import com.tink.moneymanagerui.accounts.AccountWithImage
 import com.tink.moneymanagerui.overview.accounts.setImageResFromAttr
 import com.tink.moneymanagerui.util.CurrencyUtils
 import com.tink.moneymanagerui.util.ImageUtils

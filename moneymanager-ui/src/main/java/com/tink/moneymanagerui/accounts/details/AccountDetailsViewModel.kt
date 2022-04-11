@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -15,7 +15,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.fragments.OverviewInsightsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountsListFragment
+import com.tink.moneymanagerui.overview.accounts.AccountsOverviewListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
 import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsFragment
 import com.tink.moneymanagerui.tracking.ScreenEvent
@@ -68,7 +68,7 @@ internal class OverviewFragment : BaseFragment() {
                 childFragmentManager.transaction {
                     replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
-                        AccountsListFragment()
+                        AccountsOverviewListFragment()
                     )
                 }
             }

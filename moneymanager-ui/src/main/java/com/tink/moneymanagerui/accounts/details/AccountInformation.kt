@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact

@@ -7,14 +7,16 @@ import androidx.lifecycle.ViewModelProviders
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.accounts.list.AccountDetailsListFragment
+import com.tink.moneymanagerui.accounts.list.AccountsViewModel
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
 
-internal class AccountsListFragment : BaseFragment() {
+internal class AccountsOverviewListFragment : BaseFragment() {
     override fun getLayoutId(): Int = R.layout.tink_fragment_accounts_list
     override fun needsLoginToBeAuthorized(): Boolean = true
 
@@ -33,7 +35,7 @@ internal class AccountsListFragment : BaseFragment() {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
         accountList.apply {
-            layoutManager = AccountLayoutManager(context)
+            layoutManager = AccountOverviewLayoutManager(context)
             adapter = accountListAdapter
         }
 

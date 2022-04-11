@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -6,12 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.accounts.AccountGroupable
-import com.tink.moneymanagerui.accounts.list.AccountGroup
-import com.tink.moneymanagerui.accounts.list.EVERYDAY_ACCOUNTS
-import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
-import com.tink.moneymanagerui.accounts.list.LOANS_ACCOUNTS
-import com.tink.moneymanagerui.accounts.list.OTHER_ACCOUNTS
-import com.tink.moneymanagerui.accounts.list.SAVINGS_ACCOUNTS
+import com.tink.moneymanagerui.accounts.AccountWithImage
 import com.tink.moneymanagerui.extensions.mapState
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
