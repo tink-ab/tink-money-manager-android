@@ -30,7 +30,10 @@ data class AccountDetailsEditData(
 class AccountDetailsEditViewModel@Inject constructor(
     private val accountRepository: AccountRepository
 ) : ViewModel() {
+
     private val accountId: MutableLiveData<String> = MutableLiveData()
+
+    private var initialState: AccountDetailsEditData? = null
 
     fun setAccountId(id: String) {
         accountId.postValue(id)
@@ -50,17 +53,6 @@ class AccountDetailsEditViewModel@Inject constructor(
 
     val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        fun update() {
-            whenNonNull(editedNameText.value, isUpdating.value) { editedNameText, isUpdating ->
-                value = editedNameText.isNotBlank() && !isUpdating
-            }
-        }
-
-        addSource(editedNameText) { update() }
-        addSource(isUpdating) { update() }
-    }
-
     val accountDetailsEditData: LiveData<ResponseState<AccountDetailsEditData>> =
         MediatorLiveData<ResponseState<AccountDetailsEditData>>().apply {
             value = LoadingState
@@ -76,13 +68,19 @@ class AccountDetailsEditViewModel@Inject constructor(
                     editedFavorite.postValue(account.favored)
                     editedShared.postValue(isShared)
 
-                    AccountDetailsEditData(
+                    val newState = AccountDetailsEditData(
                         name = account.name,
                         type = account.type,
                         isExcluded = account.excluded,
                         isFavored = account.favored,
                         isShared = isShared
                     )
+
+                    if (initialState == null)  {
+                        initialState = newState
+                    }
+
+                    newState
                 }
                 isUpdating.postValue(false)
             }
@@ -127,6 +125,33 @@ class AccountDetailsEditViewModel@Inject constructor(
                 }
             }
         }
+
+    val hasMadeChanges: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun update() {
+            whenNonNull(accountDetailsEditData.value, initialState) { accountDetailsEditData, initialState ->
+                val e = initialState.equals(accountDetailsEditData)
+                value = accountDetailsEditData is SuccessState &&
+                        initialState != accountDetailsEditData.data
+            }
+        }
+
+        addSource(accountDetailsEditData) { update() }
+    }
+
+    val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun update() {
+            whenNonNull(editedNameText.value, isUpdating.value, hasMadeChanges.value) {
+                    editedNameText,
+                    isUpdating,
+                    hasMadeChanges ->
+                value = editedNameText.isNotBlank() && !isUpdating && hasMadeChanges
+            }
+        }
+
+        addSource(editedNameText) { update() }
+        addSource(isUpdating) { update() }
+        addSource(hasMadeChanges) { update() }
+    }
 
     fun uppdateAccount() {
         val accountValue = account.value

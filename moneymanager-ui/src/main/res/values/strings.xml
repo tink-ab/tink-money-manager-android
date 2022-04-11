@@ -26,6 +26,8 @@
 
   <string name="tink_all_categories">All categories</string>
 
+
+
   <string name="tink_overview_statistics_error">No statistics</string>
   <string name="tink_overview_accounts_error">No accounts</string>
 
@@ -41,6 +43,7 @@
   <string name="tink_accounts_error">No accounts available</string>
   <string name="tink_accounts_edit">Edit accont</string>
   <string name="tink_accounts_edit_title">Account details</string>
+  <string name="tink_accounts_edit_unsaved_changes">You have unsaved changes</string>
   <string name="tink_accounts_edit_field_name_header">Account name</string>
   <string name="tink_accounts_edit_field_name_description">Original description: Sturehof</string>
   <string name="tink_accounts_edit_field_type_header">Account type</string>
@@ -225,5 +228,7 @@
   <string name="tink_next_month_description">Next month</string>
 
   <string name="tink_search_label">Search</string>
+  <string name="tink_continue">Continue</string>
+  <string name="tink_discard">Discard</string>
 
 </resources>
