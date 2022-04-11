@@ -3,15 +3,14 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="wrap_content">
 
   <androidx.cardview.widget.CardView
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginBottom="16dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="12dp"
     android:backgroundTint="?tink_cardBackgroundColor"
     app:cardCornerRadius="8dp">
 
@@ -59,27 +58,27 @@
         android:id="@+id/budgetsEmptyIcon"
         android:layout_width="@dimen/tink_add_budget_icon_width"
         android:layout_height="@dimen/tink_add_budget_icon_height"
-        android:layout_marginTop="20dp"
-        android:scaleType="fitXY"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="?attr/tink_createBudgetIconBackgroundColor"
+        android:clickable="true"
+        android:contentDescription="@string/tink_budget_create_button"
+        android:focusable="true"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="?attr/tink_createBudgetIconShapeStyle"
         app:srcCompat="?attr/tink_icon_add_button"
-        app:tint="?attr/tink_createBudgetIconColor"
-        android:contentDescription="@string/tink_budget_create_button"
-        android:background="?attr/tink_createBudgetIconBackgroundColor"
-        app:shapeAppearance="?attr/tink_createBudgetIconShapeStyle" />
+        app:tint="?attr/tink_createBudgetIconColor" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/emptyCreateNewButton"
         style="?attr/tink_textButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/tink_overview_budgets_empty_create_new"
@@ -87,21 +86,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/budgetsEmptyIcon"
-        tools:text="Create New Budget"/>
+        tools:text="Create New Budget" />
 
       <androidx.constraintlayout.widget.Group
         android:id="@+id/budgetsOverviewContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="title, newBudgetButton, budgetsOverviewList"/>
+        app:constraint_referenced_ids="title, newBudgetButton, budgetsOverviewList" />
 
       <androidx.constraintlayout.widget.Group
         android:id="@+id/budgetsEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="budgetsEmptyIcon, emptyCreateNewButton"/>
+        app:constraint_referenced_ids="budgetsEmptyIcon, emptyCreateNewButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

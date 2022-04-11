@@ -61,11 +61,10 @@ internal class LatestTransactionsFragment : BaseFragment() {
 
         // TODO: Remove this and instead have latestTransactions use ResponseState
         viewModel.categoriesState.observe(
-            viewLifecycleOwner,
-            {
-                card.visibleIf { it is SuccessState }
-            }
-        )
+            viewLifecycleOwner
+        ) {
+            card.visibleIf { it is SuccessState }
+        }
 
         viewModel.latestTransactions.observe(
             viewLifecycleOwner,
@@ -78,7 +77,7 @@ internal class LatestTransactionsFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer { hasTransactions ->
                 TransitionManager.beginDelayedTransition(view as ViewGroup)
-                mainContent.visibility = if (hasTransactions) View.VISIBLE else View.GONE
+                card.visibility = if (hasTransactions) View.VISIBLE else View.GONE
             }
         )
 
