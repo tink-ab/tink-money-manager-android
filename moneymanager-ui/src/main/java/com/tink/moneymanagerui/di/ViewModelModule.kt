@@ -1,10 +1,10 @@
 package com.tink.moneymanagerui.di
 
 import androidx.lifecycle.ViewModel
+import com.tink.moneymanagerui.accounts.details.AccountDetailsViewModel
 import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditViewModel
+import com.tink.moneymanagerui.accounts.list.AccountsViewModel
 import com.tink.moneymanagerui.overview.OverviewChartViewModel
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsViewModel
-import com.tink.moneymanagerui.overview.accounts.AccountsViewModel
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewViewModel
 import com.tink.moneymanagerui.overview.charts.CategorySelectionViewModel
 import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel

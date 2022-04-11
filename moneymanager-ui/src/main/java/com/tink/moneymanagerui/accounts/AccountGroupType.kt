@@ -2,8 +2,7 @@ package com.tink.moneymanagerui.accounts
 
 import android.os.Parcelable
 import com.tink.moneymanagerui.accounts.list.GroupedAccountsItem
-import com.tink.moneymanagerui.overview.accounts.AccountWithImage
-import com.tink.moneymanagerui.overview.accounts.toAccountGroup
+import com.tink.moneymanagerui.accounts.list.toAccountGroup
 import kotlinx.android.parcel.Parcelize
 
 sealed class AccountGroupType(val areAccountsGrouped: Boolean) : Parcelable

@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.AccountWithImage
 import com.tink.moneymanagerui.util.ImageUtils
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_overview_account.view.*

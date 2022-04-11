@@ -1,4 +1,4 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import android.os.Bundle
 import android.view.MenuItem

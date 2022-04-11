@@ -1,5 +1,6 @@
 package com.tink.moneymanagerui.di
 
+import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
 import com.tink.moneymanagerui.accounts.list.AccountDetailsListFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
@@ -14,8 +15,7 @@ import com.tink.moneymanagerui.insights.fragments.InsightsFragment
 import com.tink.moneymanagerui.insights.fragments.OverviewInsightsFragment
 import com.tink.moneymanagerui.overview.OverviewChartFragment
 import com.tink.moneymanagerui.overview.OverviewFragment
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountsListFragment
+import com.tink.moneymanagerui.overview.accounts.AccountsOverviewListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
 import com.tink.moneymanagerui.overview.charts.CategorySelectionFragment
 import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
@@ -60,7 +60,7 @@ internal interface FragmentBindingModule {
     fun overviewFragment(): OverviewFragment
 
     @ContributesAndroidInjector
-    fun accountsListFragment(): AccountsListFragment
+    fun accountsListFragment(): AccountsOverviewListFragment
 
     @ContributesAndroidInjector
     fun accountListFragment(): AccountDetailsListFragment

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
 import com.tink.moneymanagerui.util.ScreenUtils
 
-internal class AccountLayoutManager(context: Context) : LinearLayoutManager(context, HORIZONTAL, false) {
+internal class AccountOverviewLayoutManager(context: Context) : LinearLayoutManager(context, HORIZONTAL, false) {
 
     private val standardWidth: Int = ScreenUtils.getScreenMetrics(context).widthPixels / 2 -
             ScreenUtils.getScreenMetrics(context).widthPixels / 12
