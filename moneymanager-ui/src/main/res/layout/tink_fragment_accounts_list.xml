@@ -1,110 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="8dp">
-
-  <androidx.appcompat.widget.AppCompatTextView
-    android:id="@+id/accounts_error_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="14sp"
-    android:layout_gravity="center"
-    android:visibility="gone"
-    android:text="@string/tink_overview_accounts_error" />
-
-  <androidx.appcompat.widget.LinearLayoutCompat
-      android:id="@+id/accountsHeader"
-      android:visibility="gone"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical" >
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-      <TextView
-          android:id="@+id/accountsTitle"
-          style="@style/tink_h2"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:layout_marginStart="40dp"
-          android:text="@string/tink_overview_highlighted_accounts_title" />
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/seeAllAccounts"
-          style="?attr/tink_textButtonStyle"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginEnd="28dp"
-          android:text="@string/tink_overview_favorite_accounts_see_all" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/accountList"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp" />
-
-  </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <androidx.cardview.widget.CardView
-      android:id="@+id/noFavoriteAccountsCard"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:visibility="gone"
-      android:layout_marginStart="24dp"
-      android:layout_marginTop="16dp"
-      android:layout_marginEnd="24dp"
-      android:layout_marginBottom="16dp"
-      android:backgroundTint="?tink_cardBackgroundColor"
-      app:cardCornerRadius="8dp">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-      <com.google.android.material.imageview.ShapeableImageView
-          android:id="@+id/accountIcon"
-          android:layout_width="@dimen/tink_category_icon_size"
-          android:layout_height="@dimen/tink_category_icon_size"
-          android:layout_marginTop="16dp"
-          android:scaleType="center"
-          android:tint="?tink_accountIconColor"
-          android:background="?tink_accountIconBackgroundColor"
-          app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
-          android:src="?tink_icon_account" />
-
-      <com.google.android.material.button.MaterialButton
-          android:id="@+id/emptyStateSeeAllActions"
-          style="?attr/tink_textButtonStyle"
-          android:textColor="?tink_accountTextColor"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/tink_overview_favorite_accounts_see_all_accounts" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-  </androidx.cardview.widget.CardView>
+    android:background="?attr/tink_backgroundColor">
 
   <FrameLayout
-    android:id="@+id/loader"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+      android:id="@+id/accountsNotGroupedRoot"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/allAccountsList"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/accountErrorText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      style="@style/tink_hecto"
+      android:text="@string/tink_accounts_error" />
 
     <include
+      android:id="@+id/accountsProgressBar"
       layout="@layout/tink_loader_spinner"
-      android:visibility="visible" />
+      android:visibility="visible"/>
 
   </FrameLayout>
 
+  <FrameLayout
+      android:id="@+id/accountsGroupedRoot"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/groupedAccountsList"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:visibility="gone" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/groupedAccountErrorText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      style="@style/tink_hecto"
+      android:text="@string/tink_accounts_error" />
+
+    <include
+      android:id="@+id/groupedAccountsProgressBar"
+      layout="@layout/tink_loader_spinner"
+      android:visibility="visible"/>
+
+  </FrameLayout>
 </FrameLayout>

@@ -15,9 +15,9 @@ import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
-import kotlinx.android.synthetic.main.tink_fragment_all_accounts_list.*
+import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
 
-class AccountDetailsListFragment : BaseFragment() {
+class AccountListFragment : BaseFragment() {
 
     private lateinit var viewModel: AccountsViewModel
 
@@ -76,7 +76,7 @@ class AccountDetailsListFragment : BaseFragment() {
 
     override fun hasToolbar(): Boolean = true
 
-    override fun getLayoutId() = R.layout.tink_fragment_all_accounts_list
+    override fun getLayoutId() = R.layout.tink_fragment_accounts_list
 
     override fun needsLoginToBeAuthorized(): Boolean = true
 
