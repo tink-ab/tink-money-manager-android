@@ -32,6 +32,10 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_field_type` | Account type |
 | `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_edit_title` | Accont details |
+| `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
+| `tink_accounts_edit_unsaved_changes_no_save` | No, save |
+| `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
 | `tink_accounts_edit` | Edit accont |
 | `tink_accounts_error` | No accounts available |
 | `tink_accounts_type_checking` | Checking | 

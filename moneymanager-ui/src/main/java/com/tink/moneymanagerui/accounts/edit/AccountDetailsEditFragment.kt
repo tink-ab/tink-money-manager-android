@@ -1,13 +1,16 @@
 package com.tink.moneymanagerui.accounts.edit
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputType
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
@@ -19,6 +22,7 @@ import com.tink.moneymanagerui.util.SoftKeyboardUtils
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_account_details_edit.*
+import se.tink.commons.extensions.getThemeResIdFromAttr
 
 class AccountDetailsEditFragment : BaseFragment() {
     private val accountId: String by lazy { requireNotNull(arguments?.getString(ACCOUNT_ID_ARGS)) }
@@ -127,7 +131,7 @@ class AccountDetailsEditFragment : BaseFragment() {
             }
         }
 
-        typeInputText.doOnTextChanged { text, _, _, _ ->
+        typeInputText.doOnTextChanged { _, _, _, _ ->
             val accountType = accountTypeToNameList.find {
                 it.second == typeInputText.text.toString()
             }?.first ?: Account.Type.UNKNOWN
@@ -189,6 +193,46 @@ class AccountDetailsEditFragment : BaseFragment() {
 
         sharedSwitch.visibleIf { enabledFields.contains(EditAccountField.IS_SHARED) }
         sharedContainer.visibleIf { enabledFields.contains(EditAccountField.IS_SHARED) }
+    }
+
+    private fun showSaveBeforeExitDialog() {
+        MaterialAlertDialogBuilder(
+            requireContext(),
+            requireContext().getThemeResIdFromAttr(R.attr.tink_alertDialogStyle)
+        )
+            .setTitle(R.string.tink_accounts_edit_unsaved_changes_title)
+            .setMessage(getString(R.string.tink_accounts_edit_unsaved_changes_message))
+            .setPositiveButton(R.string.tink_accounts_edit_unsaved_changes_yes_discard) { _, _ ->
+                fragmentCoordinator.popBackStack()
+            }
+            .setNegativeButton(R.string.tink_accounts_edit_unsaved_changes_no_save) { _, _ ->
+                viewModel.uppdateAccount()
+            }
+            .setOnKeyListener { dialog, keyCode, _ ->
+                return@setOnKeyListener onSaveBeforeExitDialogKeyPress(keyCode, dialog)
+            }
+            .show()
+    }
+
+    private fun onSaveBeforeExitDialogKeyPress(
+        keyCode: Int,
+        dialog: DialogInterface
+    ): Boolean {
+        val isBackPress = keyCode == KeyEvent.KEYCODE_BACK
+        if (isBackPress) {
+            dialog.dismiss()
+            fragmentCoordinator.popBackStack()
+        }
+        return isBackPress
+    }
+
+    override fun onBackPressed(): Boolean {
+        return if (viewModel.hasMadeChanges.value == true) {
+            showSaveBeforeExitDialog()
+            true
+        } else {
+            false
+        }
     }
 
     override fun getScreenEvent() = ScreenEvent.ACCOUNT_EDIT
