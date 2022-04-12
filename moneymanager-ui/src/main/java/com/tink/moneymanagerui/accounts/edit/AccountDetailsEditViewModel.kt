@@ -129,7 +129,6 @@ class AccountDetailsEditViewModel@Inject constructor(
     val hasMadeChanges: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun update() {
             whenNonNull(accountDetailsEditData.value, initialState) { accountDetailsEditData, initialState ->
-                val e = initialState.equals(accountDetailsEditData)
                 value = accountDetailsEditData is SuccessState &&
                         initialState != accountDetailsEditData.data
             }
