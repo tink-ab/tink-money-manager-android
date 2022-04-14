@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <androidx.appcompat.widget.AppCompatTextView
+    android:id="@+id/accounts_error_text"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="@string/tink_overview_accounts_error"
+    android:textSize="14sp"
+    android:visibility="gone"
+    tools:visibility="gone" />
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/accountsHeader"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="gone">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingHorizontal="32dp">
+
+      <TextView
+        android:id="@+id/accountsTitle"
+        style="@style/tink_h2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tink_overview_highlighted_accounts_title" />
+
+      <View
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_weight="1" />
+
+      <com.google.android.material.button.MaterialButton
+        android:id="@+id/seeAllAccounts"
+        style="?attr/tink_textButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tink_overview_favorite_accounts_see_all" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/accountList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:clipToPadding="false"
+      android:paddingHorizontal="8dp"
+      android:paddingTop="4dp"
+      android:paddingBottom="12dp"
+      tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/tink_item_overview_account"
+      tools:orientation="horizontal" />
+
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/noFavoriteAccountsCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="12dp"
+    android:background="@drawable/tink_standalone_button_white_selector_stroke"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingVertical="20dp"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <com.google.android.material.imageview.ShapeableImageView
+      android:id="@+id/accountIcon"
+      android:layout_width="@dimen/tink_category_icon_size"
+      android:layout_height="@dimen/tink_category_icon_size"
+      android:background="?tink_accountIconBackgroundColor"
+      android:scaleType="center"
+      android:src="?tink_icon_account"
+      android:tint="?tink_accountIconColor"
+      app:shapeAppearance="?attr/tink_categoryIconShapeStyle" />
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/emptyStateSeeAllActions"
+      style="?attr/tink_textButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/tink_overview_favorite_accounts_see_all_accounts"
+      android:textColor="?tink_accountTextColor" />
+
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <FrameLayout
+    android:id="@+id/loader"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+      layout="@layout/tink_loader_spinner"
+      android:visibility="visible"
+      tools:visibility="gone" />
+
+  </FrameLayout>
+
+</FrameLayout>

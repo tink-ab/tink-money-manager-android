@@ -16,13 +16,13 @@ import com.tink.moneymanagerui.transaction.StatusSubtitleMode
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.service.network.SuccessState
-import kotlinx.android.synthetic.main.tink_fragment_latest_transactions.*
+import kotlinx.android.synthetic.main.tink_fragment_overview_latest_transactions.*
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
 
-internal class LatestTransactionsFragment : BaseFragment() {
-    override fun getLayoutId(): Int = R.layout.tink_fragment_latest_transactions
+internal class LatestTransactionsOverviewFragment : BaseFragment() {
+    override fun getLayoutId(): Int = R.layout.tink_fragment_overview_latest_transactions
     override fun needsLoginToBeAuthorized(): Boolean = true
 
     @Inject

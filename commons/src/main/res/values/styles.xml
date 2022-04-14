@@ -59,7 +59,7 @@
 
     <item name="tink_accountIconColor">?tink_uncategorizedLightColor</item>
     <item name="tink_accountIconBackgroundColor">?tink_colorAccent</item>
-    <item name="tink_accountTextColor">?tink_accountIconColor</item>
+    <item name="tink_accountTextColor">?tink_colorAccent</item>
 
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
