@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
@@ -21,11 +20,11 @@ class AccountListFragment : BaseFragment() {
 
     private lateinit var viewModel: AccountsViewModel
 
-    private val accountsAdapter = NotGroupedAccountList {
+    private val accountsAdapter = NotGroupedAccountListAdapter {
         fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
     }
 
-    private val groupedAccountsAdapter = GroupedAccountList {
+    private val groupedAccountsAdapter = GroupedAccountListAdapter {
         fragmentCoordinator.replace(AccountDetailsFragment.newInstance(it.id))
     }
 
@@ -44,7 +43,6 @@ class AccountListFragment : BaseFragment() {
 
         allAccountsList.layoutManager = LinearLayoutManager(context)
         allAccountsList.adapter = accountsAdapter
-        allAccountsList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
         groupedAccountsList.adapter = groupedAccountsAdapter

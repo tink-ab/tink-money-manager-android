@@ -11,8 +11,8 @@ import com.tink.moneymanagerui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.tink_grouped_item_account.view.*
 import se.tink.commons.extensions.inflate
 
-class GroupedAccountList(val accountClicked: (Account) -> Unit) :
-    ListAdapter<GroupedAccountsItem, GroupedAccountList.GroupedAccountViewHolder>(AccountGroupDiffUtil) {
+class GroupedAccountListAdapter(val accountClicked: (Account) -> Unit) :
+    ListAdapter<GroupedAccountsItem, GroupedAccountListAdapter.GroupedAccountViewHolder>(AccountGroupDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupedAccountViewHolder {
         return GroupedAccountViewHolder(parent.inflate(R.layout.tink_grouped_item_account))
@@ -28,7 +28,9 @@ class GroupedAccountList(val accountClicked: (Account) -> Unit) :
             itemView.accountKindText.text = itemView.context.getString(groupedAccounts.accountGroup.description)
             itemView.accountBalanceSumText.text = CurrencyUtils.formatCurrencyExact(groupedAccounts.totalBalance)
 
-            val accountsAdapter = NotGroupedAccountList { account ->
+            val accountsAdapter = NotGroupedAccountListAdapter(
+                itemBackgroundAttributeId = R.attr.tink_cardBackgroundColor
+            ) { account ->
                 accountClicked(account)
             }
 
