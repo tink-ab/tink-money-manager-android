@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-./gradlew assemble --stacktrace --info
+./gradlew commons:assemble data-commons:assemble moneymanager-ui:assemble

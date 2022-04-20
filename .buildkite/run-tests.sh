@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-./gradlew test
+./gradlew commons:test data-commons:test moneymanager-ui:test
