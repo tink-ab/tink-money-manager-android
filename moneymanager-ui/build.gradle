@@ -9,8 +9,8 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "30.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     buildFeatures {
         viewBinding true
