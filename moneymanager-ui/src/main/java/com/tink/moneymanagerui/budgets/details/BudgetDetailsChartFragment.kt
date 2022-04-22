@@ -126,9 +126,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                     tabs.setupWithViewPager(viewPager)
                 }
             } else if (viewPager.adapter != onePageAdapter) {
-                if (viewPager.adapter != onePageAdapter) {
-                    viewPager.adapter = onePageAdapter
-                }
+                viewPager.adapter = onePageAdapter
             }
         }
     }

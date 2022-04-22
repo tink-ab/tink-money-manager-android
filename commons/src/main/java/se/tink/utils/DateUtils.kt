@@ -12,7 +12,6 @@ import se.tink.utils.ThreadSafeDateFormat.Companion.threadSafeDateFormat
 import java.util.Locale
 
 class DateUtils() {
-    // We want to use UTC to get proper period breaks when formatting.
     private val defaultTimezoneCode = UTC_TIME_ZONE_CODE
     var timezone: DateTimeZone = DateTimeZone.forID(defaultTimezoneCode)
     var formatHumanStrings: Map<String, String> = HashMap()
@@ -40,7 +39,8 @@ class DateUtils() {
     private fun isSameDay(firstDate: DateTime, secondDate: DateTime): Boolean {
         val firstDateWithZone = firstDate.withZone(timezone)
         val secondDateWithZone = secondDate.withZone(timezone)
-        return firstDateWithZone.year == secondDateWithZone.year && firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
+        return firstDateWithZone.year == secondDateWithZone.year &&
+            firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
     }
 
     fun isCurrentYear(evaluatedDate: DateTime): Boolean {
