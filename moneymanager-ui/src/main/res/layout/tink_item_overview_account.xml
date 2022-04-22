@@ -3,60 +3,58 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
+  android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  android:layout_marginTop="4dp"
-  android:layout_marginBottom="4dp"
-  android:layout_marginStart="16dp"
+  android:layout_marginStart="8dp"
   android:layout_marginEnd="8dp"
   android:foreground="?selectableItemBackground"
   android:backgroundTint="?tink_cardBackgroundColor"
+  android:clipChildren="false"
+  android:clipToPadding="false"
   app:cardCornerRadius="@dimen/tink_corner_radius">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"> <!-- 16dp top margin due to some line height empty spacing -->
-
-    <!-- Hiding the bank logo for now to align with iOS -->
-<!--      <com.facebook.drawee.view.SimpleDraweeView-->
-<!--        android:id="@+id/bankLogo"-->
-<!--        android:layout_width="16dp"-->
-<!--        android:layout_height="16dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/accountName"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/accountName"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/accountName"/>-->
-
-    <!-- This view should have a start margin of 8dp when icon is shown -->
-    <TextView
-      android:id="@+id/accountName"
-      style="@style/tink_micro.primary"
-      android:layout_width="0dp"
+  <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:ellipsize="end"
-      android:gravity="center_vertical"
-      android:singleLine="true"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constrainedHeight="true"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:text="Account name"/>
+      android:layout_marginHorizontal="16dp"
+      android:paddingVertical="16dp"
+      android:layout_gravity="center_vertical"
+      android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/bankLogo"
+          android:layout_width="16dp"
+          android:layout_height="16dp" />
+
+      <TextView
+          android:id="@+id/accountName"
+          style="@style/tink_micro.primary"
+          android:textSize="@dimen/tink_deci_text_size"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:ellipsize="end"
+          android:gravity="center_vertical"
+          android:singleLine="true"
+          tools:text="Account name"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/accountBalance"
       style="@style/tink_giga.autoSize"
-      android:layout_width="0dp"
+      android:layout_width="wrap_content"
       android:layout_height="28dp"
       android:layout_marginTop="6dp"
       android:maxLines="1"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/accountName"
       tools:text="1234 kr"/>
-  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
 </androidx.cardview.widget.CardView>

@@ -8,15 +8,16 @@ import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.transaction
 import com.tink.moneymanagerui.BaseFragment
+import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.insights.fragments.OverviewInsightsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountsListFragment
+import com.tink.moneymanagerui.overview.accounts.AccountsOverviewListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
-import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsFragment
+import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsOverviewFragment
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import kotlinx.android.synthetic.main.tink_fragment_overview.*
 
@@ -61,10 +62,13 @@ internal class OverviewFragment : BaseFragment() {
             }
 
             is OverviewFeature.Accounts -> {
+                FinanceOverviewFragment.overviewAccountsMode = feature.overviewAccountsMode
+                FinanceOverviewFragment.accountGroupType = feature.accountGroupType
+                FinanceOverviewFragment.accountEditConfiguration = feature.accountEditConfiguration
                 childFragmentManager.transaction {
                     replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
-                        AccountsListFragment()
+                        AccountsOverviewListFragment()
                     )
                 }
             }
@@ -73,7 +77,7 @@ internal class OverviewFragment : BaseFragment() {
                 childFragmentManager.transaction {
                     replace(
                         containerIdForFeature(feature, overviewContainer, requireContext()),
-                        LatestTransactionsFragment()
+                        LatestTransactionsOverviewFragment()
                     )
                 }
             }

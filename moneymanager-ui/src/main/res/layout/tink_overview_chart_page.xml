@@ -46,8 +46,9 @@
         <com.tink.moneymanagerui.charts.PieChartView
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="0dp"
             app:tink_thickness_percent="0.3" />
     </FrameLayout>
 </FrameLayout>

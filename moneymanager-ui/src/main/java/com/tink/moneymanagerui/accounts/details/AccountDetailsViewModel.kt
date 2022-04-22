@@ -1,9 +1,10 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.tink.model.account.Account
+import com.tink.moneymanagerui.FinanceOverviewFragment
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.account.AccountRepository
 import javax.inject.Inject
@@ -19,4 +20,6 @@ internal class AccountDetailsViewModel @Inject constructor(
     }
 
     val account: LiveData<Account?> = accountId.switchMap { accountRepository.accountById(it) }
+
+    val accountCanBeEdited = FinanceOverviewFragment.accountEditConfiguration.fields.isNotEmpty()
 }

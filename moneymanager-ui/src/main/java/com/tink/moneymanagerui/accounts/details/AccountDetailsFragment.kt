@@ -1,7 +1,9 @@
-package com.tink.moneymanagerui.overview.accounts
+package com.tink.moneymanagerui.accounts.details
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,13 +15,16 @@ import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
+import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
+import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
-import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -36,7 +41,7 @@ internal class AccountDetailsFragment : BaseFragment() {
 
     private val accountHeaderAdapter = AccountHeaderAdapter()
     private lateinit var transactionsAdapter: TransactionItemListAdapter
-    private val accountDetailsAdapter = ConcatAdapter(accountHeaderAdapter)
+    private lateinit var accountDetailsAdapter: ConcatAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var metadata: TransactionsListMetaData
 
@@ -73,6 +78,9 @@ internal class AccountDetailsFragment : BaseFragment() {
             accountId = accountId
         )
         transactionListViewModel.setListMode(metadata.toListMode())
+
+        transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
+        accountDetailsAdapter = ConcatAdapter(accountHeaderAdapter, transactionsAdapter)
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,7 +110,10 @@ internal class AccountDetailsFragment : BaseFragment() {
         transactionListViewModel.loading.observe(
             viewLifecycleOwner,
             Observer { loading ->
-                view.loader.visibility = if (loading) View.VISIBLE else View.GONE
+                view.loader.visibleIf { loading }
+                if (loading) {
+                    noTransactionsText.visibility = View.GONE
+                }
             }
         )
 
@@ -110,6 +121,7 @@ internal class AccountDetailsFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 transactionsAdapter.setTransactionItems(it.transactions)
+                noTransactionsText.visibleIf { it.transactions.isEmpty() }
             }
         )
     }
@@ -117,10 +129,8 @@ internal class AccountDetailsFragment : BaseFragment() {
     private fun setupViews() {
         layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
-        recyclerView.setHasFixedSize(true)
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 
-        transactionsAdapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
         accountDetailsAdapter.addAdapter(transactionsAdapter)
 
         transactionsAdapter.onTransactionItemClickedListener = { id ->
@@ -138,6 +148,21 @@ internal class AccountDetailsFragment : BaseFragment() {
     }
 
     override fun getMoneyManagerFeatureType() = MoneyManagerFeatureType.ACCOUNTS
+
+    override fun onCreateToolbarMenu(toolbar: Toolbar) {
+        super.onCreateToolbarMenu(toolbar)
+        if (viewModel.accountCanBeEdited) {
+            toolbar.inflateMenu(R.menu.tink_menu_account_details)
+        }
+    }
+
+    override fun onToolbarMenuItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_edit) {
+            fragmentCoordinator.replace(AccountDetailsEditFragment.newInstance(accountId))
+            return true
+        }
+        return super.onToolbarMenuItemSelected(item)
+    }
 
     companion object {
 

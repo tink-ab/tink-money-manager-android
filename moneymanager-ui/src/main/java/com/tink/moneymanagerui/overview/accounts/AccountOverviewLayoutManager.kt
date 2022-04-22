@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutParams
 import com.tink.moneymanagerui.util.ScreenUtils
 
-internal class AccountLayoutManager(context: Context) : LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false) {
+internal class AccountOverviewLayoutManager(context: Context) : LinearLayoutManager(context, HORIZONTAL, false) {
 
-    private val standardWidth: Int = ScreenUtils.getScreenMetrics(context).widthPixels / 2 - ScreenUtils.getScreenMetrics(context).widthPixels / 12
+    private val standardWidth: Int = ScreenUtils.getScreenMetrics(context).widthPixels / 2 -
+        ScreenUtils.getScreenMetrics(context).widthPixels / 12
 
     override fun measureChildWithMargins(child: View, widthUsed: Int, heightUsed: Int) {
         val childLayoutParams = child.layoutParams as LayoutParams

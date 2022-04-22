@@ -7,9 +7,9 @@ import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.FragmentCoordinator
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.StatusSubtitleMode
 import com.tink.moneymanagerui.transaction.TransactionsListFragment

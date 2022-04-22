@@ -3,6 +3,8 @@
   <string name="tink_snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
   <string name="tink_onboarding_new_user_terms_link">https://www.tinkapp.com/en/terms-of-service-international/</string>
 
+  <string name="tink_changes_saved">Changes saved</string>
+
   <string name="tink_date_format_human_today">Today</string>
   <string name="tink_date_format_human_yesterday">Yesterday</string>
   <string name="tink_date_format_human_tomorrow">Tomorrow</string>
@@ -24,6 +26,8 @@
 
   <string name="tink_all_categories">All categories</string>
 
+
+
   <string name="tink_overview_statistics_error">No statistics</string>
   <string name="tink_overview_accounts_error">No accounts</string>
 
@@ -33,6 +37,43 @@
   <string name="tink_latest_transactions_toolbar_title">All transactions</string>
   <string name="tink_overview_latest_transactions_view_all_link">See all</string>
 
+  <string name="tink_overview_favorite_accounts_see_all">See all</string>
+  <string name="tink_overview_favorite_accounts_see_all_accounts">See all accounts</string>
+  <string name="tink_overview_highlighted_accounts_title">Favorite accounts</string>
+  <string name="tink_accounts_error">No accounts available</string>
+  <string name="tink_accounts_edit">Edit accont</string>
+  <string name="tink_accounts_edit_title">Account details</string>
+  <string name="tink_accounts_edit_unsaved_changes_title">You have unsaved changes</string>
+  <string name="tink_accounts_edit_unsaved_changes_message">Want to discard the changes you haven’t saved?</string>
+  <string name="tink_accounts_edit_unsaved_changes_no_save">No, save</string>
+  <string name="tink_accounts_edit_unsaved_changes_yes_discard">Yes, discard</string>
+  <string name="tink_accounts_edit_field_name_header">Account name</string>
+  <string name="tink_accounts_edit_field_name_description">Original description: Sturehof</string>
+  <string name="tink_accounts_edit_field_type_header">Account type</string>
+  <string name="tink_accounts_edit_field_type_dialog_title">Choose account type</string>
+  <string name="tink_accounts_edit_field_included_header">Included</string>
+  <string name="tink_accounts_edit_field_included_description">This account is shown in your statistics</string>
+  <string name="tink_accounts_edit_field_shared_header">Shared account</string>
+  <string name="tink_accounts_edit_field_shared_description">50% is included in your statistics</string>
+  <string name="tink_accounts_edit_field_favorite_header">Favorite account</string>
+  <string name="tink_accounts_edit_field_favorite_description">Balance is shown in the overview</string>
+  <string name="tink_accounts_edit_save_button">Save</string>
+  <string name="tink_accounts_type_checking">Checking</string>
+  <string name="tink_accounts_type_credit_card">Credit card</string>
+  <string name="tink_accounts_type_external">External</string>
+  <string name="tink_accounts_type_investment">Investment</string>
+  <string name="tink_accounts_type_loan">Loan</string>
+  <string name="tink_accounts_type_mortgage">Mortgage</string>
+  <string name="tink_accounts_type_other">Other</string>
+  <string name="tink_accounts_type_pension">Pension</string>
+  <string name="tink_accounts_type_savings">Savings</string>
+
+  <string name="tink_everyday_account">Everyday accounts</string>
+  <string name="tink_savings_account">Savings accounts</string>
+  <string name="tink_loans_account">Loan accounts</string>
+  <string name="tink_other_account">Other accounts</string>
+
+  <string name="tink_transactions_error">You haven\'t made any transactions yet</string>
   <string name="tink_transaction_similar_title">Similar transactions</string>
   <string name="tink_transaction_similar_description">Do you also want to assign these transactions to the %1$s category?</string>
   <string name="tink_transaction_similar_button_skip_text">Skip</string>
@@ -190,5 +231,7 @@
   <string name="tink_next_month_description">Next month</string>
 
   <string name="tink_search_label">Search</string>
+  <string name="tink_continue">Continue</string>
+  <string name="tink_discard">Discard</string>
 
 </resources>

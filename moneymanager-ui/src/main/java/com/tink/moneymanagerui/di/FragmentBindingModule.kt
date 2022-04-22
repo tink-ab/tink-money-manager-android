@@ -1,5 +1,8 @@
 package com.tink.moneymanagerui.di
 
+import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
+import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
+import com.tink.moneymanagerui.accounts.list.AccountListFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationModule
@@ -12,14 +15,13 @@ import com.tink.moneymanagerui.insights.fragments.InsightsFragment
 import com.tink.moneymanagerui.insights.fragments.OverviewInsightsFragment
 import com.tink.moneymanagerui.overview.OverviewChartFragment
 import com.tink.moneymanagerui.overview.OverviewFragment
-import com.tink.moneymanagerui.overview.accounts.AccountDetailsFragment
-import com.tink.moneymanagerui.overview.accounts.AccountsListFragment
+import com.tink.moneymanagerui.overview.accounts.AccountsOverviewListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
 import com.tink.moneymanagerui.overview.charts.CategorySelectionFragment
 import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
 import com.tink.moneymanagerui.overview.charts.StatisticsOverTimeFragment
 import com.tink.moneymanagerui.overview.charts.piechart.TabPieChartFragment
-import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsFragment
+import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsOverviewFragment
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.SimilarTransactionsFragment
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
@@ -40,7 +42,7 @@ internal interface FragmentBindingModule {
     fun tabPieChartFragment(): TabPieChartFragment
 
     @ContributesAndroidInjector
-    fun latestTransactionsFragment(): LatestTransactionsFragment
+    fun latestTransactionsFragment(): LatestTransactionsOverviewFragment
 
     @ContributesAndroidInjector
     fun categoryListFragment(): CategorySelectionFragment
@@ -58,7 +60,13 @@ internal interface FragmentBindingModule {
     fun overviewFragment(): OverviewFragment
 
     @ContributesAndroidInjector
-    fun accountsListFragment(): AccountsListFragment
+    fun accountsListFragment(): AccountsOverviewListFragment
+
+    @ContributesAndroidInjector
+    fun accountListFragment(): AccountListFragment
+
+    @ContributesAndroidInjector
+    fun accountDetailsEditFragment(): AccountDetailsEditFragment
 
     @ContributesAndroidInjector
     fun accountDetailsFragment(): AccountDetailsFragment

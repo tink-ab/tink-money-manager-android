@@ -11,6 +11,12 @@ import androidx.fragment.app.Fragment
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tink.core.Tink
 import com.tink.model.user.User
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration.Companion.ALL
+import com.tink.moneymanagerui.accounts.AccountGroupType
+import com.tink.moneymanagerui.accounts.NoAccountGroup
+import com.tink.moneymanagerui.accounts.OverviewAccountsMode
+import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.configuration.I18nConfiguration
@@ -190,6 +196,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         @JvmStatic
         var featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = mapOf()
             private set
+
+        internal var accountGroupType: AccountGroupType = NoAccountGroup
+
+        internal var accountEditConfiguration: AccountEditConfiguration = ALL
+
+        internal var overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
