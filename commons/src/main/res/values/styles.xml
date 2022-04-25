@@ -47,7 +47,7 @@
     <item name="tink_cardBackgroundColor">@color/tink_white</item>
     <item name="tink_createBudgetIconColor">@color/tink_color_error</item>
     <item name="tink_createBudgetIconBackgroundColor">@color/tink_expensive_blue_light</item>
-    <item name="tink_createBudgetButtonColor">@color/tink_color_error</item>
+    <item name="tink_createBudgetButtonColor">?tink_colorAccent</item>
     <item name="tink_uncategorizedIconColor">?tink_uncategorizedColor</item>
     <item name="tink_incomeIconColor">?tink_incomeColor</item>
     <item name="tink_expensesIconColor">?tink_expensesColor</item>
