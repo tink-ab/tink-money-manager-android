@@ -53,9 +53,9 @@
     <item name="tink_expensesIconColor">?tink_expensesColor</item>
     <item name="tink_transferIconColor">?tink_transferColor</item>
     <item name="tink_uncategorizedIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_incomeIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_expensesIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_transferIconBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_incomeIconBackgroundColor">?tink_incomeLightColor</item>
+    <item name="tink_expensesIconBackgroundColor">?tink_expensesLightColor</item>
+    <item name="tink_transferIconBackgroundColor">?tink_transferLightColor</item>
 
     <item name="tink_accountIconColor">?tink_uncategorizedLightColor</item>
     <item name="tink_accountIconBackgroundColor">?tink_colorAccent</item>
