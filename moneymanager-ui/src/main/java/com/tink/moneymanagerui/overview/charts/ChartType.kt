@@ -13,7 +13,7 @@ internal enum class ChartType {
         override val screenEvent = ScreenEvent.EXPENSES
         override val title: Int get() = R.string.tink_expenses_title
         override val color: Int get() = R.attr.tink_expensesColor
-        override val topCategoryName: Int get() = R.string.tink_all_categories
+        override val topCategoryName: Int get() = R.string.tink_expenses_title
         override val type: Category.Type get() = Category.Type.EXPENSE
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
@@ -23,7 +23,7 @@ internal enum class ChartType {
         override val screenEvent = ScreenEvent.INCOME
         override val title: Int get() = R.string.tink_income_title
         override val color: Int get() = R.attr.tink_incomeColor
-        override val topCategoryName: Int get() = R.string.tink_all_categories
+        override val topCategoryName: Int get() = R.string.tink_income_title
         override val type: Category.Type get() = Category.Type.INCOME
 
         override fun create1MonthFragment(): BaseFragment = TabPieChartFragment.newInstance(this)
