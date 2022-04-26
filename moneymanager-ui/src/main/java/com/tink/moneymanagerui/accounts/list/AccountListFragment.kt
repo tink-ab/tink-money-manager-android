@@ -11,10 +11,12 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.moneymanagerui.util.DimensionUtils
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_accounts_list.*
+import se.tink.android.recyclerview.VerticalSpaceItemDecoration
 
 class AccountListFragment : BaseFragment() {
 
@@ -45,7 +47,15 @@ class AccountListFragment : BaseFragment() {
         allAccountsList.adapter = accountsAdapter
 
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
-        groupedAccountsList.adapter = groupedAccountsAdapter
+        groupedAccountsList.addItemDecoration(
+          VerticalSpaceItemDecoration(
+            DimensionUtils.getPixelsFromDP(
+              24f,
+              requireContext()
+            ).toInt()
+          )
+        )
+      groupedAccountsList.adapter = groupedAccountsAdapter
 
         viewModel.accountsWithImageState.observe(
             viewLifecycleOwner,
