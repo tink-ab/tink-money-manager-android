@@ -163,6 +163,12 @@ class AccountDetailsEditViewModel@Inject constructor(
 
         isUpdating.postValue(true)
         viewModelScope.launch {
+            val accountExclusion = if (editedData.data.isExcluded) {
+                Account.AccountExclusion.PFM_DATA
+            } else {
+                Account.AccountExclusion.NONE
+            }
+
             accountRepository.updateAccountState(
                 UpdateAccountDescriptor(
                     id = accountValue.data.id,
@@ -170,7 +176,7 @@ class AccountDetailsEditViewModel@Inject constructor(
                     name = editedData.data.name,
                     ownership = ownershipPart,
                     type = editedData.data.type,
-                    accountExclusion = editedData.data.isExcluded,
+                    accountExclusion = accountExclusion
                 )
             )
         }
