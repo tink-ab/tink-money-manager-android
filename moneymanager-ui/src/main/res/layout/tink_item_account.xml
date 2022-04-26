@@ -39,7 +39,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/customerAccountNumber"
-      style="@style/tink_hecto.secondary"
+      style="@style/tink_deci"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:ellipsize="end"
