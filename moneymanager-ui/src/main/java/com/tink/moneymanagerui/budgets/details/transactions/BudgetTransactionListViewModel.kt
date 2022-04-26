@@ -14,7 +14,6 @@ import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsDataHolder
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSign
-import org.threeten.bp.Instant
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.ErrorOrValue
@@ -28,6 +27,7 @@ import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.transactions.ListItem.TransactionItem
 import se.tink.commons.transactions.TransactionItemFactory
+import java.time.Instant
 import javax.inject.Inject
 
 internal class BudgetTransactionListViewModel @Inject constructor(

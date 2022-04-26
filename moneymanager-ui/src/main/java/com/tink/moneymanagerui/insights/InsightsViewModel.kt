@@ -7,9 +7,9 @@ import com.tink.model.insights.InsightState
 import com.tink.moneymanagerui.insights.actionhandling.ActionEventBus
 import com.tink.moneymanagerui.insights.enrichment.EnrichmentDirectorFactory
 import com.tink.moneymanagerui.insights.repository.InsightsRepository
-import org.threeten.bp.Instant
 import se.tink.android.repository.TinkNetworkError
 import se.tink.commons.livedata.Event
+import java.time.Instant
 import javax.inject.Inject
 
 private typealias InsightsListProcessor = List<Insight>.() -> List<Insight>

@@ -31,6 +31,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -55,10 +56,12 @@ dependencies {
     api libraries.tink_core
     implementation libraries.tink_service
     implementation libraries.tink_models
-
     compileOnly project(':annotations')
     kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+
     implementation libraries.kotlin_stdlib
     implementation libraries.android_core_ktx
     implementation libraries.android_fragment_ktx
@@ -85,7 +88,6 @@ dependencies {
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
 
-    implementation libraries.joda_time
     implementation libraries.timber
 
     testImplementation libraries.test_junit

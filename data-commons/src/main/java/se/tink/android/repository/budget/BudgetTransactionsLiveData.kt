@@ -7,11 +7,11 @@ import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import org.threeten.bp.Instant
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.livedata.ErrorOrValue
 import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
+import java.time.Instant
 
 @ExperimentalCoroutinesApi
 class BudgetTransactionsLiveData(

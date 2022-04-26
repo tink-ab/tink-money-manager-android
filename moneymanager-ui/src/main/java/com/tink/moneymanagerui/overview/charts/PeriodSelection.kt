@@ -2,28 +2,28 @@ package com.tink.moneymanagerui.overview.charts
 
 import androidx.annotation.StringRes
 import com.tink.moneymanagerui.R
-import org.joda.time.DateTime
+import java.time.LocalDateTime
 
 sealed class PeriodSelection(
-    val start: DateTime,
-    val end: DateTime,
+    val start: LocalDateTime,
+    val end: LocalDateTime,
     @StringRes val labelResource: Int
 ) {
     class TwelveMonths : PeriodSelection(
-        DateTime.now().minusMonths(12),
-        DateTime.now(),
+        LocalDateTime.now().minusMonths(12),
+        LocalDateTime.now(),
         R.string.tink_selector_12_months
     )
 
     class SixMonths : PeriodSelection(
-        DateTime.now().minusMonths(6),
-        DateTime.now(),
+        LocalDateTime.now().minusMonths(6),
+        LocalDateTime.now(),
         R.string.tink_selector_6_months
     )
 
     class AllTime : PeriodSelection(
-        DateTime(0),
-        DateTime.now(),
+        LocalDateTime.MIN,
+        LocalDateTime.now(),
         R.string.tink_selector_all_time
     )
 }

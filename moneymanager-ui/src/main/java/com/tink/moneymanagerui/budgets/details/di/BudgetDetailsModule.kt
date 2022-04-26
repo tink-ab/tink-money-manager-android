@@ -20,13 +20,13 @@ import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import org.joda.time.DateTime
 import se.tink.android.di.viewmodel.ModelProviders
 import se.tink.android.di.viewmodel.ViewModelKey
 import se.tink.android.repository.ExceptionTracker
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.utils.DateUtils
+import java.time.LocalDateTime
 import javax.inject.Named
 import javax.inject.Scope
 
@@ -76,7 +76,7 @@ internal class BudgetDetailsModule {
         val periodStart = try {
             fragment.arguments
                 ?.getString(BudgetDetailsFragment.PERIOD_START)
-                ?.let(DateTime::parse)
+                ?.let(LocalDateTime::parse)
                 ?.plusDays(1)
         } catch (e: IllegalArgumentException) {
             if (!BuildConfig.DEBUG) {
@@ -110,7 +110,7 @@ internal class BudgetDetailsModule {
         val periodStart = try {
             fragment.arguments
                 ?.getString(BudgetDetailsFragment.PERIOD_START)
-                ?.let(DateTime::parse)
+                ?.let(LocalDateTime::parse)
                 ?.plusDays(1)
         } catch (e: IllegalArgumentException) {
             if (!BuildConfig.DEBUG) {

@@ -41,8 +41,6 @@ dependencies {
 
     implementation libraries.kotlin_stdlib
 
-    implementation libraries.joda_time
-
     implementation libraries.dagger
     kapt libraries.dagger_compiler
     testImplementation libraries.dagger

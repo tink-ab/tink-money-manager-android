@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.tink_transaction_item.view.*
 import kotlinx.android.synthetic.main.tink_transaction_item_date_group.view.*
 import kotlinx.android.synthetic.main.tink_transaction_item_date_group_upcoming.view.*
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
 import se.tink.commons.R
@@ -16,6 +14,8 @@ import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
 import se.tink.utils.DateUtils
+import java.time.LocalDateTime
+import java.time.ZoneId
 import kotlin.properties.Delegates
 
 class TransactionItemListAdapter(
@@ -92,14 +92,13 @@ class TransactionItemListAdapter(
             ?.sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             ?.let { list += it }
 
-        val timeZone = dateUtils?.timezone ?: DateTimeZone.forID(DateUtils.UTC_TIME_ZONE_CODE)
+        val timeZone = dateUtils?.timeZoneId ?: ZoneId.of(DateUtils.UTC_TIME_ZONE_CODE)
         transactionItems
             .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
-            .groupBy { it.date.withZone(timeZone).withMillisOfDay(0) }
+            .groupBy { it.date.atZone(timeZone).withNano(0) }
             .forEach { entry ->
                 if (groupByDates && dateUtils != null) {
-
-                    list += ListItem.DateGroupItem(dateUtils.formatDateHuman(entry.key))
+                    list += ListItem.DateGroupItem(dateUtils.formatDateHuman(entry.key.toLocalDateTime()))
                 }
                 list += entry.value
             }
@@ -153,7 +152,7 @@ sealed class ListItem {
         val description: String,
         val amount: String,
         val dispensableAmount: String,
-        val date: DateTime,
+        val date: LocalDateTime,
         val merchantLogoAllowed: Boolean,
         val recurring: Boolean = false,
         val upcomingTransactionData: UpcomingTransactionData? = null

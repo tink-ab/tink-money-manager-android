@@ -4,12 +4,12 @@ import com.tink.model.category.Category
 import com.tink.model.statistics.Statistics
 import com.tink.model.time.Period
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
-import org.joda.time.DateTime
 import se.tink.commons.extensions.floatValue
 import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.recursiveIdList
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
+import java.time.LocalDateTime
 import kotlin.math.abs
 
 internal sealed class ChartItem {
@@ -42,8 +42,8 @@ internal fun getPeriodString(
     period: Period,
     toToday: Boolean = true
 ): String {
-    val endOrToday = if (toToday && period.isInPeriod(DateTime.now(dateUtils.timezone))) {
-        DateTime.now()
+    val endOrToday = if (toToday && period.isInPeriod(LocalDateTime.now(dateUtils.timeZoneId))) {
+        LocalDateTime.now()
     } else {
         period.end.toDateTime()
     }

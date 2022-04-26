@@ -10,12 +10,13 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_transactions_summary.view.*
-import org.joda.time.DateTime
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.inflate
+import se.tink.commons.extensions.toDateTime
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
+import java.time.Instant
 import javax.inject.Inject
 
 @ContributesInsightViewProvider
@@ -99,7 +100,9 @@ class TransactionsSummaryViewProvider @Inject constructor(
                 largest_transaction_recipient_text.text = context.getString(
                     R.string.tink_insights_largest_transaction_recipient_text,
                     data.transactionSummary.largestExpense.description,
-                    dateUtils.getMonthWithDayOfMonth(DateTime(data.transactionSummary.largestExpense.date))
+                    dateUtils.getMonthWithDayOfMonth(
+                        Instant.ofEpochMilli(data.transactionSummary.largestExpense.date).toDateTime()
+                    )
                 )
             }
         }

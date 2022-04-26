@@ -5,6 +5,12 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.tink.core.Tink
 import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.OverviewFeature
+import com.tink.moneymanagerui.OverviewFeatures
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration
+import com.tink.moneymanagerui.accounts.AccountGroupByKind
+import com.tink.moneymanagerui.accounts.EditAccountField
+import com.tink.moneymanagerui.accounts.OverviewAccountsTypeAccounts
 import com.tink.sample.configuration.Configuration
 import com.tink.service.network.TinkConfiguration
 import timber.log.Timber
@@ -30,9 +36,16 @@ class MainActivity : FragmentActivity() {
             // Tink has already been initialized
         }
 
+        val f = OverviewFeatures(listOf(OverviewFeature.Accounts(
+            OverviewAccountsTypeAccounts(com.tink.model.account.Account.Type.SAVINGS),
+            AccountGroupByKind,
+            AccountEditConfiguration(listOf(EditAccountField.NAME, EditAccountField.IS_FAVORITE))
+        )))
+
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
+                //overviewFeatures = f,
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkStyle_Default,
                 tracker = LogTracker(),

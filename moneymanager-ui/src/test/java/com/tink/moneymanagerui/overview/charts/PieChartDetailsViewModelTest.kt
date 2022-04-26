@@ -26,9 +26,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.threeten.bp.Instant
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.user.UserRepository
+import java.time.Instant
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
