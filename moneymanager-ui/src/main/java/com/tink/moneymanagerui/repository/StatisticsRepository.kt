@@ -44,7 +44,7 @@ private const val POLLING_INTERVAL = 2_000L
 
 @ExperimentalCoroutinesApi
 @PfmScope
-internal class StatisticsRepository @Inject constructor(
+class StatisticsRepository @Inject constructor(
     private val statisticsService: StatisticsService,
     dataRefreshHandler: DataRefreshHandler,
     private val userRepository: UserRepository,
@@ -253,5 +253,16 @@ internal class StatisticsRepository @Inject constructor(
 
     override fun refresh() {
         refreshTrigger.postValue(Unit)
+    }
+
+    /**
+     * Refreshing imediately might cause problems since the statistics api take some time to update.
+     * This refreshes after a given delay to ensure that we fetch updated data.
+     */
+    suspend fun refreshDelayed(delayMills: Long = 2000) {
+        CoroutineScope(dispatcher.io()).launch {
+            delay(delayMills)
+            refreshTrigger.postValue(Unit)
+        }
     }
 }
