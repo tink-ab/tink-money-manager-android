@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tink.model.account.Account
 import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.service.account.UpdateAccountDescriptor
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -28,7 +29,8 @@ data class AccountDetailsEditData(
 )
 
 class AccountDetailsEditViewModel@Inject constructor(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
+    private val statisticsRepository: StatisticsRepository
 ) : ViewModel() {
 
     private val accountId: MutableLiveData<String> = MutableLiveData()
@@ -173,6 +175,7 @@ class AccountDetailsEditViewModel@Inject constructor(
                     accountExclusion = editedData.data.isExcluded,
                 )
             )
+            statisticsRepository.refreshDelayed()
         }
     }
 }
