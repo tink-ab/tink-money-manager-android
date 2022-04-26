@@ -76,7 +76,7 @@ class AccountDetailsEditViewModel@Inject constructor(
                         isShared = isShared
                     )
 
-                    if (initialState == null)  {
+                    if (initialState == null) {
                         initialState = newState
                     }
 
@@ -130,7 +130,7 @@ class AccountDetailsEditViewModel@Inject constructor(
         fun update() {
             whenNonNull(accountDetailsEditData.value, initialState) { accountDetailsEditData, initialState ->
                 value = accountDetailsEditData is SuccessState &&
-                        initialState != accountDetailsEditData.data
+                    initialState != accountDetailsEditData.data
             }
         }
 
