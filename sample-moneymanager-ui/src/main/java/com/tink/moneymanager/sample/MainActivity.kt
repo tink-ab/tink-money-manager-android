@@ -78,7 +78,7 @@ class MainActivity : FragmentActivity() {
                     width = FrameLayout.LayoutParams.MATCH_PARENT,
                     height = FrameLayout.LayoutParams.WRAP_CONTENT
                 ),
-                OverviewFeature.Accounts,
+                OverviewFeature.Accounts(),
                 OverviewFeature.LatestTransactions,
                 OverviewFeature.Budgets
             )
