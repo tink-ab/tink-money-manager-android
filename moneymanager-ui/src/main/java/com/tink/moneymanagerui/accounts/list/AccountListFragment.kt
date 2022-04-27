@@ -48,14 +48,14 @@ class AccountListFragment : BaseFragment() {
 
         groupedAccountsList.layoutManager = LinearLayoutManager(context)
         groupedAccountsList.addItemDecoration(
-          VerticalSpaceItemDecoration(
-            DimensionUtils.getPixelsFromDP(
-              24f,
-              requireContext()
-            ).toInt()
-          )
+            VerticalSpaceItemDecoration(
+                DimensionUtils.getPixelsFromDP(
+                    24f,
+                    requireContext()
+                ).toInt()
+            )
         )
-      groupedAccountsList.adapter = groupedAccountsAdapter
+        groupedAccountsList.adapter = groupedAccountsAdapter
 
         viewModel.accountsWithImageState.observe(
             viewLifecycleOwner,
