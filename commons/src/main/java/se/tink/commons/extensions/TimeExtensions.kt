@@ -10,10 +10,9 @@ fun Period.isInPeriod(dateTime: DateTime): Boolean {
 
     val instant = Instant.ofEpochMilli(dateTime.millis)
 
-    //Inclusive inside checks.
+    // Inclusive inside checks.
     val afterStart = instant.isAfter(start) || instant == start
     val beforeStop = instant.isBefore(end) || instant == end
 
     return afterStart && beforeStop
 }
-

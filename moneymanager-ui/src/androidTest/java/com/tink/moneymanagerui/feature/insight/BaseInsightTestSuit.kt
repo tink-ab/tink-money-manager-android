@@ -6,16 +6,17 @@ import com.tink.moneymanagerui.mock.TransactionMockFactory
 import com.tink.moneymanagerui.testutil.PathDispatcher
 import okhttp3.mockwebserver.MockResponse
 
-open class BaseInsightTestSuit: BaseTestSuite() {
+open class BaseInsightTestSuit : BaseTestSuite() {
 
     private val defaultTransaction = TransactionMockFactory.getTransaction()
     val insightDispatcher = PathDispatcher(
         mutableMapOf(
             "/api/v1/transactions/${defaultTransaction["id"]}" to
-                    MockResponse().setResponseCode(200).setBody(defaultTransaction.toString()),
+                MockResponse().setResponseCode(200).setBody(defaultTransaction.toString()),
             "/api/v1/insights/archived" to MockResponse().setResponseCode(200).setBody("[]"),
             "/api/v1/categories" to
-                    MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString()))
+                MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString())
+        )
     )
 
     internal fun openInsightsFragment() {

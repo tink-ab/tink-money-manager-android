@@ -9,10 +9,9 @@ import org.threeten.bp.LocalDate
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.ThreadSafeDateFormat.Companion.dateFormatsMap
 import se.tink.utils.ThreadSafeDateFormat.Companion.threadSafeDateFormat
-import java.util.*
+import java.util.Locale
 
 class DateUtils() {
-    // We want to use UTC to get proper period breaks when formatting.
     private val defaultTimezoneCode = UTC_TIME_ZONE_CODE
     var timezone: DateTimeZone = DateTimeZone.forID(defaultTimezoneCode)
     var formatHumanStrings: Map<String, String> = HashMap()
@@ -40,7 +39,8 @@ class DateUtils() {
     private fun isSameDay(firstDate: DateTime, secondDate: DateTime): Boolean {
         val firstDateWithZone = firstDate.withZone(timezone)
         val secondDateWithZone = secondDate.withZone(timezone)
-        return firstDateWithZone.year == secondDateWithZone.year && firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
+        return firstDateWithZone.year == secondDateWithZone.year &&
+            firstDateWithZone.dayOfYear == secondDateWithZone.dayOfYear
     }
 
     fun isCurrentYear(evaluatedDate: DateTime): Boolean {
@@ -112,7 +112,9 @@ class DateUtils() {
     }
 
     fun formatDateRange(
-        start: DateTime, end: DateTime, includeYearIfNotCurrent: Boolean
+        start: DateTime,
+        end: DateTime,
+        includeYearIfNotCurrent: Boolean
     ): String {
 
         val dateInterval: String
@@ -121,12 +123,12 @@ class DateUtils() {
         val isThisYear = isCurrentYear(start) && isCurrentYear(end)
 
         dateInterval = if (isToday(start)) {
-            val todayText =  formatHumanStrings[KEY_TODAY]!!
+            val todayText = formatHumanStrings[KEY_TODAY]!!
             val endHumanForm = formatDateHumanShort(end)
             String.format("%s - %s", todayText, endHumanForm)
         } else if (isToday(end)) {
             val startHumanForm = formatDateHumanShort(start)
-            val todayText =  formatHumanStrings[KEY_TODAY]!!
+            val todayText = formatHumanStrings[KEY_TODAY]!!
             String.format("%s - %s", startHumanForm, todayText)
         } else if (isSameDayOfMonth && isSameMonth && isThisYear) {
             val day = getDayOfMonth(start)
@@ -160,7 +162,7 @@ class DateUtils() {
     }
 
     private fun getDateTimeFromPeriod(period: Period): DateTime {
-        //TODO: Core setup
+        // TODO: Core setup
         val periodDuration = period.end.toEpochMilli() - period.start.toEpochMilli()
         val middleOfPeriod = Instant.ofEpochMilli(period.start.toEpochMilli() + periodDuration / 2)
         return middleOfPeriod.toDateTime()

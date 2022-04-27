@@ -12,7 +12,6 @@ import se.tink.commons.extensions.round
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.Currency
-import java.util.HashMap
 import java.util.Locale
 import kotlin.collections.set
 import kotlin.math.roundToLong
@@ -79,7 +78,7 @@ object CurrencyUtils {
         return formatCurrency(
             amount,
             CurrencyFormat.DYNAMIC or CurrencyFormat.SYMBOL or CurrencyFormat.AMOUNT_SIGN
-                    or CurrencyFormat.EXACT
+                or CurrencyFormat.EXACT
         )
     }
 
@@ -112,7 +111,7 @@ object CurrencyUtils {
             formatAmountExact(absValue, currencyCode)
 //        } else if (currencyFormat and CurrencyFormat.SHORT == CurrencyFormat.SHORT) {
 //            formatShort(absValue, currencyCode)
-        } else if(currencyFormat and CurrencyFormat.EXACT_OR_INTEGER == CurrencyFormat.EXACT_OR_INTEGER) {
+        } else if (currencyFormat and CurrencyFormat.EXACT_OR_INTEGER == CurrencyFormat.EXACT_OR_INTEGER) {
             formatAmountExactIfNotInteger(absValue, currencyCode)
         } else { // CurrencyFormat.DYNAMIC
             if (absValue.toBigDecimal().toInt() < DYNAMIC_ROUNDING_THRESHOLDS.get(currencyCode) &&
@@ -164,7 +163,7 @@ object CurrencyUtils {
             val symbol =
                 (format as DecimalFormat).decimalFormatSymbols.currencySymbol
             if (formatted.contains(symbol)) {
-                //Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
+                // Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
                 formatted = formatted.replace(symbol + "\\s".toRegex(), "")
                 formatted = formatted.replace("\\s" + symbol.toRegex(), "")
                 formatted = formatted.replace(symbol.toRegex(), "")
@@ -236,7 +235,7 @@ object CurrencyUtils {
     }
 
     fun formatAmountExactWithoutCurrencySymbol(amount: Double, currency: String?): String {
-        return formatAmount(amount, 2, currency, false);
+        return formatAmount(amount, 2, currency, false)
     }
 
     fun formatCurrencyExactWithoutSignAndSymbol(amount: Amount, currency: String?): String {
@@ -244,7 +243,7 @@ object CurrencyUtils {
     }
 
     fun formatAmountExactWithCurrencySymbol(amount: Double, currency: String?): String {
-        return formatAmount(amount, 2, currency, true);
+        return formatAmount(amount, 2, currency, true)
     }
 
     private fun formatAmountExact(
@@ -271,7 +270,7 @@ object CurrencyUtils {
         if (!useCurrencySymbol) {
             val symbol = (format as DecimalFormat).decimalFormatSymbols.currencySymbol
             if (formatted.contains(symbol)) {
-                //Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
+                // Replace the currency symbol and the surrounding space, if it's before or after the symbol, or no space.
                 formatted = formatted.replace(symbol + "\\s".toRegex(), "")
                 formatted = formatted.replace("\\s" + symbol.toRegex(), "")
                 formatted = formatted.replace(symbol.toRegex(), "")
@@ -301,39 +300,39 @@ object CurrencyUtils {
     init {
         val enUsMap =
             listOf(
-                    StringExactNumberPair("", ZERO),
-                    StringExactNumberPair("k", THOUSAND),
-                    StringExactNumberPair("mm", MILLION),
-                    StringExactNumberPair("bn", BILLION)
-                )
+                StringExactNumberPair("", ZERO),
+                StringExactNumberPair("k", THOUSAND),
+                StringExactNumberPair("mm", MILLION),
+                StringExactNumberPair("bn", BILLION)
+            )
         val svSeMap =
             listOf(
-                    StringExactNumberPair("", ZERO),
-                    StringExactNumberPair("t", THOUSAND),
-                    StringExactNumberPair("mn", MILLION),
-                    StringExactNumberPair("md", BILLION)
-                )
+                StringExactNumberPair("", ZERO),
+                StringExactNumberPair("t", THOUSAND),
+                StringExactNumberPair("mn", MILLION),
+                StringExactNumberPair("md", BILLION)
+            )
         val frFRMap =
             listOf(
-                    StringExactNumberPair("", ZERO),
-                    StringExactNumberPair("m", THOUSAND),
-                    StringExactNumberPair("mn", MILLION),
-                    StringExactNumberPair("md", BILLION)
-                )
+                StringExactNumberPair("", ZERO),
+                StringExactNumberPair("m", THOUSAND),
+                StringExactNumberPair("mn", MILLION),
+                StringExactNumberPair("md", BILLION)
+            )
         val defaultMap =
             listOf(
-                    StringExactNumberPair("", ZERO),
-                    StringExactNumberPair("k", THOUSAND),
-                    StringExactNumberPair("M", MILLION),
-                    StringExactNumberPair("G", BILLION)
-                )
+                StringExactNumberPair("", ZERO),
+                StringExactNumberPair("k", THOUSAND),
+                StringExactNumberPair("M", MILLION),
+                StringExactNumberPair("G", BILLION)
+            )
         val nlNlMap =
             listOf(
-                    StringExactNumberPair("", ZERO),
-                    StringExactNumberPair("dzd", THOUSAND),
-                    StringExactNumberPair("mln", MILLION),
-                    StringExactNumberPair("mjd", BILLION)
-                )
+                StringExactNumberPair("", ZERO),
+                StringExactNumberPair("dzd", THOUSAND),
+                StringExactNumberPair("mln", MILLION),
+                StringExactNumberPair("mjd", BILLION)
+            )
         UNITS["en"] = enUsMap
         UNITS["sv"] = svSeMap
         UNITS["fr"] = frFRMap

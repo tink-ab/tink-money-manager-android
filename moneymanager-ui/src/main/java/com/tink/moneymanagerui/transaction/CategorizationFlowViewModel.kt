@@ -3,18 +3,18 @@ package com.tink.moneymanagerui.transaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import com.tink.model.category.Category
+import com.tink.model.transaction.Transaction
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.livedata.switchMap
+import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.transaction.SingleTransactionLiveData
 import se.tink.android.repository.transaction.TransactionError
 import se.tink.android.repository.transaction.TransactionReceived
 import se.tink.android.repository.transaction.TransactionRepository
-import se.tink.commons.livedata.Event
-import se.tink.commons.extensions.whenNonNull
-import com.tink.model.category.Category
-import com.tink.model.transaction.Transaction
-import se.tink.android.repository.TinkNetworkError
 import se.tink.commons.extensions.findCategoryById
+import se.tink.commons.extensions.whenNonNull
+import se.tink.commons.livedata.Event
 import javax.inject.Inject
 
 internal class CategorizationFlowViewModel @Inject constructor(
@@ -23,7 +23,6 @@ internal class CategorizationFlowViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var transactionLiveData: SingleTransactionLiveData? = null
-
 
     fun setTransactionId(id: String) =
         setTransactionSource(transactionRepository.fetchById(id))
@@ -66,7 +65,6 @@ internal class CategorizationFlowViewModel @Inject constructor(
         addSource(categories) { update() }
     }
 
-
     val similarTransactions: LiveData<List<Transaction>> = transaction.switchMap {
         transactionRepository.fetchSimilarTransactions(it.id)
     }
@@ -80,7 +78,6 @@ internal class CategorizationFlowViewModel @Inject constructor(
         }
     }
 
-
     private val _state: MediatorLiveData<State> = MediatorLiveData<State>().apply {
 
         addSource(transaction) {
@@ -91,7 +88,6 @@ internal class CategorizationFlowViewModel @Inject constructor(
     }
     val state: LiveData<State> = _state
 
-
     fun categorySelected(categoryId: String) {
 
         val transaction = transaction.value ?: return
@@ -100,7 +96,7 @@ internal class CategorizationFlowViewModel @Inject constructor(
             _state.value = State.SimilarTransactions(categoryId)
             categorizeTransactions(listOf(transaction.id), categoryId)
         } else {
-           setStatusToDone()
+            setStatusToDone()
         }
     }
 

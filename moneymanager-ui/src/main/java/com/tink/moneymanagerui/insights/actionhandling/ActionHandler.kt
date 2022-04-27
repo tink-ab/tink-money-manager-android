@@ -2,8 +2,6 @@ package com.tink.moneymanagerui.insights.actionhandling
 
 import com.tink.model.insights.Insight
 import com.tink.model.insights.InsightAction
-import com.tink.model.insights.PerformedInsightAction
-import javax.inject.Inject
 
 interface ActionHandler {
 

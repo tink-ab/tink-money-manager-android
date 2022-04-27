@@ -37,9 +37,12 @@ internal class I18nConfiguration @Inject constructor(
 ) {
 
     fun initialize() {
-        userRepository.userProfile.observe(ProcessLifecycleOwner.get(), Observer {
-            it?.let(::setupI18nConfigurationDependentSingletons)
-        })
+        userRepository.userProfile.observe(
+            ProcessLifecycleOwner.get(),
+            Observer {
+                it?.let(::setupI18nConfigurationDependentSingletons)
+            }
+        )
 
         getInstance().formatHumanStrings = getMapWithHumanDateStrings()
         getInstance().locale = suitableLocaleFinder.findLocale()

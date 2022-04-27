@@ -19,6 +19,34 @@ Here's a list of all the public string resources in the SDK that can be overridd
 
 | String Resource ID | English Text |
 |------|-----|
+| `tink_accounts_edit_field_favorite_description` | Balance is shown in the overview |
+| `tink_accounts_edit_field_favorite_header` | Favorite account |
+| `tink_accounts_edit_field_included_description` | This account is shown in your statistics |
+| `tink_accounts_edit_field_included_header` | Included |
+| `tink_accounts_edit_field_name_description` | Original description: Sturehof |
+| `tink_accounts_edit_field_name_header` | Account name |
+| `tink_accounts_edit_field_shared_description` | 50% is included in your statistics |
+| `tink_accounts_edit_field_shared_header` | Shared account |
+| `tink_accounts_edit_field_type_dialog_title` | Choose account type | 
+| `tink_accounts_edit_field_type_header` | Account type | 
+| `tink_accounts_edit_field_type` | Account type |
+| `tink_accounts_edit_save_button` | Save |
+| `tink_accounts_edit_title` | Accont details |
+| `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
+| `tink_accounts_edit_unsaved_changes_no_save` | No, save |
+| `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
+| `tink_accounts_edit` | Edit accont |
+| `tink_accounts_error` | No accounts available |
+| `tink_accounts_type_checking` | Checking | 
+| `tink_accounts_type_credit_card` | Credit card | 
+| `tink_accounts_type_external` | External | 
+| `tink_accounts_type_investment` | Investment | 
+| `tink_accounts_type_loan` | Loan | 
+| `tink_accounts_type_mortgage` | Mortgage | 
+| `tink_accounts_type_other` | Other | 
+| `tink_accounts_type_pension` | Pension | 
+| `tink_accounts_type_savings` | Savings |
 | `tink_all_categories` | All categories |
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_create_all_expenses` | All expenses |
@@ -82,11 +110,13 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_transactions_toolbar_title` | Budget |
 | `tink_category_default_child_format` | %s - Other |
 | `tink_category_list_fragment_button_text` | Select |
+| `tink_changes_saved` | Changes saved |
 | `tink_choose_category_text` | Choose category |
 | `tink_clear_text_description` | Clear text |
 | `tink_date_format_human_today` | Today |
 | `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_date_format_human_yesterday` | Yesterday |
+| `tink_everyday_account` | Everyday accounts |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |
 | `tink_expenses_text` | %s expenses |
@@ -111,8 +141,10 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
 | `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
 | `tink_latest_transactions_toolbar_title` | All transactions |
+| `tink_loans_account` | Loan accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
 | `tink_next_month_description` | Next month |
+| `tink_other_account` | Other accounts |
 | `tink_other` | Other |
 | `tink_overview_accounts_error` | No accounts |
 | `tink_overview_budget_left_of` | %1$s left of %2$s |
@@ -120,12 +152,16 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budgets_create_new` | New Budget |
 | `tink_overview_budgets_empty_create_new` | Create New Budget |
 | `tink_overview_budgets_title` | Budgets |
+| `tink_overview_favorite_accounts_see_all_accounts` | See all accounts |
+| `tink_overview_favorite_accounts_see_all` | See all |
+| `tink_overview_highlighted_accounts_title` | Favorite accounts |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
 | `tink_overview_statistics_error` | No statistics |
 | `tink_overview_toolbar_title` | Overview |
 | `tink_period_selection_title` | Choose time period |
 | `tink_previous_month_description` | Previous month |
+| `tink_savings_account` | Savings accounts |
 | `tink_search_label` | Search |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |
@@ -134,6 +170,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_selector_over_time` | Over time |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
+| `tink_transactions_error` | You haven\'t made any transactions yet |
 | `tink_transaction_similar_button_accept_text` | Assign %1$d selected |
 | `tink_transaction_similar_button_skip_text` | Skip |
 | `tink_transaction_similar_description` | Do you also want to assign these transactions to the %1$s category? |

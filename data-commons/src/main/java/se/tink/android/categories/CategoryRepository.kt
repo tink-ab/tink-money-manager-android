@@ -23,7 +23,6 @@ class CategoryRepository @Inject constructor(
     // TODO: Don't expose LiveData directly from a repository. They belong in ViewModels.
     // Perhaps use a StateFlow instead (or wait until it's out of experimental).
 
-
     private val _categories = object : MutableLiveData<CategoryTree>() {
         override fun onActive() {
             refresh()

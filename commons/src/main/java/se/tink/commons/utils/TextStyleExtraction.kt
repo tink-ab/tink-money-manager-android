@@ -15,7 +15,7 @@ private val textLabelAttributes = arrayOf(
     fontFamilyAttr
 )
     .toIntArray().apply { sort() }
-//Framework bug, values have to be sorted: http://stackoverflow.com/questions/19034597/get-multiple-style-attributes-with-obtainstyledattributes?lq=1
+// Framework bug, values have to be sorted: http://stackoverflow.com/questions/19034597/get-multiple-style-attributes-with-obtainstyledattributes?lq=1
 
 private fun index(id: Int) = textLabelAttributes.indexOf(id)
 
@@ -50,5 +50,3 @@ data class TextStyle(
     val textColor: Int,
     val fontFamily: Typeface?
 )
-
-

@@ -38,7 +38,7 @@ internal class TinkTabs @JvmOverloads constructor(
     ) {
         val tinkTextView = TinkTextView(context)
         tinkTextView.setTheme(
-            object: NanoTitle(context) {
+            object : NanoTitle(context) {
                 override var textColor = colorOnBackground
                 override val spacing = DimensionUtils.getEmFromDp(2f)
                 override fun toUpperCase() = true
@@ -62,9 +62,12 @@ internal class TinkTabs @JvmOverloads constructor(
     }
 
     fun show() {
-        postDelayed({
-            val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_to_top)
-            startAnimation(anim)
-        }, 0)
+        postDelayed(
+            {
+                val anim = AnimationUtils.loadAnimation(context, R.anim.tink_slide_in_to_top)
+                startAnimation(anim)
+            },
+            0
+        )
     }
 }

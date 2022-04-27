@@ -6,9 +6,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.tink.moneymanagerui.R
-import se.tink.commons.extensions.inflate
 import se.tink.android.viewholders.ClickableViewHolder
 import se.tink.android.viewholders.OnViewHolderClickedListener
+import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.tint
 
 internal class BudgetCreationSearchSuggestionsAdapter : ListAdapter<String, ClickableViewHolder>(SuggestionDiffUtil), OnViewHolderClickedListener {

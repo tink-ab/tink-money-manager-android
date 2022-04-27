@@ -11,6 +11,12 @@ import androidx.fragment.app.Fragment
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.tink.core.Tink
 import com.tink.model.user.User
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration
+import com.tink.moneymanagerui.accounts.AccountEditConfiguration.Companion.ALL
+import com.tink.moneymanagerui.accounts.AccountGroupType
+import com.tink.moneymanagerui.accounts.NoAccountGroup
+import com.tink.moneymanagerui.accounts.OverviewAccountsMode
+import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import com.tink.moneymanagerui.buildConfig.BuildConfigurations
 import com.tink.moneymanagerui.configuration.BackPressedConfiguration
 import com.tink.moneymanagerui.configuration.I18nConfiguration
@@ -37,7 +43,12 @@ import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.commons.BuildConfig
 import timber.log.Timber
 import java.io.IOException
-import java.security.*
+import java.security.InvalidAlgorithmParameterException
+import java.security.InvalidKeyException
+import java.security.KeyStoreException
+import java.security.NoSuchAlgorithmException
+import java.security.NoSuchProviderException
+import java.security.UnrecoverableEntryException
 import java.security.cert.CertificateException
 import javax.crypto.NoSuchPaddingException
 import javax.inject.Inject
@@ -130,7 +141,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             false
         }
 
-    //TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
+    // TODO:PFMSDK: This should be removed later, since we should not be responsible for handling sensitive data
     fun initSecuredDataStorage(context: Context) {
         try {
             SecuredClientDataStorage.init(context.applicationContext, DefaultRecoveryHandler())
@@ -168,7 +179,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
         requireArguments().putString(ARG_ACCESS_TOKEN, accessToken)
 
-        Tink.setUser(User.fromAccessToken(accessToken));
+        Tink.setUser(User.fromAccessToken(accessToken))
     }
 
     private fun setupTimber() {
@@ -185,6 +196,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         @JvmStatic
         var featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = mapOf()
             private set
+
+        internal var accountGroupType: AccountGroupType = NoAccountGroup
+
+        internal var accountEditConfiguration: AccountEditConfiguration = ALL
+
+        internal var overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts
 
         /**
          * Creates a new instance of the [FinanceOverviewFragment].
