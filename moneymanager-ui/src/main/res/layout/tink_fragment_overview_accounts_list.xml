@@ -90,7 +90,7 @@
 
     <com.google.android.material.button.MaterialButton
       android:id="@+id/emptyStateSeeAllActions"
-      style="?attr/tink_textButtonStyle"
+      style="?attr/tink_textButtonNonClickableStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/tink_overview_favorite_accounts_see_all_accounts"
