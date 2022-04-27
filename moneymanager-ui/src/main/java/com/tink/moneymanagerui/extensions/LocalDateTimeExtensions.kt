@@ -6,9 +6,12 @@ import se.tink.commons.extensions.toDateTime
 import java.text.DecimalFormat
 import java.time.Instant
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
+import java.util.Calendar
 
 fun LocalDateTime.monthOfYear(): Int = this.month.value
 
@@ -40,9 +43,10 @@ fun LocalDateTime.getStartOfMonth(): LocalDateTime = with(TemporalAdjusters.firs
 
 fun LocalDateTime.getEndOfMonth(): LocalDateTime = with(TemporalAdjusters.lastDayOfMonth())
 
-//fun LocalDateTime.getAbbreviatedMonthName(): String {
-//    return toString("MMM")
-//        .take(3)
-//}
+fun LocalDateTime.millsInLocalTimeZone(): Long {
+    // Calendar.getInstance().timeZone stores the local time zone.
+    val zonedLatestEndTime = ZonedDateTime.of(this, ZoneId.of(Calendar.getInstance().timeZone.id))
+    return zonedLatestEndTime.toInstant().toEpochMilli()
+}
 
 

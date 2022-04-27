@@ -109,7 +109,6 @@ class DateUtils {
         return string.substring(0, 1).uppercase(Locale.getDefault()) + string.substring(1)
     }
 
-
     fun getMonthNameAndMaybeYearOfPeriod(period: Period): String {
         // TODO: add zone
         return getMonthNameOfDate(getDateTimeFromPeriod(period), true)
@@ -170,7 +169,7 @@ class DateUtils {
             .format(dateTime)
     }
 
-    private fun getDateTimeFromPeriod(period: Period): LocalDateTime {
+    fun getDateTimeFromPeriod(period: Period): LocalDateTime {
         // TODO: Core setup
         val periodDuration = period.end.toEpochMilli() - period.start.toEpochMilli()
         val middleOfPeriod = Instant.ofEpochMilli(period.start.toEpochMilli() + periodDuration / 2)

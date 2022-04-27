@@ -15,7 +15,7 @@ import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
 import com.tink.moneymanagerui.extensions.closeKeyboard
-import com.tink.moneymanagerui.extensions.milli
+import com.tink.moneymanagerui.extensions.millsInLocalTimeZone
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
 import com.tink.moneymanagerui.extensions.visibleIf
@@ -188,8 +188,11 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         periodStartText.setOnClickListener {
             amountInputText.closeKeyboard()
             val startDate = viewModel.periodStartValue.value ?: LocalDateTime.now()
-            val earliestPickableStart = viewModel.periodEndValue.value?.milli() ?: Long.MAX_VALUE
-            onPeriodDatePickerClicked(startDate, earliestStartTimeInMills = earliestPickableStart) { date ->
+
+            val latestEndTime = viewModel.periodEndValue.value ?: LocalDateTime.MAX
+            val latestEndTimeInMills = latestEndTime.millsInLocalTimeZone()
+
+            onPeriodDatePickerClicked(startDate, latestEndTimeInMills = latestEndTimeInMills) { date ->
                 viewModel.periodStartValue.value = date
             }
         }
@@ -197,8 +200,11 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
         periodEndText.setOnClickListener {
             amountInputText.closeKeyboard()
             val endDate = viewModel.periodEndValue.value ?: LocalDateTime.now()
-            val latestPickableEnd = viewModel.periodStartValue.value?.milli() ?: 0
-            onPeriodDatePickerClicked(endDate, latestEndTimeInMills = latestPickableEnd) { date ->
+
+            val earliestStartTime =  viewModel.periodStartValue.value ?: LocalDateTime.MIN
+            val earliestStartTimeInMills = earliestStartTime.millsInLocalTimeZone()
+
+            onPeriodDatePickerClicked(endDate, earliestStartTimeInMills = earliestStartTimeInMills) { date ->
                 viewModel.periodEndValue.value = date
             }
         }
@@ -289,8 +295,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
     private fun onPeriodDatePickerClicked(
         currentDate: LocalDateTime,
-        earliestStartTimeInMills: Long = Long.MAX_VALUE,
-        latestEndTimeInMills: Long = 0,
+        latestEndTimeInMills: Long = Long.MAX_VALUE,
+        earliestStartTimeInMills: Long = 0,
         onDateSelect: (LocalDateTime) -> Unit
     ) {
         context?.let { context ->
@@ -298,7 +304,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 context,
                 context.getThemeResIdFromAttr(R.attr.tink_datePickerStyle),
                 { _, year, month, dayOfMonth ->
-                    val date = LocalDateTime.of(year, month, dayOfMonth, 0, 0, 0, 0)
+                    // Calendar#MONTH expects 0-11 while LocalDate>Time#monthValue outputs 1-12
+                    val date = LocalDateTime.of(year,  month + 1, dayOfMonth, 0, 0, 0, 0)
                     onDateSelect.invoke(date)
                 },
                 currentDate.year,
@@ -306,8 +313,8 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 currentDate.monthValue - 1,
                 currentDate.dayOfMonth
             ).apply {
-                datePicker.minDate = latestEndTimeInMills
-                datePicker.maxDate = earliestStartTimeInMills
+                datePicker.minDate = earliestStartTimeInMills
+                datePicker.maxDate = latestEndTimeInMills
             }.show()
         }
     }

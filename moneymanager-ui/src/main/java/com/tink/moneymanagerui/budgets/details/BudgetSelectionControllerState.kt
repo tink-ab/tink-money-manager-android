@@ -70,13 +70,14 @@ internal class BudgetSelectionControllerState(
 
         addSource(_budgetPeriodsState) { state ->
             value = state.map { periodDetails ->
-                calculateBudgetPeriodsTreeSet(periodDetails.second).toList()
+                updateBudgetPeriodsTreeSet(periodDetails.second)
+                budgetPeriods.toList()
             }
         }
     }
 
-    private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
-        return budgetPeriods.apply {
+    private fun updateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>) {
+        budgetPeriods.apply {
             clear()
             addAll(periods)
         }
@@ -91,9 +92,9 @@ internal class BudgetSelectionControllerState(
             value = state.map { periodDetails ->
                 val currentValue = value
                 if (currentValue is SuccessState) {
-                    updateCurrentPeriod(currentValue.data, calculateBudgetPeriodsTreeSet(periodDetails.second))
+                    updateCurrentPeriod(currentValue.data, budgetPeriods)
                 } else {
-                    updateCurrentPeriod(null, calculateBudgetPeriodsTreeSet(periodDetails.second))
+                    updateCurrentPeriod(null, budgetPeriods)
                 }
             }
         }
