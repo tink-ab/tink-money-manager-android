@@ -93,6 +93,7 @@
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
     <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
+    <item name="tink_textButtonNonClickableStyle">@style/TinkTextButtonNonClickableStyle</item>
     <item name="tink_insightPrimaryActionButtonStyle">@style/TinkInsightPrimaryActionButtonStyle</item>
     <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
     <item name="tink_periodPickerButtonStyle">@style/TinkPeriodPickerButtonStyle</item>
