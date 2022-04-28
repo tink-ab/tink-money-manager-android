@@ -12,6 +12,7 @@ import com.tink.moneymanagerui.accounts.OverviewAccountsMode
 import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import com.tink.moneymanagerui.mock.AccountMockFactory
 import com.tink.moneymanagerui.mock.CategoryMockFactory
+import com.tink.moneymanagerui.mock.ProvidersMockFactory
 import com.tink.moneymanagerui.mock.TransactionMockFactory
 import com.tink.moneymanagerui.testutil.PathDispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -35,7 +36,9 @@ open class BaseAccountTestSuit: BaseTestSuite() {
             "/api/v1/transactions/${defaultTransaction["id"]}" to
                     MockResponse().setResponseCode(200).setBody(defaultTransaction.toString()),
             "/api/v1/categories" to
-                    MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString()))
+                    MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString()),
+            "/api/v1/providers" to MockResponse().setResponseCode(200).setBody(ProvidersMockFactory.getProviders().toString())
+        )
     )
 
     internal fun openOverviewWithAcoounts(

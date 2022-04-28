@@ -15,11 +15,11 @@ import com.tink.moneymanagerui.accounts.NoAccountGroup
 import com.tink.moneymanagerui.accounts.OverviewAccountsMode
 import com.tink.moneymanagerui.accounts.OverviewFavoriteAccounts
 import com.tink.moneymanagerui.accounts.list.EVERYDAY_ACCOUNTS
-import com.tink.moneymanagerui.accounts.list.GroupedAccountList
+import com.tink.moneymanagerui.accounts.list.GroupedAccountListAdapter
 import com.tink.moneymanagerui.accounts.list.OTHER_ACCOUNTS
 import com.tink.moneymanagerui.accounts.list.SAVINGS_ACCOUNTS
+import com.tink.moneymanagerui.accounts.list.toAccountGroup
 import com.tink.moneymanagerui.mock.AccountMockFactory
-import com.tink.moneymanagerui.overview.accounts.toAccountGroup
 import com.tink.moneymanagerui.testutil.CustomMatchers
 import com.tink.moneymanagerui.testutil.RecyclerViewItemCountAssertion
 import kotlinx.android.synthetic.main.tink_grouped_item_account.view.*
@@ -131,13 +131,13 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
         private val title: String,
         private val amount: String,
         private val numberOfAccounts: Int,
-    ): BoundedMatcher<GroupedAccountList.GroupedAccountViewHolder, GroupedAccountList.GroupedAccountViewHolder>
-        (GroupedAccountList.GroupedAccountViewHolder::class.java) {
+    ): BoundedMatcher<GroupedAccountListAdapter.GroupedAccountViewHolder, GroupedAccountListAdapter.GroupedAccountViewHolder>
+        (GroupedAccountListAdapter.GroupedAccountViewHolder::class.java) {
         override fun describeTo(description: Description?) {
             description?.appendText("Matching title, amount and number of list items.")
         }
 
-        override fun matchesSafely(item: GroupedAccountList.GroupedAccountViewHolder?): Boolean {
+        override fun matchesSafely(item: GroupedAccountListAdapter.GroupedAccountViewHolder?): Boolean {
             if (item == null) return false
 
             val x = item.itemView.accountBalanceSumText.text.filter { !it.isWhitespace() }.toString()

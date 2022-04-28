@@ -28,7 +28,7 @@ class AccountOverviewListTest: BaseAccountTestSuit() {
     }
 
     @Test
-    fun shows_see_accounts_button_when_no_fovorit_accounts() {
+    fun shows_see_accounts_button_when_no_favorit_accounts() {
         openOverviewWithAcoounts(listOf(
             AccountMockFactory.getAccount(id = "1", favored = false),
             AccountMockFactory.getAccount(id = "2", favored = false)
