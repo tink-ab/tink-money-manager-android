@@ -9,8 +9,8 @@ apply plugin: 'kotlin-android-extensions'
 apply from: '../dependencies.gradle'
 
 android {
-    buildToolsVersion '30.0.3'
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.tink.moneymanager.ui.sample"

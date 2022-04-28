@@ -3,11 +3,11 @@ package com.tink.moneymanagerui.theme
 import android.content.Context
 import android.graphics.Typeface
 import com.tink.moneymanagerui.R
-import se.tink.commons.extensions.getColorFromAttr
-import com.tink.moneymanagerui.view.Hecto
 import com.tink.moneymanagerui.util.FontUtils
+import com.tink.moneymanagerui.view.Hecto
 import com.tink.moneymanagerui.view.TinkSnackbar
 import com.tink.moneymanagerui.view.TinkTextView
+import se.tink.commons.extensions.getColorFromAttr
 
 open class TinkDefaultSnackbarTheme(private val context: Context) : TinkSnackbar.Theme {
     override val textTheme: TinkTextView.Theme

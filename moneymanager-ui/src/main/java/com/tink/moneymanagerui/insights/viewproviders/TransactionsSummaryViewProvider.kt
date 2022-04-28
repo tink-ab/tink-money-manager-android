@@ -25,8 +25,8 @@ class TransactionsSummaryViewProvider @Inject constructor(
 
     override val supportedInsightTypes: List<InsightType> =
         listOf(
-          InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
-          InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS
+            InsightType.WEEKLY_SUMMARY_EXPENSE_TRANSACTIONS,
+            InsightType.MONTHLY_SUMMARY_EXPENSE_TRANSACTIONS
         )
 
     override val viewType: InsightViewType = getViewType()
@@ -55,11 +55,13 @@ class TransactionsSummaryViewProvider @Inject constructor(
     }
 
     inner class TransactionsSummaryViewHolder(
-        parent: ViewGroup, actionHandler: ActionHandler
+        parent: ViewGroup,
+        actionHandler: ActionHandler
     ) : InsightViewHolder(
         parent.inflate(R.layout.tink_item_insight_transactions_summary),
         actionHandler
-    ), InsightCommonBottomPart {
+    ),
+        InsightCommonBottomPart {
         override val view: View = itemView
 
         override fun bind(data: InsightDataHolder, insight: Insight) {
@@ -83,16 +85,19 @@ class TransactionsSummaryViewProvider @Inject constructor(
                     when (data.transactionSummaryType) {
                         TransactionSummaryType.WEEKLY_TRANSACTION_SUMMARY -> R.string.tink_insights_total_weekly_transactions_text
                         TransactionSummaryType.MONTHLY_TRANSACTION_SUMMARY -> R.string.tink_insights_total_monthly_transactions_text
-                    }, data.transactionSummary.commonTransactionsOverview.totalNumberOfTransactions
+                    },
+                    data.transactionSummary.commonTransactionsOverview.totalNumberOfTransactions
                 )
-                most_common_transaction_last_month_text.text = context.getString(R.string.tink_insights_most_common_transaction_text,
+                most_common_transaction_last_month_text.text = context.getString(
+                    R.string.tink_insights_most_common_transaction_text,
                     data.transactionSummary.commonTransactionsOverview.mostCommonTransactionDescription,
                     data.transactionSummary.commonTransactionsOverview.mostCommonTransactionCount
                 )
 
                 val largestExpense = data.transactionSummary.largestExpense.amount.formatCurrencyExact()
                 largest_transaction_text.text = context.getString(R.string.tink_insights_largest_transaction_text, largestExpense)
-                largest_transaction_recipient_text.text = context.getString(R.string.tink_insights_largest_transaction_recipient_text,
+                largest_transaction_recipient_text.text = context.getString(
+                    R.string.tink_insights_largest_transaction_recipient_text,
                     data.transactionSummary.largestExpense.description,
                     dateUtils.getMonthWithDayOfMonth(DateTime(data.transactionSummary.largestExpense.date))
                 )

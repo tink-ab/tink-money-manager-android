@@ -29,4 +29,14 @@
       android:id="@+id/loader"
       layout="@layout/tink_loader_spinner" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/noTransactionsText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="14sp"
+      android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+      android:visibility="gone"
+      android:text="@string/tink_transactions_error" />
+
 </RelativeLayout>

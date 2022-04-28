@@ -44,16 +44,19 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        viewModel.state.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
+        viewModel.state.observe(
+            viewLifecycleOwner,
+            Observer {
+                when (it) {
+                    is CategorizationFlowViewModel.State.CategorySelection -> showCategoryPickerView(it.transaction)
 
-                is CategorizationFlowViewModel.State.SimilarTransactions ->
-                    showSimilarTransactionsOnReturn(it.updatedCategoryId)
+                    is CategorizationFlowViewModel.State.SimilarTransactions ->
+                        showSimilarTransactionsOnReturn(it.updatedCategoryId)
 
-                is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
+                    is CategorizationFlowViewModel.State.Done -> fragmentCoordinator.popBackStack()
+                }
             }
-        })
+        )
     }
 
     private fun showCategoryPickerView(transaction: Transaction) {
@@ -85,18 +88,21 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     }
 
     private fun showSimilarTransactionsOnReturn(updatedCategoryId: String) {
-        viewModel.similarTransactions.observe(this, object : Observer<List<Transaction>?> {
-            override fun onChanged(list: List<Transaction>?) {
-                list?.let {
-                    viewModel.similarTransactions.removeObserver(this)
-                    if (list.isNotEmpty()) {
-                        showSimilarTransactionFragment(list, updatedCategoryId)
-                    } else {
-                        viewModel.similarTransactionsDone()
+        viewModel.similarTransactions.observe(
+            this,
+            object : Observer<List<Transaction>?> {
+                override fun onChanged(list: List<Transaction>?) {
+                    list?.let {
+                        viewModel.similarTransactions.removeObserver(this)
+                        if (list.isNotEmpty()) {
+                            showSimilarTransactionFragment(list, updatedCategoryId)
+                        } else {
+                            viewModel.similarTransactionsDone()
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     override fun onCategorySelected(updatedCategoryId: String) =
@@ -116,7 +122,8 @@ internal class CategorizationFlowFragment : BaseFragment(), CategorySelectionLis
     companion object {
         fun newInstance(
             transactionId: String,
-            moneyManagerFeatureType: MoneyManagerFeatureType? = null) =
+            moneyManagerFeatureType: MoneyManagerFeatureType? = null
+        ) =
             CategorizationFlowFragment().apply {
                 arguments = bundleOf(
                     ARG_TRANSACTION_ID to transactionId,

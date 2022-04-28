@@ -42,10 +42,16 @@ internal class BudgetSelectionControllerState(
     private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : LifecycleObserver {
 
+    private val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
+        first.start.compareTo(second.start)
+    }
+
     init {
-        budgetsRepository.requestBudgetPeriodDetailsState(budgetId,
+        budgetsRepository.requestBudgetPeriodDetailsState(
+            budgetId,
             DateTime.now().minusMonths(12).getInstant(),
-            Instant.now())
+            Instant.now()
+        )
 
         lifecycle.addObserver(this)
     }
@@ -70,14 +76,11 @@ internal class BudgetSelectionControllerState(
         }
     }
 
-    private val budgetPeriods = TreeSet<BudgetPeriod> { first, second ->
-        first.start.compareTo(second.start)
-    }
-
     private fun calculateBudgetPeriodsTreeSet(periods: List<BudgetPeriod>): TreeSet<BudgetPeriod> {
-        budgetPeriods.removeAll(periods.toSet())
-        budgetPeriods.addAll(periods)
-        return budgetPeriods
+        return budgetPeriods.apply {
+            clear()
+            addAll(periods)
+        }
     }
 
     private val _currentSelectedPeriodMutable = MutableLiveData<BudgetPeriod>()
@@ -96,7 +99,7 @@ internal class BudgetSelectionControllerState(
             }
         }
 
-        addSource(_currentSelectedPeriodMutable) {value = SuccessState(it)}
+        addSource(_currentSelectedPeriodMutable) { value = SuccessState(it) }
     }
 
     private fun updateCurrentPeriod(currentValue: BudgetPeriod?, allPeriods: TreeSet<BudgetPeriod>): BudgetPeriod {
@@ -172,7 +175,6 @@ internal class BudgetSelectionControllerState(
     }
 
     fun previous() {
-
         (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriodData ->
             _currentSelectedPeriodMutable.value = budgetPeriods.lower(currentSelectedPeriodData)
             whenNonNull(
@@ -192,7 +194,6 @@ internal class BudgetSelectionControllerState(
     }
 
     fun next() {
-
         (_currentSelectedPeriodState.value as? SuccessState)?.data?.let { currentSelectedPeriod ->
             _currentSelectedPeriodMutable.value = budgetPeriods.higher(currentSelectedPeriod)
         }
@@ -218,14 +219,13 @@ internal class BudgetSelectionControllerState(
                 } else {
                     false
                 }
-
             }
         }
     }
 
     private fun shouldFetchMore(currentSelectedPeriod: BudgetPeriod, periods: List<Period>) =
-        currentSelectedPeriod == budgetPeriods.first()
-                && currentSelectedPeriod.start.isAfter(periods.first().start)
+        currentSelectedPeriod == budgetPeriods.first() &&
+            currentSelectedPeriod.start.isAfter(periods.first().start)
 
     private fun backTrackPeriodRange(
         currentPeriod: BudgetPeriod,

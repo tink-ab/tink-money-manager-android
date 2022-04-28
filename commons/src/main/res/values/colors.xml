@@ -55,17 +55,6 @@
   <color name="tink_ripple_on_light_background">#20444444</color>
   <color name="tink_ripple_on_dark_background">#20ffffff</color>
 
-  /* App colors */
-<!--  <color name="colorPrimary">?tink_colorPrimary</color>-->
-<!--  <color name="colorPrimaryDark">?tink_colorPrimaryDark</color>-->
-<!--  <color name="colorPrimaryLight">?tink_colorPrimaryLight</color>-->
-<!--  <color name="colorOnPrimary">?tink_colorOnPrimary</color>-->
-
-<!--  <color name="colorAccent">?tink_colorAccent</color>-->
-<!--  <color name="colorAccentDark">?tink_colorAccentDark</color>-->
-<!--  <color name="colorAccentLight">?tink_colorAccentLight</color>-->
-<!--  <color name="colorOnAccent">?tink_colorOnAccent</color>-->
-
   <color name="tink_color_warning">@color/tink_orange</color>
   <color name="tink_color_on_warning">@color/tink_white</color>
   <color name="tink_color_error">@color/tink_red</color>

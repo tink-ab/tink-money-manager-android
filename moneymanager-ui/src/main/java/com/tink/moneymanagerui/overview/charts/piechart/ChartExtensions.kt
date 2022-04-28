@@ -5,11 +5,10 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.charts.ColorGenerator
 import com.tink.moneymanagerui.charts.PieChartLabelView
 import com.tink.moneymanagerui.charts.PieChartView
-import com.tink.moneymanagerui.charts.ColorGenerator
 import com.tink.moneymanagerui.charts.extensions.sumByFloat
-
 
 internal fun PieChartView.addBackSegment(type: String, @ColorInt baseColor: Int) {
     val color = ColorUtils.setAlphaComponent(baseColor, (0.4f * 255).toInt())
@@ -53,7 +52,8 @@ private fun PieChartView.addSegment(
     startAngle: Float,
     sweep: Float,
     color: Int,
-    colorPressed: Int): PieChartView.PieChartSegmentView {
+    colorPressed: Int
+): PieChartView.PieChartSegmentView {
     return createSegment().also {
         it.startAngle = startAngle
         it.angle = sweep
@@ -74,7 +74,8 @@ private fun createStateList(color: Int, colorPressed: Int) = ColorStateList(
     arrayOf(
         intArrayOf(android.R.attr.state_pressed),
         intArrayOf()
-    ), intArrayOf(
+    ),
+    intArrayOf(
         colorPressed,
         color
     )

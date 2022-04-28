@@ -13,7 +13,7 @@ object SoftKeyboardUtils {
     }
 
     @JvmStatic
-	fun closeSoftKeyboard(activity: Activity?) {
+    fun closeSoftKeyboard(activity: Activity?) {
         val currentFocus = activity?.currentFocus
         if (currentFocus != null) {
             closeSoftKeyboard(activity, currentFocus)

@@ -35,5 +35,3 @@ internal class TranslationTransition : Transition() {
         } else null
     }
 }
-
-

@@ -45,21 +45,21 @@
     <item name="tink_textColorSecondaryDisabled">@color/tink_disabled_greyblack</item>
     <item name="tink_textColorPrimaryInverse">@color/tink_white</item>
     <item name="tink_cardBackgroundColor">@color/tink_white</item>
-    <item name="tink_createBudgetIconColor">@color/tink_color_error</item>
+    <item name="tink_createBudgetIconColor">?tink_colorAccent</item>
     <item name="tink_createBudgetIconBackgroundColor">@color/tink_expensive_blue_light</item>
-    <item name="tink_createBudgetButtonColor">@color/tink_color_error</item>
+    <item name="tink_createBudgetButtonColor">?tink_colorAccent</item>
     <item name="tink_uncategorizedIconColor">?tink_uncategorizedColor</item>
     <item name="tink_incomeIconColor">?tink_incomeColor</item>
     <item name="tink_expensesIconColor">?tink_expensesColor</item>
     <item name="tink_transferIconColor">?tink_transferColor</item>
     <item name="tink_uncategorizedIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_incomeIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_expensesIconBackgroundColor">?tink_uncategorizedLightColor</item>
-    <item name="tink_transferIconBackgroundColor">?tink_uncategorizedLightColor</item>
+    <item name="tink_incomeIconBackgroundColor">?tink_incomeLightColor</item>
+    <item name="tink_expensesIconBackgroundColor">?tink_expensesLightColor</item>
+    <item name="tink_transferIconBackgroundColor">?tink_transferLightColor</item>
 
     <item name="tink_accountIconColor">?tink_uncategorizedLightColor</item>
     <item name="tink_accountIconBackgroundColor">?tink_colorAccent</item>
-    <item name="tink_accountTextColor">?tink_accountIconColor</item>
+    <item name="tink_accountTextColor">?tink_colorAccent</item>
 
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
@@ -93,6 +93,7 @@
     <!-- Button styles -->
     <item name="tink_containedButtonStyle">@style/TinkContainedButtonStyle</item>
     <item name="tink_textButtonStyle">@style/TinkTextButtonStyle</item>
+    <item name="tink_textButtonNonClickableStyle">@style/TinkTextButtonNonClickableStyle</item>
     <item name="tink_insightPrimaryActionButtonStyle">@style/TinkInsightPrimaryActionButtonStyle</item>
     <item name="tink_insightSecondaryActionButtonStyle">@style/TinkInsightSecondaryActionButtonStyle</item>
     <item name="tink_periodPickerButtonStyle">@style/TinkPeriodPickerButtonStyle</item>

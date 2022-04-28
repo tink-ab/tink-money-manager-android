@@ -48,45 +48,59 @@ internal class BudgetCreationFilterSelectionFragment : BaseFragment() {
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
 
-        title = getString(if (viewModel.isEditing) {
-            R.string.tink_budget_edit_toolbar_title
-        } else {
-            R.string.tink_budget_create_title
-        })
+        title = getString(
+            if (viewModel.isEditing) {
+                R.string.tink_budget_edit_toolbar_title
+            } else {
+                R.string.tink_budget_create_title
+            }
+        )
 
-        viewModel.showActionButton.observe(viewLifecycle, { shouldShowActionButton ->
-            actionButton.visibleIf { shouldShowActionButton }
-        })
+        viewModel.showActionButton.observe(
+            viewLifecycle,
+            { shouldShowActionButton ->
+                actionButton.visibleIf { shouldShowActionButton }
+            }
+        )
 
         adapter.onSelectionListener = viewModel.selectedTreeListItems::postValue
 
         filterSelectionList.layoutManager = LinearLayoutManager(context)
         filterSelectionList.adapter = adapter
 
-        viewModel.filterItems.observe(viewLifecycleOwner, { items ->
-            if (items != null) {
-                adapter.setMultiSelectionData(items)
-            }
-        })
-
-        viewModel.searchClicked.observe(viewLifecycle, { event ->
-            event.getContentIfNotHandled()?.let { isSearchClicked ->
-                if (isSearchClicked) {
-                    adapter.removeSelectedItems()
-                    navigation.goToSearchFragment()
+        viewModel.filterItems.observe(
+            viewLifecycleOwner,
+            { items ->
+                if (items != null) {
+                    adapter.setMultiSelectionData(items)
                 }
             }
-        })
+        )
 
-        viewModel.allExpensesClicked.observe(viewLifecycle, { event ->
-            event.getContentIfNotHandled()?.let { isExpensesClicked ->
-                if (isExpensesClicked) {
-                    adapter.removeSelectedItems()
-                    viewModel.onAllExpensesSelected()
-                    navigation.goToSpecificationFragment()
+        viewModel.searchClicked.observe(
+            viewLifecycle,
+            { event ->
+                event.getContentIfNotHandled()?.let { isSearchClicked ->
+                    if (isSearchClicked) {
+                        adapter.removeSelectedItems()
+                        navigation.goToSearchFragment()
+                    }
                 }
             }
-        })
+        )
+
+        viewModel.allExpensesClicked.observe(
+            viewLifecycle,
+            { event ->
+                event.getContentIfNotHandled()?.let { isExpensesClicked ->
+                    if (isExpensesClicked) {
+                        adapter.removeSelectedItems()
+                        viewModel.onAllExpensesSelected()
+                        navigation.goToSpecificationFragment()
+                    }
+                }
+            }
+        )
 
         actionButton.setOnClickListener {
             adapter.selectedItems

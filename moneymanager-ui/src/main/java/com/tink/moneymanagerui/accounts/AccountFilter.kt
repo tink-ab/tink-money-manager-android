@@ -1,7 +1,5 @@
 package com.tink.moneymanagerui.accounts
 
-import com.tink.moneymanagerui.overview.accounts.AccountWithImage
-
 /**
  * Interface definition to filter accounts
  */

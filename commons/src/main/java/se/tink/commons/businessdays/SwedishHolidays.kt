@@ -1,9 +1,8 @@
 package se.tink.commons.businessdays
 
-
-/// Gauss' Easter algorithm
-///
-/// - Note: [Gauss' Easter algorithm](https://en.wikipedia.org/wiki/Computus#Gauss'_Easter_algorithm)
+// / Gauss' Easter algorithm
+// /
+// / - Note: [Gauss' Easter algorithm](https://en.wikipedia.org/wiki/Computus#Gauss'_Easter_algorithm)
 private fun dateComponentsOfEasterSunday(year: Int): DateComponents {
     val a = year % 19
     val b = year % 4
@@ -51,116 +50,116 @@ private fun dateComponentsOfPentecost(year: Int): DateComponents {
     return easter.plusDays(49).toDateComponents()
 }
 
-/// Easter Sunday
-/// - Date: The first Sunday after a full moon on or after March 21
-/// - Note: Påskdagen
+// / Easter Sunday
+// / - Date: The first Sunday after a full moon on or after March 21
+// / - Note: Påskdagen
 fun DateComponents.isEasterSunday() = this == dateComponentsOfEasterSunday(year)
 
-/// Good Friday
-/// - Date: The Friday before Easter Sunday
-/// - Note: Långfredagen
+// / Good Friday
+// / - Date: The Friday before Easter Sunday
+// / - Note: Långfredagen
 fun DateComponents.isGoodFriday() = this == dateComponentsOfGoodFriday(year)
 
-/// Easter Monday
-/// - Date: Monday after Easter Sunday (one day after Easter Sunday)
-/// - Note: Annandag påsk
+// / Easter Monday
+// / - Date: Monday after Easter Sunday (one day after Easter Sunday)
+// / - Note: Annandag påsk
 fun DateComponents.isEasterMonday() = this == dateComponentsOfEasterMonday(year)
 
-/// Ascension Day
-/// - Date: 39 days after Easter Sunday
-/// - Note: Kristi himmelsfärds dag
+// / Ascension Day
+// / - Date: 39 days after Easter Sunday
+// / - Note: Kristi himmelsfärds dag
 fun DateComponents.isAscensionDay() = this == dateComponentsOfAscensionDay(year)
 
-/// Pentecost
-/// - Date: The 7th Sunday (49 days) after Easter Sunday
-/// - Note: Pingstdagen
+// / Pentecost
+// / - Date: The 7th Sunday (49 days) after Easter Sunday
+// / - Note: Pingstdagen
 fun DateComponents.isPentecost() = this == dateComponentsOfPentecost(year)
 
-/// New Year's Day
-///
-/// - Date: 1 January
-/// - Note: Nyårsdagen
+// / New Year's Day
+// /
+// / - Date: 1 January
+// / - Note: Nyårsdagen
 fun DateComponents.isNewYearsDay() = this == DateComponents(year = year, month = 1, day = 1)
 
-/// Epiphany
-/// - Date: 6 January
-/// - Note: Trettondedag jul
+// / Epiphany
+// / - Date: 6 January
+// / - Note: Trettondedag jul
 fun DateComponents.isEpiphany() = this == DateComponents(year = year, month = 1, day = 6)
 
-/// International Workers' Day
-/// - Date: 1 May
-/// - Note: Första Maj
+// / International Workers' Day
+// / - Date: 1 May
+// / - Note: Första Maj
 fun DateComponents.isInternationalWorkersDay() =
     this == DateComponents(year = year, month = 5, day = 1)
 
-/// National Day of Sweden
-/// - Date: 6 June
-/// - Note: Sveriges nationaldag
+// / National Day of Sweden
+// / - Date: 6 June
+// / - Note: Sveriges nationaldag
 fun DateComponents.isNationalDayOfSweden() = this == DateComponents(year = year, month = 6, day = 6)
 
-/// Midsummer's Eve
-/// - Date: The Friday during the period 19–25 June. (2016: June 24)
-/// - Note: Midsommarafton
+// / Midsummer's Eve
+// / - Date: The Friday during the period 19–25 June. (2016: June 24)
+// / - Note: Midsommarafton
 fun DateComponents.isMidsummersEve(): Boolean {
     val dateTime = toDateTime().plusHours(1)
 
     val intervalStart = DateComponents(year, month = 6, day = 19).toDateTime()
-    val intervalEnd = DateComponents(year, month = 6, day = 26).toDateTime() //Exclusive
+    val intervalEnd = DateComponents(year, month = 6, day = 26).toDateTime() // Exclusive
 
-    return dateTime.dayOfWeek == 5
-            && dateTime.isAfter(intervalStart)
-            && dateTime.isBefore(intervalEnd)
+    return dateTime.dayOfWeek == 5 &&
+        dateTime.isAfter(intervalStart) &&
+        dateTime.isBefore(intervalEnd)
 }
 
-/// Midsummer's Day
-/// - Date: The Saturday during the period 20–26 June
-/// - Note: Midsommardagen
+// / Midsummer's Day
+// / - Date: The Saturday during the period 20–26 June
+// / - Note: Midsommardagen
 fun DateComponents.isMidsummersDay(): Boolean {
     val dateTime = toDateTime().plusHours(1)
 
     val intervalStart = DateComponents(year, month = 6, day = 20).toDateTime()
-    val intervalEnd = DateComponents(year, month = 6, day = 27).toDateTime() //Exclusive
+    val intervalEnd = DateComponents(year, month = 6, day = 27).toDateTime() // Exclusive
 
-    return dateTime.dayOfWeek == 6
-            && dateTime.isAfter(intervalStart)
-            && dateTime.isBefore(intervalEnd)
+    return dateTime.dayOfWeek == 6 &&
+        dateTime.isAfter(intervalStart) &&
+        dateTime.isBefore(intervalEnd)
 }
 
-/// All Saints' Day
-/// - Date: The Saturday during the period 31 October–6 November
-/// - Note: Alla helgons dag
+// / All Saints' Day
+// / - Date: The Saturday during the period 31 October–6 November
+// / - Note: Alla helgons dag
 fun DateComponents.isAllSaintsDay(): Boolean {
     val dateTime = toDateTime().plusHours(1)
 
     val intervalStart = DateComponents(year, month = 10, day = 31).toDateTime()
-    val intervalEnd = DateComponents(year, month = 11, day = 7).toDateTime() //Exclusive
+    val intervalEnd = DateComponents(year, month = 11, day = 7).toDateTime() // Exclusive
 
-    return dateTime.dayOfWeek == 6
-            && dateTime.isAfter(intervalStart)
-            && dateTime.isBefore(intervalEnd)
+    return dateTime.dayOfWeek == 6 &&
+        dateTime.isAfter(intervalStart) &&
+        dateTime.isBefore(intervalEnd)
 }
 
-/// Christmas Eve
-///
-/// - Date: 24 December
-/// - Note: Julafton
+// / Christmas Eve
+// /
+// / - Date: 24 December
+// / - Note: Julafton
 fun DateComponents.isChristmasEve() = this == DateComponents(year = year, month = 12, day = 24)
 
-/// Christmas Day
-///
-/// - Date: 25 December
-/// - Note: Juldagen
+// / Christmas Day
+// /
+// / - Date: 25 December
+// / - Note: Juldagen
 fun DateComponents.isChristmasDay() = this == DateComponents(year = year, month = 12, day = 25)
 
-/// Second Day of Christmas
-///
-/// - Date: 26 December
-/// - Note: Annandag jul
+// / Second Day of Christmas
+// /
+// / - Date: 26 December
+// / - Note: Annandag jul
 fun DateComponents.isSecondDayOfChristmas() =
     this == DateComponents(year = year, month = 12, day = 26)
 
-/// New Year's Eve
-///
-/// - Date: 31 December
-/// - Note: Nyårsafton
+// / New Year's Eve
+// /
+// / - Date: 31 December
+// / - Note: Nyårsafton
 fun DateComponents.isNewYearsEve() = this == DateComponents(year = year, month = 12, day = 31)

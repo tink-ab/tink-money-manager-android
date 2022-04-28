@@ -7,7 +7,7 @@ import android.transition.TransitionValues
 @Suppress("UNCHECKED_CAST")
 internal operator fun <T> TransitionValues?.get(key: String): T? = this?.values?.get(key) as? T
 
-//TODO: Use ktx when released
+// TODO: Use ktx when released
 internal fun Animator.doOnStart(action: () -> Unit) = addListener(object : Animator.AnimatorListener {
     override fun onAnimationRepeat(animation: Animator?) {}
     override fun onAnimationEnd(animation: Animator?) {}
@@ -22,7 +22,7 @@ internal fun Animator.doOnEnd(action: () -> Unit) = addListener(object : Animato
     override fun onAnimationStart(animation: Animator?) {}
 })
 
-//TODO: Use ktx when released
+// TODO: Use ktx when released
 internal fun Transition.doOnStart(action: () -> Unit) = addListener(object : Transition.TransitionListener {
     override fun onTransitionEnd(transition: Transition?) {}
     override fun onTransitionResume(transition: Transition?) {}

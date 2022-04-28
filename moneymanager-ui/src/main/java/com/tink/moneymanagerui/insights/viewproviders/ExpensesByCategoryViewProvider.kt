@@ -84,7 +84,6 @@ class ExpensesByCategoryViewHolder(
                     View.VISIBLE
                 } ?: View.GONE
 
-
             second.visibility =
                 data.second?.let {
                     icon1.setImageResFromAttr(it.categoryIcon)

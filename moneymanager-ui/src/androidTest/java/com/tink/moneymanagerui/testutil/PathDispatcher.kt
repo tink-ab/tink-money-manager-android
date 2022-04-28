@@ -7,7 +7,7 @@ import okhttp3.mockwebserver.RecordedRequest
 class PathDispatcher(
     private val pathToResponseMap: MutableMap<String, MockResponse> = mutableMapOf(),
     private val pathToBodyFilterMap: MutableMap<String, (String) -> Boolean> = mutableMapOf()
-): Dispatcher() {
+) : Dispatcher() {
 
     private val defaultResponse = MockResponse().setResponseCode(500).setBody("{}")
 

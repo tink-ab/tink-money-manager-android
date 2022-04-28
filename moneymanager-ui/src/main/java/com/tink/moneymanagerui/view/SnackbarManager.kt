@@ -1,12 +1,12 @@
 package com.tink.moneymanagerui.view
 
+import android.content.Context
+import android.view.View
+import androidx.annotation.StringRes
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
-import android.content.Context
-import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import android.view.View
 import com.tink.annotations.PfmScope
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.theme.TinkDefaultSnackbarTheme
@@ -14,7 +14,6 @@ import com.tink.moneymanagerui.theme.TinkErrorSnackbarTheme
 import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.TinkNetworkError.ErrorCode
 import javax.inject.Inject
-
 
 private interface SnackbarHandler {
     fun display(message: String, duration: Int, theme: TinkSnackbar.Theme)
@@ -29,8 +28,10 @@ internal class SnackbarManager @Inject constructor() {
         context?.let { displayError(error, it) }
     }
 
-    fun displayError(error: TinkNetworkError?, context: Context,
-                     theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)
+    fun displayError(
+        error: TinkNetworkError?,
+        context: Context,
+        theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)
     ) {
         val message = when {
             error?.statusCode?.value() == 408 -> context.getString(R.string.tink_snackbar_utils_error_status_code_408)
@@ -45,31 +46,41 @@ internal class SnackbarManager @Inject constructor() {
         context?.let { displayError(message, it) }
     }
 
-    fun displayError(@StringRes message: Int, context: Context,
-                     theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)) =
-            displayError(context.getString(message), theme)
+    fun displayError(
+        @StringRes message: Int,
+        context: Context,
+        theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)
+    ) =
+        displayError(context.getString(message), theme)
 
     fun displayError(message: String, context: Context?) {
         context?.let { displayError(message, it) }
     }
 
-    fun displayError(message: String, context: Context,
-                     theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)) =
-            display(message, Snackbar.LENGTH_LONG, theme)
+    fun displayError(
+        message: String,
+        context: Context,
+        theme: TinkSnackbar.Theme = TinkErrorSnackbarTheme(context)
+    ) =
+        display(message, Snackbar.LENGTH_LONG, theme)
 
     fun displayError(message: String, theme: TinkSnackbar.Theme) =
-            display(message, Snackbar.LENGTH_LONG, theme)
+        display(message, Snackbar.LENGTH_LONG, theme)
 
     fun displayMessage(message: String, duration: Int, context: Context?) {
         context?.let { displayMessage(message, duration, it) }
     }
 
-    fun displayMessage(message: String, duration: Int, context: Context,
-                       theme: TinkSnackbar.Theme = TinkDefaultSnackbarTheme(context)) =
-            display(message, duration, theme)
+    fun displayMessage(
+        message: String,
+        duration: Int,
+        context: Context,
+        theme: TinkSnackbar.Theme = TinkDefaultSnackbarTheme(context)
+    ) =
+        display(message, duration, theme)
 
     fun displayMessage(message: String, duration: Int, theme: TinkSnackbar.Theme) =
-            display(message, duration, theme)
+        display(message, duration, theme)
 
     private fun display(message: String, duration: Int, theme: TinkSnackbar.Theme) {
         handlers.lastOrNull()?.display(message, duration, theme)
@@ -77,27 +88,28 @@ internal class SnackbarManager @Inject constructor() {
 
     @JvmOverloads
     fun displayLoader(@StringRes message: Int, context: Context, theme: TinkSnackbar.Theme = TinkDefaultSnackbarTheme(context)): TinkSnackbar? =
-            handlers.lastOrNull()?.displayLoader(context.getString(message), theme)
+        handlers.lastOrNull()?.displayLoader(context.getString(message), theme)
 
     private fun register(handler: SnackbarHandler) = handlers.add(handler)
     private fun unregister(handler: SnackbarHandler) = handlers.remove(handler)
 
     fun register(view: View, lifecycle: Lifecycle) {
-        lifecycle.addObserver(object : DefaultLifecycleObserver,
-            SnackbarHandler {
+        lifecycle.addObserver(object :
+                DefaultLifecycleObserver,
+                SnackbarHandler {
 
-            override fun onStart(owner: LifecycleOwner) {
-                register(this)
-            }
+                override fun onStart(owner: LifecycleOwner) {
+                    register(this)
+                }
 
-            override fun onStop(owner: LifecycleOwner) {
-                unregister(this)
-            }
+                override fun onStop(owner: LifecycleOwner) {
+                    unregister(this)
+                }
 
-            override fun display(message: String, duration: Int, theme: TinkSnackbar.Theme) =
+                override fun display(message: String, duration: Int, theme: TinkSnackbar.Theme) =
                     TinkSnackbar.make(view, message, duration, theme).show()
 
-            override fun displayLoader(message: String, theme: TinkSnackbar.Theme): TinkSnackbar =
+                override fun displayLoader(message: String, theme: TinkSnackbar.Theme): TinkSnackbar =
                     TinkSnackbar.make(
                         view,
                         message,
@@ -107,6 +119,6 @@ internal class SnackbarManager @Inject constructor() {
                         setLoading(true)
                         show()
                     }
-        })
+            })
     }
 }

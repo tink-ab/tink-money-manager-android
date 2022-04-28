@@ -60,7 +60,7 @@ internal fun calculateStatistic(
         .filter { it.period == period }
         .groupBy { categories.findParentOfCategoryWithId(it.identifier) }
         .mapNotNull { (category, valueList) ->
-            if(category == null) return@mapNotNull null
+            if (category == null) return@mapNotNull null
             val amount = valueList.sumByFloat { abs(it.value.value.floatValue()) }
             category to amount
         }
@@ -78,4 +78,3 @@ internal fun calculateStatistic(
 
 private fun List<Category>.findParentOfCategoryWithId(id: String): Category? =
     find { it.recursiveIdList.contains(id) }
-

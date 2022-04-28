@@ -2,7 +2,9 @@ package com.tink.moneymanagerui.feature.insight
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.mock.InsightMockFactory
@@ -12,7 +14,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class OverviewInsightsFragmentTest: BaseInsightTestSuit() {
+class OverviewInsightsFragmentTest : BaseInsightTestSuit() {
 
     private var allInsights = InsightMockFactory.getInsightsForTypes(InsightMockFactory.allTypes)
     private var supportedInsights = InsightMockFactory.getInsightsForTypes(InsightMockFactory.supportedTypes)
@@ -20,7 +22,8 @@ class OverviewInsightsFragmentTest: BaseInsightTestSuit() {
     private fun setupDispatcher() {
 
         insightDispatcher.addResponse(
-            "/api/v1/insights", MockResponse().setResponseCode(200).setBody(allInsights.toString()))
+            "/api/v1/insights", MockResponse().setResponseCode(200).setBody(allInsights.toString())
+        )
 
         server.dispatcher = insightDispatcher
     }

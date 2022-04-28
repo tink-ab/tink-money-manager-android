@@ -10,7 +10,6 @@ import com.tink.moneymanagerui.charts.CircularProgressChart
 import com.tink.moneymanagerui.charts.extensions.get
 import se.tink.commons.extensions.whenNonNull
 
-
 private const val VALUE = "value"
 
 class CircularProgressTransition : Transition() {

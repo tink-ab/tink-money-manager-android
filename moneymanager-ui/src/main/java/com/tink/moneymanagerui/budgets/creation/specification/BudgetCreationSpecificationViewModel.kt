@@ -21,7 +21,6 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
 import com.tink.moneymanagerui.configuration.SuitableLocaleFinder
 import com.tink.moneymanagerui.extensions.minusMonths
-import com.tink.moneymanagerui.extensions.withUtcTimeRetainZone
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
@@ -35,7 +34,15 @@ import se.tink.android.livedata.createResultHandler
 import se.tink.android.repository.TinkNetworkError
 import se.tink.android.repository.budget.BudgetsRepository
 import se.tink.android.repository.user.UserRepository
-import se.tink.commons.extensions.*
+import se.tink.commons.extensions.average
+import se.tink.commons.extensions.divide
+import se.tink.commons.extensions.doubleValue
+import se.tink.commons.extensions.findCategoryByCode
+import se.tink.commons.extensions.multiply
+import se.tink.commons.extensions.recursiveIdList
+import se.tink.commons.extensions.sumOrNull
+import se.tink.commons.extensions.toDateTime
+import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import java.math.BigDecimal
 import javax.inject.Inject
@@ -93,9 +100,8 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     fun updateBudgetAmount(amountString: String) {
         amountTextWatcher.value?.let { amountTextWatcher ->
-            amountTextWatcher.getAmountFromText(amountString)?.let { amount ->
-                dataHolder.amount.postValue(amount)
-            }
+            val amount = amountTextWatcher.getAmountFromText(amountString)
+            dataHolder.amount.postValue(amount)
         }
     }
 
@@ -122,24 +128,12 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             }
     }
 
-    val periodStartValueFormatted: LiveData<DateTime> =
-        Transformations.map(periodStartValue) {
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            it.withUtcTimeRetainZone()
-        }
-
-    val periodEndValueFormatted: LiveData<DateTime> =
-        Transformations.map(periodEndValue) {
-            // We get UTC time from server, so we need to set it back to pre-fill proper values.
-            it.withUtcTimeRetainZone()
-        }
-
     val periodStartText: LiveData<String> =
-        Transformations.map(periodStartValueFormatted) {
+        Transformations.map(periodStartValue) {
             dateUtils.getDateWithYear(it)
         }
     val periodEndText: LiveData<String> =
-        Transformations.map(periodEndValueFormatted) {
+        Transformations.map(periodEndValue) {
             dateUtils.getDateWithYear(it)
         }
 
@@ -154,7 +148,7 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                     ) { periodStart, periodEnd ->
                         value = Budget.Periodicity.OneOff(
                             Instant.ofEpochMilli(periodStart.millis),
-                            Instant.ofEpochMilli(periodEnd.millis),
+                            Instant.ofEpochMilli(periodEnd.millis)
                         )
                     }
                 } else {
@@ -196,9 +190,11 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                                     .groupBy { it.period }
                                     .map { (period, values) ->
                                         val totalAmount = Amount(
-                                            ExactNumber(values.sumOf {
-                                                abs(it.value.value.doubleValue())
-                                            }),
+                                            ExactNumber(
+                                                values.sumOf {
+                                                    abs(it.value.value.doubleValue())
+                                                }
+                                            ),
                                             currency
                                         )
                                         AmountForPeriod(
@@ -322,10 +318,10 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
             whenNonNull(
                 dataHolder.name.value.takeIf { !it.isNullOrBlank() },
                 dataHolder.amount.value?.takeIf {
-                   it.value.unscaledValue > 0
+                    it.value.unscaledValue > 0
                 },
                 dataHolder.selectedFilter.value,
-                dataHolder.periodicity.value,
+                dataHolder.periodicity.value
             ) { _, _, _, _ ->
                 postValue(true)
             } ?: postValue(false)

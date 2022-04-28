@@ -4,7 +4,6 @@ import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
 import com.tink.service.transaction.TransactionService
 
-
 suspend fun TransactionService.fetchAllTransactions(
     period: Period,
     categoryId: String

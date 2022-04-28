@@ -50,7 +50,7 @@ internal class TextScaleTransition : Transition() {
 
         val view = endValues.view as TextView
 
-        val startScale = startSize/endSize
+        val startScale = startSize / endSize
         val endScale = 1f
 
         return AnimatorSet().apply {

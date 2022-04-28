@@ -12,7 +12,7 @@ enum class EditAccountField {
 }
 
 @Parcelize
-data class AccountEditConfiguration( val fields: List<EditAccountField>): Parcelable {
+data class AccountEditConfiguration(val fields: List<EditAccountField>) : Parcelable {
     companion object {
         @JvmField
         val ALL = AccountEditConfiguration(
@@ -20,5 +20,3 @@ data class AccountEditConfiguration( val fields: List<EditAccountField>): Parcel
         )
     }
 }
-
-

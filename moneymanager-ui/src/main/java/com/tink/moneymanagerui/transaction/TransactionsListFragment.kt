@@ -33,13 +33,16 @@ internal class TransactionsListFragment : BaseFragment() {
     private lateinit var layoutManager: LinearLayoutManager
 
     private val metaData: TransactionsListMetaData by lazy {
-        requireNotNull(arguments?.getParcelable(
-            METADATA
-        ) as? TransactionsListMetaData)
+        requireNotNull(
+            arguments?.getParcelable(
+                METADATA
+            ) as? TransactionsListMetaData
+        )
     }
 
     private val featureType: MoneyManagerFeatureType? by lazy {
-        arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
+        arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType
+    }
 
     private lateinit var viewModel: TransactionListViewModel
 
@@ -81,17 +84,21 @@ internal class TransactionsListFragment : BaseFragment() {
             }
         )
 
-        viewModel.errors.observe(viewLifecycleOwner, Observer { event ->
-            event?.getContentIfNotHandled()?.let { error ->
-                snackbarManager.displayError(error, requireContext())
+        viewModel.errors.observe(
+            viewLifecycleOwner,
+            Observer { event ->
+                event?.getContentIfNotHandled()?.let { error ->
+                    snackbarManager.displayError(error, requireContext())
+                }
             }
-        })
+        )
 
         viewModel.loading.observe(
             viewLifecycleOwner,
             Observer { isLoading ->
                 loader.visibleIf { isLoading }
-            })
+            }
+        )
     }
 
     private fun setupTransactionAdapter() {

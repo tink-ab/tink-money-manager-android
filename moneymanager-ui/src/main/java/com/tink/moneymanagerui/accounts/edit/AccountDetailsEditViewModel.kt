@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tink.model.account.Account
 import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.service.account.UpdateAccountDescriptor
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -28,9 +29,13 @@ data class AccountDetailsEditData(
 )
 
 class AccountDetailsEditViewModel@Inject constructor(
-    private val accountRepository: AccountRepository
-): ViewModel() {
+    private val accountRepository: AccountRepository,
+    private val statisticsRepository: StatisticsRepository
+) : ViewModel() {
+
     private val accountId: MutableLiveData<String> = MutableLiveData()
+
+    private var initialState: AccountDetailsEditData? = null
 
     fun setAccountId(id: String) {
         accountId.postValue(id)
@@ -48,18 +53,7 @@ class AccountDetailsEditViewModel@Inject constructor(
     val editedFavorite: MutableLiveData<Boolean> = MutableLiveData(false)
     val editedShared: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
-        fun update() {
-            whenNonNull(editedNameText.value, isUpdating.value) { editedNameText, isUpdating ->
-                value = editedNameText.isNotBlank() && !isUpdating
-            }
-        }
-
-        addSource(editedNameText) { update() }
-        addSource(isUpdating) { update() }
-    }
+    val isUpdating: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val accountDetailsEditData: LiveData<ResponseState<AccountDetailsEditData>> =
         MediatorLiveData<ResponseState<AccountDetailsEditData>>().apply {
@@ -76,13 +70,19 @@ class AccountDetailsEditViewModel@Inject constructor(
                     editedFavorite.postValue(account.favored)
                     editedShared.postValue(isShared)
 
-                    AccountDetailsEditData(
+                    val newState = AccountDetailsEditData(
                         name = account.name,
                         type = account.type,
                         isExcluded = account.excluded,
                         isFavored = account.favored,
                         isShared = isShared
                     )
+
+                    if (initialState == null) {
+                        initialState = newState
+                    }
+
+                    newState
                 }
                 isUpdating.postValue(false)
             }
@@ -128,11 +128,38 @@ class AccountDetailsEditViewModel@Inject constructor(
             }
         }
 
+    val hasMadeChanges: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun update() {
+            whenNonNull(accountDetailsEditData.value, initialState) { accountDetailsEditData, initialState ->
+                value = accountDetailsEditData is SuccessState &&
+                    initialState != accountDetailsEditData.data
+            }
+        }
+
+        addSource(accountDetailsEditData) { update() }
+    }
+
+    val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
+        fun update() {
+            whenNonNull(editedNameText.value, isUpdating.value, hasMadeChanges.value) {
+                    editedNameText,
+                    isUpdating,
+                    hasMadeChanges ->
+                value = editedNameText.isNotBlank() && !isUpdating && hasMadeChanges
+            }
+        }
+
+        addSource(editedNameText) { update() }
+        addSource(isUpdating) { update() }
+        addSource(hasMadeChanges) { update() }
+    }
+
     fun uppdateAccount() {
         val accountValue = account.value
         val editedData = accountDetailsEditData.value
         if (accountValue !is SuccessState<Account> ||
-            editedData !is SuccessState<AccountDetailsEditData>) return
+            editedData !is SuccessState<AccountDetailsEditData>
+        ) return
 
         val ownershipPart = if (editedData.data.isShared) ExactNumber(0.5) else ExactNumber(1)
 
@@ -141,13 +168,14 @@ class AccountDetailsEditViewModel@Inject constructor(
             accountRepository.updateAccountState(
                 UpdateAccountDescriptor(
                     id = accountValue.data.id,
-                    excluded = editedData.data.isExcluded,
                     favored = editedData.data.isFavored,
                     name = editedData.data.name,
                     ownership = ownershipPart,
-                    type = editedData.data.type)
+                    type = editedData.data.type,
+                    accountExclusion = editedData.data.isExcluded,
+                )
             )
+            statisticsRepository.refreshDelayed()
         }
-
     }
 }

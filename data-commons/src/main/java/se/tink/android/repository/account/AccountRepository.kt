@@ -67,7 +67,7 @@ class AccountRepository @Inject constructor(
     val accountsState: LiveData<ResponseState<List<Account>>> = _accountsState
 
     fun accountByIdState(id: String): LiveData<ResponseState<Account>> = accountsState.map { accountList ->
-        when(accountList) {
+        when (accountList) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(accountList.errorMessage)
             is SuccessState -> {
@@ -79,14 +79,12 @@ class AccountRepository @Inject constructor(
                 } else {
                     SuccessState(account)
                 }
-
             }
         }
     }
 
-    suspend fun updateAccountState(descriptor: UpdateAccountDescriptor){
+    suspend fun updateAccountState(descriptor: UpdateAccountDescriptor) {
         accountService.update(descriptor)
         _accountsState.update()
     }
-
 }

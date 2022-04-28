@@ -82,13 +82,19 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
             }
         }
 
-        viewModel.hasNext.observe(viewLifecycleOwner, Observer { hasNext ->
-            view.periodPicker.setNextButtonEnabled(hasNext)
-        })
+        viewModel.hasNext.observe(
+            viewLifecycleOwner,
+            Observer { hasNext ->
+                view.periodPicker.setNextButtonEnabled(hasNext)
+            }
+        )
 
-        viewModel.hasPrevious.observe(viewLifecycleOwner, Observer { hasPrevious ->
-            view.periodPicker.setPreviousButtonEnabled(hasPrevious)
-        })
+        viewModel.hasPrevious.observe(
+            viewLifecycleOwner,
+            Observer { hasPrevious ->
+                view.periodPicker.setPreviousButtonEnabled(hasPrevious)
+            }
+        )
 
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
@@ -119,11 +125,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                     viewPager.adapter = twoPageAdapter
                     tabs.setupWithViewPager(viewPager)
                 }
-
             } else if (viewPager.adapter != onePageAdapter) {
-                if (viewPager.adapter != onePageAdapter) {
-                    viewPager.adapter = onePageAdapter
-                }
+                viewPager.adapter = onePageAdapter
             }
         }
     }
@@ -163,7 +166,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                     budgetDetailsProgressChartPage.amountLeft.visibleIf { responseState is SuccessState }
                     budgetDetailsProgressChartPage.totalAmount.visibleIf { responseState is SuccessState }
 
-                    when(responseState) {
+                    when (responseState) {
                         is SuccessState -> {
                             budgetDetailsProgressChartPage.budgetHeader.text = responseState.data.headerText
                             budgetDetailsProgressChartPage.amountLeft.text = responseState.data.amountLeft
@@ -171,7 +174,8 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                                 requireContext().getString(R.string.tink_budget_details_total_amount, responseState.data.totalAmount)
                             budgetDetailsProgressChartPage.budgetProgress.progress = responseState.data.progress
                             budgetDetailsProgressChartPage.budgetProgress.setProgressArcColor(
-                                responseState.data.amountLeftColor, MoneyManagerFeatureType.BUDGETS)
+                                responseState.data.amountLeftColor, MoneyManagerFeatureType.BUDGETS
+                            )
                         }
                         is LoadingState -> Unit
                         is ErrorState -> Unit
@@ -183,7 +187,7 @@ internal class BudgetDetailsChartFragment : BaseFragment() {
                 val budgetDetailsBarChartPage = TinkBudgetDetailsBarChartPageBinding.inflate(layoutInflater, container, true)
 
                 viewModel.budgetDetailsData.observe(this@BudgetDetailsChartFragment.viewLifecycle) { responseState ->
-                    when(responseState) {
+                    when (responseState) {
                         is SuccessState -> {
                             budgetDetailsBarChartPage.budgetProgress.visibleIf { !responseState.data.barChartEmpty }
                             budgetDetailsBarChartPage.emptyChartMessage.visibleIf { responseState.data.barChartEmpty }

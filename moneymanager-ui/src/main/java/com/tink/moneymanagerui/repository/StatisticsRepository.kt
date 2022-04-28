@@ -44,12 +44,12 @@ private const val POLLING_INTERVAL = 2_000L
 
 @ExperimentalCoroutinesApi
 @PfmScope
-internal class StatisticsRepository @Inject constructor(
+class StatisticsRepository @Inject constructor(
     private val statisticsService: StatisticsService,
     dataRefreshHandler: DataRefreshHandler,
     private val userRepository: UserRepository,
     transactionUpdateEventBus: TransactionUpdateEventBus,
-    private val dispatcher: DispatcherProvider,
+    private val dispatcher: DispatcherProvider
 ) : Refreshable {
 
     init {
@@ -196,16 +196,16 @@ internal class StatisticsRepository @Inject constructor(
     }
 
     private val periodMap: LiveData<Map<String, Period>> = statistics.map { statistics ->
-        statistics.associate { it.period.identifier to it.period  }
+        statistics.associate { it.period.identifier to it.period }
     }
 
     private val periodMapState: LiveData<ResponseState<Map<String, Period>>> = statisticsState.map { statistics ->
-        when(statistics) {
+        when (statistics) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(statistics.errorMessage)
             is SuccessState -> {
                 SuccessState(
-                    statistics.data.associate { it.period.identifier to it.period  }
+                    statistics.data.associate { it.period.identifier to it.period }
                 )
             }
         }
@@ -216,7 +216,7 @@ internal class StatisticsRepository @Inject constructor(
     }
 
     val periodsState: LiveData<ResponseState<List<Period>>> = Transformations.map(periodMapState) { periodMapState ->
-        when(periodMapState) {
+        when (periodMapState) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState("")
             is SuccessState -> {
@@ -234,7 +234,7 @@ internal class StatisticsRepository @Inject constructor(
     }
 
     val currentPeriodState: LiveData<ResponseState<Period>> = Transformations.map(periodMapState) { periodMapState ->
-        when(periodMapState) {
+        when (periodMapState) {
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(periodMapState.errorMessage)
             is SuccessState -> {
@@ -254,5 +254,15 @@ internal class StatisticsRepository @Inject constructor(
     override fun refresh() {
         refreshTrigger.postValue(Unit)
     }
-}
 
+    /**
+     * Refreshing imediately might cause problems since the statistics api take some time to update.
+     * This refreshes after a given delay to ensure that we fetch updated data.
+     */
+    suspend fun refreshDelayed(delayMills: Long = 2000) {
+        CoroutineScope(dispatcher.io()).launch {
+            delay(delayMills)
+            refreshTrigger.postValue(Unit)
+        }
+    }
+}

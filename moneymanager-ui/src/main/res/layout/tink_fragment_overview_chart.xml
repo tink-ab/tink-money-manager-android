@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/chartRoot"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="12dp">
 
     <ProgressBar
         android:id="@+id/overviewProgressBar"
@@ -13,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/overviewErrorText"
@@ -23,6 +26,7 @@
         android:textSize="14sp"
         android:text="@string/tink_overview_statistics_error"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +49,8 @@
         android:id="@+id/pageIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

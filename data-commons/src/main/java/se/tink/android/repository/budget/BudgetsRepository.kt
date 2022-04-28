@@ -107,7 +107,6 @@ class BudgetsRepository @Inject constructor(
         }
     }
 
-
     private val _budgetPeriodDetailsState: MutableLiveData<ResponseState<Pair<BudgetSpecification, List<BudgetPeriod>>>> = MutableLiveData(LoadingState)
     val budgetPeriodDetailsState = _budgetPeriodDetailsState
 
@@ -122,4 +121,3 @@ class BudgetsRepository @Inject constructor(
         }
     }
 }
-

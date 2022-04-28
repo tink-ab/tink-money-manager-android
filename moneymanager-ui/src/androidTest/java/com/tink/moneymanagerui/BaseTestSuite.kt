@@ -14,7 +14,6 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 
-
 abstract class BaseTestSuite {
 
     val resources: Resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
@@ -49,7 +48,6 @@ abstract class BaseTestSuite {
         try {
             Tink.init(config, InstrumentationRegistry.getInstrumentation().targetContext)
         } catch (e: IllegalStateException) {
-
         }
     }
 

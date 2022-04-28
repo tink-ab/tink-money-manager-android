@@ -65,5 +65,4 @@ internal class BudgetDetailsDataHolder(
 
     fun nextPeriod() = budgetSelectionController.next()
     fun previousPeriod() = budgetSelectionController.previous()
-
 }

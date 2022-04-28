@@ -1,13 +1,13 @@
 package com.tink.moneymanagerui.di
 
+import com.tink.annotations.PfmScope
+import com.tink.model.misc.Amount
 import com.tink.moneymanagerui.util.CurrencyUtils
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactExplicitlyPositive
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSign
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSignAndSymbol
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExactWithoutSymbol
-import com.tink.annotations.PfmScope
-import com.tink.model.misc.Amount
 import dagger.Module
 import dagger.Provides
 import se.tink.commons.currency.AmountFormatter
