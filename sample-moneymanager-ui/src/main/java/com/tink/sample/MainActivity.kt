@@ -36,16 +36,20 @@ class MainActivity : FragmentActivity() {
             // Tink has already been initialized
         }
 
-        val f = OverviewFeatures(listOf(OverviewFeature.Accounts(
-            OverviewAccountsTypeAccounts(com.tink.model.account.Account.Type.SAVINGS),
-            AccountGroupByKind,
-            AccountEditConfiguration(listOf(EditAccountField.NAME, EditAccountField.IS_FAVORITE))
-        )))
+        val f = OverviewFeatures(
+            listOf(
+                OverviewFeature.Accounts(
+                    OverviewAccountsTypeAccounts(com.tink.model.account.Account.Type.SAVINGS),
+                    AccountGroupByKind,
+                    AccountEditConfiguration(listOf(EditAccountField.NAME, EditAccountField.IS_FAVORITE))
+                )
+            )
+        )
 
         supportFragmentManager.beginTransaction().add(
             R.id.fragmentContainer,
             FinanceOverviewFragment.newInstance(
-                //overviewFeatures = f,
+                // overviewFeatures = f,
                 accessToken = Configuration.sampleAccessToken,
                 styleResId = R.style.TinkStyle_Default,
                 tracker = LogTracker(),

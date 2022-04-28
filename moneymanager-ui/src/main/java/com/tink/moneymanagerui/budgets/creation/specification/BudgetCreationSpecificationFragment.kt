@@ -201,7 +201,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             amountInputText.closeKeyboard()
             val endDate = viewModel.periodEndValue.value ?: LocalDateTime.now()
 
-            val earliestStartTime =  viewModel.periodStartValue.value ?: LocalDateTime.MIN
+            val earliestStartTime = viewModel.periodStartValue.value ?: LocalDateTime.MIN
             val earliestStartTimeInMills = earliestStartTime.millsInLocalTimeZone()
 
             onPeriodDatePickerClicked(endDate, earliestStartTimeInMills = earliestStartTimeInMills) { date ->
@@ -305,7 +305,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
                 context.getThemeResIdFromAttr(R.attr.tink_datePickerStyle),
                 { _, year, month, dayOfMonth ->
                     // Calendar#MONTH expects 0-11 while LocalDate>Time#monthValue outputs 1-12
-                    val date = LocalDateTime.of(year,  month + 1, dayOfMonth, 0, 0, 0, 0)
+                    val date = LocalDateTime.of(year, month + 1, dayOfMonth, 0, 0, 0, 0)
                     onDateSelect.invoke(date)
                 },
                 currentDate.year,

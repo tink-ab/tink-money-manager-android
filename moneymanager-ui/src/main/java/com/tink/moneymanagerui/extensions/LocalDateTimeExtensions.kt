@@ -48,5 +48,3 @@ fun LocalDateTime.millsInLocalTimeZone(): Long {
     val zonedLatestEndTime = ZonedDateTime.of(this, ZoneId.of(Calendar.getInstance().timeZone.id))
     return zonedLatestEndTime.toInstant().toEpochMilli()
 }
-
-

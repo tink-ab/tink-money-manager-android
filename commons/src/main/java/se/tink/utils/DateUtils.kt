@@ -180,7 +180,8 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_DAY_OF_WEEK_COMPACT,
             locale,
-            timeZoneId)
+            timeZoneId
+        )
             .format(dateTime)
     }
 
@@ -188,7 +189,8 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_DAILY,
             locale,
-            timeZoneId)
+            timeZoneId
+        )
             .format(dateTime)
     }
 
@@ -196,7 +198,8 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_MONTHLY_COMPACT,
             locale,
-            timeZoneId)
+            timeZoneId
+        )
             .format(dateTime)
     }
 
@@ -213,8 +216,9 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_DAILY_MONTHLY,
             locale,
-            timeZoneId).
-        format(date)
+            timeZoneId
+        )
+            .format(date)
     }
 
     fun getDateWithYear(dateTime: LocalDateTime): String {
@@ -228,7 +232,8 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_MONTH_AND_DAY_OF_MONTH,
             locale,
-            timeZoneId)
+            timeZoneId
+        )
             .format(dateTime)
     }
 
@@ -244,7 +249,8 @@ class DateUtils {
         return threadSafeDateFormat(
             ThreadSafeDateFormat.FORMATTER_MONTH_AND_YEAR,
             locale,
-            timeZoneId).format(date)
+            timeZoneId
+        ).format(date)
     }
 
     companion object {
