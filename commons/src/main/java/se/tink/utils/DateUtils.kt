@@ -8,20 +8,21 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Locale
+import java.util.TimeZone
 
 /**
  * Uses dates of the class LocalDateTime with a ZoneId for the current user to calcluate the time
  * in the users time zone.
  */
 class DateUtils {
-    private val defaultTimezoneCode = UTC_TIME_ZONE_CODE
+    private val defaultTimezoneCode = TimeZone.getDefault().id
 
     var timeZoneId = ZoneId.of(defaultTimezoneCode)
     var formatHumanStrings: Map<String, String> = HashMap()
     var locale: Locale = Locale.getDefault()
 
     private fun setupTimezone(timezoneCode: String) {
-        this.timeZoneId = ZoneId.of(defaultTimezoneCode)
+        this.timeZoneId = ZoneId.of(timezoneCode)
     }
 
     fun isToday(evaluatedDate: LocalDateTime): Boolean {
@@ -124,7 +125,6 @@ class DateUtils {
         end: LocalDateTime,
         includeYearIfNotCurrent: Boolean
     ): String {
-
         val dateInterval: String
         val isSameDayOfMonth = getDayOfMonth(start) == getDayOfMonth(end)
         val isSameMonth = start.month.value == end.month.value
@@ -252,11 +252,14 @@ class DateUtils {
         const val KEY_TOMORROW = "tomorrow"
         const val KEY_YESTERDAY = "yesterday"
 
-        const val UTC_TIME_ZONE_CODE = "UTC"
-
         private const val NUMBER_OF_DAYS_TO_SHOW_ONLY_WEEKDAY = 6
 
         private val instance: DateUtils = DateUtils()
+
+        fun getInstance(locale: Locale): DateUtils {
+            instance.locale = locale
+            return instance
+        }
 
         fun getInstance(locale: Locale, timezoneCode: String): DateUtils {
             instance.locale = locale

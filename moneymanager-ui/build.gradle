@@ -60,7 +60,7 @@ dependencies {
     kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring(libraries.desugar_jdk_libs)
 
     implementation libraries.kotlin_stdlib
     implementation libraries.android_core_ktx

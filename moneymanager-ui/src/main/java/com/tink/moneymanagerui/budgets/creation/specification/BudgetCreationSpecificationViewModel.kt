@@ -150,7 +150,6 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                         value = Budget.Periodicity.OneOff(
                             periodStart.toInstant(),
                             periodEnd.toInstant()
-
                         )
                     }
                 } else {

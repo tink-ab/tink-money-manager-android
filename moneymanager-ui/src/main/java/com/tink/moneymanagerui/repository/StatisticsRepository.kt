@@ -132,7 +132,8 @@ internal class StatisticsRepository @Inject constructor(
                 StatisticsQueryDescriptor(
                     userProfile.periodMode,
                     userProfile.currency
-                )
+                ),
+                userProfile.timeZone
             ).handleMonthsMissingData(userProfile.currency)
         } catch (error: Throwable) {
             Timber.e(error)

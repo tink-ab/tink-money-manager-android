@@ -41,7 +41,7 @@ dependencies {
 
     implementation libraries.tink_models
 
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring(libraries.desugar_jdk_libs)
 
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat

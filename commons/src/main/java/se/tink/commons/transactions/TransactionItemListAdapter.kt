@@ -16,6 +16,7 @@ import se.tink.commons.extensions.tint
 import se.tink.utils.DateUtils
 import java.time.LocalDateTime
 import java.time.ZoneId
+import java.util.TimeZone
 import kotlin.properties.Delegates
 
 class TransactionItemListAdapter(
@@ -92,7 +93,7 @@ class TransactionItemListAdapter(
             ?.sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             ?.let { list += it }
 
-        val timeZone = dateUtils?.timeZoneId ?: ZoneId.of(DateUtils.UTC_TIME_ZONE_CODE)
+        val timeZone = dateUtils?.timeZoneId ?: ZoneId.of(TimeZone.getDefault().id)
         transactionItems
             .sortedWith(compareByDescending<ListItem.TransactionItem> { it.date }.thenBy { it.id })
             .groupBy { it.date.atZone(timeZone).withNano(0) }

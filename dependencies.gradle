@@ -12,8 +12,9 @@ ext {
     recyclerViewVersion = "1.2.1"
     supportLibVersion = "1.0.0"
     timberVersion = "4.7.1"
+    desugarVersion = "1.1.5"
 
-    tinkCoreVersion = "1.8.5"
+    tinkCoreVersion = "0.8.2"
 
     // test
     assertj = "3.22.0"
@@ -50,6 +51,8 @@ ext {
             dagger_android_support              : "com.google.dagger:dagger-android-support:$daggerVersion",
             dagger_android_processor            : "com.google.dagger:dagger-android-processor:$daggerVersion",
             dagger_compiler                     : "com.google.dagger:dagger-compiler:$daggerVersion",
+
+            desugar_jdk_libs                    : "com.android.tools:desugar_jdk_libs:$desugarVersion",
 
             gson                                : "com.google.code.gson:gson:$gsonVersion",
             kotlin_stdlib                       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
