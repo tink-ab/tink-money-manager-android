@@ -69,7 +69,7 @@ internal class AccountsOverviewListFragment : BaseFragment() {
                 accountsHeader.visibleIf { hasFavoriteAccount }
                 accountList.visibleIf { hasFavoriteAccount }
                 noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
-                //EspressoIdlingResource.decrement()
+                EspressoIdlingResource.decrement()
             }
         )
     }

@@ -18,7 +18,7 @@ import com.tink.moneymanagerui.testutil.PathDispatcher
 import okhttp3.mockwebserver.MockResponse
 import org.json.JSONObject
 
-open class BaseAccountTestSuit: BaseTestSuite() {
+open class BaseAccountTestSuit : BaseTestSuite() {
 
     val defaultAmount = Amount(ExactNumber(999.0), "SEK")
 
@@ -34,9 +34,9 @@ open class BaseAccountTestSuit: BaseTestSuite() {
     val accountDispatcher = PathDispatcher(
         mutableMapOf(
             "/api/v1/transactions/${defaultTransaction["id"]}" to
-                    MockResponse().setResponseCode(200).setBody(defaultTransaction.toString()),
+                MockResponse().setResponseCode(200).setBody(defaultTransaction.toString()),
             "/api/v1/categories" to
-                    MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString()),
+                MockResponse().setResponseCode(200).setBody(CategoryMockFactory.getFoodCategories().toString()),
             "/api/v1/providers" to MockResponse().setResponseCode(200).setBody(ProvidersMockFactory.getProviders().toString())
         )
     )
@@ -56,12 +56,16 @@ open class BaseAccountTestSuit: BaseTestSuite() {
         )
 
         server.dispatcher = accountDispatcher
-        launchFinanceOverviewFragment(features = OverviewFeatures(listOf(
-            OverviewFeature.Accounts(
-                overviewAccountsMode = overviewAccountsMode,
-                accountGroupType = accountGroupType,
-                accountEditConfiguration = accountEditConfiguration
+        launchFinanceOverviewFragment(
+            features = OverviewFeatures(
+                listOf(
+                    OverviewFeature.Accounts(
+                        overviewAccountsMode = overviewAccountsMode,
+                        accountGroupType = accountGroupType,
+                        accountEditConfiguration = accountEditConfiguration
+                    )
+                )
             )
-        )))
+        )
     }
 }

@@ -4,11 +4,13 @@ import org.json.JSONObject
 
 object AccountMockFactory {
 
-    fun getAccounts(list: List<JSONObject>) = JSONObject("""
+    fun getAccounts(list: List<JSONObject>) = JSONObject(
+        """
         {
             "accounts": $list
         }
-        """)
+        """
+    )
 
     fun getAccount(
         id: String = "SE2885222529285409533697",
@@ -21,7 +23,8 @@ object AccountMockFactory {
         excluded: Boolean = false,
         favored: Boolean = true,
     ): JSONObject {
-        return JSONObject("""
+        return JSONObject(
+            """
         {
             "accountNumber": "$accountNumber",
             "availableCredit": 0.0,

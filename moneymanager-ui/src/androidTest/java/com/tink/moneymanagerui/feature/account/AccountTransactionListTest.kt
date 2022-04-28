@@ -23,9 +23,8 @@ import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class AccountTransactionListTest: BaseAccountTestSuit() {
+class AccountTransactionListTest : BaseAccountTestSuit() {
     private fun openAccountDetailsWithAcoount(
         account: JSONObject,
         overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts,
@@ -41,8 +40,9 @@ class AccountTransactionListTest: BaseAccountTestSuit() {
         openAccountDetailsWithAcoount(account = defaultAccount)
 
         onView(withId(R.id.accountNumber))
-            .check(matches(withText(defaultAccount["accountNumber"].toString()))
-        )
+            .check(
+                matches(withText(defaultAccount["accountNumber"].toString()))
+            )
     }
 
     @Test
@@ -60,9 +60,15 @@ class AccountTransactionListTest: BaseAccountTestSuit() {
         openAccountDetailsWithAcoount(account = defaultAccount)
 
         onView(withId(R.id.tink_toolbar))
-            .check(matches(hasDescendant(withText(
-                defaultAccount["name"].toString()
-            ))))
+            .check(
+                matches(
+                    hasDescendant(
+                        withText(
+                            defaultAccount["name"].toString()
+                        )
+                    )
+                )
+            )
     }
 
     @Test
@@ -74,19 +80,20 @@ class AccountTransactionListTest: BaseAccountTestSuit() {
             numberOfTransactions = numberOfTransactionForAccount
         )
 
-        accountDispatcher.addResponse("/api/v1/search",
-            MockResponse().setResponseCode(200).setBody(transactionForAccount.toString()))
+        accountDispatcher.addResponse(
+            "/api/v1/search",
+            MockResponse().setResponseCode(200).setBody(transactionForAccount.toString())
+        )
 
-        val accountIdFilter = {body: String ->
+        val accountIdFilter = { body: String ->
             try {
                 val query = SearchQueryJsonAdapter(Moshi.Builder().build()).fromJson(body)
                 query?.accounts?.contains(accountId) ?: false
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 false
             }
         }
         accountDispatcher.addFilter("/api/v1/search", accountIdFilter)
-
 
         openAccountDetailsWithAcoount(account = defaultAccount)
 

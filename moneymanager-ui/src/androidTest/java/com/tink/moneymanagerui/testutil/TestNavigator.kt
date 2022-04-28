@@ -24,9 +24,11 @@ class TestNavigator {
 
     fun fromOverviewToAccountDetails() {
         onView(ViewMatchers.withId(R.id.accountList))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<AccountItemViewHolder>(
-                0, click()
-            ))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<AccountItemViewHolder>(
+                    0, click()
+                )
+            )
     }
 
     fun fromOverviewToEditAccountDetails() {

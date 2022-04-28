@@ -28,9 +28,8 @@ import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class AccountDetailsListTest: BaseAccountTestSuit() {
+class AccountDetailsListTest : BaseAccountTestSuit() {
     private val defaultAccounts = mutableListOf(
         AccountMockFactory.getAccount(id = "1", favored = true, excluded = true),
         AccountMockFactory.getAccount(id = "2", favored = false),
@@ -100,7 +99,8 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
                     GroupAccountListMatcher(
                         resources.getString(R.string.tink_everyday_account),
                         "6000000,00kr",
-                        groups.filter { it == EVERYDAY_ACCOUNTS }.count())
+                        groups.filter { it == EVERYDAY_ACCOUNTS }.count()
+                    )
                 )
             )
 
@@ -110,7 +110,8 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
                     GroupAccountListMatcher(
                         resources.getString(R.string.tink_savings_account),
                         "6000000,00kr",
-                        groups.filter { it == SAVINGS_ACCOUNTS }.count())
+                        groups.filter { it == SAVINGS_ACCOUNTS }.count()
+                    )
                 )
             )
 
@@ -120,19 +121,18 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
                     GroupAccountListMatcher(
                         resources.getString(R.string.tink_other_account),
                         "2000000,00kr",
-                        groups.filter { it == OTHER_ACCOUNTS }.count())
+                        groups.filter { it == OTHER_ACCOUNTS }.count()
+                    )
                 )
             )
-
-
     }
 
     class GroupAccountListMatcher(
         private val title: String,
         private val amount: String,
         private val numberOfAccounts: Int,
-    ): BoundedMatcher<GroupedAccountListAdapter.GroupedAccountViewHolder, GroupedAccountListAdapter.GroupedAccountViewHolder>
-        (GroupedAccountListAdapter.GroupedAccountViewHolder::class.java) {
+    ) : BoundedMatcher<GroupedAccountListAdapter.GroupedAccountViewHolder, GroupedAccountListAdapter.GroupedAccountViewHolder>
+    (GroupedAccountListAdapter.GroupedAccountViewHolder::class.java) {
         override fun describeTo(description: Description?) {
             description?.appendText("Matching title, amount and number of list items.")
         }
@@ -143,14 +143,11 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
             val x = item.itemView.accountBalanceSumText.text.filter { !it.isWhitespace() }.toString()
             val y = amount
 
-            return item.itemView.accountKindText.text == title
-                    //&& item.itemView.accountBalanceSumText.text.filter { !it.isWhitespace() }.toString() == amount
-                    && item.itemView.accountsList.adapter?.itemCount == numberOfAccounts
-
+            return item.itemView.accountKindText.text == title &&
+                // && item.itemView.accountBalanceSumText.text.filter { !it.isWhitespace() }.toString() == amount
+                item.itemView.accountsList.adapter?.itemCount == numberOfAccounts
         }
     }
-
-
 
     private fun checkVisibleViews(
         displayAllList: Boolean,
@@ -161,5 +158,4 @@ class AccountDetailsListTest: BaseAccountTestSuit() {
         onView(withId(R.id.groupedAccountsList))
             .check(ViewAssertions.matches(CustomMatchers.isDisplayedIf(displayGroupList)))
     }
-
 }

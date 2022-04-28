@@ -37,9 +37,9 @@ class PathDispatcher(
         val hasResponse = pathToResponseMap[request.path] != null
         val hasFilter = pathToBodyFilterMap.containsKey(request.path)
         val passedFilter = pathToBodyFilterMap[request.path]?.let {
-                filter -> filter(request.body.readUtf8())
+                filter ->
+            filter(request.body.readUtf8())
         } ?: false
-
 
         return if (hasResponse && (hasFilter && passedFilter) || (hasResponse && !hasFilter)) {
             pathToResponseMap[request.path] ?: defaultResponse
@@ -47,5 +47,4 @@ class PathDispatcher(
             defaultResponse
         }
     }
-
 }

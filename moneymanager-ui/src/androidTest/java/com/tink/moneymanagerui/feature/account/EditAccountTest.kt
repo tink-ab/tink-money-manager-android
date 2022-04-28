@@ -19,7 +19,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class EditAccountTest: BaseAccountTestSuit() {
+class EditAccountTest : BaseAccountTestSuit() {
     private fun openAccountEditWithAcoount(
         account: JSONObject,
         overviewAccountsMode: OverviewAccountsMode = OverviewFavoriteAccounts,

@@ -8,7 +8,6 @@ import com.tink.moneymanagerui.FinanceOverviewFragment
 import com.tink.moneymanagerui.accounts.AccountGroupable
 import com.tink.moneymanagerui.accounts.AccountWithImage
 import com.tink.moneymanagerui.extensions.mapState
-import com.tink.moneymanagerui.util.EspressoIdlingResource
 import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
 import com.tink.service.network.map
@@ -62,7 +61,6 @@ internal class AccountsViewModel @Inject constructor(
                     overviewAccountsMode.overviewAccountsFilter.isIncludedInOverview(it)
                 }
             }
-            EspressoIdlingResource.decrement()
         }
     }
 

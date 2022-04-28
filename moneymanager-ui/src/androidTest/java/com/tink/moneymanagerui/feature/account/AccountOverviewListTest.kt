@@ -13,9 +13,8 @@ import com.tink.moneymanagerui.testutil.RecyclerViewItemCountAssertion
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
-class AccountOverviewListTest: BaseAccountTestSuit() {
+class AccountOverviewListTest : BaseAccountTestSuit() {
 
     @Test
     fun shows_see_accounts_button_when_no_accounts() {
@@ -29,10 +28,12 @@ class AccountOverviewListTest: BaseAccountTestSuit() {
 
     @Test
     fun shows_see_accounts_button_when_no_favorit_accounts() {
-        openOverviewWithAcoounts(listOf(
-            AccountMockFactory.getAccount(id = "1", favored = false),
-            AccountMockFactory.getAccount(id = "2", favored = false)
-        ))
+        openOverviewWithAcoounts(
+            listOf(
+                AccountMockFactory.getAccount(id = "1", favored = false),
+                AccountMockFactory.getAccount(id = "2", favored = false)
+            )
+        )
         checkVisibleViews(
             displayList = false,
             displaysmallShowAllButton = false,
@@ -42,10 +43,12 @@ class AccountOverviewListTest: BaseAccountTestSuit() {
 
     @Test
     fun shows_see_all_button_when_one_account_is_not_favorite() {
-        openOverviewWithAcoounts(listOf(
-            AccountMockFactory.getAccount(id = "1", favored = true),
-            AccountMockFactory.getAccount(id = "2", favored = false)
-        ))
+        openOverviewWithAcoounts(
+            listOf(
+                AccountMockFactory.getAccount(id = "1", favored = true),
+                AccountMockFactory.getAccount(id = "2", favored = false)
+            )
+        )
         checkVisibleViews(
             displayList = true,
             displaysmallShowAllButton = true,
@@ -85,9 +88,12 @@ class AccountOverviewListTest: BaseAccountTestSuit() {
             AccountMockFactory.getAccount(id = "4", favored = false),
             AccountMockFactory.getAccount(id = "5", favored = true)
         )
-        openOverviewWithAcoounts(accounts, OverviewCustomAccounts {
-            it.account.id == "2" || it.account.id == "4"
-        })
+        openOverviewWithAcoounts(
+            accounts,
+            OverviewCustomAccounts {
+                it.account.id == "2" || it.account.id == "4"
+            }
+        )
 
         checkVisibleViews(
             displayList = true,
@@ -106,7 +112,8 @@ class AccountOverviewListTest: BaseAccountTestSuit() {
     private fun checkVisibleViews(
         displayList: Boolean,
         displaysmallShowAllButton: Boolean,
-        displayLargeShowAllButton: Boolean) {
+        displayLargeShowAllButton: Boolean
+    ) {
         onView(withId(R.id.accountList))
             .check(matches(isDisplayedIf(displayList)))
         onView(withId(R.id.seeAllAccounts))

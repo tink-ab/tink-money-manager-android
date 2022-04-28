@@ -18,7 +18,8 @@ object TransactionMockFactory {
             """
         }
 
-        return JSONObject("""
+        return JSONObject(
+            """
         {
             "count" : 10167,
             "net": 1288.45,
@@ -63,15 +64,12 @@ object TransactionMockFactory {
             },
             "results" : $transactions
         }
-        """)
-        
-    } 
-//    
+        """
+        )
+    } //
 //    = (1..numberOfTransactions).map {
 //            getTransaction(id = it.toString(), accountId = accountId)
 //        }
-
-
 
     fun getTransaction(
         id: String = "8a703fa458d144f9b802b09b26a43e89",
