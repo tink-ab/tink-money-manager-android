@@ -64,14 +64,14 @@ class AccountDetailsEditViewModel@Inject constructor(
 
                     editedNameText.postValue(account.name)
                     editedType.postValue(account.type)
-                    editedExcluded.postValue(account.excluded)
+                    editedExcluded.postValue(isAccountExcluded(account))
                     editedFavorite.postValue(account.favored)
                     editedShared.postValue(isShared)
 
                     val newState = AccountDetailsEditData(
                         name = account.name,
                         type = account.type,
-                        isExcluded = account.excluded,
+                        isExcluded = isAccountExcluded(account),
                         isFavored = account.favored,
                         isShared = isShared
                     )
@@ -125,6 +125,9 @@ class AccountDetailsEditViewModel@Inject constructor(
                 }
             }
         }
+
+    private fun isAccountExcluded(account: Account) =
+        account.accountExclusion == Account.AccountExclusion.PFM_DATA
 
     val hasMadeChanges: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun update() {
