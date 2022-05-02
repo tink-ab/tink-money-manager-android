@@ -11,6 +11,7 @@ import com.tink.moneymanagerui.accounts.details.AccountDetailsFragment
 import com.tink.moneymanagerui.accounts.list.AccountListFragment
 import com.tink.moneymanagerui.accounts.list.AccountsViewModel
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.util.EspressoIdlingResource
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.SuccessState
@@ -33,6 +34,7 @@ internal class AccountsOverviewListFragment : BaseFragment() {
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
         super.authorizedOnViewCreated(view, savedInstanceState)
+        EspressoIdlingResource.increment()
 
         accountList.apply {
             layoutManager = AccountOverviewLayoutManager(context)
@@ -67,6 +69,7 @@ internal class AccountsOverviewListFragment : BaseFragment() {
                 accountsHeader.visibleIf { hasFavoriteAccount }
                 accountList.visibleIf { hasFavoriteAccount }
                 noFavoriteAccountsCard.visibleIf { !hasFavoriteAccount }
+                EspressoIdlingResource.decrement()
             }
         )
     }

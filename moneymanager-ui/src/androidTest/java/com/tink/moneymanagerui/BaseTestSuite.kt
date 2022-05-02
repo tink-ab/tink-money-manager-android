@@ -22,10 +22,12 @@ abstract class BaseTestSuite {
     private lateinit var url: String
     private lateinit var testConfiguration: TestConfiguration
 
-    internal fun launchFinanceOverviewFragment() {
+    internal fun launchFinanceOverviewFragment(
+        features: OverviewFeatures = OverviewFeatures.ALL
+    ) {
         val fragmentArgs = bundleOf(
             FinanceOverviewFragment.ARG_ACCESS_TOKEN to testConfiguration.sampleAccessToken,
-            FinanceOverviewFragment.ARG_OVERVIEW_FEATURES to OverviewFeatures.ALL,
+            FinanceOverviewFragment.ARG_OVERVIEW_FEATURES to features,
             FinanceOverviewFragment.ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to true
         )
         launchFragmentInContainer<FinanceOverviewFragment>(fragmentArgs)

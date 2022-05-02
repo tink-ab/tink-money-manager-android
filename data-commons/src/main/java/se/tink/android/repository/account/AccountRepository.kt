@@ -33,14 +33,13 @@ class AccountRepository @Inject constructor(
         AutoFetchLiveData {
             CoroutineScope(dispatcher.io()).launch {
                 val accounts = try {
-                    accountService.listAccounts().sortedBy { it.name.lowercase() }
+                    accountService.listAccounts()
                 } catch (t: Throwable) {
                     emptyList()
                 }
                 it.postValue(accounts)
             }
         }
-
     val accounts: LiveData<List<Account>> = _accounts
 
     fun accountById(id: String): LiveData<Account?> = accounts.map { accountList ->
