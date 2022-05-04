@@ -11,6 +11,9 @@ import com.tink.model.statistics.Statistics
 import com.tink.model.time.MonthPeriod
 import com.tink.model.time.Period
 import com.tink.model.user.UserProfile
+import com.tink.moneymanagerui.extensions.getEndOfMonth
+import com.tink.moneymanagerui.extensions.getStartOfMonth
+import com.tink.moneymanagerui.extensions.toInstant
 import com.tink.moneymanagerui.extensions.toPeriodIdentifier
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
@@ -27,8 +30,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
-import org.joda.time.DateTime
-import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
@@ -37,6 +38,7 @@ import se.tink.android.repository.user.UserRepository
 import se.tink.commons.extensions.isInPeriod
 import se.tink.commons.extensions.toDateTime
 import timber.log.Timber
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 private const val STATISTICS_FETCH_TIMEOUT = 15_000L
@@ -130,7 +132,8 @@ class StatisticsRepository @Inject constructor(
                 StatisticsQueryDescriptor(
                     userProfile.periodMode,
                     userProfile.currency
-                )
+                ),
+                userProfile.timeZone
             ).handleMonthsMissingData(userProfile.currency)
         } catch (error: Throwable) {
             Timber.e(error)
@@ -143,13 +146,13 @@ class StatisticsRepository @Inject constructor(
         val backfillStartTime = minByOrNull { it.period.start }
             ?.period
             ?.start
-            ?.toDateTime() ?: DateTime.now()
+            ?.toDateTime() ?: LocalDateTime.now()
 
-        val endDate = DateTime.now()
+        val endDate = LocalDateTime.now()
             .withDayOfMonth(backfillStartTime.dayOfMonth)
-            .withHourOfDay(23)
-            .withMinuteOfHour(59)
-            .withSecondOfMinute(59)
+            .withHour(23)
+            .withMinute(59)
+            .withSecond(59)
 
         val existingPeriodIdentifiers = distinctBy { it.period.identifier }.map { it.period.identifier }
         val monthsMissingTransactions = generateSequence(backfillStartTime) { date ->
@@ -164,16 +167,17 @@ class StatisticsRepository @Inject constructor(
         return this.plus(monthsMissingTransactions)
     }
 
-    private fun getZeroDataStatisticsForType(currencyCode: String, dateTime: DateTime): Statistics {
-        val startOfCurrentMonth = dateTime.dayOfMonth().withMinimumValue().millisOfDay().withMinimumValue()
-        val endOfCurrentMonth = dateTime.dayOfMonth().withMaximumValue().millisOfDay().withMaximumValue()
+    private fun getZeroDataStatisticsForType(currencyCode: String, dateTime: LocalDateTime): Statistics {
+        val startOfCurrentMonth = dateTime.getStartOfMonth()
+        val endOfCurrentMonth = dateTime.getEndOfMonth()
+
         val period =
             MonthPeriod(
-                monthOfYear = dateTime.monthOfYear,
+                monthOfYear = dateTime.monthValue,
                 year = dateTime.year,
                 identifier = dateTime.toPeriodIdentifier(),
-                start = Instant.ofEpochMilli(startOfCurrentMonth.millis),
-                end = Instant.ofEpochMilli(endOfCurrentMonth.millis)
+                start = startOfCurrentMonth.toInstant(),
+                end = endOfCurrentMonth.toInstant()
             )
         return Statistics(
             identifier = period.toString(),
@@ -228,9 +232,7 @@ class StatisticsRepository @Inject constructor(
     }
 
     val currentPeriod: LiveData<Period> = Transformations.map(periodMap) {
-        DateTime().let { now ->
-            it?.values?.firstOrNull { it.isInPeriod(now) }
-        }
+        it?.values?.firstOrNull { first -> first.isInPeriod(LocalDateTime.now()) }
     }
 
     val currentPeriodState: LiveData<ResponseState<Period>> = Transformations.map(periodMapState) { periodMapState ->
@@ -238,14 +240,12 @@ class StatisticsRepository @Inject constructor(
             is LoadingState -> LoadingState
             is ErrorState -> ErrorState(periodMapState.errorMessage)
             is SuccessState -> {
-                DateTime().let { now ->
-                    val period = periodMapState.data.values.firstOrNull { it.isInPeriod(now) }
-                        ?: periodMapState.data.values.maxByOrNull { it.identifier }
-                    if (period == null) {
-                        ErrorState("Did not have data for the current period.")
-                    } else {
-                        SuccessState(period)
-                    }
+                val period = periodMapState.data.values.firstOrNull { it.isInPeriod(LocalDateTime.now()) }
+                    ?: periodMapState.data.values.maxByOrNull { it.identifier }
+                if (period == null) {
+                    ErrorState("Did not have data for the current period.")
+                } else {
+                    SuccessState(period)
                 }
             }
         }

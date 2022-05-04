@@ -1,14 +1,20 @@
 package se.tink.commons.extensions
 
+// TODO: rename to period extension
 import com.tink.model.time.Period
-import org.joda.time.DateTime
-import org.threeten.bp.Instant
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 
-fun Instant.toDateTime(): DateTime = DateTime(this.toEpochMilli())
+// TODO: Move to Instantextension
+fun Instant.toDateTime(): LocalDateTime = LocalDateTime.ofEpochSecond(
+    this.epochSecond,
+    0,
+    ZoneOffset.UTC
+)
 
-fun Period.isInPeriod(dateTime: DateTime): Boolean {
-
-    val instant = Instant.ofEpochMilli(dateTime.millis)
+fun Period.isInPeriod(dateTime: LocalDateTime): Boolean {
+    val instant = Instant.ofEpochMilli(dateTime.toEpochSecond(ZoneOffset.UTC))
 
     // Inclusive inside checks.
     val afterStart = instant.isAfter(start) || instant == start
@@ -16,3 +22,5 @@ fun Period.isInPeriod(dateTime: DateTime): Boolean {
 
     return afterStart && beforeStop
 }
+
+fun java.time.Period.totalMonths(): Int = years * 12 + months

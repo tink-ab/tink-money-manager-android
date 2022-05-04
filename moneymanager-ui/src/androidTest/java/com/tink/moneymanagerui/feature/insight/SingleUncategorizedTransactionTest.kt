@@ -5,13 +5,14 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.tink.moneymanagerui.extensions.milli
 import com.tink.moneymanagerui.mock.InsightMockFactory
 import com.tink.moneymanagerui.mock.TransactionMockFactory
 import okhttp3.mockwebserver.MockResponse
-import org.joda.time.DateTime
 import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.LocalDateTime
 
 @RunWith(AndroidJUnit4::class)
 class SingleUncategorizedTransactionTest : BaseInsightTestSuit() {
@@ -36,7 +37,7 @@ class SingleUncategorizedTransactionTest : BaseInsightTestSuit() {
             id = transactionId,
             amount = "-150",
             description = "Climbing shoes",
-            date = DateTime.parse("2021-12-27T05:20").millis.toString(),
+            date = LocalDateTime.parse("2021-12-27T05:20").milli().toString(),
             currencyCode = "EUR"
         )
         insight = InsightMockFactory.getSingleUncategorizedTransaction(transactionId)
