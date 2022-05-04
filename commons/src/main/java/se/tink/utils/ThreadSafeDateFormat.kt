@@ -1,10 +1,9 @@
 package se.tink.utils
 
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
-import org.joda.time.ReadablePartial
-import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
@@ -15,30 +14,30 @@ import java.util.Locale
  */
 class ThreadSafeDateFormat private constructor(builder: ThreadSafeDateFormatBuilder) {
     private val dateFormat: DateTimeFormatter =
-        DateTimeFormat
-            .forPattern(builder.pattern)
-            .withZone(builder.timezone)
+        DateTimeFormatter
+            .ofPattern(builder.pattern)
+            .withZone(builder.timeZoneId)
             .withLocale(builder.locale)
 
     /**
      * A builder used to construct [ThreadSafeDateFormat]s
      */
-    class ThreadSafeDateFormatBuilder(pattern: String, locale: Locale, timezone: DateTimeZone) : Cloneable {
+    class ThreadSafeDateFormatBuilder(pattern: String, locale: Locale, timeZoneId: ZoneId) : Cloneable {
         var pattern: String? = null
             private set
         var locale: Locale? = null
             private set
-        var timezone: DateTimeZone? = null
+        var timeZoneId: ZoneId? = null
             private set
 
         init {
             setPattern(pattern)
             setLocale(locale)
-            setTimezone(timezone)
+            setTimezone(timeZoneId)
         }
 
-        private fun setTimezone(timezone: DateTimeZone): ThreadSafeDateFormatBuilder {
-            this.timezone = timezone
+        private fun setTimezone(timeZoneId: ZoneId): ThreadSafeDateFormatBuilder {
+            this.timeZoneId = timeZoneId
             return this
         }
 
@@ -66,16 +65,16 @@ class ThreadSafeDateFormat private constructor(builder: ThreadSafeDateFormatBuil
         }
     }
 
-    constructor(pattern: String?, locale: Locale, timezone: DateTimeZone) : this(
-        ThreadSafeDateFormatBuilder(pattern!!, locale, timezone)
+    constructor(pattern: String?, locale: Locale, timeZoneId: ZoneId) : this(
+        ThreadSafeDateFormatBuilder(pattern!!, locale, timeZoneId)
     )
 
-    fun format(date: DateTime?): String {
-        return dateFormat.print(date)
+    fun format(date: LocalDateTime?): String {
+        return dateFormat.format(date)
     }
 
-    fun format(date: ReadablePartial?): String {
-        return dateFormat.print(date)
+    fun format(date: LocalDate?): String {
+        return dateFormat.format(date)
     }
 
     companion object {
@@ -97,8 +96,8 @@ class ThreadSafeDateFormat private constructor(builder: ThreadSafeDateFormatBuil
         @JvmStatic
         var dateFormatsMap: Map<String, String> = HashMap()
         @JvmStatic
-        fun threadSafeDateFormat(key: String, locale: Locale, timezone: DateTimeZone): ThreadSafeDateFormat {
-            return ThreadSafeDateFormat(dateFormatsMap[key], locale, timezone)
+        fun threadSafeDateFormat(key: String, locale: Locale, timeZoneId: ZoneId): ThreadSafeDateFormat {
+            return ThreadSafeDateFormat(dateFormatsMap[key], locale, timeZoneId)
         }
     }
 }

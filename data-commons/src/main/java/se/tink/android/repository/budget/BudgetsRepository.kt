@@ -17,12 +17,12 @@ import com.tink.service.util.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import org.threeten.bp.Instant
 import se.tink.android.extensions.launchForResult
 import se.tink.android.livedata.AutoFetchLiveData
 import se.tink.android.repository.service.DataRefreshHandler
 import se.tink.android.repository.service.Refreshable
 import se.tink.android.repository.transaction.TransactionUpdateEventBus
+import java.time.Instant
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi

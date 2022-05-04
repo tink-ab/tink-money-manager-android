@@ -11,7 +11,6 @@ import com.tink.moneymanagerui.insights.enrichment.TransactionViewDetails
 import com.tink.moneymanagerui.insights.enrichment.TransactionsViewDetails
 import com.tink.moneymanagerui.util.extensions.formatCurrencyExact
 import kotlinx.android.synthetic.main.tink_item_insight_single_expense_uncategorized.view.*
-import org.threeten.bp.Instant
 import se.tink.android.annotations.ContributesInsightViewProvider
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
@@ -19,6 +18,7 @@ import se.tink.commons.extensions.toDateTime
 import se.tink.insights.InsightViewType
 import se.tink.insights.getViewType
 import se.tink.utils.DateUtils
+import java.time.Instant
 import javax.inject.Inject
 
 @ContributesInsightViewProvider

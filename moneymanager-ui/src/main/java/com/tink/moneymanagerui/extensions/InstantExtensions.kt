@@ -1,6 +1,6 @@
 package com.tink.moneymanagerui.extensions
 
-import org.threeten.bp.Instant
 import se.tink.commons.extensions.toDateTime
+import java.time.Instant
 
-fun Instant.minusMonths(months: Int) = toDateTime().minusMonths(months).getInstant()
+fun Instant.minusMonths(months: Int) = toDateTime().minusMonths(months.toLong()).toInstant()

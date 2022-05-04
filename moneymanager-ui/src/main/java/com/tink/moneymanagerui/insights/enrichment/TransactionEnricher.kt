@@ -6,10 +6,10 @@ import com.tink.model.insights.InsightData
 import com.tink.model.misc.Amount
 import com.tink.model.transaction.Transaction
 import kotlinx.android.parcel.Parcelize
-import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.livedata.switchMap
 import se.tink.android.repository.transaction.TransactionRepository
+import java.time.Instant
 import javax.inject.Inject
 
 class TransactionEnricher @Inject constructor(

@@ -15,7 +15,7 @@ fun Budget.Period.toPeriodChartLabel(
         Budget.Periodicity.Recurring.PeriodUnit.WEEK ->
             context.getString(
                 R.string.tink_budget_period_chart_week_label,
-                start.toDateTime().weekOfWeekyear().get()
+                start.toDateTime().weekOfWeekyear()
             )
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->
@@ -23,7 +23,7 @@ fun Budget.Period.toPeriodChartLabel(
 
         Budget.Periodicity.Recurring.PeriodUnit.MONTH,
         Budget.Periodicity.Recurring.PeriodUnit.UNKNOWN -> {
-            getHalfwayPoint().getAbbreviatedMonthName()
+            dateUtils.getMonthCompact(getHalfwayPoint())
         }
     }
 }
@@ -37,7 +37,7 @@ fun Budget.Period.toHistoricIntervalLabel(
         Budget.Periodicity.Recurring.PeriodUnit.WEEK ->
             context.getString(
                 R.string.tink_budget_period_chart_week_label,
-                getHalfwayPoint().weekOfWeekyear().get()
+                getHalfwayPoint().weekOfWeekyear()
             )
 
         Budget.Periodicity.Recurring.PeriodUnit.YEAR ->

@@ -28,6 +28,10 @@ android {
         }
     }
 
+    compileOptions {
+        coreLibraryDesugaringEnabled = true
+    }
+
     resourcePrefix("tink_")
 
 }
@@ -36,6 +40,8 @@ dependencies {
     compileOnly project(':annotations')
 
     implementation libraries.tink_models
+
+    coreLibraryDesugaring(libraries.desugar_jdk_libs)
 
     implementation libraries.kotlin_stdlib
     implementation libraries.support_appcompat
@@ -49,8 +55,6 @@ dependencies {
     implementation libraries.dagger_android_support
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
-
-    implementation libraries.joda_time
 
     testImplementation libraries.test_mockk
     testImplementation libraries.test_assertj

@@ -5,13 +5,14 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.tink.moneymanagerui.R
+import com.tink.moneymanagerui.extensions.milli
 import com.tink.moneymanagerui.mock.InsightMockFactory
 import com.tink.moneymanagerui.mock.TransactionMockFactory
 import okhttp3.mockwebserver.MockResponse
-import org.joda.time.DateTime
 import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.time.LocalDateTime
 
 @RunWith(AndroidJUnit4::class)
 class WeeklyUncategorizedTransactionsTest : BaseInsightTestSuit() {
@@ -29,17 +30,17 @@ class WeeklyUncategorizedTransactionsTest : BaseInsightTestSuit() {
             TransactionMockFactory.getTransaction(
                 id = transactionIds[0],
                 description = "Lunch",
-                date = DateTime.parse("2021-07-04T05:20").millis.toString()
+                date = LocalDateTime.parse("2021-07-04T05:20").milli().toString()
             ),
             TransactionMockFactory.getTransaction(
                 id = transactionIds[1],
                 description = "Camera",
-                date = DateTime.parse("2021-06-30T01:20").millis.toString()
+                date = LocalDateTime.parse("2021-06-30T01:20").milli().toString()
             ),
             TransactionMockFactory.getTransaction(
                 id = transactionIds[2],
                 description = "Coffee",
-                date = DateTime.parse("2021-07-05T05:20").millis.toString()
+                date = LocalDateTime.parse("2021-07-05T05:20").milli().toString()
             )
         )
         insightDispatcher.addResponses(

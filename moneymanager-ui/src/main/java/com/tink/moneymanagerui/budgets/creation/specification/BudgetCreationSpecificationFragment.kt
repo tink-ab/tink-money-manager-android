@@ -15,6 +15,7 @@ import com.tink.moneymanagerui.budgets.creation.BudgetCreationFragment
 import com.tink.moneymanagerui.budgets.creation.BudgetCreationNavigation
 import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationViewModelFactory
 import com.tink.moneymanagerui.extensions.closeKeyboard
+import com.tink.moneymanagerui.extensions.millsInLocalTimeZone
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
 import com.tink.moneymanagerui.extensions.visibleIf
@@ -22,9 +23,8 @@ import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_fragment_budget_creation_specification.*
-import org.joda.time.DateTime
 import se.tink.commons.extensions.getThemeResIdFromAttr
-import java.util.Calendar
+import java.time.LocalDateTime
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -187,18 +187,24 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
 
         periodStartText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val startDate = viewModel.periodStartValue.value ?: DateTime.now()
-            val earliestPickableStart = viewModel.periodEndValue.value?.millis ?: Long.MAX_VALUE
-            onPeriodDatePickerClicked(startDate, earliestStartTime = earliestPickableStart) { date ->
+            val startDate = viewModel.periodStartValue.value ?: LocalDateTime.now()
+
+            val latestEndTime = viewModel.periodEndValue.value ?: LocalDateTime.MAX
+            val latestEndTimeInMills = latestEndTime.millsInLocalTimeZone()
+
+            onPeriodDatePickerClicked(startDate, latestEndTimeInMills = latestEndTimeInMills) { date ->
                 viewModel.periodStartValue.value = date
             }
         }
 
         periodEndText.setOnClickListener {
             amountInputText.closeKeyboard()
-            val endDate = viewModel.periodEndValue.value ?: DateTime.now()
-            val latestPickableEnd = viewModel.periodStartValue.value?.millis ?: 0
-            onPeriodDatePickerClicked(endDate, latestEndTime = latestPickableEnd) { date ->
+            val endDate = viewModel.periodEndValue.value ?: LocalDateTime.now()
+
+            val earliestStartTime = viewModel.periodStartValue.value ?: LocalDateTime.MIN
+            val earliestStartTimeInMills = earliestStartTime.millsInLocalTimeZone()
+
+            onPeriodDatePickerClicked(endDate, earliestStartTimeInMills = earliestStartTimeInMills) { date ->
                 viewModel.periodEndValue.value = date
             }
         }
@@ -288,32 +294,28 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
     }
 
     private fun onPeriodDatePickerClicked(
-        currentDate: DateTime,
-        earliestStartTime: Long = Long.MAX_VALUE,
-        latestEndTime: Long = 0,
-        onDateSelect: (DateTime) -> Unit
+        currentDate: LocalDateTime,
+        latestEndTimeInMills: Long = Long.MAX_VALUE,
+        earliestStartTimeInMills: Long = 0,
+        onDateSelect: (LocalDateTime) -> Unit
     ) {
         context?.let { context ->
             DatePickerDialog(
                 context,
                 context.getThemeResIdFromAttr(R.attr.tink_datePickerStyle),
                 { _, year, month, dayOfMonth ->
-                    val calendar = Calendar.getInstance()
-                    calendar.set(Calendar.YEAR, year)
-                    calendar.set(Calendar.MONTH, month)
-                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                    val date = DateTime(calendar.timeInMillis)
+                    // Calendar#MONTH expects 0-11 while LocalDate>Time#monthValue outputs 1-12
+                    val date = LocalDateTime.of(year, month + 1, dayOfMonth, 0, 0, 0, 0)
                     onDateSelect.invoke(date)
                 },
                 currentDate.year,
-                // Calendar#MONTH expects 0-11 while DateTime#monthOfYear outputs 1-12
-                currentDate.monthOfYear - 1,
+                // Calendar#MONTH expects 0-11 while LocalDate>Time#monthValue outputs 1-12
+                currentDate.monthValue - 1,
                 currentDate.dayOfMonth
             ).apply {
-                datePicker.minDate = latestEndTime
-                datePicker.maxDate = earliestStartTime
-            }
-                .show()
+                datePicker.minDate = earliestStartTimeInMills
+                datePicker.maxDate = latestEndTimeInMills
+            }.show()
         }
     }
 
