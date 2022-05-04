@@ -27,7 +27,7 @@ allprojects {
 }
 
 subprojects {
-    if(it.name != "app" && it.name != "annotations" && it.name != "codegen") {
+    if(it.name != "sample-moneymanager-ui" && it.name != "annotations" && it.name != "codegen") {
         apply from: "../maven-publish.gradle"
     }
 
