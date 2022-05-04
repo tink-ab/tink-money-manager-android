@@ -1,5 +1,8 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     id "com.github.ben-manes.versions" version "0.39.0"
+    id "org.jetbrains.dokka"
 }
 
 apply plugin: 'com.android.library'
@@ -104,3 +107,12 @@ dependencies {
     debugImplementation libraries.test_espresso_idling_resource
     debugImplementation libraries.test_fragment
 }
+
+//tasks.named("dokkaHtml") {
+//    outputDirectory.set(buildDir.resolve("docs"))
+//}
+
+tasks.withType(DokkaTask).configureEach({
+//    outputDirectory.set(buildDir.resolve("dokka"))
+    outputDirectory.set(rootDir.resolve("docs"))
+})
