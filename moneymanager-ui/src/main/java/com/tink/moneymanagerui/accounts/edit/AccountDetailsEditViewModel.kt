@@ -66,14 +66,14 @@ class AccountDetailsEditViewModel@Inject constructor(
 
                     editedNameText.postValue(account.name)
                     editedType.postValue(account.type)
-                    editedExcluded.postValue(account.excluded)
+                    editedExcluded.postValue(isAccountExcluded(account))
                     editedFavorite.postValue(account.favored)
                     editedShared.postValue(isShared)
 
                     val newState = AccountDetailsEditData(
                         name = account.name,
                         type = account.type,
-                        isExcluded = account.excluded,
+                        isExcluded = isAccountExcluded(account),
                         isFavored = account.favored,
                         isShared = isShared
                     )
@@ -128,6 +128,9 @@ class AccountDetailsEditViewModel@Inject constructor(
             }
         }
 
+    private fun isAccountExcluded(account: Account) =
+        account.accountExclusion == Account.AccountExclusion.PFM_DATA
+
     val hasMadeChanges: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun update() {
             whenNonNull(accountDetailsEditData.value, initialState) { accountDetailsEditData, initialState ->
@@ -165,6 +168,12 @@ class AccountDetailsEditViewModel@Inject constructor(
 
         isUpdating.postValue(true)
         viewModelScope.launch {
+            val accountExclusion = if (editedData.data.isExcluded) {
+                Account.AccountExclusion.PFM_DATA
+            } else {
+                Account.AccountExclusion.NONE
+            }
+
             accountRepository.updateAccountState(
                 UpdateAccountDescriptor(
                     id = accountValue.data.id,
@@ -172,7 +181,7 @@ class AccountDetailsEditViewModel@Inject constructor(
                     name = editedData.data.name,
                     ownership = ownershipPart,
                     type = editedData.data.type,
-                    accountExclusion = editedData.data.isExcluded,
+                    accountExclusion = accountExclusion
                 )
             )
             statisticsRepository.refreshDelayed()
