@@ -1,0 +1,17 @@
+---
+title: date
+---
+//[moneymanager-ui](../../../../index.html)/[com.tink.model.budget](../../index.html)/[Budget](../index.html)/[Transaction](index.html)/[date](date.html)
+
+
+
+# date
+
+
+
+[androidJvm]\
+val [date](date.html): [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html)
+
+
+
+
