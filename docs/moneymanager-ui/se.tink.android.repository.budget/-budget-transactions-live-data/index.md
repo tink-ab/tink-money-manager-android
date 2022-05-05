@@ -1,0 +1,61 @@
+---
+title: BudgetTransactionsLiveData
+---
+//[moneymanager-ui](../../../index.html)/[se.tink.android.repository.budget](../index.html)/[BudgetTransactionsLiveData](index.html)
+
+
+
+# BudgetTransactionsLiveData
+
+
+
+[androidJvm]\
+@ExperimentalCoroutinesApi
+
+
+
+class [BudgetTransactionsLiveData](index.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant, dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) : [MediatorLiveData](https://developer.android.com/reference/kotlin/androidx/lifecycle/MediatorLiveData.html)&lt;[ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;
+
+
+
+## Constructors
+
+
+| | |
+|---|---|
+| [BudgetTransactionsLiveData](-budget-transactions-live-data.html) | [androidJvm]<br>fun [BudgetTransactionsLiveData](-budget-transactions-live-data.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant, dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) |
+
+
+## Functions
+
+
+| Name | Summary |
+|---|---|
+| [addSource](index.html#-64157780%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun &lt;[S](index.html#-64157780%2FFunctions%2F1000845458) : [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)&gt; [addSource](index.html#-64157780%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [LiveData](https://developer.android.com/reference/kotlin/androidx/lifecycle/LiveData.html)&lt;[S](index.html#-64157780%2FFunctions%2F1000845458)&gt;, @[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p1: [Observer](https://developer.android.com/reference/kotlin/androidx/lifecycle/Observer.html)&lt;in [S](index.html#-64157780%2FFunctions%2F1000845458)&gt;) |
+| [changeActiveCounter](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1482381820%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun [changeActiveCounter](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1482381820%2FFunctions%2F1000845458)(p0: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)) |
+| [dispatchingValue](index.html#-574409575%2FFunctions%2F1000845458) | [androidJvm]<br>open fun [dispatchingValue](index.html#-574409575%2FFunctions%2F1000845458)(@[Nullable](https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html)p0: [LiveData.ObserverWrapper](https://developer.android.com/reference/kotlin/androidx/lifecycle/LiveData.ObserverWrapper.html)&lt;[ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;?) |
+| [dispose](dispose.html) | [androidJvm]<br>fun [dispose](dispose.html)() |
+| [getValue](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#685674515%2FFunctions%2F1000845458) | [androidJvm]<br>@[Nullable](https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html)<br>open fun [getValue](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#685674515%2FFunctions%2F1000845458)(): [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;? |
+| [getVersion](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-256882484%2FFunctions%2F1000845458) | [androidJvm]<br>open fun [getVersion](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-256882484%2FFunctions%2F1000845458)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [hasActiveObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1328333103%2FFunctions%2F1000845458) | [androidJvm]<br>open fun [hasActiveObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1328333103%2FFunctions%2F1000845458)(): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [hasObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1046544021%2FFunctions%2F1000845458) | [androidJvm]<br>open fun [hasObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1046544021%2FFunctions%2F1000845458)(): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [observe](index.html#749313535%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun [observe](index.html#749313535%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [LifecycleOwner](https://developer.android.com/reference/kotlin/androidx/lifecycle/LifecycleOwner.html), @[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p1: [Observer](https://developer.android.com/reference/kotlin/androidx/lifecycle/Observer.html)&lt;in [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;) |
+| [observeForever](index.html#1766802971%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun [observeForever](index.html#1766802971%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [Observer](https://developer.android.com/reference/kotlin/androidx/lifecycle/Observer.html)&lt;in [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;) |
+| [onActive](index.html#1643158172%2FFunctions%2F1000845458) | [androidJvm]<br>@[CallSuper](https://developer.android.com/reference/kotlin/androidx/annotation/CallSuper.html)<br>open override fun [onActive](index.html#1643158172%2FFunctions%2F1000845458)() |
+| [onInactive](index.html#-1916013673%2FFunctions%2F1000845458) | [androidJvm]<br>@[CallSuper](https://developer.android.com/reference/kotlin/androidx/annotation/CallSuper.html)<br>open override fun [onInactive](index.html#-1916013673%2FFunctions%2F1000845458)() |
+| [postValue](index.html#-21393588%2FFunctions%2F1000845458) | [androidJvm]<br>open override fun [postValue](index.html#-21393588%2FFunctions%2F1000845458)(p0: [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;) |
+| [removeObserver](index.html#54815914%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun [removeObserver](index.html#54815914%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [Observer](https://developer.android.com/reference/kotlin/androidx/lifecycle/Observer.html)&lt;in [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;) |
+| [removeObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#1487287389%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun [removeObservers](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#1487287389%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [LifecycleOwner](https://developer.android.com/reference/kotlin/androidx/lifecycle/LifecycleOwner.html)) |
+| [removeSource](index.html#-676371886%2FFunctions%2F1000845458) | [androidJvm]<br>@[MainThread](https://developer.android.com/reference/kotlin/androidx/annotation/MainThread.html)<br>open fun &lt;[S](index.html#-676371886%2FFunctions%2F1000845458) : [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)&gt; [removeSource](index.html#-676371886%2FFunctions%2F1000845458)(@[NonNull](https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html)p0: [LiveData](https://developer.android.com/reference/kotlin/androidx/lifecycle/LiveData.html)&lt;[S](index.html#-676371886%2FFunctions%2F1000845458)&gt;) |
+| [setValue](index.html#-740957068%2FFunctions%2F1000845458) | [androidJvm]<br>open override fun [setValue](index.html#-740957068%2FFunctions%2F1000845458)(p0: [ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;) |
+
+
+## Properties
+
+
+| Name | Summary |
+|---|---|
+| [mActiveCount](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-163308686%2FProperties%2F1000845458) | [androidJvm]<br>val [mActiveCount](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-163308686%2FProperties%2F1000845458): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [mDataLock](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1918813974%2FProperties%2F1000845458) | [androidJvm]<br>val [mDataLock](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#-1918813974%2FProperties%2F1000845458): [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html) |
+| [mPendingData](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#230544954%2FProperties%2F1000845458) | [androidJvm]<br>val [mPendingData](../../se.tink.android.repository.transaction/-category-transaction-pages-live-data/index.html#230544954%2FProperties%2F1000845458): [Any](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html) |
+
