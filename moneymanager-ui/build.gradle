@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.DokkaTask
+
 plugins {
     id "com.github.ben-manes.versions" version "0.39.0"
 }
@@ -6,6 +8,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.dokka'
 apply from: '../dependencies.gradle'
 
 android {
@@ -106,3 +109,46 @@ dependencies {
     debugImplementation libraries.test_espresso_idling_resource
     debugImplementation libraries.test_fragment
 }
+
+tasks.withType(DokkaTask).configureEach {
+    outputDirectory.set(file("$rootDir/docs"))
+
+    dokkaSourceSets {
+        named("main") {
+            sourceRoots.setFrom(file("$rootDir/moneymanager-ui/src"))
+            sourceRoots.from(file("$rootDir/data-commons/src"))
+            sourceRoots.from(file("$rootDir/commons/src"))
+            sourceRoots.from(file("$rootDir/../tink-sdk-core-android/core/src"))
+            sourceRoots.from(file("$rootDir/../tink-sdk-core-android/models/src"))
+            sourceRoots.from(file("$rootDir/../tink-sdk-core-android/service/src"))
+        }
+    }
+
+    doFirst {
+        println("Deleting old /docs")
+        delete("$rootDir/docs")
+    }
+}
+
+
+//tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configure {
+
+//tasks.dokkaJekyll.configure {
+//    outputDirectory.set(file("$rootDir/docs"))
+//
+//    dokkaSourceSets {
+//        named("main") {
+//            sourceRoots.setFrom(file("$rootDir/moneymanager-ui/src"))
+//            sourceRoots.setFrom(file("$rootDir/data-commons/src"))
+//            sourceRoots.setFrom(file("$rootDir/commons/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/core/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/models/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/service/src"))
+//        }
+//    }
+//
+//    doFirst {
+//        println("Deleting old /docs")
+//        delete("$rootDir/docs")
+//    }
+//}
