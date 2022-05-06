@@ -1,0 +1,40 @@
+---
+title: OverviewCustomAccounts
+---
+//[moneymanager-ui](../../../index.html)/[com.tink.moneymanagerui.accounts](../index.html)/[OverviewCustomAccounts](index.html)
+
+
+
+# OverviewCustomAccounts
+
+
+
+[androidJvm]\
+class [OverviewCustomAccounts](index.html)(customAccountFilter: [AccountFilter](../-account-filter/index.html)) : [OverviewAccountsMode](../-overview-accounts-mode/index.html)
+
+
+
+## Constructors
+
+
+| | |
+|---|---|
+| [OverviewCustomAccounts](-overview-custom-accounts.html) | [androidJvm]<br>fun [OverviewCustomAccounts](-overview-custom-accounts.html)(customAccountFilter: [AccountFilter](../-account-filter/index.html)) |
+
+
+## Functions
+
+
+| Name | Summary |
+|---|---|
+| [describeContents](../../com.tink.service.provider/-provider-filter/index.html#-1578325224%2FFunctions%2F1000845458) | [androidJvm]<br>abstract fun [describeContents](../../com.tink.service.provider/-provider-filter/index.html#-1578325224%2FFunctions%2F1000845458)(): [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [writeToParcel](../../com.tink.service.provider/-provider-filter/index.html#-1754457655%2FFunctions%2F1000845458) | [androidJvm]<br>abstract fun [writeToParcel](../../com.tink.service.provider/-provider-filter/index.html#-1754457655%2FFunctions%2F1000845458)(p0: [Parcel](https://developer.android.com/reference/kotlin/android/os/Parcel.html), p1: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)) |
+
+
+## Properties
+
+
+| Name | Summary |
+|---|---|
+| [overviewAccountsFilter](../-overview-accounts-mode/overview-accounts-filter.html) | [androidJvm]<br>val [overviewAccountsFilter](../-overview-accounts-mode/overview-accounts-filter.html): [AccountFilter](../-account-filter/index.html) |
+
