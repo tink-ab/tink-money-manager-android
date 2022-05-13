@@ -102,18 +102,33 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(ARG_FIRST_LAUNCH, false)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        setupTimber()
         DaggerFragmentComponent
             .factory()
             .create(Tink.requireComponent(), this)
             .inject(this)
-        Tink.setUser(User.fromAccessToken(accessToken))
         i18nConfiguration.initialize()
-        refreshData()
+        initSecuredDataStorage(requireContext())
+    }
 
-        context.let(::initSecuredDataStorage)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if(savedInstanceState == null){
+            setupTimber()
+            Tink.setUser(User.fromAccessToken(accessToken))
+        }
+        val isFirstLaunch = savedInstanceState?.getBoolean(ARG_FIRST_LAUNCH) ?: arguments?.getBoolean(ARG_FIRST_LAUNCH) ?: false
+        if(isFirstLaunch){
+            Timber.d("[TinkLink]: Version ${BuildConfig.libraryVersion}")
+            Timber.d("[TinkCore]: Version ${com.tink.core.BuildConfig.libraryVersion}")
+        }
+        refreshData()
     }
 
     override fun onCreateView(
@@ -186,6 +201,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     companion object {
 
+        const val ARG_FIRST_LAUNCH = "firstLaunch"
         const val ARG_STYLE_RES = "styleRes"
         const val ARG_ACCESS_TOKEN = "accessToken"
         const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
@@ -239,6 +255,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             this.featureSpecificThemes = featureSpecificThemes
             return FinanceOverviewFragment().apply {
                 arguments = bundleOf(
+                    ARG_FIRST_LAUNCH to true,
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
                     ARG_OVERVIEW_FEATURES to overviewFeatures,
