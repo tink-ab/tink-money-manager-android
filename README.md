@@ -1,7 +1,12 @@
+![Min Android API level](https://img.shields.io/badge/api-21%2B-0E9EC2)
+
 # Tink Money Manager SDK for Android
 
 ## Prerequisites
-   Before you can use the SDK, you need to create a developer account at [Tink Console](https://console.tink.com/). You will also need to have a working integration with Tink to authenticate and authorize users.
+   Before you can use the SDK, you need to create a developer account at [Tink Console](https://console.tink.com/). 
+   You will also need to have a working integration with Tink to authenticate and authorize users.
+
+   The minimum API level required for using this library is 21 (Android 5.0). 
 
 ## Installation
 
