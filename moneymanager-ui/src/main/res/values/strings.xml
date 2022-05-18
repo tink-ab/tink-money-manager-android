@@ -181,7 +181,7 @@
   <string name="tink_budget_details_selector_over_time">Over time</string>
   <string name="tink_budget_details_remaining">%s remaining</string>
   <string name="tink_budget_details_starts_in">Starts in %s</string>
-  <string name="tink_budget_details_ended_months_days_ago">Ended %s ago</string>
+  <string name="tink_budget_details_ended_months_days_ago">Closed %s ago</string>
   <plurals name="tink_budget_days_plural">
     <item quantity="one">%s day</item>
     <item quantity="other">%s days</item>
