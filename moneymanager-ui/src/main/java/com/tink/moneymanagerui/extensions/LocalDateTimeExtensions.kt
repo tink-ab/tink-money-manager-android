@@ -17,7 +17,7 @@ fun LocalDateTime.monthOfYear(): Int = this.month.value
 
 fun LocalDateTime.toInstant(): Instant = Instant.ofEpochSecond(this.toEpochSecond(ZoneOffset.UTC))
 
-fun LocalDateTime.milli(): Long = toInstant().toEpochMilli()
+fun LocalDateTime.milli(): Long = toInstant().toEpochMilliSafe()
 
 fun LocalDateTime.weekOfWeekyear(): Int = this.toLocalDate().get(WeekFields.ISO.weekOfWeekBasedYear())
 
@@ -43,8 +43,12 @@ fun LocalDateTime.getStartOfMonth(): LocalDateTime = with(TemporalAdjusters.firs
 
 fun LocalDateTime.getEndOfMonth(): LocalDateTime = with(TemporalAdjusters.lastDayOfMonth())
 
+fun LocalDateTime.getStartOfYear(): LocalDateTime = with(TemporalAdjusters.firstDayOfYear())
+
+fun LocalDateTime.getEndOfYear(): LocalDateTime = with(TemporalAdjusters.lastDayOfYear())
+
 fun LocalDateTime.millsInLocalTimeZone(): Long {
     // Calendar.getInstance().timeZone stores the local time zone.
     val zonedLatestEndTime = ZonedDateTime.of(this, ZoneId.of(Calendar.getInstance().timeZone.id))
-    return zonedLatestEndTime.toInstant().toEpochMilli()
+    return zonedLatestEndTime.toInstant().toEpochMilliSafe()
 }
