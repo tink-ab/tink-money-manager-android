@@ -19,6 +19,8 @@ import com.tink.moneymanagerui.extensions.millsInLocalTimeZone
 import com.tink.moneymanagerui.extensions.openKeyboard
 import com.tink.moneymanagerui.extensions.textChangedObserver
 import com.tink.moneymanagerui.extensions.visibleIf
+import com.tink.moneymanagerui.extensions.getStartOfYear
+import com.tink.moneymanagerui.extensions.getEndOfYear
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.view.TinkSnackbar
@@ -189,7 +191,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             amountInputText.closeKeyboard()
             val startDate = viewModel.periodStartValue.value ?: LocalDateTime.now()
 
-            val latestEndTime = viewModel.periodEndValue.value ?: LocalDateTime.MAX
+            val latestEndTime = viewModel.periodEndValue.value ?: LocalDateTime.now().getEndOfYear()
             val latestEndTimeInMills = latestEndTime.millsInLocalTimeZone()
 
             onPeriodDatePickerClicked(startDate, latestEndTimeInMills = latestEndTimeInMills) { date ->
@@ -201,7 +203,7 @@ internal class BudgetCreationSpecificationFragment : BaseFragment() {
             amountInputText.closeKeyboard()
             val endDate = viewModel.periodEndValue.value ?: LocalDateTime.now()
 
-            val earliestStartTime = viewModel.periodStartValue.value ?: LocalDateTime.MIN
+            val earliestStartTime = viewModel.periodStartValue.value ?: LocalDateTime.now().getStartOfYear()
             val earliestStartTimeInMills = earliestStartTime.millsInLocalTimeZone()
 
             onPeriodDatePickerClicked(endDate, earliestStartTimeInMills = earliestStartTimeInMills) { date ->
