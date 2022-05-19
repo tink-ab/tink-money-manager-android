@@ -106,7 +106,10 @@ internal class BarChartWithAmountLabels : View {
                     getResourceId(R.styleable.TinkBarChartWithThreshold_tink_bar_label_style, -1)
                 setTextStyles(barLabelTextStyle, barLabelPaint)
 
-                getDimensionPixelSize(R.styleable.TinkBarChartWithThreshold_tink_horizontal_margin, 0).also {
+                getDimensionPixelSize(
+                    R.styleable.TinkBarChartWithThreshold_tink_horizontal_margin,
+                    0
+                ).also {
                     barChartMarginLeft = it
                     barChartMarginRight = it
                 }

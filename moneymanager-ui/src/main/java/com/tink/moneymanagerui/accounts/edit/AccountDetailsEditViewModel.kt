@@ -145,9 +145,9 @@ class AccountDetailsEditViewModel@Inject constructor(
     val saveButtonEnabled: LiveData<Boolean> = MediatorLiveData<Boolean>().apply {
         fun update() {
             whenNonNull(editedNameText.value, isUpdating.value, hasMadeChanges.value) {
-                    editedNameText,
-                    isUpdating,
-                    hasMadeChanges ->
+                editedNameText,
+                isUpdating,
+                hasMadeChanges ->
                 value = editedNameText.isNotBlank() && !isUpdating && hasMadeChanges
             }
         }
