@@ -126,7 +126,7 @@
 
   <string name="tink_insights_tab_title">Events</string>
   <string name="tink_insights_archive_title">Archive</string>
-  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want see your previous ones</string>
+  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want to see your previous events</string>
   <string name="tink_insights_archived_empty_state_text">No archived events</string>
   <string name="tink_insights_overview_card_new_events_title">Events</string>
   <string name="tink_insights_overview_card_archived_events_title">Archived events</string>
