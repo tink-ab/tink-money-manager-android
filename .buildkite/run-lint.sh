@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-./gradlew ktlintFormat
+./gradlew ktlintCheck
