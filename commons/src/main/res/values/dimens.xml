@@ -28,6 +28,7 @@
 
   <!-- CardView style dimensions -->
   <dimen name="tink_card_elevation">2dp</dimen>
+  <dimen name="tink_card_elevation_mid">4dp</dimen>
   <dimen name="tink_card_corner_radius">8dp</dimen>
   <dimen name="tink_corner_radius">8dp</dimen>
 

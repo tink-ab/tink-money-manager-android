@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:layout_marginStart="8dp"
-  android:layout_marginEnd="8dp"
-  android:foreground="?selectableItemBackground"
-  android:backgroundTint="?tink_cardBackgroundColor"
-  android:clipChildren="false"
-  android:clipToPadding="false"
-  app:cardCornerRadius="@dimen/tink_corner_radius">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:backgroundTint="?tink_cardBackgroundColor"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    app:cardElevation="@dimen/tink_card_elevation_mid"
+    android:foreground="?selectableItemBackground"
+    app:cardCornerRadius="@dimen/tink_corner_radius">
 
   <androidx.appcompat.widget.LinearLayoutCompat
       android:layout_width="match_parent"

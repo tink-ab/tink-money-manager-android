@@ -24,7 +24,7 @@
         android:visibility="gone"
         app:cardBackgroundColor="?tink_colorAccent"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardElevation="@dimen/tink_card_elevation_mid">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/insightsCardContent"
@@ -36,6 +36,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_margin="12dp"
+                android:contentDescription="@string/tink_insights_overview_card_new_events_title"
                 android:background="@drawable/tink_circle"
                 android:backgroundTint="?tink_colorOnAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
