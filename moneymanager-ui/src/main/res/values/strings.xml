@@ -190,7 +190,7 @@
     <item quantity="one">%s month</item>
     <item quantity="other">%s months</item>
   </plurals>
-  <string name="tink_budget_details_amount_left_none_message">You\'re about to exceed your budget</string>
+  <string name="tink_budget_details_amount_left_none_message">You have %1$s remaining of your budget</string>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>
   <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and manage your budget</string>
