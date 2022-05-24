@@ -125,7 +125,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         }
         val isFirstLaunch = savedInstanceState?.getBoolean(ARG_FIRST_LAUNCH) ?: arguments?.getBoolean(ARG_FIRST_LAUNCH) ?: false
         if(isFirstLaunch){
-            Timber.d("[TinkLink]: Version ${BuildConfig.libraryVersion}")
+            Timber.d("[TinkMoneyManager]: Version ${BuildConfig.libraryVersion}")
             Timber.d("[TinkCore]: Version ${com.tink.core.BuildConfig.libraryVersion}")
         }
         refreshData()
