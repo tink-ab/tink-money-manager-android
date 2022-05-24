@@ -23,7 +23,7 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             val config = TinkConfiguration(
                 Configuration.sampleEnvironment,
                 Configuration.sampleOAuthClientId,
@@ -59,7 +59,7 @@ class MainActivity : FragmentActivity() {
                     currentFinanceOverviewFragment = it
                 }
             ).commit()
-        }else{
+        } else {
             currentFinanceOverviewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as FinanceOverviewFragment
         }
     }

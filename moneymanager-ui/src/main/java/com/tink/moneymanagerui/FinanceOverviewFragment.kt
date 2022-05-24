@@ -119,12 +119,12 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             setupTimber()
             Tink.setUser(User.fromAccessToken(accessToken))
         }
         val isFirstLaunch = savedInstanceState?.getBoolean(ARG_FIRST_LAUNCH) ?: arguments?.getBoolean(ARG_FIRST_LAUNCH) ?: false
-        if(isFirstLaunch){
+        if (isFirstLaunch) {
             Timber.d("[TinkMoneyManager]: Version ${BuildConfig.libraryVersion}")
             Timber.d("[TinkCore]: Version ${com.tink.core.BuildConfig.libraryVersion}")
         }
