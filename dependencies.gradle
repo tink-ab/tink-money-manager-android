@@ -14,7 +14,7 @@ ext {
     timberVersion = "4.7.1"
     desugarVersion = "1.1.5"
 
-    tinkCoreVersion = "0.8.3"
+    tinkCoreVersion = "0.8.4"
 
     // test
     assertj = "3.22.0"
