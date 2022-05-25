@@ -46,7 +46,7 @@ internal class AccountsViewModel @Inject constructor(
         }
 
     val groupedAccountsState: LiveData<ResponseState<List<GroupedAccountsItem>>> = accountsWithImageState.map {
-            accountState ->
+        accountState ->
         accountState.map { accounts ->
             (FinanceOverviewFragment.accountGroupType as? AccountGroupable)
                 ?.groupAccounts(accounts)

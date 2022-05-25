@@ -12,6 +12,10 @@ buildscript {
     }
 }
 
+plugins {
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+}
+
 ext {
     buildToolsVersion = "31.0.0"
     compileSdkVersion = 31
@@ -31,8 +35,6 @@ subprojects {
     if(it.name != "sample-moneymanager-ui" && it.name != "annotations" && it.name != "codegen") {
         apply from: "../maven-publish.gradle"
     }
-
-    apply { from("../ktlint.gradle") }
 }
 
 task clean(type: Delete) {
