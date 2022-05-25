@@ -51,6 +51,7 @@ android {
     }
 
     resourcePrefix("tink_")
+    namespace 'com.tink.moneymanagerui'
 }
 
 dependencies {

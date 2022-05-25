@@ -34,6 +34,7 @@ android {
     }
 
     resourcePrefix("tink_")
+    namespace 'se.tink.commons'
 
 }
 
