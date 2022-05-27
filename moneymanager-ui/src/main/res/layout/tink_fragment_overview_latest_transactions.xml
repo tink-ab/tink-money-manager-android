@@ -7,14 +7,12 @@
 
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/card"
+      app:cardViewStyle="@style/TinkMaterialCardviewStyle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginHorizontal="16dp"
       android:layout_marginVertical="12dp"
-      android:backgroundTint="?tink_cardBackgroundColor"
       android:visibility="gone"
-      app:cardCornerRadius="8dp"
-      app:cardElevation="@dimen/tink_card_elevation_mid"
       tools:visibility="visible">
 
     <androidx.constraintlayout.widget.ConstraintLayout

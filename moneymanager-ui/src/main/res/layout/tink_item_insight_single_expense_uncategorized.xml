@@ -3,11 +3,10 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  app:cardViewStyle="@style/TinkMaterialCardviewStyle"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:layout_margin="16dp"
-  app:cardBackgroundColor="?tink_cardBackgroundColor"
-  app:cardCornerRadius="@dimen/tink_card_corner_radius">
+  android:layout_margin="16dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

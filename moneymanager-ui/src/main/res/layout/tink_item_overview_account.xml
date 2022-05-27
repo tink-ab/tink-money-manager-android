@@ -3,16 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cardViewStyle="@style/TinkMaterialCardviewStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
-    android:backgroundTint="?tink_cardBackgroundColor"
     android:clipChildren="false"
     android:clipToPadding="false"
-    app:cardElevation="@dimen/tink_card_elevation_mid"
-    android:foreground="?selectableItemBackground"
-    app:cardCornerRadius="@dimen/tink_corner_radius">
+    app:rippleColor="@color/tink_ripple_on_light_background">
 
   <androidx.appcompat.widget.LinearLayoutCompat
       android:layout_width="match_parent"

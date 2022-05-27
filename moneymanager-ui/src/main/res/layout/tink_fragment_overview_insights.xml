@@ -14,17 +14,16 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/insightsCard"
+        app:cardViewStyle="@style/TinkMaterialCardviewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:foreground="?selectableItemBackground"
+        app:rippleColor="@color/tink_ripple_on_light_background"
         android:visibility="gone"
-        app:cardBackgroundColor="?tink_colorAccent"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="@dimen/tink_card_elevation_mid">
+        app:cardBackgroundColor="?tink_colorAccent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/insightsCardContent"
