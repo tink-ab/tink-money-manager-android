@@ -121,6 +121,9 @@
     <!-- Alert dialog style -->
     <attr name="tink_alertDialogStyle" format="reference" />
 
+    <!-- Cardview style -->
+    <attr name="tink_cardviewStyle" format="reference" />
+
     <!-- Date picker style -->
     <attr name="tink_datePickerStyle" format="reference" />
 
