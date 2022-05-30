@@ -20,6 +20,31 @@
     app:shapeAppearance="?attr/tink_categoryIconShapeStyle"
     tools:srcCompat="@drawable/tink_category_healthandbeauty" />
 
+  <View
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:id="@+id/cornerIconBackgroundView"
+      android:background="@color/tink_white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="@id/cornerIcon"
+      app:layout_constraintEnd_toEndOf="@id/cornerIcon"
+      app:layout_constraintTop_toTopOf="@id/cornerIcon"
+      app:layout_constraintBottom_toBottomOf="@id/cornerIcon"
+      android:padding="4dp"
+      tools:visibility="visible"/>
+
+  <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/cornerIcon"
+      app:layout_constraintEnd_toEndOf="@+id/icon"
+      app:layout_constraintBottom_toBottomOf="@+id/icon"
+      app:tint="?tink_colorAccent"
+      android:visibility="gone"
+      tools:visibility="visible"
+      android:src="@drawable/tink_clock"
+      tools:ignore="ContentDescription" />
+
   <Space
     android:id="@+id/spacer"
     android:layout_width="2dp"
