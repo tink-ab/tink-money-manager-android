@@ -8,8 +8,8 @@ import com.tink.model.insights.InsightData
 import com.tink.model.insights.InsightType
 import com.tink.model.relations.ExpensesByDay
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.charts.BarChartWithAmountLabels
 import com.tink.moneymanagerui.insights.actionhandling.ActionHandler
+import com.tink.moneymanagerui.statistics.barchart.BarChartWithAmountLabels
 import com.tink.moneymanagerui.util.CurrencyUtils
 import kotlinx.android.synthetic.main.tink_item_insight_weekly_expenses_by_day.view.*
 import se.tink.android.annotations.ContributesInsightViewProvider

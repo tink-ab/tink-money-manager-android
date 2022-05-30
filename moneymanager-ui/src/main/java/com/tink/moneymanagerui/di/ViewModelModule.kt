@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import com.tink.moneymanagerui.accounts.details.AccountDetailsViewModel
 import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditViewModel
 import com.tink.moneymanagerui.accounts.list.AccountsViewModel
+import com.tink.moneymanagerui.category.CategorySelectionViewModel
 import com.tink.moneymanagerui.overview.OverviewChartViewModel
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewViewModel
-import com.tink.moneymanagerui.overview.charts.CategorySelectionViewModel
-import com.tink.moneymanagerui.overview.charts.ChartDetailsViewModel
 import com.tink.moneymanagerui.overview.charts.PieChartDetailsViewModel
-import com.tink.moneymanagerui.overview.charts.StatisticsOverTimeViewModel
 import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsViewModel
+import com.tink.moneymanagerui.statistics.details.ChartDetailsViewModel
+import com.tink.moneymanagerui.statistics.overtime.StatisticsOverTimeViewModel
 import com.tink.moneymanagerui.transaction.CategorizationFlowViewModel
 import com.tink.moneymanagerui.transaction.SimilarTransactionsViewModel
 import com.tink.moneymanagerui.transaction.TransactionListViewModel

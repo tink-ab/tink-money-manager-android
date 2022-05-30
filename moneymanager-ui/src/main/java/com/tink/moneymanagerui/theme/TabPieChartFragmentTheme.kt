@@ -2,7 +2,7 @@ package com.tink.moneymanagerui.theme
 
 import androidx.annotation.AttrRes
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.overview.charts.ChartType
+import com.tink.moneymanagerui.statistics.ChartType
 
 internal interface TabPieChartFragmentTheme {
     val iconTheme: CategoryIconTheme

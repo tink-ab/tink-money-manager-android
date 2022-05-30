@@ -3,10 +3,10 @@ package com.tink.moneymanagerui.di
 import com.tink.moneymanagerui.FragmentCoordinator
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.TransitionCoordinatorImpl
-import com.tink.moneymanagerui.overview.charts.piechart.FullPieChartFragment
-import com.tink.moneymanagerui.overview.charts.piechart.HalfPieChartFragment
-import com.tink.moneymanagerui.overview.charts.piechart.PieChartNavigation
-import com.tink.moneymanagerui.overview.charts.piechart.TabPieChartFragment
+import com.tink.moneymanagerui.statistics.piechart.FullPieChartFragment
+import com.tink.moneymanagerui.statistics.piechart.HalfPieChartFragment
+import com.tink.moneymanagerui.statistics.piechart.PieChartNavigation
+import com.tink.moneymanagerui.statistics.piechart.TabPieChartFragment
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
