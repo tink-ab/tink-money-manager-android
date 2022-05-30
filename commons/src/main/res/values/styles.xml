@@ -118,7 +118,6 @@
 
     <!-- Cardview style -->
     <item name="tink_cardviewStyle">@style/TinkMaterialCardviewStyle</item>
-    <item name="materialCardViewStyle">?tink_cardviewStyle</item>
 
     <!-- Date picker style -->
     <item name="tink_datePickerStyle">@style/TinkDatePickerStyle</item>
