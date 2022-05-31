@@ -50,20 +50,18 @@
     <attr name="tink_createBudgetIconColor" format="color|reference" />
     <attr name="tink_createBudgetIconBackgroundColor" format="color|reference" />
     <attr name="tink_createBudgetButtonColor" format="color|reference" />
-
     <attr name="tink_uncategorizedIconColor" format="color|reference"/>
     <attr name="tink_incomeIconColor" format="color|reference"/>
     <attr name="tink_expensesIconColor" format="color|reference"/>
     <attr name="tink_transferIconColor" format="color|reference"/>
-
     <attr name="tink_uncategorizedIconBackgroundColor" format="color|reference"/>
     <attr name="tink_incomeIconBackgroundColor" format="color|reference"/>
     <attr name="tink_expensesIconBackgroundColor" format="color|reference"/>
     <attr name="tink_transferIconBackgroundColor" format="color|reference"/>
-
     <attr name="tink_accountIconColor" format="color|reference"/>
     <attr name="tink_accountIconBackgroundColor" format="color|reference"/>
     <attr name="tink_accountTextColor" format="color|reference"/>
+    <attr name="tink_rippleColor" format="color|reference"/>
 
     <!--    Icons-->
     <attr name="tink_icon_category_all_expenses" format="integer|reference" />
@@ -94,6 +92,9 @@
     <attr name="tink_icon_ingested_account" format="integer|reference" />
     <attr name="tink_icon_account" format="integer|reference" />
 
+    <!-- Elevation -->
+    <attr name="tink_cardElevation" format="dimension"/>
+
     <!-- Button styles -->
     <attr name="tink_containedButtonStyle" format="reference" />
     <attr name="tink_textButtonStyle" format="reference" />
@@ -106,8 +107,10 @@
     <attr name="tink_categoryIconShapeStyle" format="reference" />
     <attr name="tink_createBudgetIconShapeStyle" format="reference" />
 
+    <!-- Corner radius -->
     <!-- Recommended values are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a tink_circle -->
-    <attr name="tink_checkbox_corner_radius_in_dp" format="dimension">4dp</attr>
+    <attr name="tink_checkbox_corner_radius_in_dp" format="dimension"/>
+    <attr name="tink_cardCornerRadius" format="dimension"/>
 
     <!-- Text appearance -->
     <attr name="tink_dateGroupTextAppearance" format="reference" />

@@ -29,6 +29,9 @@
   <!-- CardView style dimensions -->
   <dimen name="tink_card_elevation">4dp</dimen>
   <dimen name="tink_card_corner_radius">8dp</dimen>
+
+  <!-- Corner radius -->
+  <dimen name="tink_checkbox_corner_radius">12dp</dimen>
   <dimen name="tink_corner_radius">8dp</dimen>
 
   <!-- Category icon dimensions -->
