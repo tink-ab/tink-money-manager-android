@@ -69,7 +69,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and manage your budget |
 | `tink_budget_details_amount_left_message_plain` | You can spend %1$s and manage your budget |
 | `tink_budget_details_amount_left_monthly_message` | You can spend %1$s per month and manage your budget |
-| `tink_budget_details_amount_left_none_message` | You\'re about to exceed your budget |
+| `tink_budget_details_amount_left_none_message` | You have %1$s remaining of your budget |
 | `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and manage your budget |
 | `tink_budget_details_amount_left_yearly_message` | You can spend %1$s per year and manage your budget |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
