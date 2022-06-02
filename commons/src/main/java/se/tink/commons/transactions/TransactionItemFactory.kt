@@ -35,8 +35,7 @@ class TransactionItemFactory @Inject constructor(
                 description = category.name,
                 label = description,
                 amount = amount,
-                upcomingTransactionData = null,
-                isPending = pending
+                upcomingTransactionData = null
             )
         }
 
@@ -78,8 +77,7 @@ class TransactionItemFactory @Inject constructor(
         label: String,
         amount: Amount,
         dispensableAmount: Amount = Amount(ExactNumber(0, 0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
-        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null, // TODO: PFMSDK: Remove upcoming transaction data
-        isPending: Boolean
+        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {
             val icon = if (isUpcoming) {
@@ -107,8 +105,7 @@ class TransactionItemFactory @Inject constructor(
                 ),
                 date = date,
                 merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
-                upcomingTransactionData = upcomingTransactionData,
-                isPending = isPending
+                upcomingTransactionData = upcomingTransactionData
             )
         } else {
             null
