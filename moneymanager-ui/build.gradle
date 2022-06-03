@@ -131,8 +131,6 @@ tasks.withType(DokkaTask).configureEach {
         delete("$rootDir/docs")
     }
 }
-
-
 //tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configure {
 
 //tasks.dokkaJekyll.configure {
