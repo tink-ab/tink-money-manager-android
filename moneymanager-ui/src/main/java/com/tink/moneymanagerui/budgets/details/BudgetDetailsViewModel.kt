@@ -387,7 +387,7 @@ private fun composeRemainingBudgetStatusString(
         when {
             hasNoMoneyLeftPerPeriod(remainingAmountForPeriod) -> context.getString(
                 R.string.tink_budget_details_amount_left_none_message,
-                remainingAmountForPeriod.formatCurrencyExact()
+                remainingAmount.formatCurrencyExact()
             )
             remainingYears > 1 -> {
                 context.getString(
