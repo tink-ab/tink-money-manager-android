@@ -50,6 +50,7 @@ title: moneymanager-ui
 | [com.tink.moneymanagerui.configuration](moneymanager-ui/com.tink.moneymanagerui.configuration/index.html) |
 | [com.tink.moneymanagerui.di](moneymanager-ui/com.tink.moneymanagerui.di/index.html) |
 | [com.tink.moneymanagerui.extensions](moneymanager-ui/com.tink.moneymanagerui.extensions/index.html) |
+| [com.tink.moneymanagerui.feature.account](moneymanager-ui/com.tink.moneymanagerui.feature.account/index.html) |
 | [com.tink.moneymanagerui.feature.insight](moneymanager-ui/com.tink.moneymanagerui.feature.insight/index.html) |
 | [com.tink.moneymanagerui.insights](moneymanager-ui/com.tink.moneymanagerui.insights/index.html) |
 | [com.tink.moneymanagerui.insights.actionhandling](moneymanager-ui/com.tink.moneymanagerui.insights.actionhandling/index.html) |

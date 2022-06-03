@@ -4,7 +4,6 @@ import com.tink.model.category.Category
 import com.tink.model.misc.Amount
 import com.tink.model.misc.ExactNumber
 import com.tink.model.transaction.Transaction
-import org.joda.time.DateTime
 import se.tink.commons.R
 import se.tink.commons.categories.getIcon
 import se.tink.commons.categories.iconBackgroundColor
@@ -15,6 +14,7 @@ import se.tink.commons.currency.AmountFormatter
 import se.tink.commons.extensions.isValid
 import se.tink.commons.extensions.toDateTime
 import se.tink.utils.DateUtils
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 class TransactionItemFactory @Inject constructor(
@@ -72,7 +72,7 @@ class TransactionItemFactory @Inject constructor(
         id: String,
         isUpcoming: Boolean, // TODO: PFMSDK: Remove upcoming flag
         category: Category,
-        date: DateTime,
+        date: LocalDateTime,
         description: String,
         label: String,
         amount: Amount,

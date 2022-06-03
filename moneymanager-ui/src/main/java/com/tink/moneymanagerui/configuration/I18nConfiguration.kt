@@ -2,12 +2,8 @@ package com.tink.moneymanagerui.configuration
 
 import android.content.Context
 import androidx.annotation.StringRes
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ProcessLifecycleOwner
-import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.R
 import se.tink.android.di.application.ApplicationScoped
-import se.tink.android.repository.user.UserRepository
 import se.tink.utils.DateUtils.Companion.KEY_TODAY
 import se.tink.utils.DateUtils.Companion.KEY_TOMORROW
 import se.tink.utils.DateUtils.Companion.KEY_YESTERDAY
@@ -32,25 +28,18 @@ import javax.inject.Inject
 
 internal class I18nConfiguration @Inject constructor(
     @ApplicationScoped private val context: Context,
-    private val suitableLocaleFinder: SuitableLocaleFinder,
-    private val userRepository: UserRepository
+    private val suitableLocaleFinder: SuitableLocaleFinder
 ) {
 
     fun initialize() {
-        userRepository.userProfile.observe(
-            ProcessLifecycleOwner.get(),
-            Observer {
-                it?.let(::setupI18nConfigurationDependentSingletons)
-            }
-        )
-
+        setupI18nConfigurationDependentSingletons()
         getInstance().formatHumanStrings = getMapWithHumanDateStrings()
         getInstance().locale = suitableLocaleFinder.findLocale()
         ThreadSafeDateFormat.dateFormatsMap = getDateFormatsMap()
     }
 
-    private fun setupI18nConfigurationDependentSingletons(item: UserProfile) {
-        getInstance(suitableLocaleFinder.findLocale(), item.timeZone)
+    private fun setupI18nConfigurationDependentSingletons() {
+        getInstance(suitableLocaleFinder.findLocale())
     }
 
     private fun getMapWithHumanDateStrings(): Map<String, String> {

@@ -161,9 +161,6 @@ limitations under the License.
 ### JUnit Jupiter Params
 [EPL 2.0](https://github.com/junit-team/junit5/blob/main/LICENSE.md)
 
-### Joda Time
-[Apache 2.0](https://github.com/JodaOrg/joda-time/blob/master/LICENSE.txt)
-
 ### Conscrypt Android
 [Apache 2.0](https://github.com/google/conscrypt/blob/master/LICENSE)
 

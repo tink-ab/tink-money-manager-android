@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/tink_budget_details_chart_empty_message" />
 
-    <com.tink.moneymanagerui.charts.BarChartWithThreshold
+    <com.tink.moneymanagerui.statistics.barchart.BarChartWithThreshold
         android:id="@+id/budgetProgress"
         android:layout_width="0dp"
         android:layout_height="match_parent"

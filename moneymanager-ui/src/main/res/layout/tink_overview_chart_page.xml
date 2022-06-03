@@ -43,7 +43,7 @@
                 android:gravity="center" />
         </LinearLayout>
 
-        <com.tink.moneymanagerui.charts.PieChartView
+        <com.tink.moneymanagerui.statistics.PieChartView
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

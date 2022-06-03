@@ -11,8 +11,8 @@ import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
-import com.tink.moneymanagerui.overview.charts.CategorySelectionFragment
-import com.tink.moneymanagerui.overview.charts.CategorySelectionListener
+import com.tink.moneymanagerui.category.CategorySelectionFragment
+import com.tink.moneymanagerui.category.CategorySelectionListener
 import se.tink.commons.extensions.isBiggerThan
 
 private const val ARG_TRANSACTION_ID = "arg_transaction_id"

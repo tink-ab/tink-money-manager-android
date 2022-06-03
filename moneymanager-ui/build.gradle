@@ -1,6 +1,7 @@
 import org.jetbrains.dokka.gradle.DokkaTask
 
 plugins {
+    id "org.jlleitschuh.gradle.ktlint"
     id "com.github.ben-manes.versions" version "0.39.0"
 }
 
@@ -34,6 +35,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -49,6 +51,7 @@ android {
     }
 
     resourcePrefix("tink_")
+    namespace 'com.tink.moneymanagerui'
 }
 
 dependencies {
@@ -58,10 +61,12 @@ dependencies {
     api libraries.tink_core
     implementation libraries.tink_service
     implementation libraries.tink_models
-
     compileOnly project(':annotations')
     kapt project(':codegen')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    coreLibraryDesugaring(libraries.desugar_jdk_libs)
+
     implementation libraries.kotlin_stdlib
     implementation libraries.android_core_ktx
     implementation libraries.android_fragment_ktx
@@ -88,7 +93,6 @@ dependencies {
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
 
-    implementation libraries.joda_time
     implementation libraries.timber
 
     testImplementation libraries.test_junit
@@ -102,6 +106,7 @@ dependencies {
     androidTestImplementation libraries.test_rules
     androidTestImplementation libraries.test_espresso
     androidTestImplementation libraries.test_mockwebserver
+    androidTestImplementation libraries.test_espresso_contrib
 
     debugImplementation libraries.test_espresso_idling_resource
     debugImplementation libraries.test_fragment
@@ -126,3 +131,24 @@ tasks.withType(DokkaTask).configureEach {
         delete("$rootDir/docs")
     }
 }
+//tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configure {
+
+//tasks.dokkaJekyll.configure {
+//    outputDirectory.set(file("$rootDir/docs"))
+//
+//    dokkaSourceSets {
+//        named("main") {
+//            sourceRoots.setFrom(file("$rootDir/moneymanager-ui/src"))
+//            sourceRoots.setFrom(file("$rootDir/data-commons/src"))
+//            sourceRoots.setFrom(file("$rootDir/commons/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/core/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/models/src"))
+//            sourceRoots.setFrom(file("$rootDir/../tink-sdk-core-android/service/src"))
+//        }
+//    }
+//
+//    doFirst {
+//        println("Deleting old /docs")
+//        delete("$rootDir/docs")
+//    }
+//}

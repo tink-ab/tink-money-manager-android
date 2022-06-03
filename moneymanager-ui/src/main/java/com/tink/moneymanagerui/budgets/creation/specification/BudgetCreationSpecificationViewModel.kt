@@ -21,12 +21,11 @@ import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.CUSTOM
 import com.tink.moneymanagerui.budgets.creation.specification.PeriodValue.MONTH
 import com.tink.moneymanagerui.configuration.SuitableLocaleFinder
 import com.tink.moneymanagerui.extensions.minusMonths
+import com.tink.moneymanagerui.extensions.toInstant
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.moneymanagerui.util.FormattedNumberTextWatcher
 import com.tink.moneymanagerui.util.extensions.formatCurrencyRound
 import com.tink.service.handler.ResultHandler
-import org.joda.time.DateTime
-import org.threeten.bp.Instant
 import se.tink.android.categories.CategoryRepository
 import se.tink.android.di.application.ApplicationScoped
 import se.tink.android.livedata.ErrorOrValue
@@ -45,6 +44,8 @@ import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import java.math.BigDecimal
+import java.time.Instant
+import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -113,14 +114,14 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
 
     val showPeriodDateField: LiveData<Boolean> = Transformations.map(periodValue) { it == CUSTOM }
 
-    val periodStartValue = MutableLiveData<DateTime>().apply {
+    val periodStartValue = MutableLiveData<LocalDateTime>().apply {
         (dataHolder.periodicity.value as? OneOffPeriodicity)
             ?.start
             ?.let {
                 value = it.toDateTime()
             }
     }
-    val periodEndValue = MutableLiveData<DateTime>().apply {
+    val periodEndValue = MutableLiveData<LocalDateTime>().apply {
         (dataHolder.periodicity.value as? OneOffPeriodicity)
             ?.end
             ?.let {
@@ -147,8 +148,8 @@ internal class BudgetCreationSpecificationViewModel @Inject constructor(
                         periodEndValue.value
                     ) { periodStart, periodEnd ->
                         value = Budget.Periodicity.OneOff(
-                            Instant.ofEpochMilli(periodStart.millis),
-                            Instant.ofEpochMilli(periodEnd.millis)
+                            periodStart.toInstant(),
+                            periodEnd.toInstant()
                         )
                     }
                 } else {

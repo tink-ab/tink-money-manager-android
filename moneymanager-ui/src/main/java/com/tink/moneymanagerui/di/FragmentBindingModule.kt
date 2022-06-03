@@ -9,6 +9,7 @@ import com.tink.moneymanagerui.budgets.creation.di.BudgetCreationModule
 import com.tink.moneymanagerui.budgets.details.BudgetDetailsFragment
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetails
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsModule
+import com.tink.moneymanagerui.category.CategorySelectionFragment
 import com.tink.moneymanagerui.insights.di.InsightsModule
 import com.tink.moneymanagerui.insights.fragments.ArchivedInsightsFragment
 import com.tink.moneymanagerui.insights.fragments.InsightsFragment
@@ -17,11 +18,10 @@ import com.tink.moneymanagerui.overview.OverviewChartFragment
 import com.tink.moneymanagerui.overview.OverviewFragment
 import com.tink.moneymanagerui.overview.accounts.AccountsOverviewListFragment
 import com.tink.moneymanagerui.overview.budgets.BudgetsOverviewFragment
-import com.tink.moneymanagerui.overview.charts.CategorySelectionFragment
 import com.tink.moneymanagerui.overview.charts.ChartDetailsPagerFragment
-import com.tink.moneymanagerui.overview.charts.StatisticsOverTimeFragment
-import com.tink.moneymanagerui.overview.charts.piechart.TabPieChartFragment
 import com.tink.moneymanagerui.overview.latesttransactions.LatestTransactionsOverviewFragment
+import com.tink.moneymanagerui.statistics.overtime.StatisticsOverTimeFragment
+import com.tink.moneymanagerui.statistics.piechart.TabPieChartFragment
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.SimilarTransactionsFragment
 import com.tink.moneymanagerui.transaction.TransactionsListFragment

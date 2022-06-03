@@ -1081,6 +1081,36 @@ $dokka.location:com.tink.moneymanagerui.extensions//toPeriodChartLabel/com.tink.
 $dokka.location:com.tink.moneymanagerui.extensions//toStartOfLocalDate/org.joda.time.DateTime#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.extensions/to-start-of-local-date.html
 $dokka.location:com.tink.moneymanagerui.extensions//totalMonths/org.threeten.bp.Period#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.extensions/total-months.html
 $dokka.location:com.tink.moneymanagerui.extensions//withUtcTimeRetainZone/org.joda.time.DateTime#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.extensions/with-utc-time-retain-zone.html
+$dokka.location:com.tink.moneymanagerui.feature.account////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest.GroupAccountListMatcher///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/-group-account-list-matcher/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest.GroupAccountListMatcher/GroupAccountListMatcher/#kotlin.String#kotlin.String#kotlin.Int/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/-group-account-list-matcher/-group-account-list-matcher.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest.GroupAccountListMatcher/describeTo/#Description?/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/-group-account-list-matcher/describe-to.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest.GroupAccountListMatcher/matchesSafely/#com.tink.moneymanagerui.accounts.list.GroupedAccountListAdapter.GroupedAccountViewHolder?/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/-group-account-list-matcher/matches-safely.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest/AccountDetailsListTest/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/-account-details-list-test.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest/shows_account_groups_when_grouping/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/shows_account_groups_when_grouping.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountDetailsListTest/shows_all_account_when_no_grouping/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-details-list-test/shows_all_account_when_no_grouping.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/AccountOverviewListTest/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/-account-overview-list-test.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/list_shows_all_favorite_accounts/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/list_shows_all_favorite_accounts.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/list_shows_all_filtered_accounts/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/list_shows_all_filtered_accounts.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/shows_see_accounts_button_when_no_accounts/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/shows_see_accounts_button_when_no_accounts.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/shows_see_accounts_button_when_no_favorit_accounts/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/shows_see_accounts_button_when_no_favorit_accounts.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountOverviewListTest/shows_see_all_button_when_one_account_is_not_favorite/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-overview-list-test/shows_see_all_button_when_one_account_is_not_favorite.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest/AccountTransactionListTest/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/-account-transaction-list-test.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest/shows_account_number/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/shows_account_number.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest/shows_balance/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/shows_balance.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest/shows_toolbar_title/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/shows_toolbar_title.html
+$dokka.location:com.tink.moneymanagerui.feature.account/AccountTransactionListTest/shows_transactions_in_list/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-account-transaction-list-test/shows_transactions_in_list.html
+$dokka.location:com.tink.moneymanagerui.feature.account/BaseAccountTestSuit///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-base-account-test-suit/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/BaseAccountTestSuit/BaseAccountTestSuit/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-base-account-test-suit/-base-account-test-suit.html
+$dokka.location:com.tink.moneymanagerui.feature.account/BaseAccountTestSuit/accountDispatcher/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-base-account-test-suit/account-dispatcher.html
+$dokka.location:com.tink.moneymanagerui.feature.account/BaseAccountTestSuit/defaultAccount/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-base-account-test-suit/default-account.html
+$dokka.location:com.tink.moneymanagerui.feature.account/BaseAccountTestSuit/defaultAmount/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-base-account-test-suit/default-amount.html
+$dokka.location:com.tink.moneymanagerui.feature.account/EditAccountTest///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-edit-account-test/index.html
+$dokka.location:com.tink.moneymanagerui.feature.account/EditAccountTest/EditAccountTest/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-edit-account-test/-edit-account-test.html
+$dokka.location:com.tink.moneymanagerui.feature.account/EditAccountTest/shows_correct_settings/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.account/-edit-account-test/shows_correct_settings.html
 $dokka.location:com.tink.moneymanagerui.feature.insight////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.insight/index.html
 $dokka.location:com.tink.moneymanagerui.feature.insight/BaseInsightTestSuit///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.insight/-base-insight-test-suit/index.html
 $dokka.location:com.tink.moneymanagerui.feature.insight/BaseInsightTestSuit/BaseInsightTestSuit/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.feature.insight/-base-insight-test-suit/-base-insight-test-suit.html
@@ -1506,6 +1536,8 @@ $dokka.location:com.tink.moneymanagerui.insights/InsightsViewModel/refresh/#/Poi
 $dokka.location:com.tink.moneymanagerui.insights/InsightsViewModel/showEmptyState/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.insights/-insights-view-model/show-empty-state.html
 $dokka.location:com.tink.moneymanagerui.mock////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/index.html
 $dokka.location:com.tink.moneymanagerui.mock/AccountMockFactory///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-account-mock-factory/index.html
+$dokka.location:com.tink.moneymanagerui.mock/AccountMockFactory/getAccount/#kotlin.String#kotlin.String#kotlin.Double#kotlin.String#kotlin.String#kotlin.String#kotlin.Double#kotlin.Boolean#kotlin.Boolean/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-account-mock-factory/get-account.html
+$dokka.location:com.tink.moneymanagerui.mock/AccountMockFactory/getAccounts/#kotlin.collections.List[org.json.JSONObject]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-account-mock-factory/get-accounts.html
 $dokka.location:com.tink.moneymanagerui.mock/AccountMockFactory/getListWithOneAccount/#kotlin.String#kotlin.String/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-account-mock-factory/get-list-with-one-account.html
 $dokka.location:com.tink.moneymanagerui.mock/CategoryMockFactory///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-category-mock-factory/index.html
 $dokka.location:com.tink.moneymanagerui.mock/CategoryMockFactory/getFoodCategories/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-category-mock-factory/get-food-categories.html
@@ -1537,8 +1569,11 @@ $dokka.location:com.tink.moneymanagerui.mock/InsightMockFactory/getWeeklySummary
 $dokka.location:com.tink.moneymanagerui.mock/InsightMockFactory/getWeeklySummaryExpensesTransactions/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-insight-mock-factory/get-weekly-summary-expenses-transactions.html
 $dokka.location:com.tink.moneymanagerui.mock/InsightMockFactory/getWeeklyUncategorizedTransactions/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-insight-mock-factory/get-weekly-uncategorized-transactions.html
 $dokka.location:com.tink.moneymanagerui.mock/InsightMockFactory/supportedTypes/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-insight-mock-factory/supported-types.html
+$dokka.location:com.tink.moneymanagerui.mock/ProvidersMockFactory///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-providers-mock-factory/index.html
+$dokka.location:com.tink.moneymanagerui.mock/ProvidersMockFactory/getProviders/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-providers-mock-factory/get-providers.html
 $dokka.location:com.tink.moneymanagerui.mock/TransactionMockFactory///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-transaction-mock-factory/index.html
-$dokka.location:com.tink.moneymanagerui.mock/TransactionMockFactory/getTransaction/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-transaction-mock-factory/get-transaction.html
+$dokka.location:com.tink.moneymanagerui.mock/TransactionMockFactory/getTransaction/#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String#kotlin.String/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-transaction-mock-factory/get-transaction.html
+$dokka.location:com.tink.moneymanagerui.mock/TransactionMockFactory/getTransactionsForAccount/#kotlin.String#kotlin.Int/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.mock/-transaction-mock-factory/get-transactions-for-account.html
 $dokka.location:com.tink.moneymanagerui.overview.accounts////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.overview.accounts/index.html
 $dokka.location:com.tink.moneymanagerui.overview.accounts//setImageResFromAttr/android.widget.ImageView#kotlin.Int/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.overview.accounts/set-image-res-from-attr.html
 $dokka.location:com.tink.moneymanagerui.overview.budgets////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.overview.budgets/index.html
@@ -1660,8 +1695,12 @@ $dokka.location:com.tink.moneymanagerui.repository/TabPieChartDetailsState/userP
 $dokka.location:com.tink.moneymanagerui.testutil////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/index.html
 $dokka.location:com.tink.moneymanagerui.testutil//getLatestRequest/MockWebServer#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/get-latest-request.html
 $dokka.location:com.tink.moneymanagerui.testutil//requestsTakenMap/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/requests-taken-map.html
+$dokka.location:com.tink.moneymanagerui.testutil/CustomMatchers///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-custom-matchers/index.html
+$dokka.location:com.tink.moneymanagerui.testutil/CustomMatchers/isDisplayedIf/#kotlin.Boolean/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-custom-matchers/is-displayed-if.html
 $dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/index.html
-$dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/PathDispatcher/#kotlin.collections.MutableMap[kotlin.String,MockResponse]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/-path-dispatcher.html
+$dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/PathDispatcher/#kotlin.collections.MutableMap[kotlin.String,MockResponse]#kotlin.collections.MutableMap[kotlin.String,kotlin.Function1[kotlin.String,kotlin.Boolean]]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/-path-dispatcher.html
+$dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/addFilter/#kotlin.String#kotlin.Function1[kotlin.String,kotlin.Boolean]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/add-filter.html
+$dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/addFilters/#kotlin.collections.Map[kotlin.String,kotlin.Function1[kotlin.String,kotlin.Boolean]]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/add-filters.html
 $dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/addResponse/#kotlin.String#MockResponse/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/add-response.html
 $dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/addResponses/#kotlin.collections.Map[kotlin.String,MockResponse]/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/add-responses.html
 $dokka.location:com.tink.moneymanagerui.testutil/PathDispatcher/clearResponses/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-path-dispatcher/clear-responses.html
@@ -1672,6 +1711,9 @@ $dokka.location:com.tink.moneymanagerui.testutil/RecyclerViewItemCountAssertion/
 $dokka.location:com.tink.moneymanagerui.testutil/TestNavigator///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/index.html
 $dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/TestNavigator/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/-test-navigator.html
 $dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/backWithToolbar/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/back-with-toolbar.html
+$dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/fromOverviewToAccountDetails/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/from-overview-to-account-details.html
+$dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/fromOverviewToAccountDetailsList/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/from-overview-to-account-details-list.html
+$dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/fromOverviewToEditAccountDetails/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/from-overview-to-edit-account-details.html
 $dokka.location:com.tink.moneymanagerui.testutil/TestNavigator/fromOverviewToInsight/#/PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.testutil/-test-navigator/from-overview-to-insight.html
 $dokka.location:com.tink.moneymanagerui.theme////PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.theme/index.html
 $dokka.location:com.tink.moneymanagerui.theme/TinkDefaultSnackbarTheme///PointingToDeclaration/moneymanager-ui/com.tink.moneymanagerui.theme/-tink-default-snackbar-theme/index.html
@@ -2730,6 +2772,7 @@ com.tink.moneymanagerui.collections
 com.tink.moneymanagerui.configuration
 com.tink.moneymanagerui.di
 com.tink.moneymanagerui.extensions
+com.tink.moneymanagerui.feature.account
 com.tink.moneymanagerui.feature.insight
 com.tink.moneymanagerui.insights
 com.tink.moneymanagerui.insights.actionhandling

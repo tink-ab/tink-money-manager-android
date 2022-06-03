@@ -10,7 +10,7 @@
   <string name="tink_date_format_human_tomorrow">Tomorrow</string>
   <string name="tink_date_formatter_yearly">yyyy</string>
   <string name="tink_date_formatter_monthly_compact">MMM</string>
-  <string name="tink_date_formatter_month_name">MMMMM</string>
+  <string name="tink_date_formatter_month_name">MMMM</string>
   <string name="tink_date_formatter_daily">dd</string>
   <string name="tink_date_formatter_daily_monthly">dd MMM</string>
   <string name="tink_date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
@@ -126,7 +126,7 @@
 
   <string name="tink_insights_tab_title">Events</string>
   <string name="tink_insights_archive_title">Archive</string>
-  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want see your previous ones</string>
+  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want to see your previous events</string>
   <string name="tink_insights_archived_empty_state_text">No archived events</string>
   <string name="tink_insights_overview_card_new_events_title">Events</string>
   <string name="tink_insights_overview_card_archived_events_title">Archived events</string>
@@ -181,7 +181,7 @@
   <string name="tink_budget_details_selector_over_time">Over time</string>
   <string name="tink_budget_details_remaining">%s remaining</string>
   <string name="tink_budget_details_starts_in">Starts in %s</string>
-  <string name="tink_budget_details_ended_months_days_ago">Ended %s ago</string>
+  <string name="tink_budget_details_ended_months_days_ago">Closed %s ago</string>
   <plurals name="tink_budget_days_plural">
     <item quantity="one">%s day</item>
     <item quantity="other">%s days</item>
@@ -190,7 +190,7 @@
     <item quantity="one">%s month</item>
     <item quantity="other">%s months</item>
   </plurals>
-  <string name="tink_budget_details_amount_left_none_message">You\'re about to exceed your budget</string>
+  <string name="tink_budget_details_amount_left_none_message">You have %1$s remaining of your budget</string>
   <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and manage your budget</string>
   <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and manage your budget</string>
   <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and manage your budget</string>

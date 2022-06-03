@@ -13,6 +13,7 @@ import com.tink.model.transaction.Transaction
 import com.tink.model.user.UserProfile
 import com.tink.moneymanagerui.overview.charts.utils.CoroutineTestRule
 import com.tink.moneymanagerui.repository.StatisticsRepository
+import com.tink.moneymanagerui.statistics.ChartType
 import com.tink.service.network.ErrorState
 import com.tink.service.network.LoadingState
 import com.tink.service.network.ResponseState
@@ -26,9 +27,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.threeten.bp.Instant
 import se.tink.android.repository.transaction.TransactionRepository
 import se.tink.android.repository.user.UserRepository
+import java.time.Instant
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)

@@ -12,7 +12,6 @@ import com.tink.model.time.Period
 import com.tink.model.transaction.Transaction
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionState
-import com.tink.moneymanagerui.extensions.getInstant
 import com.tink.moneymanagerui.extensions.minusMonths
 import com.tink.moneymanagerui.repository.StatisticsRepository
 import com.tink.service.handler.ResultHandler
@@ -21,8 +20,6 @@ import com.tink.service.network.ResponseState
 import com.tink.service.network.SuccessState
 import com.tink.service.network.map
 import kotlinx.coroutines.Job
-import org.joda.time.DateTime
-import org.threeten.bp.Instant
 import se.tink.android.livedata.map
 import se.tink.android.livedata.requireValue
 import se.tink.android.repository.TinkNetworkError
@@ -31,6 +28,8 @@ import se.tink.android.repository.transaction.TransactionUpdateEventBus
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.whenNonNull
 import se.tink.commons.livedata.Event
+import java.time.Instant
+import java.time.LocalDateTime
 import java.util.TreeSet
 
 @Deprecated("Use BudgetSelectionControllerState")
@@ -39,7 +38,7 @@ internal class BudgetSelectionController(
     private val budgetsRepository: BudgetsRepository,
     statisticsRepository: StatisticsRepository,
     lifecycle: Lifecycle,
-    private val periodStart: DateTime?,
+    private val periodStart: LocalDateTime?,
     private val transactionUpdateEventBus: TransactionUpdateEventBus
 ) : LifecycleObserver {
 
@@ -99,11 +98,11 @@ internal class BudgetSelectionController(
         } ?: periodStart?.let { preselectedStart ->
             allPeriods.firstOrNull {
                 it.start.toDateTime()
-                    .isBefore(preselectedStart.toDateTime()) && it.end.toDateTime()
+                    .isBefore(preselectedStart) && it.end.toDateTime()
                     .isAfter(preselectedStart)
             }
         } ?: allPeriods.firstOrNull {
-            it.start.toDateTime().isBeforeNow && it.end.toDateTime().isAfterNow
+            it.start.isBefore(Instant.now()) && it.end.isBefore(Instant.now())
         } ?: allPeriods.last()
     }
 
@@ -168,13 +167,13 @@ internal class BudgetSelectionController(
     init {
         budgetsRepository.requestBudgetPeriodDetailsState(
             budgetId,
-            DateTime.now().minusMonths(12).getInstant(),
+            Instant.now().minusMonths(12),
             Instant.now()
         )
 
         updateBudgetPeriods(
             budgetId,
-            DateTime.now().minusMonths(12).getInstant(),
+            Instant.now().minusMonths(12),
             Instant.now()
         )
         lifecycle.addObserver(this)
@@ -188,7 +187,7 @@ internal class BudgetSelectionController(
             resultHandler =
             ResultHandler(
                 { periodDetails ->
-                    _budgetSpecification.postValue(periodDetails.first)
+                    _budgetSpecification.postValue(periodDetails.first!!)
                     budgetPeriods.removeAll(periodDetails.second)
                     budgetPeriods.addAll(periodDetails.second)
                     _budgetPeriodsList.postValue(budgetPeriods.toList())
@@ -210,11 +209,11 @@ internal class BudgetSelectionController(
             } ?: periodStart?.let { preselectedStart ->
                 budgetPeriods.firstOrNull {
                     it.start.toDateTime()
-                        .isBefore(preselectedStart.toDateTime()) && it.end.toDateTime()
+                        .isBefore(preselectedStart) && it.end.toDateTime()
                         .isAfter(preselectedStart)
                 }
             } ?: budgetPeriods.firstOrNull {
-                it.start.toDateTime().isBeforeNow && it.end.toDateTime().isAfterNow
+                it.start.isBefore(Instant.now()) && it.end.isAfter(Instant.now())
             } ?: budgetPeriods.last()
         )
     }

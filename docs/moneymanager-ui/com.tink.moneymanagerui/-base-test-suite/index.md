@@ -48,5 +48,6 @@ abstract class [BaseTestSuite](index.html)
 
 | Name |
 |---|
+| [BaseAccountTestSuit](../../com.tink.moneymanagerui.feature.account/-base-account-test-suit/index.html) |
 | [BaseInsightTestSuit](../../com.tink.moneymanagerui.feature.insight/-base-insight-test-suit/index.html) |
 

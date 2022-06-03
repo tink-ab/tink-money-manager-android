@@ -14,7 +14,8 @@ title: com.tink.moneymanagerui.testutil
 
 | Name | Summary |
 |---|---|
-| [PathDispatcher](-path-dispatcher/index.html) | [androidJvm]<br>class [PathDispatcher](-path-dispatcher/index.html)(pathToResponseMap: [MutableMap](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html)&lt;[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), &lt;ERROR CLASS&gt;&gt; = mutableMapOf()) |
+| [CustomMatchers](-custom-matchers/index.html) | [androidJvm]<br>object [CustomMatchers](-custom-matchers/index.html) |
+| [PathDispatcher](-path-dispatcher/index.html) | [androidJvm]<br>class [PathDispatcher](-path-dispatcher/index.html)(pathToResponseMap: [MutableMap](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html)&lt;[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), &lt;ERROR CLASS&gt;&gt; = mutableMapOf(), pathToBodyFilterMap: [MutableMap](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/index.html)&lt;[String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), ([String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) -&gt; [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)&gt; = mutableMapOf()) |
 | [RecyclerViewItemCountAssertion](-recycler-view-item-count-assertion/index.html) | [androidJvm]<br>class [RecyclerViewItemCountAssertion](-recycler-view-item-count-assertion/index.html)(expectedCount: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)) |
 | [TestNavigator](-test-navigator/index.html) | [androidJvm]<br>class [TestNavigator](-test-navigator/index.html) |
 

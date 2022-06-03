@@ -52,7 +52,7 @@
       app:layout_constraintTop_toTopOf="@+id/averageExpensesByDayContainer"
       >
 
-      <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
+      <com.tink.moneymanagerui.statistics.barchart.BarChartWithAmountLabels
         android:id="@+id/averageExpensesChart"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-      <com.tink.moneymanagerui.charts.BarChartWithAmountLabels
+      <com.tink.moneymanagerui.statistics.barchart.BarChartWithAmountLabels
         android:id="@+id/totalExpensesChart"
         android:layout_width="0dp"
         android:layout_height="0dp"

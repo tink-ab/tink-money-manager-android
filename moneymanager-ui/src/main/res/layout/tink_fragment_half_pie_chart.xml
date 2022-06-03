@@ -40,7 +40,7 @@
 
     </ScrollView>
 
-    <com.tink.moneymanagerui.charts.PieChartPartLayout
+    <com.tink.moneymanagerui.statistics.piechart.PieChartPartLayout
         android:id="@+id/chartLayout"
         android:layout_width="0dp"
         android:layout_height="220dp"
@@ -51,12 +51,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tink_chart_visible_part="0.5">
 
-        <com.tink.moneymanagerui.charts.PieChartView
+        <com.tink.moneymanagerui.statistics.PieChartView
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:transitionGroup="true" />
-    </com.tink.moneymanagerui.charts.PieChartPartLayout>
+    </com.tink.moneymanagerui.statistics.piechart.PieChartPartLayout>
 
     <com.tink.moneymanagerui.view.TinkTextView
         android:id="@+id/halfPieChartTotalAmount"
