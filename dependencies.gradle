@@ -12,6 +12,7 @@ ext {
     supportLibVersion = "1.0.0"
     timberVersion = "4.7.1"
     desugarVersion = "1.1.5"
+    nav_version = "2.4.2"
 
     tinkCoreVersion = "0.8.4"
 
@@ -27,7 +28,6 @@ ext {
     androidXFragmentTest = "1.4.0"
     mockwebserver = "4.3.1"
     coroutinesTest = "1.6.0"
-
 
     libraries = [
             android_core_ktx                    : "androidx.core:core-ktx:$coreKtx",
@@ -65,6 +65,9 @@ ext {
 
             material_components                 : "com.google.android.material:material:$materialVersion",
 
+            nav_component_fragment              : "androidx.navigation:navigation-fragment-ktx:$nav_version",
+            nav_component_ui                    : "androidx.navigation:navigation-ui-ktx:$nav_version",
+
             timber                              : "com.jakewharton.timber:timber:$timberVersion",
 
             test_junit_api                      : "org.junit.jupiter:junit-jupiter-api:$junitJupiter",
@@ -88,4 +91,5 @@ ext {
             tink_service                        : "com.tink:service:$tinkCoreVersion",
             tink_models                         : "com.tink:models:$tinkCoreVersion",
     ]
+
 }

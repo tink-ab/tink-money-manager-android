@@ -92,6 +92,9 @@ dependencies {
 
     kapt libraries.dagger_android_processor
     kapt libraries.dagger_compiler
+    
+    implementation libraries.nav_component_fragment
+    implementation libraries.nav_component_ui
 
     implementation libraries.timber
 
