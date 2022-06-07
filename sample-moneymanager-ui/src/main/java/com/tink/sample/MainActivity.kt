@@ -46,22 +46,31 @@ class MainActivity : FragmentActivity() {
                     )
                 )
             )
-            supportFragmentManager.beginTransaction().add(
-                R.id.fragmentContainer,
-                FinanceOverviewFragment.newInstance(
-                    // overviewFeatures = f,
-                    accessToken = Configuration.sampleAccessToken,
-                    styleResId = R.style.TinkStyle_Default,
-                    tracker = LogTracker(),
-                    backPressedListener = { Timber.d("User navigated back") },
-                    isOverviewToolbarVisible = false
-                ).also {
-                    currentFinanceOverviewFragment = it
-                }
-            ).commit()
+
+            navigateToFragment()
         } else {
             currentFinanceOverviewFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainer) as FinanceOverviewFragment
         }
+    }
+
+    /**
+     * This method wraps old implementation of navigation flow
+     * It will be deprecated once navigation component support will be in place
+     * */
+    private fun navigateToFragment() {
+        supportFragmentManager.beginTransaction().add(
+            R.id.fragmentContainer,
+            FinanceOverviewFragment.newInstance(
+                // overviewFeatures = f,
+                accessToken = Configuration.sampleAccessToken,
+                styleResId = R.style.TinkStyle_Default,
+                tracker = LogTracker(),
+                backPressedListener = { Timber.d("User navigated back") },
+                isOverviewToolbarVisible = false
+            ).also {
+                currentFinanceOverviewFragment = it
+            }
+        ).commit()
     }
 
     override fun onBackPressed() {
