@@ -1,5 +1,6 @@
 package se.tink.commons.transactions
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
 import se.tink.commons.extensions.tint
+import se.tink.commons.extensions.visible
 import se.tink.utils.DateUtils
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -158,7 +160,9 @@ sealed class ListItem {
         val date: LocalDateTime,
         val merchantLogoAllowed: Boolean,
         val recurring: Boolean = false,
-        val upcomingTransactionData: UpcomingTransactionData? = null
+        val upcomingTransactionData: UpcomingTransactionData? = null,
+        val isPending: Boolean,
+        val isEditable: Boolean = false
     ) : ListItem() {
         override fun isSameItem(other: ListItem): Boolean {
             return id == (other as? TransactionItem)?.id
@@ -229,9 +233,18 @@ class TransactionItemViewHolder(
         with(itemView) {
 
             val (iconRes, iconColor, iconBackgroundColor) = item.icon
+
             icon.setImageResFromAttr(iconRes)
-            icon.tint(iconColor)
-            icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
+            showAndHideClockIcon(item.isPending)
+
+            if (item.isPending) {
+                icon.setBackgroundResource(R.drawable.tink_dotted_circle)
+            } else {
+                icon.apply {
+                    tint(iconColor)
+                    setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
+                }
+            }
 
             icon.setOnClickListener {
                 onTransactionIconClickedListener?.invoke(item.id, item.isPending, item.isEditable)
@@ -243,5 +256,10 @@ class TransactionItemViewHolder(
 //            dispensableAmount.text = item.dispensableAmount
 //            dispensableAmount.visible = item.dispensableAmount != item.amount
         }
+    }
+
+    private fun View.showAndHideClockIcon(showClock: Boolean) {
+        cornerIconBackgroundView.visible = showClock
+        cornerIcon.visible = showClock
     }
 }
