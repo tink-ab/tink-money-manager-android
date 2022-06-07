@@ -12,7 +12,7 @@ import com.tink.moneymanagerui.extensions.isTrue
  * All the methods should be called when UI change is allowed
  */
 @UiThread
-internal class FragmentCoordinator(
+class FragmentCoordinator(
     private val fragmentManager: FragmentManager,
     private val containerViewId: Int,
     private val transitionCoordinator: TransitionCoordinatorImpl? = null

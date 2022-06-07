@@ -12,16 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.model.account.Account
 import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.accounts.edit.AccountDetailsEditFragment
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
-import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.TransactionListViewModel
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
 import com.tink.moneymanagerui.transaction.toListMode
+import com.tink.moneymanagerui.util.TransactionListHelper
 import kotlinx.android.synthetic.main.tink_fragment_account_details.*
 import kotlinx.android.synthetic.main.tink_fragment_account_details.view.*
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.recyclerView
@@ -133,17 +132,12 @@ internal class AccountDetailsFragment : BaseFragment() {
 
         accountDetailsAdapter.addAdapter(transactionsAdapter)
 
-        transactionsAdapter.onTransactionItemClickedListener = { id ->
-            CategorizationFlowFragment
-                .newInstance(id, MoneyManagerFeatureType.ACCOUNTS)
-                .also {
-                    fragmentCoordinator.replace(
-                        it,
-                        addToBackStack = true,
-                        animation = FragmentAnimationFlags.FADE_IN_ONLY
-                    )
-                }
-        }
+        TransactionListHelper().navToCategorizationOrShowUneditableMsg(
+            fragmentCoordinator,
+            requireActivity(),
+            transactionsAdapter,
+            MoneyManagerFeatureType.ACCOUNTS
+        )
         recyclerView.adapter = accountDetailsAdapter
     }
 

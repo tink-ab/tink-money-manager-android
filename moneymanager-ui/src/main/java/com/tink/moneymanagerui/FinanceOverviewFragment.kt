@@ -270,5 +270,6 @@ public enum class MoneyManagerFeatureType {
     ACCOUNTS,
     ACTIONABLE_INSIGHTS,
     BUDGETS,
-    STATISTICS;
+    STATISTICS,
+    LATEST_TRANSACTIONS;
 }

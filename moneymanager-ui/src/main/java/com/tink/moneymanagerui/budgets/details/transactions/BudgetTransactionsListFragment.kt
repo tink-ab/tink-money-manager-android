@@ -6,14 +6,13 @@ import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.details.di.BudgetDetailsViewModelFactory
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.theme.resolveColorForFeature
 import com.tink.moneymanagerui.tracking.ScreenEvent
-import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
+import com.tink.moneymanagerui.util.TransactionListHelper
 import kotlinx.android.synthetic.main.tink_fragment_budget_transactions_list.*
 import kotlinx.android.synthetic.main.tink_item_picker.view.*
 import se.tink.commons.transactions.TransactionItemListAdapter
@@ -52,16 +51,12 @@ internal class BudgetTransactionsListFragment : BaseFragment() {
         )[BudgetTransactionListViewModel::class.java]
 
         adapter = TransactionItemListAdapter(dateUtils).also {
-            it.onTransactionItemClickedListener = { transactionId ->
-                CategorizationFlowFragment
-                    .newInstance(transactionId, MoneyManagerFeatureType.BUDGETS)
-                    .also { fragment ->
-                        fragmentCoordinator.replace(
-                            fragment,
-                            animation = FragmentAnimationFlags.FADE_IN_ONLY
-                        )
-                    }
-            }
+            TransactionListHelper().navToCategorizationOrShowUneditableMsg(
+                fragmentCoordinator,
+                requireActivity(),
+                it,
+                MoneyManagerFeatureType.BUDGETS
+            )
         }
 
         transactionsList.layoutManager = LinearLayoutManager(context)

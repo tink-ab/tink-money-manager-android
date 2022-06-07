@@ -25,7 +25,7 @@
   <string name="tink_date_formatter_month_and_year_compact">MMM yyyy</string>
 
   <string name="tink_all_categories">All categories</string>
-
+  <string name="tink_general_ok">OK</string>
 
 
   <string name="tink_overview_statistics_error">No statistics</string>
@@ -80,6 +80,9 @@
   <string name="tink_transaction_similar_button_accept_text">Assign %1$d selected</string>
   <string name="tink_transaction_similar_marker_button_mark_text">Select all</string>
   <string name="tink_transaction_similar_marker_button_unmark_text">Unselect all</string>
+  <string name="tink_transaction_pending_uneditable_dialog_title">Not editable</string>
+  <string name="tink_transaction_pending_uneditable_dialog_body">Pending transactions are not editable until they are confirmed by the bank.</string>
+
 
   <string name="tink_pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
   <string name="tink_amount_transition" translatable="false">%1$s-amount-transition</string>

@@ -29,6 +29,8 @@ class TransactionItemListAdapter(
 
     var onTransactionItemClickedListener: ((String) -> Unit)? = null
 
+    var onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)? = null
+
     var onUpcomingTransactionClickedListener: ((ListItem.TransactionItem.UpcomingTransactionData) -> Unit)? =
         null
 
@@ -54,7 +56,7 @@ class TransactionItemListAdapter(
         when (val item = flatData[position]) {
             is ListItem.DateGroupItem -> (holder as DateGroupViewHolder).bind(item)
             is ListItem.UpcomingGroupHeaderItem -> (holder as UpcomingHeaderViewHolder).bind(item)
-            is ListItem.TransactionItem -> (holder as TransactionItemViewHolder).bind(item)
+            is ListItem.TransactionItem -> (holder as TransactionItemViewHolder).bind(item, onTransactionIconClickedListener)
         }
     }
 
@@ -223,13 +225,17 @@ class TransactionItemViewHolder(
     parent.inflate(R.layout.tink_transaction_item),
     onViewHolderClickedListener
 ) {
-    fun bind(item: ListItem.TransactionItem) {
+    fun bind(item: ListItem.TransactionItem, onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)?) {
         with(itemView) {
 
             val (iconRes, iconColor, iconBackgroundColor) = item.icon
             icon.setImageResFromAttr(iconRes)
             icon.tint(iconColor)
             icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
+
+            icon.setOnClickListener {
+                onTransactionIconClickedListener?.invoke(item.id, item.isPending, item.isEditable)
+            }
 
             label.text = item.label
             description.text = item.description

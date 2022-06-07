@@ -2,7 +2,7 @@ package com.tink.moneymanagerui
 
 import androidx.fragment.app.FragmentTransaction
 
-internal enum class FragmentAnimationFlags {
+enum class FragmentAnimationFlags {
     FULL, EXIT_ONLY, KEEP_BEHIND, FADE, FADE_IN, FADE_IN_ONLY, SLIDE_UP, NONE
 }
 

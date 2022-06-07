@@ -179,6 +179,9 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_transaction_similar_title` | Similar transactions |
 | `tink_transactions_list_toolbar_title` | Transactions |
 | `tink_until_next_date` | Until %s |
+| `tink_transaction_pending_uneditable_dialog_title` | Not editable |
+| `tink_transaction_pending_uneditable_dialog_body` | Pending transactions are not editable until they are confirmed by the bank. |
+| `tink_general_ok` |OK |
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml

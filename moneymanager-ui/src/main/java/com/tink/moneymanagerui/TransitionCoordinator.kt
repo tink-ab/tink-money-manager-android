@@ -13,7 +13,7 @@ interface TransitionCoordinator {
 }
 
 @UiThread
-internal class TransitionCoordinatorImpl(private val transitions: Set<TransitionDescription>) :
+class TransitionCoordinatorImpl(private val transitions: Set<TransitionDescription>) :
     TransitionCoordinator {
     private var exitingFragment: Fragment? = null
 
@@ -99,7 +99,7 @@ internal class TransitionCoordinatorImpl(private val transitions: Set<Transition
     }
 }
 
-internal interface TransitionDescription {
+interface TransitionDescription {
     val fragment1: FragmentClass
     val fragment2: FragmentClass
 

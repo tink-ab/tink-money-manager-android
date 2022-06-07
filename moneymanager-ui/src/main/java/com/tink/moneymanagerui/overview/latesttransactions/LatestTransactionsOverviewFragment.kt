@@ -9,12 +9,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tink.moneymanagerui.BaseFragment
 import com.tink.moneymanagerui.FragmentAnimationFlags
+import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.transaction.CategorizationFlowFragment
 import com.tink.moneymanagerui.transaction.StatusSubtitleMode
 import com.tink.moneymanagerui.transaction.TransactionsListFragment
 import com.tink.moneymanagerui.transaction.TransactionsListMetaData
+import com.tink.moneymanagerui.util.TransactionListHelper
 import com.tink.service.network.SuccessState
 import kotlinx.android.synthetic.main.tink_fragment_overview_latest_transactions.*
 import se.tink.commons.transactions.TransactionItemListAdapter
@@ -47,6 +49,13 @@ internal class LatestTransactionsOverviewFragment : BaseFragment() {
                 animation = FragmentAnimationFlags.FADE_IN_ONLY
             )
         }
+
+        TransactionListHelper().navToCategorizationOrShowUneditableMsg(
+            fragmentCoordinator,
+            requireActivity(),
+            transactionsAdapter,
+            MoneyManagerFeatureType.LATEST_TRANSACTIONS
+        )
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
