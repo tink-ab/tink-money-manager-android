@@ -41,7 +41,7 @@
   <dimen name="tink_add_budget_icon_height">40dp</dimen>
   <dimen name="tink_category_label_text_width">40dp</dimen>
   <dimen name="tink_category_label_text_height">40dp</dimen>
-
+  <!-- Negative padding needed to show correctly the dotted circle for pending transactions-->
   <dimen name="tink_pending_transaction_padding">-10dp</dimen>
 
 </resources>

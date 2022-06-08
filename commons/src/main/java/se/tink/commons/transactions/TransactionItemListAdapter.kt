@@ -171,7 +171,7 @@ sealed class ListItem {
 
         override fun getViewType(): ViewType = ViewType.TRANSACTION_ITEM
 
-        data class Icon(val resource: Int, val color: Int, val backgroundColor: Int)
+        data class Icon(val resource: Int, val color: Int, val backgroundColor: Int, val disabledColor: Int = R.attr.tink_textColorSecondary)
         data class UpcomingTransactionData(
             val pending: Boolean,
             val editable: Boolean,
@@ -231,35 +231,46 @@ class TransactionItemViewHolder(
     onViewHolderClickedListener
 ) {
     fun bind(item: ListItem.TransactionItem, onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)?) {
+
         with(itemView) {
-
-            val (iconRes, iconColor, iconBackgroundColor) = item.icon
-
-            icon.setImageResFromAttr(iconRes)
-            showAndHideClockIcon(item.isPending)
-
-            if (item.isPending) {
-                icon.apply {
-                    setBackgroundResource(R.drawable.tink_dotted_circle)
-                    val padding = resources.getDimensionPixelOffset(R.dimen.tink_pending_transaction_padding)
-                    setPadding(padding)
-                }
-            } else {
-                icon.apply {
-                    tint(iconColor)
-                    setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
-                }
-            }
-
-            icon.setOnClickListener {
-                onTransactionIconClickedListener?.invoke(item.id, item.isPending, item.isEditable)
-            }
-
             label.text = item.label
             description.text = item.description
             amount.text = item.amount
-//            dispensableAmount.text = item.dispensableAmount
-//            dispensableAmount.visible = item.dispensableAmount != item.amount
+        }
+
+        bindCategoryIcon(
+            item,
+            onTransactionIconClickedListener
+        )
+    }
+
+    private fun bindCategoryIcon(
+        data: ListItem.TransactionItem,
+        onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)?
+    ) {
+        with(itemView) {
+            icon.apply {
+                val iconData = data.icon
+                setImageResFromAttr(iconData.resource)
+                if (data.isPending) {
+                    setBackgroundResource(R.drawable.tink_dotted_circle)
+                    val padding =
+                        resources.getDimensionPixelOffset(R.dimen.tink_pending_transaction_padding)
+                    setPadding(padding)
+                    if (data.isEditable) {
+                        tint(iconData.color)
+                    } else {
+                        tint(iconData.disabledColor)
+                    }
+                } else {
+                    setBackgroundColor(itemView.context.getColorFromAttr(iconData.backgroundColor))
+                    tint(iconData.color)
+                }
+                setOnClickListener {
+                    onTransactionIconClickedListener?.invoke(data.id, data.isPending, data.isEditable)
+                }
+            }
+            showAndHideClockIcon(data.isPending)
         }
     }
 
