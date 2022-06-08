@@ -59,7 +59,6 @@ ext {
             kotlin_coroutines_android           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version",
 
             support_appcompat                   : "androidx.appcompat:appcompat:$supportLibVersion",
-            support_cardview                    : "androidx.cardview:cardview:$supportLibVersion",
             support_constraint_layout           : "androidx.constraintlayout:constraintlayout:$constraintLayout",
             support_recyclerview                : "androidx.recyclerview:recyclerview:$recyclerViewVersion",
 
