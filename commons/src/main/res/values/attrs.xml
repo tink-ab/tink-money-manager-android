@@ -108,9 +108,11 @@
     <attr name="tink_createBudgetIconShapeStyle" format="reference" />
 
     <!-- Corner radius -->
-    <!-- Recommended values are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a tink_circle -->
+    <!-- Recommended values for tink_checkbox_corner_radius_in_dp are in the range from 0dp to 12dp where 0dp will draw a square and 12dp will draw a tink_circle -->
     <attr name="tink_checkbox_corner_radius_in_dp" format="dimension"/>
     <attr name="tink_cardCornerRadius" format="dimension"/>
+    <!-- Recommended values for tink_pendingTransactionCornerRadius are in the range from 0dp to 20dp where 0dp will draw a square and 20dp will draw a tink_circle -->
+    <attr name="tink_pendingTransactionCornerRadius" format="dimension"/>
 
     <!-- Text appearance -->
     <attr name="tink_dateGroupTextAppearance" format="reference" />

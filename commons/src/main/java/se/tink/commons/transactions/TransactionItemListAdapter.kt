@@ -2,6 +2,7 @@ package se.tink.commons.transactions
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.tink_transaction_item.view.*
@@ -238,7 +239,11 @@ class TransactionItemViewHolder(
             showAndHideClockIcon(item.isPending)
 
             if (item.isPending) {
-                icon.setBackgroundResource(R.drawable.tink_dotted_circle)
+                icon.apply {
+                    setBackgroundResource(R.drawable.tink_dotted_circle)
+                    val padding = resources.getDimensionPixelOffset(R.dimen.tink_pending_transaction_padding)
+                    setPadding(padding)
+                }
             } else {
                 icon.apply {
                     tint(iconColor)
