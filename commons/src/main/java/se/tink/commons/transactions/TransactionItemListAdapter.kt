@@ -74,8 +74,11 @@ class TransactionItemListAdapter(
         if (item is ListItem.TransactionItem) {
             item.upcomingTransactionData?.also {
                 onUpcomingTransactionClickedListener?.invoke(it)
-            } ?: onTransactionItemClickedListener?.invoke(ClickListenerData(
-                id = item.id, isPending = item.isPending, isEditable = item.isEditable))
+            } ?: onTransactionItemClickedListener?.invoke(
+                ClickListenerData(
+                    id = item.id, isPending = item.isPending, isEditable = item.isEditable
+                )
+            )
         }
     }
 
@@ -270,8 +273,11 @@ class TransactionItemViewHolder(
                     tint(iconData.color)
                 }
                 setOnClickListener {
-                    onTransactionIconClickedListener?.invoke(TransactionItemListAdapter.ClickListenerData(
-                        id = data.id, isPending = data.isPending, isEditable = data.isEditable))
+                    onTransactionIconClickedListener?.invoke(
+                        TransactionItemListAdapter.ClickListenerData(
+                            id = data.id, isPending = data.isPending, isEditable = data.isEditable
+                        )
+                    )
                 }
             }
             showAndHideClockIcon(data.isPending)

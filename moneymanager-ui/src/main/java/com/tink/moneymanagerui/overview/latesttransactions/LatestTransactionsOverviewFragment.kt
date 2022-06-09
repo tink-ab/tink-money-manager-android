@@ -43,7 +43,7 @@ internal class LatestTransactionsOverviewFragment : BaseFragment() {
             .of(scope, viewModelFactory)[LatestTransactionsViewModel::class.java]
 
         transactionsAdapter = TransactionItemListAdapter(dateUtils, groupByDates = false)
-        transactionsAdapter.onTransactionItemClickedListener = {data ->
+        transactionsAdapter.onTransactionItemClickedListener = { data ->
             fragmentCoordinator.replace(
                 CategorizationFlowFragment.newInstance(data.id),
                 animation = FragmentAnimationFlags.FADE_IN_ONLY
