@@ -28,11 +28,13 @@ class TransactionItemListAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
 
+    data class ClickListenerData(val id: String, val isPending: Boolean, val isEditable: Boolean)
+
     private var flatData: List<ListItem> = emptyList()
 
-    var onTransactionItemClickedListener: ((String) -> Unit)? = null
+    var onTransactionItemClickedListener: ((ClickListenerData) -> Unit)? = null
 
-    var onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)? = null
+    var onTransactionIconClickedListener: ((ClickListenerData) -> Unit)? = null
 
     var onUpcomingTransactionClickedListener: ((ListItem.TransactionItem.UpcomingTransactionData) -> Unit)? =
         null
@@ -72,7 +74,8 @@ class TransactionItemListAdapter(
         if (item is ListItem.TransactionItem) {
             item.upcomingTransactionData?.also {
                 onUpcomingTransactionClickedListener?.invoke(it)
-            } ?: onTransactionItemClickedListener?.invoke(item.id)
+            } ?: onTransactionItemClickedListener?.invoke(ClickListenerData(
+                id = item.id, isPending = item.isPending, isEditable = item.isEditable))
         }
     }
 
@@ -230,7 +233,7 @@ class TransactionItemViewHolder(
     parent.inflate(R.layout.tink_transaction_item),
     onViewHolderClickedListener
 ) {
-    fun bind(item: ListItem.TransactionItem, onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)?) {
+    fun bind(item: ListItem.TransactionItem, onTransactionIconClickedListener: ((TransactionItemListAdapter.ClickListenerData) -> Unit)?) {
 
         with(itemView) {
             label.text = item.label
@@ -246,7 +249,7 @@ class TransactionItemViewHolder(
 
     private fun bindCategoryIcon(
         data: ListItem.TransactionItem,
-        onTransactionIconClickedListener: ((String, Boolean, Boolean) -> Unit)?
+        onTransactionIconClickedListener: ((TransactionItemListAdapter.ClickListenerData) -> Unit)?
     ) {
         with(itemView) {
             icon.apply {
@@ -267,7 +270,8 @@ class TransactionItemViewHolder(
                     tint(iconData.color)
                 }
                 setOnClickListener {
-                    onTransactionIconClickedListener?.invoke(data.id, data.isPending, data.isEditable)
+                    onTransactionIconClickedListener?.invoke(TransactionItemListAdapter.ClickListenerData(
+                        id = data.id, isPending = data.isPending, isEditable = data.isEditable))
                 }
             }
             showAndHideClockIcon(data.isPending)

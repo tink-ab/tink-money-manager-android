@@ -17,15 +17,19 @@ internal class TransactionListHelper {
         adapter: TransactionItemListAdapter,
         featureType: MoneyManagerFeatureType?
     ) {
-        adapter.onTransactionItemClickedListener = { id ->
-            navToCategorizationFlow(fragmentCoordinator, id, featureType)
-        }
-
-        adapter.onTransactionIconClickedListener = { id, isPending, isEditable ->
-            if (isPending && !isEditable) {
+        adapter.onTransactionItemClickedListener = { data ->
+            if (data.isPending && !data.isEditable) {
                 showUneditableDialogMessage(context)
             } else {
-                navToCategorizationFlow(fragmentCoordinator, id, featureType)
+                navToCategorizationFlow(fragmentCoordinator, data.id, featureType)
+            }
+        }
+
+        adapter.onTransactionIconClickedListener = { data ->
+            if (data.isPending && !data.isEditable) {
+                showUneditableDialogMessage(context)
+            } else {
+                navToCategorizationFlow(fragmentCoordinator, data.id, featureType)
             }
         }
     }
