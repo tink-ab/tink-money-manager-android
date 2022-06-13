@@ -14,6 +14,7 @@ import se.tink.commons.R
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.setPendingTransactionIconColor
 import se.tink.commons.extensions.tint
 import se.tink.commons.extensions.visible
 import se.tink.utils.DateUtils
@@ -263,11 +264,7 @@ class TransactionItemViewHolder(
                     val padding =
                         resources.getDimensionPixelOffset(R.dimen.tink_pending_transaction_padding)
                     setPadding(padding)
-                    if (data.isEditable) {
-                        tint(iconData.color)
-                    } else {
-                        tint(iconData.disabledColor)
-                    }
+                    setPendingTransactionIconColor(if (data.isEditable) iconData.color else iconData.disabledColor)
                 } else {
                     setBackgroundColor(itemView.context.getColorFromAttr(iconData.backgroundColor))
                     tint(iconData.color)
