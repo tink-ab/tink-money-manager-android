@@ -108,6 +108,7 @@
     <!-- Corner radius -->
     <item name="tink_checkbox_corner_radius_in_dp">@dimen/tink_checkbox_corner_radius</item>
     <item name="tink_cardCornerRadius">@dimen/tink_card_corner_radius</item>
+    <item name="tink_pendingTransactionCornerRadius">@dimen/tink_pending_transaction_corner_radius</item>
 
     <!-- Text styles -->
     <item name="tink_dateGroupTextAppearance">@style/TinkDateGroupTextAppearance</item>
