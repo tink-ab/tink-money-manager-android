@@ -39,6 +39,7 @@ internal open class TransactionListViewModel @Inject constructor(
 ) : ViewModel() {
     private val _errors = MutableLiveData<Event<TinkNetworkError>>()
     val errors: LiveData<Event<TinkNetworkError>> = _errors
+    var isEditableOnPendingTransaction: Boolean = true
 
     @SuppressLint("CheckResult")
     private fun presetTransactions(ids: List<String>): TransactionPagesLiveData {
@@ -87,7 +88,7 @@ internal open class TransactionListViewModel @Inject constructor(
             ) { transactions, categories ->
                 fun Transaction.toItem(): ListItem.TransactionItem? {
                     val category = categories.findCategoryById(categoryId) ?: return null
-                    return transactionItemFactory.fromTransaction(this, category)
+                    return transactionItemFactory.fromTransaction(this, category, isEditableOnPendingTransaction)
                 }
                 val transactionsList = mutableListOf<Transaction>().apply { addAll(transactions) }
                 value = TransactionItems(

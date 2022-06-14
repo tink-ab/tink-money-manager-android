@@ -71,6 +71,9 @@ internal class AccountDetailsFragment : BaseFragment() {
             transactionListViewModel = get(TransactionListViewModel::class.java)
         }
 
+        transactionListViewModel.isEditableOnPendingTransaction =
+            TransactionListHelper().isEditableOnPendingValue(requireActivity())
+
         viewModel.setAccountId(accountId)
         metadata = TransactionsListMetaData(
             title = "",

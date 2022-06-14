@@ -66,6 +66,9 @@ internal class TransactionsListFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(TransactionListViewModel::class.java)
         viewModel.setListMode(metaData.toListMode())
+
+        viewModel.isEditableOnPendingTransaction =
+            TransactionListHelper().isEditableOnPendingValue(requireActivity())
     }
 
     public override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -66,7 +66,8 @@ class MainActivity : FragmentActivity() {
                 styleResId = R.style.TinkStyle_Default,
                 tracker = LogTracker(),
                 backPressedListener = { Timber.d("User navigated back") },
-                isOverviewToolbarVisible = false
+                isOverviewToolbarVisible = false,
+                isEditableOnPendingTransaction = true
             ).also {
                 currentFinanceOverviewFragment = it
             }

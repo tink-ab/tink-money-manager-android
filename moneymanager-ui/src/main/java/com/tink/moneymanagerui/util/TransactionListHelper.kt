@@ -60,4 +60,9 @@ internal class TransactionListHelper {
             show()
         }
     }
+
+    fun isEditableOnPendingValue(context: Context) = context.getSharedPreferences(
+        "ARG_IS_EDITABLE_ON_PENDING_TRANSACTION",
+        Context.MODE_PRIVATE
+    ).getBoolean("IS_EDITABLE_ON_PENDING_TRANSACTION", true)
 }

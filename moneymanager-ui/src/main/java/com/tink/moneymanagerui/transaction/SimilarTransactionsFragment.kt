@@ -16,6 +16,7 @@ import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
 import com.tink.moneymanagerui.util.FontUtils
+import com.tink.moneymanagerui.util.TransactionListHelper
 import com.tink.moneymanagerui.view.CustomTypefaceSpan
 import com.tink.moneymanagerui.view.TinkSnackbar
 import kotlinx.android.synthetic.main.tink_transaction_similar_fragment.*
@@ -46,7 +47,11 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         requireNotNull(arguments?.getString(TRANSACTION_SIMILAR_CATEGORY_ID))
     }
 
-    private val featureType: MoneyManagerFeatureType? by lazy { arguments?.getSerializable(ARG_MONEY_MANAGER_FEATURE_TYPE) as? MoneyManagerFeatureType }
+    private val featureType: MoneyManagerFeatureType? by lazy {
+        arguments?.getSerializable(
+            ARG_MONEY_MANAGER_FEATURE_TYPE
+        ) as? MoneyManagerFeatureType
+    }
 
     private val adapter = SimilarTransactionsAdapter()
 
@@ -65,6 +70,9 @@ internal class SimilarTransactionsFragment : BaseFragment() {
         )[SimilarTransactionsViewModel::class.java].apply {
             initialize(transactions, newCategoryCode)
         }
+
+        viewModel.isEditableOnPendingTransaction =
+            TransactionListHelper().isEditableOnPendingValue(requireActivity())
     }
 
     override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {

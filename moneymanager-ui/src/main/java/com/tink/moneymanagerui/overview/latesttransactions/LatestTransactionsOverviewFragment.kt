@@ -42,6 +42,9 @@ internal class LatestTransactionsOverviewFragment : BaseFragment() {
         viewModel = ViewModelProviders
             .of(scope, viewModelFactory)[LatestTransactionsViewModel::class.java]
 
+        viewModel.isEditableOnPendingTransaction =
+            TransactionListHelper().isEditableOnPendingValue(requireActivity())
+
         transactionsAdapter = TransactionItemListAdapter(dateUtils, groupByDates = false)
         transactionsAdapter.onTransactionItemClickedListener = { data ->
             fragmentCoordinator.replace(

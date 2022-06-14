@@ -83,7 +83,8 @@ internal class BudgetTransactionListViewModel @Inject constructor(
                                         label = description,
                                         amount = amount,
                                         upcomingTransactionData = null,
-                                        isPending = false
+                                        isPending = false,
+                                        isEditable = false
                                     )
                                 }
                             }
