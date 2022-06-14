@@ -30,15 +30,12 @@ import se.tink.commons.extensions.isBiggerThan
 import se.tink.commons.extensions.minus
 import se.tink.commons.extensions.subtract
 import se.tink.commons.extensions.toDateTime
-import se.tink.commons.extensions.totalMonths
 import se.tink.commons.extensions.whenNonNull
 import se.tink.utils.DateUtils
 import java.time.Instant
 import java.time.LocalDateTime
-import java.time.Period
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
-import kotlin.math.absoluteValue
 import kotlin.math.min
 import kotlin.math.roundToInt
 
@@ -143,41 +140,6 @@ internal class BudgetDetailsViewModel @Inject constructor(
         budgetPeriodsList
             .filter { successData.budget.created.isBefore(it.end) }
             .size
-
-    private fun getBudgetHeaderText(successData: BudgetSelectionData): String {
-        val budgetPeriod = successData.currentSelectedPeriod
-
-        val startOfToday = Instant.now().toDateTime().toLocalDate().atStartOfDay()
-        val budgetStart = budgetPeriod.start.toDateTime().toLocalDate().atStartOfDay()
-        val budgetEnd = budgetPeriod.end.toDateTime().toLocalDate().atStartOfDay()
-
-        return when {
-            budgetPeriod.start.toDateTime().isAfter(Instant.now().toDateTime()) -> {
-                val period = Period.between(budgetStart.toLocalDate(), startOfToday.toLocalDate())
-                budgetHeaderTextFormatter(
-                    BudgetStatus.NOT_STARTED,
-                    period.days.absoluteValue,
-                    period.totalMonths().absoluteValue
-                )
-            }
-            Instant.now().toDateTime().isAfter(budgetPeriod.end.toDateTime()) -> {
-                val between = Period.between(budgetEnd.toLocalDate(), startOfToday.toLocalDate())
-                budgetHeaderTextFormatter(
-                    BudgetStatus.ENDED,
-                    between.days.absoluteValue,
-                    between.totalMonths().absoluteValue
-                )
-            }
-            else -> {
-                val between = Period.between(budgetEnd.toLocalDate(), startOfToday.toLocalDate())
-                budgetHeaderTextFormatter(
-                    BudgetStatus.ACTIVE,
-                    between.days.absoluteValue,
-                    between.totalMonths().absoluteValue
-                )
-            }
-        }
-    }
 
     private fun getBudgetPeriodData(budgetPeriods: List<BudgetPeriod>): List<Float> {
         return budgetPeriods.map { it.spentAmount.value.toBigDecimal().toFloat() }
