@@ -104,7 +104,7 @@ internal class BudgetSelectionControllerState(
 
     private fun updateCurrentPeriod(currentValue: BudgetPeriod?, allPeriods: TreeSet<BudgetPeriod>): BudgetPeriod {
         return currentValue?.let { current ->
-            allPeriods.first {
+            allPeriods.firstOrNull {
                 it.start == current.start
             }
         } ?: periodStart?.let { preselectedStart ->
