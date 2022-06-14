@@ -13,6 +13,7 @@ import com.tink.model.misc.ExactNumber
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.budgets.creation.specification.EXACT_NUMBER_ZERO
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
+import com.tink.moneymanagerui.budgets.details.usecases.GetBudgetHeaderTextUseCase
 import com.tink.moneymanagerui.extensions.formattedPeriod
 import com.tink.moneymanagerui.extensions.toHistoricIntervalLabel
 import com.tink.moneymanagerui.extensions.toPeriodChartLabel
@@ -83,7 +84,7 @@ internal class BudgetDetailsViewModel @Inject constructor(
 
                 BudgetDetailsData(
                     budget = data.budget,
-                    headerText = getBudgetHeaderText(data),
+                    headerText = GetBudgetHeaderTextUseCase(budgetHeaderTextFormatter, data).invoke(),
                     amountLeft = getAmountLeft(data),
                     amountLeftColor = getAmountLeftColor(data),
                     totalAmount = getTotalAmount(data),
