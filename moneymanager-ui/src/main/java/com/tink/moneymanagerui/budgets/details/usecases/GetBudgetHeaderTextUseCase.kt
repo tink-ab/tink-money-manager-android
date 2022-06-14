@@ -2,7 +2,9 @@ package com.tink.moneymanagerui.budgets.details.usecases
 
 import com.tink.model.budget.Budget
 import com.tink.moneymanagerui.budgets.details.BudgetStatus
-import com.tink.moneymanagerui.budgets.details.BudgetStatus.*
+import com.tink.moneymanagerui.budgets.details.BudgetStatus.ACTIVE
+import com.tink.moneymanagerui.budgets.details.BudgetStatus.ENDED
+import com.tink.moneymanagerui.budgets.details.BudgetStatus.NOT_STARTED
 import com.tink.moneymanagerui.budgets.details.model.BudgetSelectionData
 import se.tink.commons.extensions.toDateTime
 import se.tink.commons.extensions.totalMonths
