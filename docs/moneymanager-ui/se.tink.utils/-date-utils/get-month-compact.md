@@ -10,7 +10,7 @@ title: getMonthCompact
 
 
 [androidJvm]\
-fun [getMonthCompact](get-month-compact.html)(dateTime: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [getMonthCompact](get-month-compact.html)(dateTime: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

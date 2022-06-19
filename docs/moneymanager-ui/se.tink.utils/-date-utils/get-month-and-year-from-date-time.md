@@ -10,7 +10,7 @@ title: getMonthAndYearFromDateTime
 
 
 [androidJvm]\
-fun [getMonthAndYearFromDateTime](get-month-and-year-from-date-time.html)(date: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [getMonthAndYearFromDateTime](get-month-and-year-from-date-time.html)(date: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

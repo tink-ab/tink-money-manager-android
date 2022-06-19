@@ -10,9 +10,9 @@ title: format
 
 
 [androidJvm]\
-fun [format](format.html)(date: DateTime?): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [format](format.html)(date: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)?): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
-fun [format](format.html)(date: ReadablePartial?): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [format](format.html)(date: [LocalDate](https://developer.android.com/reference/kotlin/java/time/LocalDate.html)?): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

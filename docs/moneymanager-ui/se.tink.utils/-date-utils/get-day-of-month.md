@@ -10,7 +10,7 @@ title: getDayOfMonth
 
 
 [androidJvm]\
-fun [getDayOfMonth](get-day-of-month.html)(dateTime: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [getDayOfMonth](get-day-of-month.html)(dateTime: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

@@ -10,7 +10,7 @@ title: BudgetTransactionParams
 
 
 [androidJvm]\
-fun [BudgetTransactionParams](-budget-transaction-params.html)(id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant)
+fun [BudgetTransactionParams](-budget-transaction-params.html)(id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html))
 
 
 

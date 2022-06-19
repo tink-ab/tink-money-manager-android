@@ -10,7 +10,7 @@ title: ThreadSafeDateFormatBuilder
 
 
 [androidJvm]\
-class [ThreadSafeDateFormatBuilder](index.html)(pattern: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timezone: DateTimeZone) : [Cloneable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-cloneable/index.html)
+class [ThreadSafeDateFormatBuilder](index.html)(pattern: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timeZoneId: [ZoneId](https://developer.android.com/reference/kotlin/java/time/ZoneId.html)) : [Cloneable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-cloneable/index.html)
 
 A builder used to construct [ThreadSafeDateFormat](../index.html)s
 
@@ -21,7 +21,7 @@ A builder used to construct [ThreadSafeDateFormat](../index.html)s
 
 | | |
 |---|---|
-| [ThreadSafeDateFormatBuilder](-thread-safe-date-format-builder.html) | [androidJvm]<br>fun [ThreadSafeDateFormatBuilder](-thread-safe-date-format-builder.html)(pattern: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timezone: DateTimeZone) |
+| [ThreadSafeDateFormatBuilder](-thread-safe-date-format-builder.html) | [androidJvm]<br>fun [ThreadSafeDateFormatBuilder](-thread-safe-date-format-builder.html)(pattern: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timeZoneId: [ZoneId](https://developer.android.com/reference/kotlin/java/time/ZoneId.html)) |
 
 
 ## Functions
@@ -42,5 +42,5 @@ A builder used to construct [ThreadSafeDateFormat](../index.html)s
 |---|---|
 | [locale](locale.html) | [androidJvm]<br>val [locale](locale.html): [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html)? = null |
 | [pattern](pattern.html) | [androidJvm]<br>val [pattern](pattern.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)? = null |
-| [timezone](timezone.html) | [androidJvm]<br>val [timezone](timezone.html): DateTimeZone? = null |
+| [timeZoneId](time-zone-id.html) | [androidJvm]<br>val [timeZoneId](time-zone-id.html): [ZoneId](https://developer.android.com/reference/kotlin/java/time/ZoneId.html)? = null |
 

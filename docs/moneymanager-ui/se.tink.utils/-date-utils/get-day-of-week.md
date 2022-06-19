@@ -10,9 +10,7 @@ title: getDayOfWeek
 
 
 [androidJvm]\
-fun [getDayOfWeek](get-day-of-week.html)(dateTime: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
-
-fun [getDayOfWeek](get-day-of-week.html)(date: LocalDate): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [getDayOfWeek](get-day-of-week.html)(dateTime: [LocalDate](https://developer.android.com/reference/kotlin/java/time/LocalDate.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

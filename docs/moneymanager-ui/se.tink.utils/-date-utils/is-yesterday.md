@@ -10,7 +10,7 @@ title: isYesterday
 
 
 [androidJvm]\
-fun [isYesterday](is-yesterday.html)(evaluatedDate: DateTime): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+fun [isYesterday](is-yesterday.html)(evaluatedDate: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 
 

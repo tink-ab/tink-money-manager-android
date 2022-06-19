@@ -49,6 +49,6 @@ sealed class [Period](index.html) : [Parcelable](https://developer.android.com/r
 
 | Name | Summary |
 |---|---|
-| [getHalfwayPoint](../../com.tink.moneymanagerui.extensions/get-halfway-point.html) | [androidJvm]<br>fun [Period](index.html).[getHalfwayPoint](../../com.tink.moneymanagerui.extensions/get-halfway-point.html)(): DateTime |
-| [isInPeriod](../../se.tink.commons.extensions/is-in-period.html) | [androidJvm]<br>fun [Period](index.html).[isInPeriod](../../se.tink.commons.extensions/is-in-period.html)(dateTime: DateTime): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
+| [getHalfwayPoint](../../com.tink.moneymanagerui.extensions/get-halfway-point.html) | [androidJvm]<br>fun [Period](index.html).[getHalfwayPoint](../../com.tink.moneymanagerui.extensions/get-halfway-point.html)(): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html) |
+| [isInPeriod](../../se.tink.commons.extensions/is-in-period.html) | [androidJvm]<br>fun [Period](index.html).[isInPeriod](../../se.tink.commons.extensions/is-in-period.html)(dateTime: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 

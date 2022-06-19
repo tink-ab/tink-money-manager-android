@@ -19,7 +19,7 @@ object [Companion](index.html)
 
 | Name | Summary |
 |---|---|
-| [threadSafeDateFormat](thread-safe-date-format.html) | [androidJvm]<br>@[JvmStatic](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html)<br>fun [threadSafeDateFormat](thread-safe-date-format.html)(key: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timezone: DateTimeZone): [ThreadSafeDateFormat](../index.html) |
+| [threadSafeDateFormat](thread-safe-date-format.html) | [androidJvm]<br>@[JvmStatic](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html)<br>fun [threadSafeDateFormat](thread-safe-date-format.html)(key: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timeZoneId: [ZoneId](https://developer.android.com/reference/kotlin/java/time/ZoneId.html)): [ThreadSafeDateFormat](../index.html) |
 
 
 ## Properties

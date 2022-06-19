@@ -10,7 +10,7 @@ title: onTransactionItemClickedListener
 
 
 [androidJvm]\
-var [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html): ([String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null
+var [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html): ([TransactionItemListAdapter.ClickListenerData](-click-listener-data/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null
 
 
 

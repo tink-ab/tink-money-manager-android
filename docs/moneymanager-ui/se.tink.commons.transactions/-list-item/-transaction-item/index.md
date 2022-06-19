@@ -10,7 +10,7 @@ title: TransactionItem
 
 
 [androidJvm]\
-data class [TransactionItem](index.html)(val id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val icon: [ListItem.TransactionItem.Icon](-icon/index.html), val label: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val amount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val dispensableAmount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val date: DateTime, val merchantLogoAllowed: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val recurring: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false, val upcomingTransactionData: [ListItem.TransactionItem.UpcomingTransactionData](-upcoming-transaction-data/index.html)? = null) : [ListItem](../index.html)
+data class [TransactionItem](index.html)(val id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val icon: [ListItem.TransactionItem.Icon](-icon/index.html), val label: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val amount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val dispensableAmount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val date: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html), val merchantLogoAllowed: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val recurring: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false, val upcomingTransactionData: [ListItem.TransactionItem.UpcomingTransactionData](-upcoming-transaction-data/index.html)? = null, val isPending: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val isEditable: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false) : [ListItem](../index.html)
 
 
 
@@ -19,7 +19,7 @@ data class [TransactionItem](index.html)(val id: [String](https://kotlinlang.org
 
 | | |
 |---|---|
-| [TransactionItem](-transaction-item.html) | [androidJvm]<br>fun [TransactionItem](-transaction-item.html)(id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), icon: [ListItem.TransactionItem.Icon](-icon/index.html), label: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), amount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), dispensableAmount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), date: DateTime, merchantLogoAllowed: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), recurring: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false, upcomingTransactionData: [ListItem.TransactionItem.UpcomingTransactionData](-upcoming-transaction-data/index.html)? = null) |
+| [TransactionItem](-transaction-item.html) | [androidJvm]<br>fun [TransactionItem](-transaction-item.html)(id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), icon: [ListItem.TransactionItem.Icon](-icon/index.html), label: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), description: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), amount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), dispensableAmount: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), date: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html), merchantLogoAllowed: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), recurring: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false, upcomingTransactionData: [ListItem.TransactionItem.UpcomingTransactionData](-upcoming-transaction-data/index.html)? = null, isPending: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), isEditable: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false) |
 
 
 ## Types
@@ -27,7 +27,7 @@ data class [TransactionItem](index.html)(val id: [String](https://kotlinlang.org
 
 | Name | Summary |
 |---|---|
-| [Icon](-icon/index.html) | [androidJvm]<br>data class [Icon](-icon/index.html)(val resource: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html), val color: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html), val backgroundColor: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)) |
+| [Icon](-icon/index.html) | [androidJvm]<br>data class [Icon](-icon/index.html)(val resource: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html), val color: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html), val backgroundColor: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html), val disabledColor: [Int](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) = R.attr.tink_textColorSecondary) |
 | [UpcomingTransactionData](-upcoming-transaction-data/index.html) | [androidJvm]<br>data class [UpcomingTransactionData](-upcoming-transaction-data/index.html)(val pending: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val editable: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val transferId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) |
 
 
@@ -47,11 +47,13 @@ data class [TransactionItem](index.html)(val id: [String](https://kotlinlang.org
 | Name | Summary |
 |---|---|
 | [amount](amount.html) | [androidJvm]<br>val [amount](amount.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [date](date.html) | [androidJvm]<br>val [date](date.html): DateTime |
+| [date](date.html) | [androidJvm]<br>val [date](date.html): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html) |
 | [description](description.html) | [androidJvm]<br>val [description](description.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [dispensableAmount](dispensable-amount.html) | [androidJvm]<br>val [dispensableAmount](dispensable-amount.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [icon](icon.html) | [androidJvm]<br>val [icon](icon.html): [ListItem.TransactionItem.Icon](-icon/index.html) |
 | [id](id.html) | [androidJvm]<br>val [id](id.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [isEditable](is-editable.html) | [androidJvm]<br>val [isEditable](is-editable.html): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false |
+| [isPending](is-pending.html) | [androidJvm]<br>val [isPending](is-pending.html): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 | [label](label.html) | [androidJvm]<br>val [label](label.html): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [merchantLogoAllowed](merchant-logo-allowed.html) | [androidJvm]<br>val [merchantLogoAllowed](merchant-logo-allowed.html): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 | [recurring](recurring.html) | [androidJvm]<br>val [recurring](recurring.html): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = false |

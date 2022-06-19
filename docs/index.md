@@ -44,8 +44,6 @@ title: moneymanager-ui
 | [com.tink.moneymanagerui.budgets.details.di](moneymanager-ui/com.tink.moneymanagerui.budgets.details.di/index.html) |
 | [com.tink.moneymanagerui.budgets.details.model](moneymanager-ui/com.tink.moneymanagerui.budgets.details.model/index.html) |
 | [com.tink.moneymanagerui.budgets.details.transactions](moneymanager-ui/com.tink.moneymanagerui.budgets.details.transactions/index.html) |
-| [com.tink.moneymanagerui.charts.models](moneymanager-ui/com.tink.moneymanagerui.charts.models/index.html) |
-| [com.tink.moneymanagerui.charts.transitions](moneymanager-ui/com.tink.moneymanagerui.charts.transitions/index.html) |
 | [com.tink.moneymanagerui.collections](moneymanager-ui/com.tink.moneymanagerui.collections/index.html) |
 | [com.tink.moneymanagerui.configuration](moneymanager-ui/com.tink.moneymanagerui.configuration/index.html) |
 | [com.tink.moneymanagerui.di](moneymanager-ui/com.tink.moneymanagerui.di/index.html) |
@@ -65,9 +63,13 @@ title: moneymanager-ui
 | [com.tink.moneymanagerui.overview.accounts](moneymanager-ui/com.tink.moneymanagerui.overview.accounts/index.html) |
 | [com.tink.moneymanagerui.overview.budgets](moneymanager-ui/com.tink.moneymanagerui.overview.budgets/index.html) |
 | [com.tink.moneymanagerui.overview.charts](moneymanager-ui/com.tink.moneymanagerui.overview.charts/index.html) |
-| [com.tink.moneymanagerui.overview.charts.model](moneymanager-ui/com.tink.moneymanagerui.overview.charts.model/index.html) |
 | [com.tink.moneymanagerui.overview.charts.utils](moneymanager-ui/com.tink.moneymanagerui.overview.charts.utils/index.html) |
 | [com.tink.moneymanagerui.repository](moneymanager-ui/com.tink.moneymanagerui.repository/index.html) |
+| [com.tink.moneymanagerui.statistics.barchart](moneymanager-ui/com.tink.moneymanagerui.statistics.barchart/index.html) |
+| [com.tink.moneymanagerui.statistics.models](moneymanager-ui/com.tink.moneymanagerui.statistics.models/index.html) |
+| [com.tink.moneymanagerui.statistics.overtime](moneymanager-ui/com.tink.moneymanagerui.statistics.overtime/index.html) |
+| [com.tink.moneymanagerui.statistics.piechart](moneymanager-ui/com.tink.moneymanagerui.statistics.piechart/index.html) |
+| [com.tink.moneymanagerui.statistics.transitions](moneymanager-ui/com.tink.moneymanagerui.statistics.transitions/index.html) |
 | [com.tink.moneymanagerui.testutil](moneymanager-ui/com.tink.moneymanagerui.testutil/index.html) |
 | [com.tink.moneymanagerui.theme](moneymanager-ui/com.tink.moneymanagerui.theme/index.html) |
 | [com.tink.moneymanagerui.tracking](moneymanager-ui/com.tink.moneymanagerui.tracking/index.html) |
@@ -111,7 +113,6 @@ title: moneymanager-ui
 | [se.tink.android.repository.transaction](moneymanager-ui/se.tink.android.repository.transaction/index.html) |
 | [se.tink.android.repository.user](moneymanager-ui/se.tink.android.repository.user/index.html) |
 | [se.tink.android.viewholders](moneymanager-ui/se.tink.android.viewholders/index.html) |
-| [se.tink.commons.businessdays](moneymanager-ui/se.tink.commons.businessdays/index.html) |
 | [se.tink.commons.categories](moneymanager-ui/se.tink.commons.categories/index.html) |
 | [se.tink.commons.categories.enums](moneymanager-ui/se.tink.commons.categories.enums/index.html) |
 | [se.tink.commons.currency](moneymanager-ui/se.tink.commons.currency/index.html) |

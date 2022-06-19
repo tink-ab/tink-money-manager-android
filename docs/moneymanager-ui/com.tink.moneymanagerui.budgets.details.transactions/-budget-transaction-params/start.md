@@ -10,7 +10,7 @@ title: start
 
 
 [androidJvm]\
-val [start](start.html): Instant
+val [start](start.html): [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html)
 
 
 

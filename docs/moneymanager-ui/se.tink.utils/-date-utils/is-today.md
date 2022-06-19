@@ -10,7 +10,7 @@ title: isToday
 
 
 [androidJvm]\
-fun [isToday](is-today.html)(evaluatedDate: DateTime): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+fun [isToday](is-today.html)(evaluatedDate: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 
 

@@ -18,7 +18,7 @@ title: threadSafeDateFormat
 
 
 
-fun [threadSafeDateFormat](thread-safe-date-format.html)(key: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timezone: DateTimeZone): [ThreadSafeDateFormat](../index.html)
+fun [threadSafeDateFormat](thread-safe-date-format.html)(key: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), locale: [Locale](https://developer.android.com/reference/kotlin/java/util/Locale.html), timeZoneId: [ZoneId](https://developer.android.com/reference/kotlin/java/time/ZoneId.html)): [ThreadSafeDateFormat](../index.html)
 
 
 
