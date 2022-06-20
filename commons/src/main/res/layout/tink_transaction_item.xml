@@ -21,8 +21,8 @@
     tools:srcCompat="@drawable/tink_category_healthandbeauty" />
 
   <View
-      android:layout_width="0dp"
-      android:layout_height="0dp"
+      android:layout_width="6dp"
+      android:layout_height="6dp"
       android:id="@+id/cornerIconBackgroundView"
       android:background="@color/tink_white"
       android:visibility="gone"
@@ -30,7 +30,6 @@
       app:layout_constraintEnd_toEndOf="@id/cornerIcon"
       app:layout_constraintTop_toTopOf="@id/cornerIcon"
       app:layout_constraintBottom_toBottomOf="@id/cornerIcon"
-      android:padding="4dp"
       tools:visibility="visible"/>
 
   <ImageView
