@@ -10,9 +10,9 @@ title: getHalfwayPoint
 
 
 [androidJvm]\
-fun [Period](../com.tink.model.time/-period/index.html).[getHalfwayPoint](get-halfway-point.html)(): DateTime
+fun [Budget.Period](../com.tink.model.budget/-budget/-period/index.html).[getHalfwayPoint](get-halfway-point.html)(): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)
 
-fun [Budget.Period](../com.tink.model.budget/-budget/-period/index.html).[getHalfwayPoint](get-halfway-point.html)(): DateTime
+fun [Period](../com.tink.model.time/-period/index.html).[getHalfwayPoint](get-halfway-point.html)(): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)
 
 
 

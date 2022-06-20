@@ -144,7 +144,16 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fragmentCoordinator.clear()
+        saveIsEditablePendingTransaction()
         fragmentCoordinator.add(OverviewFragment.newInstance(overviewFeatures, isOverviewToolbarVisible), false, FragmentAnimationFlags.NONE)
+    }
+
+    private fun saveIsEditablePendingTransaction() {
+        val isEditable = requireArguments().getBoolean(ARG_IS_EDITABLE_ON_PENDING_TRANSACTION)
+        val sharedPreference = requireContext().getSharedPreferences("ARG_IS_EDITABLE_ON_PENDING_TRANSACTION", Context.MODE_PRIVATE)
+        val editor = sharedPreference.edit()
+        editor.putBoolean("IS_EDITABLE_ON_PENDING_TRANSACTION", isEditable)
+        editor.commit()
     }
 
     fun handleBackPress() =
@@ -206,6 +215,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
         const val ARG_ACCESS_TOKEN = "accessToken"
         const val ARG_OVERVIEW_FEATURES = "overviewFeatures"
         const val ARG_IS_OVERVIEW_TOOLBAR_VISIBLE = "isOverviewToolbarVisible"
+        const val ARG_IS_EDITABLE_ON_PENDING_TRANSACTION = "isEditableOnPendingTransaction"
 
         @JvmStatic
         var featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = mapOf()
@@ -227,6 +237,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
          * @param insightActionHandler The optional [InsightActionHandler] implementation for custom handling of [insight actions][Insight.Action]
          * @param backPressedListener An optional [OnBackPressedListener] callback to listen to back presses in the SDK
          * @param isOverviewToolbarVisible Set if you want to show a toolbar for the overview fragment, defaults to false
+         * @param isEditableOnPendingTransaction Set if you want user to be able to edit category of a pending transaction, defaults to true
          * @param javaInsightActionHandler an optional [JavaInsightActionHandler] you can use to handle insights when not using Kotlin, not used if insightActionHandler is set
          * @param featureSpecificThemes an optional Map where you can set specific themes for Money Manager's individual features. The keys in the map should be the [MoneyManagerFeatureType]
          * and the values the theme for that specific feature. It's recommended to have your feature specific theme inherit from your app's base theme
@@ -241,6 +252,7 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
             insightActionHandler: InsightActionHandler? = null,
             backPressedListener: OnBackPressedListener? = null,
             isOverviewToolbarVisible: Boolean = false,
+            isEditableOnPendingTransaction: Boolean = true,
             javaInsightActionHandler: JavaInsightActionHandler? = null,
             featureSpecificThemes: Map<MoneyManagerFeatureType, Int> = emptyMap()
         ): FinanceOverviewFragment {
@@ -259,7 +271,8 @@ class FinanceOverviewFragment : Fragment(), HasAndroidInjector {
                     ARG_ACCESS_TOKEN to accessToken,
                     ARG_STYLE_RES to styleResId,
                     ARG_OVERVIEW_FEATURES to overviewFeatures,
-                    ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to isOverviewToolbarVisible
+                    ARG_IS_OVERVIEW_TOOLBAR_VISIBLE to isOverviewToolbarVisible,
+                    ARG_IS_EDITABLE_ON_PENDING_TRANSACTION to isEditableOnPendingTransaction
                 )
             }
         }
@@ -270,5 +283,6 @@ public enum class MoneyManagerFeatureType {
     ACCOUNTS,
     ACTIONABLE_INSIGHTS,
     BUDGETS,
-    STATISTICS;
+    STATISTICS,
+    LATEST_TRANSACTIONS;
 }

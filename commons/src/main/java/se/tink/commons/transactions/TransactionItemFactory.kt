@@ -24,7 +24,8 @@ class TransactionItemFactory @Inject constructor(
 
     fun fromTransaction(
         transaction: Transaction,
-        category: Category
+        category: Category,
+        isEditable: Boolean
     ): ListItem.TransactionItem? =
         with(transaction) {
             createItem(
@@ -35,7 +36,9 @@ class TransactionItemFactory @Inject constructor(
                 description = category.name,
                 label = description,
                 amount = amount,
-                upcomingTransactionData = null
+                upcomingTransactionData = null,
+                isPending = pending,
+                isEditable = isEditable
             )
         }
 
@@ -46,7 +49,8 @@ class TransactionItemFactory @Inject constructor(
     fun similarTransactionItemFromTransaction(
         transaction: Transaction,
         category: Category,
-        isSelected: Boolean = true
+        isSelected: Boolean = true,
+        isEditable: Boolean = true
     ): SimilarTransactionsAdapter.SimilarTransactionItem? =
         with(transaction) {
             if (amount.isValid) {
@@ -61,7 +65,9 @@ class TransactionItemFactory @Inject constructor(
                     description = category.name,
                     date = dateUtils.getDateWithYear(date.toDateTime()),
                     merchantLogoAllowed = !category.code.isUncategorized() && !category.code.isExcluded(),
-                    selected = isSelected
+                    selected = isSelected,
+                    isEditable = isEditable
+
                 )
             } else {
                 null
@@ -77,7 +83,9 @@ class TransactionItemFactory @Inject constructor(
         label: String,
         amount: Amount,
         dispensableAmount: Amount = Amount(ExactNumber(0, 0), "SEK"), // TODO:PFMSDK: Remove dispensableAmount
-        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null // TODO: PFMSDK: Remove upcoming transaction data
+        upcomingTransactionData: ListItem.TransactionItem.UpcomingTransactionData? = null, // TODO: PFMSDK: Remove upcoming transaction data
+        isPending: Boolean,
+        isEditable: Boolean
     ): ListItem.TransactionItem? =
         if (amount.isValid && dispensableAmount.isValid) {
             val icon = if (isUpcoming) {
@@ -105,7 +113,9 @@ class TransactionItemFactory @Inject constructor(
                 ),
                 date = date,
                 merchantLogoAllowed = !category.code.isUncategorized() && !isUpcoming && !category.code.isExcluded(),
-                upcomingTransactionData = upcomingTransactionData
+                upcomingTransactionData = upcomingTransactionData,
+                isPending = isPending,
+                isEditable = isEditable
             )
         } else {
             null

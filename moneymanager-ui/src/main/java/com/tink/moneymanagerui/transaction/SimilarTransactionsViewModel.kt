@@ -34,6 +34,8 @@ internal class SimilarTransactionsViewModel @Inject constructor(
 
     private val categoryId = MutableLiveData<String>()
 
+    var isEditableOnPendingTransaction: Boolean = true
+
     fun initialize(transactionList: List<Transaction>, categoryId: String) {
         transactions.value = transactionList
         this.categoryId.value = categoryId
@@ -96,8 +98,9 @@ internal class SimilarTransactionsViewModel @Inject constructor(
                                 categoryTree.findCategoryById(categoryId)?.let { category ->
                                     transactionItemFactory
                                         .similarTransactionItemFromTransaction(
-                                            transaction,
-                                            category
+                                            transaction = transaction,
+                                            category = category,
+                                            isEditable = isEditableOnPendingTransaction
                                         )
                                         ?.apply {
                                             selected =

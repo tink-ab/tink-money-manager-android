@@ -10,7 +10,7 @@ title: toDateTime
 
 
 [androidJvm]\
-fun Instant.[toDateTime](to-date-time.html)(): DateTime
+fun [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html).[toDateTime](to-date-time.html)(): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)
 
 
 

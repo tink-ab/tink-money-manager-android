@@ -22,6 +22,14 @@ class [TransactionItemListAdapter](index.html)(dateUtils: [DateUtils](../../se.t
 | [TransactionItemListAdapter](-transaction-item-list-adapter.html) | [androidJvm]<br>fun [TransactionItemListAdapter](-transaction-item-list-adapter.html)(dateUtils: [DateUtils](../../se.tink.utils/-date-utils/index.html)? = null, groupByDates: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) = true) |
 
 
+## Types
+
+
+| Name | Summary |
+|---|---|
+| [ClickListenerData](-click-listener-data/index.html) | [androidJvm]<br>data class [ClickListenerData](-click-listener-data/index.html)(val id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val isPending: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html), val isEditable: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)) |
+
+
 ## Functions
 
 
@@ -69,6 +77,7 @@ class [TransactionItemListAdapter](index.html)(dateUtils: [DateUtils](../../se.t
 |---|---|
 | [expanded](expanded.html) | [androidJvm]<br>var [expanded](expanded.html): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) |
 | [onToggleUpcomingTransactions](on-toggle-upcoming-transactions.html) | [androidJvm]<br>var [onToggleUpcomingTransactions](on-toggle-upcoming-transactions.html): () -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null |
-| [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html) | [androidJvm]<br>var [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html): ([String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null |
+| [onTransactionIconClickedListener](on-transaction-icon-clicked-listener.html) | [androidJvm]<br>var [onTransactionIconClickedListener](on-transaction-icon-clicked-listener.html): ([TransactionItemListAdapter.ClickListenerData](-click-listener-data/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null |
+| [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html) | [androidJvm]<br>var [onTransactionItemClickedListener](on-transaction-item-clicked-listener.html): ([TransactionItemListAdapter.ClickListenerData](-click-listener-data/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null |
 | [onUpcomingTransactionClickedListener](on-upcoming-transaction-clicked-listener.html) | [androidJvm]<br>var [onUpcomingTransactionClickedListener](on-upcoming-transaction-clicked-listener.html): ([ListItem.TransactionItem.UpcomingTransactionData](../-list-item/-transaction-item/-upcoming-transaction-data/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)? = null |
 

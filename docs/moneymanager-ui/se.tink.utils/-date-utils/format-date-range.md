@@ -10,7 +10,7 @@ title: formatDateRange
 
 
 [androidJvm]\
-fun [formatDateRange](format-date-range.html)(start: DateTime, end: DateTime, includeYearIfNotCurrent: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [formatDateRange](format-date-range.html)(start: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html), end: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html), includeYearIfNotCurrent: [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

@@ -1,6 +1,8 @@
 package se.tink.commons.transactions
 
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.tink_transaction_item.view.*
@@ -12,7 +14,9 @@ import se.tink.commons.R
 import se.tink.commons.extensions.getColorFromAttr
 import se.tink.commons.extensions.inflate
 import se.tink.commons.extensions.setImageResFromAttr
+import se.tink.commons.extensions.setPendingTransactionIconColor
 import se.tink.commons.extensions.tint
+import se.tink.commons.extensions.visible
 import se.tink.utils.DateUtils
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -25,9 +29,13 @@ class TransactionItemListAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     OnViewHolderClickedListener {
 
+    data class ClickListenerData(val id: String, val isPending: Boolean, val isEditable: Boolean)
+
     private var flatData: List<ListItem> = emptyList()
 
-    var onTransactionItemClickedListener: ((String) -> Unit)? = null
+    var onTransactionItemClickedListener: ((ClickListenerData) -> Unit)? = null
+
+    var onTransactionIconClickedListener: ((ClickListenerData) -> Unit)? = null
 
     var onUpcomingTransactionClickedListener: ((ListItem.TransactionItem.UpcomingTransactionData) -> Unit)? =
         null
@@ -54,7 +62,7 @@ class TransactionItemListAdapter(
         when (val item = flatData[position]) {
             is ListItem.DateGroupItem -> (holder as DateGroupViewHolder).bind(item)
             is ListItem.UpcomingGroupHeaderItem -> (holder as UpcomingHeaderViewHolder).bind(item)
-            is ListItem.TransactionItem -> (holder as TransactionItemViewHolder).bind(item)
+            is ListItem.TransactionItem -> (holder as TransactionItemViewHolder).bind(item, onTransactionIconClickedListener)
         }
     }
 
@@ -67,7 +75,11 @@ class TransactionItemListAdapter(
         if (item is ListItem.TransactionItem) {
             item.upcomingTransactionData?.also {
                 onUpcomingTransactionClickedListener?.invoke(it)
-            } ?: onTransactionItemClickedListener?.invoke(item.id)
+            } ?: onTransactionItemClickedListener?.invoke(
+                ClickListenerData(
+                    id = item.id, isPending = item.isPending, isEditable = item.isEditable
+                )
+            )
         }
     }
 
@@ -156,7 +168,9 @@ sealed class ListItem {
         val date: LocalDateTime,
         val merchantLogoAllowed: Boolean,
         val recurring: Boolean = false,
-        val upcomingTransactionData: UpcomingTransactionData? = null
+        val upcomingTransactionData: UpcomingTransactionData? = null,
+        val isPending: Boolean,
+        val isEditable: Boolean = false
     ) : ListItem() {
         override fun isSameItem(other: ListItem): Boolean {
             return id == (other as? TransactionItem)?.id
@@ -164,7 +178,7 @@ sealed class ListItem {
 
         override fun getViewType(): ViewType = ViewType.TRANSACTION_ITEM
 
-        data class Icon(val resource: Int, val color: Int, val backgroundColor: Int)
+        data class Icon(val resource: Int, val color: Int, val backgroundColor: Int, val disabledColor: Int = R.attr.tink_textColorSecondary)
         data class UpcomingTransactionData(
             val pending: Boolean,
             val editable: Boolean,
@@ -223,19 +237,52 @@ class TransactionItemViewHolder(
     parent.inflate(R.layout.tink_transaction_item),
     onViewHolderClickedListener
 ) {
-    fun bind(item: ListItem.TransactionItem) {
+    fun bind(item: ListItem.TransactionItem, onTransactionIconClickedListener: ((TransactionItemListAdapter.ClickListenerData) -> Unit)?) {
+
         with(itemView) {
-
-            val (iconRes, iconColor, iconBackgroundColor) = item.icon
-            icon.setImageResFromAttr(iconRes)
-            icon.tint(iconColor)
-            icon.setBackgroundColor(itemView.context.getColorFromAttr(iconBackgroundColor))
-
             label.text = item.label
             description.text = item.description
             amount.text = item.amount
-//            dispensableAmount.text = item.dispensableAmount
-//            dispensableAmount.visible = item.dispensableAmount != item.amount
         }
+
+        bindCategoryIcon(
+            item,
+            onTransactionIconClickedListener
+        )
+    }
+
+    private fun bindCategoryIcon(
+        data: ListItem.TransactionItem,
+        onTransactionIconClickedListener: ((TransactionItemListAdapter.ClickListenerData) -> Unit)?
+    ) {
+        with(itemView) {
+            icon.apply {
+                val iconData = data.icon
+                setImageResFromAttr(iconData.resource)
+                if (data.isPending) {
+                    setBackgroundResource(R.drawable.tink_dotted_circle)
+                    val padding =
+                        resources.getDimensionPixelOffset(R.dimen.tink_pending_transaction_padding)
+                    setPadding(padding)
+                    setPendingTransactionIconColor(if (data.isEditable) iconData.color else iconData.disabledColor)
+                } else {
+                    setBackgroundColor(itemView.context.getColorFromAttr(iconData.backgroundColor))
+                    tint(iconData.color)
+                }
+                setOnClickListener {
+                    onTransactionIconClickedListener?.invoke(
+                        TransactionItemListAdapter.ClickListenerData(
+                            id = data.id, isPending = data.isPending, isEditable = data.isEditable
+                        )
+                    )
+                }
+            }
+            showAndHideClockIcon(data.isPending)
+        }
+    }
+
+    private fun View.showAndHideClockIcon(showClock: Boolean) {
+        cornerIconBackgroundView.visible = showClock
+        cornerIcon.visible = showClock
     }
 }

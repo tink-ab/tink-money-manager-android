@@ -14,5 +14,5 @@ title: com.tink.moneymanagerui.budgets.details.transactions
 
 | Name | Summary |
 |---|---|
-| [BudgetTransactionParams](-budget-transaction-params/index.html) | [androidJvm]<br>data class [BudgetTransactionParams](-budget-transaction-params/index.html)(val id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val start: Instant, val end: Instant) |
+| [BudgetTransactionParams](-budget-transaction-params/index.html) | [androidJvm]<br>data class [BudgetTransactionParams](-budget-transaction-params/index.html)(val id: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), val start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), val end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html)) |
 

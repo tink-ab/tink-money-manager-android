@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="TinkMaterialCardviewStyle" parent="Widget.Material3.CardView.Elevated">
+    <item name="cardElevation">?tink_cardElevation</item>
+    <item name="cardCornerRadius">?tink_cardCornerRadius</item>
+    <item name="cardBackgroundColor">?tink_cardBackgroundColor</item>
+    <item name="rippleColor">?tink_rippleColor</item>
+  </style>
+</resources>

@@ -3,17 +3,17 @@ package com.tink.moneymanagerui.transaction
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tink.moneymanagerui.BaseFragment
-import com.tink.moneymanagerui.FragmentAnimationFlags
 import com.tink.moneymanagerui.MoneyManagerFeatureType
 import com.tink.moneymanagerui.R
 import com.tink.moneymanagerui.extensions.visibleIf
 import com.tink.moneymanagerui.tracking.ScreenEvent
+import com.tink.moneymanagerui.util.TransactionListHelper
 import kotlinx.android.synthetic.main.tink_transactions_list_fragment.*
+import kotlinx.android.synthetic.main.tink_transactions_list_fragment.loader
 import se.tink.commons.transactions.TransactionItemListAdapter
 import se.tink.utils.DateUtils
 import javax.inject.Inject
@@ -66,6 +66,9 @@ internal class TransactionsListFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(TransactionListViewModel::class.java)
         viewModel.setListMode(metaData.toListMode())
+
+        viewModel.isEditableOnPendingTransaction =
+            TransactionListHelper().isEditableOnPendingValue(requireActivity())
     }
 
     public override fun authorizedOnViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,29 +79,26 @@ internal class TransactionsListFragment : BaseFragment() {
         setupTransactionAdapter()
 
         viewModel.transactionItems.observe(
-            viewLifecycleOwner,
-            Observer { transactionItems ->
-                emptyMessage.visibleIf { transactionItems.transactions.isEmpty() }
-                recyclerView.visibleIf { transactionItems.transactions.isNotEmpty() }
-                adapter.setTransactionItems(transactionItems.transactions)
-            }
-        )
+            viewLifecycleOwner
+        ) { transactionItems ->
+            emptyMessage.visibleIf { transactionItems.transactions.isEmpty() }
+            recyclerView.visibleIf { transactionItems.transactions.isNotEmpty() }
+            adapter.setTransactionItems(transactionItems.transactions)
+        }
 
         viewModel.errors.observe(
-            viewLifecycleOwner,
-            Observer { event ->
-                event?.getContentIfNotHandled()?.let { error ->
-                    snackbarManager.displayError(error, requireContext())
-                }
+            viewLifecycleOwner
+        ) { event ->
+            event?.getContentIfNotHandled()?.let { error ->
+                snackbarManager.displayError(error, requireContext())
             }
-        )
+        }
 
         viewModel.loading.observe(
-            viewLifecycleOwner,
-            Observer { isLoading ->
-                loader.visibleIf { isLoading }
-            }
-        )
+            viewLifecycleOwner
+        ) { isLoading ->
+            loader.visibleIf { isLoading }
+        }
     }
 
     private fun setupTransactionAdapter() {
@@ -109,16 +109,13 @@ internal class TransactionsListFragment : BaseFragment() {
 
         adapter = TransactionItemListAdapter(dateUtils = dateUtils, groupByDates = true)
 
-        adapter.onTransactionItemClickedListener = { id ->
-            CategorizationFlowFragment
-                .newInstance(id, featureType)
-                .also {
-                    fragmentCoordinator.replace(
-                        it,
-                        animation = FragmentAnimationFlags.FADE_IN_ONLY
-                    )
-                }
-        }
+        TransactionListHelper().navToCategorizationOrShowUneditableMsg(
+            fragmentCoordinator,
+            requireActivity(),
+            adapter,
+            featureType
+        )
+
         recyclerView.adapter = adapter
     }
 

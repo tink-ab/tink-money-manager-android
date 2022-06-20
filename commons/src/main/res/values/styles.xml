@@ -56,10 +56,13 @@
     <item name="tink_incomeIconBackgroundColor">?tink_incomeLightColor</item>
     <item name="tink_expensesIconBackgroundColor">?tink_expensesLightColor</item>
     <item name="tink_transferIconBackgroundColor">?tink_transferLightColor</item>
-
     <item name="tink_accountIconColor">?tink_uncategorizedLightColor</item>
     <item name="tink_accountIconBackgroundColor">?tink_colorAccent</item>
     <item name="tink_accountTextColor">?tink_colorAccent</item>
+    <item name="tink_rippleColor">@color/tink_ripple_on_light_background</item>
+
+    <!-- Elevation -->
+    <item name="tink_cardElevation">@dimen/tink_card_elevation</item>
 
     <!--    Icons-->
     <item name="tink_icon_category_all_expenses">@drawable/tink_category_all_expenses</item>
@@ -102,7 +105,10 @@
     <item name="tink_categoryIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
     <item name="tink_createBudgetIconShapeStyle">@style/TinkCategoryIconShapeStyle</item>
 
-    <item name="tink_checkbox_corner_radius_in_dp">12dp</item>
+    <!-- Corner radius -->
+    <item name="tink_checkbox_corner_radius_in_dp">@dimen/tink_checkbox_corner_radius</item>
+    <item name="tink_cardCornerRadius">@dimen/tink_card_corner_radius</item>
+    <item name="tink_pendingTransactionCornerRadius">@dimen/tink_pending_transaction_corner_radius</item>
 
     <!-- Text styles -->
     <item name="tink_dateGroupTextAppearance">@style/TinkDateGroupTextAppearance</item>
@@ -115,6 +121,9 @@
 
     <!-- Alert dialog style -->
     <item name="tink_alertDialogStyle">@style/TinkMaterialAlertDialogStyle</item>
+
+    <!-- Cardview style -->
+    <item name="tink_cardviewStyle">@style/TinkMaterialCardviewStyle</item>
 
     <!-- Date picker style -->
     <item name="tink_datePickerStyle">@style/TinkDatePickerStyle</item>

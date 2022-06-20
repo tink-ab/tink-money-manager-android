@@ -10,7 +10,7 @@ title: getDateWithYear
 
 
 [androidJvm]\
-fun [getDateWithYear](get-date-with-year.html)(dateTime: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [getDateWithYear](get-date-with-year.html)(dateTime: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 

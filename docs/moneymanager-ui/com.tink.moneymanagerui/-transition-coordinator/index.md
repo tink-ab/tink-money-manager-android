@@ -23,3 +23,11 @@ interface [TransitionCoordinator](index.html)
 | [postponeEnterTransition](postpone-enter-transition.html) | [androidJvm]<br>abstract fun [postponeEnterTransition](postpone-enter-transition.html)(fragment: [Fragment](https://developer.android.com/reference/kotlin/androidx/fragment/app/Fragment.html)) |
 | [startPostponedEnterTransition](start-postponed-enter-transition.html) | [androidJvm]<br>abstract fun [startPostponedEnterTransition](start-postponed-enter-transition.html)(fragment: [Fragment](https://developer.android.com/reference/kotlin/androidx/fragment/app/Fragment.html)) |
 
+
+## Inheritors
+
+
+| Name |
+|---|
+| [TransitionCoordinatorImpl](../-transition-coordinator-impl/index.html) |
+

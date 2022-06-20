@@ -49,6 +49,9 @@ dependencies {
     implementation libraries.dagger_android
     implementation libraries.dagger_android_support
 
+    implementation libraries.nav_component_fragment
+    implementation libraries.nav_component_ui
+
     implementation libraries.timber
 
     testImplementation libraries.test_junit

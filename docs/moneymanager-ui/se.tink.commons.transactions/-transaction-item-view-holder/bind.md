@@ -10,7 +10,7 @@ title: bind
 
 
 [androidJvm]\
-fun [bind](bind.html)(item: [ListItem.TransactionItem](../-list-item/-transaction-item/index.html))
+fun [bind](bind.html)(item: [ListItem.TransactionItem](../-list-item/-transaction-item/index.html), onTransactionIconClickedListener: ([TransactionItemListAdapter.ClickListenerData](../-transaction-item-list-adapter/-click-listener-data/index.html)) -&gt; [Unit](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)?)
 
 
 

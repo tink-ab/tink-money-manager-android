@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <stroke
+        android:width="5px"
+        android:color="?attr/tink_textColorSecondary"
+        android:dashWidth="5px"
+        android:dashGap="8px" />
+    <corners android:radius="?attr/tink_pendingTransactionCornerRadius"/>
+    <size
+        android:width="@dimen/tink_category_icon_size"
+        android:height="@dimen/tink_category_icon_size" />
+</shape>

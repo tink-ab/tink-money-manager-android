@@ -14,7 +14,7 @@ title: BudgetTransactionsLiveData
 
 
 
-class [BudgetTransactionsLiveData](index.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant, dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) : [MediatorLiveData](https://developer.android.com/reference/kotlin/androidx/lifecycle/MediatorLiveData.html)&lt;[ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;
+class [BudgetTransactionsLiveData](index.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) : [MediatorLiveData](https://developer.android.com/reference/kotlin/androidx/lifecycle/MediatorLiveData.html)&lt;[ErrorOrValue](../../se.tink.android.livedata/-error-or-value/index.html)&lt;[List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)&lt;[BudgetTransaction](../../com.tink.model.budget/index.html#-1403204114%2FClasslikes%2F1000845458)&gt;&gt;&gt;
 
 
 
@@ -23,7 +23,7 @@ class [BudgetTransactionsLiveData](index.html)(budgetService: [BudgetService](..
 
 | | |
 |---|---|
-| [BudgetTransactionsLiveData](-budget-transactions-live-data.html) | [androidJvm]<br>fun [BudgetTransactionsLiveData](-budget-transactions-live-data.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant, dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) |
+| [BudgetTransactionsLiveData](-budget-transactions-live-data.html) | [androidJvm]<br>fun [BudgetTransactionsLiveData](-budget-transactions-live-data.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html)) |
 
 
 ## Functions

@@ -10,7 +10,7 @@ title: isCurrentYear
 
 
 [androidJvm]\
-fun [isCurrentYear](is-current-year.html)(evaluatedDate: DateTime): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+fun [isCurrentYear](is-current-year.html)(evaluatedDate: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [Boolean](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
 
 
 

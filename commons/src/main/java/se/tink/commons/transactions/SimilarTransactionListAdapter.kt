@@ -154,7 +154,9 @@ class SimilarTransactionsAdapter :
         val date: String,
         val merchantLogoAllowed: Boolean,
         val recurring: Boolean = false,
-        var selected: Boolean = true
+        var selected: Boolean = true,
+        var isEditable: Boolean = true
+
     ) {
 
         fun isSameItem(other: SimilarTransactionItem): Boolean = id == other.id

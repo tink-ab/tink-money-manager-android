@@ -10,7 +10,7 @@ title: requestBudgetPeriodDetailsState
 
 
 [androidJvm]\
-fun [requestBudgetPeriodDetailsState](request-budget-period-details-state.html)(budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant)
+fun [requestBudgetPeriodDetailsState](request-budget-period-details-state.html)(budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html))
 
 
 

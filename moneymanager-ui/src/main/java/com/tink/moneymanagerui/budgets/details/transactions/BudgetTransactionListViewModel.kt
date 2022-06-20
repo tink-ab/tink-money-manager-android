@@ -82,7 +82,9 @@ internal class BudgetTransactionListViewModel @Inject constructor(
                                         date = this.date.toDateTime(),
                                         label = description,
                                         amount = amount,
-                                        upcomingTransactionData = null
+                                        upcomingTransactionData = null,
+                                        isPending = false,
+                                        isEditable = false
                                     )
                                 }
                             }

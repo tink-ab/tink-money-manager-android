@@ -10,7 +10,7 @@ title: BudgetTransactionsLiveData
 
 
 [androidJvm]\
-fun [BudgetTransactionsLiveData](-budget-transactions-live-data.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: Instant, end: Instant, dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html))
+fun [BudgetTransactionsLiveData](-budget-transactions-live-data.html)(budgetService: [BudgetService](../../com.tink.service.budget/-budget-service/index.html), budgetId: [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html), start: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), end: [Instant](https://developer.android.com/reference/kotlin/java/time/Instant.html), dispatcher: [DispatcherProvider](../../com.tink.service.util/-dispatcher-provider/index.html), transactionUpdateEventBus: [TransactionUpdateEventBus](../../se.tink.android.repository.transaction/-transaction-update-event-bus/index.html))
 
 
 

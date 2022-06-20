@@ -19,6 +19,7 @@ enum [MoneyManagerFeatureType](index.html) : [Enum](https://kotlinlang.org/api/l
 
 | | |
 |---|---|
+| [LATEST_TRANSACTIONS](-l-a-t-e-s-t_-t-r-a-n-s-a-c-t-i-o-n-s/index.html) | [androidJvm]<br>[LATEST_TRANSACTIONS](-l-a-t-e-s-t_-t-r-a-n-s-a-c-t-i-o-n-s/index.html)() |
 | [STATISTICS](-s-t-a-t-i-s-t-i-c-s/index.html) | [androidJvm]<br>[STATISTICS](-s-t-a-t-i-s-t-i-c-s/index.html)() |
 | [BUDGETS](-b-u-d-g-e-t-s/index.html) | [androidJvm]<br>[BUDGETS](-b-u-d-g-e-t-s/index.html)() |
 | [ACTIONABLE_INSIGHTS](-a-c-t-i-o-n-a-b-l-e_-i-n-s-i-g-h-t-s/index.html) | [androidJvm]<br>[ACTIONABLE_INSIGHTS](-a-c-t-i-o-n-a-b-l-e_-i-n-s-i-g-h-t-s/index.html)() |

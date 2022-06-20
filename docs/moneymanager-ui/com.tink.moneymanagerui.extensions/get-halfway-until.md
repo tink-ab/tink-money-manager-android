@@ -10,7 +10,7 @@ title: getHalfwayUntil
 
 
 [androidJvm]\
-fun DateTime.[getHalfwayUntil](get-halfway-until.html)(end: DateTime): DateTime
+fun [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html).[getHalfwayUntil](get-halfway-until.html)(end: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)
 
 
 

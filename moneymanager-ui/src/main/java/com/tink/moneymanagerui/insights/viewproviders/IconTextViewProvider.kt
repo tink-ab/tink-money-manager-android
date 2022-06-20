@@ -95,7 +95,7 @@ class IconTextViewProvider @Inject constructor() : InsightViewProvider {
             IconResource.Attribute(iconFromCategoryCode(CategoryType.EXPENSES.stringCode))
         InsightType.CREDIT_CARD_LIMIT_CLOSE,
         InsightType.WEEKLY_UNCATEGORIZED_TRANSACTIONS -> IconResource.DrawableId(R.drawable.tink_uncategorized)
-        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> IconResource.DrawableId(R.drawable.tink_accounts)
+        InsightType.AGGREGATION_REFRESH_PSD2_CREDENTIAL -> IconResource.DrawableId(R.drawable.tink_addbank)
         else -> IconResource.Attribute(R.attr.tink_icon_category_uncategorized)
     }
 

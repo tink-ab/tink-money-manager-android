@@ -10,7 +10,7 @@ title: date
 
 
 [androidJvm]\
-val [date](date.html): DateTime
+val [date](date.html): [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)
 
 
 

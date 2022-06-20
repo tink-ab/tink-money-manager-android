@@ -10,7 +10,7 @@ title: formatYearly
 
 
 [androidJvm]\
-fun [formatYearly](format-yearly.html)(date: DateTime): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
+fun [formatYearly](format-yearly.html)(date: [LocalDateTime](https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html)): [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
 
 
