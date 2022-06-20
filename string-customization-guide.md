@@ -5,7 +5,7 @@ Money Manager SDK allows you to customize the text shown in the finance overview
 Override the string resource values in your application's `res/values/strings.xml`
 ```xml
 <resources>
-    <string name="tink_all_categories">Custom All Categories Text</string>
+  <string name="tink_all_categories">Custom All Categories Text</string>
 </resources>
 ```
 You can also have translations for different locales by overriding the string resource values in the respective `strings.xml` resource files.
@@ -33,7 +33,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_edit_title` | Accont details |
 | `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
-| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven't saved? |
 | `tink_accounts_edit_unsaved_changes_no_save` | No, save |
 | `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
 | `tink_accounts_edit` | Edit accont |
@@ -130,7 +130,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_largest_transaction_recipient_text` | To %s (%s) |
 | `tink_insights_largest_transaction_text` | %s was your largest expense |
-| `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
+| `tink_insights_monthly_summary_expense_transactions_title` | Here's a summary of your expense transactions last month |
 | `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_overview_card_archived_events_title` | Archived events |
@@ -139,7 +139,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_expenses_text` | %s in total expenses |
 | `tink_insights_total_monthly_transactions_text` | %d transactions last month |
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
-| `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
+| `tink_insights_weekly_summary_expense_transactions_title` | Here's a summary of your expense transactions last week |
 | `tink_latest_transactions_toolbar_title` | All transactions |
 | `tink_loans_account` | Loan accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
@@ -179,23 +179,24 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_transaction_similar_title` | Similar transactions |
 | `tink_transactions_list_toolbar_title` | Transactions |
 | `tink_until_next_date` | Until %s |
+| `tink_transaction_pending_uneditable_dialog_title` | Not editable |
+| `tink_transaction_pending_uneditable_dialog_body` | Pending transactions are not editable until they are confirmed by the bank. |
+| `tink_general_ok` |OK |
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
 <resources>
-    <plurals name="tink_budget_days_plural">
-        <item quantity="one">%s day</item>
-        <item quantity="other">%s days</item>
-    </plurals>
-    <plurals name="tink_budget_months_plural">
-        <item quantity="one">%s month</item>
-        <item quantity="other">%s months</item>
-    </plurals>
-    <plurals name="tink_budget_details_chart_status_message_last_year">
-        <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
-        <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
-    </plurals>
+  <plurals name="tink_budget_days_plural">
+    <item quantity="one">%s day</item>
+    <item quantity="other">%s days</item>
+  </plurals>
+  <plurals name="tink_budget_months_plural">
+    <item quantity="one">%s month</item>
+    <item quantity="other">%s months</item>
+  </plurals>
+  <plurals name="tink_budget_details_chart_status_message_last_year">
+    <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
+    <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
+  </plurals>
 </resources>
 ```
-
-

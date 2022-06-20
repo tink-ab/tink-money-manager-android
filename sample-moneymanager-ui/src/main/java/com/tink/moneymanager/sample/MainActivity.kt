@@ -48,7 +48,8 @@ class MainActivity : FragmentActivity() {
                 accessToken = accessToken,
                 styleResId = R.style.TinkStyle_ChewingGum,
                 tracker = LogTracker(),
-                overviewFeatures = getOverviewFeatures()
+                overviewFeatures = getOverviewFeatures(),
+                isEditableOnPendingTransaction = true
             ).also {
                 currentFinanceOverviewFragment = it
             }
