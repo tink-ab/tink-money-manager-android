@@ -33,7 +33,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_edit_title` | Accont details |
 | `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
-| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven't saved? |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
 | `tink_accounts_edit_unsaved_changes_no_save` | No, save |
 | `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
 | `tink_accounts_edit` | Edit accont |
@@ -130,7 +130,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_largest_transaction_recipient_text` | To %s (%s) |
 | `tink_insights_largest_transaction_text` | %s was your largest expense |
-| `tink_insights_monthly_summary_expense_transactions_title` | Here's a summary of your expense transactions last month |
+| `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
 | `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_overview_card_archived_events_title` | Archived events |
@@ -139,7 +139,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_expenses_text` | %s in total expenses |
 | `tink_insights_total_monthly_transactions_text` | %d transactions last month |
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
-| `tink_insights_weekly_summary_expense_transactions_title` | Here's a summary of your expense transactions last week |
+| `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
 | `tink_latest_transactions_toolbar_title` | All transactions |
 | `tink_loans_account` | Loan accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
