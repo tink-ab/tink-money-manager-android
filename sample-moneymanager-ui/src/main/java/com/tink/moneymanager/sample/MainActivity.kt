@@ -49,7 +49,8 @@ class MainActivity : FragmentActivity() {
                 styleResId = R.style.TinkStyle_ChewingGum,
                 tracker = LogTracker(),
                 overviewFeatures = getOverviewFeatures(),
-                isEditableOnPendingTransaction = true
+                isEditableOnPendingTransaction = true,
+                isTransactionDetailsEnabled = true
             ).also {
                 currentFinanceOverviewFragment = it
             }
