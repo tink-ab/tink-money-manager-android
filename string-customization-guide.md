@@ -33,7 +33,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_edit_save_button` | Save |
 | `tink_accounts_edit_title` | Accont details |
 | `tink_accounts_edit_unsaved_changes_title` | You have unsaved changes |
-| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven't saved? |
+| `tink_accounts_edit_unsaved_changes_message` | Want to discard the changes you haven’t saved? |
 | `tink_accounts_edit_unsaved_changes_no_save` | No, save |
 | `tink_accounts_edit_unsaved_changes_yes_discard` | Yes, discard |
 | `tink_accounts_edit` | Edit accont |
@@ -66,12 +66,12 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_delete_dialog_confirm_button` | Delete |
 | `tink_budget_delete_dialog_message` | Are you sure you want to remove the budget \"%s\"? |
 | `tink_budget_delete_error_message` | We are not able to remove your budget right now. |
-| `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and manage your budget |
-| `tink_budget_details_amount_left_message_plain` | You can spend %1$s and manage your budget |
-| `tink_budget_details_amount_left_monthly_message` | You can spend %1$s per month and manage your budget |
-| `tink_budget_details_amount_left_none_message` | You have %1$s remaining of your budget |
-| `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and manage your budget |
-| `tink_budget_details_amount_left_yearly_message` | You can spend %1$s per year and manage your budget |
+| `tink_budget_details_amount_left_daily_message` | You can spend %1$s per day and still remain within your budget |
+| `tink_budget_details_amount_left_message_plain` | You can spend %1$s and still remain within your budget |
+| `tink_budget_details_amount_left_monthly_message` | You can spend %1$s per month and still remain within your budget |
+| `tink_budget_details_amount_left_none_message` | You have no remaining budget for this period |
+| `tink_budget_details_amount_left_weekly_message` | You can spend %1$s per week and still remain within your budget |
+| `tink_budget_details_amount_left_yearly_message` | You can spend %1$s per year and still remain within your budget |
 | `tink_budget_details_chart_empty_message` | Here you will see your historical spending on %s. But now you don\'t have any! |
 | `tink_budget_details_chart_over_budget_status_message_current_month` | You have gone over your budget this month |
 | `tink_budget_details_chart_over_budget_status_message_current_week` | You have gone over your budget this week |
@@ -80,17 +80,26 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_details_chart_status_message_current_week` | You have %s left on your budget this week |
 | `tink_budget_details_chart_status_message_current_year` | You have %s left on your budget this year |
 | `tink_budget_details_ended_months_days_ago` | Closed %s ago |
-| `tink_budget_details_managed_budget_message` | You managed your budget for this period |
+| `tink_budget_details_managed_budget_message` | You managed your budget this period |
 | `tink_budget_details_menu_edit_budget_item` | Edit Budget |
 | `tink_budget_details_not_started` | Budget hasn\'t started yet |
-| `tink_budget_details_over_budget_message` | You have gone over your budget this period |
+| `tink_budget_details_over_budget_message` | You went over your budget this period |
 | `tink_budget_details_remaining` | %s remaining |
 | `tink_budget_details_selector_monthly` | Monthly |
 | `tink_budget_details_selector_over_time` | Over time |
 | `tink_budget_details_selector_weekly` | Weekly |
 | `tink_budget_details_selector_yearly` | Yearly |
 | `tink_budget_details_show_transaction_btn_title` | See Transactions |
+| `tink_budget_details_starts_in_exact_1_day` | Starts tomorrow |
 | `tink_budget_details_starts_in` | Starts in %s |
+| `tink_budget_details_starts_in_month_and_day` | Starts in %s and %s |
+| `tink_budget_details_remaining_exact_0_day` | Ends today |
+| `tink_budget_details_remaining_exact_1_day` | Ends tomorrow |
+| `tink_budget_details_remaining` | %s remaining |
+| `tink_budget_details_remaining_months_and_days` | %s and %s remaining |
+| `tink_budget_details_ended_1_day_ago` | Closed yesterday |
+| `tink_budget_details_ended_months_days_ago` | Closed %s ago |
+| `tink_budget_details_ended_months_and_days_ago` | Closed %s and %s ago |
 | `tink_budget_details_toolbar_title` | Budget |
 | `tink_budget_details_total_amount` | left of %s |
 | `tink_budget_edit_button` | Save changes |
@@ -130,7 +139,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_expenses_by_day_average_text` | Average |
 | `tink_insights_largest_transaction_recipient_text` | To %s (%s) |
 | `tink_insights_largest_transaction_text` | %s was your largest expense |
-| `tink_insights_monthly_summary_expense_transactions_title` | Here's a summary of your expense transactions last month |
+| `tink_insights_monthly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last month |
 | `tink_insights_most_common_transaction_text` | Most common was %s (%d) |
 | `tink_insights_overview_card_action_text` | View |
 | `tink_insights_overview_card_archived_events_title` | Archived events |
@@ -139,7 +148,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_insights_total_expenses_text` | %s in total expenses |
 | `tink_insights_total_monthly_transactions_text` | %d transactions last month |
 | `tink_insights_total_weekly_transactions_text` | %d transactions last week |
-| `tink_insights_weekly_summary_expense_transactions_title` | Here's a summary of your expense transactions last week |
+| `tink_insights_weekly_summary_expense_transactions_title` | Here’s a summary of your expense transactions last week |
 | `tink_latest_transactions_toolbar_title` | All transactions |
 | `tink_loans_account` | Loan accounts |
 | `tink_nav_app_bar_navigate_up_description` | Navigate up |
@@ -182,6 +191,25 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_transaction_pending_uneditable_dialog_title` | Not editable |
 | `tink_transaction_pending_uneditable_dialog_body` | Pending transactions are not editable until they are confirmed by the bank. |
 | `tink_general_ok` |OK |
+| `tink_general_edit` | Edit |
+
+| `tink_transaction_detail_error` | No transaction details available |
+| `tink_transaction_detail_change` | CHANGE |
+| `tink_transaction_detail_description` | Description |
+| `tink_transaction_detail_original_description` | Original description: |
+| `tink_transaction_detail_date` | Date |
+
+| `tink_transaction_edit_error_title` | Error saving changes |
+| `tink_transaction_edit_error_msg` | There was an unexpected error when saving the changes. |
+| `tink_transaction_edit_unsaved_title` | You have unsaved changes |
+| `tink_transaction_edit_unsaved_msg` | Want to discard the changes you haven’t saved? |
+
+Alert Dialog button text & common title/message
+
+| `tink_alert_no_save` | No, Save |
+| `tink_alert_yes_discard` | Yes, Discard |
+| `tink_alert_cancel` | Cancel |
+| `tink_alert_try_again` | Try Again |
 
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
