@@ -27,9 +27,7 @@ class MainActivity : FragmentActivity(), OnFragmentViewCreatedListener {
         setContentView(R.layout.activity_main)
 
         val environment: Environment = Environment.Production
-        // TODO: Create a client in Tink Console https://console.tink.com/
         val clientId: String = ""
-        // TODO: Insert access token https://docs.tink.com/resources/api-setup/get-access-token
         val accessToken: String = ""
 
         val config = TinkConfiguration(
