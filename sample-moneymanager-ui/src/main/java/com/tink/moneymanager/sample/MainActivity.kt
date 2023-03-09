@@ -1,18 +1,16 @@
 package com.tink.moneymanager.sample
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import com.tink.core.Tink
 import com.tink.moneymanagerui.FinanceOverviewFragment
+import com.tink.moneymanagerui.OnCustomContainerCreatedListener
+import com.tink.moneymanagerui.OnFragmentViewCreatedListener
 import com.tink.moneymanagerui.OverviewFeature
 import com.tink.moneymanagerui.OverviewFeatures
 import com.tink.moneymanagerui.StatisticType
@@ -20,7 +18,7 @@ import com.tink.service.network.Environment
 import com.tink.service.network.TinkConfiguration
 import se.tink.android.tink_pfm_sdk_android.R
 
-class MainActivity : FragmentActivity() {
+class MainActivity : FragmentActivity(), OnFragmentViewCreatedListener {
 
     private lateinit var currentFinanceOverviewFragment: FinanceOverviewFragment
 
@@ -30,9 +28,9 @@ class MainActivity : FragmentActivity() {
 
         val environment: Environment = Environment.Production
         // TODO: Create a client in Tink Console https://console.tink.com/
-        val clientId: String =
+        val clientId: String = ""
         // TODO: Insert access token https://docs.tink.com/resources/api-setup/get-access-token
-        val accessToken: String =
+        val accessToken: String = ""
 
         val config = TinkConfiguration(
             environment,
@@ -50,14 +48,12 @@ class MainActivity : FragmentActivity() {
                 tracker = LogTracker(),
                 overviewFeatures = getOverviewFeatures(),
                 isEditableOnPendingTransaction = true,
-                isTransactionDetailsEnabled = true
+                isTransactionDetailsEnabled = true,
+                fragmentViewCreatedListener = this@MainActivity
             ).also {
                 currentFinanceOverviewFragment = it
             }
         ).commit()
-
-        // Do this to handle creation of your custom views
-        addFragmentLifecycleCallbacks()
     }
 
     /**
@@ -87,64 +83,41 @@ class MainActivity : FragmentActivity() {
         )
 
     /**
-     * Add fragment lifecycle callbacks to update the custom views after they are added to
-     * the finance overview screen.
+     * Add your own custom component to the finance overview
+     *
      */
-    private fun addFragmentLifecycleCallbacks() {
-        supportFragmentManager.registerFragmentLifecycleCallbacks(
-            object: FragmentManager.FragmentLifecycleCallbacks() {
-                override fun onFragmentAttached(
-                    fragmentManager: FragmentManager,
-                    fragment: Fragment,
-                    context: Context
-                ) {
-                    super.onFragmentAttached(fragmentManager, fragment, context)
-                    currentFinanceOverviewFragment
-                        .childFragmentManager
-                        .registerFragmentLifecycleCallbacks(
-                            object : FragmentManager.FragmentLifecycleCallbacks() {
-                                override fun onFragmentViewCreated(
-                                    fm: FragmentManager,
-                                    f: Fragment,
-                                    v: View,
-                                    savedInstanceState: Bundle?
-                                ) {
-                                    super.onFragmentViewCreated(fm, f, v, savedInstanceState)
-                                    setupCustomViews(v)
-                                }
-                            },
-                            true
-                        )
+    private fun setupCustomView(viewId: Int) {
+        currentFinanceOverviewFragment.getContainerById(
+            viewId,
+            object : OnCustomContainerCreatedListener {
+                override fun onCustomContainerCreated(container: FrameLayout) {
+                    val customComponent = View.inflate(
+                        this@MainActivity,
+                        R.layout.layout_custom_button,
+                        container
+                    )
+
+                    customComponent.findViewById<Button>(R.id.myapp_custom_button)
+                        .setOnClickListener {
+                            Toast.makeText(it.context, "Custom button clicked", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                 }
-            },
-            false
+            }
         )
     }
 
     /**
-     * Add your own custom component to the finance overview
-     *
-     */
-    private fun setupCustomViews(parent: View) {
-        val customView = parent.findViewById<FrameLayout>(R.id.myapp_custom_view)
-        if (customView != null) {
-            if (customView.findViewById<RelativeLayout>(R.id.myapp_custom_button_container) == null) {
-                val customComponent = View.inflate(
-                    this,
-                    R.layout.layout_custom_button,
-                    customView
-                )
-                val customButton = customComponent.findViewById<Button>(R.id.myapp_custom_button)
-                customButton.setOnClickListener {
-                    Toast.makeText(it.context, "My custom button clicked", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-        }
+     * Setup custom views inside this method
+     * */
+    override fun onFragmentViewCreated() {
+        setupCustomView(R.id.myapp_custom_view)
+        // Add more custom layouts here
     }
 
     override fun onBackPressed() {
-        if (!currentFinanceOverviewFragment.handleBackPress())
+        if (!currentFinanceOverviewFragment.handleBackPress()) {
             super.onBackPressed()
+        }
     }
 }
