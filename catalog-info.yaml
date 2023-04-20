@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tink-money-manager-android
+  description: Tink Money Manager Android Public
+  tags: []
+  annotations:
+    github.com/project-slug: tink-ab/tink-money-manager-android
+  links: []
+spec:
+  owner: android
+  type: library
+  lifecycle: production
