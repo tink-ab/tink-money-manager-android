@@ -1,0 +1,1 @@
+sourceset_dependencies='{":moneymanager-ui:dokkaHtml/androidTestRelease":[],":moneymanager-ui:dokkaHtml/debug":[],":moneymanager-ui:dokkaHtml/main":[],":moneymanager-ui:dokkaHtml/release":[],":moneymanager-ui:dokkaHtml/testFixtures":[],":moneymanager-ui:dokkaHtml/testFixturesDebug":[],":moneymanager-ui:dokkaHtml/testFixturesRelease":[]}'
