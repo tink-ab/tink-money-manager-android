@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>OverviewFeature</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../index.html">
+                    <span>Tink Money Manager SDK</span>
+            </a>
+    </div>
+    <div>
+0.28.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="Tink Money Manager SDK::com.tink.moneymanagerui/OverviewFeature///PointingToDeclaration//932399188">
+  <div class="breadcrumbs"><a href="../../../index.html">Tink Money Manager SDK</a><span class="delimiter">/</span><a href="../index.html">com.tink.moneymanagerui</a><span class="delimiter">/</span><a href="index.html">OverviewFeature</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Overview</span><wbr></wbr><span><span>Feature</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="index.html">OverviewFeature</a> : <a href="https://developer.android.com/reference/kotlin/android/os/Parcelable.html">Parcelable</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This class represents the features that are displayed as individual sections in the overview screen in the financial overview UI. Each section acts as an entry point that end-users can interact with and navigate towards more detailed feature flows.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Inheritors">Inheritors</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="2032507611%2FClasslikes%2F932399188" anchor-label="Accounts" id="2032507611%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-accounts/index.html"><span><span>Accounts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032507611%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-accounts/index.html">Accounts</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>overviewAccountsMode<span class="token operator">: </span><a href="../../com.tink.moneymanagerui.accounts/-overview-accounts-mode/index.html">OverviewAccountsMode</a><span class="token operator"> = </span>OverviewFavoriteAccounts<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>accountGroupType<span class="token operator">: </span><a href="../../com.tink.moneymanagerui.accounts/-account-group-type/index.html">AccountGroupType</a><span class="token operator"> = </span>NoAccountGroup<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>accountEditConfiguration<span class="token operator">: </span><a href="../../com.tink.moneymanagerui.accounts/-account-edit-configuration/index.html">AccountEditConfiguration</a><span class="token operator"> = </span>ALL</span></span><span class="token punctuation">)</span> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the accounts list section in the overview screen.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-938815018%2FClasslikes%2F932399188" anchor-label="ActionableInsights" id="-938815018%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-actionable-insights/index.html"><span>Actionable</span><wbr></wbr><span><span>Insights</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-938815018%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-actionable-insights/index.html">ActionableInsights</a> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the actionable insights section in the overview screen.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-213601197%2FClasslikes%2F932399188" anchor-label="Budgets" id="-213601197%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-budgets/index.html"><span><span>Budgets</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-213601197%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-budgets/index.html">Budgets</a> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the budgets section in the overview screen.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1888963284%2FClasslikes%2F932399188" anchor-label="CustomContainerView" id="-1888963284%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-custom-container-view/index.html"><span>Custom</span><wbr></wbr><span>Container</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888963284%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-custom-container-view/index.html">CustomContainerView</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>containerViewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>width<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>height<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents a custom view container that can be added to the overview screen.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1509397243%2FClasslikes%2F932399188" anchor-label="LatestTransactions" id="-1509397243%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-latest-transactions/index.html"><span>Latest</span><wbr></wbr><span><span>Transactions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1509397243%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-latest-transactions/index.html">LatestTransactions</a> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the latest transactions section in the overview screen. This section includes a &quot;See All&quot; action text that the user can click to see a list of all transactions.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="776462398%2FClasslikes%2F932399188" anchor-label="Statistics" id="776462398%2FClasslikes%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-statistics/index.html"><span><span>Statistics</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="776462398%2FClasslikes%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">class </span><a href="-statistics/index.html">Statistics</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>statisticTypes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="../-statistic-type/index.html">StatisticType</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span> : <a href="index.html">OverviewFeature</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Represents the statistics charts section in the overview screen.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Inheritors</h2>
+      <div class="table" data-togglable="Inheritors"><a data-name="776462398%2FInheritors%2F932399188" anchor-label="Statistics" id="776462398%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-statistics/index.html">Statistics</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="776462398%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-1509397243%2FInheritors%2F932399188" anchor-label="LatestTransactions" id="-1509397243%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-latest-transactions/index.html">LatestTransactions</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1509397243%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="2032507611%2FInheritors%2F932399188" anchor-label="Accounts" id="2032507611%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-accounts/index.html">Accounts</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032507611%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-938815018%2FInheritors%2F932399188" anchor-label="ActionableInsights" id="-938815018%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-actionable-insights/index.html">ActionableInsights</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-938815018%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-213601197%2FInheritors%2F932399188" anchor-label="Budgets" id="-213601197%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-budgets/index.html">Budgets</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-213601197%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+<a data-name="-1888963284%2FInheritors%2F932399188" anchor-label="CustomContainerView" id="-1888963284%2FInheritors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-custom-container-view/index.html">CustomContainerView</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888963284%2FInheritors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>
