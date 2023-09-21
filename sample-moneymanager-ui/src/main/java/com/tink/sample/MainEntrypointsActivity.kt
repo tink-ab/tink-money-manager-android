@@ -128,6 +128,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         initUI()
 
         if (savedInstanceState == null) {
