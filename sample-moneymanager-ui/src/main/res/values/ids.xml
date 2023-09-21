@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <item name="myapp_custom_view" type="id" />
+    <!--id for custom views container -->
+    <item name="custom_view" type="id" />
 </resources>

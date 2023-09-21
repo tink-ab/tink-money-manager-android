@@ -12,7 +12,6 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenLocal() // The Money Manager SDK is sourced from your local maven repository
         google()
         mavenCentral()
     }
