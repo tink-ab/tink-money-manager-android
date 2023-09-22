@@ -21,7 +21,7 @@ dependencies {
 2. Sync the changes.
 
 ## Finance overview migration guide
-Version 1.0.0 introduces a new way of launching the overview screen. This involves using the new ___TinkMoneyManagerFragment___ instead of the deprecated ___FinanceOverviewFragment___.
+Version 1.0.0 introduces a new way of launching the overview screen. This involves using the new ___TinkMoneyManager___ instead of the deprecated ___FinanceOverviewFragment___.
 
 #### Previous implementation with Tink Money Manager Android version prior 1.0.0:
 
