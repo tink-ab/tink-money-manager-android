@@ -1,19 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-
 
 android {
-    buildToolsVersion '32.0.0'
-    compileSdkVersion 33
-    namespace 'com.tink.sample'
+    compileSdkVersion 34
+    namespace 'com.tink.moneymanager.ui.sample'
 
     defaultConfig {
-        applicationId "com.tink.moneymanager.ui.sample"
+        applicationId 'com.tink.moneymanager.ui.sample'
         minSdkVersion 21
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1"
+        targetSdkVersion 34
     }
 
     buildFeatures {
@@ -21,16 +16,19 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+
+        coreLibraryDesugaringEnabled = true
     }
 
 }
 
 dependencies {
     implementation "com.tink.moneymanager:moneymanager-ui:1.0.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20"
     implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation "com.jakewharton.timber:timber:5.0.1"
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 }
