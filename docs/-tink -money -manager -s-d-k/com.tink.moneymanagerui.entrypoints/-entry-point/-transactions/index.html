@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Transactions</title>
+    <link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../../../";</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async="async"></script>
+</head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+            <a href="../../../../index.html">
+                    <span>Tink Money Manager SDK</span>
+            </a>
+    </div>
+    <div>
+1.0.0    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageIds="Tink Money Manager SDK::com.tink.moneymanagerui.entrypoints/EntryPoint.Transactions///PointingToDeclaration//932399188">
+  <div class="breadcrumbs"><a href="../../../../index.html">Tink Money Manager SDK</a><span class="delimiter">/</span><a href="../../index.html">com.tink.moneymanagerui.entrypoints</a><span class="delimiter">/</span><a href="../index.html">EntryPoint</a><span class="delimiter">/</span><a href="index.html">Transactions</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Transactions</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">Transactions</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>accounts<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>dateInterval<span class="token operator">: </span><a href="../../../com.tink.moneymanagerui.entrypoints.transactions/-date-interval/index.html">DateInterval</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>query<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>includeUpcoming<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>sort<span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-sort-enum/index.html">SearchQuery.SortEnum</a><span class="token operator">?</span><span class="token operator"> = </span>SearchQuery.SortEnum.DATE<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>order<span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-order-enum/index.html">SearchQuery.OrderEnum</a><span class="token operator">?</span><span class="token operator"> = </span>SearchQuery.OrderEnum.DESC<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>limit<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="../index.html">EntryPoint</a>, <a href="https://developer.android.com/reference/kotlin/android/os/Parcelable.html">Parcelable</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Entrypoint for the Transactions screen.</p><p class="paragraph">This class contains all the parameters that are used to customize the Transactions screen.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Parameters</h2>
+      <div data-togglable="Parameters">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>title</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The title of the page.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>accounts</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A list of account IDs to filter transactions from. Pass an empty list to include transactions from all accounts.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>categories</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A list of category IDs to filter transactions from. Pass an empty list to include transactions from all categories.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>date</span><wbr></wbr><span><span>Interval</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">A date interval <a href="../../../com.tink.moneymanagerui.entrypoints.transactions/-date-interval/index.html">DateInterval</a> for which transactions should be included.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>query</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Additional transaction query parameters.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>include</span><wbr></wbr><span><span>Upcoming</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Determines whether to include upcoming transactions. Defaults to false.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>sort</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph"><a href="../../../com.tink.rest.models/-search-query/-sort-enum/index.html">SearchQuery.SortEnum</a> Specifies the sorting criteria for transactions.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>order</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph"><a href="../../../com.tink.rest.models/-search-query/-order-enum/index.html">SearchQuery.OrderEnum</a> Specifies the order in which transactions will be presented.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>limit</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The maximum number of transactions to retrieve.</p></div></div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="61684271%2FConstructors%2F932399188" anchor-label="Transactions" id="61684271%2FConstructors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-transactions.html"><span><span>Transactions</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="61684271%2FConstructors%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-transactions.html"><span class="token function">Transactions</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;title<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;accounts<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;categories<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="token operator"> = </span>emptyList()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;dateInterval<span class="token operator">: </span><a href="../../../com.tink.moneymanagerui.entrypoints.transactions/-date-interval/index.html">DateInterval</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;query<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;includeUpcoming<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;sort<span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-sort-enum/index.html">SearchQuery.SortEnum</a><span class="token operator">?</span><span class="token operator"> = </span>SearchQuery.SortEnum.DATE<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;order<span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-order-enum/index.html">SearchQuery.OrderEnum</a><span class="token operator">?</span><span class="token operator"> = </span>SearchQuery.OrderEnum.DESC<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;limit<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="259495861%2FProperties%2F932399188" anchor-label="accounts" id="259495861%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="accounts.html"><span><span>accounts</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="259495861%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="259495861%2FProperties%2F932399188" anchor-label="accounts" id="259495861%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="accounts.html">accounts</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="384894655%2FProperties%2F932399188" anchor-label="categories" id="384894655%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="categories.html"><span><span>categories</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="384894655%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="384894655%2FProperties%2F932399188" anchor-label="categories" id="384894655%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="categories.html">categories</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1805986136%2FProperties%2F932399188" anchor-label="dateInterval" id="-1805986136%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="date-interval.html"><span>date</span><wbr></wbr><span><span>Interval</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1805986136%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="-1805986136%2FProperties%2F932399188" anchor-label="dateInterval" id="-1805986136%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="date-interval.html">dateInterval</a><span class="token operator">: </span><a href="../../../com.tink.moneymanagerui.entrypoints.transactions/-date-interval/index.html">DateInterval</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-847236229%2FProperties%2F932399188" anchor-label="includeUpcoming" id="-847236229%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="include-upcoming.html"><span>include</span><wbr></wbr><span><span>Upcoming</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-847236229%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="-847236229%2FProperties%2F932399188" anchor-label="includeUpcoming" id="-847236229%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="include-upcoming.html">includeUpcoming</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="687641604%2FProperties%2F932399188" anchor-label="limit" id="687641604%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="limit.html"><span><span>limit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="687641604%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="687641604%2FProperties%2F932399188" anchor-label="limit" id="687641604%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="limit.html">limit</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1048671185%2FProperties%2F932399188" anchor-label="order" id="1048671185%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="order.html"><span><span>order</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1048671185%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="1048671185%2FProperties%2F932399188" anchor-label="order" id="1048671185%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="order.html">order</a><span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-order-enum/index.html">SearchQuery.OrderEnum</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1565876329%2FProperties%2F932399188" anchor-label="query" id="-1565876329%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="query.html"><span><span>query</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1565876329%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="-1565876329%2FProperties%2F932399188" anchor-label="query" id="-1565876329%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="query.html">query</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1792965629%2FProperties%2F932399188" anchor-label="sort" id="1792965629%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="sort.html"><span><span>sort</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1792965629%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="1792965629%2FProperties%2F932399188" anchor-label="sort" id="1792965629%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="sort.html">sort</a><span class="token operator">: </span><a href="../../../com.tink.rest.models/-search-query/-sort-enum/index.html">SearchQuery.SortEnum</a><span class="token operator">?</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1414559751%2FProperties%2F932399188" anchor-label="title" id="1414559751%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
+        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="title.html"><span><span>title</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1414559751%2FProperties%2F932399188"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><a data-name="1414559751%2FProperties%2F932399188" anchor-label="title" id="1414559751%2FProperties%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="title.html">title</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2023 Copyright</span><span
+                class="pull-right"><span>Generated by </span><a
+                href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+</body>
+</html>

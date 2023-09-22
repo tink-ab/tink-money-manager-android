@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tink_backgroundColor">#343035</color>
+    <color name="tink_chartMeanValueColor">#A7A7A7</color>
+    <color name="tink_colorAccent">#e8a9e0</color>
+    <color name="tink_colorAccentDark">#e8a9e0</color>
+    <color name="tink_colorAccentLight">#463A45</color>
+    <color name="tink_colorPrimary">#e8a9e0</color>
+    <color name="tink_colorPrimaryDark">#e8a9e0</color>
+    <color name="tink_colorPrimaryLight">#FBFBFC</color>
+    <color name="tink_textColorPrimary">#e8a9e0</color>
+    <color name="tink_expensesColor">#e8a9e0</color>
+    <color name="tink_expensesDarkColor">#e8a9e0</color>
+    <color name="tink_expensesLightColor">#463A45</color>
+    <color name="tink_colorOnExpenses">#353035</color>
+    <color name="tink_incomeColor">#8DDC85</color>
+    <color name="tink_incomeDarkColor">#8DDC85</color>
+    <color name="tink_incomeLightColor">#3E4A3C</color>
+    <color name="tink_colorOnIncome">#353035</color>
+    <color name="tink_transferColor">#F0F1EA</color>
+    <color name="tink_transferLightColor">#3E3A3D</color>
+    <color name="tink_colorOnTransfer">#353035</color>
+    <color name="tink_uncategorizedColor">#85B9DC</color>
+    <color name="tink_uncategorizedLightColor">#3E3A3D</color>
+    <color name="tink_snackbarColor">#2A262A</color>
+    <color name="tink_colorOnSnackBar">#ffffff</color>
+    <color name="tink_textColorAction">#e8a9e0</color>
+    <color name="tink_dividerColor">#2B2B2B</color>
+    <color name="tink_cardBackgroundColor">#29262A</color>
+</resources>

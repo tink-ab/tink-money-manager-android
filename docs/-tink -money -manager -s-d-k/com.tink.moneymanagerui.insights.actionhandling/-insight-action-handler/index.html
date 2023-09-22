@@ -31,7 +31,7 @@ if(savedDarkMode === true){
             </a>
     </div>
     <div>
-0.28.0    </div>
+1.0.0    </div>
     <div class="pull-right d-flex">
         <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
         <div id="searchBar"></div>
@@ -46,28 +46,11 @@ if(savedDarkMode === true){
   <div class="breadcrumbs"><a href="../../../index.html">Tink Money Manager SDK</a><span class="delimiter">/</span><a href="../index.html">com.tink.moneymanagerui.insights.actionhandling</a><span class="delimiter">/</span><a href="index.html">InsightActionHandler</a></div>
   <div class="cover ">
     <h1 class="cover"><span>Insight</span><wbr></wbr><span>Action</span><wbr></wbr><span><span>Handler</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">InsightActionHandler</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This class contains a set of methods that you can implement to perform the necessary logic when a user selects an action for an insight that requires more user interaction.</p><p class="paragraph">All the methods have a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> return type to indicate if the action is handled by this handler or not. If you are overriding a method to perform custom logic for the action, the method should return <code class="lang-kotlin">true</code>.</p><p class="paragraph">For methods with a <code class="lang-kotlin">onComplete</code> lambda block parameter, you have to invoke the lambda block when the task related to the requested action has completed or been cancelled. If the action has completed successfully, the block can be invoked with the boolean value set to <code class="lang-kotlin">true</code>. Eg: onComplete.invoke(true) If the action has failed or is cancelled, the block can be invoked with the boolean value set to <code class="lang-kotlin">false</code>. Eg: onComplete.invoke(false) If you don’t invoke the <code class="lang-kotlin">onComplete</code> block, the insight will remain in the list and will not be archived.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword">interface </span><a href="index.html">InsightActionHandler</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This interface contains a set of methods that you can implement to perform the necessary logic when a user selects an action for an insight that requires more user interaction.</p><p class="paragraph">All the methods have a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> return type to indicate if the action is handled by this handler or not. If you are overriding a method to perform custom logic for the action, the method should return <code class="lang-kotlin">true</code>.</p><p class="paragraph">For methods with a <code class="lang-kotlin">onComplete</code> lambda block parameter, you have to invoke the lambda block when the task related to the requested action has completed or been cancelled. If the action has completed successfully, the block can be invoked with the boolean value set to <code class="lang-kotlin">true</code>. Eg: onComplete.invoke(true) If the action has failed or is cancelled, the block can be invoked with the boolean value set to <code class="lang-kotlin">false</code>. Eg: onComplete.invoke(false) If you don’t invoke the <code class="lang-kotlin">onComplete</code> block, the insight will remain in the list and will not be archived.</p></div></div>
   </div>
   <div class="tabbedcontent">
-    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button></div>
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Functions">Functions</button></div>
     <div class="tabs-section-body">
-      <h2 class="tabbedcontent">Constructors</h2>
-      <div class="table" data-togglable="Constructors"><a data-name="321563757%2FConstructors%2F932399188" anchor-label="InsightActionHandler" id="321563757%2FConstructors%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
-        <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
-          <div class="main-subrow keyValue TabbedContent">
-            <div class=""><span class="inline-flex">
-                <div><a href="-insight-action-handler.html"><span>Insight</span><wbr></wbr><span>Action</span><wbr></wbr><span><span>Handler</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="321563757%2FConstructors%2F932399188"></span>
-                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                </span></span></div>
-            <div>
-              <div class="title">
-                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":moneymanager-ui:dokkaHtml/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-insight-action-handler.html"><span class="token function">InsightActionHandler</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <h2 class="">Functions</h2>
       <div class="table" data-togglable="Functions"><a data-name="-86219457%2FFunctions%2F932399188" anchor-label="categorizeExpense" id="-86219457%2FFunctions%2F932399188" data-filterable-set=":moneymanager-ui:dokkaHtml/release"></a>
         <div class="table-row" data-filterable-current=":moneymanager-ui:dokkaHtml/release" data-filterable-set=":moneymanager-ui:dokkaHtml/release">
