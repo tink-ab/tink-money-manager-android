@@ -70,7 +70,7 @@ val config =
 
 2. Generate a valid access token. The SDK needs a valid access token for a specific user to function correctly. Since the SDK does not handle any type of authentication, this needs to be done by your backend. See the [Tink API reference](https://docs.tink.com/api/#oauth) and the [Tink access token guide](https://docs.tink.com/resources/api-setup/get-access-token) for more info on how this is done.
 
-3. Override the `TinkMoneyManagerStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/money-manager-android/pfm-sdk-android-customization) to set this up.
+3. Override the `TinkMoneyManagerStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-customization) to set this up.
 
 4. Set up a `LogTracker` implementation. This is optional and you can add the implementation if you want to track screens and events happening in the SDK. Follow the [tracking guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-event-tracking) to set this up.
 
@@ -104,11 +104,11 @@ This section will help you set up the SDK with the Finance Overview screen as th
 If you want to launch a different entrypoint, please refer to one of the following guides:
 
 * [Finance overview](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-finance-overview)
-* [Actionable insights](https://docs.tink.com/resources/money-manager/money-manager-android/actionable-insights-for-android-pfm-sdk)
+* [Actionable insights](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-handling-insight-actions)
 * [Accounts](https://docs.tink.com/resources/money-manager/money-manager-android/accounts-for-android)
-* [Budgets](https://docs.tink.com/resources/money-manager/money-manager-android/budgets-for-android-pfm-sdk)
-* [Statistics: Income, Expense, Left to spend](https://docs.tink.com/resources/money-manager/money-manager-android/statistics-for-android-pfm-sdk)
-* [Transactions](https://docs.tink.com/resources/money-manager/money-manager-android/transactions-for-android-pfm-sdk)
+* Budgets
+* Statistics: Income, Expense, Left to spend
+* Transactions
 
 
 #### Finance Overview entrypoint
@@ -117,7 +117,7 @@ If you want to launch a different entrypoint, please refer to one of the followi
 
 2. Define specific themes for Money Manager's individual features. This is optional and if not set, the main theme defined in the `TinkMoneyManager` class will be used.
 
-3. Set up an `InsightActionHandler` implementation. This is optional and you can set up an implementation for defining custom handling of the insight actions. Follow the [Actionable insights guide](https://docs.tink.com/resources/money-manager/money-manager-android/actionable-insights-for-android-pfm-sdk) to set this up.
+3. Set up an `InsightActionHandler` implementation. This is optional and you can set up an implementation for defining custom handling of the insight actions. Follow the [Actionable insights guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-handling-insight-actions) to set this up.
 
 4. Set up an `OnFragmentViewCreatedListener` implementation. This is only required for setting up custom views. Follow the [Custom Views guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-finance-overview#custom-views) to set this up.
 

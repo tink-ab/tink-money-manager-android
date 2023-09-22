@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import com.tink.core.Tink
+import com.tink.moneymanager.ui.sample.R
+import com.tink.moneymanager.ui.sample.databinding.ActivityEntrypointMainBinding
 import com.tink.moneymanagerui.OnCustomContainerCreatedListener
 import com.tink.moneymanagerui.OnFragmentViewCreatedListener
 import com.tink.moneymanagerui.OverviewFeature
@@ -23,7 +25,6 @@ import com.tink.moneymanagerui.entrypoints.EntryPoint
 import com.tink.moneymanagerui.entrypoints.transactions.DateInterval
 import com.tink.moneymanagerui.statistics.ChartType
 import com.tink.rest.models.SearchQuery
-import com.tink.sample.databinding.ActivityEntrypointMainBinding
 import com.tink.service.network.Environment
 import com.tink.service.network.TinkConfiguration
 import timber.log.Timber
