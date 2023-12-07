@@ -5,14 +5,14 @@ Money Manager SDK allows you to customize the text shown in the finance overview
 Override the string resource values in your application's `res/values/strings.xml`
 ```xml
 <resources>
-  <string name="tink_all_categories">Custom All Categories Text</string>
+    <string name="tink_all_categories">Custom All Categories Text</string>
 </resources>
 ```
 You can also have translations for different locales by overriding the string resource values in the respective `strings.xml` resource files.
 For example, you can add a Swedish translation of the text in your application's `res/values-sv/strings.xml`
 ```xml
 <resources>
-  <string name="tink_all_categories">Alla kategorier</string>
+    <string name="tink_all_categories">Alla kategorier</string>
 </resources>
 ```
 Here's a list of all the public string resources in the SDK that can be overridden:
@@ -62,6 +62,8 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_budget_create_field_period_yearly` | Yearly |
 | `tink_budget_create_period_end_invalid_message` | End date must be after start date. |
 | `tink_budget_create_title` | Create budget |
+| `tink_budget_creation_success_message` | Your budget is now created! |
+| `tink_overview_suggested_budgets_title` | Suggested budget |
 | `tink_budget_create_with_keyword` | Create with keyword |
 | `tink_budget_delete_dialog_confirm_button` | Delete |
 | `tink_budget_delete_dialog_message` | Are you sure you want to remove the budget \"%s\"? |
@@ -125,6 +127,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_date_format_human_today` | Today |
 | `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_date_format_human_yesterday` | Yesterday |
+| `tink_empty_budget_message_in_recommended_budget_list` | You have no budgets. Create a budget based on your top spending categories or create a new budget. |
 | `tink_everyday_account` | Everyday accounts |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |
@@ -161,13 +164,16 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_overview_budgets_create_new` | New Budget |
 | `tink_overview_budgets_empty_create_new` | Create New Budget |
 | `tink_overview_budgets_title` | Budgets |
+| `tink_overview_dynamic_budgets_title` | Top spending categories |
 | `tink_overview_favorite_accounts_see_all_accounts` | See all accounts |
 | `tink_overview_favorite_accounts_see_all` | See all |
 | `tink_overview_highlighted_accounts_title` | Favorite accounts |
 | `tink_overview_latest_transactions_title` | Latest transactions |
 | `tink_overview_latest_transactions_view_all_link` | See all |
 | `tink_overview_statistics_error` | No statistics |
+| `tink_overview_suggested_budgets_title` | Suggested budget |
 | `tink_overview_toolbar_title` | Overview |
+| `tink_overview_top_spending_categories_title` | Top spending categories |
 | `tink_period_selection_title` | Choose time period |
 | `tink_previous_month_description` | Previous month |
 | `tink_savings_account` | Savings accounts |
@@ -179,6 +185,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_selector_over_time` | Over time |
 | `tink_snackbar_utils_error_default` | An error has occurred. Please try again later. |
 | `tink_snackbar_utils_error_status_code_408` | Could not connect to Tink servers. Please try again later. |
+| `tink_suggested_budget_description` | You have spent %1$s on average. Track your expense by creating a budget. |
 | `tink_transactions_error` | You haven\'t made any transactions yet |
 | `tink_transaction_similar_button_accept_text` | Assign %1$d selected |
 | `tink_transaction_similar_button_skip_text` | Skip |
@@ -192,6 +199,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_transaction_pending_uneditable_dialog_body` | Pending transactions are not editable until they are confirmed by the bank. |
 | `tink_general_ok` |OK |
 | `tink_general_edit` | Edit |
+| `tink_general_done` | Done |
 
 | `tink_transaction_detail_error` | No transaction details available |
 | `tink_transaction_detail_change` | CHANGE |
@@ -214,18 +222,18 @@ Alert Dialog button text & common title/message
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
 <resources>
-  <plurals name="tink_budget_days_plural">
-    <item quantity="one">%s day</item>
-    <item quantity="other">%s days</item>
-  </plurals>
-  <plurals name="tink_budget_months_plural">
-    <item quantity="one">%s month</item>
-    <item quantity="other">%s months</item>
-  </plurals>
-  <plurals name="tink_budget_details_chart_status_message_last_year">
-    <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
-    <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
-  </plurals>
+    <plurals name="tink_budget_days_plural">
+        <item quantity="one">%s day</item>
+        <item quantity="other">%s days</item>
+    </plurals>
+    <plurals name="tink_budget_months_plural">
+        <item quantity="one">%s month</item>
+        <item quantity="other">%s months</item>
+    </plurals>
+    <plurals name="tink_budget_details_chart_status_message_last_year">
+        <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
+        <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
+    </plurals>
 </resources>
 ```
 

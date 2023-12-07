@@ -66,7 +66,8 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
                     )
                 ),
                 OverviewFeature.LatestTransactions,
-                OverviewFeature.Budgets
+                OverviewFeature.Budgets,
+                OverviewFeature.RecommendedBudgets
             )
         ),
         toolbarVisible = false,
@@ -127,9 +128,11 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
     // Configuration class for the Budgets list entrypoint.
     private val budgetsEntryPoint = EntryPoint.Budgets
 
+    // Configuration class for the Dynamic Budgets list entrypoint.
+    private val recommendedBudgetsEntryPoint = EntryPoint.RecommendedBudgets
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         initUI()
 
         if (savedInstanceState == null) {
@@ -155,12 +158,14 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
     private fun startTinkEntrypoint(entryPoint: EntryPoint) {
         // For more detailed information on each parameter, please read the TinkMoneyManager code documentation.
         TinkMoneyManager.init(
-            accessToken = "",
+            accessToken = "", // Add a valid access token to visualize data
             styleResId = R.style.TinkStyle_DayNight,
             tracker = LogTracker(),
             backPressedListener = { Timber.d("User navigated back") },
             editPendingTransaction = false,
             enableTransactionDetail = false,
+            enableRecommendedBudget = true,
+            enableBudgetCreationSuccessScreen = true,
             entryPoint = entryPoint,
             containerId = R.id.fragmentContainer,
             fragmentManager = supportFragmentManager
@@ -244,6 +249,9 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
         }
         binding.budgetsButton.setOnClickListener {
             startTinkEntrypoint(budgetsEntryPoint)
+        }
+        binding.allBudgetsButton.setOnClickListener {
+            startTinkEntrypoint(recommendedBudgetsEntryPoint)
         }
         binding.overviewButton.setOnClickListener {
             startTinkEntrypoint(overviewEntrypoint)
