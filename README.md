@@ -91,6 +91,8 @@ val config =
         backPressedListener = myBackPressedListener, // Your back press listener (optional).
         editPendingTransaction = false, // Determines if pending transactions can be recategorized. Defaults to true.
         enableTransactionDetail = false, // Determines the behaviour of the SDK when the user clicks on a transaction. Defaults to true.
+        enableRecommendedBudget = true, // Determines if SDK can show Recommended Budgets. Defaults to true.
+        enableBudgetCreationSuccessScreen = true, // Determines if SDK can show Budget Confirmation Screen. Defaults to true.
         entryPoint = overviewEntrypoint, // The Money Manager feature to launch.
         containerId = R.id.fragmentContainer, // The resource ID of the container which will contain the Tink Fragment.
         fragmentManager = supportFragmentManager // The FragmentManager which performs the Tink fragment transaction.
@@ -107,6 +109,7 @@ If you want to launch a different entrypoint, please refer to one of the followi
 * [Actionable insights](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-handling-insight-actions)
 * [Accounts](https://docs.tink.com/resources/money-manager/money-manager-android/accounts-for-android)
 * Budgets
+* Recommended Budgets
 * Statistics: Income, Expense, Left to spend
 * Transactions
 
