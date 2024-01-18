@@ -5,14 +5,14 @@ Money Manager SDK allows you to customize the text shown in the finance overview
 Override the string resource values in your application's `res/values/strings.xml`
 ```xml
 <resources>
-    <string name="tink_all_categories">Custom All Categories Text</string>
+  <string name="tink_all_categories">Custom All Categories Text</string>
 </resources>
 ```
 You can also have translations for different locales by overriding the string resource values in the respective `strings.xml` resource files.
 For example, you can add a Swedish translation of the text in your application's `res/values-sv/strings.xml`
 ```xml
 <resources>
-    <string name="tink_all_categories">Alla kategorier</string>
+  <string name="tink_all_categories">Alla kategorier</string>
 </resources>
 ```
 Here's a list of all the public string resources in the SDK that can be overridden:
@@ -222,18 +222,18 @@ Alert Dialog button text & common title/message
 In addition to the above, here's a list of plurals used in the SDK that can be overridden as well:
 ```xml
 <resources>
-    <plurals name="tink_budget_days_plural">
-        <item quantity="one">%s day</item>
-        <item quantity="other">%s days</item>
-    </plurals>
-    <plurals name="tink_budget_months_plural">
-        <item quantity="one">%s month</item>
-        <item quantity="other">%s months</item>
-    </plurals>
-    <plurals name="tink_budget_details_chart_status_message_last_year">
-        <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
-        <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
-    </plurals>
+  <plurals name="tink_budget_days_plural">
+    <item quantity="one">%s day</item>
+    <item quantity="other">%s days</item>
+  </plurals>
+  <plurals name="tink_budget_months_plural">
+    <item quantity="one">%s month</item>
+    <item quantity="other">%s months</item>
+  </plurals>
+  <plurals name="tink_budget_details_chart_status_message_last_year">
+    <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
+    <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
+  </plurals>
 </resources>
 ```
 
