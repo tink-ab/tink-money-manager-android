@@ -70,7 +70,7 @@ val config =
 
 2. Generate a valid access token. The SDK needs a valid access token for a specific user to function correctly. Since the SDK does not handle any type of authentication, this needs to be done by your backend. See the [Tink API reference](https://docs.tink.com/api/#oauth) and the [Tink access token guide](https://docs.tink.com/resources/api-setup/get-access-token) for more info on how this is done.
 
-3. Override the `TinkMoneyManagerStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-customization) to set this up.
+3. Override the `TinkMoneyManagerStyle` for color customizations. Follow the [customization guide](https://docs.tink.com/resources/money-manager-android/pfm-sdk-android-customization) to set this up.
 
 4. Set up a `LogTracker` implementation. This is optional and you can add the implementation if you want to track screens and events happening in the SDK. Follow the [tracking guide](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-event-tracking) to set this up.
 
@@ -108,11 +108,10 @@ If you want to launch a different entrypoint, please refer to one of the followi
 * [Finance overview](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-finance-overview)
 * [Actionable insights](https://docs.tink.com/resources/money-manager/money-manager-android/pfm-sdk-android-handling-insight-actions)
 * [Accounts](https://docs.tink.com/resources/money-manager/money-manager-android/accounts-for-android)
-* Budgets
-* Recommended Budgets
-* Statistics: Income, Expense, Left to spend
-* Transactions
-
+* [Budgets](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-budgets)
+* [Recommended Budgets](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-recommended-budgets)
+* [Statistics: Income, Expense, Left to spend](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-statistics)
+* [Transactions](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-transactions)
 
 #### Finance Overview entrypoint
 
@@ -162,7 +161,7 @@ To forward a back press event to the SDK, override the `onBackPressed()` method 
             
             if (!TinkMoneyManager.isSdkActive()) { 
                 // Tink Money Manager is removed from the stack.
-                ...
+                // ...
             }
         } else {
             // Tink Money Manager is not active or visible on screen.
