@@ -78,6 +78,8 @@ Use the new ___TinkMoneyManager___ and pass to the entrypoint parameter, the ___
                 backPressedListener = myBackPressedListener,
                 editPendingTransaction = true,
                 enableTransactionDetail = true,
+                enableRecommendedBudget = true,
+                enableBudgetCreationSuccessScreen = true,
                 entryPoint = overviewEntrypoint,
                 containerId = R.id.fragmentContainer,
                 fragmentManager = supportFragmentManager
