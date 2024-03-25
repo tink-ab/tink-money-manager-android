@@ -132,6 +132,7 @@ $dokka.location:com.tink.moneymanagerui/OverviewFeature.CustomContainerView/heig
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.CustomContainerView/width/#/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-custom-container-view/width.html
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.LatestTransactions///PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-latest-transactions/index.html
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.RecommendedBudgets///PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-recommended-budgets/index.html
+$dokka.location:com.tink.moneymanagerui/OverviewFeature.RecurringExpenses///PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-recurring-expenses/index.html
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.Statistics///PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-statistics/index.html
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.Statistics/Statistics/#kotlin.collections.List[com.tink.moneymanagerui.StatisticType]/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-statistics/-statistics.html
 $dokka.location:com.tink.moneymanagerui/OverviewFeature.Statistics/statisticTypes/#/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-overview-feature/-statistics/statistic-types.html
