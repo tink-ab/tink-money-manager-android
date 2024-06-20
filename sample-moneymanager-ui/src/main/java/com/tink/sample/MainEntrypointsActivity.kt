@@ -42,6 +42,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
                     listOf(
                         StatisticType.EXPENSES,
                         StatisticType.LEFT_TO_SPEND,
+                        // StatisticType.SAFE_TO_SPEND, Safe to spend is disabled by default
                         StatisticType.INCOME
                     )
                 ),
@@ -97,6 +98,11 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
         ChartType.LEFT_TO_SPEND
     )
 
+    // Configuration class for the 'Safe to Spend' statistics entrypoint.
+    private val statisticsSafeToSpendEntrypoint = EntryPoint.Statistics(
+        ChartType.SAFE_TO_SPEND
+    )
+
     // Configuration class for the Accounts list entrypoint.
     private val accountsEntrypoint = EntryPoint.Accounts(
         groupingMode = GroupingByKind,
@@ -130,6 +136,8 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
 
     // Configuration class for the Dynamic Budgets list entrypoint.
     private val recommendedBudgetsEntryPoint = EntryPoint.RecommendedBudgets
+
+    private val recurringExpensesEntryPoint = EntryPoint.RecurringExpenses
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -166,6 +174,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
             enableTransactionDetail = false,
             enableRecommendedBudget = true,
             enableBudgetCreationSuccessScreen = true,
+            enableSafeToSpend = true,
             entryPoint = entryPoint,
             containerId = R.id.fragmentContainer,
             fragmentManager = supportFragmentManager
@@ -247,6 +256,9 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
         binding.statisticsL2sButton.setOnClickListener {
             startTinkEntrypoint(statisticsLeftToSpendEntrypoint)
         }
+        binding.statisticsS2sButton.setOnClickListener {
+            startTinkEntrypoint(statisticsSafeToSpendEntrypoint)
+        }
         binding.budgetsButton.setOnClickListener {
             startTinkEntrypoint(budgetsEntryPoint)
         }
@@ -258,6 +270,9 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
         }
         binding.transactionsButton.setOnClickListener {
             startTinkEntrypoint(transactionsEntryPoint)
+        }
+        binding.recurringExpenseButton.setOnClickListener {
+            startTinkEntrypoint(recurringExpensesEntryPoint)
         }
     }
 }
