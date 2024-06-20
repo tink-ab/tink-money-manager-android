@@ -93,6 +93,7 @@ val config =
         enableTransactionDetail = false, // Determines the behaviour of the SDK when the user clicks on a transaction. Defaults to true.
         enableRecommendedBudget = true, // Determines if SDK can show Recommended Budgets. Defaults to true.
         enableBudgetCreationSuccessScreen = true, // Determines if SDK can show Budget Confirmation Screen. Defaults to true.
+        enableSafeToSpend = true, // Determines if SDK can show Recurring expense in Transaction list. Defaults to true. 
         entryPoint = overviewEntrypoint, // The Money Manager feature to launch.
         containerId = R.id.fragmentContainer, // The resource ID of the container which will contain the Tink Fragment.
         fragmentManager = supportFragmentManager // The FragmentManager which performs the Tink fragment transaction.
@@ -110,7 +111,7 @@ If you want to launch a different entrypoint, please refer to one of the followi
 * [Accounts](https://docs.tink.com/resources/money-manager/money-manager-android/accounts-for-android)
 * [Budgets](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-budgets)
 * [Recommended Budgets](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-recommended-budgets)
-* [Statistics: Income, Expense, Left to spend](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-statistics)
+* [Statistics: Income, Expense, Left to spend, Safe to spend](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-statistics)
 * [Transactions](https://docs.tink.com/resources/money-manager/money-manager-android/sdk-transactions)
 
 #### Finance Overview entrypoint

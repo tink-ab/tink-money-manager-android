@@ -48,6 +48,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_accounts_type_pension` | Pension | 
 | `tink_accounts_type_savings` | Savings |
 | `tink_all_categories` | All categories |
+| `tink_approximated` | *Approximated |
 | `tink_budget_category_selection_button` | Next |
 | `tink_budget_create_all_expenses` | All expenses |
 | `tink_budget_create_button` | Create budget |
@@ -128,6 +129,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_date_format_human_tomorrow` | Tomorrow |
 | `tink_date_format_human_yesterday` | Yesterday |
 | `tink_empty_budget_message_in_recommended_budget_list` | You have no budgets. Create a budget based on your top spending categories or create a new budget. |
+| `tink_empty_recurring_expense_list` | You have no recurring expense |
 | `tink_everyday_account` | Everyday accounts |
 | `tink_expenses_header_description_average` | %s on average per month |
 | `tink_expenses_menu_settings_title` | Transactions |
@@ -177,6 +179,7 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_period_selection_title` | Choose time period |
 | `tink_previous_month_description` | Previous month |
 | `tink_savings_account` | Savings accounts |
+| `tink_scheduled_expenses` | Scheduled expenses |
 | `tink_search_label` | Search |
 | `tink_selector_12_months` | Last 12 months |
 | `tink_selector_6_months` | Last 6 months |
