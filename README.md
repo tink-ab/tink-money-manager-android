@@ -32,28 +32,6 @@ compileOptions {
 }
 ```
 
-<a name="api-level-26"></a>
-#### Supporting API level lower than 26
-If you need to support devices running API level lower than 26, then a few more updates to your app-level `build.gradle` file are needed.
-Inside the `compileOptions` block, add the following:
-```groovy
-compileOptions {
-    // Flag to enable support for the new language APIs
-
-    // For AGP 4.1+
-    isCoreLibraryDesugaringEnabled = true
-    // For AGP 4.0
-    // coreLibraryDesugaringEnabled = true
- }
-```
-Add a dependency to the Android desugaring library (check the [latest version here](https://github.com/google/desugar_jdk_libs/blob/master/CHANGELOG.md)):
-```groovy
-dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:LATEST_SDK_VERSION")
-}
-```
-More information about Java 8+ API desugaring support can be found on the [official Android documentation](https://developer.android.com/studio/write/java8-support#library-desugaring).
-
 ## Initialization
 
 1. In your `Application` class, set up a configuration object with your specifics and initialize the **Money Manager SDK**:
