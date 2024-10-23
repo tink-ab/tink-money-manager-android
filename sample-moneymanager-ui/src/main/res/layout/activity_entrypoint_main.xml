@@ -118,6 +118,24 @@
         app:layout_constraintRight_toRightOf="@+id/transactions_button"
         app:layout_constraintTop_toBottomOf="@+id/transactions_button" />
 
+    <Button
+        android:id="@+id/subscription_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Subscription"
+        app:layout_constraintLeft_toLeftOf="@+id/recurring_expense_button"
+        app:layout_constraintRight_toRightOf="@+id/recurring_expense_button"
+        app:layout_constraintTop_toBottomOf="@+id/recurring_expense_button" />
+
+    <Button
+        android:id="@+id/statistics_s2s_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Subscription"
+        app:layout_constraintLeft_toLeftOf="@+id/subscription_button"
+        app:layout_constraintRight_toRightOf="@+id/subscription_button"
+        app:layout_constraintTop_toBottomOf="@+id/subscription_button" />
+
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
