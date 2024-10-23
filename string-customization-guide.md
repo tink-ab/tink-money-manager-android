@@ -212,6 +212,11 @@ Here's a list of all the public string resources in the SDK that can be overridd
 | `tink_transaction_edit_error_msg` | There was an unexpected error when saving the changes. |
 | `tink_transaction_edit_unsaved_title` | You have unsaved changes |
 | `tink_transaction_edit_unsaved_msg` | Want to discard the changes you haven’t saved? |
+| `tink_subscriptions` | Subscriptions |
+| `tink_subscription` | Subscription |
+| `tink_see_subscription` | Your subscription is estimated to be %s this month |
+| `tink_subscription_error_message` | Subscriptions not available |
+| `tink_subscription_average_amount` | %s on avg./month |
 
 Alert Dialog button text & common title/message
 | String Resource ID | English Text |
@@ -235,6 +240,10 @@ In addition to the above, here's a list of plurals used in the SDK that can be o
     <plurals name="tink_budget_details_chart_status_message_last_year">
         <item quantity="one">You made your budget %d%% of the time since you created the budget</item>
         <item quantity="other">You made your budget %d%% of the time since you created the budget</item>
+    </plurals>
+    <plurals name="tink_subscription_average_duration">
+        <item quantity="one">for %s subscription</item>
+        <item quantity="other">for %s subscriptions</item>
     </plurals>
 </resources>
 ```

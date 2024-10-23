@@ -66,6 +66,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
                         )
                     )
                 ),
+                OverviewFeature.Subscription,
                 OverviewFeature.LatestTransactions,
                 OverviewFeature.Budgets,
                 OverviewFeature.RecommendedBudgets
@@ -138,6 +139,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
     private val recommendedBudgetsEntryPoint = EntryPoint.RecommendedBudgets
 
     private val recurringExpensesEntryPoint = EntryPoint.RecurringExpenses
+    private val subscriptionEntryPoint = EntryPoint.Subscription
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -175,6 +177,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
             enableRecommendedBudget = true,
             enableBudgetCreationSuccessScreen = true,
             enableSafeToSpend = true,
+            enableSubscriptions = false,
             entryPoint = entryPoint,
             containerId = R.id.fragmentContainer,
             fragmentManager = supportFragmentManager
@@ -270,6 +273,9 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
         }
         binding.transactionsButton.setOnClickListener {
             startTinkEntrypoint(transactionsEntryPoint)
+        }
+        binding.subscriptionButton.setOnClickListener {
+            startTinkEntrypoint(subscriptionEntryPoint)
         }
         binding.recurringExpenseButton.setOnClickListener {
             startTinkEntrypoint(recurringExpensesEntryPoint)
