@@ -7,6 +7,10 @@ metadata:
   annotations:
     github.com/project-slug: tink-ab/tink-money-manager-android
   links: []
+  tier: B
+  integrations: { }
+  cmdb:
+    id: "0081354"
 spec:
   owner: android
   type: library
