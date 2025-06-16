@@ -3,6 +3,7 @@ kind: Component
 metadata:
   name: tink-money-manager-android
   description: Tink Money Manager Android Public
+  area: Banking & Lending Tech
   tags: []
   annotations:
     github.com/project-slug: tink-ab/tink-money-manager-android
