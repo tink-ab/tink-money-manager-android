@@ -159,6 +159,7 @@ $dokka.location:com.tink.moneymanagerui/TinkMoneyManager/init/#kotlin.String#kot
 $dokka.location:com.tink.moneymanagerui/TinkMoneyManager/isSdkActive/#/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-tink-money-manager/is-sdk-active.html
 $dokka.location:com.tink.moneymanagerui/TinkMoneyManager/onBackPressed/#/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-tink-money-manager/on-back-pressed.html
 $dokka.location:com.tink.moneymanagerui/TinkMoneyManager/onRestore/#androidx.fragment.app.FragmentManager/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-tink-money-manager/on-restore.html
+$dokka.location:com.tink.moneymanagerui/TinkMoneyManager/refreshToken/#kotlin.String/PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.moneymanagerui/-tink-money-manager/refresh-token.html
 $dokka.location:com.tink.rest.models////PointingToDeclaration/-tink -money -manager -s-d-k/com.tink.rest.models/index.html
 $dokka.location:com.tink.rest.models/SearchQuery.OrderEnum.ASC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-tink -money -manager -s-d-k/com.tink.rest.models/-search-query/-order-enum/-a-s-c/index.html
 $dokka.location:com.tink.rest.models/SearchQuery.OrderEnum.DESC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}-tink -money -manager -s-d-k/com.tink.rest.models/-search-query/-order-enum/-d-e-s-c/index.html
