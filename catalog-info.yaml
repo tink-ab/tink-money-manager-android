@@ -3,6 +3,14 @@ kind: Component
 metadata:
   name: tink-money-manager-android
   description: Tink Money Manager Android Public
+  area: Banking & Lending Tech
+  contacts:
+    - name: slack
+      type: slack
+      contact: https://tink.slack.com/archives/C01G4H7SHF0
+    - name: email
+      type: email
+      contact: mobile@tink.se
   tags: []
   annotations:
     github.com/project-slug: tink-ab/tink-money-manager-android
