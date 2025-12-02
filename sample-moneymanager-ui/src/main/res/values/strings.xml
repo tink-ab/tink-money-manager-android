@@ -1,4 +1,297 @@
 <resources>
-  <string name="app_name">Tink Money Manager UI Sample</string>
-  <string name="custom_button">Custom Button</string>
+  <string name="tink_snackbar_utils_error_default">An error has occurred. Please try again later.</string>
+  <string name="tink_snackbar_utils_error_status_code_408">Could not connect to Tink servers. Please try again later.</string>
+
+  <string name="tink_changes_saved">Changes saved</string>
+
+  <string name="tink_date_format_human_today">Today</string>
+  <string name="tink_date_format_human_yesterday">Yesterday</string>
+  <string name="tink_date_format_human_tomorrow">Tomorrow</string>
+  <string name="tink_date_formatter_yearly">yyyy</string>
+  <string name="tink_date_formatter_monthly_compact">MMM</string>
+  <string name="tink_date_formatter_month_name">MMMM</string>
+  <string name="tink_date_formatter_daily">dd</string>
+  <string name="tink_date_formatter_daily_monthly">dd MMM</string>
+  <string name="tink_date_formatter_daily_monthly_yearly">dd MMM yyyy</string>
+  <string name="tink_date_formatter_day_of_week_compact">EEE</string>
+  <string name="tink_date_formatter_day_of_week_full">EEEE</string>
+  <string name="tink_date_formatter_month_and_day_of_week">EEEE MMM d</string>
+  <string name="tink_date_formatter_month_and_day">EEEE, MMM d</string>
+  <string name="tink_date_formatter_month_and_day_and_year">EEEE, MMM d, yyyy</string>
+  <string name="tink_date_formatter_date_with_year">MMM d, yyyy</string>
+  <string name="tink_date_formatter_month_and_day_of_month">d MMM</string>
+  <string name="tink_date_formatter_month_and_year">MMMM yyyy</string>
+  <string name="tink_date_formatter_month_and_year_compact">MMM yyyy</string>
+
+  <string name="tink_all_categories">All categories</string>
+  <string name="tink_general_ok">OK</string>
+
+
+  <string name="tink_overview_statistics_error">No statistics</string>
+  <string name="tink_overview_accounts_error">No accounts</string>
+
+  <string name="tink_overview_toolbar_title">Overview</string>
+  <string name="tink_accounts_toolbar_title">Accounts</string>
+
+  <string name="tink_overview_latest_transactions_title">Latest transactions</string>
+  <string name="tink_latest_transactions_toolbar_title">All transactions</string>
+  <string name="tink_overview_latest_transactions_view_all_link">See all</string>
+
+  <string name="tink_overview_favorite_accounts_see_all">See all</string>
+  <string name="tink_overview_favorite_accounts_see_all_accounts">See all accounts</string>
+  <string name="tink_overview_highlighted_accounts_title">Favorite accounts</string>
+  <string name="tink_accounts_error">No accounts available</string>
+  <string name="tink_accounts_edit">Edit accont</string>
+  <string name="tink_accounts_edit_title">Account details</string>
+  <string name="tink_accounts_edit_unsaved_changes_title">You have unsaved changes</string>
+  <string name="tink_accounts_edit_unsaved_changes_message">Want to discard the changes you haven’t saved?</string>
+  <string name="tink_accounts_edit_unsaved_changes_no_save">No, save</string>
+  <string name="tink_accounts_edit_unsaved_changes_yes_discard">Yes, discard</string>
+  <string name="tink_accounts_edit_field_name_header">Account name</string>
+  <string name="tink_accounts_edit_field_name_description">Original description: Sturehof</string>
+  <string name="tink_accounts_edit_field_type_header">Account type</string>
+  <string name="tink_accounts_edit_field_type_dialog_title">Choose account type</string>
+  <string name="tink_accounts_edit_field_included_header">Included</string>
+  <string name="tink_accounts_edit_field_included_description">This account is shown in your statistics</string>
+  <string name="tink_accounts_edit_field_shared_header">Shared account</string>
+  <string name="tink_accounts_edit_field_shared_description">50% is included in your statistics</string>
+  <string name="tink_accounts_edit_field_favorite_header">Favorite account</string>
+  <string name="tink_accounts_edit_field_favorite_description">Balance is shown in the overview</string>
+  <string name="tink_accounts_edit_save_button">Save</string>
+  <string name="tink_accounts_type_checking">Checking</string>
+  <string name="tink_accounts_type_credit_card">Credit card</string>
+  <string name="tink_accounts_type_external">External</string>
+  <string name="tink_accounts_type_investment">Investment</string>
+  <string name="tink_accounts_type_loan">Loan</string>
+  <string name="tink_accounts_type_mortgage">Mortgage</string>
+  <string name="tink_accounts_type_other">Other</string>
+  <string name="tink_accounts_type_pension">Pension</string>
+  <string name="tink_accounts_type_savings">Savings</string>
+
+  <string name="tink_everyday_account">Everyday accounts</string>
+  <string name="tink_savings_account">Savings accounts</string>
+  <string name="tink_loans_account">Loan accounts</string>
+  <string name="tink_other_account">Other accounts</string>
+
+  <string name="tink_transactions_error">You haven\'t made any transactions yet</string>
+  <string name="tink_transaction_similar_title">Similar transactions</string>
+  <string name="tink_transaction_similar_description">Do you also want to assign these transactions to the %1$s category?</string>
+  <string name="tink_transaction_similar_button_skip_text">Skip</string>
+  <string name="tink_transaction_similar_button_accept_text">Assign %1$d selected</string>
+  <string name="tink_transaction_similar_marker_button_mark_text">Select all</string>
+  <string name="tink_transaction_similar_marker_button_unmark_text">Unselect all</string>
+  <string name="tink_transaction_pending_uneditable_dialog_title">Not editable</string>
+  <string name="tink_transaction_pending_uneditable_dialog_body">Pending transactions are not editable until they are confirmed by the bank.</string>
+
+
+  <string name="tink_pie_chart_transition" translatable="false">%1$s-pie-chart-transition</string>
+  <string name="tink_amount_transition" translatable="false">%1$s-amount-transition</string>
+  <string name="tink_amount_title_transition" translatable="false">%1$s-amount-title-transition</string>
+  <string name="tink_amount_period_transition" translatable="false">%1$s-amount-period-transition</string>
+  <string name="tink_label_transition" translatable="false">%1$s-label-transition</string>
+  <string name="tink_label_title_transition" translatable="false">%1$s-label-title-transition</string>
+  <string name="tink_label_icon_transition" translatable="false">%1$s-label-icon-transition</string>
+  <string name="tink_toolbar_transition" translatable="false">toolbar-transition</string>
+  <string name="tink_transition_chart_item" translatable="false">%1$s-transition-chart-item</string>
+  <string name="tink_transition_chart_item_amount" translatable="false">%1$s-transition-chart-item-amount</string>
+  <string name="tink_filter_search_item" translatable="false">FilterSearchItem</string>
+  <string name="tink_filter_all_expenses_item" translatable="false">AllExpensesItem</string>
+
+  <string name="tink_choose_category_text">Choose category</string>
+
+  <string name="tink_category_list_fragment_button_text">Select</string>
+
+  <string name="tink_selector_6_months">Last 6 months</string>
+  <string name="tink_selector_12_months">Last 12 months</string>
+  <string name="tink_selector_all_time">All time</string>
+
+  <string name="tink_selector_monthly">Monthly</string>
+  <string name="tink_selector_over_time">Over time</string>
+
+  <string name="tink_period_selection_title">Choose time period</string>
+
+  <string name="tink_expenses_title">Expenses</string>
+  <string name="tink_expenses_header_description_average">%s on average per month</string>
+
+  <string name="tink_recurring_expense">Recurring expenses</string>
+  <string name="tink_empty_recurring_expense_list">You have no recurring expense</string>
+  <string name="tink_expected">Expected %s</string>
+  <string name="tink_scheduled_expenses">Scheduled expenses</string>
+  <string name="tink_approximated">*Approximated</string>
+
+  <string name="tink_subscriptions">Subscriptions</string>
+  <string name="tink_subscription">Subscription</string>
+  <string name="tink_see_subscription">Your subscription is estimated to be %s this month</string>
+  <string name="tink_subscription_error_message">Subscriptions not available</string>
+  <string name="tink_subscription_average_amount">%s on avg./month</string>
+  <plurals name="tink_subscription_average_duration">
+    <item quantity="one">for %s subscription</item>
+    <item quantity="other">for %s subscriptions</item>
+  </plurals>
+
+  <!-- We can make this public when we enable Left to Spend feature -->
+  <string name="tink_left_to_spend_title">Left to spend</string>
+  <string name="tink_safe_to_spend_title">Safe to spend</string>
+  <string name="tink_left_to_spend_header_description_more">%s more than usual</string>
+  <string name="tink_left_to_spend_header_description_less">%s less than usual</string>
+  <string name="tink_left_to_spend_header_description_average">%s on average per month</string>
+  <string name="tink_income_title">Income</string>
+  <string name="tink_income_header_description_average">%s on average per month</string>
+  <string name="tink_date_span_string">%1$s - %2$s</string>
+  <string name="tink_until_next_date">Until %s</string>
+
+  <string name="tink_transactions_list_toolbar_title">Transactions</string>
+  <string name="tink_expenses_menu_settings_title">Transactions</string>
+  <string name="tink_other">Other</string>
+  <string name="tink_category_default_child_format">%s - Other</string>
+
+  <string name="tink_insights_tab_title">Events</string>
+  <string name="tink_insights_archive_title">Archive</string>
+  <string name="tink_insights_empty_state_text">No new events! Check the archive if you want to see your previous events</string>
+  <string name="tink_insights_archived_empty_state_text">No archived events</string>
+  <string name="tink_insights_overview_card_new_events_title">Events</string>
+  <string name="tink_insights_overview_card_archived_events_title">Archived events</string>
+  <string name="tink_insights_overview_card_action_text">View</string>
+  <string name="tink_insights_expenses_by_day_average_text">Average</string>
+  <string name="tink_insights_budget_create_suggestion_save_per_year_text">Save up to %s per year</string>
+
+  <string name="tink_insights_monthly_summary_expense_transactions_title">Here’s a summary of your expense transactions last month</string>
+  <string name="tink_insights_total_monthly_transactions_text">%d transactions last month</string>
+
+  <string name="tink_insights_weekly_summary_expense_transactions_title">Here’s a summary of your expense transactions last week</string>
+  <string name="tink_insights_total_weekly_transactions_text">%d transactions last week</string>
+
+  <string name="tink_expenses_text">%s expenses</string>
+  <string name="tink_insights_total_expenses_text">%s in total expenses</string>
+  <string name="tink_insights_most_common_transaction_text">Most common was %1$s (%2$d)</string>
+  <string name="tink_insights_largest_transaction_text">%s was your largest expense</string>
+  <string name="tink_insights_largest_transaction_recipient_text">To %1$s (%2$s)</string>
+
+  <string name="tink_budget_create_title">Create budget</string>
+  <string name="tink_budget_create_button">Create budget</string>
+  <string name="tink_budget_specification_toolbar_title">Budget \"%s\"</string>
+  <string name="tink_budget_create_field_name_hint">Name</string>
+  <string name="tink_budget_create_field_amount_hint">Amount</string>
+  <string name="tink_budget_create_field_period_hint">Budget Period</string>
+  <string name="tink_budget_create_field_period_start_hint">Period Start Date</string>
+  <string name="tink_budget_create_field_period_end_hint">Period End Date</string>
+  <string name="tink_budget_create_field_period_weekly">Weekly</string>
+  <string name="tink_budget_create_field_period_monthly">Monthly</string>
+  <string name="tink_budget_create_field_period_yearly">Yearly</string>
+  <string name="tink_budget_create_field_period_custom">Custom</string>
+  <string name="tink_budget_create_period_end_invalid_message">End date must be after start date.</string>
+  <string name="tink_budget_create_with_keyword">Create with keyword</string>
+  <string name="tink_budget_create_all_expenses">All expenses</string>
+
+  <string name="tink_budget_category_selection_button">Next</string>
+  <string name="tink_budget_edit_menu_delete_budget_item">Delete Budget</string>
+  <string name="tink_budget_edit_toolbar_title">Edit budget</string>
+  <string name="tink_budget_edit_field_category_hint">Category</string>
+  <string name="tink_budget_edit_button">Save changes</string>
+  <string name="tink_budget_edit_field_amount_average_for_period">Average %1$s / %2$s</string>
+  <string name="tink_budget_delete_error_message">We are not able to remove your budget right now.</string>
+  <string name="tink_budget_delete_dialog_message">Are you sure you want to remove the budget \"%s\"?</string>
+  <string name="tink_budget_delete_dialog_confirm_button">Delete</string>
+
+  <string name="tink_budget_details_show_transaction_btn_title">See Transactions</string>
+  <string name="tink_budget_details_toolbar_title">Budget</string>
+  <string name="tink_budget_details_menu_edit_budget_item">Edit Budget</string>
+  <string name="tink_budget_details_selector_weekly">Weekly</string>
+  <string name="tink_budget_details_selector_monthly">Monthly</string>
+  <string name="tink_budget_details_selector_yearly">Yearly</string>
+  <string name="tink_budget_details_selector_over_time">Over time</string>
+
+
+  <string name="tink_budget_details_starts_in_exact_1_day">Starts tomorrow</string>
+  <string name="tink_budget_details_starts_in">Starts in %s</string>
+  <string name="tink_budget_details_starts_in_month_and_day">Starts in %1$s and %2$s</string>
+  <string name="tink_budget_details_remaining_exact_0_day">Ends today</string>
+  <string name="tink_budget_details_remaining_exact_1_day">Ends tomorrow</string>
+  <string name="tink_budget_details_remaining">%s remaining</string>
+  <string name="tink_budget_details_remaining_months_and_days">%1$s and %2$s remaining</string>
+  <string name="tink_budget_details_ended_1_day_ago">Closed yesterday</string>
+  <string name="tink_budget_details_ended_months_days_ago">Closed %s ago</string>
+  <string name="tink_budget_details_ended_months_and_days_ago">Closed %1$s and %2$s ago</string>
+
+  <string name="tink_suggested_budget_description">You have spent %1$s on average. Track your expense by creating a budget.</string>
+
+
+  <plurals name="tink_budget_days_plural">
+    <item quantity="one">%s day</item>
+    <item quantity="other">%s days</item>
+  </plurals>
+  <plurals name="tink_budget_months_plural">
+    <item quantity="one">%s month</item>
+    <item quantity="other">%s months</item>
+  </plurals>
+
+  <string name="tink_budget_details_amount_left_none_message">You have no remaining budget for this period</string>
+  <string name="tink_budget_details_amount_left_daily_message">You can spend %1$s per day and still remain within your budget</string>
+  <string name="tink_budget_details_amount_left_weekly_message">You can spend %1$s per week and still remain within your budget</string>
+  <string name="tink_budget_details_amount_left_monthly_message">You can spend %1$s per month and still remain within your budget</string>
+  <string name="tink_budget_details_amount_left_yearly_message">You can spend %1$s per year and still remain within your budget</string>
+  <string name="tink_budget_details_amount_left_message_plain">You can spend %1$s and still remain within your budget</string>
+  <string name="tink_budget_details_over_budget_message">You went over your budget this period</string>
+  <string name="tink_budget_details_managed_budget_message">You managed your budget this period</string>
+  <string name="tink_budget_details_not_started">Budget hasn\'t started yet</string>
+  <string name="tink_budget_details_total_amount">left of %s</string>
+  <string name="tink_budget_period_month">month</string>
+  <string name="tink_budget_period_week">week</string>
+  <string name="tink_budget_period_day">day</string>
+  <string name="tink_budget_period_year">year</string>
+  <string name="tink_budget_period_chart_week_label">w%d</string>
+  <string name="tink_budget_details_chart_empty_message">Here you will see your historical spending on %s. But currently you don\'t have any.</string>
+  <string name="tink_budget_transactions_toolbar_title">Budget</string>
+  <string name="tink_budget_transactions_header_amount_left_of">%1$s left of %2$s</string>
+  <string name="tink_budget_transactions_header_amount_over">%1$s over budget of %2$s</string>
+  <string name="tink_budget_transactions_empty_message">There are no transactions to show for this period</string>
+  <string name="tink_budget_details_chart_status_message">You made your budget %s of the time since you created the budget</string>
+  <string name="tink_budget_details_chart_status_message_current_week">You have %s left on your budget this week</string>
+  <string name="tink_budget_details_chart_status_message_current_month">You have %s left on your budget this month</string>
+  <string name="tink_budget_details_chart_status_message_current_year">You have %s left on your budget this year</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_week">You have gone over your budget this week</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_month">You have gone over your budget this month</string>
+  <string name="tink_budget_details_chart_over_budget_status_message_current_year">You have gone over your budget this year</string>
+  <string name="tink_budget_creation_success_message">Your budget is now created!</string>
+  <string name="tink_overview_budgets_title">Budgets</string>
+  <string name="tink_overview_top_spending_categories_title">Top spending categories</string>
+  <string name="tink_overview_budgets_create_new">New Budget</string>
+  <string name="tink_overview_budgets_empty_create_new">Create New Budget</string>
+  <string name="tink_overview_budget_over">%1$s over budget of %2$s</string>
+  <string name="tink_overview_budget_left_of">%1$s left of %2$s</string>
+  <string name="tink_overview_suggested_budgets_title">Suggested budget</string>
+
+  <string name="tink_budgets_error">No budgets available</string>
+  <string name="tink_budget_list_menu_create_budget_item">Create new</string>
+  <string name="tink_empty_budget_message_in_recommended_budget_list">You have no budgets. Create a budget based on your top spending categories or create a new budget.</string>
+
+  <string name="tink_nav_app_bar_navigate_up_description">Navigate up</string>
+  <string name="tink_clear_text_description">Clear text</string>
+  <string name="tink_previous_month_description">Previous month</string>
+  <string name="tink_next_month_description">Next month</string>
+
+  <string name="tink_transaction_detail_error">No transaction details available</string>
+  <string name="tink_transaction_detail_change">Change</string>
+  <string name="tink_transaction_detail_description">Description</string>
+  <string name="tink_transaction_detail_original_description">Original description:</string>
+  <string name="tink_transaction_detail_date">Date</string>
+
+  <string name="tink_transaction_edit_error_title">Error saving changes</string>
+  <string name="tink_transaction_edit_error_msg">There was an unexpected error when saving the changes.</string>
+  <string name="tink_transaction_edit_unsaved_title">You have unsaved changes</string>
+  <string name="tink_transaction_edit_unsaved_msg">Want to discard the changes you haven’t saved?</string>
+
+  <string name="tink_general_edit">Edit</string>
+  <string name="tink_general_done">Done</string>
+
+  <!-- Alert Dialog button text & common title/message -->
+  <string name="tink_alert_no_save">No, Save</string>
+  <string name="tink_alert_yes_discard">Yes, Discard</string>
+  <string name="tink_alert_cancel">Cancel</string>
+  <string name="tink_alert_try_again">Try Again</string>
+
+  <string name="tink_search_label">Search</string>
+  <string name="tink_continue">Continue</string>
+  <string name="tink_discard">Discard</string>
+
 </resources>
