@@ -163,6 +163,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
             TinkMoneyManager.onRestore(supportFragmentManager) // Call this method after restore changes
             showHideViews(false) // Note: This is specific to this sample app
         }
+        // TinkMoneyManager.refreshToken(refreshedAccessToken) // Call this method to refresh the access token when needed
     }
 
     private fun startTinkEntrypoint(entryPoint: EntryPoint) {
@@ -179,6 +180,7 @@ class MainEntrypointsActivity : FragmentActivity(), OnFragmentViewCreatedListene
             enableSafeToSpend = true,
             enableSubscriptions = false,
             entryPoint = entryPoint,
+            useNewToolbarColor = false,
             containerId = R.id.fragmentContainer,
             fragmentManager = supportFragmentManager
         )
