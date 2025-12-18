@@ -6,6 +6,7 @@
   </style>
 
   <style name="TinkFinanceOverviewSampleStyle" parent="TinkMoneyManagerStyle">
+    <item name="tink_toolbarColor">#ff461e7d</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
     <item name="tink_colorAccent">#ff461e7d</item>
     <item name="tink_colorAccentDark">#ff461e7d</item>
@@ -33,6 +34,7 @@
   </style>
 
   <style name="TinkStyle_Default" parent="TinkMoneyManagerStyle">
+    <item name="tink_toolbarColor">#FBFBFC</item>
     <item name="tink_backgroundColor">#FBFBFC</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
     <item name="tink_colorAccent">#4E7681</item>
@@ -61,6 +63,7 @@
   </style>
 
   <style name="TinkStyle_Strict" parent="TinkMoneyManagerStyle">
+    <item name="tink_toolbarColor">#FBFBFC</item>
     <item name="tink_backgroundColor">#F7F7F8</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
     <item name="tink_colorAccent">#333439</item>
@@ -89,6 +92,7 @@
   </style>
 
   <style name="TinkStyle_ChewingGum" parent="TinkMoneyManagerStyle">
+    <item name="tink_toolbarColor">#343035</item>
     <item name="tink_backgroundColor">#343035</item>
     <item name="tink_chartMeanValueColor">#A7A7A7</item>
     <item name="tink_colorAccent">#e8a9e0</item>
@@ -127,6 +131,7 @@
 
 
   <style name="TinkStyle_DayNight" parent="TinkMoneyManagerStyle">
+    <item name="tink_toolbarColor">@color/tink_backgroundColor</item>
     <item name="tink_backgroundColor">@color/tink_backgroundColor</item>
     <item name="tink_chartMeanValueColor">@color/tink_chartMeanValueColor</item>
     <item name="tink_colorAccent">@color/tink_colorAccent</item>

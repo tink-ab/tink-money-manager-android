@@ -74,6 +74,7 @@ val config =
         enableSafeToSpend = true, // Determines if SDK can show Recurring expense in Transaction list. Defaults to true.
         enableSubscriptions = false,  // Determines if SDK can show Subscriptions in Expense Details.
         entryPoint = overviewEntrypoint, // The Money Manager feature to launch.
+        useNewToolbarColor = false, // Use separate toolbar color instead of colorPrimary (defaults to false).
         containerId = R.id.fragmentContainer, // The resource ID of the container which will contain the Tink Fragment.
         fragmentManager = supportFragmentManager // The FragmentManager which performs the Tink fragment transaction.
     )
