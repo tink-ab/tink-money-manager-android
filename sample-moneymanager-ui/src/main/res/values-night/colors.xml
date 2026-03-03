@@ -27,4 +27,7 @@
     <color name="tink_textColorAction">#e8a9e0</color>
     <color name="tink_dividerColor">#2B2B2B</color>
     <color name="tink_cardBackgroundColor">#29262A</color>
+    <!-- Tabs -->
+    <color name="tink_tabForegroundColor">#FFFFFF</color>
+    <color name="tink_tabBackgroundColor">#1E1E1E</color>
 </resources>
