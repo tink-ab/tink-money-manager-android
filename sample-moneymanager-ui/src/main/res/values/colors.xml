@@ -17,6 +17,9 @@
     <color name="tink_incomeDarkColor">#9DBF93</color>
     <color name="tink_incomeLightColor">#E5ECE4</color>
     <color name="tink_colorOnIncome">#ffffff</color>
+    <!-- Tabs -->
+    <color name="tink_tabForegroundColor">#000000</color>
+    <color name="tink_tabBackgroundColor">#FFFFFF</color>
     <color name="tink_transferColor">#494949</color>
     <color name="tink_transferLightColor">#EEEEEE</color>
     <color name="tink_colorOnTransfer">#ffffff</color>
